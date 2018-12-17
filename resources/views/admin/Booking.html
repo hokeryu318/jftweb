@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+	    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<style>
+
+.bg-black{
+background-color:black !important;
+}
+.bg-light{
+background:#d8d8d8 !important;
+}
+.bg-info{
+background:#039bfa !important;
+
+}
+.light-text{
+
+color:lightgrey;
+}
+.blueborder{
+border:3px solid #039bfa;
+}
+li.blueborder{
+color:white;
+font-weight:bold;
+padding-top:2.5%;
+height:48px;
+width:99px;
+text-align:center
+}
+.bg-green{
+background:#0ca285 !important;
+}
+.bg-pinq{
+background:#ff0093 !important;
+}
+.bg-yellow{
+background:#e88d12 !important;
+}
+.uldesign li{
+font-weight:bold;
+padding-top:1%;
+padding-bottom:0.5%;
+background:#b8b8b8;
+padding-left:1%;
+line-height:18px;
+width:120px;
+text-align:center
+
+}
+li.menu{
+color:white;
+font-weight:bold;
+padding-top:2.5%;
+padding-left:1%;
+
+height:48px;
+width:95px;
+text-align:left
+}
+li.menu1{
+color:white;
+font-weight:normal;
+padding-left:5%;
+background:grey;
+height:48px;
+border-bottom:1px solid white;
+width:100%;
+text-align:left;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.black{
+
+background:#2d2d2d !important;
+}
+thead tr{
+border-top:2px solid #1ec2c9;
+}
+
+.datetimepicker-inline{
+width:100% !important;
+}
+.switch{
+font-weight: bold;
+display:table-cell;
+
+font-size: 20px;
+
+color: #1ec2c9;
+}
+.black2{
+
+background:#4e4e4e !important;
+}
+.datetimepicker td, .datetimepicker th{
+border-radius:50px;
+}
+.datetimepicker table tr td.active, .datetimepicker table tr td.active:hover, .datetimepicker table tr td.active.disabled, .datetimepicker table tr td.active.disabled:hover,.datetimepicker table tr td.active:hover, .datetimepicker table tr td.active:hover:hover, .datetimepicker table tr td.active.disabled:hover, .datetimepicker table tr td.active.disabled:hover:hover, .datetimepicker table tr td.active:active, .datetimepicker table tr td.active:hover:active, .datetimepicker table tr td.active.disabled:active, .datetimepicker table tr td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .datetimepicker table tr td.active:hover.active, .datetimepicker table tr td.active.disabled.active, .datetimepicker table tr td.active.disabled:hover.active, .datetimepicker table tr td.active.disabled, .datetimepicker table tr td.active:hover.disabled, .datetimepicker table tr td.active.disabled.disabled, .datetimepicker table tr td.active.disabled:hover.disabled, .datetimepicker table tr td.active[disabled], .datetimepicker table tr td.active:hover[disabled], .datetimepicker table tr td.active.disabled[disabled], .datetimepicker table tr td.active.disabled:hover[disabled]{background-image:none !important;background-color:transparent;color:black;font-weight:bold;border-radius:50px !important;border:2px solid #1ec2c9}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.radius{
+
+border-radius:10px;
+}
+button h6{
+font-size:110%;
+}
+
+table,.datetimepicker > div,.datetimepicker-days{
+width:100% !important;
+
+}
+</style>
+
+<body>
+<div class=" col-5 pb-5 position-absolute hh pt-5" id="menu" style="z-index:1000;margin-left:-1200px;background:#242424;">
+<a href="#" class="bg-transparent black-text float-right" id="closemenu"><h1><span class="fa fa-close white-text"></span></h1></a>
+<div class="text-center">
+<img src="img/logo.png" class="w-75" />
+
+</div>
+<div class="text-left pr-2 pl-3 mt-4">
+<a href="#" class="text-left"><img src="img/tran.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transaction</h4></a>
+<br>
+<br><br>
+<a href="#" class="text-left"><img src="img/book.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Booking</h4></a>
+<br>
+<br>
+<br>
+<br>
+<a href="#" class="text-left"><img src="img/menu.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Edit Menu  &nbsp;&nbsp; <img src="img/lock.png" class="float-right pt-2" /></h4></a>
+<br><br>
+<a href="#" class="text-left mt-4"><img src="img/sales.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Sales Data &nbsp;&nbsp;<img src="img/lock.png" class="float-right pt-1" /></h4></a>
+<br><br>
+<a href="#" class="text-left mt-4"><img src="img/setting.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Setting &nbsp;&nbsp;<img src="img/lock.png" class="float-right pt-2" /></h4></a>
+<br><br>
+<a href="#" class="text-left mt-4"><img src="img/table.png" />&nbsp;&nbsp;<h4 class="white-text d-inline">Table Edit &nbsp;&nbsp;<img src="img/lock.png" class="float-right pt-2" /></h4></a>
+
+</div>
+</div>
+<header class="bg-black fixed-top container-fluid">
+
+<div class="row pt-0 pb-0">
+
+<div class="col-1">
+<a href="#" class="white-text" id="btnmenu"><h1 class="mb-0"><span class="fa fa-navicon"></span></h1></a>
+</div>
+<div class="col-7">
+<div class="row pl-0">
+<ul class="nav navbar pt-0 pb-0 mt-0 mb-0" style="box-shadow:none;">
+<li class="menu bg-green"><img src="img/dollar.png" /></li>
+<li class="menu bg-pinq"><img src="img/notify.png" /> 13</li>
+<li class="menu bg-yellow"><img src="img/chat.png" /> 13</li>
+<li class="menu bg-info"><img src="img/writechat.png" /> 13</li>
+
+</ul>
+</div>
+</div>
+<div class="col-4 pl-0 text-right">
+<h6 class="mb-0 white-text font-weight-bold mt-3">10:12 PM &nbsp;&nbsp; 22 MAY 2018</h6>
+
+</div>
+</div>
+
+</header>
+<div class="p-4 mt-5">
+
+<div class="container-fluid pb-3 position-relative">
+<div class="bg-grey pt-2 pl-2">
+<ul class="nav uldesign">
+<li class="grey white pr-2">22 MAY<BR>10:15PM</li>
+<li class=""><img src="img/user.png" class="mr-2" /> 12</li>
+<li class=""><img src="img/img2.png" /> H-1 <img src="img/redplus.png" /></li>
+<li class="pt-3">Ms Jenifer Lo</li>
+<li class=""><img src="img/notes.png" class="mr-2" /> Notes</li>
+
+</ul>
+</div>
+<div class="container pt-5 mt-2">
+<div class="row">
+<div class="col-4">
+
+<h3 class="font-weight-bold text-info">Today</h3>
+<div id="datetimepicker12" class="w-100">
+
+</div></div>
+
+<div class="col-4 text-center">
+<h3 class="font-weight-bold mb-3 text-left text-info" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">NOW</h3>
+<label class="light-text text-center ll">10:00 PM</label>
+<br>
+
+<label class="black-text w-100 text-center ll pt-1 pb-1" style="border-bottom:2px solid black;border-top:2px solid black">10:15 PM</label>
+<br>
+<label class="light-text text-center ll">10:30 PM </label>
+<br>
+<label class="light-text text-center ll">10:45 PM</label>
+<br>
+<label class="light-text text-center ll">11:00 PM</label>
+<br>
+<label class="light-text text-center ll">11:15 PM</label><br>
+
+<label class="light-text text-center ll">11:30 PM</label><br>
+
+<label class="light-text text-center ll">11:45 PM</label><br>
+
+<label class="light-text text-center ll">12:00 AM</label><br>
+
+<label class="light-text text-center ll">12:30 AM</label><br>
+
+
+
+</div>
+<div class="col-4 text-center">
+<h3 class="font-weight-bold mb-3 text-left text-info" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">30 min</h3>
+<label class="light-text text-center ll">Takeaway</label>
+<br>
+
+<label class="black-text w-100 text-center ll pt-1 pb-1" style="border-bottom:2px solid black;border-top:2px solid black">30 min</label>
+<br>
+<label class="light-text text-center ll">60 min</label>
+<br>
+<label class="light-text text-center ll">90 min</label>
+<br>
+<label class="light-text text-center ll">120 min</label>
+<br>                                 
+<label class="light-text text-center ll">Unlimited</label>
+
+</div>
+</div>
+<div class="row text-right mm" >
+<div class="offset-5 col-7">
+<a href="#"><img src="img/cancelblack.png" class="imgfooter" /></a>
+<a href="#"><img src="img/applyred.png" class="imgfooter" /></a>
+
+</div></div>
+</div>
+
+
+                                                
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+	<script src="js/bootstrap-timepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker12').datetimepicker({
+                inline: true,
+                sideBySide: true,
+              
+                language: 'fr',
+                weekStart: 1,
+                todayBtn: 1,
+                minView: 2,
+                forceParse: 0,
+               
+                
+               
+            });
+
+        });
+      
+    </script>
+	
+ </body>
