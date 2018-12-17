@@ -16,16 +16,16 @@ class LoginController extends Controller
     }
 
     public function postLogin(Request $request){
-        $name = $request->name;
+        $name = $request->role;
         $password = $request->password;
-        if($request->name = "admin"){
+        if($request->role = "admin"){
             $user = Role::where('name', '=', $name)->first();
             if(!isset($user)){
                 return redirect(route('loginform'));
             }
             if(Hash::check($password, $user->password)){
                 session(['role' => $name, 'logged' => true]);
-                return 'success';
+                return redirect(route('admin.home'));
             } else {
                 return redirect(route('loginform'));
             }

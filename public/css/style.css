@@ -1,4 +1,4 @@
-@import "http://allfont.net/allfont.css?fonts=exo-demibold";
+
 .containers {
     display: block;
     position: relative;
@@ -14,7 +14,7 @@
     user-select: none;
 }
 .widthh{
-	
+
 	width: 93%!important;
     /* margin: 0 auto; */
     width: 100%;
@@ -24,93 +24,197 @@
     margin-left: auto;
 }
 .datetimepicker td, .datetimepicker th{
-	
+
 	height:52px !important;
 	font-size:20px;
 	font-weight:bold;
 }
 .ll{
-	
+
 font-size:21px;
-font-weight:bold;	
+font-weight:bold;
 }
 .imgfooter{
 	width:49%;
-	
+
 }
+
+.hh4{
+height:130px;overflow-y:auto;}
+.pp{
+
+		padding:4%;
+	}
+	.pt{
+
+		padding-top:5 !important;
+	}
+	.ptt{
+
+		padding-top:3%;
+	}
 .mm{margin-left:40%;}
+.pbb{
+		padding-bottom:0%;
+	}
+	.pbb2{
+		padding-bottom:2%;
+	}
+	.pbb1{
+		padding-bottom:5%;
+	}
+	.w-95{
+
+		width:90% !important;
+	}
+
 @media(min-width:1365px){
+	.mipad{
+		padding-top:7% !important;
+
+	}
+	.hidialog{
+		height:785px !important;
+	}
+.pttbook{
+	padding-top:7.3% !important;
+
+}
+.hight1{
+	height:480px !important;
+
+}
+	.ptt{
+
+
+		padding-top:6%;
+	}
+	.pbb1{
+		padding-bottom:5%;
+	}
+	.mm{
+		margin-top:3%;
+
+	}
+	.pbb2{
+		padding-bottom:3%;
+	}
+	.margin{
+		margin-bottom:210px !important;
+
+	}
+	.pbb{
+		padding-bottom:5%;
+	}
+	.chh2{
+		height: 600px !important ;
+    overflow-y: auto;
+
+	}
+	.pt{
+
+		padding-top:0 !important;
+	}
+	.pp{
+
+		padding:5% !important;
+	}
+	li.menu1{
+	height:60px !important;
+	}
+	.fontbig{
+		font-size:20px !important;
+
+	}
+	.pbb{
+		padding-bottom:4%;
+
+	}
+
+	.mt{
+		margin-top:8%;
+
+	}
+	.mtt{
+		margin-top:18.7%;
+
+	}
+	.pb{
+	margin-bottom:2%;
+	}
+	.hh4{
+height:200px;overflow-y:auto;}
 	.hhh{
-		
-				height:735px !important; 
+
+				height:735px !important;
 				overflow-x:hidden;
 
 	}
 	.hhh1{
-		
-				height:680px !important; 
+
+				height:680px !important;
 				overflow-x:hidden;
 
 	}
 	.hi{
 		margin-bottom:17%;
-		height:400px !important; 
-		
+		height:400px !important;
+
 	}
 	.padd{
 		margin-top:10% !important;
-		
+
 	}
 	.datetimepicker td, .datetimepicker th{
-	
+
 	height:70px !important;
 	font-size:20px;
 	font-weight:bold;
 }
 .imgfooter{
 	width:49% !important;
-	
+
 }
 .mm{margin-left:0!important}
 .ll{
-	
+
 font-size:32px;
-font-weight:bold;	
+font-weight:bold;
 }
 	.widthh{
-		
+
 		width: 91% !important;
     /* margin: 0 auto; */
     padding-right: 15px;
     padding-left: 15px;
     margin-right: 4.5% !important;
     margin-left: auto;
-		
+
 	}
 	table,td,tr,th{
-	font-size:110% !important;	
+	font-size:110% !important;
 	}
 	.pp{
-		
+
 		padding-top:7.5% !important;
 	}
 	.chh{
 		 height: 534px !important ;
     overflow-y: auto;
 	}
-	
+
 	.thh{
-		
+
 		height:400px !important;overflow-y: auto;
 	}
-	
+
 }
 html {display:table;width:100%;}
 .form{
 background:url(../img/backform.png);background-repeat:no-repeat;border-radius:20px !important;box-shadow:3px 10px 2px grey
 }
 
- 
+
 .content{
  position: relative;
   z-index: 1;
@@ -118,11 +222,11 @@ background:url(../img/backform.png);background-repeat:no-repeat;border-radius:20
 .content::before {
   content: "";
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%;  
-  
+  width: 100%;
+  height: 100%;
+
   z-index:-1;
 background-image:url(../img/back5.jpg);background-position:center;background-size:cover;background-repeat:no-repeat;
 }
@@ -145,10 +249,10 @@ background-size:cover !important;
 .content::before {
   content: "";
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%;  
+  width: 100%;
+  height: 100%;
   opacity:0.6 !important;
   z-index:-1;
 background-image:url(../img/back5.jpg);background-position:center;background-size:cover;background-repeat:no-repeat;
@@ -194,12 +298,12 @@ background:url(../img/back4.png);background-repeat:no-repeat;background-position
 position:absolute;left:0;top:0%;height:210px;
 }
 .text-info{
-	
+
 	color:#01b4ff !important;
 }
 .bg-light{
 	background:lightblue !important;
-	
+
 }
 .text-dark{
 
@@ -210,7 +314,7 @@ color:#153647 !important;
 background:#00518e !important;
 }
 .bg-check{
-	
+
 	background-color:#00b4ff !important;
 }
 /* Hide the browser's default checkbox */
@@ -230,14 +334,14 @@ background:#00518e !important;
     height: 17px;
     width: 17px;
     background-color: #fff;
-		
+
 
 }
 
 /* On mouse-over, add a grey background color */
 .containers:hover input ~ .checkmark {
     background-color: #fff;
-	
+
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -299,7 +403,7 @@ background:#00518e !important;
     height: 30px;
 }
     .bs-switch input {
-        display: none; 
+        display: none;
     }
     .bs-switch .slider {
         position: absolute;
@@ -409,8 +513,8 @@ border-radius:5px;
     border-radius: 5px;
 }
 table.table2 td, table.table2 th {
-    padding-top: 0.1rem; 
-     padding-bottom: 0.1rem; 
+    padding-top: 0.1rem;
+     padding-bottom: 0.1rem;
      color:black;font-size:15px;font-weight:500;
 }
 table.table2 td, table.table2 th {
@@ -474,7 +578,7 @@ table.table2 th {
     padding: 4px 25px;
     float:right;
     margin-top:10px;
-  
+
 }
 .h4rem {
     padding-bottom: 3rem !important;
@@ -786,9 +890,9 @@ text-align:left;
   opacity: 1; /* Firefox */
 }
 .blackgrey{
-	
+
 	background:#4e4e4e;
-	
+
 }
 .black{
 
@@ -805,7 +909,7 @@ background:#4e4e4e !important;
   height: 25px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -854,9 +958,10 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 header{
-	
+
 	margin-bottom:5%;
-	
+	z-index:5 !important;
+
 }
 .slider.round:before {
   border-radius: 50%;
