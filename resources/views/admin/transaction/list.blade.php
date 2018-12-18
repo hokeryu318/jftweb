@@ -1,6 +1,6 @@
 @extends('layout.admin_layout')
 
-@section('title', 'DISH')
+@section('title', 'Transactions')
 
 @section('content')
 <div class="pp">

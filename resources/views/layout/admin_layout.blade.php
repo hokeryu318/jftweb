@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
+        @yield('title')
     </title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -47,7 +48,7 @@
                 <img src="{{ asset('img/sales.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Sales Data &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-1" /></h4>
             </a>
             <br><br>
-            <a href="#" class="text-left mt-4">
+            <a href="{{ route('admin.setting.receipt') }}" class="text-left mt-4">
                 <img src="{{ asset('img/setting.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Setting &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
             </a>
             <br><br>

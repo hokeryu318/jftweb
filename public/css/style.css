@@ -43,7 +43,7 @@ font-weight:bold;
 height:130px;overflow-y:auto;}
 .pp{
 
-		padding:4%;
+		padding:2.5%;
 	}
 	.pt{
 
@@ -114,10 +114,6 @@ height:130px;overflow-y:auto;}
 	.pt{
 
 		padding-top:0 !important;
-	}
-	.pp{
-
-		padding:5% !important;
 	}
 	li.menu1{
 	height:60px !important;
@@ -196,7 +192,7 @@ font-weight:bold;
 	}
 	.pp{
 
-		padding-top:7.5% !important;
+		padding-top:6% !important;
 	}
 	.chh{
 		 height: 534px !important ;
@@ -876,7 +872,7 @@ text-align:left
 }
 li.menu1{
 color:white;
-padding-top:2.5%;
+padding-top:5%;
 font-weight:normal;
 padding-left:5%;
 background:grey;

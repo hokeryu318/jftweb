@@ -1,6 +1,6 @@
 @extends('layout.admin_layout')
 
-@section('title', 'DISH')
+@section('title', 'Bookings')
 
 @section('content')
 <div style="padding-top:8%;" class="pttbook"></div>
