@@ -47,3 +47,5 @@ Route::post('admin/setting/receipt', 'SettingController@receiptpost')->name('adm
 Route::get('admin/setting/badge', 'SettingController@badge')->name('admin.setting.badge');
 Route::get('admin/setting/language', 'SettingController@language')->name('admin.setting.language');
 Route::get('admin/setting/password', 'SettingController@password')->name('admin.setting.password');
+
+Route::post('admin/setting/kitchenpost', 'SettingController@kitchen_post')->name('admin.setting.kitchen.post');

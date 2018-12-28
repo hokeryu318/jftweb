@@ -17,7 +17,7 @@
                 <div class="col-3 pl-0">
                     <h5 class="black-text font-weight-bold pl-5 mb-2">Settings</h5>
                     <ul class="col-lg-12 pl-0 w-100 pt-4" style="list-style-type:none">
-                        <li class="menu1 fontbig"><a style="color:white" class="anchor-white" href="{{ route('admin.setting.kitchen') }}">Kitchen Group</a></li>
+                        <li class="menu1 fontbig"><a style="color:white" class="anchor-white" href="{{ route('admin.setting.kitchen') }}">Kitchen Groups</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.timeslots') }}">Time Slots</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.htimeslots') }}">Holiday Time Slots</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.customer') }}">New Customer</a></li>

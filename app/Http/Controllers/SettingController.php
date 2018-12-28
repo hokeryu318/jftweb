@@ -70,4 +70,23 @@ class SettingController extends Controller
     {
         return view('admin.setting.password');
     }
+    public function kitchen_post()
+    {
+        if(request()->has('new')){
+            $newitems = request()->new;
+            foreach($newitems as $item){
+                $kitchen = new Kitchen();
+                $kitchen->name = $item;
+                $kitchen->save();
+            }
+        }
+        if(request()->has('removed')){
+            $removeitems = request()->removed;
+            foreach($removeitems as $item){
+                $kitchen = Kitchen::find($item);
+                $kitchen->delete();
+            }
+        }
+        return redirect()->route('admin.setting.kitchen');
+    }
 }

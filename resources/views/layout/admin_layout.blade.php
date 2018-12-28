@@ -22,7 +22,7 @@
 
 <body>
     <div class=" col-4 pb-5 position-absolute hh pt-3" id="menu" style="z-index:1000;
-                                                                        height:101vh;
+                                                                        height:110vh;
                                                                         top:0;
                                                                         margin-left:-1200px;
                                                                         background:#242424f0;">
@@ -34,11 +34,11 @@
         </div>
         <div class="text-left pr-2 pl-3 mt-4">
             <a href="{{ route('admin.transaction') }}" class="text-left">
-                <img src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transaction</h4>
+                <img src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transactions</h4>
             </a>
             <br><br><br>
             <a href="{{ route('admin.booking') }}" class="text-left">
-                <img src="{{ asset('img/book.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Booking</h4>
+                <img src="{{ asset('img/book.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Bookings</h4>
             </a>
             <br><br><br><br>
             <a href="#" class="text-left">
