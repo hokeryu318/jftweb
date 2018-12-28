@@ -17,6 +17,7 @@
     <!-- Your custom styles (optional) -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/timepicki.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
 

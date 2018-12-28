@@ -49,3 +49,4 @@ Route::get('admin/setting/language', 'SettingController@language')->name('admin.
 Route::get('admin/setting/password', 'SettingController@password')->name('admin.setting.password');
 
 Route::post('admin/setting/kitchenpost', 'SettingController@kitchen_post')->name('admin.setting.kitchen.post');
+Route::post('admin/setting/timeslotpost', 'SettingController@timeslot_post')->name('admin.setting.timeslots.post');
