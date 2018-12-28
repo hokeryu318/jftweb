@@ -23,7 +23,7 @@
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.customer') }}">New Customer</a></li>
                     </ul>
                     <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
-                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.gst') }}">gst</a></li>
+                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.gst') }}">GST</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.payment') }}">Payment Method</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.receipt') }}">Receipt</a></li>
                     </ul>

@@ -17,6 +17,7 @@
     <!-- Your custom styles (optional) -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                                                                         height:101vh;
                                                                         top:0;
                                                                         margin-left:-1200px;
-                                                                        background:#242424;">
+                                                                        background:#242424f0;">
         <a href="#" class="bg-transparent black-text float-right" id="closemenu">
             <img src="{{ asset('img/Group826.png') }}" class="w-75" />
         </a>
@@ -44,7 +45,7 @@
                 <img src="{{ asset('img/menu.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Edit Menu  &nbsp;&nbsp; <img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
             </a>
             <br><br>
-            <a href="#" class="text-left mt-4">
+            <a href="{{ route('admin.saledata') }}" class="text-left mt-4">
                 <img src="{{ asset('img/sales.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Sales Data &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-1" /></h4>
             </a>
             <br><br>
@@ -52,7 +53,7 @@
                 <img src="{{ asset('img/setting.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Setting &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
             </a>
             <br><br>
-            <a href="#" class="text-left mt-4">
+            <a href="{{ route('admin.table') }}" class="text-left mt-4">
                 <img src="{{ asset('img/table.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Table Edit &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
             </a>
         </div>
@@ -80,8 +81,7 @@
         </div>
     </header>
 
-    @yield('content');
-    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    @yield('content')
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
     <!-- Bootstrap core JavaScript -->
@@ -92,7 +92,6 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            console.log('aaa');
             $('#datetimepicker12').datetimepicker({
                 inline: true,
                 sideBySide: true,

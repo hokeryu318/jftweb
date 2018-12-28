@@ -6,7 +6,7 @@ use Hash;
 
 use Illuminate\Http\Request;
 
-use App\Role;
+use App\Model\Role;
 
 class LoginController extends Controller
 {

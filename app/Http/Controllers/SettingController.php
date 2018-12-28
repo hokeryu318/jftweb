@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Model\Receipt;
+use App\Model\Kitchen;
 class SettingController extends Controller
 {
     //
     public function kitchen()
     {
-        return view('admin.setting.kitchen');
+        $kitchens = Kitchen::get();
+        return view('admin.setting.kitchen')->with(compact('kitchens'));
     }
     public function timeslots()
     {
@@ -25,7 +28,15 @@ class SettingController extends Controller
     }
     public function gst()
     {
-        return view('admin.setting.gst');
+        $profile = Receipt::profile();
+        return view('admin.setting.gst')->with(compact('profile'));
+    }
+    public function gstpost()
+    {
+        $profile = Receipt::profile();
+        $profile->gst = request()->gst;
+        $profile->save();
+        return redirect()->route('admin.setting.gst');
     }
     public function payment()
     {
@@ -33,7 +44,19 @@ class SettingController extends Controller
     }
     public function receipt()
     {
-        return view('admin.setting.receipt');
+        $profile = Receipt::profile();
+        return view('admin.setting.receipt')->with(compact('profile'));
+    }
+    public function receiptpost()
+    {
+        // dd(request());
+        $profile = Receipt::profile();
+        $profile->shop_name = request()->shop_name;
+        $profile->abn = request()->abn;
+        $profile->address = request()->address;
+        $profile->phone = request()->phone;
+        $profile->save();
+        return redirect()->route('admin.setting.receipt');
     }
     public function badge()
     {

@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'LoginController@getLogin')->name('loginform');
 Route::get('login', 'LoginController@getLogin')->name('loginform');
 Route::post('login', 'LoginController@postLogin')->name('login');
 
@@ -31,14 +28,21 @@ Route::get('admin/transactions', 'TransactionController@index')->name('admin.tra
 
 Route::get('admin/category', 'CategoryController@index')->name('admin.category');
 
+Route::get('admin/edittable', 'TableController@index')->name('admin.table');
+
+Route::get('admin/saledata', 'SaleController@index')->name('admin.saledata');
+Route::get('admin/review', 'SaleController@review')->name('admin.review');
+
 Route::get('admin/setting/kitchen', 'SettingController@kitchen')->name('admin.setting.kitchen');
 Route::get('admin/setting/timeslots', 'SettingController@timeslots')->name('admin.setting.timeslots');
 Route::get('admin/setting/htimeslots', 'SettingController@htimeslots')->name('admin.setting.htimeslots');
 Route::get('admin/setting/customer', 'SettingController@customer')->name('admin.setting.customer');
 
 Route::get('admin/setting/gst', 'SettingController@gst')->name('admin.setting.gst');
+Route::post('admin/setting/gst', 'SettingController@gstpost')->name('admin.setting.gst.save');
 Route::get('admin/setting/payment', 'SettingController@payment')->name('admin.setting.payment');
 Route::get('admin/setting/receipt', 'SettingController@receipt')->name('admin.setting.receipt');
+Route::post('admin/setting/receipt', 'SettingController@receiptpost')->name('admin.setting.receipt.save');
 
 Route::get('admin/setting/badge', 'SettingController@badge')->name('admin.setting.badge');
 Route::get('admin/setting/language', 'SettingController@language')->name('admin.setting.language');
