@@ -18,7 +18,9 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/timepicki.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
 </head>
 
 <body>

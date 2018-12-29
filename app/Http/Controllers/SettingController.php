@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Receipt;
 use App\Model\Kitchen;
 use App\Model\Timeslot;
+use App\Model\Holiday;
 class SettingController extends Controller
 {
     //
@@ -22,7 +23,9 @@ class SettingController extends Controller
     }
     public function htimeslots()
     {
-        return view('admin.setting.htimeslots');
+        $slot = Timeslot::find(9);
+        $holidays = Holiday::get();
+        return view('admin.setting.htimeslots')->with(compact('slot', 'holidays'));
     }
     public function customer()
     {
@@ -150,6 +153,27 @@ class SettingController extends Controller
         self::saveTimeSlot(request(), $sunday, 'sunday');
 
         return redirect()->route('admin.setting.timeslots');
+    }
+
+    public function htimeslot_post(){
+        if(request()->has('new')){
+            $new_holidays = request()->input('new');
+            foreach($new_holidays as $new){
+                $holiday = new Holiday();
+                $holiday->holiday_date = $new;
+                $holiday->save();
+            }
+        }
+        if(request()->has('removed')){
+            $removeitems = request()->removed;
+            foreach($removeitems as $item){
+                $holiday = Holiday::find($item);
+                $holiday->delete();
+            }
+        }
+        $holiday = Timeslot::find(9);
+        self::saveTimeSlot(request(), $holiday, 'holiday');
+        return redirect()->route('admin.setting.htimeslots');
     }
 
     private function saveTimeSlot($req, $obj, $key){
