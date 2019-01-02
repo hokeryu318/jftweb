@@ -53,3 +53,5 @@ Route::post('admin/setting/timeslotpost', 'SettingController@timeslot_post')->na
 Route::post('admin/setting/htimeslotpost', 'SettingController@htimeslot_post')->name('admin.setting.htimeslots.post');
 Route::post('admin/setting/addbadge', 'SettingController@addbadge')->name('admin.setting.addbadge');
 Route::post('admin/setting/customerpost', 'SettingController@customer_post')->name('admin.setting.customer.save');
+Route::post('admin/setting/languagepost', 'SettingController@language_post')->name('admin.setting.language.save');
+Route::post('admin/setting/passwordpost', 'SettingController@password_post')->name('admin.setting.password.save');

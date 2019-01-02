@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
 
 use App\Model\Receipt;
 use App\Model\Kitchen;
@@ -71,11 +72,13 @@ class SettingController extends Controller
     }
     public function language()
     {
-        return view('admin.setting.language');
+        $profile = Receipt::profile();
+        return view('admin.setting.language')->with(compact('profile'));
     }
     public function password()
     {
-        return view('admin.setting.password');
+        $profile = Receipt::profile();
+        return view('admin.setting.password')->with(compact('profile'));
     }
     public function kitchen_post()
     {
@@ -240,5 +243,42 @@ class SettingController extends Controller
         $profile->customer = request()->customer_time;
         $profile->save();
         return redirect()->route('admin.setting.customer');
+    }
+    public function language_post()
+    {
+        $profile = Receipt::profile();
+        if(request()->has('lang_jp')){
+            $profile->lang_jp = request()->lang_jp == "on" ? 1 : 0;
+        }
+        if(request()->has('lang_kr')){
+            $profile->lang_kr = request()->lang_kr == "on" ? 1 : 0;
+        }
+        if(request()->has('lang_cn')){
+            $profile->lang_cn = request()->lang_cn == "on" ? 1 : 0;
+        }
+        $profile->save();
+        return redirect()->route('admin.setting.language');
+    }
+    public function password_post()
+    {
+        $profile = Receipt::profile();
+        if(request()->has('password_menu')){
+            if(substr(request()->password_menu, 0, 1) != "*")
+                $profile->password_menu = Hash::make(request()->password_menu);
+        }
+        if(request()->has('password_kitchen')){
+            if(substr(request()->password_kitchen, 0, 1) != "*")
+                $profile->password_kitchen = Hash::make(request()->password_kitchen);
+        }
+        if(request()->has('password_reception')){
+            if(substr(request()->password_reception, 0, 1) != "*")
+                $profile->password_reception = Hash::make(request()->password_reception);
+        }
+        if(request()->has('password_admin')){
+            if(substr(request()->password_admin, 0, 1) != "*")
+                $profile->password_admin = Hash::make(request()->password_admin);
+        }
+        $profile->save();
+        return redirect()->route('admin.setting.password');
     }
 }
