@@ -8,6 +8,7 @@ use App\Model\Receipt;
 use App\Model\Kitchen;
 use App\Model\Timeslot;
 use App\Model\Holiday;
+use App\Model\Badge;
 class SettingController extends Controller
 {
     //
@@ -29,7 +30,8 @@ class SettingController extends Controller
     }
     public function customer()
     {
-        return view('admin.setting.customer');
+        $profile = Receipt::profile();
+        return view('admin.setting.customer')->with(compact('profile'));
     }
     public function gst()
     {
@@ -223,5 +225,20 @@ class SettingController extends Controller
             $obj->day_on = 0;
         }
         $obj->save();
+    }
+    public function addbadge()
+    {
+        dd(request());
+        $badge = new Badge();
+        $badge->name = request()->get('image-name');
+        $badge->image =
+        request()->file('image-file')->store(request()->get('image-name'));
+    }
+    public function customer_post()
+    {
+        $profile = Receipt::profile();
+        $profile->customer = request()->customer_time;
+        $profile->save();
+        return redirect()->route('admin.setting.customer');
     }
 }

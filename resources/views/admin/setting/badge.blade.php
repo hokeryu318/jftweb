@@ -30,8 +30,13 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('admin.setting.addbadge') }}" method="POST" id="image_form">
+        <input id="image-file" type="file" style="position:fixed; top:-100px" name="image-file" accept="image/x-png, image/gif, image/jpeg">
+        <input id="image-name" name="image-name" type="hidden">
+        @csrf
+    </form>
     <div class="text-right">
-        <button class="btn bg-info text-right radius pt-2 pb-2 pr-4 pl-4"><h6 class="mb-0 pr-3 pl-3 font-weight-bold">ADD</h6></button>
+        <button class="btn bg-info text-right radius pt-2 pb-2 pr-4 pl-4" onclick="onFile()"><h6 class="mb-0 pr-3 pl-3 font-weight-bold">ADD</h6></button>
     </div>
     <div style="margin-top:230px">&nbsp;</div>
     <div class="col-lg-11 mt-5 pr-2 text-right mb-2">
@@ -39,4 +44,16 @@
         <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0">Apply</h5></a>
     </div>
 </div>
+<script>
+    function onFile(){
+        $('#image-file').trigger('click');
+    }
+    $('#image-file').change(function(){
+        var image_name = prompt('Please enter badge name');
+        if(image_name != null && image_name != ''){
+            $('#image-name').val(image_name);
+        }
+        $('#image_form').submit();
+    });
+</script>
 @endsection

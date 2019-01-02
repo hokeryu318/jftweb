@@ -51,3 +51,5 @@ Route::get('admin/setting/password', 'SettingController@password')->name('admin.
 Route::post('admin/setting/kitchenpost', 'SettingController@kitchen_post')->name('admin.setting.kitchen.post');
 Route::post('admin/setting/timeslotpost', 'SettingController@timeslot_post')->name('admin.setting.timeslots.post');
 Route::post('admin/setting/htimeslotpost', 'SettingController@htimeslot_post')->name('admin.setting.htimeslots.post');
+Route::post('admin/setting/addbadge', 'SettingController@addbadge')->name('admin.setting.addbadge');
+Route::post('admin/setting/customerpost', 'SettingController@customer_post')->name('admin.setting.customer.save');
