@@ -132,6 +132,8 @@
                 forceParse: 0,
             });
             init();
+            var height = Math.max($(window).height() * 1.02, $(document.body).height());
+            $('#menu').height(height);
         });
     </script>
 </body>

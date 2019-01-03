@@ -27,7 +27,7 @@
     <br>
     <div class="row">
         <div class="col-12">
-            <table class="table text-white txtdemibold" style="width:57%;">
+            <table class="table text-white txtdemibold" style="width:65%;">
                 <thead>
                     <tr>
                         <th class="border-0" scope="col">
@@ -49,7 +49,7 @@
                             <td class="border-0">H-1 + H-2</td>
                             <td class="border-0">12</td>
                             <td class="border-0">Ms Jenifer Lopez</td>
-                            <td class="border-0"><a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">EDIT</a></td>
+                            <td class="border-0" style="text-align:center"><a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">EDIT</a></td>
                         </tr>
                         @for($i = 0; $i < 10; $i++)
                         <tr>
@@ -57,7 +57,7 @@
                             <td>A-1</td>
                             <td>1</td>
                             <td>Mr Johny English</td>
-                            <td><a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">EDIT</a></td>
+                            <td style="text-align:center"><a style="color:white;" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">EDIT</a></td>
                         </tr>
                         @endfor
                     </tbody>

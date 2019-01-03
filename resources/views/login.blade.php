@@ -31,6 +31,12 @@
         color:white !important;font-size:20px;
         background:transparent;
     }
+    select option {
+        margin: 40px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
 </style>
 <body>
 <form method="POST" action="{{ route('login') }}">
@@ -62,7 +68,6 @@
                         </div>
                         <div class="col-6 text-left">
                             <select class="custom-input pt-1 pb-1 w-100" name="role">
-                                <option value="admin">Admin</option>
                                 <option value="reception">Reception</option>
                                 <option value="kitchen">Kitchen</option>
                                 <option value="menu">Menu</option>

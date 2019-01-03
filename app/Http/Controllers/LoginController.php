@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function postLogin(Request $request){
         $name = $request->role;
         $password = $request->password;
-        if($request->role = "admin"){
+        if($request->role = "reception"){
             $user = Role::where('name', '=', $name)->first();
             if(!isset($user)){
                 return redirect(route('loginform'));

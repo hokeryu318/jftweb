@@ -267,13 +267,19 @@ class SettingController extends Controller
     {
         $profile = Receipt::profile();
         if(request()->has('lang_jp')){
-            $profile->lang_jp = request()->lang_jp == "on" ? 1 : 0;
+            $profile->lang_jp = '1';
+        } else {
+            $profile->lang_jp = '0';
         }
         if(request()->has('lang_kr')){
-            $profile->lang_kr = request()->lang_kr == "on" ? 1 : 0;
+            $profile->lang_kr = '1';
+        } else {
+            $profile->lang_kr = '0';
         }
         if(request()->has('lang_cn')){
-            $profile->lang_cn = request()->lang_cn == "on" ? 1 : 0;
+            $profile->lang_cn = '1';
+        } else {
+            $profile->lang_cn = '0';
         }
         $profile->save();
         return redirect()->route('admin.setting.language');
