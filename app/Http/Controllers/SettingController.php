@@ -10,6 +10,7 @@ use App\Model\Kitchen;
 use App\Model\Timeslot;
 use App\Model\Holiday;
 use App\Model\Badge;
+use App\Model\Payment;
 class SettingController extends Controller
 {
     //
@@ -48,7 +49,8 @@ class SettingController extends Controller
     }
     public function payment()
     {
-        return view('admin.setting.payment');
+        $payments = Payment::orderBy('sort')->get();
+        return view('admin.setting.payment')->with(compact('payments'));
     }
     public function receipt()
     {
@@ -68,7 +70,8 @@ class SettingController extends Controller
     }
     public function badge()
     {
-        return view('admin.setting.badge');
+        $badges = Badge::get();
+        return view('admin.setting.badge')->with(compact('badges'));
     }
     public function language()
     {
@@ -231,11 +234,22 @@ class SettingController extends Controller
     }
     public function addbadge()
     {
-        dd(request());
+        $img_name = request()->get('image-name');
+        if(Badge::where('name', $img_name)->exists()){
+            return redirect()->route('admin.setting.badge');
+        }
+
+        $file = request()->file('image-file');
+        $destinationPath = 'uploads';
+        $destinationFile = $file->getClientOriginalName();
+        $file->move($destinationPath, $destinationFile);
+
         $badge = new Badge();
-        $badge->name = request()->get('image-name');
-        $badge->image =
-        request()->file('image-file')->store(request()->get('image-name'));
+        $badge->name = $img_name;
+        $badge->filepath = $destinationFile;
+        $badge->save();
+
+        return redirect()->route('admin.setting.badge');
     }
     public function customer_post()
     {
@@ -280,5 +294,43 @@ class SettingController extends Controller
         }
         $profile->save();
         return redirect()->route('admin.setting.password');
+    }
+    public function active_badge()
+    {
+        Badge::where('created_at' ,'!=', null)->update(['active' => '0']);
+        if(request()->has('actives')){
+            Badge::whereIn('id', request()->actives)->update(['active' => '1']);
+        }
+        return redirect()->route('admin.setting.badge');
+    }
+    public function payment_post()
+    {
+        // dd(request());
+        if(request()->has('new')){
+            $newitems = request()->new;
+            foreach($newitems as $item){
+                $payment = new Payment();
+                $payment->name = $item;
+                $payment->save();
+            }
+        }
+        if(request()->has('removed')){
+            $removeitems = request()->removed;
+            foreach($removeitems as $item){
+                $payment = Payment::find($item);
+                $payment->delete();
+            }
+        }
+        if(request()->has('sort')){
+            $sorts = request()->sort;
+            foreach($sorts as $s){
+                $detail = explode('_', $s);
+                $key = $detail[0];
+                $item = Payment::get_item_for_sort($key);
+                $item->sort = $detail[1];
+                $item->save();
+            }
+        }
+        return redirect()->route('admin.setting.payment');
     }
 }

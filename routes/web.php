@@ -55,3 +55,5 @@ Route::post('admin/setting/addbadge', 'SettingController@addbadge')->name('admin
 Route::post('admin/setting/customerpost', 'SettingController@customer_post')->name('admin.setting.customer.save');
 Route::post('admin/setting/languagepost', 'SettingController@language_post')->name('admin.setting.language.save');
 Route::post('admin/setting/passwordpost', 'SettingController@password_post')->name('admin.setting.password.save');
+Route::post('admin/setting/activebadge', 'SettingController@active_badge')->name('admin.setting.activebadge');
+Route::post('admin/setting/paymentpost', 'SettingController@payment_post')->name('admin.setting.payment.post');

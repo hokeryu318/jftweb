@@ -95,6 +95,32 @@
     <script src="{{ asset('js/bootstrap-timepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
     <script type="text/javascript">
+        function touchHandler(event) {
+            var touch = event.changedTouches[0];
+
+            var simulatedEvent = document.createEvent("MouseEvent");
+                simulatedEvent.initMouseEvent({
+                touchstart: "mousedown",
+                touchmove: "mousemove",
+                touchend: "mouseup"
+            }[event.type], true, true, window, 1,
+                touch.screenX, touch.screenY,
+                touch.clientX, touch.clientY, false,
+                false, false, false, 0, null);
+
+            touch.target.dispatchEvent(simulatedEvent);
+            event.preventDefault();
+        }
+
+        function init() {
+            var sortable_div = document.getElementById('sortable_div');
+            if(sortable_div){
+                document.getElementById('sortable_div').addEventListener("touchstart", touchHandler, true);
+                document.getElementById('sortable_div').addEventListener("touchmove", touchHandler, true);
+                document.getElementById('sortable_div').addEventListener("touchend", touchHandler, true);
+                document.getElementById('sortable_div').addEventListener("touchcancel", touchHandler, true);
+            }
+        }
         $(document).ready(function() {
             $('#datetimepicker12').datetimepicker({
                 inline: true,
@@ -105,6 +131,7 @@
                 minView: 2,
                 forceParse: 0,
             });
+            init();
         });
     </script>
 </body>

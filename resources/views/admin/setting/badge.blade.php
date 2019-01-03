@@ -14,23 +14,32 @@
             <h6 class="text-info font-weight-bold pl-5">Active</h6>
         </div>
     </div>
-    <div class="card pt-4 pb-2 mb-5">
+    <form action="{{ route('admin.setting.activebadge') }}" method="POST" id="active_form">
+    @foreach($badges as $badge)
+    <div class="card pt-4 pb-2" style="margin-bottom:10px">
         <div class="row">
             <div class="col-6">
-                <h6 class="font-weight-bold pl-5">Special</h6>
+                <h6 class="font-weight-bold pl-5">{{ $badge->name }}</h6>
             </div>
             <div class="col-3 text-center">
-                <img class="" src="img/spec.png" />
+                <img class="" src="{{ asset('uploads/'.$badge->filepath) }}" width="30px" />
             </div>
             <div class="col-3 text-center">
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" name="actives[]" value="{{ $badge->id }}"
+                    @if($badge->active == 1)
+                    checked
+                    @endif
+                    >
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
     </div>
-    <form action="{{ route('admin.setting.addbadge') }}" method="POST" id="image_form">
+    @endforeach
+    @csrf
+    </form>
+    <form action="{{ route('admin.setting.addbadge') }}" method="POST" id="image_form" enctype='multipart/form-data'>
         <input id="image-file" type="file" style="position:fixed; top:-100px" name="image-file" accept="image/x-png, image/gif, image/jpeg">
         <input id="image-name" name="image-name" type="hidden">
         @csrf
@@ -41,7 +50,7 @@
     <div style="margin-top:230px">&nbsp;</div>
     <div class="col-lg-11 mt-5 pr-2 text-right mb-2">
         <a href="#" class="btn bg-white black-text pt-2 pb-2 pr-2 pl-2"><h5 class="black-text mb-0">Cancel</h5></a>
-        <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0">Apply</h5></a>
+        <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0" onclick="onapply()">Apply</h5></a>
     </div>
 </div>
 <script>
@@ -55,5 +64,9 @@
         }
         $('#image_form').submit();
     });
+    function onapply()
+    {
+        $('#active_form').submit();
+    }
 </script>
 @endsection
