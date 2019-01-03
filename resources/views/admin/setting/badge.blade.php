@@ -2,7 +2,7 @@
 
 @section('setting')
 <div class="col-9 pl-0">
-    <h5 class="black-text font-weight-bold pl-5">Badge</h5>
+    <h5 class="black-text font-weight-bold pl-5">Badges</h5>
     <div class="row mt-4">
         <div class="col-6">
             <h6 class="text-info font-weight-bold pl-5">Name</h6>

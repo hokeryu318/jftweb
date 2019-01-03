@@ -24,13 +24,13 @@
                     </ul>
                     <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.gst') }}">GST</a></li>
-                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.payment') }}">Payment Method</a></li>
+                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.payment') }}">Payment Methods</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.receipt') }}">Receipt</a></li>
                     </ul>
                     <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
-                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.badge') }}">Badge</a></li>
+                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.badge') }}">Badges</a></li>
                         <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.language') }}">Multilingual</a></li>
-                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.password') }}">Password</a></li>
+                        <li class="menu1 fontbig"><a style="color:white" href="{{ route('admin.setting.password') }}">Passwords</a></li>
                     </ul>
                 </div>
                 @yield('setting')

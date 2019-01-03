@@ -61,6 +61,9 @@
     $( "#sortable" ).disableSelection();
 
     function onadd(){
+        if($('.element:visible').length >= 5){
+            return;
+        }
         var payment_name = prompt('Please enter payment type');
         if(payment_name == null || payment_name == "") return;
         var div = $('#clone').clone();

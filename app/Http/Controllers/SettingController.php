@@ -229,6 +229,11 @@ class SettingController extends Controller
             }
         } else {
             $obj->day_on = 0;
+            $obj->morning_on = 0;
+            $obj->lunch_on = 0;
+            $obj->tea_on = 0;
+            $obj->dinner_on = 0;
+            $obj->latenight_on = 0;
         }
         $obj->save();
     }

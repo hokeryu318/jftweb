@@ -6,7 +6,7 @@
     <div class="card ml-5 col-lg-5 pt-4 mr-auto pb-4 ml-auto mt-5">
         <div class="col-lg-12 pr-0 pl-0 text-center">
             <input class="blueborder pt-2 pb-2 mb-3" value="{{ $profile->gst }} %" readonly id="result"
-                style="padding-left:10px;padding-right:10px" />
+                style="padding-left:10px;padding-right:10px;text-align:right" />
         </div>
         <div class="row mt-2">
             <div class="col-lg-4">
