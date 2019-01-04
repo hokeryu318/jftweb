@@ -15,6 +15,10 @@ class DishController extends Controller
         return view('admin.dish.edit');
     }
 
+    public function add(){
+        return view('admin.dish.edit');
+    }
+
     public function preview(){
         return view('admin.dish.preview');
     }

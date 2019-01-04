@@ -45,7 +45,7 @@
                 <img src="{{ asset('img/book.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Bookings</h4>
             </a>
             <br><br><br><br>
-            <a href="#" class="text-left">
+            <a href="{{ route('admin.category') }}" class="text-left">
                 <img src="{{ asset('img/menu.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Edit Menu  &nbsp;&nbsp; <img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
             </a>
             <br><br>
