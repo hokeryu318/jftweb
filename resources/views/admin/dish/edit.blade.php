@@ -3,6 +3,12 @@
 @section('title', 'DISH')
 
 @section('content')
+<style>
+    .option-padding {
+        padding-top : 0.6rem;
+        padding-bottom : 0.6rem;
+    }
+</style>
 <div class="container-fluid pb-3 blackgrey">
     <div style="padding-top:8%;"></div>
         <div class="widthh white pt-3 pb-1 position-relative">
@@ -75,11 +81,11 @@
             <div class="col-7">
                 <label class="text-blue txtdemibold">Option</label>
                 <div>
-                    <select class="border-blue select-width-blue mr-1 h11rem"></select>
+                    <select class="border-blue select-width-blue mr-1 option-padding"></select>
                     <button class="btndeletebehind mt-2">Delete</button>
                 </div>
                 <div class="mt-2">
-                    <select class="border-blue select-width-blue mr-1 h11rem"></select>
+                    <select class="border-blue select-width-blue mr-1 option-padding"></select>
                     <button class="btndeletebehind ">Delete</button>
                 </div>
                 <button class="addOptionbtn mt-3 mb-4">Add Option </button>
@@ -91,25 +97,39 @@
                     <div>
                         <label class="text-blue txtdemibold">Category</label>
                     </div>
-                    <select type="text" class="outline-0 border-blue w-100 h11rem" name="Category"></select>
+                    <select type="text" class="outline-0 border-blue w-100 option-padding" name="category" id="mcategory">
+                        @foreach ($main_cats as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name_en }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <div>
                         <label class="text-blue txtdemibold">Sub-Category</label>
                     </div>
-                    <select type="text" class="outline-0 border-blue w-100 h11rem" name="Sub_Category"></select>
+                    <select type="text" class="outline-0 border-blue w-100 option-padding" name="sub_category" id="scategory">
+
+                    </select>
                 </div>
                 <div class="form-group">
                     <div>
                         <label class="text-blue txtdemibold">Group</label>
                     </div>
-                    <select type="text" class="outline-0 border-blue w-100 h11rem" name="Group"></select>
+                    <select type="text" class="outline-0 border-blue w-100 option-padding" id="group" name="group">
+                        @foreach ($groups as $g)
+                            <option value="{{ $g->id }}"> {{ $g->name }} </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <div>
                         <label class="text-blue txtdemibold">Badge</label>
                     </div>
-                    <select type="text" class="outline-0 border-blue w-100 h11rem" name="Badge"></select>
+                    <select type="text" class="outline-0 border-blue w-100 option-padding" name="badge">
+                        @foreach ($badges as $b)
+                            <option value="{{ $b->id }}"> {{ $b->name }} </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -272,5 +292,23 @@
 
         fr.readAsDataURL(f);
     });*/
+    $(document).ready(function(){
+        console.log($('#mcategory').val());
+        $('#mcategory').trigger('change');
+    });
+    $('#mcategory').change(function(){
+        var main = $(this).val();
+        $.ajax({
+            type:"POST",
+            url:"{{ route('admin.category.subs') }}",
+            data:{
+                parent:main,
+                _token:"{{ csrf_token() }}"
+            },
+            success: function(result){
+                $('#scategory').html(result);
+            }
+        });
+    });
 </script>
 @endsection

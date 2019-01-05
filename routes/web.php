@@ -31,6 +31,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/category', 'CategoryController@index')->name('admin.category');
     Route::post('admin/category/add', 'CategoryController@add')->name('admin.category.add');
     Route::get('admin/category/delete/{id}', 'CategoryController@delete')->name('admin.category.delete');
+    Route::post('admin/category/subs', 'CategoryController@subs')->name('admin.category.subs');
 
     Route::get('admin/dishes', 'DishController@index')->name('admin.dish');
     Route::get('admin/dish/preview', 'DishController@preview')->name('admin.dish.preview');

@@ -35,4 +35,11 @@ class CategoryController extends Controller
         $cat = Category::find($id);
         $cat->delete();
     }
+
+    public function subs()
+    {
+        $main = request()->parent;
+        $subs = Category::find($main)->subs;
+        return (string)view('part.subcategory', compact('subs'))->render();
+    }
 }
