@@ -156,7 +156,11 @@
                     <button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button" style="display:none">
                         Add Photo
                     </button>
-                    <img class="option-image" width=55 height=55 src="{{ asset('options/'.$item->image) }}">
+                    <img class="option-image" width=55 height=55
+                        @if($obj->photo_visible == '1')
+                        src="{{ asset('options/'.$item->image) }}"
+                        @endif
+                    >
                 </div>
                 <div class="col-1">
                     <label class="bs-switch mt-3">
@@ -173,7 +177,7 @@
                         Remove Option
                     </button>
                 </div>
-                <input type="file" class="file-image" name="prev-data[{{ $item->id }}][file]" style="display:none">
+                <input type="file" class="file-image" name="prev-data[{{ $item->id }}][image]" style="display:none">
                 <input type="hidden" class="stock-check-value"  name="prev-data[{{ $item->id }}][stock]">
                 <input type="hidden" class="old-id" name="prev[]" value="{{ $item->id }}">
             </div>
@@ -182,10 +186,10 @@
 
         <div class="row clone" style="display:none">
             <div class="col-6">
-                <input type="text" class="outline-0 border-bottom-blue mt-2" name="option-name[]" />
+                <input type="text" class="outline-0 border-bottom-blue mt-2 option-name" />
             </div>
             <div class="col-2">
-                <input type="number" class="outline-0 border-bottom-blue mt-2" name="option-price[]" />
+                <input type="number" class="outline-0 border-bottom-blue mt-2 option-price"/>
             </div>
             <div class="col-1">
                 <button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button">
@@ -204,8 +208,8 @@
                     Remove Option
                 </button>
             </div>
-            <input type="file" class="file-image" name="option-image[]" style="display:none">
-            <input type="hidden" class="stock-check-value"  name="option-stock[]">
+            <input type="file" class="file-image" style="display:none">
+            <input type="hidden" class="stock-check-value option-stock">
         </div>
 
         <button class="btnaddphoto3  mt-2 pt-1" type="button" onclick="onAddOption()">
@@ -213,12 +217,12 @@
         </button>
         <div class="row mt-5 mb-3">
             <div class="col-6">
-                <button class="grey-button" type="button">DELETE
+                <button class="grey-button" type="button" onclick="onDeleteMain(this)" data-url="{{ route('admin.option.delete', ['id' => $obj->id]) }}">DELETE
                     <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1"/>
                 </button>
             </div>
             <div class="col-6">
-                <button class="grey-button ml-5" type="button">CANCEL
+                <button class="grey-button ml-5" type="button" onclick="onCancel()">CANCEL
                     <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
                 </button>
                 <button class="green-button" type="button" onclick="onApply()">Apply
@@ -283,7 +287,7 @@
         $('#popupp').show();
         $("#popupp").animate({ "opacity": '1' }, "slow");
 
-        current_file_obj = $('file-image', $(this).closest('row'));
+        current_file_obj = $('.file-image', $(this).closest('.row'));
         current_image_obj = $(this);
     });
     //close image modal
@@ -294,7 +298,24 @@
         $("#popupp").animate({ "opacity": '0' }, "slow", function () {
             $("#popupp").hide();
         });
-        current_file_obj.val($('#option_image_modal').val());
+    });
+    $('.addOptionbtn').click(function(){
+        $("#popupchangePhoto").animate({ "opacity": '0' }, "slow", function () {
+            $("#popupchangePhoto").hide();
+        });
+        $("#popupp").animate({ "opacity": '0' }, "slow", function () {
+            $("#popupp").hide();
+        });
+        //current_file_obj.val($('#option_image_modal').val());
+        //$(current_file_obj).remove();
+
+        var org_name = $(current_file_obj).attr('name');
+
+        var parent = $(current_file_obj).closest('.row');
+        var newFile = $('#option_image_modal').clone();
+        newFile.attr('name', org_name);
+        newFile.attr('id', '');
+        parent.append(newFile);
         current_image_obj.attr('src', $('#popupimg').attr('src'));
     });
     //on add image button
@@ -304,7 +325,7 @@
         $('.file-image', parent).trigger('click');
     }
     //add image button on modal
-    $('.addOptionbtn').click(function(){
+    $('#popupimg').click(function(){
         $('#option_image_modal').trigger('click');
     });
     //event on modal file input
@@ -319,13 +340,18 @@
 
         fr.readAsDataURL(f);
     });
-
+    var newIndex = 0;
     function onAddOption()
     {
         var div = $('.clone').clone();
+        $('.option-name', div).attr('name', 'new-option[' + newIndex + '][name]');
+        $('.option-price', div).attr('name', 'new-option[' + newIndex + '][price]');
+        $('.file-image', div).attr('name', 'new-option[' + newIndex + '][image]');
+        $('.option-stock', div).attr('name', 'new-option[' + newIndex + '][stock]');
         $(div).show();
         $(div).removeClass('clone');
         $('#content').append(div);
+        newIndex++;
     }
 
     function onDelete(obj)
@@ -352,6 +378,17 @@
         var cur_val = Number($('#number_selection').val());
         if(cur_val > 1)
             $('#number_selection').val(cur_val - 1);
+    }
+
+    function onDeleteMain(obj)
+    {
+        var url = $(obj).data('url');
+        window.location = url;
+    }
+
+    function onCancel()
+    {
+        window.location = "{{ route('admin.option') }}";
     }
 </script>
 @endsection

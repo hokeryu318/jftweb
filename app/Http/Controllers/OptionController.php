@@ -12,7 +12,8 @@ class OptionController extends Controller
     //
     public function index()
     {
-        return view('admin.option.list');
+        $options = Option::get();
+        return view('admin.option.list')->with(compact('options'));
     }
     public function edit($id)
     {
@@ -24,6 +25,14 @@ class OptionController extends Controller
         $obj = new Option();
         return view('admin.option.form')->with(compact('obj'));
     }
+    public function delete($id)
+    {
+        $obj = Option::find($id);
+        foreach($obj->items as $i){
+            $i->delete();
+        }
+        $obj->delete();
+    }
     public function store()
     {
         // dd(request());
@@ -33,24 +42,22 @@ class OptionController extends Controller
             $obj->display_name_en = request()->display_name_en;
             $obj->display_name_cn = request()->display_name_cn;
             $obj->display_name_jp = request()->display_name_jp;
-            $obj->multi_select = request()->multi_select == "on" ? 1 : 0;
+            $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
             $obj->number_selection = request()->number_selection;
-            $obj->photo_visible = request()->photo_visible == "on" ? 1 : 0;
+            $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
             $obj->save();
 
             $option_id = $obj->id;
-
-            if(request()->has('option-name')){
-                $option_names = request()->get('option-name');
-                $option_prices = request()->get('option-price');
-                foreach($option_names as $i => $o){
-                    if($i >= count(request()->get('option-name')) - 1) break;
+            if(request()->has('new-option')){
+                $new_options = request()->get('new-option');
+                foreach($new_options as $i => $n){
                     $item = new Item();
                     $item->option_id = $option_id;
-                    $item->name = $o;
-                    $item->price = $option_prices[$i];
+                    $item->name = $n['name'];
+                    $item->price = $n['price'];
+                    $item->stock = $n['stock'];
                     if(request()->photo_visible == "on"){
-                        $file = request()->file('option-image')[$i];
+                        $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
                         $destinationFile = $file->getClientOriginalName();
                         $file->move($destinationPath, $destinationFile);
@@ -60,8 +67,58 @@ class OptionController extends Controller
                 }
             }
         } else {
-            dd(request());
+            $obj = Option::find(request()->id);
+            $obj->display_name_en = request()->display_name_en;
+            $obj->display_name_cn = request()->display_name_cn;
+            $obj->display_name_jp = request()->display_name_jp;
+            $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
+            $obj->number_selection = request()->number_selection;
+            $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
+            $obj->save();
+
+            if(request()->has('prev-data')){
+                $prev_data = request()->get('prev-data');
+                foreach($prev_data as $id => $p){
+                    $item = Item::find($id);
+                    $item->name = $p['name'];
+                    $item->price = $p['price'];
+                    $item->stock = $p['stock'];
+
+                    if(isset(request()->file('prev-data')[$id]['image']) != null){
+                        $image = request()->file('prev-data')[$id]['image'];
+                        $destinationPath = 'options';
+                        $destinationFile = $image->getClientOriginalName();
+                        $image->move($destinationPath, $destinationFile);
+                        $item->image = $destinationFile;
+                    }
+                    $item->save();
+                }
+            }
+
+            if(request()->has('deleted')){
+                $deleted_ids = request()->get('deleted');
+                Item::whereIn('id', $deleted_ids)->delete();
+            }
+
+            if(request()->has('new-option')){
+                $new_options = request()->get('new-option');
+                foreach($new_options as $i => $n){
+                    $item = new Item();
+                    $item->option_id = $obj->id;
+                    $item->name = $n['name'];
+                    $item->price = $n['price'];
+                    $item->stock = $n['stock'];
+                    if(request()->photo_visible == "on"){
+                        $file = request()->file('new-option')[$i]['image'];
+                        $destinationPath = 'options';
+                        $destinationFile = $file->getClientOriginalName();
+                        $file->move($destinationPath, $destinationFile);
+                        $item->image = $destinationFile;
+                    }
+                    $item->save();
+                }
+            }
         }
-        return redirect()->route('admin.option.add');
+        return redirect()->route('admin.option');
     }
 }

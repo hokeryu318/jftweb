@@ -42,6 +42,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/option/edit/{id}', 'OptionController@edit')->name('admin.option.edit');
     Route::get('admin/option/add', 'OptionController@add')->name('admin.option.add');
     Route::post('admin/option/store', 'OptionController@store')->name('admin.option.store');
+    Route::get('admin/option/delete/{id}', 'OptionController@delete')->name('admin.option.delete');
 
     Route::get('admin/edittable', 'TableController@index')->name('admin.table');
 
