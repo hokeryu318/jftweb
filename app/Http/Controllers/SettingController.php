@@ -245,7 +245,7 @@ class SettingController extends Controller
         }
 
         $file = request()->file('image-file');
-        $destinationPath = 'uploads';
+        $destinationPath = 'badges';
         $destinationFile = $file->getClientOriginalName();
         $file->move($destinationPath, $destinationFile);
 
