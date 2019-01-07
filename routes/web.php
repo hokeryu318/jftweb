@@ -35,8 +35,9 @@ Route::group(['middleware' => 'checkadmin'], function(){
 
     Route::get('admin/dish', 'DishController@index')->name('admin.dish');
     Route::get('admin/dish/preview', 'DishController@preview')->name('admin.dish.preview');
-    Route::get('admin/dish/edit', 'DishController@edit')->name('admin.dish.edit');
+    Route::get('admin/dish/edit/{id}', 'DishController@edit')->name('admin.dish.edit');
     Route::get('admin/dish/add', 'DishController@add')->name('admin.dish.add');
+    Route::post('admin/dish/store', 'DishController@store')->name('admin.dish.store');
 
     Route::get('admin/option', 'OptionController@index')->name('admin.option');
     Route::get('admin/option/edit/{id}', 'OptionController@edit')->name('admin.option.edit');
