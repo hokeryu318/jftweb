@@ -15,7 +15,8 @@ class DishController extends Controller
 {
     //
     public function index(){
-        return view('admin.dish.list');
+        $dishes = Dish::get();
+        return view('admin.dish.list')->with(compact('dishes'));
     }
 
     public function edit($id){
@@ -39,8 +40,25 @@ class DishController extends Controller
         return view('admin.dish.edit')->with(compact('main_cats', 'groups', 'badges', 'options', 'obj'));
     }
 
-    public function preview(){
-        return view('admin.dish.preview');
+    public function preview($id){
+        $obj = Dish::find($id);
+        return view('admin.dish.preview')->with(compact('obj'));
+    }
+
+    public function previewpost(Request $request){
+        $obj = Dish::find($request->id);
+        if($request->get("sold_out") != null){
+            $obj->sold_out = 1;
+        } else {
+            $obj->sold_out = 0;
+        }
+        if($request->get("active") != null){
+            $obj->active = 1;
+        } else {
+            $obj->active = 0;
+        }
+        $obj->save();
+        return redirect()->route('admin.dish.edit', ['id' => $request->id]);
     }
 
     public function store()

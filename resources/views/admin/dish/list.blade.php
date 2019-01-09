@@ -19,23 +19,19 @@
         </div>
     </div>
     <div class="row mb-2">
-        <div class="col-12">
-            <table class="table text-white txtdemibold" style="width:95%">
+        <div class="col-12 chh2" style="height: 65vh;overflow-y: auto;">
+            <table class="table text-white txtdemibold">
                 <thead>
                     <tr>
                         <th class="border-0 fs-3" scope="col">
                             ITEM
                             <img src="{{ asset('img/Path444.png') }}" height="20" />
                         </th>
-                        <th class="border-0 fs-3 text-right" scope="col">GROUP</th>
-                        <th class="border-0 fs-3 text-center" scope="col">PRICE</th>
+                        <th class="border-0 fs-3" scope="col">GROUP</th>
+                        <th class="border-0 fs-3" scope="col">PRICE</th>
                         <th class="border-0 fs-3" scope="col">STATUS</th>
                     </tr>
                 </thead>
-            </table>
-        </div>
-        <div class="col-12 chh" style="height: 52vh;overflow-y: auto;">
-            <table class="table text-white txtdemibold">
                 <tbody>
                     <tr>
                         <td class="border-0"></td>
@@ -45,94 +41,30 @@
                         <td class="border-0">Active</td>
                         <td class="border-0"></td>
                     </tr>
-                    <tr>
-                        <td class="border-top-0"> Avocado Roll Sushi with Ikura</td>
-                        <td class="border-top-0">Sushi</td>
-                        <td class="border-top-0">$ 14.25</td>
-
-                        <td class="border-top-0"><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class="border-top-0"><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Bireley’s Orange</td>
+                    @foreach($dishes as $d)
+                    <tr onclick="onrow(this)" data-url="{{ route('admin.dish.preview', ['id' => $d->id]) }}">
+                        <td class="">{{ $d->name_en }}</td>
                         <td class="">Drink</td>
                         <td class="">$ 12.00</td>
 
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
+                        <td class="">
+                            @if($d->sold_out == 1)
+                            <img src="{{ asset('img/Group904.png') }}" height="20" />
+                            @endif
+                        </td>
+                        <td class="">
+                            @if($d->active == 1)
+                            <img src="{{ asset('img/Group904.png') }}" height="20" />
+                            @endif
+                        </td>
                     </tr>
-                    <tr >
-                        <td class=""> Crab Claw Croquette</td>
-                        <td class="">Deep Fry</td>
-                        <td class="">$ 8.50</td>
-
-                        <td class=""></td>
-                        <td class=""></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Denemon Pure Rice Wine</td>
-                        <td class="">Drink</td>
-                        <td class="">$ 14.25</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Ebi Nigiri Sushi 2PC</td>
-                        <td class="">Sushi</td>
-                        <td class="">$ 12.00</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Fried Chicken (Karaage)</td>
-                        <td class="">Deep Fry</td>
-                        <td class="">$ 14.25</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Hiramasa Nigiri Sushi 2PC</td>
-                        <td class="">Sushi</td>
-                        <td class="">$ 12.00</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Iced Coffee Home Made Style</td>
-                        <td class="">Drink</td>
-                        <td class="">$ 8.50</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td class=""> Jagaimo Croquette</td>
-                        <td class="">                                Deep Fry
-
-                            </td>
-                        <td class="">$ 8.50</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
-                    <tr >
-                        <td class=""> Kirin Beer Ichiban</td>
-                        <td class="">Drink</td>
-                        <td class="">$ 14.25</td>
-
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                        <td class=""><img src="{{ asset('img/Group904.png') }}" height="20" /></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="row mt-4 mb-4 pb-4">
+    <div class="row mt-4 mb-4">
         <div class="col-12 mb-3">
             <div class="d-inline-block text-white font-bold border-blue ">
                 <a href="#" class="text-white d-inline-block bg-blue2 border-rightBlue p-3 w-60px">DISH</a>
@@ -140,7 +72,18 @@
                 <a class="text-white p-3 d-inline-block border- w-60px border-rightBlue" href="#">OPTION</a>
                 <a class="text-white p-3 d-inline-block border-rightBlue  w-60px" href="#">DISCOUNT</a>
             </div>
+            <a href="{{ route('admin.dish.add') }}" class="text-white  btnCreateNewDiscount">
+                CREATE NEW DISH
+                <img src="{{ asset('img/Group728white.png') }}" height="20" />
+            </a>
         </div>
     </div>
 </div>
+<script>
+    function onrow(obj)
+    {
+        var url = $(obj).data('url');
+        window.location = url;
+    }
+</script>
 @endsection
