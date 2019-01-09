@@ -11,8 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id' ,'=', null)->get();
-        $subs = Category::where('parent_id' ,'!=', null)->get();;
-        return view('admin.category.list')->with(compact('categories', 'subs'));
+        return view('admin.category.list')->with(compact('categories'));
     }
 
     public function add()
@@ -28,8 +27,12 @@ class CategoryController extends Controller
         if(!is_null($parent)){
             $parent->has_subs = 1;
             $parent->save();
+            return (string)view('part.subcategory_item', ['sub' => $new])->render();
+        } else {
+            return (string)view('part.category_item', ['cat' => $new])->render();
         }
-        return redirect()->route('admin.category');
+
+        //return redirect()->route('admin.category');
     }
 
     public function delete($id){
@@ -42,5 +45,19 @@ class CategoryController extends Controller
         $main = request()->parent;
         $subs = Category::find($main)->subs;
         return (string)view('part.subcategory', compact('subs'))->render();
+    }
+
+    public function subs_list()
+    {
+        $main = request()->parent;
+        $subs = Category::find($main)->subs;
+        return (string)view('part.subcategory_list', compact('subs'))->render();
+    }
+
+    public function dish_list()
+    {
+        $cat = Category::find(request()->category);
+        $dishes = $cat->dishes;
+        return (string)view('part.category_dish', compact('dishes'))->render();
     }
 }

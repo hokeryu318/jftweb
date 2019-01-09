@@ -32,14 +32,7 @@
                             <h6 class="hspace-category" style="margin:0px"></h6>
                             <div class="category-div" id="category-scroll">
                             @foreach($categories as $cat)
-                                <button class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light cat-button" type="button"
-                                    onclick="onMain(this)"
-                                    data-id="{{ $cat->id }}"
-                                    data-hassubs="{{ $cat->has_subs }}">
-                                    <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
-                                        <span class="fa fa-navicon"></span> {{ $cat->name_en }}
-                                    </h6>
-                                </button>
+                                @include('part.category_item')
                             @endforeach
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
@@ -60,22 +53,19 @@
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{ route('admin.category.add') }}">
                                     <div class="modal-body pr-4">
                                         <h5 class="text-info font-weight-normal">English</h5>
-		                                <input class="form-control pl-3" type="text" name="name_en">
+		                                <input class="form-control pl-3" type="text" name="name_en" id="name_en">
 		                                <h5 class="text-info font-weight-normal">Mandarine</h5>
-		                                <input class="form-control pl-3" type="text" name="name_cn">
+		                                <input class="form-control pl-3" type="text" name="name_cn" id="name_cn">
                                         <h5 class="text-info font-weight-normal">Japanese</h5>
-                                        <input class="form-control pl-3" type="text" name="name_jp">
+                                        <input class="form-control pl-3" type="text" name="name_jp" id="name_jp">
                                         <input type="hidden" id="parent_id" name="parent_id">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">APPLY &gt;</button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="addCategory()">APPLY &gt;</button>
                                     </div>
-                                    @csrf
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -88,16 +78,7 @@
                             </label>
                             <br>
                             <div class="category-div" class="pr-5" id="subcategory-scroll">
-                                @foreach ($subs as $sub)
-                                    <button class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light subcat" style="display:none"
-                                        onclick="onSub(this)"
-                                        data-id="{{ $sub->id }}"
-                                        data-parent="{{ $sub->parent_id }}" type="button">
-                                        <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
-                                            <span class="fa fa-navicon"></span> {{ $sub->name_en }}
-                                        </h6>
-                                    </button>
-                                @endforeach
+
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                                 <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()"><h6 class="mb-0 font-weight-bold">ADD</h6></button>
@@ -110,7 +91,7 @@
                     <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">DISH</h5>
                     <h6 class="hspace-category" style="margin:0px"></h6>
                     <div class="category-div" id="scroll-dish" class="hi pt-div">
-                        <button class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light" type="button" data-toggle="modal" data-target="#exampleModalCenter"><h6 class="font-weight-bold black-text mb-0 text-left"><span class="fa fa-navicon"></span> Chicken Kaust (Schnitzel) + Jap </h6></button>
+
                     </div>
                     <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                         <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light"><h6 class="mb-0 font-weight-bold">ADD</h6></button>
@@ -239,28 +220,25 @@
 
     function onMain(obj){
         activeCatButton('.cat-button', false);
-    }
-    /*function onMain(obj){
-        activeCatButton('.cat-button', false);
         var id = $(obj).data('id');
         currentMain = id;
-        var hassubs = $(obj).data('hassubs');
-        $('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
         if($(obj).hasClass('white')){
             activeCatButton(obj, true);
-            $('.subcat').each(function(i, item){
-                activeCatButton(item, false);
-                currentSub = "";
-                var parent = $(item).data('parent');
-                if(parent == id){
-                    $(item).show();
-                } else {
-                    $(item).hide();
-                }
-            });
         }
+        var hassubs = $(obj).data('hassubs');
+        $('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
+        $.ajax({
+            type:"POST",
+            url:"{{ route('admin.category.subs_list') }}",
+            data:{
+                parent: id,
+                _token:"{{ csrf_token() }}"
+            },
+            success: function(result){
+                $('#subcategory-scroll').html(result);
+            }
+        });
     }
-
     function onSub(obj){
         activeCatButton('.subcat', false);
         var id = $(obj).data('id');
@@ -268,8 +246,45 @@
         if($(obj).hasClass('white')){
             activeCatButton(obj, true);
         }
+        $.ajax({
+            type:"POST",
+            url:"{{ route('admin.category.dish_list') }}",
+            data:{
+                category: id,
+                _token:"{{ csrf_token() }}"
+            },
+            success: function(result){
+                $('#scroll-dish').html(result);
+            }
+        });
     }
 
+    function addCategory()
+    {
+        var parent_id = $('#parent_id').val();
+        $.ajax({
+            type:"POST",
+            url:"{{ route('admin.category.add') }}",
+            data:{
+                name_en : $('#name_en').val(),
+                name_cn : $('#name_cn').val(),
+                name_jp : $('#name_jp').val(),
+                parent_id : parent_id,
+                _token : "{{ csrf_token() }}"
+            },
+            success: function(result){
+                if(parent_id != ''){
+                    $('#subcategory-scroll').append(result);
+                } else {
+                    $('#category-scroll').append(result);
+                }
+                $('#name_en').val('');
+                $('#name_cn').val('');
+                $('#name_jp').val('');
+                $('#addModal').modal('hide');
+            }
+        });
+    }
     function onSubAdd(){
         if($('#chk_hassubs').is(':checked') && currentMain != ''){
             $('#parent_id').val(currentMain);
@@ -279,13 +294,25 @@
 
     function onDeleteMain(){
         if(currentMain != ''){
-            window.location = "{{ url('admin/category/delete') }}" + "/" + currentMain;
+            $.ajax({
+                type:"GET",
+                url:"{{ url('admin/category/delete') }}" + "/" + currentMain,
+                success: function(){
+                    $("[data-id='" + currentMain + "']").remove();
+                }
+            });
         }
     }
 
     function onDeleteSub(){
         if(currentSub != ''){
-            window.location = "{{ url('admin/category/delete') }}" + "/" + currentSub;
+            $.ajax({
+                type:"GET",
+                url:"{{ url('admin/category/delete') }}" + "/" + currentSub,
+                success: function(){
+                    $("[data-id='" + currentSub + "']").remove();
+                }
+            });
         }
     }
 
@@ -299,6 +326,6 @@
             $(obj).removeClass('grey');
             $('.cat-caption', obj).addClass('black-text');
         }
-    }*/
+    }
 </script>
 @endsection

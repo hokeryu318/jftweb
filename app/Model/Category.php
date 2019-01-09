@@ -24,8 +24,8 @@ class Category extends Model
         return self::where('parent_id', '=', null)->get();
     }
 
-    public static function get_subs()
+    public function dishes()
     {
-        return self::where('parent_id', '!=', null)->get();
+        return $this->hasMany(Dish::class, 'sub_category_id');
     }
 }
