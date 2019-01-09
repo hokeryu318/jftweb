@@ -129,6 +129,7 @@
                     <label class="text-blue txtdemibold">Category</label>
                 </div>
                 <select type="text" class="outline-0 border-blue w-100 option-padding" name="category_id" id="mcategory">
+                    <option value="0">--Select Category--</option>
                     @foreach ($main_cats as $cat)
                         <option value="{{ $cat->id }}"
                         @if($cat->id == $obj->category_id)
@@ -143,6 +144,7 @@
                     <label class="text-blue txtdemibold">Sub-Category</label>
                 </div>
                 <select type="text" class="outline-0 border-blue w-100 option-padding" name="sub_category_id" id="scategory">
+                    <option value="0">--Select Sub-Category--</option>
                     @if($obj->id != null)
                     @foreach ($sub_cats as $subcat)
                         <option value="{{ $subcat->id }}"
@@ -173,6 +175,7 @@
                     <label class="text-blue txtdemibold">Badge</label>
                 </div>
                 <select type="text" class="outline-0 border-blue w-100 option-padding" name="badge_id">
+                    <option value="0">--Select Badge--</option>
                     @foreach ($badges as $b)
                         <option value="{{ $b->id }}"
                         @if($b->id == $obj->badge_id)

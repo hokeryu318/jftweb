@@ -20,14 +20,17 @@ class DishController extends Controller
     }
 
     public function edit($id){
-        $main_cats = Category::get_mains();
-        $sub_cats = Category::get_subs();
+        $obj = Dish::find($id);
+
         $groups = Kitchen::get();
         $badges = Badge::where('active', '=', '1')->get();
         $options = Option::get();
-        $obj = Dish::find($id);
+
+        $main_cats = Category::get_mains();
         $main_cat = Category::find($obj->category_id);
-        $sub_cats = $main_cat->subs;
+        $sub_cats = [];
+        if($main_cat != null)
+            $sub_cats = $main_cat->subs;
         return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj'));
     }
 
@@ -86,10 +89,12 @@ class DishController extends Controller
             $obj->takeaway_dinner = request()->get('takeaway_dinner') == "on" ? 1 : 0;
 
             $file = request()->file('image');
-            $destinationPath = 'dishes';
-            $destinationFile = $file->getClientOriginalName();
-            $file->move($destinationPath, $destinationFile);
-            $obj->image = $destinationFile;
+            if($file != null){
+                $destinationPath = 'dishes';
+                $destinationFile = $file->getClientOriginalName();
+                $file->move($destinationPath, $destinationFile);
+                $obj->image = $destinationFile;
+            }
             $obj->save();
 
             $opts = request()->get('opts');

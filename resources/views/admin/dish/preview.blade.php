@@ -36,7 +36,12 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
+                        <div style="position:relative">
                         <img src="{{ asset('dishes/'.$obj->image) }}" class="img-fluid w-100" style="height:50vh" />
+                        @if($obj->badge)
+                        <img src="{{ asset('badges/'.$obj->badge->filepath) }}" style="position:absolute;bottom:0">
+                        @endif
+                        </div>
                         <p class="text-center text-movee font-weight-bold ">This dish will be prepared<br /> straight away.</p>
                     </div>
                     <div class="col-6">

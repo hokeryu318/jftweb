@@ -36,7 +36,9 @@
                                     onclick="onMain(this)"
                                     data-id="{{ $cat->id }}"
                                     data-hassubs="{{ $cat->has_subs }}">
-                                    <h6 class="font-weight-bold black-text mb-0 text-left cat-caption"><span class="fa fa-navicon"></span>{{ $cat->name_en }}</h6>
+                                    <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
+                                        <span class="fa fa-navicon"></span> {{ $cat->name_en }}
+                                    </h6>
                                 </button>
                             @endforeach
                             </div>
@@ -91,7 +93,9 @@
                                         onclick="onSub(this)"
                                         data-id="{{ $sub->id }}"
                                         data-parent="{{ $sub->parent_id }}" type="button">
-                                        <h6 class="font-weight-bold black-text mb-0 text-left cat-caption"><span class="fa fa-navicon"></span> {{ $sub->name_en }}</h6>
+                                        <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
+                                            <span class="fa fa-navicon"></span> {{ $sub->name_en }}
+                                        </h6>
                                     </button>
                                 @endforeach
                             </div>
@@ -235,6 +239,9 @@
 
     function onMain(obj){
         activeCatButton('.cat-button', false);
+    }
+    /*function onMain(obj){
+        activeCatButton('.cat-button', false);
         var id = $(obj).data('id');
         currentMain = id;
         var hassubs = $(obj).data('hassubs');
@@ -292,6 +299,6 @@
             $(obj).removeClass('grey');
             $('.cat-caption', obj).addClass('black-text');
         }
-    }
+    }*/
 </script>
 @endsection

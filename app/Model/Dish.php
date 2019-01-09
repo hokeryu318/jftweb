@@ -20,4 +20,8 @@ class Dish extends Model
     {
         return $this->hasOne(Kitchen::class, 'id', 'group_id');
     }
+    public function badge()
+    {
+        return $this->hasOne(Badge::class, 'id', 'badge_id');
+    }
 }
