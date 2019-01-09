@@ -44,8 +44,8 @@
                     @foreach($dishes as $d)
                     <tr onclick="onrow(this)" data-url="{{ route('admin.dish.preview', ['id' => $d->id]) }}">
                         <td class="">{{ $d->name_en }}</td>
-                        <td class="">Drink</td>
-                        <td class="">$ 12.00</td>
+                        <td class="">{{ $d->group->name }}</td>
+                        <td class="">$ {{ number_format($d->price, 2) }}</td>
 
                         <td class="">
                             @if($d->sold_out == 1)
@@ -67,15 +67,11 @@
     <div class="row mt-4 mb-4">
         <div class="col-12 mb-3">
             <div class="d-inline-block text-white font-bold border-blue ">
-                <a href="#" class="text-white d-inline-block bg-blue2 border-rightBlue p-3 w-60px">DISH</a>
-                <a class="text-white p-3 d-inline-block border-rightBlue w-60px" href="#">CATEGORY</a>
-                <a class="text-white p-3 d-inline-block border- w-60px border-rightBlue" href="#">OPTION</a>
+                <a class="text-white d-inline-block bg-blue2 border-rightBlue p-3 w-60px" href="{{ route('admin.dish') }}" >DISH</a>
+                <a class="text-white p-3 d-inline-block border-rightBlue w-60px" href="{{ route('admin.category') }}">CATEGORY</a>
+                <a class="text-white p-3 d-inline-block border- w-60px border-rightBlue" href="{{ route('admin.option') }}">OPTION</a>
                 <a class="text-white p-3 d-inline-block border-rightBlue  w-60px" href="#">DISCOUNT</a>
             </div>
-            <a href="{{ route('admin.dish.add') }}" class="text-white  btnCreateNewDiscount">
-                CREATE NEW DISH
-                <img src="{{ asset('img/Group728white.png') }}" height="20" />
-            </a>
         </div>
     </div>
 </div>

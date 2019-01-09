@@ -23,8 +23,8 @@
             <div class="col-10 bg-white mb-5">
                 <div class="row">
                     <div class="col-11">
-                        <h4 class="font-weight-bold mb-0">Salmon & Avocado Roll Sushi with Ikura 6pc</h4>
-                        <h5 class="font-weight-bold mb-0">Our most popular Roll Sushi with fresh salmon and ikura.</h5>
+                        <h4 class="font-weight-bold mb-0">{{ $obj->name_en }}</h4>
+                        <h5 class="font-weight-bold mb-0">{{ $obj->desc_en }}</h5>
                         <h5 class="text-movee font-weight-bold mb-0">${{ number_format($obj->price, 2) }}</h5>
                     </div>
                     <div class="col-1">

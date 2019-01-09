@@ -69,7 +69,7 @@
                 <div>
                     <label class="text-blue txtdemibold">Price</label>
                 </div>
-                <input type="number" class="outline-0 border-blue" name="price" value="{{ $obj->price }}" />
+                <input type="number" class="outline-0 border-blue" name="price" step="0.01" value="{{ $obj->price }}" />
                 <p class="text-right text-blue" >(Included GST: $ 1.13)</p>
             </div>
         </div>

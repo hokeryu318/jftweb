@@ -16,4 +16,8 @@ class Dish extends Model
     {
         return $this->hasMany(DishOption::class, 'dish_id');
     }
+    public function group()
+    {
+        return $this->hasOne(Kitchen::class, 'id', 'group_id');
+    }
 }

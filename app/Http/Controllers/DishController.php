@@ -23,7 +23,7 @@ class DishController extends Controller
         $main_cats = Category::get_mains();
         $sub_cats = Category::get_subs();
         $groups = Kitchen::get();
-        $badges = Badge::get();
+        $badges = Badge::where('active', '=', '1')->get();
         $options = Option::get();
         $obj = Dish::find($id);
         $main_cat = Category::find($obj->category_id);
@@ -35,7 +35,7 @@ class DishController extends Controller
         $obj = new Dish();
         $main_cats = Category::get_mains();
         $groups = Kitchen::get();
-        $badges = Badge::get();
+        $badges = Badge::where('active', '=', '1')->get();
         $options = Option::get();
         return view('admin.dish.edit')->with(compact('main_cats', 'groups', 'badges', 'options', 'obj'));
     }
@@ -91,6 +91,14 @@ class DishController extends Controller
             $file->move($destinationPath, $destinationFile);
             $obj->image = $destinationFile;
             $obj->save();
+
+            $opts = request()->get('opts');
+            foreach($opts as $op){
+                $dish_option = new DishOption();
+                $dish_option->dish_id = $obj->id;
+                $dish_option->option_id = $op;
+                $dish_option->save();
+            }
         } else {
             //dd(request());
             $obj = Dish::find(request()->id);

@@ -29,6 +29,7 @@ class CategoryController extends Controller
             $parent->has_subs = 1;
             $parent->save();
         }
+        return redirect()->route('admin.category');
     }
 
     public function delete($id){
