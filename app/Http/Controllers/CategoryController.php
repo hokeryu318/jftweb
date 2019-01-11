@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Category;
+use App\Model\Dish;
 
 class CategoryController extends Controller
 {
@@ -59,5 +60,14 @@ class CategoryController extends Controller
         $cat = Category::find(request()->category);
         $dishes = $cat->dishes;
         return (string)view('part.category_dish', compact('dishes'))->render();
+    }
+
+    public function dish_delete($dish_id)
+    {
+        $dish = Dish::find($dish_id);
+        $dish->category_id = null;
+        $dish->sub_category_id = null;
+        $dish->save();
+        return "sucess";
     }
 }

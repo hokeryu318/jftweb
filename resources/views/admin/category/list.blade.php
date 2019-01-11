@@ -81,8 +81,12 @@
 
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
-                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()"><h6 class="mb-0 font-weight-bold">ADD</h6></button>
-                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteSub()"><h6 class="mb-0 font-weight-bold">Delete</h6></button>
+                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()">
+                                    <h6 class="mb-0 font-weight-bold">ADD</h6>
+                                </button>
+                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteSub()">
+                                    <h6 class="mb-0 font-weight-bold">Delete</h6>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -94,14 +98,18 @@
 
                     </div>
                     <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
-                        <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light"><h6 class="mb-0 font-weight-bold">ADD</h6></button>
-                        <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light"><h6 class="mb-0 font-weight-bold">Delete</h6></button>
+                        <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onAddDish()">
+                            <h6 class="mb-0 font-weight-bold">ADD</h6>
+                        </button>
+                        <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteDish()">
+                            <h6 class="mb-0 font-weight-bold">Delete</h6>
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-12 mb-3">
-                    <div class="d-inline-block text-white font-bold border-blue ">
+                    <div class="d-inline-block text-white font-bold border-blue">
                         <a class="text-white d-inline-block border-rightBlue p-3 w-60px" href="{{ route('admin.dish') }}" >DISH</a>
                         <a class="bg-blue2 text-white p-3 d-inline-block border-rightBlue w-60px" href="{{ route('admin.category') }}">CATEGORY</a>
                         <a class="text-white p-3 d-inline-block border- w-60px border-rightBlue" href="{{ route('admin.option') }}">OPTION</a>
@@ -327,5 +335,33 @@
             $('.cat-caption', obj).addClass('black-text');
         }
     }
+
+    var current_dish = '';
+    function onDish(obj){
+        current_dish = $(obj).data('dish');
+        activeCatButton('.category-dish', false);
+        if($(obj).hasClass('white')){
+            activeCatButton(obj, true);
+        }
+    }
+    function onAddDish()
+    {
+        $('#exampleModalCenter2').modal('toggle');
+    }
+    function onDeleteDish()
+    {
+        if(current_dish != ''){
+            $.ajax({
+                type:"GET",
+                url:"{{ url('admin/category/dish_delete') }}" + "/" + current_dish,
+                success: function(result){
+                    if(result){
+                        $("[data-dish='" + current_dish + "']").remove();
+                    }
+                }
+            });
+        }
+    }
+
 </script>
 @endsection
