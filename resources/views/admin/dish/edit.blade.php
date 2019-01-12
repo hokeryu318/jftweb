@@ -14,7 +14,7 @@
     <input type="hidden" value="{{ $obj->id }}" name="id">
     <div style="padding-top:8%;">
     </div>
-    <div class="widthh white pt-3 pb-1 position-relative">
+    <div class="widthh pt-3 pb-3 mb-3 white">
         <div class="row">
             <div class="col-11">
             </div>
@@ -187,8 +187,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row mt-5">
         <div class="col-6">
             <label class="text-blue txtdemibold ">Eat-in</label>
