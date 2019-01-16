@@ -10,7 +10,7 @@
                 <h5 class="font-weight-normal">Japanese</h5>
             </div>
             <div class="col-5 pr-0 text-right">
-                <label class="switch">
+                <label class="switch-style">
                     <input type="checkbox" name="lang_jp"
                     @if($profile->lang_jp == 1)
                         checked
@@ -27,7 +27,7 @@
                 <h5 class="font-weight-normal">Korean</h5>
             </div>
             <div class="col-5 pr-0 text-right">
-                <label class="switch">
+                <label class="switch-style">
                     <input type="checkbox" name="lang_kr"
                     @if($profile->lang_kr == 1)
                         checked
@@ -44,7 +44,7 @@
                 <h5 class="font-weight-normal">Mandarin</h5>
             </div>
             <div class="col-5 pr-0 text-right">
-                <label class="switch">
+                <label class="switch-style">
                     <input type="checkbox" name="lang_cn"
                     @if($profile->lang_cn == 1)
                         checked

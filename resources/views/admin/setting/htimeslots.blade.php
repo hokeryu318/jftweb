@@ -16,7 +16,7 @@
                     <h5 class="font-weight-normal">Hoilday</h5>
                 </div>
                 <div class="col-5 pr-0 text-right">
-                    <label class="switch">
+                    <label class="switch-style">
                         <input type="checkbox" class="accordion-check" name="holiday-on"
                             @if($slot->day_on == "1")
                                 checked
@@ -50,7 +50,7 @@
                         <input type="text" class="time-element" name="holiday-morning-end" value="{{ $slot->morning_ends }}">
                     </div>
                     <div class="col-2 pl-0">
-                        <label class="switch">
+                        <label class="switch-style">
                             <input type="checkbox" name="holiday-morning-on"
                             @if($slot->morning_on == "1")
                                 checked
@@ -72,7 +72,7 @@
                         <input type="text" class="time-element" name="holiday-lunch-end" value="{{ $slot->lunch_ends }}">
                     </div>
                     <div class="col-2 pl-0">
-                        <label class="switch">
+                        <label class="switch-style">
                             <input type="checkbox" name="holiday-lunch-on"
                             @if($slot->lunch_on == "1")
                                 checked
@@ -92,7 +92,7 @@
                         <input type="text" class="time-element" name="holiday-tea-end" value="{{ $slot->tea_ends }}">
                     </div>
                     <div class="col-2 pl-0">
-                        <label class="switch">
+                        <label class="switch-style">
                             <input type="checkbox" name="holiday-tea-on"
                             @if($slot->tea_on == "1")
                                 checked
@@ -114,7 +114,7 @@
                         <input type="text" class="time-element" name="holiday-dinner-end" value="{{ $slot->dinner_ends }}">
                     </div>
                     <div class="col-2 pl-0">
-                        <label class="switch">
+                        <label class="switch-style">
                             <input type="checkbox" name="holiday-dinner-on"
                             @if($slot->dinner_on == "1")
                                 checked
@@ -136,7 +136,7 @@
                         <input type="text" class="time-element" name="holiday-latenight-end" value="{{ $slot->latenight_ends }}">
                     </div>
                     <div class="col-2 pl-0">
-                        <label class="switch">
+                        <label class="switch-style">
                             <input type="checkbox" name="holiday-latenight-on"
                             @if($slot->latenight_on == "1")
                                 checked

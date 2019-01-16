@@ -25,7 +25,7 @@
                 <img class="" src="{{ asset('badges/'.$badge->filepath) }}" width="30px" />
             </div>
             <div class="col-3 text-center">
-                <label class="switch">
+                <label class="switch-style">
                     <input type="checkbox" name="actives[]" value="{{ $badge->id }}"
                     @if($badge->active == 1)
                     checked

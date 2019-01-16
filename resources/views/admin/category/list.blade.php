@@ -72,7 +72,7 @@
                         <div class="col-6" style="border-right:1px solid grey">
                             <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">SUB CATEGORY</h5>
                             <h6 class="white-text d-inline pl-2">USE SUB CATEGORY</h6>
-                            <label class="switch" style="margin-top:8px">
+                            <label class="switch-style" style="margin-top:8px">
                                 <input type="checkbox" id="chk_hassubs">
                                 <span class="slider round"></span>
                             </label>
@@ -221,7 +221,7 @@
 </div>
 <script>
     $(document).ready(function(){
-        $('.hspace-category').height($('.switch').outerHeight(true));
+        $('.hspace-category').height($('.switch-style').outerHeight(true));
     });
     var currentMain = '';
     var currentSub = '';

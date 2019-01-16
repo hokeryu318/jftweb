@@ -131,6 +131,15 @@
                 minView: 2,
                 forceParse: 0,
             });
+            $('#datetimepicker13').datetimepicker({
+                inline: true,
+                sideBySide: true,
+                language: 'fr',
+                weekStart: 1,
+                todayBtn: 1,
+                minView: 2,
+                forceParse: 0,
+            });
             init();
             var height = Math.max($(window).height() * 1.02, $(document.body).height());
             $('#menu').height(height);
