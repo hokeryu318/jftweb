@@ -1,8 +1,6 @@
-@extends('layout.admin_layout')
+<?php $__env->startSection('title', 'DISH'); ?>
 
-@section('title', 'DISH')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     .category-div{
         height:48vh;
@@ -20,7 +18,7 @@
 
     <div class="widthh pb-1 hh black2 position-relative">
         <a href="#" class="bg-transparent" style="position:absolute;top:15px ;right:10px"><h2><span class="">
-            <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
+            <img src="<?php echo e(asset('img/Group826.png')); ?>" height="20" class="float-right" width="20" />
         </span></h2></a>
 
         <div class="pt-5">
@@ -31,9 +29,9 @@
                             <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">CATEGORY</h5>
                             <h6 class="hspace-category" style="margin:0px"></h6>
                             <div class="category-div" id="category-scroll">
-                            @foreach($categories as $cat)
-                                @include('part.category_item')
-                            @endforeach
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php echo $__env->make('part.category_item', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                                 <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" data-toggle="modal" data-target="#addModal">
@@ -113,13 +111,13 @@
                         <table>
                             <tr>
                                 <td class="d-inline-block border-rightBlue p-3 w-60px">
-                                    <a class="font-weight-bold text-white" href="{{ route('admin.dish') }}" >DISH</a>
+                                    <a class="font-weight-bold text-white" href="<?php echo e(route('admin.dish')); ?>" >DISH</a>
                                 </td>
                                 <td class="bg-blue2 p-3 d-inline-block border-rightBlue w-60px">
-                                    <a class="font-weight-bold text-white" href="{{ route('admin.category') }}">CATEGORY</a>
+                                    <a class="font-weight-bold text-white" href="<?php echo e(route('admin.category')); ?>">CATEGORY</a>
                                 </td>
                                 <td class="p-3 d-inline-block border- w-60px border-rightBlue">
-                                    <a class="font-weight-bold text-white" href="{{ route('admin.option') }}">OPTION</a>
+                                    <a class="font-weight-bold text-white" href="<?php echo e(route('admin.option')); ?>">OPTION</a>
                                 </td>
                                 <td class="p-3 d-inline-block border-rightBlue  w-60px">
                                     <a class="font-weight-bold text-white" href="#">DISCOUNT</a>
@@ -245,10 +243,10 @@
         $('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
         $.ajax({
             type:"POST",
-            url:"{{ route('admin.category.subs_list') }}",
+            url:"<?php echo e(route('admin.category.subs_list')); ?>",
             data:{
                 parent: id,
-                _token:"{{ csrf_token() }}"
+                _token:"<?php echo e(csrf_token()); ?>"
             },
             success: function(result){
                 $('#subcategory-scroll').html(result);
@@ -264,10 +262,10 @@
         }
         $.ajax({
             type:"POST",
-            url:"{{ route('admin.category.dish_list') }}",
+            url:"<?php echo e(route('admin.category.dish_list')); ?>",
             data:{
                 category: id,
-                _token:"{{ csrf_token() }}"
+                _token:"<?php echo e(csrf_token()); ?>"
             },
             success: function(result){
                 $('#scroll-dish').html(result);
@@ -280,13 +278,13 @@
         var parent_id = $('#parent_id').val();
         $.ajax({
             type:"POST",
-            url:"{{ route('admin.category.add') }}",
+            url:"<?php echo e(route('admin.category.add')); ?>",
             data:{
                 name_en : $('#name_en').val(),
                 name_cn : $('#name_cn').val(),
                 name_jp : $('#name_jp').val(),
                 parent_id : parent_id,
-                _token : "{{ csrf_token() }}"
+                _token : "<?php echo e(csrf_token()); ?>"
             },
             success: function(result){
                 if(parent_id != ''){
@@ -312,7 +310,7 @@
         if(currentMain != ''){
             $.ajax({
                 type:"GET",
-                url:"{{ url('admin/category/delete') }}" + "/" + currentMain,
+                url:"<?php echo e(url('admin/category/delete')); ?>" + "/" + currentMain,
                 success: function(){
                     $("[data-id='" + currentMain + "']").remove();
                 }
@@ -324,7 +322,7 @@
         if(currentSub != ''){
             $.ajax({
                 type:"GET",
-                url:"{{ url('admin/category/delete') }}" + "/" + currentSub,
+                url:"<?php echo e(url('admin/category/delete')); ?>" + "/" + currentSub,
                 success: function(){
                     $("[data-id='" + currentSub + "']").remove();
                 }
@@ -361,7 +359,7 @@
         if(current_dish != ''){
             $.ajax({
                 type:"GET",
-                url:"{{ url('admin/category/dish_delete') }}" + "/" + current_dish,
+                url:"<?php echo e(url('admin/category/dish_delete')); ?>" + "/" + current_dish,
                 success: function(result){
                     if(result){
                         $("[data-dish='" + current_dish + "']").remove();
@@ -372,4 +370,6 @@
     }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.admin_layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

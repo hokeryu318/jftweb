@@ -10,13 +10,16 @@ use App\Model\Badge;
 use App\Model\Option;
 use App\Model\Dish;
 use App\Model\DishOption;
+use App\Model\DishCategory;
+use App\Model\DishOrder;
 
 class DishController extends Controller
 {
     //
     public function index(){
         $dishes = Dish::get();
-        return view('admin.dish.list')->with(compact('dishes'));
+        $sort = "desc";
+        return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
 
     public function edit($id){
@@ -31,7 +34,15 @@ class DishController extends Controller
         $sub_cats = [];
         if($main_cat != null)
             $sub_cats = $main_cat->subs;
-        return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj'));
+        $dish_cats_tmp = DishCategory::getCategoryFromDish($id);
+        $dish_cats = array();
+        $dish_cats_ids = '';
+        foreach ($dish_cats_tmp as $dish_cats_arr) {
+            $dish_cats[] = $dish_cats_arr['categories_id'];
+            $dish_cats_ids .= $dish_cats_arr['categories_id'].",";
+        }
+        $dish_cats_ids = rtrim($dish_cats_ids,", ");
+        return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj', 'dish_cats', 'dish_cats_ids'));
     }
 
     public function add(){
@@ -75,8 +86,8 @@ class DishController extends Controller
             $obj->desc_cn = request()->get('desc_cn');
             $obj->desc_jp = request()->get('desc_jp');
             $obj->price = request()->get('price');
-            $obj->category_id = request()->get('category_id');
-            $obj->sub_category_id = request()->get('sub_category_id');
+            //$obj->category_id = request()->get('category_id');
+            //$obj->sub_category_id = request()->get('sub_category_id');
             $obj->group_id = request()->get('group_id');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
@@ -96,6 +107,16 @@ class DishController extends Controller
                 $obj->image = $destinationFile;
             }
             $obj->save();
+
+            if(request()->get('category_id') != ''){
+                $category_ids = explode(',', rtrim(request()->get('category_id'), ","));
+                foreach ($category_ids as $category_id) {
+                    $category_match = new DishCategory();
+                    $category_match->dish_id = $obj->id;
+                    $category_match->categories_id = $category_id;
+                    $category_match->save();
+                }
+            }
 
             $opts = request()->get('opts');
             foreach($opts as $op){
@@ -114,8 +135,8 @@ class DishController extends Controller
             $obj->desc_cn = request()->get('desc_cn');
             $obj->desc_jp = request()->get('desc_jp');
             $obj->price = request()->get('price');
-            $obj->category_id = request()->get('category_id');
-            $obj->sub_category_id = request()->get('sub_category_id');
+            //$obj->category_id = request()->get('category_id');
+            //$obj->sub_category_id = request()->get('sub_category_id');
             $obj->group_id = request()->get('group_id');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
@@ -135,7 +156,16 @@ class DishController extends Controller
                 $obj->image = $destinationFile;
             }
             $obj->save();
-
+            DishCategory::where('dish_id', request()->id)->delete();
+            if(request()->get('category_id') != ''){
+                $category_ids = explode(',', rtrim(request()->get('category_id'), ","));
+                foreach ($category_ids as $category_id) {
+                    $category_match = new DishCategory();
+                    $category_match->dish_id = request()->id;
+                    $category_match->categories_id = $category_id;
+                    $category_match->save();
+                }
+            }
             $old_opts = $obj->dishoptions->pluck('id');
             DishOption::whereIn('id', $old_opts)->delete();
 
@@ -148,5 +178,26 @@ class DishController extends Controller
             }
         }
         return redirect()->route('admin.dish');
+    }
+
+    public function deleteDish()
+    {
+        Dish::where('id', request()->id)->delete();
+        DishCategory::where('dish_id', request()->id)->delete();
+        DishOption::where('dish_id', request()->id)->delete();
+//        DishOrder::where('dish_id', request()->id)->delete();
+        return redirect()->route('admin.dish');
+    }
+
+    public function sortDish()
+    {
+        if(request()->get('sortType') == "asc"){
+            $dishes = Dish::orderBy('name_en','desc')->get();
+            $sort = "desc";
+        }else{
+            $dishes = Dish::orderBy('name_en','asc')->get();
+            $sort = "asc";
+        }
+        return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
 }

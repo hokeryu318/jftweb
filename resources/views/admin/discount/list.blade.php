@@ -168,10 +168,22 @@
     <div class="row mt-4 mb-4">
         <div class="col-12 mb-4">
             <div class="d-inline-block text-white font-bold border-blue ">
-                <a href="#" class="text-white d-inline-block border-rightBlue p-3 w-60px">DISH</a>
-                <a class="text-white p-3 d-inline-block border-rightBlue w-60px" href="#">CATEGORY</a>
-                <a class="text-white p-3 d-inline-block border- w-60px" href="#">OPTION</a>
-                <a class="text-white p-3 d-inline-block border-rightBlue bg-blue2 w-60px" href="#">DISCOUNT</a>
+                <table>
+                    <tr>
+                        <td class="d-inline-block border-rightBlue p-3 w-60px">
+                            <a class="font-weight-bold text-white" href="{{ route('admin.dish') }}" >DISH</a>
+                        </td>
+                        <td class="p-3 d-inline-block border-rightBlue w-60px">
+                            <a class="font-weight-bold text-white" href="{{ route('admin.category') }}">CATEGORY</a>
+                        </td>
+                        <td class="p-3 d-inline-block border- w-60px border-rightBlue">
+                            <a class="font-weight-bold text-white" href="{{ route('admin.option') }}">OPTION</a>
+                        </td>
+                        <td class="bg-blue2 p-3 d-inline-block border-rightBlue  w-60px">
+                            <a class="font-weight-bold text-white" href="#">DISCOUNT</a>
+                        </td>
+                    </tr>
+                </table>
 
             </div>
             <a href="" class="text-white  btnCreateNewDiscount">CREATE NEW DISCOUNT

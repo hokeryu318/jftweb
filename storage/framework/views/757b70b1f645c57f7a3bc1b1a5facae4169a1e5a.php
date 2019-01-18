@@ -1,11 +1,9 @@
-@extends('admin.setting')
-
-@section('setting')
+<?php $__env->startSection('setting'); ?>
 <div class="col-9 pl-0">
     <h5 class="black-text font-weight-bold pl-5">GST</h5>
     <div class="card ml-5 col-lg-5 pt-4 mr-auto pb-4 ml-auto mt-5">
         <div class="col-lg-12 pr-0 pl-0 text-center">
-            <input class="blueborder pt-2 pb-2 mb-3" value="{{ number_format($profile->gst, 2) }} %" readonly id="result"
+            <input class="blueborder pt-2 pb-2 mb-3" value="<?php echo e(number_format($profile->gst, 2)); ?> %" readonly id="result"
                 style="padding-left:10px;padding-right:10px;text-align:right" />
         </div>
         <div class="row mt-2">
@@ -82,8 +80,8 @@
         <button class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2" onclick="onSave()"><h5 class="white-text mb-0">Apply</h5></button>
     </div>
 </div>
-<form method="POST" action="{{ route('admin.setting.gst.save') }}" id="saveForm">
-    @csrf
+<form method="POST" action="<?php echo e(route('admin.setting.gst.save')); ?>" id="saveForm">
+    <?php echo csrf_field(); ?>
     <input type="hidden" name="gst" id="form_result">
 </form>
 <script>
@@ -111,4 +109,6 @@
         $('#saveForm').submit();
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.setting', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,8 +1,6 @@
-@extends('layout.admin_layout')
+<?php $__env->startSection('title', 'DISH'); ?>
 
-@section('title', 'DISH')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <style>
         .option-padding {
             padding-top : 0.6rem;
@@ -10,9 +8,9 @@
         }
     </style>
     <div class="container-fluid pb-3 blackgrey">
-        <form method="POST" action="{{ route('admin.dish.store') }}" enctype='multipart/form-data'>
-            <input type="hidden" value="{{ $obj->id }}" name="id">
-            <input type="hidden" name="category_id" id="checked_ids" value="{{isset($dish_cats_ids) ? $dish_cats_ids : ""}}">
+        <form method="POST" action="<?php echo e(route('admin.dish.store')); ?>" enctype='multipart/form-data'>
+            <input type="hidden" value="<?php echo e($obj->id); ?>" name="id">
+            <input type="hidden" name="category_id" id="checked_ids" value="<?php echo e(isset($dish_cats_ids) ? $dish_cats_ids : ""); ?>">
             <div style="padding-top:8%;">
             </div>
             <div class="widthh pt-3 pb-3 mb-3 white">
@@ -21,13 +19,15 @@
                     </div>
                     <div class="col-1">
                         <a href="
-                        @if(isset($obj->id))
-                            {{route('admin.dish.preview',["id"=>$obj->id])}}
-                        @else
-                            {{ route('admin.dish') }}
-                        @endif">
+                        <?php if(isset($obj->id)): ?>
+                            <?php echo e(route('admin.dish.preview',["id"=>$obj->id])); ?>
+
+                        <?php else: ?>
+                            <?php echo e(route('admin.dish')); ?>
+
+                        <?php endif; ?>">
                             <span class="">
-                                <img src="{{ asset('img/Group1100.png') }}" height="20" class="float-right" width="20" />
+                                <img src="<?php echo e(asset('img/Group1100.png')); ?>" height="20" class="float-right" width="20" />
                             </span>
                         </a>
                     </div>
@@ -39,92 +39,92 @@
                                 <div>
                                     <label class="text-blue txtdemibold">Name of dish</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_en" value="{{ $obj->name_en }}" />
+                                <input type="text" class="outline-0 border-blue h4rem" name="name_en" value="<?php echo e($obj->name_en); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Name of dish (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_cn" value="{{ $obj->name_cn }}" />
+                                <input type="text" class="outline-0 border-blue h4rem" name="name_cn" value="<?php echo e($obj->name_cn); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Name of dish (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_jp" value="{{ $obj->name_jp }}" />
+                                <input type="text" class="outline-0 border-blue h4rem" name="name_jp" value="<?php echo e($obj->name_jp); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Description</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="desc_en" value="{{ $obj->desc_en }}" />
+                                <input type="text" class="outline-0 border-blue h4rem" name="desc_en" value="<?php echo e($obj->desc_en); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Description (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="desc_cn" value="{{ $obj->desc_cn }}" />
+                                <input type="text" class="outline-0 border-blue h4rem" name="desc_cn" value="<?php echo e($obj->desc_cn); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Description (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem"  name="desc_jp" value="{{ $obj->desc_jp }}" />
+                                <input type="text" class="outline-0 border-blue h4rem"  name="desc_jp" value="<?php echo e($obj->desc_jp); ?>" />
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold">Price</label>
                                 </div>
-                                <input type="number" class="outline-0 border-blue" name="price" step="0.01" value="{{ $obj->price }}" />
+                                <input type="number" class="outline-0 border-blue" name="price" step="0.01" value="<?php echo e($obj->price); ?>" />
                                 <p class="text-right text-blue" >(Included GST: $ 1.13)</p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="addphoto">
                                 <button class="create_addPhotobtn btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" type="button" id="btn_add_image" onclick="setPhoto()"
-                                        @if($obj->image != null)
+                                        <?php if($obj->image != null): ?>
                                         style="display:none"
-                                        @endif
+                                        <?php endif; ?>
                                         >Add Photo</button>
                                 <img id="main_img" width="100%" height="100%"
-                                     @if($obj->image != null)
-                                     src="{{ asset('dishes/'.$obj->image) }}"
-                                        @endif
+                                     <?php if($obj->image != null): ?>
+                                     src="<?php echo e(asset('dishes/'.$obj->image)); ?>"
+                                        <?php endif; ?>
                                         >
                                 <input type="file" id="image_file" name="image" style="display:none">
                             </div>
                             <button class="create_changePhotobtn" type="button" id="btn_change_image" onclick="setPhoto()"
-                                    @if($obj->image == null)
+                                    <?php if($obj->image == null): ?>
                                     style="display:none"
-                                    @endif
+                                    <?php endif; ?>
                                     >Change Photo</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-7" id="content">
                             <label class="text-blue txtdemibold">Option</label>
-                            @foreach ($obj->options as $opt)
+                            <?php $__currentLoopData = $obj->options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="mt-2 option-element">
                                     <select class="border-blue select-width-blue mr-1 option-padding option-select" name="opts[]">
-                                        @foreach ($options as $o)
-                                            <option value="{{ $o->id }}"
-                                                    @if($opt->id == $o->id)
+                                        <?php $__currentLoopData = $options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $o): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($o->id); ?>"
+                                                    <?php if($opt->id == $o->id): ?>
                                                     selected
-                                                    @endif
-                                                    >{{ $o->name }}</option>
-                                        @endforeach
+                                                    <?php endif; ?>
+                                                    ><?php echo e($o->name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <button class="btndeletebehind mt-2" type="button" onclick="onDeleteOption(this)">Delete</button>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                     <button class="addOptionbtn btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" type="button" onclick="onAddOption()">Add Option </button>
                     <div class="mt-2 option-element display-none" id="clone">
                         <select class="border-blue select-width-blue mr-1 option-padding option-select" name="option">
-                            @foreach ($options as $o)
-                                <option value="{{ $o->id }}">{{ $o->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $o): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($o->id); ?>"><?php echo e($o->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <button class="btndeletebehind mt-2" type="button" onclick="onDeleteOption(this)">Delete</button>
                     </div>
@@ -139,44 +139,44 @@
                                         <label class="text-blue txtdemibold">Sub-Category</label>
                                     </div>
                                 </div>
-                                @foreach ($main_cats as $key => $cat)
-                                    <div class="border-bottom-blue category_contents main_category_{{ $cat->id }}"
-                                         @if(isset($dish_cats))
-                                            @if(!in_array($cat->id, $dish_cats))
+                                <?php $__currentLoopData = $main_cats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="border-bottom-blue category_contents main_category_<?php echo e($cat->id); ?>"
+                                         <?php if(isset($dish_cats)): ?>
+                                            <?php if(!in_array($cat->id, $dish_cats)): ?>
                                                 style="display: none;"
-                                            @endif
-                                        @else
+                                            <?php endif; ?>
+                                        <?php else: ?>
                                             style="display: none;"
-                                        @endif>
+                                        <?php endif; ?>>
                                         <div class="row">
-                                            <div class="col-6" id="category_{{ $cat->id }}">
-                                                <label class="txtdemibold mt-2">{{ $cat->name_en }}</label>
+                                            <div class="col-6" id="category_<?php echo e($cat->id); ?>">
+                                                <label class="txtdemibold mt-2"><?php echo e($cat->name_en); ?></label>
                                             </div>
                                         </div>
                                     </div>
-                                    @if(count($main_cats[$key]->subs) > 0)
-                                        @foreach ($main_cats[$key]->subs as $subcat)
-                                            <div class="border-bottom-blue category_contents category_{{ $cat->id }}"
-                                                 @if(isset($dish_cats))
-                                                    @if(!in_array($subcat->id, $dish_cats))
+                                    <?php if(count($main_cats[$key]->subs) > 0): ?>
+                                        <?php $__currentLoopData = $main_cats[$key]->subs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="border-bottom-blue category_contents category_<?php echo e($cat->id); ?>"
+                                                 <?php if(isset($dish_cats)): ?>
+                                                    <?php if(!in_array($subcat->id, $dish_cats)): ?>
                                                         style="display: none;"
-                                                    @endif
-                                                @else
+                                                    <?php endif; ?>
+                                                <?php else: ?>
                                                  style="display: none;"
-                                                @endif
+                                                <?php endif; ?>
                                                     >
                                                 <div class="row">
-                                                    <div class="col-6" id="category_{{ $cat->id }}">
-                                                        <label class="txtdemibold mt-2">{{ $cat->name_en }}</label>
+                                                    <div class="col-6" id="category_<?php echo e($cat->id); ?>">
+                                                        <label class="txtdemibold mt-2"><?php echo e($cat->name_en); ?></label>
                                                     </div>
-                                                    <div class="col-6" id="category_{{ $subcat->id }}">
-                                                        <label class="txtdemibold mt-2">{{ $subcat->name_en }}</label>
+                                                    <div class="col-6" id="category_<?php echo e($subcat->id); ?>">
+                                                        <label class="txtdemibold mt-2"><?php echo e($subcat->name_en); ?></label>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-                                @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <a class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="edit-category-btn"  data-target="#addModal">
                                 <h6 class="mb-0">Edit Category</h6>
@@ -190,13 +190,13 @@
                                     <label class="text-blue txtdemibold">Group</label>
                                 </div>
                                 <select type="text" class="outline-0 border-blue w-100 option-padding" id="group" name="group_id">
-                                    @foreach ($groups as $g)
-                                        <option value="{{ $g->id }}"
-                                                @if($g->id == $obj->group_id)
+                                    <?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $g): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($g->id); ?>"
+                                                <?php if($g->id == $obj->group_id): ?>
                                                 selected
-                                                @endif
-                                                > {{ $g->name }} </option>
-                                    @endforeach
+                                                <?php endif; ?>
+                                                > <?php echo e($g->name); ?> </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -205,13 +205,13 @@
                                 </div>
                                 <select type="text" class="outline-0 border-blue w-100 option-padding" name="badge_id">
                                     <option value="0">--Select Badge--</option>
-                                    @foreach ($badges as $b)
-                                        <option value="{{ $b->id }}"
-                                                @if($b->id == $obj->badge_id)
+                                    <?php $__currentLoopData = $badges; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($b->id); ?>"
+                                                <?php if($b->id == $obj->badge_id): ?>
                                                 selected
-                                                @endif
-                                                > {{ $b->name }} </option>
-                                    @endforeach
+                                                <?php endif; ?>
+                                                > <?php echo e($b->name); ?> </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -226,9 +226,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="eatin_breakfast"
-                                                       @if($obj->eatin_breakfast == 1)
+                                                       <?php if($obj->eatin_breakfast == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -243,9 +243,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="eatin_lunch"
-                                                       @if($obj->eatin_lunch == 1)
+                                                       <?php if($obj->eatin_lunch == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -261,9 +261,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="eatin_tea"
-                                                       @if($obj->eatin_tea == 1)
+                                                       <?php if($obj->eatin_tea == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -279,9 +279,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="eatin_dinner"
-                                                       @if($obj->eatin_dinner == 1)
+                                                       <?php if($obj->eatin_dinner == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -299,9 +299,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="takeaway_breakfast"
-                                                       @if($obj->takeaway_breakfast == 1)
+                                                       <?php if($obj->takeaway_breakfast == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -316,9 +316,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="takeaway_lunch"
-                                                       @if($obj->takeaway_lunch == 1)
+                                                       <?php if($obj->takeaway_lunch == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -333,9 +333,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="takeaway_tea"
-                                                       @if($obj->takeaway_tea == 1)
+                                                       <?php if($obj->takeaway_tea == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -351,9 +351,9 @@
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
                                                 <input type="checkbox" name="takeaway_dinner"
-                                                       @if($obj->takeaway_dinner == 1)
+                                                       <?php if($obj->takeaway_dinner == 1): ?>
                                                        checked
-                                                        @endif
+                                                        <?php endif; ?>
                                                         >
                                                 <span class="slider round"></span>
                                             </label>
@@ -365,30 +365,30 @@
                     </div>
                     <div class="row mt-5 mb-5">
                         <div class="col-7 mt-4">
-                            @if(isset($obj->id))
+                            <?php if(isset($obj->id)): ?>
                                 <a onclick="deleteConfirmModal();" class="grey-button" style="color:black;padding:10px 25px 10px 25px;">
                                     DELETE
-                                    <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                                    <img src="<?php echo e(asset('img/Group728.png')); ?>" height="20" class="mb-1" />
                                 </a>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <div class="col-5 mt-4">
-                            <a @if(isset($obj->id))
-                                href="{{route('admin.dish.preview', ['id' => $obj->id])}}"
-                               @else
-                                href="{{route('admin.dish')}}"
-                               @endif
+                            <a <?php if(isset($obj->id)): ?>
+                                href="<?php echo e(route('admin.dish.preview', ['id' => $obj->id])); ?>"
+                               <?php else: ?>
+                                href="<?php echo e(route('admin.dish')); ?>"
+                               <?php endif; ?>
                                class="grey-button ml-5" style="color:black;padding: 8px;">
                                 CANCEL
-                                <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                                <img src="<?php echo e(asset('img/Group728.png')); ?>" height="20" class="mb-1" />
                             </a>
                             <button class="green-button" style="padding:5px 25px 8px 25px;margin-top:-7px;">
                                 Apply
-                                <img src="{{ asset('img/Group728white.png') }}" height="20" class="mb-1" />
+                                <img src="<?php echo e(asset('img/Group728white.png')); ?>" height="20" class="mb-1" />
                             </button>
                         </div>
                     </div>
-            @csrf
+            <?php echo csrf_field(); ?>
         </form>
     </div>
     <div class="modal fade" id="editCategoryModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -396,31 +396,33 @@
             <div class="modal-content" style="height: 600px;overflow-x:auto;">
                 <div class="modal-header">
                     <button type="button" class="close" onclick="cancelCategory()" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
+                        <img style="width:10px;height:10px;" src="<?php echo e(asset("img/Group1100.png")); ?>">
                     </button>
                 </div>
                 <div class="modal-body pr-4">
-                    @foreach ($main_cats as $key => $cat)
+                    <?php $__currentLoopData = $main_cats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div>
                             <label class="checkbox-container" id="checkbox-label">
-                                <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
+                                <input type="checkbox" id="select_all<?php echo e($cat->id); ?>" class="common_checked for_checked<?php echo e($cat->id); ?>" onclick="selectParent(<?php echo e($cat->id); ?>)"/>
                                 <span class="checkmark"></span>
-                                {{ $cat->name_en }}
+                                <?php echo e($cat->name_en); ?>
+
                             </label>
-                            @if(count($main_cats[$key]->subs) > 0)
-                                <img class="header{{$cat->id}}" style="width:20px;height:20px;margin-top: -7px;" src="{{asset("img/Path531.png")}}" onclick="showChild({{$cat->id}})">
-                            @endif
-                            @foreach ($main_cats[$key]->subs as $sub_cat)
-                                <div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">
+                            <?php if(count($main_cats[$key]->subs) > 0): ?>
+                                <img class="header<?php echo e($cat->id); ?>" style="width:20px;height:20px;margin-top: -7px;" src="<?php echo e(asset("img/Path531.png")); ?>" onclick="showChild(<?php echo e($cat->id); ?>)">
+                            <?php endif; ?>
+                            <?php $__currentLoopData = $main_cats[$key]->subs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub_cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="content<?php echo e($cat->id); ?>" style="padding:5px;margin-left: 20px;">
                                     <label class="checkbox-container">
-                                        <input class="checkbox{{$cat->id}} common_checked for_checked{{$sub_cat->id}}" type="checkbox"  onclick="childCheck({{$cat->id}}, {{$sub_cat->id}}, this)" name="check[]" style="margin-left:50px;">
-                                        {{$sub_cat->name_en}}
+                                        <input class="checkbox<?php echo e($cat->id); ?> common_checked for_checked<?php echo e($sub_cat->id); ?>" type="checkbox"  onclick="childCheck(<?php echo e($cat->id); ?>, <?php echo e($sub_cat->id); ?>, this)" name="check[]" style="margin-left:50px;">
+                                        <?php echo e($sub_cat->name_en); ?>
+
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light waves-effect waves-light" onclick="cancelCategory()">CANCEL &gt;</button>
@@ -429,13 +431,13 @@
             </div>
         </div>
     </div>
-{{--Delete Dish Confirm Dialog--}}
+
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
+                        <img style="width:10px;height:10px;" src="<?php echo e(asset("img/Group1100.png")); ?>">
                     </button>
                 </div>
                 <p style="text-align: center;padding: 20px;font-size: 25px;border-bottom:1px solid #e9ecef">Do you want to delete it?</p>
@@ -451,18 +453,18 @@
         var checkedIds_tmp = checkedIds;
         $(document).ready(function(){
             console.log($('#mcategory').val());
-            @if($obj->id == null)
+            <?php if($obj->id == null): ?>
                 $('#mcategory').trigger('change');
-            @endif
+            <?php endif; ?>
         });
         $('#mcategory').change(function(){
             var main = $(this).val();
             $.ajax({
                 type:"POST",
-                url:"{{ route('admin.category.subs') }}",
+                url:"<?php echo e(route('admin.category.subs')); ?>",
                 data:{
                     parent:main,
-                    _token:"{{ csrf_token() }}"
+                    _token:"<?php echo e(csrf_token()); ?>"
                 },
                 success: function(result){
                     $('#scategory').html(result);
@@ -631,7 +633,7 @@
             var content_obj = $(".content"+index);
             content_obj.slideToggle(500, function () {
                 header_obj.text(function () {
-                    return content_obj.is(":visible") ? header_obj.attr("src", "{{asset('img/Path531.png')}}") : header_obj.attr("src", "{{asset('img/Path506.png')}}");
+                    return content_obj.is(":visible") ? header_obj.attr("src", "<?php echo e(asset('img/Path531.png')); ?>") : header_obj.attr("src", "<?php echo e(asset('img/Path506.png')); ?>");
                 });
             });
         }
@@ -643,7 +645,9 @@
 
         function deleteDish()
         {
-            location.href ="{{route('admin.dish.delete', ['id' => $obj->id])}}";
+            location.href ="<?php echo e(route('admin.dish.delete', ['id' => $obj->id])); ?>";
         }
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.admin_layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

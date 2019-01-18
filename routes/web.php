@@ -39,7 +39,9 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/dish', 'DishController@index')->name('admin.dish');
     Route::get('admin/dish/preview/{id}', 'DishController@preview')->name('admin.dish.preview');
     Route::get('admin/dish/edit/{id}', 'DishController@edit')->name('admin.dish.edit');
+    Route::get('admin/dish/delete/{id}', 'DishController@deleteDish')->name('admin.dish.delete');
     Route::get('admin/dish/add', 'DishController@add')->name('admin.dish.add');
+    Route::get('admin/dish/sort', 'DishController@sortDish')->name('admin.dish.sort');
     Route::post('admin/dish/store', 'DishController@store')->name('admin.dish.store');
     Route::post('admin/dish/previewpost', 'DishController@previewpost')->name('admin.dish.previewpost');
 

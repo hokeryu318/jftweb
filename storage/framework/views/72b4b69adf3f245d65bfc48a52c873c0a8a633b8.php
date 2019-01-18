@@ -6,55 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        @yield('title')
+        <?php echo $__env->yieldContent('title'); ?>
     </title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/mdb.min.css')); ?>" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ asset('css/timepicki.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+    <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/bootstrap-datetimepicker.min.css')); ?>" rel="stylesheet" media="screen">
+    <link href="<?php echo e(asset('css/timepicki.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/jquery-ui.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/index.css')); ?>" rel="stylesheet">
+    <script type="text/javascript" src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/jquery-ui.js')); ?>"></script>
 </head>
 
 <body>
     <div class=" col-4 pb-5 hh pt-3" id="menu-content" style="z-index:1000;height:765px;position:fixed;overflow: auto;top:0;margin-left:-1200px;background:#242424f0;">
         <a href="#" class="bg-transparent black-text float-right" id="menu-close-btn">
-            <img src="{{ asset('img/Group826.png') }}" class="w-75" />
+            <img src="<?php echo e(asset('img/Group826.png')); ?>" class="w-75" />
         </a>
         <div class="text-center">
-            <img src="{{ asset('img/logo.png') }}" />
+            <img src="<?php echo e(asset('img/logo.png')); ?>" />
         </div>
         <div class="text-left pr-2 pl-3 mt-4">
-            <a href="{{ route('admin.transaction') }}" class="text-left">
-                <img src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transactions</h4>
+            <a href="<?php echo e(route('admin.transaction')); ?>" class="text-left">
+                <img src="<?php echo e(asset('img/tran.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transactions</h4>
             </a>
             <br><br><br>
-            <a href="{{ route('admin.booking') }}" class="text-left">
-                <img src="{{ asset('img/book.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Bookings</h4>
+            <a href="<?php echo e(route('admin.booking')); ?>" class="text-left">
+                <img src="<?php echo e(asset('img/book.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Bookings</h4>
             </a>
             <br><br><br><br>
-            <a href="{{ route('admin.dish') }}" class="text-left">
-                <img src="{{ asset('img/menu.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Edit Menu  &nbsp;&nbsp; <img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
+            <a href="<?php echo e(route('admin.dish')); ?>" class="text-left">
+                <img src="<?php echo e(asset('img/menu.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Edit Menu  &nbsp;&nbsp; <img src="<?php echo e(asset('img/lock.png')); ?>" class="float-right pt-2" /></h4>
             </a>
             <br><br>
-            <a href="{{ route('admin.saledata') }}" class="text-left mt-4">
-                <img src="{{ asset('img/sales.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Sales Data &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-1" /></h4>
+            <a href="<?php echo e(route('admin.saledata')); ?>" class="text-left mt-4">
+                <img src="<?php echo e(asset('img/sales.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Sales Data &nbsp;&nbsp;<img src="<?php echo e(asset('img/lock.png')); ?>" class="float-right pt-1" /></h4>
             </a>
             <br><br>
-            <a href="{{ route('admin.setting.receipt') }}" class="text-left mt-4">
-                <img src="{{ asset('img/setting.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Setting &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
+            <a href="<?php echo e(route('admin.setting.receipt')); ?>" class="text-left mt-4">
+                <img src="<?php echo e(asset('img/setting.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Setting &nbsp;&nbsp;<img src="<?php echo e(asset('img/lock.png')); ?>" class="float-right pt-2" /></h4>
             </a>
             <br><br>
-            <a href="{{ route('admin.table') }}" class="text-left mt-4">
-                <img src="{{ asset('img/table.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Table Edit &nbsp;&nbsp;<img src="{{ asset('img/lock.png') }}" class="float-right pt-2" /></h4>
+            <a href="<?php echo e(route('admin.table')); ?>" class="text-left mt-4">
+                <img src="<?php echo e(asset('img/table.png')); ?>" />&nbsp;&nbsp;<h4 class="white-text d-inline">Table Edit &nbsp;&nbsp;<img src="<?php echo e(asset('img/lock.png')); ?>" class="float-right pt-2" /></h4>
             </a>
         </div>
     </div>
@@ -68,10 +68,10 @@
             <div class="col-7">
                 <div class="row pl-0">
                     <ul class="nav navbar pt-0 pb-0 mt-0 mb-0" style="box-shadow:none;">
-                        <li class="menu bg-green"><img src="{{ asset('img/dollar.png') }}" /></li>
-                        <li class="menu bg-pinq"><img src="{{ asset('img/notify.png') }}" /> 13</li>
-                        <li class="menu bg-yellow"><img src="{{ asset('img/chat.png') }}" /> 13</li>
-                        <li class="menu bg-info"><img src="{{ asset('img/writechat.png') }}" /> 13</li>
+                        <li class="menu bg-green"><img src="<?php echo e(asset('img/dollar.png')); ?>" /></li>
+                        <li class="menu bg-pinq"><img src="<?php echo e(asset('img/notify.png')); ?>" /> 13</li>
+                        <li class="menu bg-yellow"><img src="<?php echo e(asset('img/chat.png')); ?>" /> 13</li>
+                        <li class="menu bg-info"><img src="<?php echo e(asset('img/writechat.png')); ?>" /> 13</li>
                     </ul>
                 </div>
             </div>
@@ -81,15 +81,15 @@
         </div>
     </header>
 
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/popper.min.js')); ?>"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-timepicker.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/mdb.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/bootstrap-timepicker.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/bootstrap-datetimepicker.js')); ?>" charset="UTF-8"></script>
     <script type="text/javascript">
         function touchHandler(event) {
             var touch = event.changedTouches[0];

@@ -1,6 +1,4 @@
-@extends('admin.setting')
-
-@section('setting')
+<?php $__env->startSection('setting'); ?>
 <style>
     .p-edit-oneline{
         padding-top: 8px;
@@ -9,7 +7,7 @@
 <div class="col-9 pl-0">
     <h5 class="black-text font-weight-bold pl-5">Holiday Time Slots</h5>
     <br>
-    <form action="{{ route('admin.setting.htimeslots.post') }}" method="POST" id="post_form">
+    <form action="<?php echo e(route('admin.setting.htimeslots.post')); ?>" method="POST" id="post_form">
         <div class="card ml-1 col-lg-10 pr-0 pt-4 particular">
             <div class="row">
                 <div class="col-6 pl-4">
@@ -18,20 +16,20 @@
                 <div class="col-5 pr-0 text-right">
                     <label class="switch-style">
                         <input type="checkbox" class="accordion-check" name="holiday-on"
-                            @if($slot->day_on == "1")
+                            <?php if($slot->day_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                         >
                         <span class="slider round"></span>
                     </label>
                 </div>
             </div>
             <div class="accordion-div" style="display:
-                @if($slot->day_on == "1")
+                <?php if($slot->day_on == "1"): ?>
                     block
-                @else
+                <?php else: ?>
                     none
-                @endif
+                <?php endif; ?>
                 ">
                 <div class="row mt-2 mb-4">
                     <div class="col-4"></div>
@@ -44,17 +42,17 @@
                         <p class="mb-0 pl-3 p-edit-oneline">Morning</p>
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-morning-start" value="{{ $slot->morning_starts }}">
+                        <input type="text" class="time-element" name="holiday-morning-start" value="<?php echo e($slot->morning_starts); ?>">
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-morning-end" value="{{ $slot->morning_ends }}">
+                        <input type="text" class="time-element" name="holiday-morning-end" value="<?php echo e($slot->morning_ends); ?>">
                     </div>
                     <div class="col-2 pl-0">
                         <label class="switch-style">
                             <input type="checkbox" name="holiday-morning-on"
-                            @if($slot->morning_on == "1")
+                            <?php if($slot->morning_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                             >
                             <span class="slider round"></span>
                         </label>
@@ -66,17 +64,17 @@
                         <p class="mb-0 pl-3 p-edit-oneline">Lunch</p>
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-lunch-start" value="{{ $slot->lunch_starts }}">
+                        <input type="text" class="time-element" name="holiday-lunch-start" value="<?php echo e($slot->lunch_starts); ?>">
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-lunch-end" value="{{ $slot->lunch_ends }}">
+                        <input type="text" class="time-element" name="holiday-lunch-end" value="<?php echo e($slot->lunch_ends); ?>">
                     </div>
                     <div class="col-2 pl-0">
                         <label class="switch-style">
                             <input type="checkbox" name="holiday-lunch-on"
-                            @if($slot->lunch_on == "1")
+                            <?php if($slot->lunch_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                             >
                             <span class="slider round"></span>
                         </label>
@@ -86,17 +84,17 @@
                 <div class="row">
                     <div class="col-4"><p class="mb-0 pl-3 p-edit-oneline">Tea</p></div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-tea-start" value="{{ $slot->tea_starts }}">
+                        <input type="text" class="time-element" name="holiday-tea-start" value="<?php echo e($slot->tea_starts); ?>">
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-tea-end" value="{{ $slot->tea_ends }}">
+                        <input type="text" class="time-element" name="holiday-tea-end" value="<?php echo e($slot->tea_ends); ?>">
                     </div>
                     <div class="col-2 pl-0">
                         <label class="switch-style">
                             <input type="checkbox" name="holiday-tea-on"
-                            @if($slot->tea_on == "1")
+                            <?php if($slot->tea_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                             >
                             <span class="slider round"></span>
                         </label>
@@ -108,17 +106,17 @@
                         <p class="mb-0 pl-3 p-edit-oneline">Dinner</p>
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-dinner-start" value="{{ $slot->dinner_starts }}">
+                        <input type="text" class="time-element" name="holiday-dinner-start" value="<?php echo e($slot->dinner_starts); ?>">
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-dinner-end" value="{{ $slot->dinner_ends }}">
+                        <input type="text" class="time-element" name="holiday-dinner-end" value="<?php echo e($slot->dinner_ends); ?>">
                     </div>
                     <div class="col-2 pl-0">
                         <label class="switch-style">
                             <input type="checkbox" name="holiday-dinner-on"
-                            @if($slot->dinner_on == "1")
+                            <?php if($slot->dinner_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                             >
                             <span class="slider round"></span>
                         </label>
@@ -130,17 +128,17 @@
                         <p class="mb-0 pl-3 p-edit-oneline">Late Night</p>
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-latenight-start" value="{{ $slot->latenight_starts }}">
+                        <input type="text" class="time-element" name="holiday-latenight-start" value="<?php echo e($slot->latenight_starts); ?>">
                     </div>
                     <div class="col-3 text-right pr-5">
-                        <input type="text" class="time-element" name="holiday-latenight-end" value="{{ $slot->latenight_ends }}">
+                        <input type="text" class="time-element" name="holiday-latenight-end" value="<?php echo e($slot->latenight_ends); ?>">
                     </div>
                     <div class="col-2 pl-0">
                         <label class="switch-style">
                             <input type="checkbox" name="holiday-latenight-on"
-                            @if($slot->latenight_on == "1")
+                            <?php if($slot->latenight_on == "1"): ?>
                                 checked
-                            @endif
+                            <?php endif; ?>
                             >
                             <span class="slider round"></span>
                         </label>
@@ -153,18 +151,18 @@
             <h6 class="text-info font-weight-bold pl-3">Activate Holiday Time Slots On</h6>
             <div class="col-lg-11 ">
                 <div id="content">
-                @foreach ($holidays as $holiday)
+                <?php $__currentLoopData = $holidays; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $holiday): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="row mt-1 element">
                         <div class="col-9 pr-0" style="padding-left:0px; padding-top:4px">
-                            <input class="card pt-2 pb-2 pl-3 font-weight-bold holiday" style="width:100%" name="org" value="{{ $holiday->holiday_date }}">
+                            <input class="card pt-2 pb-2 pl-3 font-weight-bold holiday" style="width:100%" name="org" value="<?php echo e($holiday->holiday_date); ?>">
                         </div>
                         <div class="col-3">
-                            <button type="button" class="btn bg-info radius pb-3 pr-4 pl-4" style="margin:0px" data-id="{{ $holiday->id }}" onclick="deleteDay(this)">
+                            <button type="button" class="btn bg-info radius pb-3 pr-4 pl-4" style="margin:0px" data-id="<?php echo e($holiday->id); ?>" onclick="deleteDay(this)">
                                 <h6 class="mb-0 font-weight-bold">Delete</h6>
                             </button>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <div class="row mt-1">
                     <div class="col-9 pr-0" style="padding-left:0px; padding-top:4px">
@@ -178,7 +176,7 @@
                 </div>
             </div>
         </div>
-        @csrf
+        <?php echo csrf_field(); ?>
     </form>
     <div class="row mt-1 element" id="clone" style="display:none">
         <div class="col-9 pr-0" style="padding-left:0px; padding-top:4px">
@@ -195,9 +193,9 @@
         <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0" onclick="onapply()">Apply</h5></a>
     </div>
 </div>
-<script type="text/javascript" src="{{ asset('js/timepicki.js') }}"></script>
-<script src="{{ asset('js/bootstrap-timepicker.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/timepicki.js')); ?>"></script>
+<script src="<?php echo e(asset('js/bootstrap-timepicker.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/bootstrap-datetimepicker.js')); ?>" charset="UTF-8"></script>
 <script>
     $(document).ready(function(){
         $(".time-element").each(function(i, obj){
@@ -247,4 +245,6 @@
             $(obj).closest('.element').remove();
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.setting', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

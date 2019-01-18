@@ -8,27 +8,27 @@
 </div>
     <div class="widthh bg-lightgrey pl-5 pb pt-2">
         <div class="row">
-            <div class="col-6">
-                <label class="txtdemibold font-weight-bold">Preview</label>
+            <div class="col-6 preview-title">
+                <label class="">Preview</label>
             </div>
             <div class="col-6">
-                <a>
+                <a href="{{route('admin.dish')}}">
                     <span class="">
                         <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
                     </span>
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-10 bg-white mb-5">
+        <div class="row" style="width: 100%;">
+            <div class="col-10 bg-white mb-5 dish-detail-content">
                 <div class="row">
-                    <div class="col-11">
+                    <div class="col-11 dish-title">
                         <h4 class="font-weight-bold mb-0">{{ $obj->name_en }}</h4>
-                        <h5 class="font-weight-bold mb-0">{{ $obj->desc_en }}</h5>
-                        <h5 class="text-movee font-weight-bold mb-0">${{ number_format($obj->price, 2) }}</h5>
+                        <h5 class=" mb-0">{{ $obj->desc_en }}</h5>
+                        <h4 class="text-movee font-weight-bold mb-0">${{ number_format($obj->price, 2) }}</h4>
                     </div>
                     <div class="col-1">
-                        <a class="fa fa-s text-white float-right close_times mt-3">
+                        <a href="{{route('admin.dish')}}" class="fa fa-s text-white float-right close_times mt-3">
                             <span class="fa fa-times text-white pt-1"></span>
                         </a>
                     </div>
@@ -37,12 +37,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div style="position:relative">
-                        <img src="{{ asset('dishes/'.$obj->image) }}" class="img-fluid w-100" style="height:50vh" />
+                        <img src="{{ asset('dishes/'.$obj->image) }}" class="img-fluid w-100" style="height:42vh" />
                         @if($obj->badge)
-                        <img src="{{ asset('badges/'.$obj->badge->filepath) }}" style="position:absolute;bottom:0">
+                        <img src="{{ asset('badges/'.$obj->badge->filepath) }}" style="position:absolute;top:10px;left:10px;">
                         @endif
                         </div>
-                        <p class="text-center text-movee font-weight-bold ">This dish will be prepared<br /> straight away.</p>
+                        <p class="text-center text-movee font-weight-bold dish-adv">This dish will be prepared<br /> straight away.</p>
                     </div>
                     <div class="col-6">
                         <p class="text-white d-block bg-movee pl-1 pt-1 pb-1 font-weight-bold fs-3">Please Choose:</p>

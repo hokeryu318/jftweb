@@ -1,8 +1,6 @@
-@extends('layout.admin_layout')
+<?php $__env->startSection('title', 'Settings'); ?>
 
-@section('title', 'Settings')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="pbb1 blackgrey">
 
 <div style="padding-top:7%;">
@@ -10,7 +8,7 @@
 
 <div class="widthh white pt-0 pb-3 position-relative">
     <a href="#" class="bg-transparent" style="position:relative;top:15px ;right:10px"><h2><span class="">
-        <img src="{{ asset('img/Group1100.png') }}" height="18" class="float-right" width="20" />
+        <img src="<?php echo e(asset('img/Group1100.png')); ?>" height="18" class="float-right" width="20" />
     </span></h2></a>
     <br><br>
     <div class="row">
@@ -336,7 +334,9 @@
 </div>
 <script>
     function onRow(){
-        window.location = "{{ route('admin.review') }}";
+        window.location = "<?php echo e(route('admin.review')); ?>";
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.admin_layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
