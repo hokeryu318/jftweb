@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\DishCategory;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Dish;
@@ -38,7 +39,15 @@ class CategoryController extends Controller
 
     public function delete($id){
         $cat = Category::find($id);
+        //remove from match table
+        DishCategory::where('categories_id', $id)->delete();
+        foreach ($cat->subs as $subs) {
+            $dish_category = new DishCategory();
+            $dish_category->where('categories_id', $subs->id)->delete();
+        }
         $cat->delete();
+        Category::where("parent_id", $id)->delete();
+
     }
 
     public function subs()
@@ -50,24 +59,22 @@ class CategoryController extends Controller
 
     public function subs_list()
     {
-        $main = request()->parent;
+        $main = request()->category;
         $subs = Category::find($main)->subs;
-        return (string)view('part.subcategory_list', compact('subs'))->render();
+        $shtml = (string)view('part.subcategory_list', compact('subs'))->render();
+        $dish_html = self::dish_list();
+        return response()->json(['subcategory_list' => $shtml, 'dishs' => $dish_html]);
     }
 
     public function dish_list()
     {
-        $cat = Category::find(request()->category);
-        $dishes = $cat->dishes;
+        $dishes = DishCategory::getDishFromCategory(request()->category);
         return (string)view('part.category_dish', compact('dishes'))->render();
     }
 
     public function dish_delete($dish_id)
     {
-        $dish = Dish::find($dish_id);
-        $dish->category_id = null;
-        $dish->sub_category_id = null;
-        $dish->save();
+        DishCategory::where("dish_id", $dish_id)->delete();
         return "sucess";
     }
 }

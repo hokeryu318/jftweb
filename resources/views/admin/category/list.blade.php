@@ -19,7 +19,7 @@
     <div style="padding-top:8%;" class="pttbook"></div>
 
     <div class="widthh pb-1 hh black2 position-relative">
-        <a href="#" class="bg-transparent" style="position:absolute;top:15px ;right:10px"><h2><span class="">
+        <a href="{{route('admin.home')}}" class="bg-transparent" style="position:absolute;top:15px ;right:10px"><h2><span class="">
             <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
         </span></h2></a>
 
@@ -39,7 +39,7 @@
                                 <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" data-toggle="modal" data-target="#addModal">
                                     <h6 class="mb-0 font-weight-bold">ADD</h6>
                                 </button>
-                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteMain()">
+                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteMainCategory">
                                     <h6 class="mb-0 font-weight-bold">Delete</h6>
                                 </button>
                             </div>
@@ -74,17 +74,17 @@
                             <h6 class="white-text d-inline pl-2">USE SUB CATEGORY</h6>
                             <label class="switch-style" style="margin-top:8px">
                                 <input type="checkbox" id="chk_hassubs">
-                                <span class="slider round"></span>
+                                <span class="slider checkbox-round"></span>
                             </label>
                             <br>
-                            <div class="category-div" class="pr-5" id="subcategory-scroll">
+                            <div class="category-div pr-5" id="subcategory-scroll">
 
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                                 <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()">
                                     <h6 class="mb-0 font-weight-bold">ADD</h6>
                                 </button>
-                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteSub()">
+                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteSubCategory">
                                     <h6 class="mb-0 font-weight-bold">Delete</h6>
                                 </button>
                             </div>
@@ -94,14 +94,14 @@
                 <div class="col-5 pl-2 pr-5" style="width:85%">
                     <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">DISH</h5>
                     <h6 class="hspace-category" style="margin:0px"></h6>
-                    <div class="category-div" id="scroll-dish" class="hi pt-div">
+                    <div class="category-div hi pt-div" id="scroll-dish">
 
                     </div>
                     <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                         <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onAddDish()">
                             <h6 class="mb-0 font-weight-bold">ADD</h6>
                         </button>
-                        <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onDeleteDish()">
+                        <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteDishModal">
                             <h6 class="mb-0 font-weight-bold">Delete</h6>
                         </button>
                     </div>
@@ -227,6 +227,41 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="confirm_parent_category" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="confirm_letter"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Close &gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirm_category_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="confirm_remove"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Cancel &gt;</button>
+                <button type="button" class="btn btn-light waves-effect waves-light" id="confirmbtn">OK &gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function(){
         $('.hspace-category').height($('.switch-style').outerHeight(true));
@@ -247,11 +282,12 @@
             type:"POST",
             url:"{{ route('admin.category.subs_list') }}",
             data:{
-                parent: id,
+                category: id,
                 _token:"{{ csrf_token() }}"
             },
             success: function(result){
-                $('#subcategory-scroll').html(result);
+                $('#subcategory-scroll').html(result.subcategory_list);
+                $('#scroll-dish').html(result.dishs);
             }
         });
     }
@@ -306,7 +342,46 @@
             $('#parent_id').val(currentMain);
             $('#addModal').modal('toggle');
         }
+        if(!$('#chk_hassubs').is(':checked')){
+            $("#confirm_letter")[0].innerText = "Please set the SubCategory check button to active.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+        if(currentMain == ""){
+            $("#confirm_letter")[0].innerText = "Please select the Category.";
+            $("#confirm_parent_category").modal('toggle');
+        }
     }
+    $("#deleteMainCategory").click(function() {
+        if(currentMain != '') {
+            $("#confirm_remove")[0].innerText = "Do you want to delete the category?";
+            $("#confirmbtn").attr("onclick", "onDeleteMAin()");
+            $("#confirm_category_modal").modal('toggle');
+        }else{
+            $("#confirm_letter")[0].innerText = "Please select the Category.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+    });
+    $("#deleteSubCategory").click(function() {
+        if(currentSub != '') {
+            $("#confirm_remove")[0].innerText = "Do you want to delete the sub category?";
+            $("#confirmbtn").attr("onclick", "onDeleteSub()");
+            $("#confirm_category_modal").modal('toggle');
+        }else{
+            $("#confirm_letter")[0].innerText = "Please select the sub category.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+    });
+    $("#deleteDishModal").click(function() {
+        if(current_dish != '') {
+            $("#confirm_remove")[0].innerText = "Do you want to delete the dish?";
+            $("#confirmbtn").attr("onclick", "onDeleteDish()");
+            $("#confirm_category_modal").modal('toggle');
+        }else{
+            $("#confirm_letter")[0].innerText = "Please select the dish.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+    });
+
 
     function onDeleteMain(){
         if(currentMain != ''){
@@ -315,6 +390,8 @@
                 url:"{{ url('admin/category/delete') }}" + "/" + currentMain,
                 success: function(){
                     $("[data-id='" + currentMain + "']").remove();
+                    $("[data-parent='" + currentMain + "']").remove();
+                    $('#scroll-dish').html('');
                 }
             });
         }
@@ -327,6 +404,7 @@
                 url:"{{ url('admin/category/delete') }}" + "/" + currentSub,
                 success: function(){
                     $("[data-id='" + currentSub + "']").remove();
+                    $('#scroll-dish').html('');
                 }
             });
         }
@@ -354,7 +432,12 @@
     }
     function onAddDish()
     {
-        $('#exampleModalCenter2').modal('toggle');
+        if(currentMain == "" && currentSub == ""){
+            $("#confirm_letter")[0].innerText = "Please select the category.";
+            $("#confirm_parent_category").modal('toggle');
+        }else{
+            $('#exampleModalCenter2').modal('toggle');
+        }
     }
     function onDeleteDish()
     {
@@ -365,6 +448,7 @@
                 success: function(result){
                     if(result){
                         $("[data-dish='" + current_dish + "']").remove();
+                        $("#confirm_category_modal").modal('hide');
                     }
                 }
             });
