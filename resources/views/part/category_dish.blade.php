@@ -8,3 +8,5 @@
         </h6>
     </button>
 @endforeach
+<input type="hidden" id="dish_ids" value="{{$dish_ids}}">
+<input type="hidden" id="dish_count" value="{{$dish_count}}">

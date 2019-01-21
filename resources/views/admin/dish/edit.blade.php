@@ -401,14 +401,16 @@
                 </div>
                 <div class="modal-body pr-4">
                     @foreach ($main_cats as $key => $cat)
-                        <div>
+                        <div style="position: relative;">
                             <label class="checkbox-container" id="checkbox-label">
-                                <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
-                                <span class="checkmark"></span>
+                                @if(count($main_cats[$key]->subs) == 0)
+                                    <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
+                                    <span class="checkmark"></span>
+                                @endif
                                 {{ $cat->name_en }}
                             </label>
                             @if(count($main_cats[$key]->subs) > 0)
-                                <img class="header{{$cat->id}}" style="width:20px;height:20px;margin-top: -7px;" src="{{asset("img/Path531.png")}}" onclick="showChild({{$cat->id}})">
+                                <img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.PNG")}}" onclick="showChild({{$cat->id}})">
                             @endif
                             @foreach ($main_cats[$key]->subs as $sub_cat)
                                 <div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">
@@ -535,77 +537,81 @@
         {
             var checkObj = $(".checkbox"+index);
             var checkedCount = 0;
-            for(var i = 0; i < checkObj.length; i ++){
-                if(checkObj[i].checked == true){
-                    checkedCount ++;
+            if($(".content"+index).length == 0){
+                for(var i = 0; i < checkObj.length; i ++){
+                    if(checkObj[i].checked == true){
+                        checkedCount ++;
+                    }
                 }
-            }
-            if(checkedCount > 0){
-                $("#select_all"+index)[0].checked = true;
-            }
-            if($("#select_all"+index)[0].checked == true){
-                $(".main_category_"+index).css('display', 'block');
-                if(checkedIds_tmp != ''){
-                    var count = 0;
-                    var common_checked_count = 0;
-                    var common_checked_obj = $(".common_checked");
-                    for(var i = 0; i < common_checked_obj.length; i ++){
-                        if(common_checked_obj[i].checked == true){
-                            common_checked_count ++;
+                if(checkedCount > 0){
+                    $("#select_all"+index)[0].checked = true;
+                }
+                if($("#select_all"+index)[0].checked == true){//add checked id
+                    $(".main_category_"+index).css('display', 'block');
+                    if(checkedIds_tmp != ''){
+                        var count = 0;
+                        var common_checked_count = 0;
+                        var common_checked_obj = $(".common_checked");
+                        for(var i = 0; i < common_checked_obj.length; i ++){
+                            if(common_checked_obj[i].checked == true){
+                                common_checked_count ++;
+                            }
                         }
-                    }
-                    if(common_checked_count > 2){
-                        var tmp_ids = checkedIds_tmp.split(',');
-                    }else{
-                        var tmp_ids = checkedIds_tmp;
-                    }
-                    for(var i = 0; i < tmp_ids.length; i ++){
-                        if(tmp_ids[i] == index){
-                            count ++;
-                        }
-                    }
-                    if(count == 0){
-                        checkedIds_tmp += ',' + index;
-                    }
-                }else{
-                    checkedIds_tmp = index;
-                }
-            }else{
-                $(".main_category_"+index).css('display', 'none');
-                var ids_tmp = '';
-                if(checkedIds_tmp != ''){
-                    ids_tmp = checkedIds_tmp.split(',');
-                }
-
-                checkedIds_tmp = '';
-                for(var i = 0; i < ids_tmp.length; i ++){
-                    if(ids_tmp[i] != index){
-                        if(checkedIds_tmp == ''){
-                            checkedIds_tmp = ids_tmp[i];
+                        var tmp_ids = '';
+                        if(common_checked_count > 2){
+                            tmp_ids = checkedIds_tmp.split(',');
                         }else{
-                            checkedIds_tmp += ','+ids_tmp[i];
+                            tmp_ids = checkedIds_tmp;
+                        }
+                        for(var i = 0; i < tmp_ids.length; i ++){
+                            if(tmp_ids[i] == index){
+                                count ++;
+                            }
+                        }
+                        if(count == 0){
+                            checkedIds_tmp += ',' + index;
+                        }
+                    }else{
+                        checkedIds_tmp = index;
+                    }
+                }else{//remove checked id
+                    $(".main_category_"+index).css('display', 'none');
+                    var ids_tmp = '';
+                    if(checkedIds_tmp != ''){
+                        ids_tmp = checkedIds_tmp.split(',');
+                    }
+
+                    checkedIds_tmp = '';
+                    for(var i = 0; i < ids_tmp.length; i ++){
+                        if(ids_tmp[i] != index){
+                            if(checkedIds_tmp == ''){
+                                checkedIds_tmp = ids_tmp[i];
+                            }else{
+                                checkedIds_tmp += ','+ids_tmp[i];
+                            }
                         }
                     }
                 }
             }
+
         }
         function childCheck(category_index, sub_index, obj)
         {
             if(obj.checked == true){
-                if($("#select_all"+category_index)[0].checked == false){
-                    $("#select_all"+category_index)[0].checked = true;
+                /*if($("#select_all"+category_index)[0].checked == false){
+                    //$("#select_all"+category_index)[0].checked = true;
                     if(checkedIds_tmp == ''){
                         checkedIds_tmp = category_index;
                     }else{
                         checkedIds_tmp += ','+ category_index;
                     }
-                }
+                }*/
                 if(checkedIds_tmp == ''){
                     checkedIds_tmp = sub_index;
                 }else{
                     checkedIds_tmp += ','+ sub_index;
                 }
-                $(".main_category_"+category_index).css('display', 'block');
+                //$(".main_category_"+category_index).css('display', 'block');
                 $("#category_"+sub_index).parent().parent().css('display', 'block');
             }else{
                 $("#category_"+sub_index).parent().parent().css('display', 'none');
@@ -631,7 +637,7 @@
             var content_obj = $(".content"+index);
             content_obj.slideToggle(500, function () {
                 header_obj.text(function () {
-                    return content_obj.is(":visible") ? header_obj.attr("src", "{{asset('img/Path531.png')}}") : header_obj.attr("src", "{{asset('img/Path506.png')}}");
+                    return content_obj.is(":visible") ? header_obj.attr("src", "{{asset('img/expand.PNG')}}") : header_obj.attr("src", "{{asset('img/collapse.PNG')}}");
                 });
             });
         }

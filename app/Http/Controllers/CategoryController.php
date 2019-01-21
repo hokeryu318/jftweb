@@ -13,7 +13,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id' ,'=', null)->get();
-        return view('admin.category.list')->with(compact('categories'));
+        $dishes = Dish::get();
+        return view('admin.category.list')->with(compact('categories', 'dishes'));
     }
 
     public function add()
@@ -47,7 +48,6 @@ class CategoryController extends Controller
         }
         $cat->delete();
         Category::where("parent_id", $id)->delete();
-
     }
 
     public function subs()
@@ -61,15 +61,46 @@ class CategoryController extends Controller
     {
         $main = request()->category;
         $subs = Category::find($main)->subs;
+        $subs_count = count($subs);
         $shtml = (string)view('part.subcategory_list', compact('subs'))->render();
         $dish_html = self::dish_list();
-        return response()->json(['subcategory_list' => $shtml, 'dishs' => $dish_html]);
+        return response()->json(['subcategory_list' => $shtml, 'dishes' => $dish_html, 'subs_count' => $subs_count]);
     }
 
     public function dish_list()
     {
         $dishes = DishCategory::getDishFromCategory(request()->category);
-        return (string)view('part.category_dish', compact('dishes'))->render();
+        $dishes_arr = $dishes->toArray();
+        $dish_ids = '';
+        $dish_count = 0;
+        foreach ($dishes_arr as $dish_arr) {
+            $dish_ids .= $dish_arr['id'].',';
+            $dish_count ++;
+        }
+        $dish_ids = rtrim($dish_ids, ",");
+        return (string)view('part.category_dish', compact('dishes', 'dish_ids', 'dish_count'))->render();
+    }
+
+    public function dish_add()
+    {
+        $dish_ids = request()->dish_ids;
+        $subcategory_id = request()->subcategory_id;
+        if($dish_ids != ""){
+            $dish_id_arr = explode(",", $dish_ids);
+            DishCategory::where('categories_id', $subcategory_id)->delete();
+            foreach ($dish_id_arr as $dish_id) {
+                $dish_category = new DishCategory();
+                $dish_category->dish_id = $dish_id;
+                echo $dish_id;
+                if($subcategory_id != ""){
+                    $dish_category->categories_id = $subcategory_id;
+                }
+                $dish_category->save();
+            }
+        }else{
+            DishCategory::where('categories_id', $subcategory_id)->delete();
+        }
+        return "sucess";
     }
 
     public function dish_delete($dish_id)

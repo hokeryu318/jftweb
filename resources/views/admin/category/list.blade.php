@@ -22,7 +22,6 @@
         <a href="{{route('admin.home')}}" class="bg-transparent" style="position:absolute;top:15px ;right:10px"><h2><span class="">
             <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
         </span></h2></a>
-
         <div class="pt-5">
             <div class="row">
                 <div class="col-7">
@@ -132,97 +131,40 @@
     </div>
 
 </div>
-<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="dish_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:90% !important;">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 500px;overflow:auto;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
+            <input type="hidden" id="tmp_dish_ids">
+            <input type="hidden" id="tmp_dish_count">
             <div class="modal-body pr-4">
                 <div class="row w-100">
-	                <div class="col-5">
-	                    <div style="border:2px solid lightgrey;height:427px !important;overflow-y:scroll" class="p-2">
-	                        <a href="#" class="black-text font-weight-bold" id="beer"><span class="fa fa-chevron-right grey-text"></span> Beer / Sake</a>
-	                        <ul style="list-style-type:square" id="beeritem" class="font-weight-bold">
-	                            <li>item</li>
-	                            <li>item</li>
-	                        </ul>
-	                        <a href="#" class="black-text d-block mt-1 font-weight-bold" id="wine"><span class="fa fa-chevron-right grey-text"></span> Wine / Soft Drinks</a>
-	                        <ul style="list-style-type:square" id="wineitem" class="font-weight-bold">
-                                <li>item</li>
-                                <li>item</li>
-	                        </ul>
-	                        <a href="#" class="black-text font-weight-bold d-block mt-1" id="SPECIALS"><span class="fa fa-chevron-right grey-text"></span> SPECIALS!!</a>
-                            <ul style="list-style-type:square" id="SPECIALSitem" class="font-weight-bold">
-                                <li>item</li>
-                                <li>item</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold d-block mt-1" id="Summer"><span class="fa fa-chevron-right grey-text"></span> Summer Specials</a>
-                            <ul style="list-style-type:square" id="Summeritem"  class="font-weight-bold">
-                                <li>item</li>
-                                <li>item</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold d-block mt-1" id="Nibbles"><span class="fa fa-chevron-right grey-text"></span> Nibbles / Salad</a>
-                            <ul style="list-style-type:square" id="Nibblesitem" class="font-weight-bold">
-                                <li>item</li>
-                                <li>item</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold d-block mt-1" id="Dish"><span class="fa fa-chevron-right grey-text"></span> Main Dish</a>
-                            <ul style="list-style-type:square" id="Dishitem"  class="font-weight-bold">
-                                <li>Grilled</li>
-                                <li>Deep-fried</li>
-                                <li>Seafood</li>
-                                <li>Tempuramp</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold d-block mt-1" id="hot"><span class="fa fa-chevron-right grey-text"></span> Hot Pot</a>
-                            <ul style="list-style-type:square" class="font-weight-bold" id="hotitem">
-                                <li>item</li>
-                                <li>item</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold pl-3 d-block mt-1">Rice Dish</a>
-                            <a href="#" class="black-text font-weight-bold pl-3 d-block mt-1">Dessert</a>
-	                    </div>
-	                </div>
-	                <div class="col-7">
-	                    <div style="border:2px solid lightgrey;height:427px !important;overflow-y:scroll" class="p-2">
-                            <a href="#" class="black-text font-weight-bold" id="chicken"><span class="fa fa-chevron-right grey-text"></span> Chicken Kastsu (Schnitzel) +</a>
-                            <ul style="list-style-type:none" id="chickenitem" class="font-weight-bold">
-                                <li>  Jabanese BBQ Sauce +</li>
-                                <li>  Daikon Oroshi</li>
-                                <li><a href="#" id="sauce"><span class="fa fa-chevron-right grey-text"></span> Sauce</a>
-                                    <ul style="list-style-type:square" id="sauceitem" class="font-weight-bold">
-                                        <li>BBQ</li>
-                                        <li>Tamari Sauce</li>
-                                        <li>Gomadare</li>
-                                        <li>Ponzu</li>
-                                        <li>Kanzuri (-$0.20)</li>
-                                    </ul>
-                                </li>
-                                <li><a href="#"  id="top"><span class="fa fa-chevron-right grey-text"></span> Topping	</a>
-                                    <ul style="list-style-type:square" id="topitem" class="font-weight-bold">
-                                        <li>Daikon Oroshi</li>
-                                        <li>Omiji Oroshi</li>
-                                        <li>Gomadare</li>
-                                        <li>Non</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <a href="#" class="black-text d-block mt-1 font-weight-bold" id="tuna"><span class="fa fa-chevron-right grey-text"></span> Tuna & Avocado Roll Sushi</a>
-                            <ul style="list-style-type:none" id="tunaitem" class="font-weight-bold">
-                                <li>item1</li>
-                                <li>item2</li>
-                            </ul>
-                            <a href="#" class="black-text font-weight-bold pl-3 d-block mt-1" id="wine">Uramaki 10pc</a>
-                            <a href="#" class="black-text font-weight-bold pl-3 d-block mt-1">Salmon & Avodcado Roll Sushi<br>    with Ikura 6pc</a>
-                        </div>
-	                </div>
+                    <div class="col-12">
+                        @foreach($dishes as $dish)
+                            <div class="border-bottom-blue">
+                                <div class="row">
+                                    <div class="col-8"><label class="txtdemibold mt-2">{{$dish->name_en}}</label></div>
+                                    <div class="col-4">
+                                        <div class="float-right mt-2">
+                                            <label class="bs-switch ">
+                                                <input type="checkbox" onclick="setDishId(this, '{{$dish->id}}');" class="common_check" id="dish_id_{{$dish->id}}">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal"><h5 class="mb-0 font-weight-bold">CANCEL &gt;</h4></button>
-                <button type="button" class="btn btn-primary waves-effect waves-light"><h5 class="mb-0 font-weight-bold">ADD &gt;</h4></button>
+                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal"><h5 class="mb-0 font-weight-bold">CANCEL &gt;</h5></button>
+                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="saveCheckedDishes();"><h5 class="mb-0 font-weight-bold">ADD &gt;</h5></button>
             </div>
         </div>
     </div>
@@ -236,7 +178,7 @@
                 </button>
             </div>
             <div class="modal-body pr-4">
-                <p id="confirm_letter"></p>
+                <p id="confirm_letter" class="text-center"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Close &gt;</button>
@@ -253,7 +195,7 @@
                 </button>
             </div>
             <div class="modal-body pr-4">
-                <p id="confirm_remove"></p>
+                <p id="confirm_remove" class="text-center"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Cancel &gt;</button>
@@ -268,6 +210,7 @@
     });
     var currentMain = '';
     var currentSub = '';
+    var clickedSub = 0;
 
     function onMain(obj){
         activeCatButton('.cat-button', false);
@@ -277,7 +220,8 @@
             activeCatButton(obj, true);
         }
         var hassubs = $(obj).data('hassubs');
-        $('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
+        clickedSub = 0;
+        //$('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
         $.ajax({
             type:"POST",
             url:"{{ route('admin.category.subs_list') }}",
@@ -287,11 +231,15 @@
             },
             success: function(result){
                 $('#subcategory-scroll').html(result.subcategory_list);
-                $('#scroll-dish').html(result.dishs);
+                $('#scroll-dish').html(result.dishes);
+                if(result.subs_count > 0){
+                    $('#chk_hassubs').prop('checked', true);
+                }
             }
         });
     }
     function onSub(obj){
+        clickedSub = 1;
         activeCatButton('.subcat', false);
         var id = $(obj).data('id');
         currentSub = id;
@@ -354,7 +302,7 @@
     $("#deleteMainCategory").click(function() {
         if(currentMain != '') {
             $("#confirm_remove")[0].innerText = "Do you want to delete the category?";
-            $("#confirmbtn").attr("onclick", "onDeleteMAin()");
+            $("#confirmbtn").attr("onclick", "onDeleteMain()");
             $("#confirm_category_modal").modal('toggle');
         }else{
             $("#confirm_letter")[0].innerText = "Please select the Category.";
@@ -392,6 +340,7 @@
                     $("[data-id='" + currentMain + "']").remove();
                     $("[data-parent='" + currentMain + "']").remove();
                     $('#scroll-dish').html('');
+                    $("#confirm_category_modal").modal('hide');
                 }
             });
         }
@@ -405,6 +354,7 @@
                 success: function(){
                     $("[data-id='" + currentSub + "']").remove();
                     $('#scroll-dish').html('');
+                    $("#confirm_category_modal").modal('hide');
                 }
             });
         }
@@ -432,13 +382,102 @@
     }
     function onAddDish()
     {
-        if(currentMain == "" && currentSub == ""){
+        if(currentMain == ""){
             $("#confirm_letter")[0].innerText = "Please select the category.";
             $("#confirm_parent_category").modal('toggle');
         }else{
-            $('#exampleModalCenter2').modal('toggle');
+            if($('#chk_hassubs').is(':checked') == true && clickedSub == 0){
+                $("#confirm_letter")[0].innerText = "Please select the category.";
+                $("#confirm_parent_category").modal('toggle');
+                return;
+            }
+            var dish_ids = $("#dish_ids").val();
+            var dish_count = $("#dish_count").val();
+            var tmp_dish_ids = $("#tmp_dish_ids").val(dish_ids);
+            var tmp_dish_count = $("#tmp_dish_count").val(dish_count);
+            $(".common_check").each(function(e){
+                $(".common_check")[e].checked = false;
+            });
+            if(dish_ids != '' && dish_count > 0){
+                var dish_id_arr = dish_ids.split(',');
+                for(var i = 0; i < dish_id_arr.length; i ++){
+                    $("#dish_id_"+dish_id_arr[i])[0].checked = true;
+                }
+            }
+            if(dish_count == 1){
+                $("#dish_id_"+dish_ids)[0].checked = true;
+            }
+            $('#dish_add_modal').modal('toggle');
         }
     }
+
+
+    function setDishId(obj, dish_id)
+    {
+        var tmp_dish_ids = $("#tmp_dish_ids").val();
+        var tmp_dish_count = $("#tmp_dish_count").val();
+        if(obj.checked == true){
+            if(tmp_dish_ids != ''){
+                tmp_dish_ids += ',' + dish_id;
+            }else{
+                tmp_dish_ids = dish_id;
+            }
+            $("#tmp_dish_ids").val(tmp_dish_ids);
+            tmp_dish_count ++;
+            $("#tmp_dish_count").val(tmp_dish_count);
+        }else{
+            var save_dish_ids = '';
+            if(tmp_dish_count > 1){
+                var dish_id_arr = tmp_dish_ids.split(',');
+                for(var i = 0; i < dish_id_arr.length; i ++){
+                    if(dish_id != dish_id_arr[i]){
+                        if(save_dish_ids == ''){
+                            save_dish_ids = dish_id_arr[i];
+                        }else{
+                            save_dish_ids += ',' + dish_id_arr[i];
+                        }
+                    }
+                }
+                $("#tmp_dish_ids").val(save_dish_ids);
+            }else  if(tmp_dish_count == 1){
+                $("#tmp_dish_ids").val('');
+            }
+            tmp_dish_count --;
+            $("#tmp_dish_count").val(tmp_dish_count);
+        }
+        //$('#dish_add_modal').modal('hide');
+    }
+
+    function saveCheckedDishes()
+    {
+        var tmp_dish_ids = $("#tmp_dish_ids").val();
+        var tmp_dish_count = $("#tmp_dish_count").val();
+        $("#dish_ids").val(tmp_dish_ids);
+        $("#dish_count").val(tmp_dish_count);
+        $.ajax({
+            type:"GET",
+            url:"{{ url('admin/category/dish_add') }}",
+            data: {'dish_ids': tmp_dish_ids, 'subcategory_id':currentSub},
+            success: function(result){
+                if(result){
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ route('admin.category.dish_list') }}",
+                        data:{
+                            category: currentSub,
+                            _token:"{{ csrf_token() }}"
+                        },
+                        success: function(result){
+                            $('#scroll-dish').html(result);
+                        }
+                    });
+                    $('#dish_add_modal').modal('hide');
+                }
+            }
+        });
+
+    }
+
     function onDeleteDish()
     {
         if(current_dish != ''){

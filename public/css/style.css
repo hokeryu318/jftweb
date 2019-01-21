@@ -1084,3 +1084,15 @@ font-size:110%;
 .checkbox-round:before{
     border-radius: 30px;
 }
+
+.check-round{
+    width: 50px;
+    height: 25px;
+    margin-left: -10px;
+}
+
+.top-round{
+    width: 50px;
+    height: 25px;
+    margin-left: 194px;
+}
