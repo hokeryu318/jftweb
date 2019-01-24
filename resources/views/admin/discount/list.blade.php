@@ -5,7 +5,7 @@
 @section('content')
 <div style="padding-top:8%;">
 </div>
-<div class="widthh blackgrey pt-4">
+<div class="widthh blackgrey pt-4 discount-content">
     <div class="row">
         <div class="col-6">
             <label class="text-white fontbig font-weight-bold">DISCOUNT</label>
@@ -13,7 +13,9 @@
         <div class="col-6">
             <a>
                 <span class="">
-                    <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
+                    <a href="{{route('admin.home')}}">
+                        <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
+                    </a>
                 </span>
             </a>
         </div>
@@ -25,10 +27,28 @@
                     <tr>
                         <th class="border-0 fs-3" scope="col">
                             START
-                            <img src="img/Path 444.png" height="20" />
+                            <a href="{{route("admin.discount.sort", ["sortField" => "start", 'start_sort' => $start_sort, "end_sort" => $end_sort])}}" class="text-white">
+                                <img
+                                        @if($start_sort == "asc")
+                                        src="{{ asset('img/Path445.png') }}"
+                                        @else
+                                        src="{{ asset('img/Path444.png') }}"
+                                        @endif
+                                        height="20"/>
+                            </a>
                         </th>
-                        <th class="border-0 fs-3" scope="col">END <img src="img/Path 444.png" height="20" /></th>
-                        <th class="border-0 fs-3 text-left" scope="col">ITEM</th>
+                        <th class="border-0 fs-3" scope="col">END
+                            <a href="{{route("admin.discount.sort", ["sortField" => "end", "end_sort" => $end_sort, 'start_sort' => $start_sort])}}" class="text-white">
+                                <img
+                                        @if($end_sort == "asc")
+                                        src="{{ asset('img/Path445.png') }}"
+                                        @else
+                                        src="{{ asset('img/Path444.png') }}"
+                                        @endif
+                                        height="20"/>
+                            </a>
+                        </th>
+                        <th class="border-0 fs-3 text-left" scope="col">DISH</th>
                         <th class="border-0 fs-3 text-center" scope="col">RRP</th>
                         <th class="border-0 fs-3 text-left" scope="col">DISCOUNT</th>
                         <th class="border-0 fs-3 text-left" scope="col">TIME SLOTS</th>
@@ -46,120 +66,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border-top-0"> 5 MAY 2018</td>
-                        <td class="border-top-0">30 JUN 2018</td>
-                        <td class="border-top-0">Roll Sushi</td>
-                        <td class="border-top-0">$ 12.30</td>
-                        <td class="border-top-0">$ 10.50</td>
-                        <td class="border-top-0"><img src="img/Group 904.png" height="20"/></td>
-                        <td class="border-top-0"><img src="img/Group 904.png" height="20" /></td>
-                        <td class="border-top-0"><img src="img/Group 904.png" height="20" /></td>
-                        <td class="border-top-0"><img src="img/Group 904.png" height="20" /></td>
+                @foreach($discounts as $discount)
+                    <tr onclick="onrow(this)" @if($discount->end_type == 1) class="text-discount bg-lightgrey" @endif  data-url="{{route("admin.discount.edit", ["id" => $discount->id])}}">
+                        <td>{{($discount->start != "") ? date("d F Y", strtotime($discount->start)) : ""}}</td>
+                        <td>{{($discount->end != "") ? date("d F Y", strtotime($discount->end)) : ""}}</td>
+                        <td>{{$discount->dish->name_en}}</td>
+                        <td>{{"$ ".number_format($discount->dish->price, 2)}}</td>
+                        <td>{{"$ ".number_format($discount->discount, 2)}}</td>
+                        <td>@if($discount->timeslot_breakfast == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
+                        <td>@if($discount->timeslot_lunch == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
+                        <td>@if($discount->timeslot_tea == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
+                        <td>@if($discount->timeslot_dinner == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
                     </tr>
-                    <tr>
-                        <td>5 MAY 2018</td>
-                        <td>30 JUN 2018</td>
-                        <td>Lunch Teishoku</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                    </tr>
-                    <tr  class="text-discount bg-lightgrey">
-                        <td> 2 APR 2018</td>
-                        <td>30 JUN 2018</td>
-                        <td>Nigiri</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class="">                            </td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                    </tr>
-                    <tr >
-                        <td> 1 APR 2018</td>
-                        <td>10 APR 2018</td>
-                        <td>Miso Soup</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class="">
-                            <img src="img/Group 904.png" height="20" />
-                        </td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                    </tr>
-                    <tr  class="text-discount bg-lightgrey">
-                        <td>  2 MAR 2018</td>
-                        <td> 20 JUN 2018</td>
-                        <td>Soba</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td> 2 MAR 2018</td>
-                        <td>30 JUN 2018</td>
-                        <td>Udon</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                    </tr>
-                    <tr>
-                        <td> 2 MAR 2018</td>
-                        <td>Indefinite</td>
-                        <td>Ramen</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Group 904.png" height="20" /></td>
-                    </tr>
-                    <tr class="text-discount bg-lightgrey">
-                        <td>2 MAR 2018</td>
-                        <td>5 MAR 2018</td>
-                        <td>Inari</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                    </tr>
-                    <tr class="text-discount bg-lightgrey">
-                        <td>2 MAR 2018</td>
-                        <td>5 MAR 2018</td>
-                        <td>Yakiniki</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                    </tr>
-                    <tr  class="text-discount bg-lightgrey" >
-                        <td class="">2 MAR 2018</td>
-                        <td>      5 MAR 2018</td>
-                        <td>Inari</td>
-                        <td>$ 12.30</td>
-                        <td>$ 10.50</td>
-                        <td class="">
-                        </td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                        <td class=""></td>
-                        <td class=""><img src="img/Repeat Grid 13.png" height="20" /></td>
-                    </tr>
-
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -186,8 +105,8 @@
                 </table>
 
             </div>
-            <a href="" class="text-white  btnCreateNewDiscount">CREATE NEW DISCOUNT
-                <img src="img/Group 728white.png"  height="20" /> </a>
+            <a href="{{route('admin.discount.add')}}" class="text-white  btnCreateNewDiscount">CREATE NEW DISCOUNT
+                <img src="{{asset('img/Group728white.png')}}"  height="20" /> </a>
         </div>
     </div>
 
@@ -198,4 +117,11 @@
         <span class="slider round"></span>
     </label>-->
 </div>
+<script>
+    function onrow(obj)
+    {
+        var edit_url = $(obj).data('url');
+        window.location = edit_url;
+    }
+</script>
 @endsection

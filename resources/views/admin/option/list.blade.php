@@ -13,7 +13,9 @@
         <div class="col-6">
             <a>
                 <span class="">
-                    <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
+                    <a href="{{route('admin.home')}}">
+                        <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
+                    </a>
                 </span>
             </a>
         </div>
@@ -24,10 +26,26 @@
                 <thead>
                     <tr>
                         <th class="border-0 fs-3 fontbig" scope="col">NAME
-                            <img src="{{ asset('img/Path444.png') }}" height="20"/>
+                            <a href="{{route("admin.option.sort", ["sortField" => "name", "sort_type_name" => $sort_type_name, "sort_type_display_name" => $sort_type_display_name])}}" class="text-white">
+                                <img
+                                        @if($sort_type_name == "asc")
+                                            src="{{ asset('img/Path445.png') }}"
+                                        @else
+                                            src="{{ asset('img/Path444.png') }}"
+                                        @endif
+                                        height="20"/>
+                            </a>
                         </th>
                         <th class="border-0 fs-3 fontbig" scope="col">DISPLAY NAME
-                            <img src="{{ asset('img/Path444.png') }}" height="20" />
+                            <a href="{{route("admin.option.sort", ["sortField" => "display_name", "sort_type_display_name" => $sort_type_display_name, "sort_type_name" => $sort_type_name])}}" class="text-white">
+                                <img
+                                        @if($sort_type_display_name == "asc")
+                                        src="{{ asset('img/Path445.png') }}"
+                                        @else
+                                        src="{{ asset('img/Path444.png') }}"
+                                        @endif
+                                        height="20"/>
+                            </a>
                         </th>
                         <th class="border-0 fs-3 fontbig" scope="col">RELATED DISHES</th>
                     </tr>
@@ -61,7 +79,7 @@
                             <a class="font-weight-bold text-white" href="{{ route('admin.option') }}">OPTION</a>
                         </td>
                         <td class="p-3 d-inline-block border-rightBlue  w-60px">
-                            <a class="font-weight-bold text-white" href="#">DISCOUNT</a>
+                            <a class="font-weight-bold text-white" href="{{ route('admin.discount') }}">DISCOUNT</a>
                         </td>
                     </tr>
                 </table>

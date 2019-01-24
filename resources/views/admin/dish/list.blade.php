@@ -85,7 +85,7 @@
                             <a class="font-weight-bold text-white" href="{{ route('admin.option') }}">OPTION</a>
                         </td>
                         <td class="p-3 d-inline-block border-rightBlue  w-60px">
-                            <a class="font-weight-bold text-white" href="#">DISCOUNT</a>
+                            <a class="font-weight-bold text-white" href="{{ route('admin.discount') }}">DISCOUNT</a>
                         </td>
                     </tr>
                 </table>

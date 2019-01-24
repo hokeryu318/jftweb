@@ -13,7 +13,9 @@ class OptionController extends Controller
     public function index()
     {
         $options = Option::get();
-        return view('admin.option.list')->with(compact('options'));
+        $sort_type_name = "desc";
+        $sort_type_display_name = "desc";
+        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
     }
     public function edit($id)
     {
@@ -120,5 +122,20 @@ class OptionController extends Controller
             }
         }
         return redirect()->route('admin.option');
+    }
+
+    public function sortOption()
+    {
+        $sort_type_name = request()->get('sort_type_name');
+        $sort_type_display_name = request()->get('sort_type_display_name');
+        $sortField = request()->get('sortField');
+        if($sortField == "name"){
+            $options = Option::orderBy('name',$sort_type_name)->get();
+            $sort_type_name = ($sort_type_name == "asc") ? "desc" : "asc";
+        }else{
+            $options = Option::orderBy('display_name_en', $sort_type_display_name)->get();
+            $sort_type_display_name = ($sort_type_display_name == "asc") ? "desc" : "asc";
+        }
+        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
     }
 }

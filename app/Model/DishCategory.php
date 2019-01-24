@@ -17,6 +17,6 @@ class DishCategory extends Model
 
     public static function getDishFromCategory($category_id)
     {
-        return self::select('*')->leftjoin('dishes', 'dish_category_match.dish_id', '=', 'dishes.id')->where('categories_id', '=', $category_id)->get();
+        return self::select('id')->leftjoin('dishes', 'dish_category_match.dish_id', '=', 'dishes.id')->where('categories_id', '=', $category_id)->get();
     }
 }
