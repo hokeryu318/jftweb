@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4741d62-8ad0-4e2f-aeb1-29a24df61ed9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Model/Discount.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/font-awesome.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/DishCategory.php" afterPath="$PROJECT_DIR$/app/Model/DishCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/option/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/option/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jftweb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,24 +25,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="form.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="form.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/form.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6764705">
-              <caret line="112" column="41" selection-start-line="112" selection-start-column="41" selection-end-line="112" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.3649635">
+              <caret line="36" column="83" selection-start-line="36" selection-start-column="83" selection-end-line="36" selection-end-column="83" />
               <folding>
-                <element signature="e#12151#12185#0#HTML" expanded="true" />
-                <element signature="e#12403#12453#0#HTML" expanded="true" />
+                <element signature="e#12133#12167#0#HTML" expanded="true" />
+                <element signature="e#12385#12435#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="list.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/list.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29205608">
-              <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
+            <state vertical-scroll-proportion="-52.941177">
+              <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -62,11 +51,11 @@
       <file leaf-file-name="DiscountController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiscountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.264706">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+            <state vertical-scroll-proportion="-15.617647">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
               <folding>
                 <element signature="e#40#63#0#PHP" expanded="true" />
-                <element signature="e#846#5258#0#PHP" expanded="false" />
+                <element signature="e#845#5257#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -152,13 +141,13 @@
         <option value="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
         <option value="$PROJECT_DIR$/app/Model/DishCategory.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/option/list.blade.php" />
         <option value="$PROJECT_DIR$/app/Model/Discounts.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" />
         <option value="$PROJECT_DIR$/app/Model/Discount.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
       </list>
     </option>
   </component>
@@ -919,17 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/form.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6764705">
-          <caret line="112" column="41" selection-start-line="112" selection-start-column="41" selection-end-line="112" selection-end-column="41" />
-          <folding>
-            <element signature="e#12151#12185#0#HTML" expanded="true" />
-            <element signature="e#12403#12453#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6203271">
@@ -954,14 +932,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiscountController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.264706">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-          <folding>
-            <element signature="e#40#63#0#PHP" expanded="true" />
-            <element signature="e#846#5258#0#PHP" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-52.941177">
+          <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -973,11 +948,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/list.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiscountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29205608">
-          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-          <folding />
+        <state vertical-scroll-proportion="-15.617647">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding>
+            <element signature="e#40#63#0#PHP" expanded="true" />
+            <element signature="e#845#5257#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/discount/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3649635">
+          <caret line="36" column="83" selection-start-line="36" selection-start-column="83" selection-end-line="36" selection-end-column="83" />
+          <folding>
+            <element signature="e#12133#12167#0#HTML" expanded="true" />
+            <element signature="e#12385#12435#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

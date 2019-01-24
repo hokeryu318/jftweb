@@ -26,8 +26,8 @@ class DiscountController extends Controller
     public function edit($id)
     {
         $dishes = Dish::get();
-        $dish = Dish::find($id);
         $obj = Discount::find($id);
+        $dish = $obj->dish->id;
         $gst = 10;
         return view('admin.discount.form')->with(compact('dishes', 'gst', 'obj', 'dish'));
     }

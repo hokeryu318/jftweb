@@ -36,7 +36,7 @@
                             </div>
                             <select onchange="changeDish(this);" class="border-blue select-width-blue mr-1 option-padding option-select" style="width:100%" name="dish_id">
                                 @foreach ($dishes as $ds)
-                                    <option value="{{ $ds->id }}" data-price="{{$ds->price}}" @if(isset($dish->dish_id) && $ds->id == $dish->dish_id) selected @endif>{{ $ds->name_en }}</option>
+                                    <option value="{{ $ds->id }}" data-price="{{$ds->price}}" @if(isset($dish) && $ds->id == $dish) selected @endif>{{ $ds->name_en }}</option>
                                 @endforeach
                             </select>
                             <label class="text-blue float-right text-right" id="rrp_price">
