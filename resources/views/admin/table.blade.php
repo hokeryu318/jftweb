@@ -462,17 +462,16 @@
             var selectedObj = $("#selected-"+selected_index);
             var room_obj = $(".room-content");
             var margin_left = coordinate_x * 20;
-
             var room_div_obj = $(".room-div");
-            var move_value = selectedObj[0].offsetLeft - room_obj.width() + selectedObj.width();
-            if(room_div_obj.width() > move_value){
+            var move_value = margin_left + selectedObj.width();
+            if(move_value > room_div_obj.width()){
+                margin_left = room_div_obj.width()- selectedObj.width();
                 selectedObj.css("margin-left", margin_left+"px");
-                room_obj[0].scrollLeft = move_value;
+                room_obj[0].scrollLeft = room_div_obj.width() - room_obj.width();
             }else{
-                room_obj[0].scrollLeft = room_div_obj.width() - selectedObj.width();
-                selectedObj.css("margin-left", room_div_obj.width() - selectedObj.width()+"px");
+                selectedObj.css("margin-left", margin_left+"px");
+                room_obj[0].scrollLeft = selectedObj.width() + margin_left - room_obj.width();
             }
-
             tmp_selected_arr.x = coordinate_x;
         });
 
@@ -484,7 +483,17 @@
             var coordinate_y = $("#selected-y").val();
             var selectedObj = $("#selected-"+selected_index);
             var margin_top = coordinate_y * 20;
-            selectedObj.css("margin-top", margin_top+"px");
+            var room_obj = $(".room-content");
+            var room_div_obj = $(".room-div");
+            var move_value = margin_top + selectedObj.height();
+            if(move_value > room_div_obj.height()){
+                margin_top = room_div_obj.height()- selectedObj.height();
+                selectedObj.css("margin-top", margin_top+"px");
+                room_obj[0].scrollTop = room_div_obj.height() - room_obj.height();
+            }else{
+                selectedObj.css("margin-top", margin_top+"px");
+                room_obj[0].scrollTop = selectedObj.height() + margin_top - room_obj.height();
+            }
             tmp_selected_arr.y = coordinate_y;
         });
 
