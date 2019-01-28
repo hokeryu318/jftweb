@@ -59,7 +59,8 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::post('admin/discount/store', 'DiscountController@store')->name('admin.discount.store');
     Route::get('admin/discount/sort', 'DiscountController@sortOption')->name('admin.discount.sort');
 
-    Route::get('admin/edittable', 'TableController@index')->name('admin.table');
+    Route::get('admin/table', 'TableController@index')->name('admin.table');
+    Route::post('admin/table/store', 'TableController@store')->name('admin.table.store');
 
     Route::get('admin/saledata', 'SaleController@index')->name('admin.saledata');
 
