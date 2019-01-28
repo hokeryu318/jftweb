@@ -85,8 +85,7 @@
                 </div>
                 <div class="row mt-xl-3">
                     <div class="col-6 pl-xl-5">
-                        <button class="btn grey pr-2 pl-2"><h5 class="mb-0 font-weight-bold h5-responsive">CANCEL <br> &gt;</h5></button>
-
+                        <button class="btn grey pr-2 pl-2" onclick="location.reload();"><h5 class="mb-0 font-weight-bold h5-responsive">CANCEL <br> &gt;</h5></button>
                     </div>
                     <div class="col-6 pl-xl-2">
                         <button class="btn bg-info pr-2 pl-2"><h5 class="mb-0 font-weight-bold h5-responsive" onclick="saveChangedTables()">&nbsp;&nbsp;APPLY&nbsp;&nbsp;  <br> &gt;</h5></button>
@@ -547,7 +546,7 @@
         });
 
         function tableZoomIn(){
-            $(".minus_btn").attr("src", "{{ asset('img/minus.png') }}")
+            $(".minus_btn").attr("src", "{{ asset('img/minus.png') }}");
             var scale_value_obj = $("#scale-value");
             var scale_value_all = scale_value_obj.text();
             var scale_value = scale_value_all.slice(0, -1);

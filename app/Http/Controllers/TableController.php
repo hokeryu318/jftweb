@@ -16,7 +16,7 @@ class TableController extends Controller
             $table_arr_obj = json_decode($table[0]['table_array']);
         }
         foreach ($table_arr_obj as $key => $value){
-            $table_arr[$key] = (array)$value;
+            $table_arr[] = (array)$value;
         }
         return view('admin.table')->with(compact('table_arr'));
     }
