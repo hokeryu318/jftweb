@@ -9,7 +9,7 @@
 <div class="col-9 pl-0">
     <h5 class="black-text font-weight-bold">Time Slots</h5>
     <h6 class="text-info font-weight-bold">Regular Time Slots</h6>
-    <form action="{{ route('admin.setting.timeslots.post') }}" method="POST" id="post_form">
+    <form class="holiday_form" action="{{ route('admin.setting.timeslots.post') }}" method="POST" id="post_form">
     <div class="card ml-1 col-lg-10 pr-0">
         <div class="row mt-2 mb-4">
             <div class="col-4"></div>

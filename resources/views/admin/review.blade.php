@@ -5,7 +5,18 @@
 @section('content')
 <div class="blackgrey pl-xl-4" style="height:100vh">
     <div style="padding-top:10%"></div>
-    <div class="widthh pp white mr-lg-auto ml-auto ml-xl-5 hidialog" style="width:90% !important;height:665px;overflow-y:auto">
+    <div class="widthh white mr-lg-auto ml-auto ml-xl-5 hidialog review_content" style="width:90% !important;height:665px;overflow-y:auto">
+        <div class="row">
+            <div class="col-12 close-btn-review">
+                <a>
+                    <span class="">
+                        <a href="{{route('admin.saledata')}}">
+                            <img src="{{ asset('img/Group1100.png') }}" height="20" class="float-right" width="20" />
+                        </a>
+                    </span>
+                </a>
+            </div>
+        </div>
         <div class="row pt-2" style="background:#ededed;">
             <div class="col-5">
                 <span class="red-text h4-responsive font-weight-normal">0 min</span>

@@ -1,7 +1,7 @@
 @extends('admin.setting')
 
 @section('setting')
-<div class="col-9 pl-0 pt-5">
+<div class="col-8 pl-0 pt-5">
     <form method="POST" action="{{ route('admin.setting.password.save') }}" id="saveForm">
     <div class="mt-5">
         <h6 class="font-weight-bold text-info">Menu</h6>

@@ -25,14 +25,14 @@
 </head>
 
 <body>
-    <div class=" col-4 pb-5 hh pt-3" id="menu-content" style="z-index:1000;height:765px;position:fixed;overflow: auto;top:0;margin-left:-1200px;background:#242424f0;">
+    <div class=" col-4 pb-5 hh pt-3 menu_style" id="menu-content" style="z-index:1000;height:765px;position:fixed;overflow: auto;top:0;margin-left:-1200px;background:#242424f0;">
         <a href="#" class="bg-transparent black-text float-right" id="menu-close-btn">
             <img src="{{ asset('img/Group826.png') }}" class="w-75" />
         </a>
         <div class="text-center">
             <img src="{{ asset('img/logo.png') }}" />
         </div>
-        <div class="text-left pr-2 pl-3 mt-4">
+        <div class="text-left pr-2 pl-3 mt-4 menu_bar_style">
             <a href="{{ route('admin.transaction') }}" class="text-left">
                 <img src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline">Transactions</h4>
             </a>

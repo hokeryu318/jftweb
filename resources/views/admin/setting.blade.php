@@ -15,23 +15,25 @@
         <div class="pt-4">
             <div class="row">
                 <div class="col-3 pl-0">
-                    <h5 class="black-text font-weight-bold pl-5 mb-2">Settings</h5>
-                    <ul class="col-lg-12 pl-0 w-100 pt-4" style="list-style-type:none">
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.kitchen') }}"><a style="color:white" class="anchor-white" href="#">Kitchen Groups</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.timeslots') }}"><a style="color:white" href="#">Time Slots</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.htimeslots') }}"><a style="color:white" href="#">Holiday Time Slots</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.customer') }}"><a style="color:white" href="#">New Customer</a></li>
-                    </ul>
-                    <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.gst') }}"><a style="color:white" href="#">GST</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.payment') }}"><a style="color:white" href="#">Payment Methods</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.receipt') }}"><a style="color:white" href="#">Receipt</a></li>
-                    </ul>
-                    <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.badge') }}"><a style="color:white" href="#">Badges</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.language') }}"><a style="color:white" href="#">Multilingual</a></li>
-                        <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.password') }}"><a style="color:white" href="#">Passwords</a></li>
-                    </ul>
+                    <h5 class="blacditext font-weight-bold pl-5 mb-2">Settings</h5>
+                    <div class="setting_menu">
+                        <ul class="col-lg-12 pl-0 w-100 pt-4" style="list-style-type:none">
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.kitchen') }}"><a style="color:white" class="anchor-white" href="#">Kitchen Groups</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.timeslots') }}"><a style="color:white" href="#">Time Slots</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.htimeslots') }}"><a style="color:white" href="#">Holiday Time Slots</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.customer') }}"><a style="color:white" href="#">New Customer</a></li>
+                        </ul>
+                        <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.gst') }}"><a style="color:white" href="#">GST</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.payment') }}"><a style="color:white" href="#">Payment Methods</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.receipt') }}"><a style="color:white" href="#">Receipt</a></li>
+                        </ul>
+                        <ul class="col-lg-12 pl-0 w-100 mt-5" style="list-style-type:none">
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.badge') }}"><a style="color:white" href="#">Badges</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.language') }}"><a style="color:white" href="#">Multilingual</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.password') }}"><a style="color:white" href="#">Passwords</a></li>
+                        </ul>
+                    </div>
                 </div>
                 @yield('setting')
             </div>

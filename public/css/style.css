@@ -1250,3 +1250,24 @@ font-size:110%;
     display: block;
     width: 1024px;
 }
+.review_content{
+    padding: 0px 40px 40px 40px;
+}
+.setting_menu{
+
+}
+.holiday_form{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 600px;
+}
+.close-btn-review{
+    margin: 10px;
+}
+.category_content{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.menu_style::-webkit-scrollbar {
+    display: none;
+}

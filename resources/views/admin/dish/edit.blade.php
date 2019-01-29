@@ -128,7 +128,7 @@
                         </select>
                         <button class="btndeletebehind mt-2" type="button" onclick="onDeleteOption(this)">Delete</button>
                     </div>
-                    <div class="row">
+                    <div class="row category_content">
                         <div class="col-6">
                             <div class="form-group">
                                 <div class="row">
@@ -183,7 +183,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                  <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <div>
