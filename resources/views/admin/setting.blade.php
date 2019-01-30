@@ -7,7 +7,7 @@
     <div style="padding-top:5%;" class="pt">
     </div>
     <div class="pr-3 pl-3 pbb hh bg-light position-relative">
-        <a href="#" class="bg-transparent" style="position:absolute;top:15px ;right:10px">
+        <a href="{{route('admin.home')}}" class="bg-transparent" style="position:absolute;top:15px ;right:10px">
             <h2><span class="">
                 <img src="{{ asset('img/Group1100.png') }}" height="18" class="float-right" width="20" />
             </span></h2>

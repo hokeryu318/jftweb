@@ -9,11 +9,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 </head>
 <style>
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -46,7 +46,7 @@
         <div class="container pt-5">
             <div class="row pt-5 mt">
                 <div class="col-4 pt-5">
-                    <img class="img-fluid mt-auto mb-auto" src="img/logo.png" />
+                    <img class="img-fluid mt-auto mb-auto" src="{{asset('img/logo.png')}}" />
                 </div>
                 <div class="col-8 pt-5">
                     <div class="row">
@@ -105,11 +105,11 @@
     </div>
 </div>
 </form>
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 </body>

@@ -25,29 +25,29 @@
             </div>
             <div class="col-8 room-content">
                 <div class="room-div">
-                    @foreach($table_arr as $key => $tables)
-                        <div class="table-common" id="selected-{{$key}}" onclick="selectObject('{{$key}}', '{{$tables["type"]}}')" style="margin: {{$tables['y']*20}}px 10px 10px {{$tables['x']*20}}px;">
-                            @if($tables["type"] == "A")
+                    @foreach($tables as $key => $table)
+                        <div class="table-common" id="selected-{{$key}}" onclick="selectObject('{{$table["id"]}}', '{{$table["type"]}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            @if($table["type"] == 1){{--A--}}
                                 <div class="white table-a-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$tables["name"]}}</h5>
+                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
                                 </div>
-                            @elseif($tables["type"] == "B")
+                            @elseif($table["type"] == 2){{--B--}}
                                 <div class="chair-b-style chair-top-style"></div>
                                 <div class="white table-b-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$tables["name"]}}</h5>
+                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
                                 </div>
                                 <div class="chair-b-style chair-bottom-style"></div>
-                            @elseif($tables["type"] == "C")
+                            @elseif($table["type"] == 3){{--C--}}
                                 <div class="chair-c-style chair-top-style"></div>
                                 <div class="chair-top-style"></div>
                                 <div class="white table-c-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$tables["name"]}}</h5>
+                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
                                 </div>
                                 <div class="chair-c-style chair-bottom-style"></div>
                                 <div class="chair-bottom-style"></div>
-                            @elseif($tables["type"] == "line")
+                            @elseif($table["type"] == 4){{--Line--}}
                                 <div class="text-center line-style"
-                                     @if($tables['aroma'] == "r")
+                                     @if($table['index'] == "1"){{--right--}}
                                      style="padding-right: 200px;"
                                      @else
                                      style="padding-bottom: 200px;"
@@ -104,6 +104,7 @@
     </div>
     <form method="POST" action="{{ route('admin.table.store') }}" id="save-form" enctype='multipart/form-data'>
         <input type="hidden" name="saved_arr" id="saved-arr">
+        <input type="hidden" name="id" id="selected-id" value="0">
         @csrf
     </form>
     <input type="hidden" id="saved-width">
@@ -119,19 +120,19 @@
                 <div class="row mt-4">
                     <div class="col-4">
                         <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-a-checked" name="table" checked onclick="showTable('A')">
+                            <input type="radio" class="form-check-input rdobtn" id="table-a-checked" name="table" checked onclick="showTable(1)">
                             <label class="form-check-label text-blue txtdemibold" for="table-a-checked">A</label>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-b-checked" name="table" onclick="showTable('B')">
+                            <input type="radio" class="form-check-input rdobtn" id="table-b-checked" name="table" onclick="showTable(2)">
                             <label class="form-check-label text-blue txtdemibold" for="table-b-checked">B</label>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-c-checked" name="table" onclick="showTable('C')">
+                            <input type="radio" class="form-check-input rdobtn" id="table-c-checked" name="table" onclick="showTable(3)">
                             <label class="form-check-label text-blue txtdemibold" for="table-c-checked">C</label>
                         </div>
                     </div>
@@ -143,7 +144,7 @@
                 </div>
                 <div style="text-align: center;margin-bottom:15px;">
                     <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" id="add-table-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addTable('A')">OK &gt;</button>
+                    <button type="button" id="add-table-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addTable(1)">OK &gt;</button>
                 </div>
             </div>
         </div>
@@ -160,13 +161,13 @@
                 <div class="row mt-4">
                     <div class="col-4">
                         <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="line-r-checked" name="line" checked onclick="showLine('r')">
+                            <input type="radio" class="form-check-input rdobtn" id="line-r-checked" name="line" checked onclick="showLine(1)">
                             <label class="form-check-label text-blue txtdemibold" for="line-r-checked">Line Right</label>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="line-b-checked" name="line" onclick="showLine('b')">
+                            <input type="radio" class="form-check-input rdobtn" id="line-b-checked" name="line" onclick="showLine(2)">
                             <label class="form-check-label text-blue txtdemibold" for="line-b-checked">Line Bottom</label>
                         </div>
                     </div>
@@ -177,7 +178,7 @@
                 </div>
                 <div style="text-align: center;margin-bottom:15px;">
                     <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" id="add-line-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addLine('r')">OK &gt;</button>
+                    <button type="button" id="add-line-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addLine(1)">OK &gt;</button>
                 </div>
             </div>
         </div>
@@ -210,13 +211,13 @@
         </div>
     </div>
     {{--clone A table--}}
-    <div class="table-common display-none" id="clone-A">
+    <div class="table-common display-none" id="clone-1">
         <div class="white table-a-style text-center">
             <h5 class="font-weight-bold blue-text">A-0</h5>
         </div>
     </div>
     {{--clone B table--}}
-    <div class="table-common display-none" id="clone-B">
+    <div class="table-common display-none" id="clone-2">
         <div class="chair-b-style chair-top-style"></div>
         <div class="white table-b-style text-center">
             <h5 class="font-weight-bold blue-text">B-0</h5>
@@ -224,7 +225,7 @@
         <div class="chair-b-style chair-bottom-style"></div>
     </div>
     {{--clone C table--}}
-    <div class="table-common display-none" id="clone-C">
+    <div class="table-common display-none" id="clone-3">
         <div class="chair-c-style chair-top-style"></div>
         <div class="chair-top-style"></div>
         <div class="white table-c-style text-center">
@@ -234,17 +235,19 @@
         <div class="chair-bottom-style"></div>
     </div>
     {{--clone line right--}}
-    <div class="table-common display-none" id="clone-line-r">
+    <div class="table-common display-none" id="clone-line-1">
         <div class="text-center clone-line-style" style="padding-right: 200px;">
         </div>
     </div>
     {{--clone line bottom--}}
-    <div class="table-common display-none" id="clone-line-b">
+    <div class="table-common display-none" id="clone-line-2">
         <div class="text-center clone-line-style" style="padding-bottom: 200px;">
         </div>
     </div>
     <script>
-        var tables_arr = <?php echo json_encode($table_arr); ?>;
+        var tables_arr = <?php echo json_encode($tables); ?>;
+        var new_id = <?php echo $new_id; ?>;
+        var table_type_arr = ["A", "B", "C", "Line"];
         var selected_arr = "";
         var tmp_selected_arr = "";
         var selected_type = "";
@@ -264,13 +267,13 @@
             $(".table-sample").css("display", "none");
             $("#add-table-btn").attr("onclick", "addTable('"+type+"')");
             switch(type){
-                case "A":
+                case 1:
                     $("#table-sample-a").css("display", "block");
                     break;
-                case "B":
+                case 2:
                     $("#table-sample-b").css("display", "block");
                     break;
-                case "C":
+                case 3:
                     $("#table-sample-c").css("display", "block");
                     break;
             }
@@ -280,12 +283,13 @@
         {
             var cloneTable = $("#clone-"+type).clone();
             $(cloneTable).css("display", "block");
-            var new_table_array = {'x':0, 'y':0, 'type':type, 'name':type+'-0'};
-            tables_arr.push(new_table_array);
-            var index = tables_arr.length - 1;
-            $(cloneTable).attr("onclick", "selectObject('"+index+"', 'table')");
-            $(cloneTable).attr("id", "selected-"+index);
+            var id = new_id;
+            new_id ++;
+            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type':type, 'index':0};
+            $(cloneTable).attr("onclick", "selectObject('"+id+"', 'table')");
+            $(cloneTable).attr("id", "selected-"+id);
             $(".room-div").append(cloneTable);
+            selectObject(id, type);
             $("#add-new-table-modal").modal('toggle');
         }
 
@@ -294,10 +298,10 @@
             $(".line-sample").css("display", "none");
             $("#add-line-btn").attr("onclick", "addLine('"+type+"')");
             switch(type){
-                case "r":
+                case 1://Right
                     $("#line-sample-r").css("display", "block");
                     break;
-                case "b":
+                case 2://Bottom
                     $("#line-sample-b").css("display", "block");
                     break;
             }
@@ -307,12 +311,13 @@
         {
             var cloneLine = $("#clone-line-"+type).clone();
             $(cloneLine).css("display", "block");
-            var new_line_array = {'x':0, 'y':0, 'type':'line', 'aroma':type};
-            tables_arr.push(new_line_array);
-            var index = tables_arr.length - 1;
-            $(cloneLine).attr("onclick", "selectObject('"+index+"', 'line')");
-            $(cloneLine).attr("id", "selected-"+index);
+            var id = new_id;
+            new_id ++;
+            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type':4, 'index':type};
+            $(cloneLine).attr("onclick", "selectObject('"+id+"', 'line')");
+            $(cloneLine).attr("id", "selected-"+id);
             $(".room-div").append(cloneLine);
+            selectObject(id, type);
             $("#add-new-line-modal").modal('toggle');
         }
 
@@ -320,18 +325,20 @@
         {
             selected_arr = new Object(tables_arr[index]);
             var selected_name = "";
-            var selected_value = 0;
             var selected_value_obj = $("#selected-value-content");
             tmp_selected_arr = selected_arr;
             selected_type = type;
             selected_value_obj.css("display", "block");
             selected_index = index;
             $(".table-common").css("z-index",0);
+            $(".table-common h5").removeClass("blue-text");
+            $(".table-common h5").addClass("grey-text");
             $("#selected-"+selected_index).css("z-index", 1);
-            if(type != "line"){
-                selected_name = selected_arr.name;
-                selected_value = selected_name.split('-')[1];
-                $("#selected-value").val(selected_value);
+            $("#selected-"+selected_index+" h5").removeClass("grey-text");
+            $("#selected-"+selected_index+" h5").addClass("blue-text");
+            if(type != 4){//"line"
+                selected_name = table_type_arr[selected_arr.type-1]+"-"+selected_arr.index;
+                $("#selected-value").val(selected_arr.index);
                 $("#delete-selected-obj")[0].innerHTML = "DELETE THIS TABLE &gt;";
             }else{
                 selected_name = "Line";
@@ -349,9 +356,9 @@
                 alert("Please select the table or line!");
                 return;
             }
-            if(selected_type != "line"){
-                var selected_value = tmp_selected_arr.name.split('-')[1];
-                var selected_table_type = tmp_selected_arr.name.split('-')[0];
+            if(selected_type != 4){//"line"
+                var selected_value = tmp_selected_arr.index;
+                var selected_table_type = table_type_arr[tmp_selected_arr.type-1];
             }
             var coordinate_x = tmp_selected_arr.x;
             var coordinate_y = tmp_selected_arr.y;
@@ -367,9 +374,9 @@
                             selected_value --;
                         }
                     }
-                    tmp_selected_arr.name = selected_table_type+"-"+selected_value;
-                    $("#selected-name")[0].innerText = tmp_selected_arr.name;
-                    $("#selected-"+selected_index+" h5")[0].innerText = tmp_selected_arr.name;
+                    tmp_selected_arr.index = selected_value;
+                    $("#selected-name")[0].innerText = selected_table_type + "-" + selected_value;
+                    $("#selected-"+selected_index+" h5")[0].innerText = selected_table_type + "-" + selected_value;
                     $("#selected-value").val(selected_value);
                     break;
                 case "coordinate-x":
@@ -444,12 +451,12 @@
                 return;
             }
             var selected_value = $("#selected-value").val();
-            if(selected_type != "line"){
-                var selected_table_type = tmp_selected_arr.name.split('-')[0];
+            if(selected_type != 4){//"line"
+                var selected_table_type = table_type_arr[tmp_selected_arr.type - 1];
             }
-            tmp_selected_arr.name = selected_table_type+"-"+selected_value;
-            $("#selected-name")[0].innerText = tmp_selected_arr.name;
-            $("#selected-"+selected_index+" h5")[0].innerText = tmp_selected_arr.name;
+            tmp_selected_arr.index = selected_value;
+            $("#selected-name")[0].innerText = selected_table_type+"-"+selected_value;
+            $("#selected-"+selected_index+" h5")[0].innerText = selected_table_type+"-"+selected_value;
         });
 
         $("#selected-x").keyup(function(){
@@ -501,18 +508,10 @@
                 alert("Please select the table or line!");
                 return;
             }
-            var selectedObj = $("#selected-"+selected_index);
-            selectedObj.remove();
-            var tmp_obj = new Object();
-            for(var i = 0; i < tables_arr.length; i ++){
-                if(i != selected_index){
-                    tmp_obj[i] = tables_arr[i];
-                }
-            }
-            var form = $("#save-form");
-            var saved_arr = JSON.stringify(tmp_obj);
+            var saved_arr = JSON.stringify(tables_arr);
             $("#saved-arr").val(saved_arr);
-            form.submit();
+            $("#selected-id").val(selected_index);
+            $("#save-form").submit();
         });
 
         $("#change-room-size").click(function() {
