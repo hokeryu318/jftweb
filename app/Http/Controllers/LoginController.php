@@ -25,7 +25,7 @@ class LoginController extends Controller
             }
             if(Hash::check($password, $user->password)){
                 session(['role' => $name]);
-                return redirect(route('admin.home'));
+                return redirect(route('reception.seated'));
             } else {
                 return redirect(route('loginform'));
             }

@@ -1271,3 +1271,136 @@ font-size:110%;
 .menu_style::-webkit-scrollbar {
     display: none;
 }
+
+.table_detail{
+    position: absolute;
+    right: 0px;
+    top: 85px;
+}
+.new_customer_btn{
+    margin-top: 0.5em;
+    background-color: #222222;
+    color: white;
+    border: none;
+    width: 88%;
+    font-weight: bold;
+    font-size: 1.5em;
+    height: 2em;
+    margin-left: 15px;
+}
+.tab_activate{
+    border: 8px solid red;
+    margin-top: 5px;
+}
+.table_name{
+    position: relative;
+    border: 1px solid black;
+    width: 65px;
+    height: 65px;
+    background: black;
+    color: white;
+}
+.corner{
+    position: absolute;
+    top: -10px;
+    right: -5px;
+}
+.res-table{
+    margin-left: 10px !important;
+}
+.customer_name{
+    width: 100px;
+    overflow-wrap: break-word;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.alarm{
+    width: 20px;
+    height: 20px;
+}
+.table_seated_list{
+    margin-left: 15px;
+}
+.bg-dark-grey{
+    background: darkgrey;
+}
+.tab-header{
+    margin-bottom: 10px;
+}
+.top-menu-btn{
+    width: 130px;
+    background: lightgrey;
+}
+.top-menu-active{
+    background-color: white !important;
+}
+.uldesign{
+    padding-top: 8px;
+    padding-left: 8px;
+    height: 70px;
+}
+.time_menu{
+    margin-top: 5px;
+}
+.group_menu{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.table_menu{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.name_menu{
+    margin-bottom: 4px;
+}
+.date_content_title{
+    color: #1ec2c9;
+}
+.time_content_title{
+    color: #1ec2c9;
+    border-bottom: 2px solid #1ec2c9;
+    padding-bottom: 12px;
+}
+#delay-minutes-picker{
+    position: relative;
+    height: 100px;
+    overflow: auto;
+    margin-top: 30px;
+}
+.selected_minutes_cover{
+    position: fixed;
+    border-top: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+    height: 43px;
+    width: 27%;
+}
+.minutes_cell{
+    font-size: 20px;
+    height: 40px;
+}
+.border-guest-input{
+    text-align: center;
+    border: 2px solid #1ec2c9 !important;
+}
+.number-btn {
+    width: 80px;
+    height: 80px;
+}
+.font-20{
+    font-size: 25px;
+}
+.room-content-table{
+    overflow: auto;
+    height: 435px;
+    display: block;
+    width: 1024px;
+}
+.table-tab-content{
+    width: 920px;
+}
+.exit_full_screen{
+    width: 230px;
+    background: #868585;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
