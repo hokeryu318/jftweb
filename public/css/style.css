@@ -1118,15 +1118,30 @@ font-size:110%;
     height:100px;
     border:2px solid grey;
 }
+.table-a-style-disable{
+    width: 70px;
+    height:100px;
+    border:2px solid lightgrey;
+}
 .table-b-style{
     width: 80px;
     height:100px;
     border:2px solid grey;
 }
+.table-b-style-disable{
+    width: 80px;
+    height:100px;
+    border:2px solid lightgrey;
+}
 .table-c-style{
     width: 100px;
     height:100px;
     border:2px solid grey;
+}
+.table-c-style-disable{
+    width: 100px;
+    height:100px;
+    border:2px solid lightgrey;
 }
 .table-common{
     position: absolute;
@@ -1151,11 +1166,27 @@ font-size:110%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+.chair-top-style-disable{
+    width: 45px;
+    height: 15px;
+    border: 1px solid lightgrey;
+    background: lightgrey;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 .chair-bottom-style{
     width: 45px;
     height: 15px;
     border: 1px solid grey;
     background: grey;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.chair-bottom-style-disable{
+    width: 45px;
+    height: 15px;
+    border: 1px solid lightgrey;
+    background: lightgrey;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -1403,4 +1434,17 @@ font-size:110%;
     background: #868585;
     margin-bottom: 15px;
     margin-left: 15px;
+}
+.bg-selected{
+    background-color: yellow !important;
+}
+.table_a_red_plus{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+.table_bc_red_plus{
+    position: absolute;
+    top: 0px;
+    right: -10px;
 }

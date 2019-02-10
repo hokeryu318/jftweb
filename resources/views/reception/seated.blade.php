@@ -23,36 +23,87 @@
         </div>
         <div class="col-7 room-content">
             <div class="room-div">
-                @foreach($tables as $key => $table)
-                    <div class="table-common" id="selected-{{$key}}" onclick="selectObject('{{$table["id"]}}', '{{$table["type"]}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
-                        @if($table["type"] == 1){{--A--}}
-                            <div class="white table-a-style text-center">
-                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
-                            </div>
-                        @elseif($table["type"] == 2){{--B--}}
-                            <div class="chair-b-style chair-top-style"></div>
-                            <div class="white table-b-style text-center">
-                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
-                            </div>
-                            <div class="chair-b-style chair-bottom-style"></div>
-                        @elseif($table["type"] == 3){{--C--}}
-                            <div class="chair-c-style chair-top-style"></div>
-                            <div class="chair-top-style"></div>
-                            <div class="white table-c-style text-center">
-                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
-                            </div>
-                            <div class="chair-c-style chair-bottom-style"></div>
-                            <div class="chair-bottom-style"></div>
-                        @elseif($table["type"] == 4){{--Line--}}
+                @foreach($table_obj as $key => $table)
+                    @if(count($table->order) > 0)
+                        <div class="table-common" onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, 'order_id' => $table->order[0]->id ]) }}'" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            @if($table->type == 1){{--A--}}
+                                <div class="white table-a-style text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                        <br>{{$table->order[0]->guest}}
+                                    </a>
+                                </div>
+                            @elseif($table->type == 2){{--B--}}
+                                <div class="chair-b-style chair-top-style"></div>
+                                <div class="white table-b-style text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                        <br>{{$table->order[0]->guest}}
+                                    </a>
+                                </div>
+                                <div class="chair-b-style chair-bottom-style"></div>
+                            @elseif($table->type == 3){{--C--}}
+                                <div class="chair-c-style chair-top-style"></div>
+                                <div class="chair-top-style"></div>
+                                <div class="white table-c-style text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                        <br>{{$table->order[0]->guest}}
+                                    </a>
+                                </div>
+                                <div class="chair-c-style chair-bottom-style"></div>
+                                <div class="chair-bottom-style"></div>
+                            @endif
+                        </div>
+                    @else
+                        <div class="table-common" id="selected-{{$key}}" onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, 'order_id' => 0 ]) }}'" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            @if($table->type == 1){{--A--}}
+                                <div class="white table-a-style-disable text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                </div>
+                            @elseif($table->type == 2){{--B--}}
+                                <div class="chair-b-style chair-top-style-disable"></div>
+                                <div class="white table-b-style-disable text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                </div>
+                                <div class="chair-b-style chair-bottom-style-disable"></div>
+                            @elseif($table->type == 3){{--C--}}
+                                <div class="chair-c-style chair-top-style-disable"></div>
+                                <div class="chair-top-style-disable"></div>
+                                <div class="white table-c-style-disable text-center">
+                                    @if(in_array($table->id, $order_tables))
+                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                    @endif
+                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                </div>
+                                <div class="chair-c-style chair-bottom-style-disable"></div>
+                                <div class="chair-bottom-style-disable"></div>
+                            @endif
+                        </div>
+                    @endif
+                    @if($table->type == 4){{--Line--}}
+                        <div class="table-common" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                             <div class="text-center line-style"
-                                 @if($table['index'] == "1"){{--right--}}
+                                 @if($table->index == "1"){{--right--}}
                                  style="padding-right: 200px;"
                                  @else
                                  style="padding-bottom: 200px;"
                                     @endif>
                             </div>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -259,7 +310,7 @@
             </div>
         </div>
         <div class="row">
-            <a href="{{route('reception.addCustomer')}}" class="new_customer_btn white-text text-center pt-3 pb-5">New Customer <span class="ml-4">&gt;</span> </a>
+            <a href="{{ route("reception.addCustomer", [ "table_id" => 0, 'order_id' => 0 ]) }}" class="new_customer_btn white-text text-center pt-3 pb-5">New Customer <span class="ml-4">&gt;</span> </a>
         </div>
     </div>
 </div>

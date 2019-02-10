@@ -30,7 +30,7 @@
             /*visibility: visible;*/
         }
     </style>
-    <form method="POST" action="{{ route('reception.store') }}">
+    <form method="POST" id="save-customer" action="{{ route('reception.store') }}">
     @csrf
         <div class="p-4 mt-5">
         <div class="container-fluid pb-3 position-relative">
@@ -60,7 +60,7 @@
                     <li class="top-menu-btn font-weight-bold">
                         <div class="text-center-btn table_menu">
                             <a id="name-tab" class="black-text" onclick="changeTab('name');">
-                                <div class="text-center time_menu">Ms Jenifer Lo</div>
+                                <div class="text-center time_menu" id="name-tab-div">@if($order_id > 0) {{$order_get->customer_name}}@else Walked-in {{$table_id}} @endif</div>
                             </a>
                         </div>
                     </li>
@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <h3 class="date_content_title">TODAY</h3>
-                                <div id="datetimepicker12" class="w-100">
+                                <div id="calendar-picker" class="w-100">
                                 </div>
                             </div>
                             <div class="col-4 ">
@@ -89,20 +89,20 @@
                             </div>
                             <div class="col-4">
                                 <h3 class="time_content_title">30 min</h3>
-                                <select>
-                                    <option>Takeaway</option>
-                                    <option>30 min</option>
-                                    <option>60 min</option>
-                                    <option>90 min</option>
-                                    <option>120 min</option>
-                                    <option>Unlimited</option>
+                                <select id="duration-select">
+                                    <option value="1">Takeaway</option>
+                                    <option value="2">30 min</option>
+                                    <option value="3">60 min</option>
+                                    <option value="4">90 min</option>
+                                    <option value="5">120 min</option>
+                                    <option value="6">Unlimited</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div id="menu1" class="tab-detail display-none"><br>
                         <div class="offset-2 col-lg-8 col-xl-8 pl-0 ">
-                            <input value="0" id="guest-number" class="font-20 font-weight-bold form-control d-inline mr-4 border-guest-input text-center" style="width:36%;" name="guest_number"/>
+                            <input value="@if($order_id > 0) {{$order_get->guest}} @else 0 @endif" id="guest-number" class="font-20 font-weight-bold form-control d-inline mr-4 border-guest-input text-center" style="width:36%;" name="guest_number"/>
                             <span class="h3 text-info" style="padding-top:10px;">GUEST</span><br>
                             <button type="button" class="number-btn blackgrey border-0 pr-4 pl-4 fs-5 white-text mr-lg-0 mr-xl-3" onclick="onNumber(7)">7</button>
                             <button type="button" class="number-btn blackgrey border-0 pr-4 pl-4 fs-5 white-text mr-lg-0 mr-xl-3" onclick="onNumber(8)">8</button>
@@ -142,36 +142,87 @@
                             </div>
                             <div class="col-10 room-content-table">
                                 <div class="room-div">
-                                    @foreach($tables as $key => $table)
-                                        <div class="table-common" id="selected-{{$key}}" onclick="selectObject('{{$table["id"]}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
-                                            @if($table["type"] == 1){{--A--}}
-                                            <div class="white table-a-style text-center">
-                                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
+                                    @foreach($table_obj as $table)
+                                        @if(count($table->order) > 0)
+                                            <div class="table-common" id="selected-{{$table->id}}" onclick="selectObject('{{$table->id}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                                                @if($table->type == 1){{--A--}}
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-a-style text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                                        <br>{{$table->order[0]->guest}}
+                                                    </a>
+                                                </div>
+                                                @elseif($table->type == 2){{--B--}}
+                                                <div class="chair-b-style chair-top-style"></div>
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-b-style text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                                        <br>{{$table->order[0]->guest}}
+                                                    </a>
+                                                </div>
+                                                <div class="chair-b-style chair-bottom-style"></div>
+                                                @elseif($table->type == 3){{--C--}}
+                                                <div class="chair-c-style chair-top-style"></div>
+                                                <div class="chair-top-style"></div>
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-c-style text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
+                                                        <br>{{$table->order[0]->guest}}
+                                                    </a>
+                                                </div>
+                                                <div class="chair-c-style chair-bottom-style"></div>
+                                                <div class="chair-bottom-style"></div>
+                                                @endif
                                             </div>
-                                            @elseif($table["type"] == 2){{--B--}}
-                                            <div class="chair-b-style chair-top-style"></div>
-                                            <div class="white table-b-style text-center">
-                                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
+                                        @else
+                                            <div class="table-common" id="selected-{{$table->id}}" onclick="selectObject('{{$table->id}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                                                @if($table->type == 1){{--A--}}
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-a-style-disable text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                                </div>
+                                                @elseif($table->type == 2){{--B--}}
+                                                <div class="chair-b-style chair-top-style-disable"></div>
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-b-style-disable text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                                </div>
+                                                <div class="chair-b-style chair-bottom-style-disable"></div>
+                                                @elseif($table->type == 3){{--C--}}
+                                                <div class="chair-c-style chair-top-style-disable"></div>
+                                                <div class="chair-top-style-disable"></div>
+                                                <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-c-style-disable text-center">
+                                                    @if(in_array($table->id, $order_tables))
+                                                        <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
+                                                    @endif
+                                                    <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
+                                                </div>
+                                                <div class="chair-c-style chair-bottom-style-disable"></div>
+                                                <div class="chair-bottom-style-disable"></div>
+                                                @endif
                                             </div>
-                                            <div class="chair-b-style chair-bottom-style"></div>
-                                            @elseif($table["type"] == 3){{--C--}}
-                                            <div class="chair-c-style chair-top-style"></div>
-                                            <div class="chair-top-style"></div>
-                                            <div class="white table-c-style text-center">
-                                                <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
-                                            </div>
-                                            <div class="chair-c-style chair-bottom-style"></div>
-                                            <div class="chair-bottom-style"></div>
-                                            @elseif($table["type"] == 4){{--Line--}}
+                                        @endif
+                                        @if($table->type == 4){{--Line--}}
+                                        <div class="table-common" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                                             <div class="text-center line-style"
-                                                 @if($table['index'] == "1"){{--right--}}
+                                                 @if($table->index == "1"){{--right--}}
                                                  style="padding-right: 200px;"
                                                  @else
                                                  style="padding-bottom: 200px;"
                                                     @endif>
                                             </div>
-                                            @endif
                                         </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -180,26 +231,26 @@
                     <div id="menu3" class="container display-none tab-detail"><br>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">CUSTOMER NAME</h6>
-                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="" name="customer_name" id="customer-name"/>
+                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="@if($order_id > 0) {{$order_get->customer_name}}@else Walked-in {{$table_id}} @endif" name="customer_name" id="customer-name"/>
                         </div>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">CONTACT NUMBER</h6>
-                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="" name="contact_number" id="contact-number"/>
+                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="@if($order_id > 0) {{$order_get->contact_number}}@endif" name="contact_number" id="contact-number"/>
                         </div>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">EMAIL ADDRESS</h6>
-                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="" name="email_address" id="email-address"/>
+                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="@if($order_id > 0) {{$order_get->email_address}}@endif" name="email_address" id="email-address"/>
                         </div>
                     </div>
                     <div id="menu4" class="container display-none tab-detail"><br>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">CUSTOMER NOTES</h6>
-                            <textarea style="border:1px solid grey;border-radius:5px;height: 145px;" class="white pl-2 w-100 pt-1 pb-1" name="customer_notes" id="customer-notes"></textarea>
+                            <textarea style="border:1px solid grey;border-radius:5px;height: 145px;" class="white pl-2 w-100 pt-1 pb-1" name="customer_notes" id="customer-notes">@if($order_id > 0) {{$order_get->customer_notes}}@endif</textarea>
                         </div>
                     </div>
                     <div class="row text-right mm" >
                         <div class="offset-2 col-10">
-                            <button id="seat-btn" class="btn black" disabled><h4 class="mb-0 font-weight-bold">SEAT &gt;</h4></button>
+                            <button type="button" id="seat-btn" onclick="nextTab('group')" class="btn black"><h4 class="mb-0 font-weight-bold">SEAT &gt;</h4></button>
                         </div>
                     </div>
                 </div>
@@ -208,10 +259,13 @@
     </div>
         <input type="hidden" name="time" id="selected-time" value="{{date('Y-m-d H:i:s')}}">
         <input type="hidden" name="duration" id="selected-duration">
-        <input type="hidden" name="table_id" id="selected-table">
+        <input type="hidden" name="table_id" id="selected-table" value="{{$table_id}}">
+        <input type="hidden" name="order_id" id="selected-table" value="{{$order_id}}">
     </form>
     <input id="saved-width" type="hidden">
+    <script src="{{ asset('js/bootstrap-timepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.ios.picker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
     <script>
         var data_arr = [
             '12:00<span style="margin-left: 100px;">AM</span>','01:00<span style="margin-left: 100px;">AM</span>','02:00<span style="margin-left: 100px;">AM</span>',
@@ -223,45 +277,60 @@
             '06:00<span style="margin-left: 100px;">PM</span>','07:00<span style="margin-left: 100px;">PM</span>','08:00<span style="margin-left: 100px;">PM</span>',
             '09:00<span style="margin-left: 100px;">PM</span>','10:00<span style="margin-left: 100px;">PM</span>','11:00<span style="margin-left: 100px;">PM</span>'
         ];
-
         var date_minutes = ["Takeaway", "30 min", "60 min", "90 min", "120 min", "Unlimited"];
+        $('#calendar-picker').datetimepicker({
+            inline: true,
+            sideBySide: true,
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            minView: 2,
+            forceParse: 0
+        });
         $('#now-time-picker').picker({
             data: data_arr,
             lineHeight: 45,
-            selected: '3'
+            selected: '{{date("H")}}'
         },
         function(s){
             $(".output").html(s);
         });
 
         function changeTab(arg){
+            if(arg == "name" || arg == "notes"){
+                if($("#selected-table").val() == 0){
+                    alert("Please select the table");
+                    return;
+                }
+            }
             $(".top-menu-btn").removeClass('top-menu-active');
             $(".tab-detail").css('display', 'none');
-            if(arg == 'home'){
-                $("#seat-btn").prop('disabled', true);
-            }else{
-                $("#seat-btn").prop('disabled', false);
-            }
+            var seat_btn_obj = $("#seat-btn");
             switch (arg){
                 case 'home':
                     $("#home").css('display', 'block');
                     $("#now-tab").parent().parent().addClass('top-menu-active');
+                    seat_btn_obj.attr("onclick", "nextTab('group')");
                     break;
                 case 'group':
                     $("#menu1").css('display', 'block');
                     $("#group-tab").parent().parent().addClass('top-menu-active');
+                    seat_btn_obj.attr("onclick", "nextTab('table')");
                     break;
                 case 'table':
                     $("#menu2").css('display', 'block');
                     $("#table-tab").parent().parent().addClass('top-menu-active');
+                    seat_btn_obj.attr("onclick", "nextTab('name')");
                     break;
                 case 'name':
                     $("#menu3").css('display', 'block');
                     $("#name-tab").parent().parent().addClass('top-menu-active');
+                    seat_btn_obj.attr("onclick", "nextTab('notes')");
                     break;
                 case 'notes':
                     $("#menu4").css('display', 'block');
                     $("#notes-tab").parent().parent().addClass('top-menu-active');
+                    seat_btn_obj.attr("onclick", "nextTab('submit')");
                     break;
             }
         }
@@ -349,7 +418,50 @@
         }
 
         function selectObject(selected_id){
-            $("#selected-table").val(selected_id);
+            var table_obj = $("#selected-table");
+            $("#selected-"+selected_id+" .table-area").toggleClass("bg-selected");
+            var selected_ids = table_obj.val();
+            var selected_table_id = "";
+            if(selected_ids == 0){
+                selected_table_id = selected_id;
+            }else{
+                var selected_ids_arr = selected_ids.split(",");
+                for(var i = 0; i < selected_ids_arr.length; i ++){
+                    if(selected_ids_arr[i] != selected_id){
+                        if(selected_table_id == ""){
+                            selected_table_id = selected_ids_arr[i];
+                        }else{
+                            selected_table_id += "," + selected_ids_arr[i];
+                        }
+                    }
+                }
+            }
+            table_obj.val(selected_table_id);
         }
+
+        function nextTab(arg){
+            if(arg != 'submit'){
+                changeTab(arg);
+            }else{
+                if($("#selected-table").val() == 0){
+                    alert("Please select the table");
+                    return;
+                }
+                var selected_date = $('#calendar-picker').data().date;
+                if(selected_date == undefined){
+                    selected_date = "{{date('Y-m-d')}}";
+                }else{
+                    selected_date = $('#calendar-picker').data().date.slice(0, -6);
+                }
+                var time_selected = $(".output").html();
+                $("#selected-duration").val($("#duration-select").val());
+                $("#selected-time").val(selected_date+ " " + time_selected + ":00:00");
+                $("#save-customer").submit();
+            }
+        }
+
+        $("#customer-name").keyup(function() {
+            $("#name-tab-div").html($("#customer-name").val());
+        });
     </script>
 @endsection

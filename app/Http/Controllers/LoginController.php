@@ -18,17 +18,20 @@ class LoginController extends Controller
     public function postLogin(Request $request){
         $name = $request->role;
         $password = $request->password;
-        if($request->role = "reception"){
-            $user = Role::where('name', '=', $name)->first();
-            if(!isset($user)){
-                return redirect(route('loginform'));
-            }
-            if(Hash::check($password, $user->password)){
-                session(['role' => $name]);
+        $user = Role::where('name', '=', $name)->first();
+        if(!isset($user)){
+            return redirect(route('loginform'));
+        }
+        if(Hash::check($password, $user->password)){
+            session(['role' => $name]);
+            if($request->role == "reception") {
                 return redirect(route('reception.seated'));
-            } else {
-                return redirect(route('loginform'));
             }
+            if($request->role = "menu"){
+                return redirect(route('customer.index'));
+            }
+        } else {
+            return redirect(route('loginform'));
         }
     }
 

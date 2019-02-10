@@ -27,6 +27,14 @@ Route::get('admin/transactions', 'TransactionController@index')->name('admin.tra
 
 Route::get('admin/review', 'SaleController@review')->name('admin.review');
 
+Route::get('reception/seated', 'ReceptionController@seated')->name('reception.seated');
+Route::get('reception/waiting', 'ReceptionController@waiting')->name('reception.waiting');
+Route::get('reception/booking', 'ReceptionController@booking')->name('reception.booking');
+Route::get('reception/addCustomer', 'ReceptionController@addCustomer')->name('reception.addCustomer');
+Route::post('reception/store', 'ReceptionController@store')->name('reception.store');
+
+Route::get('customer/index', 'CustomerController@index')->name('customer.index');
+
 Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/category', 'CategoryController@index')->name('admin.category');
     Route::post('admin/category/add', 'CategoryController@add')->name('admin.category.add');
@@ -88,10 +96,4 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::post('admin/setting/passwordpost', 'SettingController@password_post')->name('admin.setting.password.save');
     Route::post('admin/setting/activebadge', 'SettingController@active_badge')->name('admin.setting.activebadge');
     Route::post('admin/setting/paymentpost', 'SettingController@payment_post')->name('admin.setting.payment.post');
-
-    Route::get('reception/seated', 'ReceptionController@seated')->name('reception.seated');
-    Route::get('reception/waiting', 'ReceptionController@waiting')->name('reception.waiting');
-    Route::get('reception/booking', 'ReceptionController@booking')->name('reception.booking');
-    Route::get('reception/addCustomer', 'ReceptionController@addCustomer')->name('reception.addCustomer');
-    Route::post('reception/store', 'ReceptionController@store')->name('reception.store');
 });
