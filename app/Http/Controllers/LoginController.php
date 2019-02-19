@@ -7,6 +7,7 @@ use Hash;
 use Illuminate\Http\Request;
 
 use App\Model\Role;
+use App\Model\Table;
 
 class LoginController extends Controller
 {
@@ -28,7 +29,22 @@ class LoginController extends Controller
                 return redirect(route('reception.seated'));
             }
             if($request->role = "menu"){
-                return redirect(route('customer.index'));
+                $table_name = $request->table;
+                $table_name_arr = array('A'=>1, 'B'=>2, 'C'=>3);
+                $table_type = $table_name_arr[strtoupper($table_name[0])];
+                $table_index = $table_name[1];
+                $table = Table::select('id')->where('type', $table_type)->where('index', $table_index)->get();
+                if(count($table) > 0){
+                    $order = $table[0]->order;
+                    if(count($order) > 0){
+                        $order_id = $order[0]->id;
+                    }else{
+                        $order_id = 0;
+                    }
+                    return redirect()->route('customer.index', ['order_id'=>$order_id]);
+                }else{
+                    return redirect(route('loginform'));
+                }
             }
         } else {
             return redirect(route('loginform'));

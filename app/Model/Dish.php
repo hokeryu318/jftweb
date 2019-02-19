@@ -24,6 +24,10 @@ class Dish extends Model
     {
         return $this->hasOne(Badge::class, 'id', 'badge_id');
     }
+    public function discount()
+    {
+        return $this->hasOne(Discount::class, 'dish_id', 'id');
+    }
     public function getDishNameFromId($dish_id)
     {
         self::select('name_en')->where('id', '=', $dish_id)->get()->toArray();

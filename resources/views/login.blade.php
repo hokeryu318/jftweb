@@ -79,7 +79,7 @@
                             <h4 class="mb-0 white-text">Table Number</h4>
                         </div>
                         <div class="col-6">
-                            <input type="number" class="custom-input" name="table" />
+                            <input class="custom-input" name="table" />
                         </div>
                     </div>
                     <div class="row  mt-5 pt-3">

@@ -33,7 +33,10 @@ Route::get('reception/booking', 'ReceptionController@booking')->name('reception.
 Route::get('reception/addCustomer', 'ReceptionController@addCustomer')->name('reception.addCustomer');
 Route::post('reception/store', 'ReceptionController@store')->name('reception.store');
 
-Route::get('customer/index', 'CustomerController@index')->name('customer.index');
+Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');
+Route::post('customer/dish_list', 'CustomerController@dish_list')->name('customer.dish_list');
+Route::post('customer/dish_info', 'CustomerController@dish_info')->name('customer.dish_info');
+Route::post('customer/dish_option', 'CustomerController@dish_option')->name('customer.dish_option');
 
 Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/category', 'CategoryController@index')->name('admin.category');

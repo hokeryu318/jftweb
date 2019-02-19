@@ -14,6 +14,10 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    public function dishes(){
+        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id');
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
