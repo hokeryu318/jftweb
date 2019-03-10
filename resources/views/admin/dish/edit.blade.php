@@ -76,7 +76,7 @@
                                     <label class="text-blue txtdemibold">Price</label>
                                 </div>
                                 <input type="number" class="outline-0 border-blue" name="price" step="0.01" value="{{ $obj->price }}" />
-                                <p class="text-right text-blue" >(Included GST: $ 1.13)</p>
+                                <p class="text-right text-blue" >(Included GST: $ {{ number_format($obj->price*$gst/100, 2) }})</p>
                             </div>
                         </div>
                         <div class="col-6">
@@ -190,6 +190,7 @@
                                     <label class="text-blue txtdemibold">Group</label>
                                 </div>
                                 <select type="text" class="outline-0 border-blue w-100 option-padding" id="group" name="group_id">
+                                    <option value="0">Choose a Group</option>
                                     @foreach ($groups as $g)
                                         <option value="{{ $g->id }}"
                                                 @if($g->id == $obj->group_id)
@@ -204,7 +205,7 @@
                                     <label class="text-blue txtdemibold">Badge</label>
                                 </div>
                                 <select type="text" class="outline-0 border-blue w-100 option-padding" name="badge_id">
-                                    <option value="0">--Select Badge--</option>
+                                    <option value="0">Choose a Badge</option>
                                     @foreach ($badges as $b)
                                         <option value="{{ $b->id }}"
                                                 @if($b->id == $obj->badge_id)

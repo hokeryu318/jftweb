@@ -12,6 +12,7 @@ use App\Model\Dish;
 use App\Model\DishOption;
 use App\Model\DishCategory;
 use App\Model\DishOrder;
+use App\Model\Receipt;
 
 class DishController extends Controller
 {
@@ -42,7 +43,9 @@ class DishController extends Controller
             $dish_cats_ids .= $dish_cats_arr['categories_id'].",";
         }
         $dish_cats_ids = rtrim($dish_cats_ids,", ");
-        return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj', 'dish_cats', 'dish_cats_ids'));
+
+        $gst = Receipt::find(1)->gst;
+        return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj', 'dish_cats', 'dish_cats_ids', 'gst'));
     }
 
     public function add(){
@@ -51,11 +54,13 @@ class DishController extends Controller
         $groups = Kitchen::get();
         $badges = Badge::where('active', '=', '1')->get();
         $options = Option::get();
-        return view('admin.dish.edit')->with(compact('main_cats', 'groups', 'badges', 'options', 'obj'));
+        $gst = Receipt::find(1)->gst;
+        return view('admin.dish.edit')->with(compact('main_cats', 'groups', 'badges', 'options', 'obj', 'gst'));
     }
 
     public function preview($id){
-        $obj = Dish::find($id);
+        $obj = Dish::find($id);//dd($obj);
+//        $option = $obj->options();dd($option);
         return view('admin.dish.preview')->with(compact('obj'));
     }
 

@@ -34,6 +34,7 @@ class OptionController extends Controller
             $i->delete();
         }
         $obj->delete();
+        return redirect()->route('admin.option');
     }
     public function store()
     {
@@ -138,4 +139,5 @@ class OptionController extends Controller
         }
         return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
     }
+
 }

@@ -311,7 +311,7 @@
     });
     $("#deleteSubCategory").click(function() {
         if(currentSub != '') {
-            $("#confirm_remove")[0].innerText = "Do you want to delete the sub category?";
+            $("#confirm_remove")[0].innerText = currentSub + "Do you want to delete the sub category?";
             $("#confirmbtn").attr("onclick", "onDeleteSub()");
             $("#confirm_category_modal").modal('toggle');
         }else{

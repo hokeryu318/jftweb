@@ -69,7 +69,8 @@ class CategoryController extends Controller
 
     public function dish_list()
     {
-        $dishes = DishCategory::getDishFromCategory(request()->category);
+//        $dishes = DishCategory::getDishFromCategory(request()->category);
+        $dishes = Category::find(request()->category)->dishes;
         $dishes_arr = $dishes->toArray();
         $dish_ids = '';
         $dish_count = 0;

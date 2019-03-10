@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Discount;
 use Illuminate\Http\Request;
 
 use App\Model\Dish;
+use App\Model\Discount;
+use App\Model\Receipt;
 
 class DiscountController extends Controller
 {
@@ -19,7 +20,8 @@ class DiscountController extends Controller
     public function add(){
         $dishes = Dish::get();
         $obj = new Discount();
-        $gst = 10;
+        $profile = Receipt::find(1);
+        $gst = $profile->gst;
         return view('admin.discount.form')->with(compact('dishes', 'gst', 'obj'));
     }
 
@@ -28,7 +30,8 @@ class DiscountController extends Controller
         $dishes = Dish::get();
         $obj = Discount::find($id);
         $dish = $obj->dish->id;
-        $gst = 10;
+        $profile = Receipt::find(1);
+        $gst = $profile->gst;
         return view('admin.discount.form')->with(compact('dishes', 'gst', 'obj', 'dish'));
     }
 

@@ -63,6 +63,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/option/sort', 'OptionController@sortOption')->name('admin.option.sort');
     Route::post('admin/option/store', 'OptionController@store')->name('admin.option.store');
     Route::get('admin/option/delete/{id}', 'OptionController@delete')->name('admin.option.delete');
+    Route::post('admin/option/changephoto', 'OptionController@changephoto')->name('admin.option.changephoto');
 
     Route::get('admin/discount', 'DiscountController@index')->name('admin.discount');
     Route::get('admin/discount/add', 'DiscountController@add')->name('admin.discount.add');
@@ -85,6 +86,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/setting/payment', 'SettingController@payment')->name('admin.setting.payment');
     Route::get('admin/setting/receipt', 'SettingController@receipt')->name('admin.setting.receipt');
     Route::post('admin/setting/receipt', 'SettingController@receiptpost')->name('admin.setting.receipt.save');
+    Route::post('admin/setting/receipt/changelogo', 'SettingController@changelogo')->name('admin.setting.changelogo');
 
     Route::get('admin/setting/badge', 'SettingController@badge')->name('admin.setting.badge');
     Route::get('admin/setting/language', 'SettingController@language')->name('admin.setting.language');

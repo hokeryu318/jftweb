@@ -39,7 +39,7 @@
                         <div style="position:relative">
                         <img src="{{ asset('dishes/'.$obj->image) }}" class="img-fluid w-100" style="height:42vh" />
                         @if($obj->badge)
-                        <img src="{{ asset('badges/'.$obj->badge->filepath) }}" style="position:absolute;top:10px;left:10px;">
+                        <img src="{{ asset('badges/'.$obj->badge->filepath) }}" style="position:absolute;top:10px;left:10px;width: 100px; height: 50px;">
                         @endif
                         </div>
                         <p class="text-center text-movee font-weight-bold dish-adv">This dish will be prepared<br /> straight away.</p>
@@ -48,24 +48,24 @@
                         <p class="text-white d-block bg-movee pl-1 pt-1 pb-1 font-weight-bold fs-3">Please Choose:</p>
                         <div style="height:40vh; overflow:auto">
                             @foreach ($obj->options as $op)
-                            @if($op->photo_visible != "1")
-                            <h5 class="font-weight-bold d-block border-bottom mt">{{ $op->name }}</h5>
-                            <div class="ml-4 pl-3">
-                                @foreach ($op->items as $it)
-                                    <div class="form-check mb-3">
-                                        <input type="radio" class="fform-check-input rdobtn" id="materialUnchecked{{ $it->id }}" name="option[{{ $op->id }}]">
-                                        <label class="form-check-label  txtdemibold font-weight-bold" for="materialUnchecked{{ $it->id }}">
-                                            {{ $it->name }}
-                                            @if($it->price > 0)
-                                                <span style="color:#9A9828">(+{{ number_format($it->price, 2) }})</span>
-                                            @elseif($it->price < 0)
-                                                <span style="color:#C74E95">({{ number_format($it->price, 2) }})</span>
-                                            @endif
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @endif
+                                @if($op->photo_visible != "1")
+                                <h5 class="font-weight-bold d-block border-bottom mt">{{ $op->name }}</h5>
+                                <div class="ml-4 pl-3">
+                                    @foreach ($op->items as $it)
+                                        <div class="form-check mb-3">
+                                            <input type="radio" class="fform-check-input rdobtn" id="materialUnchecked{{ $it->id }}" name="option[{{ $op->id }}]">
+                                            <label class="form-check-label  txtdemibold font-weight-bold" for="materialUnchecked{{ $it->id }}">
+                                                {{ $it->name }}
+                                                @if($it->price > 0)
+                                                    <span style="color:#9A9828">(+{{ number_format($it->price, 2) }})</span>
+                                                @elseif($it->price < 0)
+                                                    <span style="color:#C74E95">({{ number_format($it->price, 2) }})</span>
+                                                @endif
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @endif
                             @endforeach
                         </div>
                         <i class="fa fa-minus-circle fa-4x text-movee ml-5 mr-3 mt"></i> <label class="fs-5 font-weight-normal">00</label><i class="fa fa-plus-circle fa-4x text-movee ml-3"></i>

@@ -20,6 +20,7 @@
         </div>
         <img id="popupimg" class="popupimg" />
         <input type="file" style="display:none" id="option_image_modal">
+        <input type="hidden" name="item_id">
         <button class="addOptionbtn mcenter">Change Photo</button>
     </div>
 
@@ -27,7 +28,7 @@
         <div class="row">
             <div class="col-12">
                 <a><span class="">
-                       <img src="{{ asset('img/Group1100.png') }}" height="18" class="float-right" width="19"/></span></a>
+                       <img src="{{ asset('img/Group1100.png') }}" height="18" class="float-right" width="19" onclick="onCancel()" /></span></a>
             </div>
         </div>
         <form method="POST" action="{{ route('admin.option.store') }}" enctype='multipart/form-data' id="post_form">
@@ -153,9 +154,12 @@
                         name="prev-data[{{ $item->id }}][price]" value="{{ $item->price }}" />
                 </div>
                 <div class="col-1">
-                    <button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button" style="display:none">
-                        Add Photo
-                    </button>
+                    {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button" style="display:none">--}}
+                        {{--Add Photo1--}}
+                    {{--</button>--}}
+                    <img class="add-photo-button" width=55 height=55 onclick="onAddImage(this)" style="display: none"
+                         src="{{ asset('img/image-add-icon.png') }}"
+                    >
                     <img class="option-image" width=55 height=55
                         @if($obj->photo_visible == '1')
                         src="{{ asset('options/'.$item->image) }}"
@@ -173,7 +177,7 @@
                     </label>
                 </div>
                 <div class="col-1">
-                    <button class="btnaddphoto3  mt-2 pt-1" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
+                    <button class="btnaddphoto3" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
                         Remove Option
                     </button>
                 </div>
@@ -192,9 +196,12 @@
                 <input type="number" class="outline-0 border-bottom-blue mt-2 option-price"/>
             </div>
             <div class="col-1">
-                <button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button">
-                    Add Photo
-                </button>
+                {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button">--}}
+                    {{--Add Photo--}}
+                {{--</button>--}}
+                <img class="add-photo-button" width=55 height=55 onclick="onAddImage(this)"
+                     src="{{ asset('img/image-add-icon.png') }}"
+                >
                 <img class="option-image" width=55 height=55 style="display:none">
             </div>
             <div class="col-1">
@@ -204,7 +211,7 @@
                 </label>
             </div>
             <div class="col-1">
-                <button class="btnaddphoto3  mt-2 pt-1" type="button" onclick="onDelete(this)" data-id=0>
+                <button class="btnaddphoto3" type="button" onclick="onDelete(this)" data-id=0>
                     Remove Option
                 </button>
             </div>
@@ -390,5 +397,6 @@
     {
         window.location = "{{ route('admin.option') }}";
     }
+
 </script>
 @endsection

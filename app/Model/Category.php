@@ -27,4 +27,5 @@ class Category extends Model
     {
         return self::where('parent_id', '=', null)->get();
     }
+
 }

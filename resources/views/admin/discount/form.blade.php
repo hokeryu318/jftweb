@@ -39,24 +39,17 @@
                                     <option value="{{ $ds->id }}" data-price="{{$ds->price}}" @if(isset($dish) && $ds->id == $dish) selected @endif>{{ $ds->name_en }}</option>
                                 @endforeach
                             </select>
-                            <label class="text-blue float-right text-right" id="rrp_price">
-                                @if($obj->id > 0)
-                                    RRP: $ {{ number_format($obj->price, 2) }}
-                                @else
-                                    RRP: $ {{ number_format($ds->price, 2) }}
-                                @endif
-                            </label>
+                            <label class="text-blue float-right text-right" id="rrp_price">RRP: $ {{ number_format($ds->price, 2) }}</label>
                         </div>
                         <div class="form-group">
                             <div>
                                 <label class="text-blue txtdemibold">Discounted Price:</label>
                             </div>
                             <input type="number" class="outline-0 border-bottom-blue" value="{{$obj->discount}}" id="discount-value" name="discount" step="0.01"/>
+                            <input type="hidden" value="{{ $gst }}" id="gst" name="gst">
                             <label class="text-blue float-right  text-right" id="gst_value">
-                                @if($obj->id > 0)
-                                    RRP: $ {{ number_format($obj->discount/$gst, 2) }}
-                                @else
-                                    (Included GST: $ 0.00)
+                                @if ($obj->discount > 0)
+                                    (Included GST: $ {{ $obj->discount*$gst/100 }})
                                 @endif
                             </label>
                         </div>
@@ -355,11 +348,12 @@
 
         $("#discount-value").change(function(){
             var discount = $("#discount-value").val();
-            var gst = 0;
+            var gst = $("#gst").val();
+            var gst_include = 0;
             if(discount > 0){
-                gst = discount / 10;
+                gst_include = discount*gst / 100;
             }
-            $("#gst_value")[0].innerText = '(Included GST: $ '+gst+')';
+            $("#gst_value")[0].innerText = '(Included GST: $ '+gst_include+')';
         });
 
         $("#materialUnchecked").click(function() {

@@ -52,6 +52,7 @@ class SettingController extends Controller
         $payments = Payment::orderBy('sort')->get();
         return view('admin.setting.payment')->with(compact('payments'));
     }
+    //receipt
     public function receipt()
     {
         $profile = Receipt::profile();
@@ -68,6 +69,26 @@ class SettingController extends Controller
         $profile->save();
         return redirect()->route('admin.setting.receipt');
     }
+    public function changelogo()
+    {
+//        $img_name = request()->get('image-name');
+//        if(Receipt::where('logo_image', $img_name)->exists()){
+//            return redirect()->route('admin.setting.receipt');
+//        }
+        // change logo image
+        $file = request()->file('image-file');
+        $destinationPath = 'receipt';
+        $destinationFile = $file->getClientOriginalName();//dd($destinationFile);
+        $file->move($destinationPath, $destinationFile);
+
+        // update receipt logo_image
+        $profile = Receipt::find(1);
+        $profile->logo_image = $destinationFile;
+        $profile->save();
+
+        return redirect()->route('admin.setting.receipt');
+    }
+    //badge
     public function badge()
     {
         $badges = Badge::get();

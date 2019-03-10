@@ -68,15 +68,18 @@
             <div class="col-7">
                 <div class="row pl-0">
                     <ul class="nav navbar pt-0 pb-0 mt-0 mb-0" style="box-shadow:none;">
-                        <li class="menu bg-green"><img src="{{ asset('img/dollar.png') }}" /></li>
+                        <li class="menu bg-green"><img src="{{ asset('img/dollar.png') }}" />2</li>
                         <li class="menu bg-pinq"><img src="{{ asset('img/notify.png') }}" /> 13</li>
                         <li class="menu bg-yellow"><img src="{{ asset('img/chat.png') }}" /> 13</li>
                         <li class="menu bg-info"><img src="{{ asset('img/writechat.png') }}" /> 13</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-4 pl-0 text-right">
-                <h6 class="mb-0 white-text font-weight-bold mt-3">10:12 PM &nbsp;&nbsp; 22 MAY 2018</h6>
+            <div class="col-2 pl-0 text-right">
+                <h6 class="mb-0 white-text font-weight-bold mt-3"><p id="time"></p></h6>
+            </div>
+            <div class="col-2 pl-0 text-left">
+                <h6 class="mb-0 white-text font-weight-bold mt-3">{{ date('d M Y') }}</h6>
             </div>
         </div>
     </header>
@@ -165,6 +168,15 @@
                 }
             }
         });
+    </script>
+    {{--display current time--}}
+    <script>
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("time").innerHTML = d.toLocaleTimeString();
+        }
     </script>
 </body>
 </html>
