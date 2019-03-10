@@ -4,32 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" line="92" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4741d62-8ad0-4e2f-aeb1-29a24df61ed9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jftweb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jftweb.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DiscountController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DishController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DishController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dish/preview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dish/preview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/receipt.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/receipt.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/part/category_dish.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/part/category_dish.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="c4741d62-8ad0-4e2f-aeb1-29a24df61ed9" name="Default" comment="" />
     <ignored path="jftweb.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -63,14 +38,14 @@
           <entry key="gitignore" value="2" />
           <entry key="jpg" value="3" />
           <entry key="php" value="42" />
-          <entry key="png" value="2" />
+          <entry key="png" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Blade" value="18" />
           <entry key="CSS" value="2" />
-          <entry key="Image" value="9" />
+          <entry key="Image" value="10" />
           <entry key="PHP" value="24" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
@@ -106,16 +81,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="813">
-              <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
+            <state relative-caret-position="515">
+              <caret line="47" column="77" lean-forward="true" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/option/form.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -186,8 +161,8 @@
       <find>current_file_obj</find>
       <find>option-image</find>
       <find>delete</find>
-      <find>preview</find>
       <find>chan</find>
+      <find>preview</find>
     </findStrings>
     <replaceStrings>
       <replace>btnaddphoto3</replace>
@@ -402,18 +377,6 @@
             <path>
               <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
               <item name="jftweb" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="options" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -485,12 +448,12 @@
       <updated>1547644339120</updated>
       <workItem from="1551865901790" duration="29962000" />
       <workItem from="1552107517913" duration="1373000" />
-      <workItem from="1552122611000" duration="35577000" />
+      <workItem from="1552122611000" duration="36253000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66912000" />
+    <option name="totallyTimeSpent" value="67588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -534,7 +497,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/storage/framework/views/a288e86cf42514b8682e5f42d59911564f55d6c5.php" />
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
@@ -837,13 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="813">
-          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/option/form.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -853,6 +808,16 @@
             <element signature="e#7075#7096#0#HTML" expanded="true" />
             <element signature="e#9298#9318#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/receipt/him.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="47" column="77" lean-forward="true" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
         </state>
       </provider>
     </entry>
