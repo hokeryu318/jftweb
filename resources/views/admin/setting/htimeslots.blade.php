@@ -35,8 +35,8 @@
                 ">
                 <div class="row mt-2 mb-4">
                     <div class="col-4"></div>
-                    <div class="col-3 text-info text-center">Start</div>
-                    <div class="col-3 text-info text-center">Ends</div>
+                    <div class="col-3 text-info">Start</div>
+                    <div class="col-3 text-info">Ends</div>
                     <div class="col-2"></div>
                 </div>
                 <div class="row">

@@ -39,28 +39,28 @@
                     <li class="top-menu-btn font-weight-bold top-menu-active pr-2">
                         <div class="text-center time_menu">
                             <a class="black-text" id="now-tab" onclick="changeTab('home');">
-                                <div class="text-center time_menu">Now<br>90 min</div>
+                                <div class="text-center time_menu">Now<br>{{ $default_duration }}</div>
                             </a>
                         </div>
                     </li>
                     <li class="top-menu-btn font-weight-bold">
                         <div class="text-center-btn group_menu">
                             <a class="black-text" id="group-tab" onclick="changeTab('group');">
-                                <img src="{{asset('img/head1.png')}}" class="mr-2" />Group
+                                <img src="{{asset('img/head1.png')}}" class="mr-2" />@if($order_id > 0) {{$order_get->guest}}@else Group @endif
                             </a>
                         </div>
                     </li>
                     <li class="top-menu-btn font-weight-bold">
                         <div class="text-center-btn table_menu">
                             <a id="table-tab" class="black-text" onclick="changeTab('table');">
-                                <img src="{{asset('img/table_sample.png')}}" class="mr-2" />Table
+                                <img src="{{asset('img/table_sample.png')}}" class="mr-2" />@if($order_id > 0) {{ $table_display_id }}@else Table @endif
                             </a>
                         </div>
                     </li>
                     <li class="top-menu-btn font-weight-bold">
-                        <div class="text-center-btn table_menu">
+                        <div class="text-center-btn name_menu">
                             <a id="name-tab" class="black-text" onclick="changeTab('name');">
-                                <div class="text-center time_menu" id="name-tab-div">@if($order_id > 0) {{$order_get->customer_name}}@else Walked-in {{$table_id}} @endif</div>
+                                <div class="text-center name_menu" id="name-tab-div">@if($order_id > 0) {{$order_get->customer_name}}@else Walked-in {{$table_id}} @endif</div>
                             </a>
                         </div>
                     </li>
@@ -88,8 +88,8 @@
                                 <div class="output display-none">0</div>
                             </div>
                             <div class="col-4">
-                                <h3 class="time_content_title">30 min</h3>
-                                <select id="duration-select">
+                                <h3 class="time_content_title">Default Duration</h3>
+                                <select id="duration-select" style="width: 100%;height: 35px;">
                                     <option value="1">Takeaway</option>
                                     <option value="2">30 min</option>
                                     <option value="3">60 min</option>
@@ -147,7 +147,7 @@
                                             <div class="table-common" id="selected-{{$table->id}}" onclick="selectObject('{{$table->id}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                                                 @if($table->type == 1){{--A--}}
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-a-style text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
@@ -157,7 +157,7 @@
                                                 @elseif($table->type == 2){{--B--}}
                                                 <div class="chair-b-style chair-top-style"></div>
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-b-style text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
@@ -169,7 +169,7 @@
                                                 <div class="chair-c-style chair-top-style"></div>
                                                 <div class="chair-top-style"></div>
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-c-style text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
@@ -184,7 +184,7 @@
                                             <div class="table-common" id="selected-{{$table->id}}" onclick="selectObject('{{$table->id}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                                                 @if($table->type == 1){{--A--}}
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-a-style-disable text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
@@ -192,7 +192,7 @@
                                                 @elseif($table->type == 2){{--B--}}
                                                 <div class="chair-b-style chair-top-style-disable"></div>
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-b-style-disable text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
@@ -202,7 +202,7 @@
                                                 <div class="chair-c-style chair-top-style-disable"></div>
                                                 <div class="chair-top-style-disable"></div>
                                                 <div class="@if(in_array($table->id, $table_ids)) bg-selected @endif table-area white table-c-style-disable text-center">
-                                                    @if(in_array($table->id, $order_tables))
+                                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                                     @endif
                                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
@@ -239,13 +239,13 @@
                         </div>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">EMAIL ADDRESS</h6>
-                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="@if($order_id > 0) {{$order_get->email_address}}@endif" name="email_address" id="email-address"/>
+                            <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1" value="@if($order_id > 0) {{$order_get->email}}@endif" name="email_address" id="email-address"/>
                         </div>
                     </div>
                     <div id="menu4" class="container display-none tab-detail"><br>
                         <div class=" mt-2">
                             <h6 class="font-weight-bold">CUSTOMER NOTES</h6>
-                            <textarea style="border:1px solid grey;border-radius:5px;height: 145px;" class="white pl-2 w-100 pt-1 pb-1" name="customer_notes" id="customer-notes">@if($order_id > 0) {{$order_get->customer_notes}}@endif</textarea>
+                            <textarea style="border:1px solid grey;border-radius:5px;height: 145px;" class="white pl-2 w-100 pt-1 pb-1" name="customer_notes" id="customer-notes">@if($order_id > 0) {{$order_get->note}}@endif</textarea>
                         </div>
                     </div>
                     <div class="row text-right mm" >
@@ -271,7 +271,7 @@
             '12:00<span style="margin-left: 100px;">AM</span>','01:00<span style="margin-left: 100px;">AM</span>','02:00<span style="margin-left: 100px;">AM</span>',
             '03:00<span style="margin-left: 100px;">AM</span>','04:00<span style="margin-left: 100px;">AM</span>','05:00<span style="margin-left: 100px;">AM</span>',
             '06:00<span style="margin-left: 100px;">AM</span>','07:00<span style="margin-left: 100px;">AM</span>','08:00<span style="margin-left: 100px;">AM</span>',
-            '09:00<span style="margin-left: 100px;">AM</span>','10:00<span style="margin-left: 100px;">AM</span>','11:00<span style="margin-left: 100px;">PM</span>',
+            '09:00<span style="margin-left: 100px;">AM</span>','10:00<span style="margin-left: 100px;">AM</span>','11:00<span style="margin-left: 100px;">AM</span>',
             '12:00<span style="margin-left: 100px;">PM</span>','01:00<span style="margin-left: 100px;">PM</span>','02:00<span style="margin-left: 100px;">PM</span>',
             '03:00<span style="margin-left: 100px;">PM</span>','04:00<span style="margin-left: 100px;">PM</span>','05:00<span style="margin-left: 100px;">PM</span>',
             '06:00<span style="margin-left: 100px;">PM</span>','07:00<span style="margin-left: 100px;">PM</span>','08:00<span style="margin-left: 100px;">PM</span>',
@@ -417,6 +417,28 @@
 
         }
 
+        // function selectObject(selected_id){
+        //     var table_obj = $("#selected-table");
+        //     $("#selected-"+selected_id+" .table-area").toggleClass("bg-selected");
+        //     var selected_ids = table_obj.val();
+        //     var selected_table_id = "";
+        //     if(selected_ids == 0){
+        //         selected_table_id = selected_id;
+        //     }else{
+        //         var selected_ids_arr = selected_ids.split(",");
+        //         for(var i = 0; i < selected_ids_arr.length; i ++){
+        //             if(selected_ids_arr[i] != selected_id){
+        //                 if(selected_table_id == ""){
+        //                     selected_table_id = selected_ids_arr[i];
+        //                 }else{
+        //                     selected_table_id += "," + selected_ids_arr[i];
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     table_obj.val(selected_table_id);
+        // }
+
         function selectObject(selected_id){
             var table_obj = $("#selected-table");
             $("#selected-"+selected_id+" .table-area").toggleClass("bg-selected");
@@ -426,16 +448,36 @@
                 selected_table_id = selected_id;
             }else{
                 var selected_ids_arr = selected_ids.split(",");
-                for(var i = 0; i < selected_ids_arr.length; i ++){
-                    if(selected_ids_arr[i] != selected_id){
-                        if(selected_table_id == ""){
-                            selected_table_id = selected_ids_arr[i];
-                        }else{
-                            selected_table_id += "," + selected_ids_arr[i];
+                if(selected_ids_arr.length == 0 || selected_ids_arr.length == 1){
+                    if(selected_ids != selected_id)
+                        selected_table_id = selected_ids + "," + selected_id;
+                }
+                else {
+                    if(selected_ids_arr.includes(selected_id)) {
+                        selected_ids_arr.splice( selected_ids_arr.indexOf(selected_id), 1);
+                        for(var i = 0; i < selected_ids_arr.length; i ++){
+                            if(selected_table_id == ""){
+                                selected_table_id = selected_ids_arr[i];
+                            }else{
+                                selected_table_id += "," + selected_ids_arr[i];
+                            }
                         }
+                    }
+                    else {
+                        for(var i = 0; i < selected_ids_arr.length; i ++){
+                            if(selected_ids_arr[i] != selected_id){
+                                if(selected_table_id == ""){
+                                    selected_table_id = selected_ids_arr[i];
+                                }else{
+                                    selected_table_id += "," + selected_ids_arr[i];
+                                }
+                            }
+                        }
+                        selected_table_id += "," + selected_id;
                     }
                 }
             }
+            // alert(selected_table_id);
             table_obj.val(selected_table_id);
         }
 

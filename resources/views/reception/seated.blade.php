@@ -28,7 +28,7 @@
                         <div class="table-common" onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, 'order_id' => $table->order[0]->id ]) }}'" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                             @if($table->type == 1){{--A--}}
                                 <div class="white table-a-style text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
@@ -36,60 +36,60 @@
                                     </a>
                                 </div>
                             @elseif($table->type == 2){{--B--}}
-                                <div class="chair-b-style chair-top-style"></div>
+                                <div class="chair-b-style chair-top-b-style"></div>
                                 <div class="white table-b-style text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
                                         <br>{{$table->order[0]->guest}}
                                     </a>
                                 </div>
-                                <div class="chair-b-style chair-bottom-style"></div>
+                                <div class="chair-b-style chair-bottom-b-style"></div>
                             @elseif($table->type == 3){{--C--}}
-                                <div class="chair-c-style chair-top-style"></div>
-                                <div class="chair-top-style"></div>
+                                <div class="chair-c-style chair-top-c-style"></div>
+                                <div class="chair-top-c-style"></div>
                                 <div class="white table-c-style text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}
                                         <br>{{$table->order[0]->guest}}
                                     </a>
                                 </div>
-                                <div class="chair-c-style chair-bottom-style"></div>
-                                <div class="chair-bottom-style"></div>
+                                <div class="chair-c-style chair-bottom-c-style"></div>
+                                <div class="chair-bottom-c-style"></div>
                             @endif
                         </div>
                     @else
                         <div class="table-common" id="selected-{{$key}}" onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, 'order_id' => 0 ]) }}'" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                             @if($table->type == 1){{--A--}}
                                 <div class="white table-a-style-disable text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
                                 </div>
                             @elseif($table->type == 2){{--B--}}
-                                <div class="chair-b-style chair-top-style-disable"></div>
+                                <div class="chair-b-style chair-top-b-style-disable"></div>
                                 <div class="white table-b-style-disable text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
                                 </div>
-                                <div class="chair-b-style chair-bottom-style-disable"></div>
+                                <div class="chair-b-style chair-bottom-b-style-disable"></div>
                             @elseif($table->type == 3){{--C--}}
-                                <div class="chair-c-style chair-top-style-disable"></div>
-                                <div class="chair-top-style-disable"></div>
+                                <div class="chair-c-style chair-top-c-style-disable"></div>
+                                <div class="chair-top-c-style-disable"></div>
                                 <div class="white table-c-style-disable text-center">
-                                    @if(in_array($table->id, $order_tables))
+                                    @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                         <img class="table_bc_red_plus" src="{{asset('img/plus_red.png')}}">
                                     @endif
                                     <a class="font-weight-bold grey-text">{{$table_type[$table->type]."-".$table->index}}</a>
                                 </div>
-                                <div class="chair-c-style chair-bottom-style-disable"></div>
-                                <div class="chair-bottom-style-disable"></div>
+                                <div class="chair-c-style chair-bottom-c-style-disable"></div>
+                                <div class="chair-bottom-c-style-disable"></div>
                             @endif
                         </div>
                     @endif
@@ -113,201 +113,125 @@
             <a class="col-4 black-text">
                 <span class="font-weight-bold">SEATED</span>
                 <img src="{{ asset('img/seated.png') }}"/>
-                <span class="font-weight-bold">28</span>
+                <span class="font-weight-bold" style="font-size: 25px;padding-left: 5px;">{{ count($order_tables) }}</span>
                 <div class="tab_activate"></div>
             </a>
             <a href="{{route('reception.waiting')}}" class="col-4 black-text">
                 <span class="font-weight-bold">WAITING</span>
                 <img src="{{ asset('img/waiting.png') }}"/>
-                <span class="font-weight-bold">28</span>
+                <span class="font-weight-bold" style="font-size: 25px;">28</span>
             </a>
             <a href="{{route('reception.booking')}}" class="col-4 black-text">
                 <span class="font-weight-bold">BOOKING</span>
                 <img src="{{ asset('img/bookings.png') }}"/>
-                <span class="font-weight-bold">28</span>
+                <span class="font-weight-bold" style="font-size: 25px;">28</span>
             </a>
         </div>
         <div class="row" style="height:470px;overflow-x:hidden; overflow-y:auto;width: 325px;">
-            <div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border w-100 pt-2 pr-1 bg-dark-grey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+
+            @foreach($order_obj as $order)
+                @foreach($order->table_display_ids as $key => $ordertables)
+{{--                    <div @if(fmod($key,2) == 0) class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list" @else class="border w-100 pt-2 pr-1 bg-dark-grey table_seated_list" @endif>--}}
+                    <div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">
+                        <div class="row w-100 p-0 m-0">
+                            <div class="col-lg-3 pr-0 col-xl-3">
+                                <div class="row p-0 m-0">
+                                    <p class="red-text font-weight-bold ml-0">0 min</p>
+                                </div>
+                                <div class="row table_name">
+                                    <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                                        @if(count($order->table_display_ids) > 1)
+                                            <img src="{{asset('img/plus_red.png')}}" class="corner">
+                                        @endif
+                                        {{ $ordertables }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pr-0 col-xl-6">
+                                <div class="row p-0 m-0">
+                                    <img class="alarm" src="{{ asset('img/calling.png') }}">
+                                    <img class="alarm" src="{{ asset('img/alarm.png') }}">
+                                    <img class="alarm" src="{{ asset('img/msg.png') }}">
+                                    <img class="alarm" src="{{ asset('img/note.png') }}">
+                                </div>
+                                <div class="row pl-4 pt-2">
+                                    <p class=" pfont mb-0 black-text">{{ $order->customer_name }}<br>{{ $order->display_time }}</p>
+                                </div>
+                            </div>
+                            <div class="offset-1 col-2 pr-0 text-right">
+                                <div class="row pl-2">
+                                    <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">{{ $order->guest }}</p>
+                                </div>
+                                <div class="row mt-4 pl-1">
+                                    <img src="{{asset('img/chat1.png')}}">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border w-100 pt-2 pr-1 bg-dark-grey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border w-100 pt-2 pr-1 bg-dark-grey table_seated_list">
-                <div class="row w-100 p-0 m-0">
-                    <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
-                            <p class="red-text red-text font-weight-bold ml-0">0 min</p>
-                        </div>
-                        <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pr-0 col-xl-6">
-                        <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
-                            <img class="alarm" src="{{asset('img/alarm.png')}}">
-                            <img class="alarm" src="{{asset('img/msg.png')}}">
-                            <img class="alarm" src="{{asset('img/note.png')}}">
-                        </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
-                            <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
-                        </div>
-                        <div class="row mt-4 pl-1">
-                            <img src="{{asset('img/chat1.png')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endforeach
+
+            {{--<div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">--}}
+                {{--<div class="row w-100 p-0 m-0">--}}
+                    {{--<div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">--}}
+                            {{--<p class="red-text font-weight-bold ml-0">0 min</p>--}}
+                        {{--</div>--}}
+                        {{--<div class="row table_name">--}}
+                            {{--<p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">--}}
+                                {{--<img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-lg-6 pr-0 col-xl-6">--}}
+                        {{--<div class="row p-0 m-0">--}}
+                            {{--<img class="alarm" src="{{asset('img/calling.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/alarm.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/msg.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/note.png')}}">--}}
+                        {{--</div>--}}
+                        {{--<div class="row pl-4 pt-2">--}}
+                            {{--<p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">--}}
+                            {{--<img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>--}}
+                        {{--</div>--}}
+                        {{--<div class="row mt-4 pl-1">--}}
+                            {{--<img src="{{asset('img/chat1.png')}}">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="border w-100 pt-2 pr-1 bg-dark-grey table_seated_list">--}}
+                {{--<div class="row w-100 p-0 m-0">--}}
+                    {{--<div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">--}}
+                            {{--<p class="red-text red-text font-weight-bold ml-0">0 min</p>--}}
+                        {{--</div>--}}
+                        {{--<div class="row table_name">--}}
+                            {{--<p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">--}}
+                                {{--<img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-lg-6 pr-0 col-xl-6">--}}
+                        {{--<div class="row p-0 m-0">--}}
+                            {{--<img class="alarm" src="{{asset('img/calling.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/alarm.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/msg.png')}}">--}}
+                            {{--<img class="alarm" src="{{asset('img/note.png')}}">--}}
+                        {{--</div>--}}
+                        {{--<div class="row pl-4 pt-2">--}}
+                            {{--<p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">--}}
+                            {{--<img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>--}}
+                        {{--</div>--}}
+                        {{--<div class="row mt-4 pl-1">--}}
+                            {{--<img src="{{asset('img/chat1.png')}}">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
         <div class="row">
             <a href="{{ route("reception.addCustomer", [ "table_id" => 0, 'order_id' => 0 ]) }}" class="new_customer_btn white-text text-center pt-3 pb-5">New Customer <span class="ml-4">&gt;</span> </a>

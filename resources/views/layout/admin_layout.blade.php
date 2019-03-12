@@ -69,9 +69,9 @@
                 <div class="row pl-0">
                     <ul class="nav navbar pt-0 pb-0 mt-0 mb-0" style="box-shadow:none;">
                         <li class="menu bg-green"><img src="{{ asset('img/dollar.png') }}" />2</li>
-                        <li class="menu bg-pinq"><img src="{{ asset('img/notify.png') }}" /> 13</li>
-                        <li class="menu bg-yellow"><img src="{{ asset('img/chat.png') }}" /> 13</li>
-                        <li class="menu bg-info"><img src="{{ asset('img/writechat.png') }}" /> 13</li>
+                        <li class="menu bg-pinq"><img src="{{ asset('img/notify.png') }}" />13</li>
+                        <li class="menu bg-yellow"><img src="{{ asset('img/chat.png') }}" />13</li>
+                        <li class="menu bg-info"><img src="{{ asset('img/writechat.png') }}" />13</li>
                     </ul>
                 </div>
             </div>

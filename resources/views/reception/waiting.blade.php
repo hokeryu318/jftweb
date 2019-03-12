@@ -84,7 +84,7 @@
                         </div>
                         <div class="row table_name">
                             <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
-                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
+                                <img src="{{asset('img/plus_red.png')}}" class="corner">A-1</p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">

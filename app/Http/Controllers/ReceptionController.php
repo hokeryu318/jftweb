@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Order;
 use App\Model\OrderTable;
+use App\Model\Receipt;
 use Illuminate\Http\Request;
 use App\Model\Table;
 
@@ -14,15 +15,21 @@ class ReceptionController extends Controller
         $order_obj = Order::get();
         $table_obj = Table::get();
         $order_tables = array();
+//        $order_obj = array();
         foreach($order_obj as $order){
+            $table_display_ids = array();
             if(count($order->ordertables) > 0){
                 foreach ($order->ordertables as $ordertables) {
                     $order_tables[] = $ordertables['table_id'];
+                    $table_display_ids[] = $this->get_table_id($ordertables['table_id']);
                 }
             }
+            $order->display_time = $this->get_time_data(substr($order->time, 11, 2));
+            $order->table_display_ids = $table_display_ids;//dd($order->table_display_ids);
         }
         $table_type = array(1=>'A', 'B', 'C', 'Line');
-        return view('reception.seated')->with(compact('table_type', 'order_tables', 'table_obj'));
+//        dd($table_obj);
+        return view('reception.seated')->with(compact('table_type', 'order_tables', 'table_obj', 'order_obj'));
     }
 
     public function waiting()
@@ -76,11 +83,16 @@ class ReceptionController extends Controller
             }
         }
         $table_type = array(1=>'A', 'B', 'C', 'Line');
-        return view('reception.addCustomer')->with(compact('table_type', 'order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders'));
+        if($table_id != 0)
+            $table_display_id = $this->get_table_id($table_id);
+
+        $default_duration = $this->get_default_duration();
+
+        return view('reception.addCustomer')->with(compact('table_type', 'order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders', 'table_display_id', 'default_duration'));
     }
 
     public function store()
-    {
+    {//dd(request());
         if(request()->get('order_id') > 0){//edit
             $order_obj = Order::find(request()->get('order_id'));
             $order_obj->time = request()->get('time');

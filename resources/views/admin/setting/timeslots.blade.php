@@ -13,8 +13,8 @@
     <div class="card ml-1 col-lg-10 pr-0">
         <div class="row mt-2 mb-4">
             <div class="col-4"></div>
-            <div class="col-3 text-info text-center">Start</div>
-            <div class="col-3 text-info text-center">Ends</div>
+            <div class="col-3 text-info">Start</div>
+            <div class="col-3 text-info">Ends</div>
             <div class="col-2"></div>
         </div>
         <div class="row">
@@ -46,7 +46,7 @@
                         checked
                     @endif
                     >
-                    <span class="slider round check-round check-round"></span>
+                    <span class="slider round check-round"></span>
                 </label>
             </div>
         </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-2 pl-0">
                 <label class="switch">
-                    <input type="checkbox" name="regular-lunch-on"
+                    <input type="checkbox" class="time-check" name="regular-lunch-on"
                     @if($slots[0]->lunch_on == "1")
                         checked
                     @endif
@@ -109,7 +109,7 @@
             </div>
             <div class="col-2 pl-0">
                 <label class="switch">
-                    <input type="checkbox" name="regular-tea-on"
+                    <input type="checkbox" class="time-check" name="regular-tea-on"
                     @if($slots[0]->tea_on == "1")
                         checked
                     @endif
@@ -143,7 +143,7 @@
             </div>
             <div class="col-2 pl-0">
                 <label class="switch">
-                    <input type="checkbox" name="regular-dinner-on"
+                    <input type="checkbox" class="time-check" name="regular-dinner-on"
                     @if($slots[0]->dinner_on == "1")
                         checked
                     @endif
@@ -177,7 +177,7 @@
             </div>
             <div class="col-2 pl-0">
                 <label class="switch">
-                    <input type="checkbox" name="regular-latenight-on"
+                    <input type="checkbox" class="time-check" name="regular-latenight-on"
                     @if($slots[0]->latenight_on == "1")
                         checked
                     @endif
@@ -238,8 +238,8 @@
             @endif
             <div class="row mt-2 mb-4">
                 <div class="col-4"></div>
-                <div class="col-3 text-info text-center">Start</div>
-                <div class="col-3 text-info text-center">Ends</div>
+                <div class="col-3 text-info">Start</div>
+                <div class="col-3 text-info">Ends</div>
                 <div class="col-2"></div>
             </div>
             <div class="row">
