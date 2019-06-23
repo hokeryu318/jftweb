@@ -14,6 +14,7 @@
 Route::get('/', 'LoginController@getLogin')->name('loginform');
 Route::get('login', 'LoginController@getLogin')->name('loginform');
 Route::post('login', 'LoginController@postLogin')->name('login');
+Route::post('change_ip', 'LoginController@change_ip')->name('change_ip');
 
 Route::get('admin/login', 'LoginController@adminLogin')->name('admin.check');
 Route::post('admin/login', 'LoginController@adminPostLogin')->name('admin.login');
@@ -24,21 +25,66 @@ Route::get('admin/bookings', 'BookingController@index')->name('admin.booking');
 Route::get('admin/booking/edit', 'BookingController@edit')->name('admin.booking.edit');
 
 Route::get('admin/transactions', 'TransactionController@index')->name('admin.transaction');
+Route::get('admin/src_trans', 'TransactionController@src_trans')->name('admin.src_trans');
 
 Route::get('admin/review', 'SaleController@review')->name('admin.review');
 
+//reception
 Route::get('reception/seated', 'ReceptionController@seated')->name('reception.seated');
 Route::get('reception/waiting', 'ReceptionController@waiting')->name('reception.waiting');
-Route::get('reception/booking', 'ReceptionController@booking')->name('reception.booking');
+Route::post('reception/booking', 'ReceptionController@booking')->name('reception.booking');
 Route::get('reception/addCustomer', 'ReceptionController@addCustomer')->name('reception.addCustomer');
+Route::get('reception/editOrder', 'ReceptionController@editOrder')->name('reception.editOrder');
+Route::post('reception/edit_note_review', 'ReceptionController@edit_note_review')->name('reception.edit_note_review');
+Route::post('reception/attend_book', 'ReceptionController@attend_book')->name('reception.attend_book');
+Route::get('reception/editOrder1', 'ReceptionController@editOrder1')->name('reception.editOrder1');
+Route::post('reception/order_info_edit', 'ReceptionController@order_info_edit')->name('reception.order_info_edit');
 Route::post('reception/store', 'ReceptionController@store')->name('reception.store');
+Route::get('reception/ready_to_pay', 'ReceptionController@ready_to_pay')->name('reception.ready_to_pay');
+Route::post('reception/view_calling', 'ReceptionController@view_calling')->name('reception.view_calling');
+Route::post('reception/attend', 'ReceptionController@attend')->name('reception.attend');
+Route::get('reception/view_review', 'ReceptionController@view_review')->name('reception.view_review');
+Route::get('reception/view_note', 'ReceptionController@view_note')->name('reception.view_note');
+Route::get('reception/accounting', 'ReceptionController@accounting')->name('reception.accounting');
+Route::get('reception/amend', 'ReceptionController@amend')->name('reception.amend');
+Route::get('reception/tip', 'ReceptionController@tip')->name('reception.tip');
+Route::get('reception/discount', 'ReceptionController@discount')->name('reception.discount');
+Route::get('reception/amend', 'ReceptionController@amend')->name('reception.amend');
+Route::post('reception/dish_list', 'ReceptionController@dish_list')->name('reception.dish_list');
+Route::post('reception/add_item', 'ReceptionController@add_item')->name('reception.add_item');
+Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
 
+//customer
 Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');
 Route::post('customer/dish_list', 'CustomerController@dish_list')->name('customer.dish_list');
 Route::post('customer/dish_info', 'CustomerController@dish_info')->name('customer.dish_info');
 Route::post('customer/dish_option', 'CustomerController@dish_option')->name('customer.dish_option');
+Route::post('customer/dish_option_previous', 'CustomerController@dish_option_previous')->name('customer.dish_option_previous');
+Route::post('customer/dish_option_confirm', 'CustomerController@dish_option_confirm')->name('customer.dish_option_confirm');
+Route::post('customer/order_dish', 'CustomerController@order_dish')->name('customer.order_dish');
+Route::post('customer/orderNow_Photo', 'CustomerController@orderNow_Photo')->name('customer.orderNow_Photo');
+Route::get('customer/lang_select', 'CustomerController@lang_select')->name('customer.lang_select');
+Route::post('customer/put_lang', 'CustomerController@put_lang')->name('customer.put_lang');
+Route::get('customer/feedback', 'CustomerController@feedback')->name('customer.feedback');
+Route::post('customer/add_review', 'CustomerController@add_review')->name('customer.add_review');
+Route::post('customer/calling', 'CustomerController@calling')->name('customer.calling');
+Route::get('customer/view_bill_pay', 'CustomerController@view_bill_pay')->name('customer.view_bill_pay');
+Route::post('customer/finish_pay', 'CustomerController@finish_pay')->name('customer.finish_pay');
 
-Route::group(['middleware' => 'checkadmin'], function(){
+//kitchen
+Route::get('kitchen/CountNotification', 'KitchenController@CountNotification');
+Route::post('kitchen/get_change_group_dish', 'KitchenController@get_change_group_dish')->name('kitchen.get_change_group_dish');
+Route::get('kitchen/main_screen', 'KitchenController@main_screen')->name('kitchen.main_screen');
+Route::post('kitchen/attend', 'KitchenController@attend')->name('kitchen.attend');
+Route::get('kitchen/change_group', 'KitchenController@change_group')->name('kitchen.change_group');
+Route::post('kitchen/ready', 'KitchenController@ready')->name('kitchen.ready');
+Route::get('kitchen/extract_cooking_name', 'KitchenController@extract_cooking_name')->name('kitchen.extract_cooking_name');
+Route::get('kitchen/extract_table_number', 'KitchenController@extract_table_number')->name('kitchen.extract_table_number');
+//Route::get('kitchen/history_reprint', 'KitchenController@history_reprint')->name('kitchen.history_reprint');
+//Route::get('kitchen/docket', 'KitchenController@docket')->name('kitchen.docket');
+
+//admin
+//Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/category', 'CategoryController@index')->name('admin.category');
     Route::post('admin/category/add', 'CategoryController@add')->name('admin.category.add');
     Route::get('admin/category/delete/{id}', 'CategoryController@delete')->name('admin.category.delete');
@@ -56,6 +102,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/dish/sort', 'DishController@sortDish')->name('admin.dish.sort');
     Route::post('admin/dish/store', 'DishController@store')->name('admin.dish.store');
     Route::post('admin/dish/previewpost', 'DishController@previewpost')->name('admin.dish.previewpost');
+    Route::post('admin/dish/change_sold_active', 'DishController@change_sold_active')->name('admin.change_sold_active');
 
     Route::get('admin/option', 'OptionController@index')->name('admin.option');
     Route::get('admin/option/edit/{id}', 'OptionController@edit')->name('admin.option.edit');
@@ -73,6 +120,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
 
     Route::get('admin/table', 'TableController@index')->name('admin.table');
     Route::post('admin/table/store', 'TableController@store')->name('admin.table.store');
+    Route::post('admin/table/change_roomsize', 'TableController@change_roomsize')->name('admin.change_roomsize');
 
     Route::get('admin/saledata', 'SaleController@index')->name('admin.saledata');
 
@@ -91,6 +139,7 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::get('admin/setting/badge', 'SettingController@badge')->name('admin.setting.badge');
     Route::get('admin/setting/language', 'SettingController@language')->name('admin.setting.language');
     Route::get('admin/setting/password', 'SettingController@password')->name('admin.setting.password');
+    Route::get('admin/setting/sendmail', 'SettingController@sendmail')->name('admin.setting.sendmail');
 
     Route::post('admin/setting/kitchenpost', 'SettingController@kitchen_post')->name('admin.setting.kitchen.post');
     Route::post('admin/setting/timeslotpost', 'SettingController@timeslot_post')->name('admin.setting.timeslots.post');
@@ -101,4 +150,6 @@ Route::group(['middleware' => 'checkadmin'], function(){
     Route::post('admin/setting/passwordpost', 'SettingController@password_post')->name('admin.setting.password.save');
     Route::post('admin/setting/activebadge', 'SettingController@active_badge')->name('admin.setting.activebadge');
     Route::post('admin/setting/paymentpost', 'SettingController@payment_post')->name('admin.setting.payment.post');
-});
+    Route::post('admin/setting/sendmail_post', 'SettingController@sendmail_post')->name('admin.setting.sendmail.post');
+//});
+

@@ -8,7 +8,7 @@
         </div>
         <a href="{{ route('admin.dish.add') }}" class="text-white  btnCreateNewDiscount">
             CREATE NEW DISH
-            <img src="{{ asset('img/Group728white.png') }}" height="20" />
+            <img src="{{ asset('img/Group728white.png') }}" height="15" />
         </a>
     </div>
 </div>

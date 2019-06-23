@@ -3,112 +3,134 @@
 @section('title', 'Transactions')
 
 @section('content')
-<div class="pp">
-    <div style="padding-top:6.5%" class="pt"></div>
-    <div class=" blackgrey pt-3 pl-4 pr-4 ">
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#search_trans_date" ).datepicker();
+        });
+    </script>
+
+    <div class="pttbook"></div>
+    <div class="widthh pt-4 blackgrey">
         <div class="row">
             <div class="col-6">
-                <h4 class="text-white mb-0 h2-responsive font-weight-bold">Transactions</h4>
+                <h4 class="text-white h4-responsive font-weight-bold ml-3 fs-30">TRANSACTION HISTORY</h4>
             </div>
             <div class="col-6">
-                <a>
+                <a onclick="window.history.back()">
                     <span class="">
-                        <img src="{{ asset('img/Group826.png') }}" height="18" class="float-right" width="19" />
+                        <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
                     </span>
                 </a>
             </div>
         </div>
-        <br>
-        <div class="row mb-3 mt-2">
-            <div class="col-12">
-                <img src="{{ asset('img/Path501.png') }}" class="mb-2" height="25"/><label class="text-white ml-3 mr-3 font-weight-light fs-4 pt-2">31 MAY 2018</label>
-                <img src="{{ asset('img/Path502.png') }}" class="mb-2" height="25" />
+        <div class="row mb-5 mt-5">
+            <div class="col-4">
+                <a href="{{ route('admin.transaction', ['search_date' => $search_display_date, 'd_s' => 'down']) }}">
+                    <img src="{{ asset('img/Path501.png') }}" class="ml-3 mb-3" height="30" />
+                </a>
+                <label class="text-white ml-3 mr-3 font-weight-light pt-2 fs-30" id="search_day">
+                    {{ strtoupper($search_display_date) }}
+                </label>
+                <a href="{{ route('admin.transaction', ['search_date' => $search_display_date, 'd_s' => 'up']) }}">
+                    <img src="{{ asset('img/Path502.png') }}" class="mb-3" height="30" />
+                </a>
+            </div>
+            <div class="col-4" style="text-align: right;">
+                <input type="text" id="search_trans_date" />
+            </div>
+            <div class="col-1"></div>
+            <div class="col-3" style="margin-top: 14px;">
+                <a class="src_trans fs-25" onclick="search_transaction()">
+                    Search Transaction
+                    <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin-left: 5px;">
+                </a>
             </div>
         </div>
-        <br>
-        <div class="row">
+        <div class="row" id="data_view">
             <div class="col-12">
-                <table class="table text-white txtdemibold" style="width:57%;">
+                <table style="width: 96%;color: white;margin: 20px 0 0 15px;border-bottom: 1px solid white;">
                     <thead>
-                        <tr>
-                            <th class="border-0" scope="col">
-                                Time
-                                <img src="{{ asset('img/Path444.png') }}" height="20">
-                            </th>
-                            <th class="border-0 text-center" scope="col">TABLE</th>
-                            <th class="border-0 text-right" scope="col">AMOUNT</th>
-                            <th class="border-0 text-center" scope="col">CUSTOMER</th>
-                        </tr>
+                    <tr>
+                        <th class="border-0" scope="col" width="15%">
+                            <a href="{{route("admin.transaction", ["sortType" => $sort, 'search_date' => $search_display_date])}}" class="text-white">
+                                <b>TIME</b>
+                                @if($sort == "asc")
+                                    <img src="{{ asset('img/Path444.png') }}" style="height:18px;margin-top:-5px;" />
+                                @else
+                                    <img src="{{ asset('img/Path445.png') }}" style="height:18px;margin-top:-5px;" />
+                                @endif
+                            </a>
+                        </th>
+                        <th class="border-0" scope="col" width="30%"><b>TABLE</b></th>
+                        <th class="border-0" scope="col" width="15%"><b>AMOUNT</b></th>
+                        <th class="border-0" scope="col" width="25%"><b>CUSTOMER</b></th>
+                        <th class="border-0" scope="col" width="15%"></th>
+                    </tr>
                     </thead>
                 </table>
-            </div>
-            <div class="col-12 chh" style="height: 333px;
-                                            overflow-y: auto;">
-                <table class="table text-white txtdemibold">
-                    <tbody class="thh">
-                        <tr>
-                            <td class="border-0">09:35 PM</td>
-                            <td class="border-0">H-1 + H-2</td>
-                            <td class="border-0">$ 235.80</td>
-                            <td class="border-0">Ms Jenifer Lopez</td>
-                            <td class="border-0"><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >A-1</td>
-                            <td >$ 2,150.00</td>
-                            <td >Walk-in 16</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >A-1</td>
-                            <td >$ 2,150.00</td>
-                            <td >Walk-in 16</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >A-1</td>
-                            <td >$ 2,150.00</td>
-                            <td >Walk-in 16</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >B-3</td>
-                            <td >$ 550.50</td>
-                            <td >Walk-in 15</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >B-4</td>
-                            <td > $ 100.35</td>
-                            <td >John</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >A-4</td>
-                            <td >$ 456.78</td>
-                            <td>Nishikian Japanese Restaurant</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                        <tr>
-                            <td >09:35 PM</td>
-                            <td >C-2</td>
-                            <td >$ 550.00</td>
-                            <td >Ms Naomi Osaka</td>
-                            <td ><button class="outline-0 repbtn">REPRINT</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-            </div>
-            <div class="mt-4 mb-4 col-12">
+                <div style="height: 55vh;overflow-y: auto;">
+                    <table class="table text-white txtdemibold" style="width: 96%; margin-left:15px;">
+                        <tbody class="thh">
+                        @foreach($order_obj as $order)
+                            <tr>
+                                <td width="15%" style="padding-left: 0;">{{ $order->display_time }}</td>
+                                <td width="30%" style="padding-left: 4px;">{{ $order->table_display_name }}</td>
+                                <td width="15%" style="padding-left: 4px;">{{ $order->amount }}</td>
+                                <td width="25%" style="padding-left: 6px;">{{ $order->customer_name }}</td>
+                                <td width="15%" style="text-align:center;padding-left: 9px;">
+                                    {{--<a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">REPRINT</a>--}}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection
+
+<style>
+    #search_trans_date {
+        background: white;
+        font-size: 25px;
+        width: 300px;
+        height: 45px;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        margin-top: 7px;
+    }
+    
+    .src_trans {
+        background: white;
+        font-size: 16px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 5px;
+        font-weight: 500;
+    }
+</style>
+
+<script>
+
+    function search_transaction() {
+        var src_date = $('#search_trans_date').val();
+        var src_date_arr = src_date.split('/');
+        var src_dates = src_date_arr[2] + '-' + src_date_arr[0] + '-' + src_date_arr[1];
+//        alert(src_dates);
+        $.ajax({
+            type:"GET",
+            url:"{{ route('admin.src_trans') }}",
+            data:{src_date: src_dates},
+            success: function(result){
+                //console.log(result);
+                document.getElementById("data_view").innerHTML = result;
+
+            }
+        });
+    }
+
+</script>

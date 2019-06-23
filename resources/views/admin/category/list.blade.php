@@ -16,92 +16,131 @@
     }
 </style>
 <div class="">
-    <div style="padding-top:8%;" class="pttbook"></div>
+    <div style="padding-top:8%;"></div>
 
-    <div class="widthh pb-1 hh black2 position-relative">
-        <a href="{{route('admin.home')}}" class="bg-transparent" style="position:absolute;top:15px ;right:10px"><h2><span class="">
-            <img src="{{ asset('img/Group826.png') }}" height="20" class="float-right" width="20" />
-        </span></h2></a>
+    <div class="widthh blackgrey pt-4" style="height: 885px;">
+        <a onclick="window.history.back()">
+            <h2><span class="">
+                <img src="{{ asset('img/Group826.png') }}"  style="width:25px;height:25px;" class="float-right" />
+            </span></h2>
+        </a>
         <div class="pt-5">
-            <div class="row">
+            <div class="row" style="height: 670px;">
                 <div class="col-7">
                     <div class="row">
                         <div style="border-right:1px solid grey" class="col-6 pl-0 pr-3">
-                            <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">CATEGORY</h5>
-                            <h6 class="hspace-category" style="margin:0px"></h6>
+                            <h5 class="white-text font-weight-bold pl-2 fs-25" style="width:90%; margin:0 auto">CATEGORY</h5>
+                            <h6 class="hspace-category" style="margin:0px;height: 41px;"></h6>
                             <div class="category-div" id="category-scroll">
-                            @foreach($categories as $cat)
-                                @include('part.category_item')
-                            @endforeach
+                                @foreach($categories as $cat)
+                                    @include('part.category_item')
+                                @endforeach
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
-                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" data-toggle="modal" data-target="#addModal">
-                                    <h6 class="mb-0 font-weight-bold">ADD</h6>
+                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" data-toggle="modal" data-target="#addCategoryModal">
+                                    <h6 class="mb-0 font-weight-bold fs-25">ADD</h6>
                                 </button>
                                 <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteMainCategory">
-                                    <h6 class="mb-0 font-weight-bold">Delete</h6>
+                                    <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                                 </button>
                             </div>
                         </div>
                         <!-- Modal -->
+                        <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                                        </button>
+                                    </div>
+                                    <div class="modal-body pr-4">
+                                        <h5 class="text-info font-weight-normal fs-25">English</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_en_cat" id="name_en_cat">
+		                                <h5 class="text-info font-weight-normal fs-25">Mandarine</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_cn_cat" id="name_cn_cat">
+                                        <h5 class="text-info font-weight-normal fs-25">Japanese</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_jp_cat" id="name_jp_cat">
+                                        <input type="hidden" id="parent_id" name="parent_id">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                                            CANCEL
+                                            <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light fs-25" onclick="addMainCategory()">
+                                            APPLY
+                                            <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
+                                            <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
                                         </button>
                                     </div>
                                     <div class="modal-body pr-4">
-                                        <h5 class="text-info font-weight-normal">English</h5>
-		                                <input class="form-control pl-3" type="text" name="name_en" id="name_en">
-		                                <h5 class="text-info font-weight-normal">Mandarine</h5>
-		                                <input class="form-control pl-3" type="text" name="name_cn" id="name_cn">
-                                        <h5 class="text-info font-weight-normal">Japanese</h5>
-                                        <input class="form-control pl-3" type="text" name="name_jp" id="name_jp">
+                                        <h5 class="text-info font-weight-normal fs-25">English</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_en" id="name_en">
+                                        <h5 class="text-info font-weight-normal fs-25">Mandarine</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_cn" id="name_cn">
+                                        <h5 class="text-info font-weight-normal fs-25">Japanese</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="name_jp" id="name_jp">
                                         <input type="hidden" id="parent_id" name="parent_id">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="addCategory()">APPLY &gt;</button>
+                                        <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                                            CANCEL
+                                            <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light fs-25" onclick="addCategory()">
+                                            APPLY
+                                            <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6" style="border-right:1px solid grey">
-                            <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">SUB CATEGORY</h5>
-                            <h6 class="white-text d-inline pl-2">USE SUB CATEGORY</h6>
-                            <label class="switch-style" style="margin-top:8px">
-                                <input type="checkbox" id="chk_hassubs">
-                                <span class="slider checkbox-round"></span>
-                            </label>
+                            <h5 class="white-text font-weight-bold pl-2 fs-25" style="width:90%; margin:0 auto">SUB CATEGORY</h5>
+                            <h6 class="white-text d-inline pl-4 fs-23">USE SUB CATEGORY
+                                <label class="switch-style" style="margin-top:3px">
+                                    <input type="checkbox" id="chk_hassubs">
+                                    <span class="slider checkbox-round"></span>
+                                </label>
+                            </h6>
                             <br>
-                            <div class="category-div pr-5" id="subcategory-scroll">
+                            <div class="category-div pr-5" id="subcategory-scroll" style="margin-top: 7px;">
 
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                                 <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()">
-                                    <h6 class="mb-0 font-weight-bold">ADD</h6>
+                                    <h6 class="mb-0 font-weight-bold fs-25">ADD</h6>
                                 </button>
                                 <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteSubCategory">
-                                    <h6 class="mb-0 font-weight-bold">Delete</h6>
+                                    <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-5 pl-2 pr-5" style="width:85%">
-                    <h5 class="white-text font-weight-bold pl-2" style="width:90%; margin:0 auto">DISH</h5>
-                    <h6 class="hspace-category" style="margin:0px"></h6>
-                    <div class="category-div hi pt-div" id="scroll-dish">
+                    <h5 class="white-text font-weight-bold pl-2 fs-25" style="width:90%; margin:0 auto">DISH</h5>
+                    <h6 class="hspace-category" style="margin:0px;height: 41px;"></h6>
+                    <div class="category-div pt-div" id="scroll-dish">
 
                     </div>
                     <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
                         <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onAddDish()">
-                            <h6 class="mb-0 font-weight-bold">ADD</h6>
+                            <h6 class="mb-0 font-weight-bold fs-25">ADD</h6>
                         </button>
                         <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteDishModal">
-                            <h6 class="mb-0 font-weight-bold">Delete</h6>
+                            <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                         </button>
                     </div>
                 </div>
@@ -111,16 +150,16 @@
                     <div class="d-inline-block text-white font-bold border-blue">
                         <table>
                             <tr>
-                                <td class="d-inline-block border-rightBlue p-3 w-60px">
+                                <td class="d-inline-block border-rightBlue p-3 w-60px" style="font-size: 15px;">
                                     <a class="font-weight-bold text-white" href="{{ route('admin.dish') }}" >DISH</a>
                                 </td>
-                                <td class="bg-blue2 p-3 d-inline-block border-rightBlue w-60px">
+                                <td class="bg-blue2 p-3 d-inline-block border-rightBlue w-60px" style="font-size: 15px;">
                                     <a class="font-weight-bold text-white" href="{{ route('admin.category') }}">CATEGORY</a>
                                 </td>
-                                <td class="p-3 d-inline-block border- w-60px border-rightBlue">
+                                <td class="p-3 d-inline-block border- w-60px border-rightBlue" style="font-size: 15px;">
                                     <a class="font-weight-bold text-white" href="{{ route('admin.option') }}">OPTION</a>
                                 </td>
-                                <td class="p-3 d-inline-block border-rightBlue  w-60px">
+                                <td class="p-3 d-inline-block border-rightBlue  w-60px" style="font-size: 15px;">
                                     <a class="font-weight-bold text-white" href="{{ route('admin.discount') }}">DISCOUNT</a>
                                 </td>
                             </tr>
@@ -128,26 +167,27 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
 </div>
 <div class="modal fade" id="dish_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:90% !important;">
-        <div class="modal-content" style="height: 500px;overflow:auto;">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
                 </button>
             </div>
             <input type="hidden" id="tmp_dish_ids">
             <input type="hidden" id="tmp_dish_count">
-            <div class="modal-body pr-4">
+            <div class="modal-body pr-4" style="height: 500px;overflow:auto;">
                 <div class="row w-100">
                     <div class="col-12">
                         @foreach($dishes as $dish)
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">{{$dish->name_en}}</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">{{$dish->name_en}}</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -163,8 +203,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal"><h5 class="mb-0 font-weight-bold">CANCEL &gt;</h5></button>
-                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="saveCheckedDishes();"><h5 class="mb-0 font-weight-bold">ADD &gt;</h5></button>
+                <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                    CANCEL
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+                <button type="button" class="btn btn-primary waves-effect waves-light fs-25" onclick="saveCheckedDishes();">
+                    ADD
+                    <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                </button>
             </div>
         </div>
     </div>
@@ -174,14 +220,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
                 </button>
             </div>
             <div class="modal-body pr-4">
-                <p id="confirm_letter" class="text-center"></p>
+                <p id="confirm_letter" class="text-center fs-25"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Close &gt;</button>
+                <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                    Close
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
             </div>
         </div>
     </div>
@@ -191,28 +240,35 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
                 </button>
             </div>
             <div class="modal-body pr-4">
-                <p id="confirm_remove" class="text-center"></p>
+                <p id="confirm_remove" class="text-center fs-25"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Cancel &gt;</button>
-                <button type="button" class="btn btn-light waves-effect waves-light" id="confirmbtn">OK &gt;</button>
+                <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                    Cancel
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+                <button type="button" class="btn btn-primary waves-effect waves-light fs-25" id="confirmbtn">
+                    OK
+                    <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function(){
-        $('.hspace-category').height($('.switch-style').outerHeight(true));
+        // $('.hspace-category').height($('.switch-style').outerHeight(true));
     });
     var currentMain = '';
     var currentSub = '';
     var clickedSub = 0;
 
     function onMain(obj){
+        currentSub = '';
         activeCatButton('.cat-button', false);
         var id = $(obj).data('id');
         currentMain = id;
@@ -259,36 +315,75 @@
         });
     }
 
+    function addMainCategory()
+    {
+        var parent_id = '';
+        var name_en = $('#name_en_cat').val();
+        if(name_en == '') {
+            alert('Please input English name!');
+        } else {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('admin.category.add') }}",
+                data:{
+                    name_en : $('#name_en_cat').val(),
+                    name_cn : $('#name_cn_cat').val(),
+                    name_jp : $('#name_jp_cat').val(),
+                    parent_id : parent_id,
+                    _token : "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    if(parent_id != ''){
+                        $('#subcategory-scroll').append(result);
+                    } else {
+                        $('#category-scroll').append(result);
+                    }
+                    $('#name_en_cat').val('');
+                    $('#name_cn_cat').val('');
+                    $('#name_jp_cat').val('');
+                    $('#addCategoryModal').modal('hide');
+                }
+            });
+        }
+    }
     function addCategory()
     {
         var parent_id = $('#parent_id').val();
-        $.ajax({
-            type:"POST",
-            url:"{{ route('admin.category.add') }}",
-            data:{
-                name_en : $('#name_en').val(),
-                name_cn : $('#name_cn').val(),
-                name_jp : $('#name_jp').val(),
-                parent_id : parent_id,
-                _token : "{{ csrf_token() }}"
-            },
-            success: function(result){
-                if(parent_id != ''){
-                    $('#subcategory-scroll').append(result);
-                } else {
-                    $('#category-scroll').append(result);
+        var name_en = $('#name_en').val();
+        if(name_en == '') {
+            alert('Please input English name!');
+        } else {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('admin.category.add') }}",
+                data:{
+                    name_en : $('#name_en').val(),
+                    name_cn : $('#name_cn').val(),
+                    name_jp : $('#name_jp').val(),
+                    parent_id : parent_id,
+                    _token : "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    if(parent_id != ''){
+                        $('#subcategory-scroll').append(result);
+                    } else {
+                        $('#category-scroll').append(result);
+                    }
+                    $('#name_en').val('');
+                    $('#name_cn').val('');
+                    $('#name_jp').val('');
+                    $('#addModal').modal('hide');
                 }
-                $('#name_en').val('');
-                $('#name_cn').val('');
-                $('#name_jp').val('');
-                $('#addModal').modal('hide');
-            }
-        });
+            });
+        }
     }
     function onSubAdd(){
         if($('#chk_hassubs').is(':checked') && currentMain != ''){
             $('#parent_id').val(currentMain);
             $('#addModal').modal('toggle');
+            // currentMain = '';
         }
         if(!$('#chk_hassubs').is(':checked')){
             $("#confirm_letter")[0].innerText = "Please set the SubCategory check button to active.";
@@ -300,6 +395,7 @@
         }
     }
     $("#deleteMainCategory").click(function() {
+        //alert(currentMain);
         if(currentMain != '') {
             $("#confirm_remove")[0].innerText = "Do you want to delete the category?";
             $("#confirmbtn").attr("onclick", "onDeleteMain()");
@@ -311,7 +407,7 @@
     });
     $("#deleteSubCategory").click(function() {
         if(currentSub != '') {
-            $("#confirm_remove")[0].innerText = currentSub + "Do you want to delete the sub category?";
+            $("#confirm_remove")[0].innerText = "Do you want to delete the sub category?";
             $("#confirmbtn").attr("onclick", "onDeleteSub()");
             $("#confirm_category_modal").modal('toggle');
         }else{
@@ -341,6 +437,7 @@
                     $("[data-parent='" + currentMain + "']").remove();
                     $('#scroll-dish').html('');
                     $("#confirm_category_modal").modal('hide');
+                    currentMain = '';
                 }
             });
         }
@@ -355,6 +452,7 @@
                     $("[data-id='" + currentSub + "']").remove();
                     $('#scroll-dish').html('');
                     $("#confirm_category_modal").modal('hide');
+                    currentSub = '';
                 }
             });
         }
@@ -387,7 +485,7 @@
             $("#confirm_parent_category").modal('toggle');
         }else{
             if($('#chk_hassubs').is(':checked') == true && clickedSub == 0){
-                $("#confirm_letter")[0].innerText = "Please select the category.";
+                $("#confirm_letter")[0].innerText = "Please checkoff USE SUB CATEGORY.";
                 $("#confirm_parent_category").modal('toggle');
                 return;
             }
@@ -450,6 +548,12 @@
 
     function saveCheckedDishes()
     {
+        var category = '';
+        if(currentSub != '')
+            category = currentSub;
+        else
+            category = currentMain;
+
         var tmp_dish_ids = $("#tmp_dish_ids").val();
         var tmp_dish_count = $("#tmp_dish_count").val();
         $("#dish_ids").val(tmp_dish_ids);
@@ -457,20 +561,24 @@
         $.ajax({
             type:"GET",
             url:"{{ url('admin/category/dish_add') }}",
-            data: {'dish_ids': tmp_dish_ids, 'subcategory_id':currentSub},
+            data: {'dish_ids': tmp_dish_ids, 'category_id':category},
             success: function(result){
                 if(result){
                     $.ajax({
                         type:"POST",
                         url:"{{ route('admin.category.dish_list') }}",
                         data:{
-                            category: currentSub,
+                            category: category,
                             _token:"{{ csrf_token() }}"
                         },
                         success: function(result){
                             $('#scroll-dish').html(result);
                         }
                     });
+                    if(currentSub != '')
+                        currentSub = '';
+                    else
+                        currentMain = '';
                     $('#dish_add_modal').modal('hide');
                 }
             }
@@ -480,14 +588,22 @@
 
     function onDeleteDish()
     {
+        var category = '';
+        if(currentSub != '')
+            category = currentSub;
+        else
+            category = currentMain;
+
         if(current_dish != ''){
             $.ajax({
                 type:"GET",
                 url:"{{ url('admin/category/dish_delete') }}" + "/" + current_dish,
+                data: {'category_id':category},
                 success: function(result){
                     if(result){
                         $("[data-dish='" + current_dish + "']").remove();
                         $("#confirm_category_modal").modal('hide');
+                        current_dish = '';
                     }
                 }
             });

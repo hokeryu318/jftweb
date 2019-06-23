@@ -8,158 +8,185 @@
             padding-top : 0.6rem;
             padding-bottom : 0.6rem;
         }
+        .datetimepicker table tr td.active,
+        .datetimepicker table tr td.active:hover,
+        .datetimepicker table tr td.active.disabled,
+        .datetimepicker table tr td.active.disabled:hover,
+        .datetimepicker table tr td.active:hover,
+        .datetimepicker table tr td.active:hover:hover,
+        .datetimepicker table tr td.active.disabled:hover,
+        .datetimepicker table tr td.active.disabled:hover:hover,
+        .datetimepicker table tr td.active:active,
+        .datetimepicker table tr td.active:hover:active,
+        .datetimepicker table tr td.active.disabled:active,
+        .datetimepicker table tr td.active.disabled:hover:active,
+        .datetimepicker table tr td.active.active,
+        .datetimepicker table tr td.active:hover.active,
+        .datetimepicker table tr td.active.disabled.active,
+        .datetimepicker table tr td.active.disabled:hover.active,
+        .datetimepicker table tr td.active.disabled,
+        .datetimepicker table tr td.active:hover.disabled,
+        .datetimepicker table tr td.active.disabled.disabled,
+        .datetimepicker table tr td.active.disabled:hover.disabled,
+        .datetimepicker table tr td.active[disabled],
+        .datetimepicker table tr td.active:hover[disabled],
+        .datetimepicker table tr td.active.disabled[disabled],
+        .datetimepicker table tr td.active.disabled:hover[disabled]
+        {
+            background-image:none !important;
+            background-color:transparent;
+            color:red;
+            font-size: 50px;
+            font-weight:bold;
+            border-radius:50px !important;
+            /*border:2px solid #1ec2c9*/
+        }
+
+        .datetimepicker-days table.table-condensed {
+            width: 360px;
+        }
+
     </style>
-    <div class="container-fluid pb-3 pt-3 blackgrey">
-        <form method="POST" action="{{ route('admin.discount.store') }}" enctype='multipart/form-data'>
+    <div class="container-fluid pb-3 pt-3 blackgrey" style="height: 1024px;">
+        <form method="POST" action="{{ route('admin.discount.store') }}" enctype='multipart/form-data' onSubmit="return validateform()">
             <input type="hidden" name="id" value="{{$obj->id}}">
             <input type="hidden" name="checked_start_date" id="checked-start-date" value="{{(isset($obj->start) ? $obj->start : date("Y-m-d H:i:s"))}}">
             <input type="hidden" name="checked_end_date" id="checked-end-date" value="{{(isset($obj->end) ? $obj->end : date("Y-m-d H:i:s"))}}">
             <input type="hidden" name="end_type" id="end-type" value="{{isset($obj->end_type) ? $obj->end_type : 0}}">
-            <div style="padding-top:8%;"></div>
+            <div style="padding-top:7%;"></div>
             <div class="widthh pt-3 pb-3 mb-3 white">
                 <div class="row">
                     <div class="col-12">
                         <a>
-                    <span class="">
-                        <a href="{{route('admin.discount')}}">
-                            <img src="{{ asset('img/Group1100.png') }}" height="20" class="float-right" width="20" />
-                        </a>
-                    </span>
+                            <span class="">
+                                <a href="{{route('admin.discount')}}">
+                                    <img src="{{ asset('img/Group1100.png') }}" width="25" height="25" class="float-right" />
+                                </a>
+                            </span>
                         </a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pl-4 pr-4">
                     <div class="col-6">
                         <div class="form-group">
                             <div>
-                                <label class="text-blue txtdemibold">Choose Dish</label>
+                                <label class="text-blue txtdemibold fs-25">Choose Dish</label>
                             </div>
-                            <select onchange="changeDish(this);" class="border-blue select-width-blue mr-1 option-padding option-select" style="width:100%" name="dish_id">
+                            <select onchange="changeDish(this);" class="border-blue select-width-blue mr-1 option-padding option-select fs-25" style="width:100%" name="dish_id">
                                 @foreach ($dishes as $ds)
                                     <option value="{{ $ds->id }}" data-price="{{$ds->price}}" @if(isset($dish) && $ds->id == $dish) selected @endif>{{ $ds->name_en }}</option>
                                 @endforeach
                             </select>
-                            <label class="text-blue float-right text-right" id="rrp_price">RRP: $ {{ number_format($ds->price, 2) }}</label>
+                            <label class="text-blue float-right text-right fs-23" id="rrp_price">List Price: $ {{ number_format($ds->price, 2) }}</label>
                         </div>
                         <div class="form-group">
                             <div>
-                                <label class="text-blue txtdemibold">Discounted Price:</label>
+                                <label class="text-blue txtdemibold fs-25">Discounted Price:</label>
                             </div>
-                            <input type="number" class="outline-0 border-bottom-blue" value="{{$obj->discount}}" id="discount-value" name="discount" step="0.01"/>
+                            <input type="number" class="outline-0 border-bottom-blue" style="font-size: 25px;" value="{{$obj->discount}}" id="discount-value" name="discount" step="0.01"/>
                             <input type="hidden" value="{{ $gst }}" id="gst" name="gst">
-                            <label class="text-blue float-right  text-right" id="gst_value">
+                            <label class="text-blue float-right  text-right fs-23" id="gst_value">
                                 @if ($obj->discount > 0)
-                                    (Included GST: $ {{ $obj->discount*$gst/100 }})
+                                    (Included GST: $ {{ number_format($obj->discount*$gst/100, 2) }})
                                 @endif
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4 pl-4 pr-4">
                     <div class="col-6">
                         <div>
-                            <label class="text-blue txtdemibold mr-3">Start</label>
+                            <label class="text-blue txtdemibold mr-3 fs-25">Start</label>
                             <div class="form-check d-inline">
                                 <input type="radio" class="form-check-input rdobtn" id="materialUnchecked" name="start"
-                                       @if($obj->end_type == 2 || $obj->end_type == 4) checked
-                                        @endif
-                                        >
-                                <label class="form-check-label text-blue txtdemibold" for="materialUnchecked">Now</label>
+                                    @if($obj->end_type == 2 || $obj->end_type == 4) checked @endif>
+                                <label class="form-check-label text-blue txtdemibold fs-25" for="materialUnchecked">Now</label>
                             </div>
                         </div>
                         <div>
-                            <label class="text-blue txtdemibold invisible mr-3">Start</label>
+                            <label class="text-blue txtdemibold invisible mr-3 fs-25">Start</label>
                             <div class="form-check d-inline">
                                 <input type="radio" class="form-check-input" id="materialChecked" name="start"
-                                       @if($obj->end_type != 2 && $obj->end_type != 4) checked
-                                        @endif>
-                                <label class="form-check-label text-blue txtdemibold" id="selected-start-date" for="materialChecked">
+                                    @if($obj->end_type != 2 && $obj->end_type != 4) checked @endif>
+                                <label class="form-check-label text-blue txtdemibold fs-25" id="selected-start-date" for="materialChecked">
                                     @if($obj->id > 0 && $obj->end_type != 2)
-                                        {{date("j F Y g:i A", strtotime($obj->start))}}
+                                        {{date("H:i d F Y", strtotime($obj->start))}}
                                     @else
-                                        {{date("j F Y g:i A")}}
+                                        {{date("H:i d F Y")}}
                                     @endif
                                 </label>
                             </div>
-                            <button type="button" class="addOptionbtn pl-4 pr-4 float-right" onclick="onDateModal('start')">Change</button>
+                            <button type="button" class="addOptionbtn pl-4 pr-4 float-right fs-25" onclick="onDateModal('start')">Change</button>
                         </div>
                     </div>
                     <div class="col-6">
                         <div>
-                            <label class="text-blue txtdemibold mr-3 ">End</label>
+                            <label class="text-blue txtdemibold mr-3  fs-25">End</label>
                             <div class="form-check d-inline">
                                 <input type="radio" class="form-check-input" id="materialUnchecked2" name="end"
-                                       @if($obj->end_type == 3 || $obj->end_type == 4) checked
-                                        @endif>
-                                <label class="form-check-label text-blue txtdemibold" for="materialUnchecked2">Indefinite</label>
+                                    @if($obj->end_type == 3 || $obj->end_type == 4) checked @endif>
+                                <label class="form-check-label text-blue txtdemibold fs-25" for="materialUnchecked2">Indefinite</label>
                             </div>
                         </div>
                         <div>
-                            <label class="text-blue txtdemibold invisible mr-3">End</label>
+                            <label class="text-blue txtdemibold invisible mr-3 fs-25">End</label>
                             <div class="form-check d-inline">
                                 <input type="radio" class="form-check-input" id="materialChecked3" name="end"
-                                       @if($obj->end_type != 3 && $obj->end_type != 4) checked
-                                        @endif>
-                                <label class="form-check-label text-blue txtdemibold" id="selected-end-date" for="materialChecked3">
+                                    @if($obj->end_type != 3 && $obj->end_type != 4) checked @endif>
+                                <label class="form-check-label text-blue txtdemibold fs-25" id="selected-end-date" for="materialChecked3">
                                     @if($obj->id > 0 && $obj->end_type != 3 )
-                                        {{date("j F Y g:i A", strtotime($obj->end))}}
+                                        {{date("H:i d F Y", strtotime($obj->end))}}
                                     @else
-                                        {{date("j F Y g:i A")}}
+                                        {{date("H:i d F Y")}}
                                     @endif</label>
                             </div>
-                            <button type="button" class="addOptionbtn pl-4 pr-4 float-right" onclick="onDateModal('end')">Change</button>
+                            <button type="button" class="addOptionbtn pl-4 pr-4 float-right fs-25" onclick="onDateModal('end')">Change</button>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row mt-5 pl-4 pr-4">
                     <div class="col-7">
-                        <label class="text-blue txtdemibold">Time Slots</label>
-                        <div class="border-bottom-blue3 mt-3 mb-3"></div>
                         <div class="border-bottom-blue">
                             <div class="row">
-                                <div class="col-8"><label class="txtdemibold mt-2">Breakfast</label></div>
+                                <div class="col-8"><label class="text-blue txtdemibold mt-2 fs-25">Time Slots</label></div>
+                            </div>
+                        </div>
+                        <div class="border-bottom-blue" style="margin: 8px 0 0 0;">
+                            <div class="row">
+                                <div class="col-8"><label class="txtdemibold mt-2 fs-25">Breakfast</label></div>
                                 <div class="col-4">
                                     <div class="float-right mt-2">
                                         <label class="bs-switch">
                                             <input type="checkbox" name="timeslot_breakfast"
-                                                    @if($obj->timeslot_breakfast == 1)
-                                                        checked
-                                                    @endif
-                                                    >
+                                               @if($obj->timeslot_breakfast == 1) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="border-bottom-blue">
+                        <div class="border-bottom-blue" style="margin: 8px 0 0 0;">
                             <div class="row">
-                                <div class="col-8"><label class="txtdemibold mt-2">Lunch</label></div>
+                                <div class="col-8"><label class="txtdemibold mt-2 fs-25">Lunch</label></div>
                                 <div class="col-4">
                                     <div class="float-right mt-2">
                                         <label class="bs-switch ">
                                             <input type="checkbox" name="timeslot_lunch"
-                                                   @if($obj->timeslot_lunch == 1)
-                                                   checked
-                                                    @endif
-                                                    >
+                                               @if($obj->timeslot_lunch == 1) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="border-bottom-blue">
+                        <div class="border-bottom-blue" style="margin: 8px 0 0 0;">
                             <div class="row">
-                                <div class="col-8"><label class="txtdemibold mt-2">Tea</label></div>
+                                <div class="col-8"><label class="txtdemibold mt-2 fs-25">Tea</label></div>
                                 <div class="col-4">
                                     <div class="float-right mt-2">
                                         <label class="bs-switch ">
                                             <input type="checkbox" name="timeslot_tea"
-                                                   @if($obj->timeslot_tea == 1)
-                                                   checked
-                                                    @endif
-                                                    >
+                                                @if($obj->timeslot_tea == 1) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -167,17 +194,14 @@
                             </div>
                         </div>
 
-                        <div class="border-bottom-blue">
+                        <div class="border-bottom-blue" style="margin: 8px 0 0 0;">
                             <div class="row">
-                                <div class="col-8"><label class="txtdemibold mt-2">Dinner</label></div>
+                                <div class="col-8"><label class="txtdemibold mt-2 fs-25">Dinner</label></div>
                                 <div class="col-4">
                                     <div class="float-right mt-2">
                                         <label class="bs-switch ">
                                             <input type="checkbox" name="timeslot_dinner"
-                                                   @if($obj->timeslot_dinner == 1)
-                                                   checked
-                                                    @endif
-                                                    >
+                                                @if($obj->timeslot_dinner == 1) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -186,23 +210,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row mt-5 pl-4 pr-4">
                     <div class="col-7">
                         @if($obj->end_type == 0 && $obj->id > 0)
-                            <button class="grey-button" onclick="onEndNow()">
+                            <button class="grey-button fs-25" onclick="onEndNow()" style="padding: 10px 15px 10px 15px;margin-top: -10px;">
                                 END NOW
-                                <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                                <img src="{{ asset('img/Group728.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                             </button>
                         @endif
                     </div>
                     <div class="col-5">
-                        <a class="grey-button ml-5" href="{{route('admin.discount')}}" style="color:black;padding: 10px;">
+                        <a class="grey-button fs-25" href="{{route('admin.discount')}}" style="color:black;padding: 14px 15px 14px 15px;margin-left: 150px;">
                             CANCEL
-                            <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                            <img src="{{ asset('img/Group728.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                         </a>
-                        <button class="green-button" style="padding:5px 25px 8px 25px;margin-top:-7px;">
-                            Apply
-                            <img src="{{ asset('img/Group728white.png') }}" height="20" class="mb-1" />
+                        <button class="green-button fs-25" style="padding: 10px 15px 10px 15px;margin-top:-10px;">
+                            APPLY
+                            <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                         </button>
                     </div>
                 </div>
@@ -213,27 +237,33 @@
 
     <div class="modal fade" id="datetimemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 800px;margin-left: -30%;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <img src="{{ asset('img/Group1100.png') }}" width="30" height="30" class="float-right mt-3 mr-3" />
                     </button>
                 </div>
-                <div class="modal-body pr-4">
+                <div class="modal-body pr-4" style="width: 800px;">
                     <div class="row">
                         <div class="col-6">
-                            <h3 class="font-weight-bold mb-3 text-left text-info" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">Date</h3>
-                            <div id="now-datepicker" class="w-100"></div>
+                            <h3 class="font-weight-bold mb-3 text-left text-info fs-25" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">Date</h3>
+                            <div id="now-datepicker"  style="font-size: 20px;width: 200px;"></div>
                         </div>
                         <div class="col-6 text-center">
-                            <h3 class="font-weight-bold mb-3 text-left text-info" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">Time</h3>
-                            <div id="now-time-picker"></div>
+                            <h3 class="font-weight-bold mb-3 text-left text-info fs-25" style="border-bottom:2px solid #1ec2c9;padding-bottom:11px">Time</h3>
+                            <div id="now-time-picker" style="font-size: 25px;"></div>
                             <div class="output display-none">0</div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light" id="apply-time-btn">APPLY &gt;</button>
+                        <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                            CANCEL
+                            <img src="{{ asset('img/Group728.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
+                        </button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light fs-25" id="apply-time-btn">
+                            APPLY
+                            <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -258,7 +288,7 @@
             weekStart: 1,
             todayBtn: 1,
             minView: 2,
-            forceParse: 0
+            forceParse: 0,
         });
         $('#now-time-picker').picker({
             data: data_arr,
@@ -357,23 +387,47 @@
         });
 
         $("#materialUnchecked").click(function() {
-           $("#checked-start-date").val(1);
+           // $("#checked-start-date").val(1);
             var end_type = $("#end-type").val();
             if(end_type == 3){
                 $("#end-type").val(4);
-            }else{
+            }else if(end_type == 0){
                 $("#end-type").val(2);
             }
+            //alert(end_type);
         });
 
         $("#materialUnchecked2").click(function() {
-            $("#checked-end-date").val(1);
+            // $("#checked-end-date").val(1);
             var end_type = $("#end-type").val();
             if(end_type == 2){
                 $("#end-type").val(4);
-            }else{
+            }else if(end_type == 0){
                 $("#end-type").val(3);
             }
+            //alert(end_type);
+        });
+
+        $("#materialChecked").click(function() {
+            // $("#checked-start-date").val(1);
+            var end_type = $("#end-type").val();
+            if(end_type == 2){
+                $("#end-type").val(0);
+            }else if(end_type == 4){
+                $("#end-type").val(3);
+            }
+            //alert(end_type);
+        });
+
+        $("#materialChecked3").click(function() {
+            // $("#checked-end-date").val(1);
+            var end_type = $("#end-type").val();
+            if(end_type == 3){
+                $("#end-type").val(0);
+            }else if(end_type == 4){
+                $("#end-type").val(2);
+            }
+            //alert(end_type);
         });
 
         function onEndNow()
@@ -408,6 +462,17 @@
                 }
             }
             return 1;
+        }
+
+        function validateform() {
+
+            var discount_value = $("#discount-value").val();
+
+            if(!discount_value) {
+                alert('Plesae input Discounted Price!');
+                return false;
+            }
+            return true;
         }
     </script>
 @endsection

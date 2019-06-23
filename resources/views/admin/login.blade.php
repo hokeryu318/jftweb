@@ -28,42 +28,54 @@
     }
 </style>
 <body>
-    <form method="POST" action="{{ route('admin.login') }}">
+    <form method="POST" action="{{ route('admin.login', ['slag'=>$slag]) }}">
     @csrf
-    <div class="">
-        <div class="container-fluid hh black pt-5">
+        <div class="container-fluid hh black lg-height">
             <div class="container pt-5">
-                <div class="row pt-5">
+                <div class="row pt-5 mt">
                     <div class="col-4 pt-5">
-                        <img class="img-fluid mt-auto mb-auto" src="{{ asset('img/logo.png') }}" />
+                        <img class="lg-img-ht mt-auto mb-auto" src="{{ asset('receipt/'.$profile->logo_image) }}" />
                     </div>
                     <div class="col-8 pt-5">
-                        <h4 class="white-text mb-5 mt-0 pt-0">
-                        @if($slag == 'setting')
-                            Setting
-                        @elseif($slag == 'category')
-                            Edit Menu
-                        @elseif($slag == 'saledata')
-                            Sales Data
-                        @elseif($slag == 'table')
-                            Table Edit
-                        @endif
-                        </h4>
-                        <input type="password" name="password" style="width:250px;border:2px solid white !important;text-align:center;color:white !important;font-size:20px" placeholder="****" />
+                        <h1 class="white-text mb-5 mt-0 pt-0">
+                            @if($slag == 'setting')
+                                Setting
+                            @elseif($slag == 'edit_menu')
+                                Edit Menu
+                            @elseif($slag == 'saledata')
+                                Sales Data
+                            @elseif($slag == 'table')
+                                Table Edit
+                            @endif
+                        </h1>
+                        <input type="password" name="password"
+                               style="width:350px;border:2px solid white !important;text-align:center;color:white !important;font-size:25px"
+                               placeholder="" />
                         <div class="row" style="padding-top:20rem">
                             <div class="col-6">
-                                <button class="btn white w-100"><h5 class="mb-0 black-text font-weight-bold">Cancel</h5></button>
+                                <a class="btn white w-100" onclick="window.history.back()">
+                                    <h5 class="mb-0 black-text font-weight-bold fs-30">Cancel</h5>
+                                </a>
                             </div>
                             <div class="col-6 pl-2">
-                                <button class="btn bg-info w-100"><h5 class="mb-0 white-text font-weight-bold">Log In</h5></button>
+                                <button class="btn bg-info w-100">
+                                    <h5 class="mb-0 white-text font-weight-bold fs-30">Log In</h5>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
     </form>
+    @if($alert)
+        <div class="alert alert-success alert-dismissible lg-alert" id="success-alert" role="alert" style="margin: -550px 0 0 510px;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ $alert }}
+        </div>
+        <br>
+    @endif
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
@@ -71,4 +83,20 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+
+    <script>
+        $("#success-alert").fadeTo(3000, 500).fadeOut(5000, function(){
+            $("#success-alert").alert('close');
+        });
+    </script>
 </body>
+
+<style>
+    .adm_inp {
+        width:350px;
+        border:2px solid white !important;
+        text-align:center;
+        color:white !important;
+        font-size:20px;
+    }
+</style>

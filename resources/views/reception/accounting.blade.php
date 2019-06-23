@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {{--<meta http-equiv="refresh" content="60">--}}
+    <title>
+        @yield('title')
+    </title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/timepicki.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+</head>
+
+<body>
+    <form method="POST" id="save-pay" action="{{ route('reception.pay', ['status' => $status]) }}">
+        @csrf
+        <input type="hidden" id="order_time" value="{{ $time }}" />
+        <input type="hidden" id="order_id" value="{{ $order_id }}" />
+        <input type="hidden" id="duration" value="{{ $duration }}" />
+        <div class="accounting" id="accounting">
+            <div class="accounting_header">
+                <span class="close" style="margin: 0 35px 0 0;" onclick="window.history.back()">
+                    <h2>
+                        <img src="{{ asset('img/Group1101.png') }}" width="25" height="25" class="float-right mt-3 mr-3" />
+                    </h2>
+                </span>
+                <div class="col-lg-11 pr-0 col-xl-11" style="padding: 20px 0 0 40px;">
+                    <div>
+                        <h5><span class="fs-25" style="font-weight: 700;">NAME: </span><span class="fs-25">{{ $customer_name }}</span></h5>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <span>
+                            <span class="fs-25" style="font-weight: 700;">TIME: </span><span class="fs-25">{{ $starting_time }}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="fs-25" style="font-weight: 700;">DURATION: </span><span class="fs-25">{{ $duration_time }}</span>
+                            <span class="fs-25" id="during_time"></span>
+                        </h5>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td width="50px"><img src="{{asset('img/head1.png')}}" width="45px" height="45px"></td>
+                                <td width="80px" align="left"><span style="font-size: 30px;"><b>{{ $guest }}</b></span></td>
+                                @foreach($table_name as $tb_nm)
+                                    @if($table_name[0] != $tb_nm)
+                                        <td width="70px" align="center"><img src="{{asset('img/plus_red.png')}}"></td>
+                                    @endif
+                                    <td style="width: 100px;height: 100px;background: #000;color:white;text-align: center;-ms-word-break: break-all;word-break: break-all;">
+                                        <b class="fs-25">
+                                            @if(strlen($tb_nm) > 12)
+                                                {{ substr($tb_nm, 0, 12)."..." }}
+                                            @else
+                                                {{ $tb_nm }}
+                                            @endif
+                                        </b>
+                                    </td>
+                                @endforeach
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div class="accounting_content">
+                        <table class="account_tb_hd">
+                            <tr>
+                                <td class="td1"><h6><span class="fs-25" style="font-weight: 700;">Item</span></h6></td>
+                                <td class="td2"><h6><span class="fs-25" style="font-weight: 700;">Qty</span></h6></td>
+                                <td class="td3"><h6><span class="fs-25" style="font-weight: 700;">Each</span></h6></td>
+                                <td class="td4"><h6><span class="fs-25" style="font-weight: 700;">Sub Total</span></h6></td>
+                            </tr>
+                        </table>
+                        <div style="width: 780px;height: 400px;overflow-x: hidden;overflow-y: auto;" id="item_list">
+                            <table class="account_tb_ct">
+                                @if(count($order_dishes) > 0)
+                                    @foreach($order_dishes as $order_dish)
+                                        <tr>
+                                            <td class="td1"><h6><span class="fs-25">{{ $order_dish->dish_name_en }}
+                                                @foreach($order_dish->options as $option)
+                                                    [{{ $option->option_name }}: {{ $option->item_name }}]
+                                                @endforeach
+                                            </span></h6></td>
+                                            <td class="td2"><h6><span class="fs-25">{{ $order_dish->count }}</span></h6></td>
+                                            <td class="td3"><h6><span class="fs-25">
+                                                @if($order_dish->each_price)
+                                                    ${{ number_format($order_dish->each_price, 2) }}
+                                                @endif</span></h6></td>
+                                            <td class="td4"><h6><span class="fs-25">
+                                                @if($order_dish->sub_total)
+                                                    ${{ number_format($order_dish->sub_total, 2) }}
+                                                @endif
+                                            </span></h6></td>
+                                        </tr>
+                                    @endforeach
+                                    @if(count($order_dishes) < 5)
+                                        @for($i=0;$i<5-count($order_dishes);$i++)
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="td2"></td>
+                                            <td class="td3"></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        @endfor
+                                    @endif
+                                @else
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                @endif
+                            </table>
+                        </div>
+                        <table class="account_tb_ft">
+                            <tr>
+                                <td class="td1">
+                                    <span class="amend_btn" onclick="onAmend()"><am class="fs-25" style="margin-right: 80px;" id="am">AMEND</am>
+                                        <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
+                                    </span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="accounting_footer">
+                        <div class="row">
+                            <div class="col-6" style="border-right: 2px solid black;">
+                                <table>
+                                    <tr>
+                                        <td width="40px" onclick="onTip()"><img src="{{asset('img/chat22.png')}}" width="50px" height="50px"></td>
+                                        <td width="120px"><span style="font-size: 23px;float: left;">Tip:</span></td>
+                                        <td width="200px"><span style="font-size: 23px;float: right;" id="tip_value">$0</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><span style="font-size: 23px;float: left;">Sub Total:</span></td>
+                                        <td><span style="font-size: 23px;float: right;" id="sub_total">${{ number_format($total, 2) }}</span></td>
+                                        <input type="hidden" id="tmp_sub_total" value="{{ number_format($total, 2) }}">
+                                        <input type="hidden" id="gst" value="{{ number_format($gst, 2) }}">
+                                    </tr>
+                                    <tr>
+                                        <td onclick="onDiscount()"><img src="{{asset('img/chat22.png')}}" width="50px" height="50px"></td>
+                                        <td><span style="font-size: 23px;float: left;">Discount:</span></td>
+                                        <td><span style="font-size: 23px;float: right;" id="discount_value">$0(0%)</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6" style="">
+                                <table>
+                                    <tr>
+                                        <td width="140px"><span style="font-size: 23px;float: left;"><b>Total:</b></span></td>
+                                        <td width="190px"><b><span style="font-size: 23px;float: right;" id="total">${{ number_format($total, 2) }}</span></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 23px;float: left;">Without GST:</span></td>
+                                        <td><span style="font-size: 23px;float: right;" id="without_gst">${{ number_format($without_gst_price, 2) }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 23px;float: left;">GST:</span></td>
+                                        <td><span style="font-size: 23px;float: right;" id="gst_pr">${{ number_format($gst_price, 2) }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 23px;float: left;"><b>Balance Due</b>:</span></td>
+                                        <td><b><span style="font-size: 23px;float: right;" id="balance">${{ number_format($total, 2) }}</span></b></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-11" style="margin-bottom: 40px;">
+                            <table>
+                                <tr>
+                                    <td width="130px"><span style="font-size: 25px;float: left;">Balance Due:</span></td>
+                                    <td width="150px"><span style="font-size: 25px;float: right;" id="balance1">${{ number_format($total, 2) }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="mt-3" style="font-size: 25px;float: left;">Amount Tendered:</span></td>
+                                    <td>
+                                        <input class="mt-3" type="text" id="amount_tender" name="amount_tender" value=""
+                                               style="font-size: 25px;text-align: right;border-style: solid;
+                                               border-width: 1px;padding-right: 5px;height: 40px;"
+                                         disabled />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="mt-3" style="font-size: 25px;float: left;">Change:</span></td>
+                                    <td><span class="mt-3" style="font-size: 25px;float: right;color: #F00;" id="change"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7" style="margin:0 0 0 5px">
+                            <table style="border-spacing: 10px;border-collapse: separate;">
+                                <tr>
+                                    <td class="number_panel" onclick="onNumber(7)"><span class="fs-35">7</span></td>
+                                    <td class="number_panel" onclick="onNumber(8)"><span class="fs-35">8</span></td>
+                                    <td class="number_panel" onclick="onNumber(9)"><span class="fs-35">9</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="number_panel" onclick="onNumber(4)"><span class="fs-35">4</span></td>
+                                    <td class="number_panel" onclick="onNumber(5)"><span class="fs-35">5</span></td>
+                                    <td class="number_panel" onclick="onNumber(6)"><span class="fs-35">6</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="number_panel" onclick="onNumber(1)"><span class="fs-35">1</span></td>
+                                    <td class="number_panel" onclick="onNumber(2)"><span class="fs-35">2</span></td>
+                                    <td class="number_panel" onclick="onNumber(3)"><span class="fs-35">3</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="number_panel" onclick="onNumber('c')"><span class="fs-35">C</span></td>
+                                    <td class="number_panel" onclick="onNumber(0)"><span class="fs-35">0</span></td>
+                                    <td class="number_panel" onclick="onNumber('.')"><span class="fs-35">.</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="key_panel" style="width: 120px;height: 80px;color:#777777;font-weight: 500;" onclick="Payment('CASH')">
+                                        <span class="fs-25">CASH</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-5" style="margin: 0 0 0 -35px;">
+                            <table style="border-spacing: 10px;border-collapse: separate;">
+                                <tr>
+                                    <td class="key_panel_1" style="background: #ADACAC;color:#FFFFFF;width: 180px;height: 70px;" onclick="Exact()">
+                                        <span class="fs-25">EXACT</span>
+                                    </td>
+                                </tr>
+                                @foreach($payment_method as $payment)
+                                <tr>
+                                    <td class="key_panel_1" onclick="Payment('{{$payment->name}}')" style="height: 70px;">
+                                        <span class="fs-25">{{ $payment->name }}</span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <script>
+        //amend button click
+        function onAmend() {
+            var order_id = $('#order_id').val();
+            document.getElementById("am").innerText = "ADD ITEM";
+            $.ajax({
+                type:"GET",
+                url:"{{ route('reception.amend') }}",
+                data:{order_id: order_id},
+                success: function(result){
+                    // console.log(result);
+                    $('#thirdModal').html(result);
+                }
+            });
+            $('#thirdModal').modal("toggle");
+        }
+
+        function onNumber(number){
+            var amount_tender_obj = $("#amount_tender");
+            var origin_number = amount_tender_obj.val();
+            if(number != "c"){
+                origin_number = origin_number.toString() + number.toString();
+            }
+            if(number == "c"){
+                origin_number = '$';
+            }
+            amount_tender_obj.val(origin_number)
+        }
+
+        function onTip() {
+            $.ajax({
+                type:"GET",
+                url:"{{ route('reception.tip') }}",
+                data:{},
+                success: function(result){
+//                    console.log(result);
+                    $('#thirdModal').html(result);
+                }
+            });
+            $('#thirdModal').modal("toggle");
+        }
+
+        function onDiscount() {
+
+            $.ajax({
+                type:"GET",
+                url:"{{ route('reception.discount') }}",
+                data:{},
+                success: function(result){
+                    // console.log(result);
+                    $('#thirdModal').html(result);
+                }
+            });
+            $('#thirdModal').modal("toggle");
+        }
+        function onCancel() {
+
+            document.getElementById("am").innerText = "AMEND";
+            $('#thirdModal').html('');
+            $('#thirdModal').modal("hide");
+        }
+        //onAddItemApply
+        function onAddItemApply() {
+
+
+        }
+        //onTipEnter
+        function onTipEnter(tip_obj) {
+
+            $('#thirdModal').html('');
+            $('#thirdModal').modal("hide");
+
+            //display tip
+            if(tip_obj == ''){
+                document.getElementById("tip_value").textContent = '$0';
+            }else {
+                tip_obj = parseFloat(tip_obj).toFixed(2);
+                document.getElementById("tip_value").textContent = '$' + tip_obj;
+            }
+
+            //display sub total
+            var tip = parseFloat(document.getElementById("tip_value").textContent.substring(1));
+            var base_sub_total = parseFloat($("#tmp_sub_total").val().replace(',', ''));
+            document.getElementById("sub_total").textContent = '$' + (tip + base_sub_total).toFixed(2).toString();
+
+            //display discount
+            var sub_total = parseFloat(document.getElementById("sub_total").textContent.substring(1)).toFixed(2);
+            var tmp_discount_obj = document.getElementById("discount_value").textContent.split('(');
+            var discount_obj = tmp_discount_obj[0].substring(1);
+            var percent = ((discount_obj/sub_total)*100).toFixed(2);
+            var percent_str = "(" + percent.toString() + "%" + ")";
+            document.getElementById("discount_value").textContent = tmp_discount_obj[0] + percent_str;
+
+            //display total
+            var total = (sub_total - parseFloat(tmp_discount_obj[0].substring(1)).toFixed(2)).toFixed(2);
+            document.getElementById("total").textContent = '$' + total.toString();
+
+            //display gst
+            var gst_val = $('#gst').val();
+            var gst = ((total*gst_val)/100).toFixed(2);
+            document.getElementById("gst_pr").textContent = '$' + (gst).toString();
+
+            //display without gst
+            var without_gst = (total - gst).toFixed(2);
+            document.getElementById("without_gst").textContent = '$' + (without_gst).toString();
+
+            //display balance due
+            document.getElementById("balance").textContent = '$' + total.toString();
+
+            //display balance1 due
+            document.getElementById("balance1").textContent = '$' + total.toString();
+
+        }
+        //onDiscountEnter
+        function onDiscountEnter(discount_obj) {
+
+            $('#thirdModal').html('');
+            $('#thirdModal').modal("hide");
+
+            //display discount
+            if(discount_obj == ''){
+                document.getElementById("discount_value").textContent = '$0(0%)';
+            }else {
+                discount_obj = parseFloat(discount_obj).toFixed(2);
+                document.getElementById("discount_value").textContent = '$' + discount_obj;
+            }
+            var sub_total = parseFloat(document.getElementById("sub_total").textContent.replace(',', '').substring(1)).toFixed(2);
+            var tmp_discount_obj = document.getElementById("discount_value").textContent.split('(');
+            var discount_obj = tmp_discount_obj[0].substring(1);
+            var percent = ((discount_obj/sub_total)*100).toFixed(2);
+            var percent_str = "(" + percent.toString() + "%" + ")";
+            document.getElementById("discount_value").textContent = document.getElementById("discount_value").textContent + percent_str;
+
+            //display total
+            var total = (sub_total - parseFloat(tmp_discount_obj[0].substring(1)).toFixed(2)).toFixed(2);
+            document.getElementById("total").textContent = '$' + total.toString();
+
+            //display gst
+            var gst_val = $('#gst').val();
+            var gst = ((total*gst_val)/100).toFixed(2);
+            document.getElementById("gst_pr").textContent = '$' + (gst).toString();
+
+            //display without gst
+            var without_gst = (total - gst).toFixed(2);
+            document.getElementById("without_gst").textContent = '$' + (without_gst).toString();
+
+            //display balance due
+            document.getElementById("balance").textContent = '$' + total.toString();
+
+            //display balance1 due
+            document.getElementById("balance1").textContent = '$' + total.toString();
+        }
+
+        function Exact() {
+            var balance_due = document.getElementById("balance").textContent;
+            $("#amount_tender").val(balance_due);
+            var amount = parseFloat($('#amount_tender').val().replace(',', '').substring(1)).toFixed(2);
+            var balance = parseFloat(balance_due.replace(',', '').substring(1)).toFixed(2);
+            var change = amount - balance;
+            document.getElementById("change").textContent = '$' + change.toFixed(2).toString();
+        }
+
+        function Payment(pay_method) {
+
+            var am = $('#amount_tender').val();
+            if(am.toString().indexOf('$') < 0) {
+                $('#amount_tender').val('$' + am);
+            }
+            var amount = parseFloat($('#amount_tender').val().replace(',', '').substring(1)).toFixed(2);
+            var balance = parseFloat(document.getElementById("balance").textContent.replace(',', '').substring(1)).toFixed(2);
+            var change = amount - balance;
+            if($('#amount_tender').val() == '$') {
+                alert('There is no amount data.\nPlease input Amount data!');
+            } else {
+                if(change < 0) {
+                    alert('Amount is smaller than Balance.\nPlease inpunt Amount correctly!');
+                    document.getElementById("change").textContent = '';
+                } else {
+                    document.getElementById("change").textContent = '$' + change.toFixed(2).toString();
+
+                    //regist to database
+                    var order_id = $('#order_id').val();
+                    var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
+                    // alert(order_id + '/' + balance + '/' + amount + '/' + change);
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ route('reception.pay') }}",
+                        data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change,  _token: "{{ csrf_token() }}" },
+                        success: function(result){
+                            // console.log(result);
+                            $("#save-pay").submit();
+                        }
+                    });
+                    // window.history.back();
+                }
+            }
+
+        }
+
+        //timer part
+        var myVar = setInterval(myTimer, 1000);
+        function myTimer() {
+
+            var order_time = new Date(<?php echo json_encode($time) ?>);
+            var duration = '<?php echo json_encode($duration) ?>';
+
+            var current_time =  new Date();
+            var elapsed_time = '';
+
+            if(duration == 0) {
+                document.getElementById("during_time").innerHTML = '(Takeaway)';
+            } else if(duration == 1) {
+                order_time.setMinutes( order_time.getMinutes() + 30 );
+                elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+                elapsed_time /= 60;
+                elapsed_time = Math.round(elapsed_time);
+                if(elapsed_time > 0) {
+                    document.getElementById("during_time").innerHTML = '(' + elapsed_time + 'min)';
+                }
+                else {
+                    document.getElementById("during_time").innerHTML = '(0min)';
+                }
+            } else if(duration == 2) {
+                order_time.setMinutes( order_time.getMinutes() + 60 );
+                elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+                elapsed_time /= 60;
+                elapsed_time = Math.round(elapsed_time);
+                if(elapsed_time > 0) {
+                    document.getElementById("during_time").innerHTML = '(' + elapsed_time + 'min)';
+                }
+                else {
+                    document.getElementById("during_time").innerHTML = '(0min)';
+                }
+            } else if(duration == 3) {
+                order_time.setMinutes( order_time.getMinutes() + 90 );
+                elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+                elapsed_time /= 60;
+                elapsed_time = Math.round(elapsed_time);
+                if(elapsed_time > 0) {
+                    document.getElementById("during_time").innerHTML = '(' + elapsed_time + 'min)';
+                }
+                else {
+                    document.getElementById("during_time").innerHTML = '(0min)';
+                }
+            } else if(duration == 4) {
+                order_time.setMinutes( order_time.getMinutes() + 120 );
+                elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+                elapsed_time /= 60;
+                elapsed_time = Math.round(elapsed_time);
+                if(elapsed_time > 0) {
+                    document.getElementById("during_time").innerHTML = '(' + elapsed_time + 'min)';
+                }
+                else {
+                    document.getElementById("during_time").innerHTML = '(0min)';
+                }
+            } else if(duration == 5) {
+                document.getElementById("during_time").innerHTML = '(Unlimited)';
+            }
+
+        }
+    </script>
+
+    <div id="thirdModal" class="modal"></div>
+</body>
+</html>

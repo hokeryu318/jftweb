@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-1 pr-0 pl-0 text-center" id="display-method">
+        <div class="col-1 pr-0 pl-0 text-center" style="margin-right: -45px;" id="display-method">
             <div class="text-center display_all_content" id="display-all">
                 <img src="{{ asset('img/arrow.png') }}" class="display_all_btn"/>
                 <p class="white-text font-weight-bold display_all">DISPLAY ALL TABLE</p>
@@ -59,49 +59,49 @@
     </div>
     <div class="table_detail col-4">
         <div class="row tab-header">
-            <a href="{{route('reception.seated')}}" class="black-text col-4">
+            <a href="{{route('reception.seated')}}" class="black-text col-4" style="margin-right:-5px;">
                 <span class="font-weight-bold">SEATED</span>
-                <img src="{{ asset('img/seated.png') }}"/>
-                <span class="font-weight-bold">28</span>
+                <img src="{{ asset('img/seated.png') }}" style="width:45px;height:40px;"/>
+                <span class="font-weight-bold" style="font-size: 20px;padding-left: 3px;">{{ $count_notification->seated }}</span>
             </a>
-            <a href="{{route('reception.waiting')}}" class="black-text col-4">
+            <a href="{{route('reception.waiting')}}" class="black-text col-4" style="margin-right:-5px;">
                 <span class="font-weight-bold">WAITING</span>
-                <img src="{{ asset('img/waiting.png') }}"/>
-                <span class="font-weight-bold">28</span>
+                <img src="{{ asset('img/waiting.png') }}" style="width:40px;height:40px;"/>
+                <span class="font-weight-bold" style="font-size: 20px;">{{ $count_notification->calling_count }}</span>
             </a>
-            <a class="black-text col-4">
-                <span class="font-weight-bold">BOOKING</span>
-                <img src="{{ asset('img/bookings.png') }}"/>
-                <span class="font-weight-bold">28</span>
+            <a class="black-text col-4" style="margin-right:-5px;">
+                <span class="font-weight-bold">BOOKINGS</span>
+                <img src="{{ asset('img/bookings.png') }}" style="width:40px;height:40px;"/>
+                <span class="font-weight-bold" style="font-size: 20px;">{{ $count_notification->bookings }}</span>
                 <div class="tab_activate"></div>
             </a>
         </div>
-        <div class="row" style="height:470px;overflow-x:hidden; overflow-y:auto;width: 325px;">
+        <div class="row" style="height:500px;overflow-x:hidden; overflow-y:auto;width: 310px;">
             <div class="border w-100 pt-2 pr-1 bg-lightgrey table_seated_list">
                 <div class="row w-100 p-0 m-0">
                     <div class="col-lg-3 pr-0 col-xl-3"><div class="row p-0 m-0">
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -113,25 +113,25 @@
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -143,25 +143,25 @@
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -173,25 +173,25 @@
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -203,25 +203,25 @@
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -233,25 +233,25 @@
                             <p class="red-text red-text font-weight-bold ml-0">0 min</p>
                         </div>
                         <div class="row table_name">
-                            <p class="res-table pl-1 p-0 m-0 pt-3 text-center font-weight-bold">
+                            <p class="res-table pl-2 p-0 m-0 pt-4 text-center font-weight-bold">
                                 <img src="{{asset('img/plus_red.png')}}" class="corner">A-1 </p>
                         </div>
                     </div>
                     <div class="col-lg-6 pr-0 col-xl-6">
                         <div class="row p-0 m-0">
-                            <img class="alarm" src="{{asset('img/calling.png')}}">
+                            <img class="alarm" style="margin-left:-7px;" src="{{asset('img/calling.png')}}">
                             <img class="alarm" src="{{asset('img/alarm.png')}}">
                             <img class="alarm" src="{{asset('img/msg.png')}}">
                             <img class="alarm" src="{{asset('img/note.png')}}">
                         </div>
-                        <div class="row pl-4 pt-2">
-                            <p class=" pfont mb-0 black-text">Delta <br> Ingrambloomburry<br> 6:30 PM</p>
+                        <div class="row pl-2 pt-3">
+                            <p class=" pfont mb-0 black-text" style="word-break: break-all; line-height: 20px;">Delta Ingrambloomburry<br> 6:30 PM</p>
                         </div>
                     </div>
                     <div class="offset-1 col-2 pr-0 text-right"><div class="row pl-2">
                             <img src="{{asset('img/head1.png')}}" width="20" height="20"><p class="font-weight-bold middle-ver">1</p>
                         </div>
-                        <div class="row mt-4 pl-1">
+                        <div class="row mt-4 pl-3">
                             <img src="{{asset('img/chat1.png')}}">
                         </div>
                     </div>
@@ -259,24 +259,22 @@
             </div>
         </div>
         <div class="row">
-            <a href="{{route('reception.addCustomer')}}" class="new_customer_btn white-text text-center pt-3 pb-5">New Customer <span class="ml-4">&gt;</span> </a>
+            <a href="{{route('reception.addCustomer')}}" class="new_customer_btn white-text text-center pt-3 pb-5">NEW CUSTOMER <span class="ml-4">&gt;</span> </a>
         </div>
     </div>
 </div>
 <script>
         $("#display-all").click(function(){
             $("#display-method").hide("slow");
-            $("#display-name-container").hide("slow");
             var room_content = $(".room-content");
-            $("#saved-width").val(room_content.width());
-            room_content.width('100%');
+            room_content.width('1190px');
             $("#exit-fullscreen").show('slow');
         });
 
         $("#exit-fullscreen").click(function() {
             $("#display-method").show("slow");
-            $("#display-name-container").show("slow");
-            $(".room-content").width($("#saved-width").val());
+            var room_content = $(".room-content");
+            room_content.width('1110px');
             $("#exit-fullscreen").hide('slow');
         });
 

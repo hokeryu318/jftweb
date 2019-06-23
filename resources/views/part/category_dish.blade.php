@@ -4,7 +4,14 @@
         data-category = "{{$ds->categories_id}}"
         onclick="onDish(this)">
         <h6 class="font-weight-bold black-text mb-0 text-left" style="white-space:nowrap;overflow:hidden">
-            <span class="fa fa-navicon"></span> {{ $ds->name_en }}
+            <span class="fa fa-navicon" style="margin:-12px 9px 0 9px;"></span>
+            <span class="fs-25">
+            @if(strlen($ds->name_en) > 22)
+                    {{ substr($ds->name_en, 0, 22)."..." }}
+                @else
+                    {{ $ds->name_en }}
+                @endif
+        </span>
         </h6>
     </button>
 @endforeach

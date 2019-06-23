@@ -2,8 +2,8 @@
 
 @section('setting')
 
-<div class="col-9 pl-0">
-    <h5 class="black-text pl-5"><span class=" font-weight-bold ">Payment Methods</span> (Up to 5 methods)</h5>
+<div class="col-9 pl-0" style="margin-top: 100px;">
+    <h5 class="black-text pl-5"><span class=" font-weight-bold fs-30">Payment Methods (Up to 5 methods)</span></h5>
     <div  id="sortable_div">
     <form action="{{ route('admin.setting.payment.post') }}" method="POST" id="post_form">
     <ul id="sortable" style="padding:0px">
@@ -11,15 +11,15 @@
         <li style="list-style-type:none" class="element">
             <div class="row pt-2 ml-4 pl-2">
                 <div class="col-9">
-                    <div class="card pt-2 mt-3 pl-2">
-                        <h5 class="font-weight-bold"><span class="fa fa-navicon name">&nbsp;&nbsp;{{ $p->name }}</span></h5>
+                    <div class="card pt-1 pb-1 mt-3 pl-2">
+                        <h5 class="font-weight-bold"><span class="fa fa-navicon name fs-25" style="padding-top: 9px;">&nbsp;&nbsp;{{ $p->name }}</span></h5>
                         <input type="hidden" class="post" name="orgitem" value="{{ $p->id }}">
                         <input type="hidden" class="sort" name="sort[]" value="{{ $p->id }}_{{ $p->sort }}">
                     </div>
                 </div>
                 <div class="col-3 pt-2 mt-1">
-                    <button type="button" class="btn black radius pt-2 pb-2 pr-4 pl-4 deleteBtn" data-id="{{ $p->id }}">
-                        <h6 class="mb-0 font-weight-bold">Delete</h6>
+                    <button type="button" class="btn black radius-1 ptb pr-5 pl-5 deleteBtn" style="margin-top: 2px;" data-id="{{ $p->id }}">
+                        <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                     </button>
                 </div>
             </div>
@@ -33,27 +33,48 @@
         <div class="col-9">
         </div>
         <div class="col-3">
-            <button type="button" class="btn bg-info radius pt-2 pb-2 pr-4 pl-4" onclick="onadd()"><h5 class="mb-0 pr-1 pl-1 font-weight-bold">ADD</h5></button>
+            <button type="button" class="btn bg-info radius-1 ptb pr-5 pl-5" style="width: 182px;margin-left:2px;" onclick="onadd()">
+                <h5 class="mb-0 pr-1 pl-1 font-weight-bold fs-25">ADD</h5>
+            </button>
         </div>
     </div>
-    <div class="col-lg-12 mt-5 pr-4 text-right">
-        <a href="#" class="btn bg-white black-text pt-2 pb-2 pr-2 pl-2"><h5 class="black-text mb-0">Cancel</h5></a>
-        <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0" onclick="onapply()">Apply</h5></a>
-    </div>
+
     <li style="list-style-type:none; display:none" id="clone" class="element">
         <div class="row pt-2 ml-4 pl-2">
             <div class="col-9">
-                <div class="card pt-2 mt-3 pl-2">
-                    <h5 class="font-weight-bold"><span class="fa fa-navicon name">&nbsp;&nbsp;</span></h5>
+                <div class="card pt-1 pb-1 mt-3 pl-2">
+                    <h5 class="font-weight-bold"><span class="fa fa-navicon name fs-25" style="padding-top: 9px;">&nbsp;&nbsp;</span></h5>
                     <input type="hidden" class="post" name="new[]" value="new">
                     <input type="hidden" class="sort" name="sort[]" value="">
                 </div>
             </div>
             <div class="col-3 pt-2 mt-1">
-                <button class="btn black radius pt-2 pb-2 pr-4 pl-4"><h6 class="mb-0 font-weight-bold">Delete</h6></button>
+                <button class="btn black radius-1 ptb pr-5 pl-5" style="margin-top: 2px;">
+                    <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
+                </button>
             </div>
         </div>
     </li>
+    <div style="margin-bottom:125px"></div>
+    {{--<div class="col-lg-12 mt-5 pr-4 text-right">--}}
+        {{--<a href="#" class="btn bg-white black-text pt-2 pb-2 pr-2 pl-2"><h5 class="black-text mb-0">Cancel</h5></a>--}}
+        {{--<a href="#" class="btn bg-info black-text pt-2 pb-2 pr-2 pl-2"><h5 class="white-text mb-0" onclick="onapply()">Apply</h5></a>--}}
+    {{--</div>--}}
+
+    <div class="col-lg-12 mt-5 pt-2 pr-4 text-right">
+        <a href="{{ route('admin.setting.payment') }}" class="btn bg-white black-text pt-2 pb-2 pr-3 pl-3">
+            <h5 class="black-text mb-0 fs-25">
+                <b>Cancel</b>
+                <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin: -5px 0 0 20px;">
+            </h5>
+        </a>
+        <a href="#" class="btn bg-info black-text pt-2 pb-2 pr-3 pl-3" style="margin-right: -8px;">
+            <h5 class="white-text mb-0 fs-25" onclick="onApply()">
+                <b>Apply</b>
+                <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -5px 0 0 20px;">
+            </h5>
+        </a>
+    </div>
 </div>
 <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
 <script>
@@ -62,6 +83,7 @@
 
     function onadd(){
         if($('.element:visible').length >= 5){
+            alert("You can't register over 5.");
             return;
         }
         var payment_name = prompt('Please enter payment type');
@@ -86,7 +108,7 @@
             $(this).closest('.element').remove();
     });
 
-    function onapply(){
+    function onApply(){
         var index = 1;
         $('.element').each(function(i, obj){
             var visible = $(obj).is(':visible');

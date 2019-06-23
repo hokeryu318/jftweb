@@ -45,7 +45,7 @@
 			max_hour_value: 12,
 			show_meridian: true,
 			step_size_hours: '1',
-			step_size_minutes: '1',
+			step_size_minutes: '5',
 			overflow_minutes: false,
 			disable_keyboard_mobile: false,
 			reset: false,
@@ -444,6 +444,7 @@
 				var cur_time = Number(ele_next.find("." + cur_cli + " .ti_tx input").val());
 				var ele_st = Number(settings.min_hour_value);
 				var ele_en = Number(settings.max_hour_value);
+				// var step_size = Number(settings.step_size_hours);
 				var step_size = Number(settings.step_size_hours);
 				if ((cur_ele && cur_ele.hasClass('action-next')) || direction === 'next') {
 					if (cur_time + step_size > ele_en) {

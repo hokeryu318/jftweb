@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Hash;
 
+use App\Model\Role;
 use App\Model\Receipt;
 use App\Model\Kitchen;
 use App\Model\Timeslot;
 use App\Model\Holiday;
 use App\Model\Badge;
 use App\Model\Payment;
+use App\Model\Mail;
 class SettingController extends Controller
 {
     //
@@ -104,6 +106,12 @@ class SettingController extends Controller
         $profile = Receipt::profile();
         return view('admin.setting.password')->with(compact('profile'));
     }
+
+    public function sendmail()
+    {
+        $mails = Mail::get();
+        return view('admin.setting.sendmail')->with(compact('mails'));
+    }
     public function kitchen_post()
     {
         if(request()->has('new')){
@@ -125,7 +133,7 @@ class SettingController extends Controller
     }
     public function timeslot_post()
     {
-        // dd(request());
+        //dd(request());
         $regular = Timeslot::find(1);
         if(request()->has('regular-morning-on')){
             $regular->morning_on = 1;
@@ -172,7 +180,6 @@ class SettingController extends Controller
         $wednesday = Timeslot::find(4);
         self::saveTimeSlot(request(), $wednesday, 'wednesday');
         $thursday = Timeslot::find(5);
-        // dd($thursday);
         self::saveTimeSlot(request(), $thursday, 'thursday');
         $friday = Timeslot::find(6);
         self::saveTimeSlot(request(), $friday, 'friday');
@@ -307,25 +314,38 @@ class SettingController extends Controller
     }
     public function password_post()
     {
-        $profile = Receipt::profile();
+
         if(request()->has('password_menu')){
-            if(substr(request()->password_menu, 0, 1) != "*")
-                $profile->password_menu = Hash::make(request()->password_menu);
+            if(substr(request()->password_menu, 0, 1) != "*") {
+                $user_menu = Role::where('name', 'menu')->get()->first();
+                $user_menu->password = Hash::make(request()->password_menu);
+                $user_menu->save();
+            }
         }
         if(request()->has('password_kitchen')){
-            if(substr(request()->password_kitchen, 0, 1) != "*")
-                $profile->password_kitchen = Hash::make(request()->password_kitchen);
+            if(substr(request()->password_kitchen, 0, 1) != "*") {
+                $user_kitchen = Role::where('name', 'kitchen')->get()->first();
+                $user_kitchen->password = Hash::make(request()->password_kitchen);
+                $user_kitchen->save();
+            }
         }
         if(request()->has('password_reception')){
-            if(substr(request()->password_reception, 0, 1) != "*")
-                $profile->password_reception = Hash::make(request()->password_reception);
+            if(substr(request()->password_reception, 0, 1) != "*") {
+                $user_reception = Role::where('name', 'reception')->get()->first();
+                $user_reception->password = Hash::make(request()->password_reception);
+                $user_reception->save();
+            }
         }
         if(request()->has('password_admin')){
-            if(substr(request()->password_admin, 0, 1) != "*")
-                $profile->password_admin = Hash::make(request()->password_admin);
+            if(substr(request()->password_admin, 0, 1) != "*") {
+                $user_admin = Role::where('name', 'admin')->get()->first();
+                $user_admin->password = Hash::make(request()->password_admin);
+                $user_admin->save();
+            }
         }
-        $profile->save();
+
         return redirect()->route('admin.setting.password');
+
     }
     public function active_badge()
     {
@@ -364,5 +384,24 @@ class SettingController extends Controller
             }
         }
         return redirect()->route('admin.setting.payment');
+    }
+    public function sendmail_post()
+    {
+        if(request()->has('new')){
+            $newitems = request()->new;
+            foreach($newitems as $item){
+                $mail = new Mail();
+                $mail->name = $item;
+                $mail->save();
+            }
+        }
+        if(request()->has('removed')){
+            $removeitems = request()->removed;
+            foreach($removeitems as $item){
+                $mail = Mail::find($item);
+                $mail->delete();
+            }
+        }
+        return redirect()->route('admin.setting.sendmail');
     }
 }

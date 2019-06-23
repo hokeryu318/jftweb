@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Dish;
+use App\Model\DishOption;
 use Illuminate\Http\Request;
 
 use App\Model\Option;
 use App\Model\Item;
+use App\Model\Receipt;
 
 class OptionController extends Controller
 {
@@ -15,17 +18,31 @@ class OptionController extends Controller
         $options = Option::get();
         $sort_type_name = "desc";
         $sort_type_display_name = "desc";
+        foreach($options as $option) {
+            $dish_ids = DishOption::where('option_id', $option->id)->pluck('dish_id');
+            //dd($dish_ids);
+            $related_dishes = '';
+            foreach($dish_ids as $ds) {
+                $dish_name = Dish::where('id', $ds)->pluck('name_en')->first();
+                $related_dishes .= $dish_name.', ';
+            }
+            $option->related_dishes = substr($related_dishes, 0, -2);
+        }
         return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
     }
     public function edit($id)
     {
         $obj = Option::find($id);
-        return view('admin.option.form')->with(compact('obj'));
+        $profile = Receipt::find(1);
+        $gst = $profile->gst;
+        return view('admin.option.form')->with(compact('obj', 'gst'));
     }
     public function add()
     {
         $obj = new Option();
-        return view('admin.option.form')->with(compact('obj'));
+        $profile = Receipt::find(1);
+        $gst = $profile->gst;
+        return view('admin.option.form')->with(compact('obj', 'gst'));
     }
     public function delete($id)
     {
@@ -59,7 +76,8 @@ class OptionController extends Controller
                     $item->name = $n['name'];
                     $item->price = $n['price'];
                     $item->stock = $n['stock'];
-                    if(request()->photo_visible == "on"){
+                    if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
+
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
                         $destinationFile = $file->getClientOriginalName();
@@ -111,7 +129,7 @@ class OptionController extends Controller
                     $item->name = $n['name'];
                     $item->price = $n['price'];
                     $item->stock = $n['stock'];
-                    if(request()->photo_visible == "on"){
+                    if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
                         $destinationFile = $file->getClientOriginalName();
@@ -137,7 +155,24 @@ class OptionController extends Controller
             $options = Option::orderBy('display_name_en', $sort_type_display_name)->get();
             $sort_type_display_name = ($sort_type_display_name == "asc") ? "desc" : "asc";
         }
+        $this->get_related_dish($options);
         return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
     }
+
+    public function get_related_dish($options) {
+
+        foreach($options as $option) {
+            $dish_ids = DishOption::where('option_id', $option->id)->pluck('dish_id');
+            //dd($dish_ids);
+            $related_dishes = '';
+            foreach($dish_ids as $ds) {
+                $dish_name = Dish::where('id', $ds)->pluck('name_en')->first();
+                $related_dishes .= $dish_name.', ';
+            }
+            $option->related_dishes = substr($related_dishes, 0, -2);
+        }
+        return $options;
+    }
+
 
 }

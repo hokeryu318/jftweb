@@ -8,4 +8,5 @@ class DishOption extends Model
 {
     //
     protected $table = 'dish_option_match';
+
 }

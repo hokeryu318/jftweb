@@ -27,8 +27,9 @@ Author: senthil
 .prev,
 .next {
 	cursor: pointer;
-	padding: 18px;
-	width: 28%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	/*width: 28%;*/
 	border: 1px solid #ccc;
 	margin: auto;
 	background: url(../images/arrow.png) no-repeat;
@@ -37,7 +38,7 @@ Author: senthil
 
 .prev:hover,
 .next:hover {
-	background-color: #ccc;
+	/*background-color: #ccc;*/
 }
 
 .next {
@@ -64,6 +65,7 @@ Author: senthil
 	position: absolute;
 	top: 27px;
 	left: 0;
+	margin-left: 46px;
 }
 
 .arrow_top {

@@ -13,4 +13,9 @@ class Table extends Model
     {
         return $this->hasManyThrough(Order::class, OrderTable::class, 'table_id', 'id', 'id', 'order_id');
     }
+
+    public function orderTable()
+    {
+        return $this->hasMany(OrderTable::class, 'table_id');
+    }
 }

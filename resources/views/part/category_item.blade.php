@@ -3,6 +3,13 @@
     data-id="{{ $cat->id }}"
     data-hassubs="{{ $cat->has_subs }}">
     <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
-        <span class="fa fa-navicon"></span> {{ $cat->name_en }}
+        <span class="fa fa-navicon" style="margin:-12px 9px 0 9px;"></span>
+        <span class="fs-25">
+            @if(strlen($cat->name_en) > 15)
+                {{ substr($cat->name_en, 0, 15)."..." }}
+            @else
+                {{ $cat->name_en }}
+            @endif
+        </span>
     </h6>
 </button>

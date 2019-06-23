@@ -8,4 +8,9 @@ class Kitchen extends Model
 {
     //
     protected $table = 'groups';
+
+    public function Dish()
+    {
+        return $this->hasMany(Dish::class, 'group_id');
+    }
 }

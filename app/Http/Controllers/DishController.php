@@ -18,8 +18,9 @@ class DishController extends Controller
 {
     //
     public function index(){
-        $dishes = Dish::get();
+        $dishes = Dish::get();//dd($dishes);
         $sort = "desc";
+
         return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
 
@@ -80,6 +81,21 @@ class DishController extends Controller
         return redirect()->route('admin.dish.edit', ['id' => $request->id]);
     }
 
+    public function change_sold_active(Request $request){
+        $obj = Dish::find($request->id);
+        if($request->get("sold_out") == true){
+            $obj->sold_out = 1;
+        } else {
+            $obj->sold_out = 0;
+        }
+        if($request->get("active") == true){
+            $obj->active = 1;
+        } else {
+            $obj->active = 0;
+        }
+        $obj->save();
+    }
+
     public function store()
     {
         if(is_null(request()->id)){
@@ -123,12 +139,14 @@ class DishController extends Controller
                 }
             }
 
-            $opts = request()->get('opts');
-            foreach($opts as $op){
-                $dish_option = new DishOption();
-                $dish_option->dish_id = $obj->id;
-                $dish_option->option_id = $op;
-                $dish_option->save();
+            if(request()->get('opts') != '') {
+                $opts = request()->get('opts');
+                foreach($opts as $op){
+                    $dish_option = new DishOption();
+                    $dish_option->dish_id = $obj->id;
+                    $dish_option->option_id = $op;
+                    $dish_option->save();
+                }
             }
         } else {
             //dd(request());
@@ -174,12 +192,14 @@ class DishController extends Controller
             $old_opts = $obj->dishoptions->pluck('id');
             DishOption::whereIn('id', $old_opts)->delete();
 
-            $opts = request()->get('opts');
-            foreach($opts as $op){
-                $dish_option = new DishOption();
-                $dish_option->dish_id = $obj->id;
-                $dish_option->option_id = $op;
-                $dish_option->save();
+            if(request()->get('opts') != ''){
+                $opts = request()->get('opts');
+                foreach($opts as $op){
+                    $dish_option = new DishOption();
+                    $dish_option->dish_id = $obj->id;
+                    $dish_option->option_id = $op;
+                    $dish_option->save();
+                }
             }
         }
         return redirect()->route('admin.dish');
@@ -205,4 +225,5 @@ class DishController extends Controller
         }
         return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
+
 }

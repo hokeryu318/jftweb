@@ -3,78 +3,79 @@
 @section('title', 'DISH')
 
 @section('content')
-<div class="container-fluid pb-5 blackgrey">
-    <div style="padding-top:8%;"></div>
+<div class="container-fluid pb-5 blackgrey" style="height: auto;min-height: 870px;">
+    <div style="padding-top:8.5%;"></div>
 
     <div class="popupp" id="popupp"></div>
 
     <div class="popupchangePhoto white" id="popupchangePhoto">
         <div class="row">
             <div class="col-12">
-                <a>
-                    <span class="">
-                        <img src="{{ asset('img/Group1100.png') }}" height="20" id="btncloselang" class="float-right mr-3 mt-2" width="20" />
-                    </span>
-                </a>
+                <span class="" id="btncloselang">
+                    <img src="{{ asset('img/Group1100.png') }}" width="30" height="30" class="float-right mt-3 mr-3"  />
+                </span>
             </div>
         </div>
-        <img id="popupimg" class="popupimg" />
+        <img id="popupimg" class="popupimg" style="width: 500px;height: 500px;margin: 0 0 50px 93px;"/>
         <input type="file" style="display:none" id="option_image_modal">
         <input type="hidden" name="item_id">
-        <button class="addOptionbtn mcenter">Change Photo</button>
+        <button class="addOptionbtn mcenter fs-25" style="width: 200px;">Change Photo</button>
     </div>
 
-    <div class="widthh pb-2 pt-3 white">
+    <div class="widthh pb-2 pt-3 white" style="height: auto;min-height: 862px;">
         <div class="row">
             <div class="col-12">
                 <a><span class="">
-                       <img src="{{ asset('img/Group1100.png') }}" height="18" class="float-right" width="19" onclick="onCancel()" /></span></a>
+                    <img src="{{ asset('img/Group1100.png') }}" width="30" height="30" class="float-right mt-3 mr-3" onclick="onCancel()" />
+                </span></a>
             </div>
         </div>
-        <form method="POST" action="{{ route('admin.option.store') }}" enctype='multipart/form-data' id="post_form">
+        <form method="POST" action="{{ route('admin.option.store') }}" enctype='multipart/form-data' id="post_form" class="pl-4 pr-4">
         <input type="hidden" name="id" value="{{ $obj->id }}">
+        <input type="hidden" value="{{ $gst }}" id="gst" name="gst">
+        <input type="hidden" value="{{ count($obj->items) }}" id="count_item" name="count_item">
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
                    <div>
-                       <label class="text-blue txtdemibold">Name</label>
+                       <label class="text-blue txtdemibold fs-25">Name</label>
                    </div>
-                    <input type="text" class="outline-0 border-bottom-blue" name="name" value="{{ $obj->name }}">
+                    <input type="text" class="outline-0 border-bottom-blue" style="font-size: 25px;" name="name" id="name" value="{{ $obj->name }}">
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
                     <div>
-                        <label class="text-blue txtdemibold">Display Name</label>
+                        <label class="text-blue txtdemibold fs-25">Display Name</label>
                     </div>
-                    <input type="text" class="outline-0 border-bottom-blue" name="display_name_en" value="{{ $obj->display_name_en }}" />
+                    <input type="text" class="outline-0 border-bottom-blue" style="font-size: 25px;" name="display_name_en" id="name_en" value="{{ $obj->display_name_en }}" />
                 </div>
                 <div class="form-group">
                     <div>
-                        <label class="text-blue txtdemibold">Display Name (Mandarine)</label>
+                        <label class="text-blue txtdemibold fs-25">Display Name (Mandarine)</label>
                     </div>
-                    <input type="text" class="outline-0 border-bottom-blue" name="display_name_cn" value="{{ $obj->display_name_cn }}" />
+                    <input type="text" class="outline-0 border-bottom-blue" style="font-size: 25px;" name="display_name_cn" value="{{ $obj->display_name_cn }}" />
                 </div>
                 <div class="form-group">
                     <div>
-                        <label class="text-blue txtdemibold">Display Name (Japanese)</label>
+                        <label class="text-blue txtdemibold fs-25">Display Name (Japanese)</label>
                     </div>
-                    <input type="text" class="outline-0 border-bottom-blue" name="display_name_jp" value="{{ $obj->display_name_jp }}" />
+                    <input type="text" class="outline-0 border-bottom-blue" style="font-size: 25px;" name="display_name_jp" value="{{ $obj->display_name_jp }}" />
                 </div>
             </div>
         </div>
         <div class="border-bottom-blue3 mt-3 mb-3"></div>
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-5" style="margin-top: 15px;">
                 <div class="row">
                     <div class="col-6">
-                        <label class="text-blue txtdemibold mr-2">Multiple Select</label>
+                        <label class="text-blue txtdemibold mr-2 fs-25">Multiple Select</label>
                     </div>
                     <div class="col-6">
                         <span>
                             <label class="bs-switch">
-                                <input type="checkbox" name="multi_select" id="multi_select"
+                                <input type="checkbox" name="multi_select" id="multi_select" onchange="multi_select_change()"
                                 @if($obj->multi_select == 1)
                                     checked
                                 @endif
@@ -86,20 +87,20 @@
                 </div>
             </div>
             <div class="col-7">
-                <label class="text-blue txtdemibold m5">Number of Selection</label>
-                <img src="{{ asset('img/Path506.png') }}" class="" height="50" width="60" onclick="decNumber()" />
-                <input type="number" class="numInput outline-0" name="number_selection" id="number_selection" value="{{ $obj->number_selection }}">
-                <img src="{{ asset('img/Path531.png') }}" class="" height="50" width="60" onclick="incNumber()">
+                <label class="text-blue txtdemibold m5 fs-25">Number of Selection</label>
+                <img src="{{ asset('img/Path506.png') }}" class="" style="margin-left: 40px;" height="40" width="45" onclick="decNumber()" id="minus" />
+                <input type="number" class="numInput outline-0" style="margin: 0 20px 0 20px;" name="number_selection" id="number_selection" value="{{ $obj->number_selection }}" disabled>
+                <img src="{{ asset('img/Path531.png') }}" class="" height="40" width="45" onclick="incNumber()" id="plus" />
             </div>
 
         </div>
         <div class="border-bottom-blue3 mt-3 mb-3"></div>
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-5" style="margin-top: 15px;">
                 <div class="row">
                     <div class="col-6">
-                        <label class="text-blue txtdemibold mr-2">Show Photo</label>
+                        <label class="text-blue txtdemibold mr-2 fs-25">Show Photo</label>
                     </div>
                     <div class="col-6">
                         <span>
@@ -121,22 +122,22 @@
 
         <div class="row">
             <div class="col-6">
-                <label class="text-blue txtdemibold">
+                <label class="text-blue txtdemibold fs-25">
                     Option
                 </label>
             </div>
             <div class="col-2">
-                <label class="text-blue ma35 txtdemibold">
+                <label class="text-blue ma35 txtdemibold fs-25">
                     Price
                 </label>
             </div>
             <div class="col-1">
-                <label class="text-blue ma35 txtdemibold">
+                <label class="text-blue ma35 txtdemibold fs-25">
                     Photo
                 </label>
             </div>
             <div class="col-1">
-                <label class="text-blue ma35 txtdemibold">
+                <label class="text-blue ma35 txtdemibold fs-25">
                     Stock
                 </label>
             </div>
@@ -146,12 +147,18 @@
         @foreach ($obj->items as $item)
             <div class="row">
                 <div class="col-6">
-                    <input type="text" class="outline-0 border-bottom-blue mt-2 option-name"
+                    <input type="text" class="outline-0 border-bottom-blue mt-2 option-name" style="font-size: 25px;"
                         name="prev-data[{{ $item->id }}][name]" value="{{ $item->name }}" />
                 </div>
                 <div class="col-2">
-                    <input type="number" class="outline-0 border-bottom-blue mt-2 option-price"
-                        name="prev-data[{{ $item->id }}][price]" value="{{ $item->price }}" />
+                    <input type="number" class="outline-0 border-bottom-blue mt-2 option-price" style="font-size: 25px;"
+                        name="prev-data[{{ $item->id }}][price]" value="{{ $item->price }}" id="item_price_{{ $item->id }}" onchange="item_price_change({{ $item->id }})" />
+                    <input type="hidden" value="{{ $gst }}" id="gst" name="gst">
+                    <label class="text-blue float-right text-right fs-20" id="gst_value_{{ $item->id }}">
+                        @if ($item->price)
+                            (Included GST: <br>$ {{ number_format($item->price*$gst/100, 2) }})
+                        @endif
+                    </label>
                 </div>
                 <div class="col-1">
                     {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button" style="display:none">--}}
@@ -177,7 +184,7 @@
                     </label>
                 </div>
                 <div class="col-1">
-                    <button class="btnaddphoto3" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
+                    <button class="btnaddphoto3 fs-23" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
                         Remove Option
                     </button>
                 </div>
@@ -190,10 +197,10 @@
 
         <div class="row clone" style="display:none">
             <div class="col-6">
-                <input type="text" class="outline-0 border-bottom-blue mt-2 option-name" />
+                <input type="text" class="outline-0 border-bottom-blue mt-2 option-name" style="font-size: 25px;" />
             </div>
             <div class="col-2">
-                <input type="number" class="outline-0 border-bottom-blue mt-2 option-price"/>
+                <input type="number" class="outline-0 border-bottom-blue mt-2 option-price" style="font-size: 25px;"/>
             </div>
             <div class="col-1">
                 {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button">--}}
@@ -211,7 +218,7 @@
                 </label>
             </div>
             <div class="col-1">
-                <button class="btnaddphoto3" type="button" onclick="onDelete(this)" data-id=0>
+                <button class="btnaddphoto3 fs-23" type="button" onclick="onDelete(this)" data-id=0>
                     Remove Option
                 </button>
             </div>
@@ -219,21 +226,25 @@
             <input type="hidden" class="stock-check-value option-stock">
         </div>
 
-        <button class="btnaddphoto3  mt-2 pt-1" type="button" onclick="onAddOption()">
+        <button class="btnaddphoto3 mt-2 pt-1 fs-25" style="width: 200px;" type="button" onclick="onAddOption()">
             Add Option
         </button>
         <div class="row mt-5 mb-3">
             <div class="col-6">
-                <button class="grey-button" type="button" onclick="onDeleteMain(this)" data-url="{{ route('admin.option.delete', ['id' => $obj->id]) }}">DELETE
-                    <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1"/>
+                <button class="grey-button fs-25" type="button" onclick="onDeleteMain(this)" data-url="{{ route('admin.option.delete', ['id' => $obj->id]) }}"
+                        style="padding: 10px 15px 10px 15px;margin-top: -10px;">
+                    DELETE
+                    <img src="{{ asset('img/Group728.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                 </button>
             </div>
             <div class="col-6">
-                <button class="grey-button ml-5" type="button" onclick="onCancel()">CANCEL
-                    <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                <button class="grey-button fs-25" type="button" onclick="onCancel()" style="color:black;padding: 10px 15px 10px 15px;margin-top:-10px;margin-left: 250px;">
+                    CANCEL
+                    <img src="{{ asset('img/Group728.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                 </button>
-                <button class="green-button" type="button" onclick="onApply()">Apply
-                    <img src="{{ asset('img/Group728white.png') }}" height="20" class="mb-1" />
+                <button class="green-button fs-25" type="button" onclick="onApply()" style="padding: 10px 15px 10px 15px;margin-top:-10px;">
+                    APPLY
+                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -5px 0 0 20px;" />
                 </button>
             </div>
         </div>
@@ -242,6 +253,9 @@
     </div>
 </div>
 <script>
+
+    var count_item = $('#count_item').val();
+
     function onApply(){
         if($('#show_photo').is(':checked')){
             var invalidCt = 0;
@@ -256,6 +270,10 @@
                 return;
             }
         }
+        // else {
+        //     var add_photo_button = document.getElementsByClassName("add-photo-button");
+        //     add_photo_button.src = "";
+        // }
         $('.stock-check-obj').each(function(i, obj){
             var parent = $(obj).closest('.row');
             var value = $('.stock-check-value', parent);
@@ -265,7 +283,19 @@
                 value.val(0);
             }
         });
-        $('#post_form').submit();
+
+        var name = $('#name').val();
+        var name_en = $('#name_en').val();
+        var count_item = $("div[id^=aaa]").length;
+        if(name == '')
+            alert('Please input Name!');
+        else if(name_en == '')
+            alert('Please input Display Name!');
+        else if(count_item == 0)
+            alert('Please add Option(Include Option and Price)!');
+        else
+            $('#post_form').submit();
+
     }
     var current_image_obj;
     var current_file_obj;
@@ -288,14 +318,29 @@
     });
     //click add image button image in row
     $(document).on('click', '.option-image', function(){
-        $('#popupimg').attr('src', $(this).attr('src'));
-        $('#popupchangePhoto').show();
-        $("#popupchangePhoto").animate({ "opacity": '1' }, "slow");
-        $('#popupp').show();
-        $("#popupp").animate({ "opacity": '1' }, "slow");
 
-        current_file_obj = $('.file-image', $(this).closest('.row'));
-        current_image_obj = $(this);
+        if($('#show_photo').is(':checked')) {
+            $('#popupimg').attr('src', $(this).attr('src'));
+            $('#popupchangePhoto').show();
+            $("#popupchangePhoto").animate({ "opacity": '1' }, "slow");
+            $('#popupp').show();
+            $("#popupp").animate({ "opacity": '1' }, "slow");
+
+            current_file_obj = $('.file-image', $(this).closest('.row'));
+            current_image_obj = $(this);
+        }
+        else {
+            alert('You can not change photo. Please check Show Photo option!');
+        }
+
+        // $('#popupimg').attr('src', $(this).attr('src'));
+        // $('#popupchangePhoto').show();
+        // $("#popupchangePhoto").animate({ "opacity": '1' }, "slow");
+        // $('#popupp').show();
+        // $("#popupp").animate({ "opacity": '1' }, "slow");
+        //
+        // current_file_obj = $('.file-image', $(this).closest('.row'));
+        // current_image_obj = $(this);
     });
     //close image modal
     $('#btncloselang').click(function(){
@@ -328,8 +373,14 @@
     //on add image button
     function onAddImage(obj)
     {
-        var parent = $(obj).closest('.row');
-        $('.file-image', parent).trigger('click');
+        if($('#show_photo').is(':checked')) {
+            var parent = $(obj).closest('.row');
+            $('.file-image', parent).trigger('click');
+        }
+        else {
+            alert('You can not change photo. Please check Show Photo option!');
+        }
+
     }
     //add image button on modal
     $('#popupimg').click(function(){
@@ -351,6 +402,7 @@
     function onAddOption()
     {
         var div = $('.clone').clone();
+        $(div).attr('id', 'aaa');
         $('.option-name', div).attr('name', 'new-option[' + newIndex + '][name]');
         $('.option-price', div).attr('name', 'new-option[' + newIndex + '][price]');
         $('.file-image', div).attr('name', 'new-option[' + newIndex + '][image]');
@@ -359,6 +411,7 @@
         $(div).removeClass('clone');
         $('#content').append(div);
         newIndex++;
+
     }
 
     function onDelete(obj)
@@ -377,14 +430,21 @@
     function incNumber()
     {
         var cur_val = Number($('#number_selection').val());
-        $('#number_selection').val(cur_val + 1);
+        if($('#multi_select').is(':checked')) {
+            $("#number_selection").prop('disabled', false);
+            $('#number_selection').val(cur_val + 1);
+        }
+
     }
 
     function decNumber()
     {
         var cur_val = Number($('#number_selection').val());
-        if(cur_val > 1)
-            $('#number_selection').val(cur_val - 1);
+        if($('#multi_select').is(':checked')) {
+            $("#number_selection").prop('disabled', false);
+            if(cur_val > 1)
+                $('#number_selection').val(cur_val - 1);
+        }
     }
 
     function onDeleteMain(obj)
@@ -396,6 +456,28 @@
     function onCancel()
     {
         window.location = "{{ route('admin.option') }}";
+    }
+
+    function multi_select_change() {
+        if($('#multi_select').is(':checked')) {
+            $("#number_selection").prop('disabled', false);
+        } else {
+            $("#number_selection").prop('disabled', true);
+        }
+    }
+
+    function item_price_change(id) {
+
+        var item_price = $('#item_price_' + id).val();
+        //alert(id + ' ' + item_price);
+        var gst = $("#gst").val();
+        var gst_include = 0;
+        if(item_price != 0){
+            gst_include = item_price*gst / 100;
+        }
+
+        $('#gst_value_' + id).html('(Included GST: \n $ '+gst_include.toFixed(2)+')');
+
     }
 
 </script>

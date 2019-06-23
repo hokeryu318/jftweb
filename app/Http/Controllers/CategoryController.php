@@ -85,28 +85,31 @@ class CategoryController extends Controller
     public function dish_add()
     {
         $dish_ids = request()->dish_ids;
-        $subcategory_id = request()->subcategory_id;
+        $category_id = request()->category_id;
         if($dish_ids != ""){
             $dish_id_arr = explode(",", $dish_ids);
-            DishCategory::where('categories_id', $subcategory_id)->delete();
+//            DishCategory::where('categories_id', $subcategory_id)->delete();
             foreach ($dish_id_arr as $dish_id) {
+                DishCategory::where('dish_id', $dish_id)->where('categories_id', $category_id)->delete();
                 $dish_category = new DishCategory();
                 $dish_category->dish_id = $dish_id;
-                echo $dish_id;
-                if($subcategory_id != ""){
-                    $dish_category->categories_id = $subcategory_id;
-                }
+                $dish_category->categories_id = $category_id;
+//                echo $dish_id;
+//                if($subcategory_id != ""){
+//                    $dish_category->categories_id = $subcategory_id;
+//                }
                 $dish_category->save();
             }
         }else{
-            DishCategory::where('categories_id', $subcategory_id)->delete();
+            DishCategory::where('categories_id', $category_id)->delete();
         }
-        return "sucess";
+        return "success";
     }
 
     public function dish_delete($dish_id)
     {
-        DishCategory::where("dish_id", $dish_id)->delete();
-        return "sucess";
+        $category_id = request()->category_id;
+        DishCategory::where("dish_id", $dish_id)->where('categories_id', $category_id)->delete();
+        return "success";
     }
 }

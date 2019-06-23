@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('CountNotification', 'Api\CountNotificationController@CountNotification');
+Route::get('get_change_group_dish/{group_id}', 'Api\CountNotificationController@get_change_group_dish');
+Route::post('ready', 'Api\CountNotificationController@ready');
+

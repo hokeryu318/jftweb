@@ -9,13 +9,13 @@
             padding-bottom : 0.6rem;
         }
     </style>
-    <div class="container-fluid pb-3 blackgrey">
-        <form method="POST" action="{{ route('admin.dish.store') }}" enctype='multipart/form-data'>
+    <div class="container-fluid pb-3 blackgrey" style="height: auto;">
+        <form method="POST" action="{{ route('admin.dish.store') }}" enctype='multipart/form-data' name="edit_dish" onSubmit="return validateform()">
             <input type="hidden" value="{{ $obj->id }}" name="id">
             <input type="hidden" name="category_id" id="checked_ids" value="{{isset($dish_cats_ids) ? $dish_cats_ids : ""}}">
             <div style="padding-top:8%;">
             </div>
-            <div class="widthh pt-3 pb-3 mb-3 white">
+            <div class="widthh pt-3 pb-3 mb-3 white" style="height: auto;">
                 <div class="row">
                     <div class="col-11">
                     </div>
@@ -27,61 +27,62 @@
                             {{ route('admin.dish') }}
                         @endif">
                             <span class="">
-                                <img src="{{ asset('img/Group1100.png') }}" height="20" class="float-right" width="20" />
+                                <img src="{{ asset('img/Group1100.png') }}" width="25" height="25" class="float-right" width="20" />
                             </span>
                         </a>
                     </div>
                 </div>
                 <div>
-                    <div class="row">
+                    <div class="row pl-4 pr-4 pt-3" >
                         <div class="col-6">
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Name of dish</label>
+                                    <label class="text-blue txtdemibold fs-25">Name of dish</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_en" value="{{ $obj->name_en }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_en" id="name_en" value="{{ $obj->name_en }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Name of dish (Mandarine)</label>
+                                    <label class="text-blue txtdemibold fs-25">Name of dish (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_cn" value="{{ $obj->name_cn }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_cn" id="name_cn" value="{{ $obj->name_cn }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Name of dish (Japanese)</label>
+                                    <label class="text-blue txtdemibold fs-25">Name of dish (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="name_jp" value="{{ $obj->name_jp }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_jp" id="name_jp" value="{{ $obj->name_jp }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Description</label>
+                                    <label class="text-blue txtdemibold fs-25">Description</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="desc_en" value="{{ $obj->desc_en }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="desc_en" value="{{ $obj->desc_en }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Description (Mandarine)</label>
+                                    <label class="text-blue txtdemibold fs-25">Description (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem" name="desc_cn" value="{{ $obj->desc_cn }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="desc_cn" value="{{ $obj->desc_cn }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Description (Japanese)</label>
+                                    <label class="text-blue txtdemibold fs-25">Description (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem"  name="desc_jp" value="{{ $obj->desc_jp }}" />
+                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;"  name="desc_jp" value="{{ $obj->desc_jp }}" />
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Price</label>
+                                    <label class="text-blue txtdemibold fs-25">Price</label>
                                 </div>
-                                <input type="number" class="outline-0 border-blue" name="price" step="0.01" value="{{ $obj->price }}" />
-                                <p class="text-right text-blue" >(Included GST: $ {{ number_format($obj->price*$gst/100, 2) }})</p>
+                                <input type="number" class="outline-0 border-blue pl-3" style="padding:10px 0 10px 0;font-size: 25px;" name="price" id="price" step="0.01" value="{{ $obj->price }}" />
+                                <input type="hidden" value="{{ $gst }}" id="gst" name="gst">
+                                <p class="text-right text-blue fs-25" id="gst_value">(Included GST: $ {{ number_format($obj->price*$gst/100, 2) }})</p>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="addphoto">
-                                <button class="create_addPhotobtn btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" type="button" id="btn_add_image" onclick="setPhoto()"
+                            <div class="addphoto mt-5">
+                                <button class="create_addPhotobtn btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light fs-25" type="button" id="btn_add_image" onclick="setPhoto()"
                                         @if($obj->image != null)
                                         style="display:none"
                                         @endif
@@ -93,19 +94,19 @@
                                         >
                                 <input type="file" id="image_file" name="image" style="display:none">
                             </div>
-                            <button class="create_changePhotobtn" type="button" id="btn_change_image" onclick="setPhoto()"
+                            <button class="create_changePhotobtn fs-25" type="button" id="btn_change_image" onclick="setPhoto()"
                                     @if($obj->image == null)
                                     style="display:none"
                                     @endif
                                     >Change Photo</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pl-4">
                         <div class="col-7" id="content">
-                            <label class="text-blue txtdemibold">Option</label>
+                            <label class="text-blue txtdemibold fs-25">Option</label>
                             @foreach ($obj->options as $opt)
                                 <div class="mt-2 option-element">
-                                    <select class="border-blue select-width-blue mr-1 option-padding option-select" name="opts[]">
+                                    <select class="border-blue select-width-blue mr-1 option-padding option-select pl-3 fs-25" name="opts[]" id="opts">
                                         @foreach ($options as $o)
                                             <option value="{{ $o->id }}"
                                                     @if($opt->id == $o->id)
@@ -114,29 +115,33 @@
                                                     >{{ $o->name }}</option>
                                         @endforeach
                                     </select>
-                                    <button class="btndeletebehind mt-2" type="button" onclick="onDeleteOption(this)">Delete</button>
+                                    <button class="btndeletebehind mt-2 fs-25" type="button" onclick="onDeleteOption(this)">Delete</button>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                    <button class="addOptionbtn btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" type="button" onclick="onAddOption()">Add Option </button>
+                    <div class="row pl-5">
+                        <button class="create_changePhotobtn fs-25" type="button" onclick="onAddOption()">
+                            Add Option
+                        </button>
+                    </div>
                     <div class="mt-2 option-element display-none" id="clone">
-                        <select class="border-blue select-width-blue mr-1 option-padding option-select" name="option">
+                        <select class="border-blue select-width-blue mr-1 option-padding option-select pl-3 fs-25" name="option">
                             @foreach ($options as $o)
                                 <option value="{{ $o->id }}">{{ $o->name }}</option>
                             @endforeach
                         </select>
-                        <button class="btndeletebehind mt-2" type="button" onclick="onDeleteOption(this)">Delete</button>
+                        <button class="btndeletebehind mt-2 fs-25" type="button" onclick="onDeleteOption(this)">Delete</button>
                     </div>
-                    <div class="row category_content">
+                    <div class="row category_content pl-4">
                         <div class="col-6">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label class="text-blue txtdemibold">Category</label>
+                                        <label class="text-blue txtdemibold fs-25">Category</label>
                                     </div>
                                     <div class="col-6">
-                                        <label class="text-blue txtdemibold">Sub-Category</label>
+                                        <label class="text-blue txtdemibold fs-25">Sub-Category</label>
                                     </div>
                                 </div>
                                 @foreach ($main_cats as $key => $cat)
@@ -150,7 +155,7 @@
                                         @endif>
                                         <div class="row">
                                             <div class="col-6" id="category_{{ $cat->id }}">
-                                                <label class="txtdemibold mt-2">{{ $cat->name_en }}</label>
+                                                <label class="txtdemibold mt-2 fs-25">{{ $cat->name_en }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -167,10 +172,10 @@
                                                     >
                                                 <div class="row">
                                                     <div class="col-6" id="category_{{ $cat->id }}">
-                                                        <label class="txtdemibold mt-2">{{ $cat->name_en }}</label>
+                                                        <label class="txtdemibold mt-2 fs-25">{{ $cat->name_en }}</label>
                                                     </div>
                                                     <div class="col-6" id="category_{{ $subcat->id }}">
-                                                        <label class="txtdemibold mt-2">{{ $subcat->name_en }}</label>
+                                                        <label class="txtdemibold mt-2 fs-25">{{ $subcat->name_en }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,19 +183,21 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <a class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="edit-category-btn"  data-target="#addModal">
-                                <h6 class="mb-0">Edit Category</h6>
-                            </a>
+                            <div class="row pl-4">
+                                <button class="create_changePhotobtn fs-25" type="button" id="edit-category-btn" data-target="#addModal">
+                                    Edit Category
+                                </button>
+                            </div>
                         </div>
                     </div>
-                  <div class="row">
+                    <div class="row pl-4">
                         <div class="col-6">
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Group</label>
+                                    <label class="text-blue txtdemibold fs-25">Group</label>
                                 </div>
-                                <select type="text" class="outline-0 border-blue w-100 option-padding" id="group" name="group_id">
-                                    <option value="0">Choose a Group</option>
+                                <select type="text" class="outline-0 border-blue w-100 option-padding pl-3 fs-25" id="group" name="group_id">
+                                    <option value="">Choose a Group</option>
                                     @foreach ($groups as $g)
                                         <option value="{{ $g->id }}"
                                                 @if($g->id == $obj->group_id)
@@ -202,10 +209,10 @@
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <label class="text-blue txtdemibold">Badge</label>
+                                    <label class="text-blue txtdemibold fs-25">Badge</label>
                                 </div>
-                                <select type="text" class="outline-0 border-blue w-100 option-padding" name="badge_id">
-                                    <option value="0">Choose a Badge</option>
+                                <select type="text" class="outline-0 border-blue w-100 option-padding pl-3 fs-25" name="badge_id">
+                                    <option value="">Choose a Badge</option>
                                     @foreach ($badges as $b)
                                         <option value="{{ $b->id }}"
                                                 @if($b->id == $obj->badge_id)
@@ -217,12 +224,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5">
+                    <div class="row mt-5 pl-4 pr-4">
                         <div class="col-6">
-                            <label class="text-blue txtdemibold ">Eat-in</label>
+                            <label class="text-blue txtdemibold fs-25">Eat-in</label>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Breakfast</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Breakfast</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -239,7 +246,7 @@
                             </div>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Lunch</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Lunch</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -257,7 +264,7 @@
                             </div>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Tea</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Tea</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -272,10 +279,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Dinner</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Dinner</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -292,10 +298,10 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <label class="text-blue txtdemibold">Takeaway</label>
+                            <label class="text-blue txtdemibold fs-25">Takeaway</label>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Breakfast</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Breakfast</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -312,7 +318,7 @@
                             </div>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Lunch</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Lunch</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -329,7 +335,7 @@
                             </div>
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Tea</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Tea</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -344,10 +350,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="border-bottom-blue">
                                 <div class="row">
-                                    <div class="col-8"><label class="txtdemibold mt-2">Dinner</label></div>
+                                    <div class="col-8"><label class="txtdemibold mt-2 fs-25">Dinner</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
                                             <label class="bs-switch ">
@@ -364,12 +369,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5 mb-5">
+                    <div class="row mt-5 mb-5 pl-4 pr-4">
                         <div class="col-7 mt-4">
                             @if(isset($obj->id))
-                                <a onclick="deleteConfirmModal();" class="grey-button" style="color:black;padding:10px 25px 10px 25px;">
+                                <a onclick="deleteConfirmModal();" class="grey-button fs-25" style="color:black;padding:10px 25px 10px 25px;">
                                     DELETE
-                                    <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                                 </a>
                             @endif
                         </div>
@@ -379,31 +384,33 @@
                                @else
                                 href="{{route('admin.dish')}}"
                                @endif
-                               class="grey-button ml-5" style="color:black;padding: 8px;">
-                                CANCEL
-                                <img src="{{ asset('img/Group728.png') }}" height="20" class="mb-1" />
+                               class="grey-button ml-5 fs-25" style="padding:15px 25px 15px 25px;color:black;">
+                               CANCEL
+                               <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                             </a>
-                            <button class="green-button" style="padding:5px 25px 8px 25px;margin-top:-7px;">
-                                Apply
-                                <img src="{{ asset('img/Group728white.png') }}" height="20" class="mb-1" />
+                            <button class="green-button fs-25" style="padding: 12px 23px 12px 25px;margin-top: -12px;">
+                                APPLY
+                                <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
             @csrf
         </form>
     </div>
     <div class="modal fade" id="editCategoryModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="height: 600px;overflow-x:auto;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" onclick="cancelCategory()" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
+                        <img style="width:20px;height:20px;" src="{{asset("img/Group1100.png")}}">
                     </button>
                 </div>
-                <div class="modal-body pr-4">
+                <div class="modal-body pr-4" style="height: 500px;overflow-y:auto;">
                     @foreach ($main_cats as $key => $cat)
                         <div style="position: relative;">
-                            <label class="checkbox-container" id="checkbox-label">
+                            <label class="checkbox-container fs-25" id="checkbox-label">
                                 @if(count($main_cats[$key]->subs) == 0)
                                     <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
                                     <span class="checkmark"></span>
@@ -411,11 +418,11 @@
                                 {{ $cat->name_en }}
                             </label>
                             @if(count($main_cats[$key]->subs) > 0)
-                                <img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.PNG")}}" onclick="showChild({{$cat->id}})">
+                                <img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.png")}}" onclick="showChild({{$cat->id}})">
                             @endif
                             @foreach ($main_cats[$key]->subs as $sub_cat)
                                 <div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">
-                                    <label class="checkbox-container">
+                                    <label class="checkbox-container fs-25">
                                         <input class="checkbox{{$cat->id}} common_checked for_checked{{$sub_cat->id}}" type="checkbox"  onclick="childCheck({{$cat->id}}, {{$sub_cat->id}}, this)" name="check[]" style="margin-left:50px;">
                                         {{$sub_cat->name_en}}
                                         <span class="checkmark"></span>
@@ -426,8 +433,14 @@
                     @endforeach
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light waves-effect waves-light" onclick="cancelCategory()">CANCEL &gt;</button>
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="saveCategory()">OK &gt;</button>
+                    <button type="button" class="btn btn-light waves-effect waves-light fs-25" onclick="cancelCategory()">
+                        CANCEL
+                        <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                    </button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light fs-25" onclick="saveCategory()">
+                        OK
+                        <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                    </button>
                 </div>
             </div>
         </div>
@@ -443,8 +456,14 @@
                 </div>
                 <p style="text-align: center;padding: 20px;font-size: 25px;border-bottom:1px solid #e9ecef">Do you want to delete it?</p>
                 <div style="text-align: center;margin-bottom:15px;">
-                    <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="deleteDish()">OK &gt;</button>
+                    <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                        CANCEL
+                        <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                    </button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light fs-25" style="padding: 15px;width: 25%;" onclick="deleteDish()">
+                        OK
+                        <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                    </button>
                 </div>
             </div>
         </div>
@@ -452,8 +471,19 @@
     <script>
         var checkedIds = $("#checked_ids").val();
         var checkedIds_tmp = checkedIds;
+
+        $("#price").change(function(){
+            var price = $("#price").val();
+            var gst = $("#gst").val();
+            var gst_include = 0;
+            if(price > 0){
+                gst_include = price*gst / 100;
+            }
+            $("#gst_value")[0].innerText = '(Included GST: $ '+gst_include.toFixed(2)+')';
+        });
+
         $(document).ready(function(){
-            console.log($('#mcategory').val());
+            // console.log($('#mcategory').val());
             @if($obj->id == null)
                 $('#mcategory').trigger('change');
             @endif
@@ -493,6 +523,7 @@
         {
             var div = $('#clone').clone();
             $('.option-select', div).attr('name', 'opts[]');
+            $('.option-select', div).attr('id', 'opts');
             $(div).css("display", "block");
             $('#content').append(div);
         }
@@ -502,13 +533,25 @@
             $(parent).remove();
         }
         $("#edit-category-btn").click(function(){
+
+            // var aa = '1,2';
+            // var bb = aa.split(',');
+            // console.log(bb.length);
+
             var checked_ids_arr = '';
             if(checkedIds != ''){
-                checked_ids_arr = checkedIds.split(',');
+                // console.log(checkedIds);
+                if(checkedIds.length >= 2){
+                    checked_ids_arr = checkedIds.split(',');//console.log(checked_ids_arr);
+                }else{
+                    checked_ids_arr = checkedIds;
+                }
+                checked_ids_arr = checkedIds.split(',');//console.log(checked_ids_arr);
+                for(var i = 0; i < checked_ids_arr.length; i ++){
+                    $(".for_checked"+ checked_ids_arr[i])[0].checked = true;
+                }
             }
-            for(var i = 0; i < checked_ids_arr.length; i ++){
-                $(".for_checked"+ checked_ids_arr[i])[0].checked = true;
-            }
+
             $("#editCategoryModal").modal("toggle");
         });
 
@@ -521,7 +564,11 @@
             checkedIds_tmp = checkedIds;
             var checked_ids_arr = '';
             if(checkedIds != ''){
-                checked_ids_arr = checkedIds.split(',');
+                if(checkedIds.length >= 2){
+                    checked_ids_arr = checkedIds.split(',');
+                }else{
+                    checked_ids_arr = checkedIds;
+                }
             }
             $(".category_contents").css('display', 'none');
             var common_checked = $(".common_checked");
@@ -559,7 +606,7 @@
                             }
                         }
                         var tmp_ids = '';
-                        if(common_checked_count > 2){
+                        if(common_checked_count >= 2){
                             tmp_ids = checkedIds_tmp.split(',');
                         }else{
                             tmp_ids = checkedIds_tmp;
@@ -579,7 +626,12 @@
                     $(".main_category_"+index).css('display', 'none');
                     var ids_tmp = '';
                     if(checkedIds_tmp != ''){
-                        ids_tmp = checkedIds_tmp.split(',');
+                        if(checkedIds_tmp.length >=2) {
+                            ids_tmp = checkedIds_tmp.split(',');
+                        }
+                        else {
+                            ids_tmp = checkedIds_tmp;
+                        }
                     }
 
                     checkedIds_tmp = '';
@@ -638,7 +690,7 @@
             var content_obj = $(".content"+index);
             content_obj.slideToggle(500, function () {
                 header_obj.text(function () {
-                    return content_obj.is(":visible") ? header_obj.attr("src", "{{asset('img/expand.PNG')}}") : header_obj.attr("src", "{{asset('img/collapse.PNG')}}");
+                    return content_obj.is(":visible") ? header_obj.attr("src", "{{asset('img/expand.png')}}") : header_obj.attr("src", "{{asset('img/collapse.png')}}");
                 });
             });
         }
@@ -651,6 +703,41 @@
         function deleteDish()
         {
             location.href ="{{route('admin.dish.delete', ['id' => $obj->id])}}";
+        }
+
+        function validateform() {
+
+            var name_en = $("#name_en").val();
+            var name_cn = $("#name_cn").val();
+            var name_jp = $("#name_jp").val();
+            var group = $("#group").val();
+            var price = $("#price").val();
+            var opts = $("#opts").val();
+            var category = $("#checked_ids").val();
+            // var opts = e.options[e.selectedIndex].value;
+            if(!name_en) {
+                alert('Plesae input Name of dish!');
+                return false;
+            } else if(!name_cn) {
+                alert('Plesae input Name of dish(Mandarine)!');
+                return false;
+            } else if(!name_jp) {
+                alert('Plesae input Name of dish(Japanese)!');
+                return false;
+            } else if(!group) {
+                alert('Plesae select a Group!');
+                return false;
+            } else if(!price) {
+                alert('Plesae select a Price!');
+                return false;
+            } else if(!opts) {
+                alert('Plesae select a Option!');
+                return false;
+            } else if(!category) {
+                alert('Plesae select a Category!');
+                return false;
+            }
+            return true;
         }
     </script>
 @endsection

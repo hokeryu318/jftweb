@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use http\Url;
 use Illuminate\Support\Facades\Route;
 
 use Closure;

@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-1 pr-0 pl-0 text-center" id="display-method">
+            <div class="col-1 pr-0 pl-0 text-center" id="display-method" style="margin-right: -45px;">
                 <div class="text-center display_all_content" id="display-all">
                     <img src="{{ asset('img/arrow.png') }}" class="display_all_btn"/>
                     <p class="white-text font-weight-bold display_all">DISPLAY ALL TABLE</p>
@@ -23,82 +23,225 @@
                     <img src="{{ asset('img/minus.png') }}" class="minus_btn" onclick="tableZoomOut();"/>
                 </div>
             </div>
-            <div class="col-8 room-content">
+            <div class="room-content" id="room-content">
                 <div class="room-div">
                     @foreach($tables as $key => $table)
                         <div class="table-common" id="selected-{{$key}}" onclick="selectObject('{{$table["id"]}}', '{{$table["type"]}}')" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
-                            @if($table["type"] == 1){{--A--}}
-                                <div class="white table-a-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
+                            @if($table["type"] == 0)
+                            <div style="margin:0">
+                                <div style="display: inline-block;">
+                                    <div>
+                                        <div class="white table-c-style-disable text-center">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
                                 </div>
-                            @elseif($table["type"] == 2){{--B--}}
-                                <div class="chair-b-style chair-top-style"></div>
-                                <div class="white table-b-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
+                            </div>
+                            @elseif($table["type"] == 1)
+                            <div style="margin:0">
+                                <div style="display: inline-block;">
+                                    <div style="height: 110px;">
+                                        <div class="white table-c-style-disable text-center">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
                                 </div>
-                                <div class="chair-b-style chair-bottom-style"></div>
-                            @elseif($table["type"] == 3){{--C--}}
-                                <div class="chair-c-style chair-top-style"></div>
-                                <div class="chair-top-style"></div>
-                                <div class="white table-c-style text-center">
-                                    <h5 class="font-weight-bold grey-text">{{$table_type[$table["type"]]."-".$table["index"]}}</h5>
+                            </div>
+                            @elseif($table["type"] == 2)
+                            <div style="margin:0">
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-center"></span>
+                                    <div style="height: 110px;">
+                                        <div class="white table-c-style-disable text-center">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
                                 </div>
-                                <div class="chair-c-style chair-bottom-style"></div>
-                                <div class="chair-bottom-style"></div>
-                            @elseif($table["type"] == 4){{--Line--}}
-                                <div class="text-center line-style"
-                                     @if($table['index'] == "1"){{--right--}}
-                                     style="padding-right: 200px;"
-                                     @else
-                                     style="padding-bottom: 200px;"
-                                        @endif
-                                        >
+                            </div>
+                            @elseif($table["type"] == 3)
+                            <div style="margin: 0 0 0 -38px;">
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-center" style="margin-left: 73px;"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
                                 </div>
+                            </div>
+                            @elseif($table["type"] == 4)
+                            <div style="margin: 0 0 0 -38px;">
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                            </div>
+                            @elseif($table["type"] == 5)
+                            <div style="margin: 0 0 0 6px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                            </div>
+                            @elseif($table["type"] == 6)
+                            <div style="margin: 0 0 0 6px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table["type"] == 7)
+                            <div style="margin: 0 0 0 5px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table["type"] == 8)
+                            <div style="margin: 0 0 0 5px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-top"></span>
+                                <span class="ch-2 ch-dis ch-right ch-right-bottom"></span>
+                            </div>
+                            @elseif($table["type"] == 9){{--Line--}}
+                            <div class="text-center line-style"
+                                 @if($table['index'] == "1"){{--right--}}
+                                    style="padding-right: 200px;"
+                                 @else
+                                    style="padding-bottom: 200px;"
+                                 @endif
+                            ></div>
                             @endif
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
-        <div class="col-3 display_name" id="display-name-container">
+        <div class="col-4 display_name" id="display-name-container" style="width:420px;">
             <div class="p-2 display-content">
-                <h3 class="text-info font-weight-bold h3-responsive">Display Name</h3>
-                <h4 class="black-text mb-xl-4 font-weight-bold h4-responsive selected-name" id="selected-name"></h4>
+                <h3 class="text-info font-weight-bold h3-responsive mt-3 mb-3 fs-30">Display Name</h3>
+                <input type="" class="black-text mb-xl-4 font-weight-bold h4-responsive selected-name fs-25" name="selected-name"
+                       id="selected-name" style="width: 350px;padding-left: 15px;padding-right: 15px;margin-left: 10px;" value="" onchange="display_name()">
                 <div class="display-value-coordinate">
-                    <div class="text-center" id="selected-value-content">
-                        <img src="{{ asset('img/arrowbottom.png') }}" onclick="changeCoordinate('value', 'down')" />
-                        <input type="" id="selected-value" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3" placeholder="1" value="0" />
-                        <img src="{{ asset('img/arrowtop.png') }}" onclick="changeCoordinate('value', 'up')"  />
+                    <div class="text-center" id="selected-type-content">
+                        <img src="{{ asset('img/arrowbottom.png') }}" width="55px" onclick="changeCoordinate('value', 'down')" />
+                        <input id="selected-type" class="d-inline black-text font-weight-bold text-center mr-5 ml-5 fs-30"
+                               style="width: 90px;height: 70px;border: 1px solid black;" placeholder="1" value="0" />
+                        <img src="{{ asset('img/arrowtop.png') }}" width="55px" onclick="changeCoordinate('value', 'up')"  />
                     </div>
                     <div class="text-center mt-xl-4">
-                        <h4 class="text-info font-weight-bold text-left h4-responsive">X-Coordinate</h4>
-                        <img src="{{ asset('img/arrowleft.png') }}" onclick="changeCoordinate('coordinate-x', 'down')"/>
-                        <input type="" id="selected-x" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3" placeholder="1" value="0" />
-                        <img src="{{ asset('img/arrowright.png') }}" onclick="changeCoordinate('coordinate-x', 'up')" />
+                        <h4 class="text-info font-weight-bold text-left h4-responsive fs-25">X-Coordinate</h4>
+                        <img src="{{ asset('img/arrowleft.png') }}" width="55px" onclick="changeCoordinate('coordinate-x', 'down')"/>
+                        <input id="selected-x" class="d-inline black-text font-weight-bold text-center mr-5 ml-5 fs-30"
+                               style="width: 90px;height: 70px;border: 1px solid black;" placeholder="1" value="0" />
+                        <img src="{{ asset('img/arrowright.png') }}" width="55px" onclick="changeCoordinate('coordinate-x', 'up')" />
                     </div>
                     <div class="text-center mt-xl-4">
-                        <h4 class="text-info font-weight-bold text-left h4-responsive">Y-Coordinate</h4>
-                        <img src="{{ asset('img/arrowbottom.png') }}" onclick="changeCoordinate('coordinate-y', 'down')" />
-                        <input type="" id="selected-y" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3" placeholder="1" value="0"  />
-                        <img src="{{ asset('img/arrowtop.png') }}" onclick="changeCoordinate('coordinate-y', 'up')"/>
+                        <h4 class="text-info font-weight-bold text-left h4-responsive fs-25">Y-Coordinate</h4>
+                        <img src="{{ asset('img/arrowbottom.png') }}" width="55px" onclick="changeCoordinate('coordinate-y', 'down')" />
+                        <input id="selected-y" class="d-inline black-text font-weight-bold text-center mr-5 ml-5 fs-30"
+                               style="width: 90px;height: 70px;border: 1px solid black;" placeholder="1" value="0"  />
+                        <img src="{{ asset('img/arrowtop.png') }}" width="55px" onclick="changeCoordinate('coordinate-y', 'up')"/>
                     </div>
                 </div>
-                <div class="row mt-xl-3">
+                <div class="row" style="margin-top: 120px;">
                     <div class="col-6 pl-xl-5">
-                        <button class="btn grey pr-2 pl-2" onclick="location.reload();"><h5 class="mb-0 font-weight-bold h5-responsive">CANCEL <br> &gt;</h5></button>
+                        <button class="btn grey pr-2 pl-0" style="width: 170px;margin-left: -20px;" onclick="location.reload();">
+                            <h5 class="mb-0 font-weight-bold h5-responsive fs-25">
+                                CANCEL
+                                <br>
+                                <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 10px;">
+                            </h5>
+                        </button>
                     </div>
                     <div class="col-6 pl-xl-2">
-                        <button class="btn bg-info pr-2 pl-2"><h5 class="mb-0 font-weight-bold h5-responsive" onclick="saveChangedTables()">&nbsp;&nbsp;APPLY&nbsp;&nbsp;  <br> &gt;</h5></button>
+                        <button class="btn bg-info pr-2 pl-2" style="width: 170px;margin-left: -5px;" onclick="saveChangedTables()">
+                            <h5 class="mb-0 font-weight-bold h5-responsive fs-25">
+                                APPLY
+                                <br>
+                                <img src="{{ asset('img/Group728white.png') }}" style="height:18px;">
+                            </h5>
+                        </button>
                     </div>
                 </div>
                 <div class="row pr-3 pl-3 mt-2 mb-2">
-                    <button class="btn bg-grey pr-2 pl-2 w-100"><h5 class="mb-0 font-weight-bold h5-responsive" id="delete-selected-obj">DELETE THIS TABLE &gt;</h5></button>
+                    <button class="btn bg-grey pr-2 pl-2 w-100">
+                        <h5 class="mb-0 font-weight-bold h5-responsive fs-25" id="delete-selected-obj">
+                            DELETE THIS TABLE
+                            <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 20px;">
+                        </h5>
+                    </button>
                 </div>
             </div>
             <div class="row operate_btn">
-                <button class="btn black pr-2 pl-2 w-100" id="add-new-table"><h5 class="mb-0 font-weight-bold">ADD NEW TABLE &gt;</h5></button>
-                <button class="btn bg-info pr-2 pl-2 w-100" id="add-new-line"><h5 class="mb-0 font-weight-bold">ADD LINE &gt;</h5></button>
-                <button class="btn bg-info pr-2 pl-2 w-100" id="change-room-size"><h5 class="mb-0 font-weight-bold">CHANGE ROOM SIZE &gt;</h5></button>
+                <button class="btn black pr-2 pl-2 w-400px" id="add-new-table">
+                    <h5 class="mb-0 font-weight-bold fs-25">
+                        ADD NEW TABLE
+                        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 57px;">
+                    </h5>
+                </button>
+                <button class="btn bg-info pr-2 pl-2 w-400px" id="add-new-line">
+                    <h5 class="mb-0 font-weight-bold fs-25">
+                        ADD LINE
+                        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 136px;">
+                    </h5>
+                </button>
+                <button class="btn bg-info pr-2 pl-2 w-400px" id="change-room-size">
+                    <h5 class="mb-0 font-weight-bold fs-25">
+                        CHANGE ROOM SIZE
+                        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 5px;">
+                    </h5>
+                </button>
             </div>
         </div>
     </div>
@@ -108,67 +251,26 @@
         @csrf
     </form>
     <input type="hidden" id="saved-width">
-    {{--Modal Add new table--}}
-    <div class="modal fade" id="add-new-table-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
-                    </button>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-4">
-                        <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-a-checked" name="table" checked onclick="showTable(1)">
-                            <label class="form-check-label text-blue txtdemibold" for="table-a-checked">A</label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-b-checked" name="table" onclick="showTable(2)">
-                            <label class="form-check-label text-blue txtdemibold" for="table-b-checked">B</label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-check d-inline">
-                            <input type="radio" class="form-check-input rdobtn" id="table-c-checked" name="table" onclick="showTable(3)">
-                            <label class="form-check-label text-blue txtdemibold" for="table-c-checked">C</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-table-content">
-                    <a class="table-sample" id="table-sample-a"><img src="{{asset('img/table_a.png')}}"></a>
-                    <a class="table-sample display-none" id="table-sample-b"><img src="{{asset('img/table_b.png')}}"></a>
-                    <a class="table-sample display-none" id="table-sample-c"><img src="{{asset('img/table_c.png')}}"></a>
-                </div>
-                <div style="text-align: center;margin-bottom:15px;">
-                    <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" id="add-table-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addTable(1)">OK &gt;</button>
-                </div>
-            </div>
-        </div>
-    </div>
     {{--Modal Add new LIne--}}
     <div class="modal fade" id="add-new-line-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
+                        <img style="width:20px;height:20px;" src="{{asset("img/Group1100.png")}}">
                     </button>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-4">
-                        <div class="form-check d-inline">
+                    <div class="col-5">
+                        <div class="form-check d-inline ml-5">
                             <input type="radio" class="form-check-input rdobtn" id="line-r-checked" name="line" checked onclick="showLine(1)">
-                            <label class="form-check-label text-blue txtdemibold" for="line-r-checked">Line Right</label>
+                            <label class="form-check-label text-blue txtdemibold fs-25" for="line-r-checked">Line Right</label>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="form-check d-inline">
+                    <div class="col-5">
+                        <div class="form-check d-inline ml-2">
                             <input type="radio" class="form-check-input rdobtn" id="line-b-checked" name="line" onclick="showLine(2)">
-                            <label class="form-check-label text-blue txtdemibold" for="line-b-checked">Line Bottom</label>
+                            <label class="form-check-label text-blue txtdemibold fs-25" for="line-b-checked">Line Bottom</label>
                         </div>
                     </div>
                 </div>
@@ -177,8 +279,15 @@
                     <a class="line-sample display-none" id="line-sample-b"><img src="{{asset('img/line_bottom.png')}}"></a>
                 </div>
                 <div style="text-align: center;margin-bottom:15px;">
-                    <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" id="add-line-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" onclick="addLine(1)">OK &gt;</button>
+                    <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                        CANCEL
+                        <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin-left: 20px;">
+                    </button>
+                    <button type="button" id="add-line-btn" class="btn btn-primary waves-effect waves-light fs-25"
+                            style="padding: 15px;width: 25%;" onclick="addLine(1)">
+                        OK
+                        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 20px;">
+                    </button>
                 </div>
             </div>
         </div>
@@ -190,49 +299,158 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img style="width:10px;height:10px;" src="{{asset("img/Group1100.png")}}">
+                        <img style="width:20px;height:20px;" src="{{asset("img/Group1100.png")}}">
                     </button>
                 </div>
                 <div class="text-center room-size" id="room-width-content">
-                    <span class="text-info font-weight-bold h3-responsive">Room Width</span>
-                    <input id="room-width" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3" placeholder="1" value="0" />
-                    <span class="text-info font-weight-bold h3-responsive">PX</span>
+                    <span class="text-info font-weight-bold h3-responsive fs-25">Room Width</span>
+                    <input id="room-width" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3 fs-25" placeholder="1" value="{{ $room_size->width }}" />
+                    <span class="text-info font-weight-bold h3-responsive fs-25">PX</span>
                 </div>
                 <div class="text-center room-size" id="room-height-content">
-                    <span class="text-info font-weight-bold h3-responsive">Room Height</span>
-                    <input id="room-height" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3" placeholder="1" value="0" />
-                    <span class="text-info font-weight-bold h3-responsive">PX</span>
+                    <span class="text-info font-weight-bold h3-responsive fs-25">Room Height</span>
+                    <input id="room-height" class="d-inline black-text font-weight-bold text-center w-25 mr-3 ml-3 fs-25" placeholder="1" value="{{ $room_size->height }}" />
+                    <span class="text-info font-weight-bold h3-responsive fs-25">PX</span>
                 </div>
                 <div style="text-align: center;margin-bottom:15px;">
-                    <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">CANCEL &gt;</button>
-                    <button type="button" id="save-room-btn" class="btn btn-primary waves-effect waves-light" style="padding: 15px;width: 25%;" >OK &gt;</button>
+                    <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                        CANCEL
+                        <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin-left: 20px;">
+                    </button>
+                    <button type="button" id="save-room-btn" class="btn btn-primary waves-effect waves-light fs-25" style="padding: 15px;width: 25%;" >
+                        OK
+                        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 20px;">
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    {{--clone A table--}}
+
+    {{--seat:0--}}
+    <div class="table-common display-none" id="clone-0">
+        <div style="display: inline-block;">
+            <div>
+                <div class="white table-c-style-disable text-center">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--seat:1--}}
     <div class="table-common display-none" id="clone-1">
-        <div class="white table-a-style text-center">
-            <h5 class="font-weight-bold blue-text">A-0</h5>
+        <div style="display: inline-block;">
+            <div style="height: 110px;">
+                <div class="white table-c-style-disable text-center">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
         </div>
     </div>
-    {{--clone B table--}}
-    <div class="table-common display-none" id="clone-2">
-        <div class="chair-b-style chair-top-style"></div>
-        <div class="white table-b-style text-center">
-            <h5 class="font-weight-bold blue-text">B-0</h5>
+    {{--seat:2--}}
+    <div class="table-common display-none" style="margin-top: -4px;" id="clone-2">
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-center"></span>
+            <div style="height: 110px;">
+                <div class="white table-c-style-disable text-center">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
         </div>
-        <div class="chair-b-style chair-bottom-style"></div>
     </div>
-    {{--clone C table--}}
-    <div class="table-common display-none" id="clone-3">
-        <div class="chair-c-style chair-top-style"></div>
-        <div class="chair-top-style"></div>
-        <div class="white table-c-style text-center">
-            <h5 class="font-weight-bold blue-text">C-0</h5>
+    {{--seat:3--}}
+    <div class="table-common display-none" style="margin: -4px 0 0 -37px;" id="clone-3">
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-center" style="margin-left: 73px;"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
         </div>
-        <div class="chair-c-style chair-bottom-style"></div>
-        <div class="chair-bottom-style"></div>
+    </div>
+    {{--seat:4--}}
+    <div class="table-common display-none" style="margin: -4px 0 0 -37px;" id="clone-4">
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+            <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+        </div>
+    </div>
+    {{--seat:5--}}
+    <div class="table-common display-none" style="margin-top: -4px;" id="clone-5">
+        <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+            <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+        </div>
+    </div>
+    {{--seat:6--}}
+    <div class="table-common display-none" style="margin-top: -4px;" id="clone-6">
+        <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+            <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+        </div>
+        <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+    </div>
+    {{--seat:7--}}
+    <div class="table-common display-none" style="margin-top: -4px;" id="clone-7">
+        <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+        <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+            <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+        </div>
+        <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+    </div>
+    {{--seat:8--}}
+    <div class="table-common display-none" style="margin-top: -4px;" id="clone-8">
+        <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+        <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+        <div style="display: inline-block;">
+            <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+            <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+            <div style="height: 118px;">
+                <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                    <h6 class="font-weight-bold blue-text wb"></h6>
+                </div>
+            </div>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+            <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+        </div>
+        <span class="ch-2 ch-dis ch-right ch-right-top"></span>
+        <span class="ch-2 ch-dis ch-right ch-right-bottom"></span>
     </div>
     {{--clone line right--}}
     <div class="table-common display-none" id="clone-line-1">
@@ -247,14 +465,16 @@
     <script>
         var tables_arr = <?php echo json_encode($tables); ?>;
         var new_id = <?php echo $new_id; ?>;
-        var table_type_arr = ["A", "B", "C", "Line"];
+        var table_type_arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', 'Line'];
         var selected_arr = "";
         var tmp_selected_arr = "";
         var selected_type = "";
         var selected_index = "";
+
         $("document").ready(function () {
             $("#add-new-table").click(function() {
-                $("#add-new-table-modal").modal('toggle');
+                // $("#add-new-table-modal").modal('toggle');
+                addTable(0);
             });
 
             $("#add-new-line").click(function() {
@@ -262,21 +482,24 @@
             });
         });
 
-        function showTable(type)
-        {
-            $(".table-sample").css("display", "none");
-            $("#add-table-btn").attr("onclick", "addTable('"+type+"')");
-            switch(type){
-                case 1:
-                    $("#table-sample-a").css("display", "block");
-                    break;
-                case 2:
-                    $("#table-sample-b").css("display", "block");
-                    break;
-                case 3:
-                    $("#table-sample-c").css("display", "block");
-                    break;
+        function display_name() {
+
+            if(selected_index == ""){
+                alert("Please select the table or line!");
+                return;
             }
+            var display_table_name = $('#selected-name').val();
+
+            if(selected_type < 9) {
+                $("#selected-"+selected_index+" h6")[0].innerText = display_table_name;
+                tables_arr[selected_index]['name'] = display_table_name;
+            } else {
+                alert("You can't named the line.");
+                $("#selected-name").val('');
+            }
+//            var tbnm = document.getElementById("tb_nm").offsetWidth;
+//            var tb = $(document.getElementsByClassName("table-c-style-disable")).width();
+
         }
 
         function addTable(type)
@@ -285,12 +508,12 @@
             $(cloneTable).css("display", "block");
             var id = new_id;
             new_id ++;
-            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type':type, 'index':0};
+            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type':type, 'index':0, 'name':''};
             $(cloneTable).attr("onclick", "selectObject('"+id+"', 'table')");
             $(cloneTable).attr("id", "selected-"+id);
             $(".room-div").append(cloneTable);
             selectObject(id, type);
-            $("#add-new-table-modal").modal('toggle');
+            // $("#add-new-table-modal").modal('toggle');
         }
 
         function showLine(type)
@@ -313,7 +536,7 @@
             $(cloneLine).css("display", "block");
             var id = new_id;
             new_id ++;
-            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type':4, 'index':type};
+            tables_arr[id] = {'id':id, 'x':0, 'y':0, 'type': 9, 'index':type, 'name':''};
             $(cloneLine).attr("onclick", "selectObject('"+id+"', 'line')");
             $(cloneLine).attr("id", "selected-"+id);
             $(".room-div").append(cloneLine);
@@ -323,29 +546,35 @@
 
         function selectObject(index, type)
         {
+            // console.log(tables_arr);
             selected_arr = new Object(tables_arr[index]);
+            // console.log(selected_arr);
             var selected_name = "";
-            var selected_value_obj = $("#selected-value-content");
+            var selected_value_obj = $("#selected-type-content");
             tmp_selected_arr = selected_arr;
-            selected_type = type;
+            selected_type = tables_arr[index]['type'];
             selected_value_obj.css("display", "block");
             selected_index = index;
             $(".table-common").css("z-index",0);
-            $(".table-common h5").removeClass("blue-text");
-            $(".table-common h5").addClass("grey-text");
+            $(".table-common h6").removeClass("blue-text");
+            $(".table-common h6").addClass("grey-text");
             $("#selected-"+selected_index).css("z-index", 1);
-            $("#selected-"+selected_index+" h5").removeClass("grey-text");
-            $("#selected-"+selected_index+" h5").addClass("blue-text");
-            if(type != 4){//"line"
-                selected_name = table_type_arr[selected_arr.type-1]+"-"+selected_arr.index;
+            $("#selected-"+selected_index+" h6").removeClass("grey-text");
+            $("#selected-"+selected_index+" h6").addClass("blue-text");
+
+            if(selected_type < 9){
+                // selected_name = $("#selected-name").val();
+                selected_name = $("#selected-"+index+" h6")[0].innerText;
                 $("#selected-value").val(selected_arr.index);
                 $("#delete-selected-obj")[0].innerHTML = "DELETE THIS TABLE &gt;";
-            }else{
+            }else{//"line"
                 selected_name = "Line";
                 selected_value_obj.css("display", "none");
                 $("#delete-selected-obj")[0].innerHTML = "DELETE THIS LINE &gt;";
             }
-            $("#selected-name")[0].innerText = selected_name;
+            $("#selected-name").val(selected_name);
+            tables_arr[index]['name'] = $("#selected-name").val();
+            $("#selected-type").val(selected_arr.type);
             $("#selected-x").val(selected_arr.x);
             $("#selected-y").val(selected_arr.y);
         }
@@ -356,9 +585,10 @@
                 alert("Please select the table or line!");
                 return;
             }
-            if(selected_type != 4){//"line"
+            if(selected_type <  9){//"line"
                 var selected_value = tmp_selected_arr.index;
-                var selected_table_type = table_type_arr[tmp_selected_arr.type-1];
+                var selected_table_type = table_type_arr[tmp_selected_arr.type];
+                var selected_name = $('#selected-name').val();
             }
             var coordinate_x = tmp_selected_arr.x;
             var coordinate_y = tmp_selected_arr.y;
@@ -368,71 +598,321 @@
             switch (type){
                 case "value":
                     if(aroma == "up"){
-                        selected_value ++;
+                        if(selected_type <= 7){
+                            selected_type ++;
+                            if(selected_type == 1) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <div style=\"height: 110px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\">\n" +
+                                    "              <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "            </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-center\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 2) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin-top: -4px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-center\"></span>\n" +
+                                    "       <div style=\"height: 110px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-center\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 3) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 -38px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-center\" style=\"margin-left: 73px;\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 4) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 -38px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 5) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 6px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-center\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 6) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 6px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-center\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-center\"></span>\n" +
+                                    "</div>";
+                            } else if (selected_type == 7) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 5px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-top\"></span>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-bottom\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-center\"></span>\n" +
+                                    "</div>";
+                            } else if (selected_type == 8) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 5px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-top\"></span>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-bottom\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-top\"></span>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-bottom\"></span>\n" +
+                                    "</div>";
+                            }
+                        } else {
+                            alert("You can't create seat for over 8.");
+                            break;
+                        }
                     }else{
-                        if(selected_value > 0){
-                            selected_value --;
+                        if(selected_type > 0){
+                            selected_type --;
+                            if(selected_type == 0) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <div>\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if(selected_type == 1) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <div style=\"height: 110px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\">\n" +
+                                    "              <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "            </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-center\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 2) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin-top: -4px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-center\"></span>\n" +
+                                    "       <div style=\"height: 110px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-center\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 3) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 -38px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-center\" style=\"margin-left: 73px;\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 4) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 -38px;\">\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 5) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 6px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-center\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "</div>";
+                            } else if (selected_type == 6) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 6px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-center\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-center\"></span>\n" +
+                                    "</div>";
+                            } else if (selected_type == 7) {
+                                document.getElementById("selected-"+selected_index).innerHTML =
+                                    "<div style=\"margin: -4px 0 0 5px;\">\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-top\"></span>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-left ch-left-bottom\"></span>\n" +
+                                    "   <div style=\"display: inline-block;\">\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-top ch-top-right\"></span>\n" +
+                                    "       <div style=\"height: 118px;\">\n" +
+                                    "           <div class=\"white table-c-style-disable text-center\" style=\"margin-left: 38px;\">\n" +
+                                    "               <h6 class=\"font-weight-bold blue-text wb\"></h6>\n" +
+                                    "           </div>\n" +
+                                    "       </div>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-left\"></span>\n" +
+                                    "       <span class=\"ch-1 ch-dis ch-bottom ch-bottom-right\"></span>\n" +
+                                    "   </div>\n" +
+                                    "   <span class=\"ch-2 ch-dis ch-right ch-right-center\"></span>\n" +
+                                    "</div>";
+                            }
                         }
                     }
                     tmp_selected_arr.index = selected_value;
-                    $("#selected-name")[0].innerText = selected_table_type + "-" + selected_value;
-                    $("#selected-"+selected_index+" h5")[0].innerText = selected_table_type + "-" + selected_value;
-                    $("#selected-value").val(selected_value);
+                    $("#selected-name")[0].innerText = selected_name;
+                    $("#selected-"+selected_index+" h6")[0].innerText = selected_name;
+                    $("#selected-type").val(selected_type);
+
+                    tables_arr[selected_index]['type'] = selected_type;
+                    // tables_arr[selected_index]['name'] = $('#selected-name').val();
                     break;
                 case "coordinate-x":
                     var room_pos_left = room_obj.width() + room_obj[0].scrollLeft;
-                        if(aroma == "up"){
-                            if($(".room-div").width() > room_pos_left) {
-                                coordinate_x++;
-                            }
+                    if(aroma == "up"){
+                        if($(".room-div").width() > room_pos_left) {
+                            coordinate_x++;
+                        }
 
-                        }else{
-                            if(coordinate_x > 0){
-                                coordinate_x --;
-                            }
+                    }else{
+                        if(coordinate_x > 0){
+                            coordinate_x --;
                         }
-                        var margin_left = coordinate_x * 20;
-                        selectedObj.css("margin-left", margin_left+"px");
-                        tmp_selected_arr.x = coordinate_x;
-                        $("#selected-x").val(coordinate_x);
-                        var selected_pos_left = selectedObj[0].offsetLeft + selectedObj.width();
-                        if(aroma == "down" && coordinate_y > 0){
-                            if(room_obj[0].scrollLeft > selectedObj[0].offsetLeft){
-                                room_obj[0].scrollLeft = room_obj[0].scrollLeft - 20;
-                            }
-                        }else{
-                            if(room_pos_left < selected_pos_left){
-                                room_obj[0].scrollLeft = room_obj[0].scrollLeft + 20;
-                            }
+                    }
+                    var margin_left = coordinate_x * 20;
+                    selectedObj.css("margin-left", margin_left+"px");
+                    tmp_selected_arr.x = coordinate_x;
+                    $("#selected-x").val(coordinate_x);
+                    var selected_pos_left = selectedObj[0].offsetLeft + selectedObj.width();
+                    if(aroma == "down" && coordinate_y > 0){
+                        if(room_obj[0].scrollLeft > selectedObj[0].offsetLeft){
+                            room_obj[0].scrollLeft = room_obj[0].scrollLeft - 20;
                         }
+                    }else{
+                        if(room_pos_left < selected_pos_left){
+                            room_obj[0].scrollLeft = room_obj[0].scrollLeft + 20;
+                        }
+                    }
                     break;
                 case "coordinate-y":
                     var room_pos_top = room_obj.height() + room_obj[0].scrollTop;
 
-                        if(aroma == "up"){
-                            if(coordinate_y > 0){
-                                coordinate_y --;
-                            }
-                        }else{
-                            if($(".room-div").height() > room_pos_top) {
-                                coordinate_y++;
-                            }
+                    if(aroma == "up"){
+                        if(coordinate_y > 0){
+                            coordinate_y --;
                         }
-                        var margin_top = coordinate_y * 20;
-                        selectedObj.css("margin-top", margin_top+"px");
-                        tmp_selected_arr.y = coordinate_y;
-                        $("#selected-y").val(coordinate_y);
+                    }else{
+                        if($(".room-div").height() > room_pos_top) {
+                            coordinate_y++;
+                        }
+                    }
+                    var margin_top = coordinate_y * 20;
+                    selectedObj.css("margin-top", margin_top+"px");
+                    tmp_selected_arr.y = coordinate_y;
+                    $("#selected-y").val(coordinate_y);
 
-                        var selected_pos_top = selectedObj[0].offsetTop + selectedObj.height();
-                        if(aroma == "up" && coordinate_y > 0){
-                            if(room_obj[0].scrollTop > selectedObj[0].offsetTop){
-                                room_obj[0].scrollTop = room_obj[0].scrollTop - 20;
-                            }
-                        }else{
-                            if(room_pos_top < selected_pos_top){
-                                room_obj[0].scrollTop = room_obj[0].scrollTop + 20;
-                            }
+                    var selected_pos_top = selectedObj[0].offsetTop + selectedObj.height();
+                    if(aroma == "up" && coordinate_y > 0){
+                        if(room_obj[0].scrollTop > selectedObj[0].offsetTop){
+                            room_obj[0].scrollTop = room_obj[0].scrollTop - 20;
                         }
+                    }else{
+                        if(room_pos_top < selected_pos_top){
+                            room_obj[0].scrollTop = room_obj[0].scrollTop + 20;
+                        }
+                    }
                     break;
             }
         }
@@ -451,12 +931,12 @@
                 return;
             }
             var selected_value = $("#selected-value").val();
-            if(selected_type != 4){//"line"
-                var selected_table_type = table_type_arr[tmp_selected_arr.type - 1];
+            if(selected_type != 9){//"line"
+                var selected_table_type = table_type_arr[tmp_selected_arr.type];
             }
             tmp_selected_arr.index = selected_value;
             $("#selected-name")[0].innerText = selected_table_type+"-"+selected_value;
-            $("#selected-"+selected_index+" h5")[0].innerText = selected_table_type+"-"+selected_value;
+            $("#selected-"+selected_index+" h6")[0].innerText = selected_table_type+"-"+selected_value;
         });
 
         $("#selected-x").keyup(function(){
@@ -516,31 +996,65 @@
 
         $("#change-room-size").click(function() {
             var room_obj = $(".room-div");
-            $("#room-width").val(room_obj.width());
-            $("#room-height").val(room_obj.height());
+            // $("#room-width").val(room_obj.width());
+            // $("#room-height").val(room_obj.height());
             $("#change-room-modal").modal("toggle");
         });
 
         $("#save-room-btn").click(function(){
             var room_obj = $(".room-div");
-            room_obj.width($("#room-width").val());
-            room_obj.height($("#room-height").val());
-            $("#change-room-modal").modal("toggle");
+            var width = $("#room-width").val();
+            var height = $("#room-height").val();
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('admin.change_roomsize') }}",
+                data:{
+                    room_width: width, room_height: height, _token:"{{ csrf_token() }}"
+                },
+                success: function(result){
+                    room_obj.width(width);
+                    room_obj.height(height);
+                    $("#change-room-modal").modal("toggle");
+                }
+            });
+
         });
 
         $("#display-all").click(function(){
-            $("#display-method").hide("slow");
-            $("#display-name-container").hide("slow");
-            var room_content = $(".room-content");
-            $("#saved-width").val(room_content.width());
-            room_content.width('100%');
-            $("#exit-fullscreen").show('slow');
+            // $("#display-method").hide("slow");
+            // $("#display-name-container").hide("slow");
+            // var room_content = $(".room-content");
+            // $("#saved-width").val(room_content.width());
+            // room_content.width('1000px');
+            // room_content.height('645px');
+            // room_content.css('margin-top', '15px');
+            // room_content.css('margin-left', '15px');
+            // $("#exit-fullscreen").show('slow');
+
+            var room_obj = $(".room-div");
+            var width = $("#room-width").val();
+            var height = $("#room-height").val();
+            room_obj.width(width);
+            room_obj.height(height);
+
+            if(width >= height) {
+                var scale_value = (865/width).toString();
+                $(".room-div").animate({ 'zoom': scale_value }, 400);
+            } else {
+                var scale_value = (888/height).toString();
+                $(".room-div").animate({ 'zoom': scale_value }, 400);
+            }
+
         });
 
         $("#exit-fullscreen").click(function() {
             $("#display-method").show("slow");
             $("#display-name-container").show("slow");
-            $(".room-content").width($("#saved-width").val());
+            $(".room-content").width('865px');
+            $(".room-content").height('888px');
+            // $(".room-content").css('margin-top', '-5px');
+            $(".room-content").css('margin-left', '20px');
             $("#exit-fullscreen").hide('slow');
         });
 
@@ -579,7 +1093,7 @@
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
             }
             scale_value_obj.text(scale_value+"%");
-
         }
+
     </script>
 @endsection
