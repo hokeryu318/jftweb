@@ -36,6 +36,7 @@
           <entry key="config" value="3" />
           <entry key="css" value="21" />
           <entry key="env" value="8" />
+          <entry key="gitignore" value="1" />
           <entry key="js" value="25" />
           <entry key="json" value="3" />
           <entry key="php" value="426" />
@@ -52,7 +53,7 @@
           <entry key="JSON" value="3" />
           <entry key="JavaScript" value="25" />
           <entry key="PHP" value="176" />
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="12" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="81" />
         </counts>
@@ -147,6 +148,9 @@
       <replace>$mails</replace>
       <replace>w-180px</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -461,12 +465,12 @@
       <workItem from="1560580153830" duration="35325000" />
       <workItem from="1560644911818" duration="71641000" />
       <workItem from="1560742317010" duration="129650000" />
-      <workItem from="1561118290885" duration="41343000" />
+      <workItem from="1561118290885" duration="41960000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="646020000" />
+    <option name="totallyTimeSpent" value="646637000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -501,13 +505,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/preview.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/part/dish_info.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -893,6 +890,9 @@
           <caret line="85" column="7" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
