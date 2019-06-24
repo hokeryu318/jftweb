@@ -1420,17 +1420,6 @@ button h6{
     margin: 0 0 48px -5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .line-style{
     background: grey;
     border:2px solid grey;
@@ -2120,6 +2109,10 @@ td.key_panel_1 {
     font-size: 60px;
 }
 
+.fn-bold {
+    font-weight: 700;
+}
+
 .img-25 {
     width: 25px;
 }
@@ -2153,7 +2146,7 @@ td.key_panel_1 {
      text-align: center;
  }
 
-.modalPriceOffer{
+.modalPriceOffer {
     display: inline-flex;
     /*font-weight: bolder;*/
     /*font-size: 1.2em;*/
@@ -2161,17 +2154,22 @@ td.key_panel_1 {
     line-height: 1;
 }
 
-.discountedPrice{
+.discountedPrice {
     color: #cd4a98;
     font-weight: bold;
     font-size: 25px;
 }
 
-.price{
+.price {
     color: #d3bb33;
 }
-.striked{
+.striked {
     text-decoration-line: line-through;
     font-weight: bold;
     font-size: 25px;
+}
+
+.ct-sl-modal {
+    max-width: 800px;
+    margin: 100px auto;
 }

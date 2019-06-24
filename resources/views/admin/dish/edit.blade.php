@@ -400,38 +400,81 @@
         </form>
     </div>
     <div class="modal fade" id="editCategoryModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 1000px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" onclick="cancelCategory()" aria-label="Close">
                         <img style="width:20px;height:20px;" src="{{asset("img/Group1100.png")}}">
                     </button>
                 </div>
-                <div class="modal-body pr-4" style="height: 500px;overflow-y:auto;">
-                    @foreach ($main_cats as $key => $cat)
-                        <div style="position: relative;">
-                            <label class="checkbox-container fs-25" id="checkbox-label">
-                                @if(count($main_cats[$key]->subs) == 0)
-                                    <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
-                                    <span class="checkmark"></span>
-                                @endif
-                                {{ $cat->name_en }}
-                            </label>
-                            @if(count($main_cats[$key]->subs) > 0)
-                                <img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.png")}}" onclick="showChild({{$cat->id}})">
-                            @endif
-                            @foreach ($main_cats[$key]->subs as $sub_cat)
-                                <div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">
-                                    <label class="checkbox-container fs-25">
-                                        <input class="checkbox{{$cat->id}} common_checked for_checked{{$sub_cat->id}}" type="checkbox"  onclick="childCheck({{$cat->id}}, {{$sub_cat->id}}, this)" name="check[]" style="margin-left:50px;">
-                                        {{$sub_cat->name_en}}
+                <div class="row col-12 ml-1">
+                    <div class="col-6" style="display: inline-block;">
+                        <label class="fs-25 fn-bold pt-3 pb-2">SELECT CATEGORY</label>
+                        <div class="modal-body pr-4" style="height: 500px;overflow-y:auto;">
+                            @foreach ($main_cats as $key => $cat)
+                                <div style="position: relative;">
+                                    <label class="checkbox-container fs-25" id="checkbox-label">
+                                        <input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>
                                         <span class="checkmark"></span>
+                                        {{ $cat->name_en }}
                                     </label>
                                 </div>
                             @endforeach
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col-6" style="display: inline-block;">
+                        <label class="fs-25 fn-bold pt-3 pb-2"><b>SELECT SUB CATEGORY</b></label>
+                        <div class="modal-body pr-4" style="height: 500px;overflow-y:auto;">
+                            @foreach ($main_cats as $key => $cat)
+                                <div style="position: relative;">
+                                    @if(count($main_cats[$key]->subs) > 0)
+                                        <label class="checkbox-container fs-25" id="checkbox-label">
+                                            {{ $cat->name_en }}
+                                        </label>
+                                        <img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.png")}}" onclick="showChild({{$cat->id}})">
+                                    @endif
+                                    @foreach ($main_cats[$key]->subs as $sub_cat)
+                                        <div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">
+                                            <label class="checkbox-container fs-25">
+                                                <input class="checkbox{{$cat->id}} common_checked for_checked{{$sub_cat->id}}" type="checkbox"  onclick="childCheck('{{$cat->id}}', '{{$sub_cat->id}}', this)" name="check[]" style="margin-left:50px;">
+                                                {{$sub_cat->name_en}}
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
+                {{--<div class="col-6" style="display: inline-block;">--}}
+                    {{--<label class="fs-25 fn-bold pt-3 pb-2"><b>SELECT SUB CATEGORY</b></label>--}}
+                    {{--<div class="modal-body pr-4" style="height: 500px;overflow-y:auto;">--}}
+                        {{--@foreach ($main_cats as $key => $cat)--}}
+                            {{--<div style="position: relative;">--}}
+                                {{--<label class="checkbox-container fs-25" id="checkbox-label">--}}
+                                    {{--@if(count($main_cats[$key]->subs) == 0)--}}
+                                        {{--<input type="checkbox" id="select_all{{$cat->id}}" class="common_checked for_checked{{$cat->id}}" onclick="selectParent({{$cat->id}})"/>--}}
+                                        {{--<span class="checkmark"></span>--}}
+                                    {{--@endif--}}
+                                    {{--{{ $cat->name_en }}--}}
+                                {{--</label>--}}
+                                {{--@if(count($main_cats[$key]->subs) > 0)--}}
+                                    {{--<img class="header{{$cat->id}}" style="width:24px;height:25px;position:absolute;left:1px;top:5px;" src="{{asset("img/expand.png")}}" onclick="showChild({{$cat->id}})">--}}
+                                {{--@endif--}}
+                                {{--@foreach ($main_cats[$key]->subs as $sub_cat)--}}
+                                    {{--<div class="content{{$cat->id}}" style="padding:5px;margin-left: 20px;">--}}
+                                        {{--<label class="checkbox-container fs-25">--}}
+                                            {{--<input class="checkbox{{$cat->id}} common_checked for_checked{{$sub_cat->id}}" type="checkbox"  onclick="childCheck('{{$cat->id}}', '{{$sub_cat->id}}', this)" name="check[]" style="margin-left:50px;">--}}
+                                            {{--{{$sub_cat->name_en}}--}}
+                                            {{--<span class="checkmark"></span>--}}
+                                        {{--</label>--}}
+                                    {{--</div>--}}
+                                {{--@endforeach--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light waves-effect waves-light fs-25" onclick="cancelCategory()">
                         CANCEL
@@ -583,71 +626,128 @@
         }
         function selectParent(index)
         {
-            var checkObj = $(".checkbox"+index);
-            var checkedCount = 0;
-            if($(".content"+index).length == 0){
-                for(var i = 0; i < checkObj.length; i ++){
-                    if(checkObj[i].checked == true){
-                        checkedCount ++;
+            if($("#select_all"+index)[0].checked == true){//add checked id
+                $(".main_category_"+index).css('display', 'block');
+                if(checkedIds_tmp != ''){
+                    var count = 0;
+                    var common_checked_count = 0;
+                    var common_checked_obj = $(".common_checked");
+                    for(var i = 0; i < common_checked_obj.length; i ++){
+                        if(common_checked_obj[i].checked == true){
+                            common_checked_count ++;
+                        }
                     }
-                }
-                if(checkedCount > 0){
-                    $("#select_all"+index)[0].checked = true;
-                }
-                if($("#select_all"+index)[0].checked == true){//add checked id
-                    $(".main_category_"+index).css('display', 'block');
-                    if(checkedIds_tmp != ''){
-                        var count = 0;
-                        var common_checked_count = 0;
-                        var common_checked_obj = $(".common_checked");
-                        for(var i = 0; i < common_checked_obj.length; i ++){
-                            if(common_checked_obj[i].checked == true){
-                                common_checked_count ++;
-                            }
-                        }
-                        var tmp_ids = '';
-                        if(common_checked_count >= 2){
-                            tmp_ids = checkedIds_tmp.split(',');
-                        }else{
-                            tmp_ids = checkedIds_tmp;
-                        }
-                        for(var i = 0; i < tmp_ids.length; i ++){
-                            if(tmp_ids[i] == index){
-                                count ++;
-                            }
-                        }
-                        if(count == 0){
-                            checkedIds_tmp += ',' + index;
-                        }
+                    var tmp_ids = '';
+                    if(common_checked_count >= 2){
+                        tmp_ids = checkedIds_tmp.split(',');
                     }else{
-                        checkedIds_tmp = index;
+                        tmp_ids = checkedIds_tmp;
                     }
-                }else{//remove checked id
-                    $(".main_category_"+index).css('display', 'none');
-                    var ids_tmp = '';
-                    if(checkedIds_tmp != ''){
-                        if(checkedIds_tmp.length >=2) {
-                            ids_tmp = checkedIds_tmp.split(',');
-                        }
-                        else {
-                            ids_tmp = checkedIds_tmp;
+                    for(var i = 0; i < tmp_ids.length; i ++){
+                        if(tmp_ids[i] == index){
+                            count ++;
                         }
                     }
+                    if(count == 0){
+                        checkedIds_tmp += ',' + index;
+                    }
+                }else{
+                    checkedIds_tmp = index;
+                }
+            }else{//remove checked id
+                $(".main_category_"+index).css('display', 'none');
+                var ids_tmp = '';
+                if(checkedIds_tmp != ''){
+                    if(checkedIds_tmp.length >=2) {
+                        ids_tmp = checkedIds_tmp.split(',');
+                    }
+                    else {
+                        ids_tmp = checkedIds_tmp;
+                    }
+                }
 
-                    checkedIds_tmp = '';
-                    for(var i = 0; i < ids_tmp.length; i ++){
-                        if(ids_tmp[i] != index){
-                            if(checkedIds_tmp == ''){
-                                checkedIds_tmp = ids_tmp[i];
-                            }else{
-                                checkedIds_tmp += ','+ids_tmp[i];
-                            }
+                checkedIds_tmp = '';
+                for(var i = 0; i < ids_tmp.length; i ++){
+                    if(ids_tmp[i] != index){
+                        if(checkedIds_tmp == ''){
+                            checkedIds_tmp = ids_tmp[i];
+                        }else{
+                            checkedIds_tmp += ','+ids_tmp[i];
                         }
                     }
                 }
             }
 
         }
+        // function selectParent(index)
+        // {
+        //     alert(index);
+        //
+        //     var checkObj = $(".checkbox"+index);
+        //     var checkedCount = 0;
+        //     if($(".content"+index).length == 0){
+        //         for(var i = 0; i < checkObj.length; i ++){
+        //             if(checkObj[i].checked == true){
+        //                 checkedCount ++;
+        //             }
+        //         }
+        //         if(checkedCount > 0){
+        //             $("#select_all"+index)[0].checked = true;
+        //         }
+        //         if($("#select_all"+index)[0].checked == true){//add checked id
+        //             $(".main_category_"+index).css('display', 'block');
+        //             if(checkedIds_tmp != ''){
+        //                 var count = 0;
+        //                 var common_checked_count = 0;
+        //                 var common_checked_obj = $(".common_checked");
+        //                 for(var i = 0; i < common_checked_obj.length; i ++){
+        //                     if(common_checked_obj[i].checked == true){
+        //                         common_checked_count ++;
+        //                     }
+        //                 }
+        //                 var tmp_ids = '';
+        //                 if(common_checked_count >= 2){
+        //                     tmp_ids = checkedIds_tmp.split(',');
+        //                 }else{
+        //                     tmp_ids = checkedIds_tmp;
+        //                 }
+        //                 for(var i = 0; i < tmp_ids.length; i ++){
+        //                     if(tmp_ids[i] == index){
+        //                         count ++;
+        //                     }
+        //                 }
+        //                 if(count == 0){
+        //                     checkedIds_tmp += ',' + index;
+        //                 }
+        //             }else{
+        //                 checkedIds_tmp = index;
+        //             }
+        //         }else{//remove checked id
+        //             $(".main_category_"+index).css('display', 'none');
+        //             var ids_tmp = '';
+        //             if(checkedIds_tmp != ''){
+        //                 if(checkedIds_tmp.length >=2) {
+        //                     ids_tmp = checkedIds_tmp.split(',');
+        //                 }
+        //                 else {
+        //                     ids_tmp = checkedIds_tmp;
+        //                 }
+        //             }
+        //
+        //             checkedIds_tmp = '';
+        //             for(var i = 0; i < ids_tmp.length; i ++){
+        //                 if(ids_tmp[i] != index){
+        //                     if(checkedIds_tmp == ''){
+        //                         checkedIds_tmp = ids_tmp[i];
+        //                     }else{
+        //                         checkedIds_tmp += ','+ids_tmp[i];
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //
+        // }
         function childCheck(category_index, sub_index, obj)
         {
             if(obj.checked == true){
