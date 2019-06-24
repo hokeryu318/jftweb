@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-lg-12 mt-5 pt-2 pr-4 text-right">
-            <a href="{{ route('admin.setting.kitchen') }}" class="btn bg-white black-text pt-2 pb-2 pr-3 pl-3">
+            <a href="{{ route('admin.setting.sendmail') }}" class="btn bg-white black-text pt-2 pb-2 pr-3 pl-3">
                 <h5 class="black-text mb-0 fs-25">
                     <b>Cancel</b>
                     <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin: -5px 0 0 20px;">

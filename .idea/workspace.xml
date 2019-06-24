@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +41,7 @@
           <entry key="gitignore" value="2" />
           <entry key="js" value="25" />
           <entry key="json" value="4" />
-          <entry key="php" value="430" />
+          <entry key="php" value="431" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="81" />
@@ -51,7 +49,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="250" />
+          <entry key="Blade" value="251" />
           <entry key="CSS" value="23" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
@@ -91,17 +89,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="69" column="88" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
+            <state relative-caret-position="473">
+              <caret line="141" column="100" selection-start-line="141" selection-start-column="92" selection-end-line="141" selection-end-column="100" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="445" column="39" lean-forward="true" selection-start-line="445" selection-start-column="39" selection-end-line="445" selection-end-column="39" />
+            <state relative-caret-position="662">
+              <caret line="446" column="30" lean-forward="true" selection-start-line="446" selection-start-column="30" selection-end-line="446" selection-end-column="30" />
               <folding>
                 <element signature="e#24567#24622#0#HTML" expanded="true" />
                 <element signature="e#25189#25215#0#HTML" expanded="true" />
@@ -119,6 +117,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -132,7 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>view_callig</find>
       <find>attend_boo</find>
       <find>view_c</find>
       <find>ta</find>
@@ -162,6 +168,7 @@
       <find>.font</find>
       <find>.f</find>
       <find>bold</find>
+      <find>sendmail</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -183,7 +190,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/saledata.blade.php" />
         <option value="$PROJECT_DIR$/app/Model/Mail.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SettingController.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/view_review.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/view_note.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/seated.blade.php" />
@@ -229,6 +235,7 @@
         <option value="$PROJECT_DIR$/public/kitchen_css/style.css" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php" />
       </list>
     </option>
   </component>
@@ -445,6 +452,21 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -506,12 +528,12 @@
       <workItem from="1560580153830" duration="35325000" />
       <workItem from="1560644911818" duration="71641000" />
       <workItem from="1560742317010" duration="129650000" />
-      <workItem from="1561118290885" duration="57238000" />
+      <workItem from="1561118290885" duration="57889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="661915000" />
+    <option name="totallyTimeSpent" value="662566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -546,13 +568,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/setting/customer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="57" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/reception/view_review.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -910,13 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="69" column="88" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -929,8 +937,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="445" column="39" lean-forward="true" selection-start-line="445" selection-start-column="39" selection-end-line="445" selection-end-column="39" />
+        <state relative-caret-position="662">
+          <caret line="446" column="30" lean-forward="true" selection-start-line="446" selection-start-column="30" selection-end-line="446" selection-end-column="30" />
           <folding>
             <element signature="e#24567#24622#0#HTML" expanded="true" />
             <element signature="e#25189#25215#0#HTML" expanded="true" />
@@ -944,6 +952,20 @@
             <element signature="e#28965#29003#0#HTML" expanded="true" />
             <element signature="e#29300#29325#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="141" column="100" selection-start-line="141" selection-start-column="92" selection-end-line="141" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
         </state>
       </provider>
     </entry>
