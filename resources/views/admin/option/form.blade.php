@@ -184,8 +184,8 @@
                     </label>
                 </div>
                 <div class="col-1">
-                    <button class="btnaddphoto3 fs-23" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
-                        Remove Option
+                    <button class="btnaddphoto3 mt-3 fs-23" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
+                        Remove
                     </button>
                 </div>
                 <input type="file" class="file-image" name="prev-data[{{ $item->id }}][image]" style="display:none">
@@ -218,8 +218,8 @@
                 </label>
             </div>
             <div class="col-1">
-                <button class="btnaddphoto3 fs-23" type="button" onclick="onDelete(this)" data-id=0>
-                    Remove Option
+                <button class="btnaddphoto3 mt-3 fs-23" type="button" onclick="onDelete(this)" data-id=0>
+                    Remove
                 </button>
             </div>
             <input type="file" class="file-image" style="display:none">
@@ -291,8 +291,8 @@
             alert('Please input Name!');
         else if(name_en == '')
             alert('Please input Display Name!');
-        else if(count_item == 0)
-            alert('Please add Option(Include Option and Price)!');
+        // else if(count_item == 0)
+        //     alert('Please add Option(Include Option and Price)!');
         else
             $('#post_form').submit();
 

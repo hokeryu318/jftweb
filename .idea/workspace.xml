@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="" />
+    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +43,7 @@
           <entry key="gitignore" value="2" />
           <entry key="js" value="25" />
           <entry key="json" value="4" />
-          <entry key="php" value="456" />
+          <entry key="php" value="460" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="81" />
@@ -49,12 +51,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="259" />
+          <entry key="Blade" value="262" />
           <entry key="CSS" value="23" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
           <entry key="JavaScript" value="25" />
-          <entry key="PHP" value="197" />
+          <entry key="PHP" value="198" />
           <entry key="PLAIN_TEXT" value="17" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="81" />
@@ -67,13 +69,13 @@
           <entry key="env" value="71" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="25922" />
+          <entry key="php" value="25936" />
           <entry key="vue" value="6824" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="19349" />
+          <entry key="Blade" value="19363" />
           <entry key="CSS" value="1298" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
@@ -99,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="470">
-              <caret line="28" column="61" lean-forward="true" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+              <caret line="28" column="61" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
               <folding>
                 <element signature="e#31#74#0#PHP" expanded="true" />
               </folding>
@@ -135,16 +137,43 @@
         <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/customer/view_bill_pay.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="683">
+              <caret line="75" column="33" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/customer/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="672" column="46" selection-start-line="672" selection-start-column="27" selection-end-line="672" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="426">
+              <caret line="103" column="104" lean-forward="true" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/option/form.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
+            <state relative-caret-position="577">
+              <caret line="294" column="37" selection-start-line="293" selection-start-column="35" selection-end-line="294" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -153,12 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ready</find>
-      <find>attending</find>
-      <find>attend</find>
-      <find>filter</find>
-      <find>kitchen.extract_modal</find>
-      <find>tooltip</find>
       <find>tooltiptext</find>
       <find>ready_btn</find>
       <find>edit cat</find>
@@ -183,6 +206,12 @@
       <find>smtp</find>
       <find>this is report</find>
       <find>this is rep</find>
+      <find>finish and pay</find>
+      <find>finish_pay</find>
+      <find>remove option</find>
+      <find>customer.finish_pay</find>
+      <find>Remove Option</find>
+      <find>aaa</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -210,7 +239,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/option/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
@@ -250,6 +278,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
         <option value="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" />
       </list>
     </option>
   </component>
@@ -538,12 +567,12 @@
       <workItem from="1561118290885" duration="75376000" />
       <workItem from="1561808170225" duration="7096000" />
       <workItem from="1561821406767" duration="366000" />
-      <workItem from="1561822978538" duration="16615000" />
+      <workItem from="1561822978538" duration="18194000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="704130000" />
+    <option name="totallyTimeSpent" value="705709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -578,16 +607,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/reception/addCustomer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="1109" column="83" selection-start-line="1109" selection-start-column="83" selection-end-line="1109" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/customer_css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -636,13 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="38" column="51" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="605" column="21" selection-start-line="605" selection-start-column="8" selection-end-line="605" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -816,13 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="136" column="118" lean-forward="true" selection-start-line="136" selection-start-column="118" selection-end-line="136" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="691">
@@ -878,17 +883,10 @@
     <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
-          <caret line="28" column="61" lean-forward="true" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+          <caret line="28" column="61" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
           <folding>
             <element signature="e#31#74#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -921,6 +919,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/view_bill_pay.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="75" column="33" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="672" column="46" selection-start-line="672" selection-start-column="27" selection-end-line="672" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="103" column="104" lean-forward="true" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/option/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="294" column="37" selection-start-line="293" selection-start-column="35" selection-end-line="294" selection-end-column="37" />
         </state>
       </provider>
     </entry>
