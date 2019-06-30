@@ -18,17 +18,23 @@
                                 <div class="row" style="margin-left: -12px;">
                                     <p class="red-text font-weight-bold ml-3 fs-23" id="time_pay_{{$kk}}"></p>
                                 </div>
-                                <div class="row table_name">
-                                    <p class="res-table text-center font-weight-bold fs-25">
-                                        @if(count($order->table_display_names) > 1)
-                                            <img src="{{asset('img/plus_red.png')}}" class="corner">
-                                        @endif
-                                        @if(strlen($ordertables) > 9)
-                                            {{ substr($ordertables, 0, 9)."..." }}
-                                        @else
-                                            {{ $ordertables }}
-                                        @endif
-                                    </p>
+                                <div class="row table_name" style="text-align:center;">
+                                    <table>
+                                        <tr>
+                                            @if(count($order->table_display_names) > 1)
+                                                <img src="{{asset('img/plus_red.png')}}" class="corner">
+                                            @endif
+                                            <td style="width: 100px;height: 80px;background: #000;color:white;text-align: center;-ms-word-break: break-all;word-break: break-all;">
+                                                <b class="fs-25">
+                                                    @if(strlen($ordertables) > 9)
+                                                        {{ substr($ordertables, 0, 9)."..." }}
+                                                    @else
+                                                        {{ $ordertables }}
+                                                    @endif
+                                                </b>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-lg-3 pr-0 col-xl-3" style="margin-left: -30px;">
