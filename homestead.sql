@@ -1,7 +1,7 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : aaa
+ Source Server         : mylocaldb
  Source Server Type    : MySQL
  Source Server Version : 100131
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100131
  File Encoding         : 65001
 
- Date: 01/07/2019 02:30:40
+ Date: 01/07/2019 02:59:35
 */
 
 SET NAMES utf8mb4;
@@ -485,7 +485,12 @@ CREATE TABLE `order_dish_match`  (
   `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of order_dish_match
+-- ----------------------------
+INSERT INTO `order_dish_match` VALUES ('1', '1', '6', '1', '18.00', '18.00', '0', '2019-07-01 02:37:32', '2019-07-01 02:37:32');
 
 -- ----------------------------
 -- Table structure for order_option_match
@@ -760,8 +765,8 @@ CREATE TABLE `websockets_statistics_entries`  (
   `peak_connection_count` int(11) NOT NULL,
   `websocket_message_count` int(11) NOT NULL,
   `api_message_count` int(11) NOT NULL,
-  `created_at` timestamp(0) DEFAULT NULL,
-  `updated_at` timestamp(0) DEFAULT NULL,
+  `created_at` datetime(0) DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 

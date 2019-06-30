@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-    </list>
+    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +41,7 @@
           <entry key="gitignore" value="2" />
           <entry key="js" value="25" />
           <entry key="json" value="4" />
-          <entry key="php" value="452" />
+          <entry key="php" value="456" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="81" />
@@ -51,12 +49,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="257" />
+          <entry key="Blade" value="259" />
           <entry key="CSS" value="23" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
           <entry key="JavaScript" value="25" />
-          <entry key="PHP" value="195" />
+          <entry key="PHP" value="197" />
           <entry key="PLAIN_TEXT" value="17" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="81" />
@@ -69,17 +67,17 @@
           <entry key="env" value="71" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="25861" />
+          <entry key="php" value="25922" />
           <entry key="vue" value="6824" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="19333" />
+          <entry key="Blade" value="19349" />
           <entry key="CSS" value="1298" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="6528" />
+          <entry key="PHP" value="6573" />
           <entry key="PLAIN_TEXT" value="119" />
           <entry key="Vue.js" value="6824" />
         </counts>
@@ -97,7 +95,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="470">
@@ -136,8 +134,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="153">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -204,7 +211,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/option/form.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
@@ -213,7 +219,6 @@
         <option value="$PROJECT_DIR$/routes/channels.php" />
         <option value="$PROJECT_DIR$/app/Events/AttendEvent.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/addCustomer.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/components/AttendComponent.vue" />
         <option value="$PROJECT_DIR$/resources/views/kitchen/calling_modal.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/components/NotificationComponent.vue" />
@@ -222,7 +227,6 @@
         <option value="$PROJECT_DIR$/resources/views/reception/view_calling.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/editOrder.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/components/CustomerCallingComponent.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/KitchenController.php" />
         <option value="$PROJECT_DIR$/resources/views/kitchen/extract_modal.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" />
@@ -243,6 +247,9 @@
         <option value="$PROJECT_DIR$/resources/views/reception/ready_to_pay.blade.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
       </list>
     </option>
   </component>
@@ -531,12 +538,12 @@
       <workItem from="1561118290885" duration="75376000" />
       <workItem from="1561808170225" duration="7096000" />
       <workItem from="1561821406767" duration="366000" />
-      <workItem from="1561822978538" duration="15420000" />
+      <workItem from="1561822978538" duration="16615000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="702935000" />
+    <option name="totallyTimeSpent" value="704130000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -596,13 +603,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/img/call_staff.png" />
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="122" column="22" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/NotificationComponent.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -643,13 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="605" column="21" selection-start-line="605" selection-start-column="8" selection-end-line="605" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="317" column="53" selection-start-line="317" selection-start-column="41" selection-end-line="317" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -750,13 +743,6 @@
     <entry file="file://$PROJECT_DIR$/public/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="146" column="29" selection-start-line="146" selection-start-column="25" selection-end-line="146" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -847,13 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="691">
@@ -868,13 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reception/seated.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="711" column="46" lean-forward="true" selection-start-line="694" selection-start-column="40" selection-end-line="711" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -910,6 +882,45 @@
           <folding>
             <element signature="e#31#74#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reception/seated.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3562">
+          <caret line="711" column="46" selection-start-line="694" selection-start-column="40" selection-end-line="711" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="75" column="35" lean-forward="true" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/admin_layout.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="129" column="66" lean-forward="true" selection-start-line="129" selection-start-column="66" selection-end-line="129" selection-end-column="66" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
         </state>
       </provider>
     </entry>
