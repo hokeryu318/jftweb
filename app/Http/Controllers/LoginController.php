@@ -20,7 +20,7 @@ class LoginController extends Controller
         //get ip address from database
         $profile = Receipt::profile();
         //last get table number(ordered already)
-        $table_last = Table::where('index', 0)->latest()->first();
+        $table_last = Table::where('index', 0)->orderBy('id', 'desc')->first();
         return view('login')->with(compact('table_last', 'profile'));
     }
 
