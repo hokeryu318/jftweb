@@ -8,11 +8,7 @@
     <div style="height:85px;"></div>
 
     <div class="widthhh white pt-0 pb-0 " style="margin-right: auto;height: 930px;">
-        <a onclick="window.history.back()" class="bg-transparent" >
-            <span class="" style="position:relative;top:55px ;right:10px">
-                <img src="{{ asset('img/Group1100.png') }}" width="25" height="25" class="float-right" style="margin-top:12px;" />
-            </span>
-        </a>
+
         <br><br>
         <div class="row">
             <div class="col-12" style="margin:-40px 0 0 0">
@@ -27,6 +23,11 @@
                         <label class="ml-5 mr-2 fs-30">Next&nbsp;&nbsp;&nbsp;&gt;</label>
                     </a>
                 </div>
+                <a onclick="window.history.back()">
+                    <span class="" style="position:relative;top:55px ;right:10px">
+                        <img src="{{ asset('img/Group1100.png') }}" width="25" height="25" class="float-right" style="margin-top:12px;" />
+                    </span>
+                </a>
                 <form action="{{ route('admin.saledata') }}">
                 <select class="border-blue w-200px heigh2rem float-right fs-20" id="date_seller" name="date_seller" onchange="submit()">
                     {{--<option value="0">Select Type</option>--}}
