@@ -30,7 +30,7 @@ class SalesDayReportEmail extends Mailable
      */
     public function build()
     {
-        $address = 'jft@gmail.com';
+        $address = 'jft@email.com';
         $subject = 'Sales Day Reporing';
         $name = 'Manager';
 
