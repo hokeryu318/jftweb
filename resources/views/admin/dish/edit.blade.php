@@ -812,31 +812,31 @@
             var name_jp = $("#name_jp").val();
             var group = $("#group").val();
             var price = $("#price").val();
-            var opts = $("#opts").val();
+            // var opts = $("#opts").val();
             var category = $("#checked_ids").val();
             // var opts = e.options[e.selectedIndex].value;
             if(!name_en) {
-                alert('Plesae input Name of dish!');
+                alert('Please input Name of dish!');
                 return false;
             } else if(!name_cn) {
-                alert('Plesae input Name of dish(Mandarine)!');
+                alert('Please input Name of dish(Mandarine)!');
                 return false;
             } else if(!name_jp) {
-                alert('Plesae input Name of dish(Japanese)!');
+                alert('Please input Name of dish(Japanese)!');
                 return false;
             } else if(!group) {
-                alert('Plesae select a Group!');
+                alert('Please select a Group!');
                 return false;
             } else if(!price) {
-                alert('Plesae select a Price!');
-                return false;
-            } else if(!opts) {
-                alert('Plesae select a Option!');
+                alert('Please select a Price!');
                 return false;
             } else if(!category) {
-                alert('Plesae select a Category!');
+                alert('Please select a Category!');
                 return false;
-            }
+            } //else if(!opts) {
+            //     alert('Please select a Option!');
+            //     return false;
+            // }
             return true;
         }
     </script>

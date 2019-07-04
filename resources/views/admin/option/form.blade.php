@@ -89,7 +89,13 @@
             <div class="col-7">
                 <label class="text-blue txtdemibold m5 fs-25">Number of Selection</label>
                 <img src="{{ asset('img/Path506.png') }}" class="" style="margin-left: 40px;" height="40" width="45" onclick="decNumber()" id="minus" />
-                <input type="number" class="numInput outline-0" style="margin: 0 20px 0 20px;" name="number_selection" id="number_selection" value="{{ $obj->number_selection }}" disabled>
+                <input type="number" class="numInput outline-0" style="margin: 0 20px 0 20px;" name="number_selection" id="number_selection"
+                       @if($obj->number_selection)
+                            value="{{ $obj->number_selection }}"
+                       @else
+                            value="1"
+                       @endif
+                       disabled>
                 <img src="{{ asset('img/Path531.png') }}" class="" height="40" width="45" onclick="incNumber()" id="plus" />
             </div>
 

@@ -97,7 +97,7 @@
                 @if($count == 0)
                     <button class="cta" onclick="nextModal('thx');">Order now</button>
                 @else
-                    <button class="cta" onclick="nextModal('main');">SELECT MAIN DISH</button>
+                    <button class="cta" onclick="nextModal('main');">SELECT XXX</button>
                 @endif
             </div>
         </div>

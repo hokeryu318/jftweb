@@ -288,14 +288,17 @@ class CustomerController extends Controller
         //save to order_option_match table
         $order_dish_id = $order_dish->id;
         $items_price = 0;
+
         foreach($items_id as $item_id) {
-            $order_option = new OrderOption();
-            $order_option->order_dish_id = $order_dish_id;
-            $order_option->option_id = Item::where('id',$item_id)->pluck('option_id')->first();
-            $order_option->item_id = $item_id;
-            $order_option->item_price = Item::where('id',$item_id)->pluck('price')->first();
-            $items_price += $order_option->item_price;
-            $order_option->save();
+            if($item_id != "") {
+                $order_option = new OrderOption();
+                $order_option->order_dish_id = $order_dish_id;
+                $order_option->option_id = Item::where('id', $item_id)->pluck('option_id')->first();
+                $order_option->item_id = $item_id;
+                $order_option->item_price = Item::where('id', $item_id)->pluck('price')->first();
+                $items_price += $order_option->item_price;
+                $order_option->save();
+            }
         }
 
         //save total price

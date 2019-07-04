@@ -313,6 +313,7 @@
                             chked_list_str = $("input:radio[name="+name+"]:checked").val();
                     }
                 });
+
                 var chked_list = chked_list_str.split(",");
                 const distinct = (value, index, self) => {
                     return self.indexOf(value) === index;
