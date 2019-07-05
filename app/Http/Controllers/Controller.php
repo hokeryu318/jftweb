@@ -62,7 +62,8 @@ class Controller extends BaseController
 
     public function get_discount($dish_id)
     {
-        date_default_timezone_set("Asia/Shanghai");
+//        date_default_timezone_set("Asia/Shanghai");
+        date_default_timezone_set("Australia/Melbourne");
         $date = date('Y-m-d H:i:s');//dd($date);
         $check_discount = Discount::where('dish_id', $dish_id)->where('start', '<=', $date)->where('end', '>=', $date)->get()->first();//dd($check_discount);
         if($check_discount)
