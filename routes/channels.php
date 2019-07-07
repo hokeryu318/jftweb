@@ -31,3 +31,6 @@ Broadcast::channel('pay-channel', function ($user) {
 Broadcast::channel('attend-channel', function ($user) {
     return $user;
 });
+Broadcast::channel('changecount-channel', function ($user) {
+    return $user;
+});

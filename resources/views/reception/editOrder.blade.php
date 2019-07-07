@@ -145,8 +145,10 @@
                             </div>
 
                             <div class="edit_order_cancel_bill">
-                                <span class="fs-25">CANCEL BILL</span>
-                                <img src="{{ asset('img/Group728white.png') }}" style="height:20px; margin: -8px 0 0 20px;">
+                                <a onclick="cancel_bill({{ $booking_order->order_id }})">
+                                    <span class="fs-25">CANCEL BILL</span>
+                                    <img src="{{ asset('img/Group728white.png') }}" style="height:20px; margin: -8px 0 0 20px;">
+                                </a>
                             </div>
                             <div class="edit_order_space">
 
@@ -292,6 +294,19 @@
                 }
             });
             clearInterval(myVar);
+        }
+
+        function cancel_bill(order_id) {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('reception.cancel_bill') }}",
+                data:{ order_id: order_id,  _token:"{{ csrf_token() }}" },
+                success: function(result){
+                    // console.log(result);
+                    location.href = window.location.href;
+                }
+            });
         }
 
         //timer part

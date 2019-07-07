@@ -1932,6 +1932,15 @@ __webpack_require__.r(__webpack_exports__);
     }); // display part for dish list by group change
 
     this.get_by_group_order_dishes(this.group);
+    Echo.channel('changecount-channel') //public channel
+    .listen('ChangeCountEvent', function (event) {
+      console.dir(event.group_ids);
+      var cmp_val = 0; // cmp_val = this.compare(this.group, event.group_ids);
+
+      if (cmp_val > 0) {
+        location.href = window.location.href;
+      }
+    });
   },
   methods: {
     // api for get dish list by change group

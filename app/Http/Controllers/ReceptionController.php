@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChangeCountEvent;
+use App\Events\KitchenEvent;
 use Illuminate\Http\Request;
 
 use App\Events\NotificationEvent;
@@ -355,6 +357,19 @@ class ReceptionController extends Controller
         return view('reception.accounting')->with(compact('order_id', 'customer_name', 'starting_time', 'duration_time', 'duration', 'time', 'during_time', 'guest', 'status', 'table_name', 'order_dishes', 'total', 'gst_price', 'without_gst_price', 'gst', 'payment_method'));
     }
 
+    public function cancel_bill() {
+
+        $order_id = request()->order_id;
+        $order = Order::findOrFail($order_id);
+        $order->pay_flag = 0;
+        $order->save();
+
+        $count_notification = $this->CountNotification();
+        broadcast(new NotificationEvent($count_notification));
+
+        return $this->ready_to_pay();
+    }
+
     public function amend() {
 
         $order_id = request()->order_id;
@@ -611,6 +626,12 @@ class ReceptionController extends Controller
             $qty = $item_info[1];
             $sub_total = substr($item_info[2], 1);
             OrderDish::where('id', $id)->update(['count' => $qty, 'total_price' => $sub_total]);
+
+            //broadcast to kitchen
+            $dish_id = OrderDish::where('id', $id)->pluck('dish_id');
+            $group_id_arr = Dish::where('id', $dish_id)->pluck('group_id');
+            $group_ids = explode(',', $group_id_arr);
+            broadcast(new ChangeCountEvent($group_ids));
         }
 
         return $order_qty_info;

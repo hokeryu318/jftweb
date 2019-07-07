@@ -46,6 +46,7 @@ Route::post('reception/attend', 'ReceptionController@attend')->name('reception.a
 Route::get('reception/view_review', 'ReceptionController@view_review')->name('reception.view_review');
 Route::get('reception/view_note', 'ReceptionController@view_note')->name('reception.view_note');
 Route::get('reception/accounting', 'ReceptionController@accounting')->name('reception.accounting');
+Route::post('reception/cancel_bill', 'ReceptionController@cancel_bill')->name('reception.cancel_bill');
 Route::get('reception/amend', 'ReceptionController@amend')->name('reception.amend');
 Route::get('reception/tip', 'ReceptionController@tip')->name('reception.tip');
 Route::get('reception/discount', 'ReceptionController@discount')->name('reception.discount');

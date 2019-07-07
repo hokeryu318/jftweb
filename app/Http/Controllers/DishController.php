@@ -46,6 +46,10 @@ class DishController extends Controller
         $dish_cats_ids = rtrim($dish_cats_ids,", ");
 
         $gst = Receipt::find(1)->gst;
+
+        $group_id = $obj->group_id;
+        $obj->groups = explode(',', $group_id);
+
         return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj', 'dish_cats', 'dish_cats_ids', 'gst'));
     }
 
@@ -55,6 +59,7 @@ class DishController extends Controller
         $groups = Kitchen::get();
         $badges = Badge::where('active', '=', '1')->get();
         $options = Option::get();
+        $obj->groups = [];
         $gst = Receipt::find(1)->gst;
         return view('admin.dish.edit')->with(compact('main_cats', 'groups', 'badges', 'options', 'obj', 'gst'));
     }
@@ -109,7 +114,12 @@ class DishController extends Controller
             $obj->price = request()->get('price');
             //$obj->category_id = request()->get('category_id');
             //$obj->sub_category_id = request()->get('sub_category_id');
-            $obj->group_id = request()->get('group_id');
+            $group_ids = request()->get('groups');
+            $grs = '';
+            foreach($group_ids as $gr){
+                $grs .= $gr.',';
+            }
+            $obj->group_id = rtrim($grs, ',');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
             $obj->eatin_lunch = request()->get('eatin_lunch') == "on" ? 1 : 0;
@@ -160,7 +170,12 @@ class DishController extends Controller
             $obj->price = request()->get('price');
             //$obj->category_id = request()->get('category_id');
             //$obj->sub_category_id = request()->get('sub_category_id');
-            $obj->group_id = request()->get('group_id');
+            $group_ids = request()->get('groups');
+            $grs = '';
+            foreach($group_ids as $gr){
+                $grs .= $gr.',';
+            }
+            $obj->group_id = rtrim($grs, ',');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
             $obj->eatin_lunch = request()->get('eatin_lunch') == "on" ? 1 : 0;

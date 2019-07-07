@@ -266,9 +266,11 @@
     var currentMain = '';
     var currentSub = '';
     var clickedSub = 0;
+    var haveSub = 0;
 
     function onMain(obj){
         currentSub = '';
+        haveSub = 0;
         activeCatButton('.cat-button', false);
         var id = $(obj).data('id');
         currentMain = id;
@@ -276,6 +278,7 @@
             activeCatButton(obj, true);
         }
         var hassubs = $(obj).data('hassubs');
+        haveSub = hassubs;
         clickedSub = 0;
         //$('#chk_hassubs').prop('checked', hassubs == 1 ? true : false);
         $.ajax({
@@ -290,6 +293,9 @@
                 $('#scroll-dish').html(result.dishes);
                 if(result.subs_count > 0){
                     $('#chk_hassubs').prop('checked', true);
+                }
+                else {
+                    $('#chk_hassubs').prop('checked', false);
                 }
             }
         });
@@ -484,11 +490,22 @@
             $("#confirm_letter")[0].innerText = "Please select the category.";
             $("#confirm_parent_category").modal('toggle');
         }else{
-            if($('#chk_hassubs').is(':checked') == true && clickedSub == 0){
-                $("#confirm_letter")[0].innerText = "Please checkoff USE SUB CATEGORY.";
+            // ('#chk_hassubs').is(':checked') == true   :  use sub category checked
+            // clickedSub == 0  :  number of selected sub category = 0
+            // clickedSub == 1  :  number of selected sub category > 0
+            // haveSub == 1  : have subcategory   else  :  no subcategory
+
+            if(haveSub == 1 && clickedSub == 0)
+            {
+                $("#confirm_letter")[0].innerText = "Please select SUB CATEGORY.";
                 $("#confirm_parent_category").modal('toggle');
                 return;
             }
+            // if($('#chk_hassubs').is(':checked') == true && clickedSub == 0){
+            //     $("#confirm_letter")[0].innerText = "Please checkoff USE SUB CATEGORY.";
+            //     $("#confirm_parent_category").modal('toggle');
+            //     return;
+            // }
             var dish_ids = $("#dish_ids").val();
             var dish_count = $("#dish_count").val();
             var tmp_dish_ids = $("#tmp_dish_ids").val(dish_ids);

@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 pr-0 col-xl-2">
-                                <div class="cancel_bill">
+                                <div class="cancel_bill" onclick="cancel_bill({{ $order->id }})">
                                     <b class="fs-25">CANCEL<br>BILL</b>
                                     <br>
                                     <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 9px;">
@@ -93,7 +93,24 @@
     </div>
 </div>
 
+<div id="myModal" class="modal"></div>
+
 <script>
+
+    function cancel_bill(order_id) {
+
+        $.ajax({
+            type:"POST",
+            url:"{{ route('reception.cancel_bill') }}",
+            data:{ order_id: order_id,  _token:"{{ csrf_token() }}" },
+            success: function(result){
+                // console.log(result);
+                $('#myModal').html(result);
+            }
+        });
+
+        clearInterval(myVar);
+    }
 
     //timer part
     var myVar = setInterval(myTimer, 1000);
