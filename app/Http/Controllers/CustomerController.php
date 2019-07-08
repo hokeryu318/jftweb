@@ -57,21 +57,21 @@ class CustomerController extends Controller
 //        dd($dishes);
         return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time'));
     }
+//    public function dish_list()
+//    {
+//        $category = Category::find(request()->category);
+//        if($category->has_subs == 1) {
+//
+//        } else {
+//            $dishes = $category->dishes;
+//            foreach($dishes as $dish){
+//                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+//            }
+//            return (string)view('part.category_dish_customer', compact('dishes'))->render();
+//        }
+//
+//    }
     public function dish_list()
-    {
-        $category = Category::find(request()->category);
-        if($category->has_subs == 1) {
-
-        } else {
-            $dishes = $category->dishes;
-            foreach($dishes as $dish){
-                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-            }
-            return (string)view('part.category_dish_customer', compact('dishes'))->render();
-        }
-
-    }
-    public function dish_list1()
     {
         $category = Category::find(request()->category);
         $dishes = $category->dishes;
