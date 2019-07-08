@@ -62,8 +62,6 @@ class CustomerController extends Controller
         $category = Category::find(request()->category);
         if($category->has_subs == 1) {
 
-            $sub_categories = Category::where('parent_id', request()->category)->get();
-            dd(request()->category);
         } else {
             $dishes = $category->dishes;
             foreach($dishes as $dish){
@@ -72,12 +70,6 @@ class CustomerController extends Controller
             return (string)view('part.category_dish_customer', compact('dishes'))->render();
         }
 
-
-        $dishes = $category->dishes;
-        foreach($dishes as $dish){
-            $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-        }
-        return (string)view('part.category_dish_customer', compact('dishes'))->render();
     }
     public function dish_list1()
     {
