@@ -252,7 +252,7 @@
         selected_obj.toggleClass('selected_category_color');
         $.ajax({
             type:"POST",
-            url:"{{ route('customer.dish_list') }}",
+            url:"{{ route('customer.dish_list1') }}",
             data:{
                 category: category_id, _token:"{{ csrf_token() }}"
             },

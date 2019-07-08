@@ -58,6 +58,7 @@ Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
 //customer
 Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');
 Route::post('customer/dish_list', 'CustomerController@dish_list')->name('customer.dish_list');
+Route::post('customer/dish_list1', 'CustomerController@dish_list1')->name('customer.dish_list1');
 Route::post('customer/dish_info', 'CustomerController@dish_info')->name('customer.dish_info');
 Route::post('customer/dish_option', 'CustomerController@dish_option')->name('customer.dish_option');
 Route::post('customer/dish_option_previous', 'CustomerController@dish_option_previous')->name('customer.dish_option_previous');
