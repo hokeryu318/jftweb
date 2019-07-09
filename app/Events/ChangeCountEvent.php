@@ -14,11 +14,11 @@ class ChangeCountEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $group_ids;
+    public $group_id;
 
     public function __construct($var)
     {
-        $this->group_ids = $var;
+        $this->group_id = $var;
     }
 
     public function broadcastOn()

@@ -1910,7 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
       // console.dir(('['+ g_id + ']').includes(this.group));
       // if(this.group === event.added_dish.group_id) {
 
-      if (('[' + event.added_dish.group_id + ']').includes(_this.group) == true) {
+      if (('[' + event.added_dish.group_id + ']').includes('&' + _this.group + '&') == true) {
         _this.group_order_dishes.push({
           display_table: event.added_dish.display_table,
           table_count: event.added_dish.table_count,
@@ -1939,10 +1939,8 @@ __webpack_require__.r(__webpack_exports__);
     this.get_by_group_order_dishes(this.group);
     Echo.channel('changecount-channel') //public channel
     .listen('ChangeCountEvent', function (event) {
-      console.dir(event.group_ids);
-      var cmp_val = 0; // cmp_val = this.compare(this.group, event.group_ids);
-
-      if (cmp_val > 0) {
+      // console.dir(event.group_id);
+      if (('[' + event.group_id + ']').includes('&' + _this.group + '&') == true) {
         location.href = window.location.href;
       }
     });

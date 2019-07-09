@@ -472,6 +472,10 @@ class ReceptionController extends Controller
             $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
         }
 
+        //broadcast to kitchen
+        $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);
+        broadcast(new KitchenEvent($added_dish));
+
 //        return (string)view('reception.item_list', compact('order_dishes'))->render();
         return $order_id;
     }
@@ -629,9 +633,8 @@ class ReceptionController extends Controller
 
             //broadcast to kitchen
             $dish_id = OrderDish::where('id', $id)->pluck('dish_id');
-            $group_id_arr = Dish::where('id', $dish_id)->pluck('group_id');
-            $group_ids = explode(',', $group_id_arr);
-            broadcast(new ChangeCountEvent($group_ids));
+            $group_id = Dish::where('id', $dish_id)->pluck('group_id');
+            broadcast(new ChangeCountEvent($group_id));
         }
 
         return $order_qty_info;
