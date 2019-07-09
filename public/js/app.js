@@ -1904,8 +1904,13 @@ __webpack_require__.r(__webpack_exports__);
 
     Echo.channel('kitchen-channel') //public channel
     .listen('KitchenEvent', function (event) {
-      // console.log(this.group + "=>" + event.added_dish.group_id);
-      if (_this.group === event.added_dish.group_id) {
+      console.log(_this.group + "=>" + event.added_dish.group_id);
+      var g_id = event.added_dish.group_id; // var g_id_arr = g_id.split(",");
+      // console.dir(g_id_arr);
+      // console.dir(('['+ g_id + ']').includes(this.group));
+      // if(this.group === event.added_dish.group_id) {
+
+      if (('[' + event.added_dish.group_id + ']').includes(_this.group) == true) {
         _this.group_order_dishes.push({
           display_table: event.added_dish.display_table,
           table_count: event.added_dish.table_count,

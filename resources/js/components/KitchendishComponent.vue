@@ -53,9 +53,14 @@
             Echo.channel('kitchen-channel')//public channel
             .listen('KitchenEvent', (event) => {
 
-                // console.log(this.group + "=>" + event.added_dish.group_id);
+                console.log(this.group + "=>" + event.added_dish.group_id);
+                var g_id = event.added_dish.group_id;
+                // var g_id_arr = g_id.split(",");
+                // console.dir(g_id_arr);
+                // console.dir(('['+ g_id + ']').includes(this.group));
 
-                if(this.group === event.added_dish.group_id) {
+                // if(this.group === event.added_dish.group_id) {
+                if(('['+ event.added_dish.group_id + ']').includes(this.group) == true) {
                     this.group_order_dishes.push({
 
                         display_table: event.added_dish.display_table,
@@ -84,7 +89,6 @@
 
             // display part for dish list by group change
             this.get_by_group_order_dishes(this.group);
-
 
             Echo.channel('changecount-channel')//public channel
             .listen('ChangeCountEvent', (event) => {

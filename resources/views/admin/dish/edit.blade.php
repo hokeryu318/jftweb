@@ -194,20 +194,22 @@
                     <div class="row pl-4">
                         <div class="col-8" id="group-content">
                             <label class="text-blue txtdemibold fs-25">Group</label>
-                            @foreach ($obj->groups as $grp)
-                                <div class="mt-2 group-element">
-                                    <select class="border-blue select-width-blue mr-1 option-padding group-select pl-3 fs-25" name="groups[]" id="groups">
-                                        @foreach ($groups as $g)
-                                            <option value="{{ $g->id }}"
-                                                    @if($grp == $g->id)
-                                                    selected
-                                                    @endif
-                                            >{{ $g->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <button class="btndeletebehind mt-2 fs-25" type="button" onclick="onDeleteGroup(this)">Delete</button>
-                                </div>
-                            @endforeach
+                            @if($obj->groups)
+                                @foreach ($obj->groups as $grp)
+                                    <div class="mt-2 group-element">
+                                        <select class="border-blue select-width-blue mr-1 option-padding group-select pl-3 fs-25" name="groups[]" id="groups">
+                                            @foreach ($groups as $g)
+                                                <option value="{{ $g->id }}"
+                                                        @if(substr($grp, 1, -1) == $g->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $g->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btndeletebehind mt-2 fs-25" type="button" onclick="onDeleteGroup(this)">Delete</button>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="row pl-5">

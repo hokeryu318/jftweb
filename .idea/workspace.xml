@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="" />
+    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DishController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DishController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +51,7 @@
           <entry key="gitignore" value="4" />
           <entry key="js" value="25" />
           <entry key="json" value="4" />
-          <entry key="php" value="522" />
+          <entry key="php" value="531" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="87" />
@@ -51,12 +59,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="293" />
+          <entry key="Blade" value="295" />
           <entry key="CSS" value="24" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
           <entry key="JavaScript" value="25" />
-          <entry key="PHP" value="229" />
+          <entry key="PHP" value="236" />
           <entry key="PLAIN_TEXT" value="21" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="87" />
@@ -69,19 +77,19 @@
           <entry key="env" value="71" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="28702" />
-          <entry key="vue" value="7012" />
+          <entry key="php" value="29203" />
+          <entry key="vue" value="7190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="20530" />
+          <entry key="Blade" value="20585" />
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="8172" />
+          <entry key="PHP" value="8618" />
           <entry key="PLAIN_TEXT" value="119" />
-          <entry key="Vue.js" value="7012" />
+          <entry key="Vue.js" value="7190" />
         </counts>
       </usages-collector>
     </session>
@@ -91,8 +99,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="60" column="65" selection-start-line="60" selection-start-column="55" selection-end-line="60" selection-end-column="65" />
+            <state relative-caret-position="271">
+              <caret line="98" column="50" selection-start-line="98" selection-start-column="45" selection-end-line="98" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -100,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+            <state relative-caret-position="385">
+              <caret line="109" column="59" selection-start-line="109" selection-start-column="59" selection-end-line="109" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -118,17 +135,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="59" column="31" lean-forward="true" selection-start-line="59" selection-start-column="31" selection-end-line="72" selection-end-column="7" />
+            <state relative-caret-position="271">
+              <caret line="323" column="35" selection-start-line="323" selection-start-column="35" selection-end-line="323" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/customer/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DishController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
-              <caret line="281" column="46" lean-forward="true" selection-start-line="281" selection-start-column="46" selection-end-line="281" selection-end-column="46" />
+            <state relative-caret-position="694">
+              <caret line="275" selection-start-line="275" selection-end-line="275" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="215" column="105" selection-start-line="215" selection-start-column="105" selection-end-line="215" selection-end-column="105" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/list.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="833">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -137,11 +172,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cancel_bill</find>
-      <find>attend</find>
       <find>broad</find>
       <find>-&gt;</find>
-      <find>get_added_dish</find>
       <find>add_</find>
       <find>order_info_edit</find>
       <find>add option</find>
@@ -167,6 +199,9 @@
       <find>get_current</find>
       <find>collect()</find>
       <find>onDishes</find>
+      <find>get_added_dish</find>
+      <find>groups</find>
+      <find>admin/dish</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -183,7 +218,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/list.blade.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/discount/form.blade.php" />
@@ -199,7 +233,6 @@
         <option value="$PROJECT_DIR$/resources/js/components/CustomerCallingComponent.vue" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/KitchenController.php" />
         <option value="$PROJECT_DIR$/resources/views/kitchen/extract_modal.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" />
         <option value="$PROJECT_DIR$/public/kitchen_css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/setting/sendmail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/DayReport.blade.php" />
@@ -224,16 +257,18 @@
         <option value="$PROJECT_DIR$/routes/channels.php" />
         <option value="$PROJECT_DIR$/app/Events/ChangeCountEvent.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DishController.php" />
         <option value="$PROJECT_DIR$/resources/views/kitchen/main_screen.blade.php" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/category/list.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/dish/list.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DishController.php" />
       </list>
     </option>
   </component>
@@ -421,6 +456,27 @@
               <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
               <item name="jftweb" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Mail" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -530,18 +586,18 @@
       <workItem from="1561822978538" duration="57289000" />
       <workItem from="1562405731802" duration="3370000" />
       <workItem from="1562419661222" duration="39699000" />
-      <workItem from="1562557673877" duration="10797000" />
+      <workItem from="1562557673877" duration="23477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="798670000" />
+    <option name="totallyTimeSpent" value="811350000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.21882641" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.21882641" />
       <window_info id="Structure" order="1" sideWeight="0.50162864" side_tool="true" weight="0.24327628" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -562,6 +618,28 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.21882641" />
+      <window_info id="Structure" order="1" sideWeight="0.50162864" side_tool="true" weight="0.24327628" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3295964" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3295964" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.31614348" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -570,30 +648,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/cache.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/cache/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="488" column="34" lean-forward="true" selection-start-line="488" selection-start-column="34" selection-end-line="488" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Console/Scheduling/Schedule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BookingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/view_pay.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -837,20 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DishController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="177" column="46" lean-forward="true" selection-start-line="177" selection-start-column="46" selection-end-line="177" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="617" column="33" selection-start-line="617" selection-start-column="33" selection-end-line="617" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
@@ -861,13 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="60" column="65" selection-start-line="60" selection-start-column="55" selection-end-line="60" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -875,10 +908,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="84" column="57" lean-forward="true" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
+        <state relative-caret-position="385">
+          <caret line="109" column="59" selection-start-line="109" selection-start-column="59" selection-end-line="109" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -889,24 +922,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/KitchendishComponent.vue">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+        <state relative-caret-position="340">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="59" column="31" lean-forward="true" selection-start-line="59" selection-start-column="31" selection-end-line="72" selection-end-column="7" />
+        <state relative-caret-position="476">
+          <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="137" column="20" selection-start-line="137" selection-start-column="20" selection-end-line="137" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="281" column="46" lean-forward="true" selection-start-line="281" selection-start-column="46" selection-end-line="281" selection-end-column="46" />
+        <state relative-caret-position="591">
+          <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="323" column="35" selection-start-line="323" selection-start-column="35" selection-end-line="323" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="98" column="50" selection-start-line="98" selection-start-column="45" selection-end-line="98" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="215" column="105" selection-start-line="215" selection-start-column="105" selection-end-line="215" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Dish.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/dish/list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DishController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="694">
+          <caret line="275" selection-start-line="275" selection-end-line="275" />
         </state>
       </provider>
     </entry>

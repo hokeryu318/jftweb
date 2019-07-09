@@ -18,8 +18,19 @@ class DishController extends Controller
 {
     //
     public function index(){
+
         $dishes = Dish::get();//dd($dishes);
         $sort = "desc";
+
+        foreach($dishes as $ds)
+        {
+            if($ds->group_id){
+                $group_ids = explode(",", $ds->group_id);
+                $group_id = substr($group_ids[0], 1, -1);
+                $group_name = Kitchen::where('id', $group_id)->pluck('name')->first();
+                $ds->group_name = $group_name;
+            }
+        }
 
         return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
@@ -48,7 +59,9 @@ class DishController extends Controller
         $gst = Receipt::find(1)->gst;
 
         $group_id = $obj->group_id;
-        $obj->groups = explode(',', $group_id);
+        if($group_id) {
+            $obj->groups = explode(',', $group_id);
+        }
 
         return view('admin.dish.edit')->with(compact('main_cats', 'sub_cats', 'groups', 'badges', 'options', 'obj', 'dish_cats', 'dish_cats_ids', 'gst'));
     }
@@ -114,12 +127,16 @@ class DishController extends Controller
             $obj->price = request()->get('price');
             //$obj->category_id = request()->get('category_id');
             //$obj->sub_category_id = request()->get('sub_category_id');
-            $group_ids = request()->get('groups');
-            $grs = '';
-            foreach($group_ids as $gr){
-                $grs .= $gr.',';
+            if(request()->get('groups')) {
+                $group_ids = request()->get('groups');
+                $grs = '';
+                foreach($group_ids as $gr){
+                    $grs .= '&'.$gr.'&,';
+                }
+                $obj->group_id = rtrim($grs, ',');
+            } else {
+                $obj->group_id = '';
             }
-            $obj->group_id = rtrim($grs, ',');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
             $obj->eatin_lunch = request()->get('eatin_lunch') == "on" ? 1 : 0;
@@ -170,12 +187,16 @@ class DishController extends Controller
             $obj->price = request()->get('price');
             //$obj->category_id = request()->get('category_id');
             //$obj->sub_category_id = request()->get('sub_category_id');
-            $group_ids = request()->get('groups');
-            $grs = '';
-            foreach($group_ids as $gr){
-                $grs .= $gr.',';
+            if(request()->get('groups')) {
+                $group_ids = request()->get('groups');
+                $grs = '';
+                foreach($group_ids as $gr){
+                    $grs .= '&'.$gr.'&,';
+                }
+                $obj->group_id = rtrim($grs, ',');
+            } else {
+                $obj->group_id = '';
             }
-            $obj->group_id = rtrim($grs, ',');
             $obj->badge_id = request()->get('badge_id');
             $obj->eatin_breakfast = request()->get('eatin_breakfast') == "on" ? 1 : 0;
             $obj->eatin_lunch = request()->get('eatin_lunch') == "on" ? 1 : 0;
@@ -238,6 +259,17 @@ class DishController extends Controller
             $dishes = Dish::orderBy('name_en','asc')->get();
             $sort = "asc";
         }
+
+        foreach($dishes as $ds)
+        {
+            if($ds->group_id){
+                $group_ids = explode(",", $ds->group_id);
+                $group_id = substr($group_ids[0], 1, -1);
+                $group_name = Kitchen::where('id', $group_id)->pluck('name')->first();
+                $ds->group_name = $group_name;
+            }
+        }
+
         return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
 
