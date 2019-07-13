@@ -11,8 +11,7 @@ class SalesDayReportEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $day_report_data;
-
+    public $data;
     /**
      * Create a new message instance.
      *
@@ -20,7 +19,8 @@ class SalesDayReportEmail extends Mailable
      */
     public function __construct($data)
     {
-        $this->day_report_data = $data;
+        //
+        $this->data = $data;
     }
 
     /**
@@ -40,7 +40,7 @@ class SalesDayReportEmail extends Mailable
                     ->bcc($address, $name)
                     ->replyTo($address, $name)
                     ->subject($subject)
-                    //->with($this->day_report_data);
-                    ->attachData();
+//                    ->with($this->data);
+                    ->attach($this->data);
     }
 }

@@ -506,7 +506,6 @@ class ReceptionController extends Controller
 
     public function pay() {
 
-        //date_default_timezone_set("Australia/Melbourne");
         $order_id = request()->order_id;
         $count = OrderPay::where('order_id', $order_id)->get()->count();//dd($count);
 //        if($count > 0) {
