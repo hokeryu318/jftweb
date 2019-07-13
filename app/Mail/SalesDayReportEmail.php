@@ -34,7 +34,7 @@ class SalesDayReportEmail extends Mailable
         $subject = 'Sales Day Reporing';
         $name = 'Manager';
 
-        return $this->view('emails.day_report')
+        return $this->view('emails.index')
                     ->from($address, $name)
                     ->cc($address, $name)
                     ->bcc($address, $name)

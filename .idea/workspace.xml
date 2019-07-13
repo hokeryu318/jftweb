@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/sales_day.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jftweb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jftweb.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/day_report.blade.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,11 +42,11 @@
         <counts>
           <entry key="config" value="3" />
           <entry key="css" value="24" />
-          <entry key="env" value="14" />
+          <entry key="env" value="15" />
           <entry key="gitignore" value="4" />
           <entry key="js" value="25" />
           <entry key="json" value="6" />
-          <entry key="php" value="548" />
+          <entry key="php" value="549" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="87" />
@@ -64,13 +54,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="300" />
+          <entry key="Blade" value="301" />
           <entry key="CSS" value="24" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="6" />
           <entry key="JavaScript" value="25" />
           <entry key="PHP" value="248" />
-          <entry key="PLAIN_TEXT" value="21" />
+          <entry key="PLAIN_TEXT" value="22" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="87" />
         </counts>
@@ -79,10 +69,10 @@
         <counts>
           <entry key="css" value="1300" />
           <entry key="dummy" value="48" />
-          <entry key="env" value="71" />
+          <entry key="env" value="74" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="29264" />
+          <entry key="php" value="29269" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
@@ -92,8 +82,8 @@
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="8674" />
-          <entry key="PLAIN_TEXT" value="119" />
+          <entry key="PHP" value="8679" />
+          <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
       </usages-collector>
@@ -104,7 +94,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
+            <state relative-caret-position="748">
               <caret line="95" selection-start-line="95" selection-end-line="95" />
               <folding>
                 <element signature="e#40#71#0#PHP" expanded="true" />
@@ -113,7 +103,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/app.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="657">
@@ -131,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+            <state relative-caret-position="459">
+              <caret line="27" column="6" lean-forward="true" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
               <folding>
                 <element signature="e#28#57#0#PHP" expanded="true" />
               </folding>
@@ -211,7 +201,6 @@
         <option value="$PROJECT_DIR$/app/Mail/SalesDayReportingEmail.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/day_report.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/view_pay.blade.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/LoginController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/saledata.blade.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
@@ -240,10 +229,11 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/AlarmCount.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
-        <option value="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" />
         <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" />
       </list>
     </option>
   </component>
@@ -557,18 +547,18 @@
       <workItem from="1562419661222" duration="39699000" />
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
-      <workItem from="1563003149478" duration="1316000" />
+      <workItem from="1563003149478" duration="2518000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="823658000" />
+    <option name="totallyTimeSpent" value="824860000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.22249389" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.22249389" />
       <window_info id="Structure" order="1" sideWeight="0.50162864" side_tool="true" weight="0.24327628" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -597,20 +587,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/option/form.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="302" column="25" selection-start-line="302" selection-start-column="16" selection-end-line="302" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/part/dish_info.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-729">
-          <caret line="99" column="79" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/part/dish_option.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -902,13 +878,17 @@
     <entry file="file://$PROJECT_DIR$/resources/views/emails/index.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
+    <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-          <folding>
-            <element signature="e#28#57#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="657">
+          <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -921,7 +901,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
+        <state relative-caret-position="748">
           <caret line="95" selection-start-line="95" selection-end-line="95" />
           <folding>
             <element signature="e#40#71#0#PHP" expanded="true" />
@@ -929,10 +909,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
+        <state relative-caret-position="459">
+          <caret line="27" column="6" lean-forward="true" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+          <folding>
+            <element signature="e#28#57#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
