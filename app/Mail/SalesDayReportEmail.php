@@ -35,11 +35,12 @@ class SalesDayReportEmail extends Mailable
         $name = 'Manager';
 
         return $this->view('emails.day_report')
-            ->from($address, $name)
-            ->cc($address, $name)
-            ->bcc($address, $name)
-            ->replyTo($address, $name)
-            ->subject($subject)
-            ->with($this->day_report_data);
+                    ->from($address, $name)
+                    ->cc($address, $name)
+                    ->bcc($address, $name)
+                    ->replyTo($address, $name)
+                    ->subject($subject)
+                    //->with($this->day_report_data);
+                    ->attachData();
     }
 }

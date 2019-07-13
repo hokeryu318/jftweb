@@ -38,6 +38,8 @@ class AlarmCount
 
         View::share(compact('count_notification'));
 
+        date_default_timezone_set("Australia/Melbourne");
+
 //        date_default_timezone_set("Asia/Tokyo");
 //        $current_date = strtoupper(date('d M Y'));
 //        View::share(compact('current_date'));

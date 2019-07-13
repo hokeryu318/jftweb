@@ -506,24 +506,38 @@ class ReceptionController extends Controller
 
     public function pay() {
 
+        //date_default_timezone_set("Australia/Melbourne");
         $order_id = request()->order_id;
-        $count = OrderPay::where('order_id', $order_id)->get()->count();
-        if($count > 0) {
-            $orderPay = OrderPay::where('order_id', $order_id)->get()->first();
-            $orderPay->pay_method = request()->get('pay_method');
-            $orderPay->balance = request()->get('balance');
-            $orderPay->amount = request()->get('amount');
-            $orderPay->change = request()->get('change');
-            $orderPay->update();
-        } else {
-            $orderPay = new OrderPay();
-            $orderPay->order_id = request()->get('order_id');
-            $orderPay->pay_method = request()->get('pay_method');
-            $orderPay->balance = request()->get('balance');
-            $orderPay->amount = request()->get('amount');
-            $orderPay->change = request()->get('change');
-            $orderPay->save();
-        }
+        $count = OrderPay::where('order_id', $order_id)->get()->count();//dd($count);
+//        if($count > 0) {
+//            $orderPay = OrderPay::where('order_id', $order_id)->get()->first();
+//            $orderPay->tip = request()->get('tip');
+//            $orderPay->sub_total = request()->get('sub_total');
+//            $orderPay->discount = request()->get('discount');
+//            $orderPay->total = request()->get('total');
+//            $orderPay->without_gst = request()->get('without_gst');
+//            $orderPay->gst = request()->get('gst');
+//            $orderPay->pay_method = request()->get('pay_method');
+//            $orderPay->balance = request()->get('balance');
+//            $orderPay->amount = request()->get('amount');
+//            $orderPay->change = request()->get('change');
+//            $orderPay->update();
+//        } else {
+        $orderPay = new OrderPay();
+        $orderPay->order_id = request()->get('order_id');
+        $orderPay->tip = request()->get('tip');
+        $orderPay->sub_total = request()->get('sub_total');
+        $orderPay->discount = request()->get('discount');
+        $orderPay->total = request()->get('total');
+        $orderPay->without_gst = request()->get('without_gst');
+        $orderPay->gst = request()->get('gst');
+        $orderPay->pay_method = request()->get('pay_method');
+        $orderPay->balance = request()->get('balance');
+        $orderPay->amount = request()->get('amount');
+        $orderPay->change = request()->get('change');
+        $orderPay->save();
+        OrderPay::where('order_id', Null)->delete();
+//        }
 
         Order::where('id', $order_id)->update(['pay_flag' => 2]);
         OrderTable::where('order_id', $order_id)->delete();
