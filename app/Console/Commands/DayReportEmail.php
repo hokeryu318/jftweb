@@ -42,6 +42,7 @@ class DayReportEmail extends Command
      */
     public function handle()
     {
+
         date_default_timezone_set("Australia/Melbourne");
 
         Excel::create('sales_data', function($excel) {
