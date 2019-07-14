@@ -4,8 +4,6 @@
     <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +42,7 @@
         <counts>
           <entry key="config" value="3" />
           <entry key="css" value="24" />
-          <entry key="env" value="15" />
+          <entry key="env" value="16" />
           <entry key="gitignore" value="4" />
           <entry key="js" value="25" />
           <entry key="json" value="6" />
@@ -56,6 +54,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key=".env file" value="1" />
           <entry key="Blade" value="302" />
           <entry key="CSS" value="24" />
           <entry key="Image" value="1" />
@@ -74,7 +73,7 @@
           <entry key="env" value="74" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="29447" />
+          <entry key="php" value="29452" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
@@ -84,7 +83,7 @@
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="8788" />
+          <entry key="PHP" value="8793" />
           <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
@@ -96,8 +95,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-734">
-              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+            <state relative-caret-position="711">
+              <caret line="94" column="50" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+              <folding>
+                <element signature="e#40#71#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="17" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -105,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/app.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3876">
+            <state relative-caret-position="810">
               <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
             </state>
           </provider>
@@ -123,8 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/emails/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-end-line="9" />
+            <state relative-caret-position="85">
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -240,8 +251,8 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/resources/views/emails/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" />
-        <option value="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" />
         <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" />
       </list>
     </option>
   </component>
@@ -258,6 +269,7 @@
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
+      <path value="$PROJECT_DIR$/TestSendMail/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
@@ -543,12 +555,12 @@
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
       <workItem from="1563003149478" duration="16550000" />
-      <workItem from="1563100481451" duration="578000" />
+      <workItem from="1563100481451" duration="2638000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="839470000" />
+    <option name="totallyTimeSpent" value="841530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -851,13 +863,6 @@
     <entry file="file://$PROJECT_DIR$/resources/views/emails/sales_day.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/day_report.blade.php" />
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -869,9 +874,16 @@
     <entry file="file://$PROJECT_DIR$/routes/console.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3876">
+        <state relative-caret-position="810">
           <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
         </state>
       </provider>
@@ -885,8 +897,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-end-line="9" />
+        <state relative-caret-position="85">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -902,8 +914,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-734">
-          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        <state relative-caret-position="711">
+          <caret line="94" column="50" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+          <folding>
+            <element signature="e#40#71#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

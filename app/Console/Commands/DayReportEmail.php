@@ -92,7 +92,7 @@ class DayReportEmail extends Command
 
         })->store('xlsx', public_path('excel/exports'));
 
-        $filename = public_path().'\excel\exports\sales_data.xlsx';
+        $filename = public_path().'/excel/exports/sales_data.xlsx';
 
         Mail::to('jiuhejong@gmail.com')->send(new SalesDayReportEmail($filename));
     }
