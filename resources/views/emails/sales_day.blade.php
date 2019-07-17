@@ -9,123 +9,203 @@
     <h3> 1. Sales Data </h3>
     <table>
         <tr>
-            <td>Total Sales</td>
-            <td>{{ $sales_data['total_sales'] }}</td>
+            <td align="left">Total Sales</td>
+            <td align="right">${{ number_format($sales_data['total_sales'], 2) }}</td>
         </tr>
         <tr>
-            <td>Gross Total</td>
-            <td>{{ $sales_data['gross_total'] }}</td>
+            <td align="left">Gross Total</td>
+            <td align="right">${{ number_format($sales_data['gross_total'], 2) }}</td>
         </tr>
         <tr>
-            <td>Total GST({{ $sales_data['gst_pr'] }}%)</td>
-            <td>{{ $sales_data['total_gst'] }}</td>
+            <td align="left">Total GST({{ $sales_data['gst_pr'] }}%)</td>
+            <td align="right">${{ number_format($sales_data['total_gst'], 2) }}</td>
         </tr>
         <tr>
-            <td>Guest</td>
-            <td>{{ $sales_data['guest'] }}</td>
+            <td align="left">Guest</td>
+            <td align="right">{{ $sales_data['guest'] }}</td>
         </tr>
         <tr>
-            <td>Cash Income</td>
-            <td>{{ $sales_data['cash_income'] }}</td>
+            <td align="left">Cash Income</td>
+            <td align="right">${{ number_format($sales_data['cash_income'], 2) }}</td>
         </tr>
         <tr>
-            <td>Cash Count</td>
-            <td>{{ $sales_data['cash_count'] }}</td>
+            <td align="left">Cash Count</td>
+            <td align="right">{{ $sales_data['cash_count'] }}</td>
         </tr>
         <tr>
-            <td>Card Total</td>
-            <td>{{ $sales_data['card_total'] }}</td>
+            <td align="left">Card Total</td>
+            <td align="right">${{ number_format($sales_data['card_total'], 2) }}</td>
         </tr>
         <tr>
-            <td>Card Count</td>
-            <td>{{ $sales_data['card_count'] }}</td>
+            <td align="left">Card Count</td>
+            <td align="right">{{ $sales_data['card_count'] }}</td>
         </tr>
         <tr>
-            <td>Refund</td>
-            <td>{{ $sales_data['refund_total'] }}</td>
+            <td align="left">Refund</td>
+            <td align="right">${{ number_format($sales_data['refund_total'], 2) }}</td>
         </tr>
         <tr>
-            <td>Discount</td>
-            <td>{{ $sales_data['discount_total'] }}</td>
+            <td align="left">Discount</td>
+            <td align="right">${{ number_format($sales_data['discount_total'], 2) }}</td>
         </tr>
         <tr>
-            <td>Tip Total</td>
-            <td>{{ $sales_data['tip_total'] }}</td>
+            <td align="left">Tip Total</td>
+            <td align="right">${{ number_format($sales_data['tip_total'], 2) }}</td>
         </tr>
     </table>
 
     <h3> 2. Card Sales Data </h3>
-    <table>
-        <tr>
-            <td>
-
-            </td>
-        </tr>
-    </table>
+    @for($i=0;$i<count($card_type);$i++)
+        <table>
+            <tr>
+                <td align="left">{{ $card_type[$i] }} Total</td>
+                <td align="right">${{ number_format($card_sales_data[$card_type[$i] . '_Total'], 2) }}</td>
+            </tr>
+            <tr>
+                <td align="left">{{ $card_type[$i] }} Tip</td>
+                <td align="right">${{ number_format($card_sales_data[$card_type[$i] . '_Tip'], 2) }}</td>
+            </tr>
+            <tr>
+                <td align="left">{{ $card_type[$i] }} Count</td>
+                <td align="right">{{ $card_sales_data[$card_type[$i] . '_Count'] }}</td>
+            </tr>
+        </table>
+    @endfor
 
     <h3> 3. Discounts </h3>
     <table>
-        <tr>
-            <td>
-
-            </td>
-        </tr>
+        @foreach($order_pay as $ord_pay)
+            <tr>
+                <td align="left">{{ substr($ord_pay->created_at, 11, 5) }}({{ $ord_pay->id }})</td>
+                <td align="left">Reception</td>
+                <td align="right">-${{ number_format($ord_pay->discount, 2) }}</td>
+            </tr>
+        @endforeach
     </table>
 
     <h3> 4. Canceled Items </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="left">xxx</td>
+            <td align="left">Reception</td>
+            <td align="right">-$0.00</td>
         </tr>
     </table>
 
     <h3> 5. Hour Sales Data </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="center"><b>Hour</b></td>
+            <td align="center"><b>People</b></td>
+            <td align="center"><b>Sales</b></td>
         </tr>
+        @for($i=0;$i<24;$i++)
+            <tr>
+                <td align="right">{{ $i }}</td>
+                <td align="right">{{ $hour_sales_data[$i]['people'] }}</td>
+                <td align="right">${{ number_format($hour_sales_data[$i]['sales'], 2) }}</td>
+            </tr>
+        @endfor
     </table>
 
     <h3> 6. Category Sales Data </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="center"><b>Category</b></td>
+            <td align="center"><b>Qty</b></td>
+            <td align="center"><b>Sales</b></td>
         </tr>
+        @for($i=0;$i<count($category_sales_data);$i++)
+            <tr>
+                <td align="left">{{ ($i+1).'.'.$category_sales_data[$i]['name'] }}</td>
+                <td align="right">{{ $category_sales_data[$i]['qty'] }}</td>
+                <td align="right">${{ number_format($category_sales_data[$i]['sales'], 2) }}</td>
+            </tr>
+        @endfor
     </table>
 
     <h3> 7. Item Sales Data </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="center"><b>Item Name</b></td>
+            <td align="center"><b>Qty</b></td>
+            <td align="center"><b>Sales</b></td>
         </tr>
+        @for($i=0;$i<count($item_sales_data);$i++)
+            <tr>
+                <td align="left">{{ $item_sales_data[$i]['name'] }}</td>
+                <td align="right">{{ $item_sales_data[$i]['qty'] }}</td>
+                <td align="right">${{ number_format($item_sales_data[$i]['sales'], 2) }}</td>
+            </tr>
+        @endfor
     </table>
 
     <h3> 8. Hourly Item Ranking </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="center"><b>Item Name</b></td>
+            <td align="center"><b>Item Total</b></td>
+            <td align="center"><b>10</b></td>
+            <td align="center"><b>11</b></td>
+            <td align="center"><b>12</b></td>
+            <td align="center"><b>13</b></td>
+            <td align="center"><b>14</b></td>
+            <td align="center"><b>15</b></td>
+            <td align="center"><b>16</b></td>
+            <td align="center"><b>17</b></td>
+            <td align="center"><b>18</b></td>
+            <td align="center"><b>19</b></td>
+            <td align="center"><b>20</b></td>
+            <td align="center"><b>21</b></td>
+            <td align="center"><b>22</b></td>
+            <td align="center"><b>23</b></td>
+            <td align="center"><b>0</b></td>
         </tr>
+        @for($i=0;$i<count($hourly_item_ranking);$i++)
+            <tr>
+                <td align="left">{{ $hourly_item_ranking[$i]['item_name'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['item_total'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['10'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['11'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['12'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['13'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['14'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['15'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['16'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['17'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['18'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['19'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['20'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['21'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['22'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['23'] }}</td>
+                <td align="right">{{ $hourly_item_ranking[$i]['0'] }}</td>
+            </tr>
+        @endfor
     </table>
 
     <h3> 9. Hourly Cooktime Ranking </h3>
     <table>
         <tr>
-            <td>
-
-            </td>
+            <td align="center"><b>Item Name</b></td>
+            <td align="center"><b>Cooktime(AVG:min)</b></td>
+            <td align="center"><b>10</b></td>
+            <td align="center"><b>11</b></td>
+            <td align="center"><b>12</b></td>
+            <td align="center"><b>13</b></td>
+            <td align="center"><b>14</b></td>
+            <td align="center"><b>15</b></td>
+            <td align="center"><b>16</b></td>
+            <td align="center"><b>17</b></td>
+            <td align="center"><b>18</b></td>
+            <td align="center"><b>19</b></td>
+            <td align="center"><b>20</b></td>
+            <td align="center"><b>21</b></td>
+            <td align="center"><b>22</b></td>
+            <td align="center"><b>23</b></td>
+            <td align="center"><b>0</b></td>
         </tr>
     </table>
-
 
     </body>
 
