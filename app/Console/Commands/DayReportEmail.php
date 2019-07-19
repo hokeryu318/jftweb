@@ -102,9 +102,9 @@ class DayReportEmail extends Command
                     }
                 }
 
-                // ===3. Discounts ====
+                // ===3. Discounts ===
 
-                // ===4. Canceled Items ====
+                // ===4. Canceled Items ===
 
                 // ===5. Hour Sales Data ===
                 $hour_sales_data = array();

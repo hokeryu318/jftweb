@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/excel/exports/sales_data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/excel/exports/sales_data.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,11 +43,11 @@
         <counts>
           <entry key="config" value="3" />
           <entry key="css" value="24" />
-          <entry key="env" value="17" />
+          <entry key="env" value="18" />
           <entry key="gitignore" value="4" />
           <entry key="js" value="25" />
           <entry key="json" value="7" />
-          <entry key="php" value="568" />
+          <entry key="php" value="569" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="87" />
@@ -53,13 +55,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key=".env file" value="2" />
+          <entry key=".env file" value="3" />
           <entry key="Blade" value="307" />
           <entry key="CSS" value="24" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="7" />
           <entry key="JavaScript" value="25" />
-          <entry key="PHP" value="261" />
+          <entry key="PHP" value="262" />
           <entry key="PLAIN_TEXT" value="22" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="87" />
@@ -69,21 +71,21 @@
         <counts>
           <entry key="css" value="1300" />
           <entry key="dummy" value="48" />
-          <entry key="env" value="77" />
+          <entry key="env" value="83" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="30929" />
+          <entry key="php" value="30940" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key=".env file" value="3" />
+          <entry key=".env file" value="9" />
           <entry key="Blade" value="20802" />
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="10127" />
+          <entry key="PHP" value="10138" />
           <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
@@ -95,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
+            <state relative-caret-position="757">
+              <caret line="241" column="87" selection-start-line="241" selection-start-column="87" selection-end-line="241" selection-end-column="87" />
               <folding>
                 <element signature="e#40#71#0#PHP" expanded="true" />
               </folding>
@@ -129,7 +131,16 @@
         <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="30" column="86" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="86" />
+              <caret line="30" column="89" lean-forward="true" selection-start-line="30" selection-start-column="89" selection-end-line="30" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="17" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -263,11 +274,11 @@
         <option value="$PROJECT_DIR$/resources/views/emails/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/sales_day.blade.php" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/accounting.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php" />
         <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
       </list>
     </option>
@@ -594,18 +605,18 @@
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
       <workItem from="1563003149478" duration="16550000" />
-      <workItem from="1563100481451" duration="38574000" />
+      <workItem from="1563100481451" duration="48444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="877466000" />
+    <option name="totallyTimeSpent" value="887336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.22493887" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.22493887" />
       <window_info id="Structure" order="1" sideWeight="0.50162864" side_tool="true" weight="0.24327628" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -927,13 +938,6 @@
     <entry file="file://$PROJECT_DIR$/resources/views/admin/transaction/list.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="35" selection-start-line="35" selection-end-line="40" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -944,25 +948,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+        <state relative-caret-position="323">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
           <folding>
             <element signature="e#28#57#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80" />
+        <state relative-caret-position="255">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="17" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
+        <state relative-caret-position="757">
+          <caret line="241" column="87" selection-start-line="241" selection-start-column="87" selection-end-line="241" selection-end-column="87" />
           <folding>
             <element signature="e#40#71#0#PHP" expanded="true" />
           </folding>
@@ -972,7 +983,7 @@
     <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="30" column="86" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="86" />
+          <caret line="30" column="89" lean-forward="true" selection-start-line="30" selection-start-column="89" selection-end-line="30" selection-end-column="89" />
         </state>
       </provider>
     </entry>
