@@ -45,7 +45,7 @@
           <entry key="gitignore" value="4" />
           <entry key="js" value="25" />
           <entry key="json" value="7" />
-          <entry key="php" value="566" />
+          <entry key="php" value="568" />
           <entry key="png" value="1" />
           <entry key="rnc" value="1" />
           <entry key="vue" value="87" />
@@ -59,7 +59,7 @@
           <entry key="Image" value="1" />
           <entry key="JSON" value="7" />
           <entry key="JavaScript" value="25" />
-          <entry key="PHP" value="259" />
+          <entry key="PHP" value="261" />
           <entry key="PLAIN_TEXT" value="22" />
           <entry key="RNG Compact" value="1" />
           <entry key="Vue.js" value="87" />
@@ -72,7 +72,7 @@
           <entry key="env" value="77" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="30927" />
+          <entry key="php" value="30929" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
@@ -83,7 +83,7 @@
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="10125" />
+          <entry key="PHP" value="10127" />
           <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
@@ -92,6 +92,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
+              <folding>
+                <element signature="e#40#71#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -440,6 +452,13 @@
               <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
               <item name="jftweb" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Console" type="462c0819:PsiDirectoryNode" />
+              <item name="Commands" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -456,6 +475,12 @@
               <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
               <item name="Api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jftweb" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Mail" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jftweb" type="b2602c69:ProjectViewProjectNode" />
@@ -569,12 +594,12 @@
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
       <workItem from="1563003149478" duration="16550000" />
-      <workItem from="1563100481451" duration="37664000" />
+      <workItem from="1563100481451" duration="38574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="876556000" />
+    <option name="totallyTimeSpent" value="877466000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -840,16 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
-          <folding>
-            <element signature="e#28#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -861,16 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
-          <folding>
-            <element signature="e#40#71#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,9 +927,11 @@
     <entry file="file://$PROJECT_DIR$/resources/views/admin/transaction/list.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80" />
+        <state relative-caret-position="544">
+          <caret line="35" selection-start-line="35" selection-end-line="40" selection-end-column="19" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
@@ -937,10 +944,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/app/Mail/SalesDayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="35" selection-start-line="35" selection-end-line="40" selection-end-column="19" />
+        <state relative-caret-position="697">
+          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+          <folding>
+            <element signature="e#28#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
+          <folding>
+            <element signature="e#40#71#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
