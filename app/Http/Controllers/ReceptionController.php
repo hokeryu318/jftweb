@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChangeCountEvent;
 use App\Events\KitchenEvent;
+use App\Model\Mail;
 use Illuminate\Http\Request;
 
 use App\Events\NotificationEvent;
@@ -24,8 +25,15 @@ use App\Model\Option;
 use App\Model\Item;
 use App\Model\Room;
 
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
+
 class ReceptionController extends Controller
 {
+
+    public $printerIp = '192.168.1.99';
+    public $printerPort = 9100;
 
     //reception main screen ===========================================================================================
     //seated   : order.status = seated;
@@ -545,7 +553,103 @@ class ReceptionController extends Controller
         $pay_status = 'pay_'.$order_id;
         broadcast(new PayEvent($pay_status));
 
-//        return 'successf';
+//        return 'success';
+        return redirect()->route('reception.seated', ['status'=>'seated']);
+    }
+
+    public function print() {
+
+        $profile = Receipt::profile();
+        $logo_image_name = $profile->logo_image;
+        $title = "TAX INVOICE";
+        $description = "425 Springvale Rd.Foresthill, Vic 3131";
+        $tel = "TEL : ".$profile->phone;
+        $abn = "ABN : ".$profile->abn;
+
+        $order_id = request()->get('order_id');
+        $table_ids = OrderTable::where('id', $order_id)->pluck('table_id');
+        $table_name = "";
+        foreach($table_ids as $table_id) {
+            $table_name .= $this->get_table_name($table_id).'+';
+        }
+        $table_name = rtrim($table_name, '+');
+        $guest = Order::where('id', $order_id)->pluck('guest');
+        $table = "Table  : ".$table_name." (".$guest." Guests)";
+        $current_date = date('d F Y');
+        $current_time = date('H:i:s');
+        $day = date("D", strtotime($current_date));
+        $date = "Date  : ".$day.", ".$current_date.", ".$current_time;
+
+
+
+
+
+
+        $tip = request()->get('tip');
+        $sub_total = request()->get('sub_total');
+        $discount = request()->get('discount');
+        $total = request()->get('total');
+        $without_gst = request()->get('without_gst');
+        $gst = request()->get('gst');
+        $pay_method = request()->get('pay_method');
+        $balance = request()->get('balance');
+        $amount = request()->get('amount');
+        $change = request()->get('change');
+
+
+
+        $connector = new NetworkPrintConnector($this->printerIp, $this->printerPort);
+        $printer = new Printer($connector);
+
+        try {
+            //Print top logo
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+//            $logo_image = EscposImage::load("{{asset('receipt/'.$logo_image_name)}}", false);
+            $logo_image = EscposImage::load("{{asset('receipt/img1.PNG')}}");
+//            $printer->bitImage($logo_image);
+            $printer->graphics($logo_image);
+
+//            $printer->setFont(Printer::FONT_A);
+//            $printer->setFont(Printer::FONT_B);
+//            $printer->setFont(Printer::FONT_C);
+
+            for($i=1;$i<9;$i++) {
+                $printer->setTextSize($i, $i);
+                $printer->text("title\n");
+            }
+
+            $printer->setTextSize(5,5);//1~8 of width and height, can change textsize
+            //Print top text
+            $printer->setEmphasis(true);
+            $printer->text("$title\n");
+            $printer->setEmphasis(false);
+            $printer->text("$description\n");
+            $printer->text("$tel\n");
+            $printer->text("$abn\n");
+            $printer->setEmphasis(true);
+            $printer->text("-----------------------\n");
+
+            //Print table and date
+            $printer->setEmphasis(false);
+            $printer->text("$table\n");
+            $printer->text("$date\n");
+            $printer->setEmphasis(true);
+            $printer->text("-----------------------\n");
+
+
+
+
+
+
+
+
+
+            $printer->cut();
+        } finally {
+            $printer -> close();
+        }
+
+//        return 'success';
         return redirect()->route('reception.seated', ['status'=>'seated']);
     }
 

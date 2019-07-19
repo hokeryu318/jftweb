@@ -449,6 +449,20 @@
                 } else {
                     document.getElementById("change").textContent = '$' + change.toFixed(2).toString();
 
+                    {{--if(confirm("Would you like a receipt?")) {--}}
+                        {{--$.ajax({--}}
+                            {{--type:"POST",--}}
+                            {{--url:"{{ route('reception.print') }}",--}}
+                            {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
+                            {{--success: function(result){--}}
+                                {{--// console.log(result);--}}
+                                {{--$("#save-pay").submit();--}}
+                            {{--}--}}
+                        {{--});--}}
+                    {{--} else {--}}
+
+                    {{--}--}}
+
                     //regist to database
                     var order_id = $('#order_id').val();
                     var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
@@ -459,7 +473,19 @@
                         data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
                         success: function(result){
                             // console.log(result);
-                            $("#save-pay").submit();
+                            if(confirm("Would you like a receipt?")) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:"{{ route('reception.print') }}",
+                                    data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+                                    success: function(result){
+
+                                    }
+                                });
+                            } else {
+
+                            }
+                            // $("#save-pay").submit();
                         }
                     });
                     // window.history.back();
