@@ -44,7 +44,9 @@
                         <div class="col-3">
                             <h4 class="white-text mb-5 mt-0 pt-0 lg-font" id="ip_addr">{{ $profile->ip_address }}</h4>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-3 pl-0">
                             <span class="bg-info btn mt-0 pt-1 pb-1" style="border-radius:10px !important" data-toggle="modal" data-target="#myModal">
                                 <h5 class="white-text mb-0 mt-0 mt-0 pt-0 font-weight-bold lg-change-font" id="change_button">Change</h5>
                             </span>
