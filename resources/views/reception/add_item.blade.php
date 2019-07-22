@@ -96,13 +96,17 @@
                 <div class="col-4"></div>
             </div>
             <div class="row" style="height: 50px;">
-                <div class="col-5" style="text-align: right;"><img src="{{asset('img/qty_down.png')}}" style="width: 60px;margin: 17px 10px 0 0px;" onclick="plusQty('minus')" /></div>
+                <div class="col-5" style="text-align: right;">
+                    <img src="{{asset('img/qty_down.png')}}" style="width: 60px;margin: 17px 10px 0 0px;" onclick="plusQty('minus')" />
+                </div>
                 <div class="col-2">
                     <div class="row qty_text">
-                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">01</span>
+                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">@if($order_dish_id != 0) 00 @else 01 @endif</span>
                     </div>
                 </div>
-                <div class="col-5"><img src="{{asset('img/qty_up.png')}}" style="width: 60px;margin: 17px 0px 0 -15px;" onclick="plusQty('plus')" /></div>
+                <div class="col-5">
+                    <img src="{{asset('img/qty_up.png')}}" style="width: 60px;margin: 17px 0px 0 -15px;" onclick="plusQty('plus')" />
+                </div>
             </div>
         </div>
         <div class="col-4" style="margin-left: -6px;">
@@ -110,7 +114,7 @@
                 <aa class="fs-25" style="margin-right: 20px;">APPLY</aa>
                 <img src="{{ asset('img/Group728white.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
-            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="onCancel()">
+            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="onAddItemCancel()">
                 <aa class="fs-25" style="margin-left: 25px;">CANCEL</aa>
                 <img src="{{ asset('img/Group728black.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
@@ -121,6 +125,7 @@
 <script>
 
     var select_list = [];
+    var order_dish_id = <?php echo(json_encode($order_dish_id))?>;
 
     $(document).ready(function(){
         $(".category_parent").first().addClass('selected_category_color');
@@ -151,21 +156,26 @@
     function plusQty(arg){
         var qty_number_obj = $("#qty");
         var qty_number = qty_number_obj.html();
-        if(arg == 'plus'){
-            qty_number ++;
-        }else{
-            if(qty_number > 1){
-                qty_number --;
-            }
-        }
-        if(qty_number < 10){
-            if(qty_number == 1){
-                qty_number = '01';
+        if(order_dish_id == 0) { // add item
+            if(arg == 'plus'){
+                qty_number ++;
             }else{
-                qty_number = '0' + qty_number;
+                if(qty_number > 1){
+                    qty_number --;
+                }
             }
+            if(qty_number < 10){
+                if(qty_number == 1){
+                    qty_number = '01';
+                }else{
+                    qty_number = '0' + qty_number;
+                }
+            }
+            qty_number_obj.html(qty_number);
+        } else { // amend for cancel item
+            alert('This is amend action.');
         }
-        qty_number_obj.html(qty_number);
+
     }
 
     var toggler = document.getElementsByClassName("caret");

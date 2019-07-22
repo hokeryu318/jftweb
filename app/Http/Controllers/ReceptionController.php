@@ -381,6 +381,8 @@ class ReceptionController extends Controller
     public function amend() {
 
         $order_id = request()->order_id;
+        $order_dish_id = request()->order_dish_id;
+
         $categories = Category::get()->toArray();
         $dishes = array();
         if(count($categories) > 0){
@@ -403,7 +405,7 @@ class ReceptionController extends Controller
                 $category_all[$category['id']]['children'] = $sub_categories;
             }
         }
-        return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes'));
+        return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes', 'order_dish_id'));
     }
 
     public function add_item() {
@@ -635,6 +637,18 @@ class ReceptionController extends Controller
             $printer->text("$date\n");
             $printer->setEmphasis(true);
             $printer->text("-----------------------\n");
+
+            // loop
+            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name", "quantity", "price", "total");
+            $printer->text($line);
+            $printer->text("\n");
+            // end loop
+
+            // loop
+            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name", "quantity", "price", "total");
+            $printer->text($line);
+            $printer->text("\n");
+            // end loop
 
 
 
