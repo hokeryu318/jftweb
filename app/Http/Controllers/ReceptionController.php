@@ -32,7 +32,7 @@ use Mike42\Escpos\Printer;
 class ReceptionController extends Controller
 {
 
-    public $printerIp = '192.168.1.99';
+    public $printerIp = '192.168.192.150';
     public $printerPort = 9100;
 
     //reception main screen ===========================================================================================
@@ -639,22 +639,16 @@ class ReceptionController extends Controller
             $printer->text("-----------------------\n");
 
             // loop
-            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name", "quantity", "price", "total");
+            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name1", "quantity", "price", "total");
             $printer->text($line);
             $printer->text("\n");
             // end loop
 
             // loop
-            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name", "quantity", "price", "total");
+            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name2", "quantity", "price", "total");
             $printer->text($line);
             $printer->text("\n");
             // end loop
-
-
-
-
-
-
 
 
 
@@ -663,8 +657,7 @@ class ReceptionController extends Controller
             $printer -> close();
         }
 
-//        return 'success';
-        return redirect()->route('reception.seated', ['status'=>'seated']);
+        return 'success';
     }
 
     //edit order part ==================================================================================================

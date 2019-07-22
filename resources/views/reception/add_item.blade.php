@@ -157,23 +157,37 @@
         var qty_number_obj = $("#qty");
         var qty_number = qty_number_obj.html();
         if(order_dish_id == 0) { // add item
-            if(arg == 'plus'){
+            if(arg == 'plus') {
                 qty_number ++;
-            }else{
-                if(qty_number > 1){
+            } else {
+                if(qty_number > 1) {
                     qty_number --;
                 }
             }
-            if(qty_number < 10){
-                if(qty_number == 1){
+            if(qty_number < 10) {
+                if(qty_number == 1) {
                     qty_number = '01';
-                }else{
+                } else {
                     qty_number = '0' + qty_number;
                 }
             }
             qty_number_obj.html(qty_number);
         } else { // amend for cancel item
-            alert('This is amend action.');
+            if(arg == 'plus') {
+                qty_number ++;
+            } else {
+
+                qty_number --;
+
+            }
+            if(qty_number < 10) {
+                if(qty_number == 1) {
+                    qty_number = '01';
+                } else {
+                    qty_number = '0' + qty_number;
+                }
+            }
+            qty_number_obj.html(qty_number);
         }
 
     }

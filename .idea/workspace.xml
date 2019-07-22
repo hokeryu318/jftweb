@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reception/accounting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reception/accounting.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" afterDir="false" />
@@ -75,18 +74,18 @@
           <entry key="env" value="83" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="33122" />
+          <entry key="php" value="33275" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="9" />
-          <entry key="Blade" value="22728" />
+          <entry key="Blade" value="22815" />
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="10394" />
+          <entry key="PHP" value="10460" />
           <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
@@ -120,16 +119,16 @@
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="302">
-              <caret line="49" column="81" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="81" />
+              <caret line="56" column="28" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="779">
-              <caret line="650" column="23" selection-start-line="650" selection-start-column="23" selection-end-line="650" selection-end-column="23" />
+            <state relative-caret-position="725">
+              <caret line="654" column="28" lean-forward="true" selection-start-line="654" selection-start-column="28" selection-end-line="654" selection-end-column="28" />
               <folding>
                 <element signature="e#40#72#0#PHP" expanded="true" />
               </folding>
@@ -137,11 +136,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/reception/add_item.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="178" column="5" lean-forward="true" selection-start-line="178" selection-start-column="5" selection-end-line="178" selection-end-column="5" />
+            <state relative-caret-position="583">
+              <caret line="179" column="16" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -167,8 +166,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/reception/accounting.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="270" selection-start-line="270" selection-end-line="270" />
+            <state relative-caret-position="822">
+              <caret line="488" column="54" selection-start-line="488" selection-start-column="54" selection-end-line="488" selection-end-column="54" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#2512#2518#0#HTML" expanded="true" />
@@ -239,7 +238,6 @@
       <find>orderPay-&gt;</find>
       <find>&lt;img</find>
       <find>$profile = Receipt::profile();</find>
-      <find>print</find>
       <find>fon</find>
       <find>get_table_name</find>
       <find>Date</find>
@@ -253,6 +251,7 @@
       <find>reception.add_item</find>
       <find>_&quot;</find>
       <find>add item</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -318,8 +317,8 @@
         <option value="$PROJECT_DIR$/resources/views/login.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/reception/accounting.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php" />
+        <option value="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" />
       </list>
     </option>
   </component>
@@ -645,12 +644,12 @@
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
       <workItem from="1563003149478" duration="16550000" />
-      <workItem from="1563100481451" duration="76513000" />
+      <workItem from="1563100481451" duration="82512000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="915405000" />
+    <option name="totallyTimeSpent" value="921404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -1013,13 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="49" column="81" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/kitchen/main_screen.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -1027,17 +1019,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reception/add_item.blade.php">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="178" column="5" lean-forward="true" selection-start-line="178" selection-start-column="5" selection-end-line="178" selection-end-column="5" />
+        <state relative-caret-position="302">
+          <caret line="56" column="28" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/reception/accounting.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="270" selection-start-line="270" selection-end-line="270" />
+        <state relative-caret-position="822">
+          <caret line="488" column="54" selection-start-line="488" selection-start-column="54" selection-end-line="488" selection-end-column="54" />
           <folding>
             <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#2512#2518#0#HTML" expanded="true" />
@@ -1089,11 +1081,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="650" column="23" selection-start-line="650" selection-start-column="23" selection-end-line="650" selection-end-column="23" />
+        <state relative-caret-position="725">
+          <caret line="654" column="28" lean-forward="true" selection-start-line="654" selection-start-column="28" selection-end-line="654" selection-end-column="28" />
           <folding>
             <element signature="e#40#72#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reception/add_item.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="583">
+          <caret line="179" column="16" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="16" />
         </state>
       </provider>
     </entry>
