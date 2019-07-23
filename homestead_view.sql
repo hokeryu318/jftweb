@@ -38,7 +38,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
   order_dish_match.order_id,
   order_dish_match.dish_id,
   items.id as item_id, 
-  order_pay.created_at
+  order_pay.created_at, 
+  order_dish_match.created_at as start_time, 
+  order_dish_match.ready_time
 FROM
   items,	
   order_dish_match,

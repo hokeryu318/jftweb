@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CountNotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KitchenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KitchenController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reception/add_item.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="250b178c-e8e8-4955-8e5b-4111675e12fa" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2544">
-              <caret line="178" column="63" lean-forward="true" selection-start-line="178" selection-start-column="63" selection-end-line="178" selection-end-column="63" />
+              <caret line="178" column="63" selection-start-line="178" selection-start-column="63" selection-end-line="178" selection-end-column="63" />
               <folding>
                 <element signature="e#40#71#0#PHP" expanded="true" />
               </folding>
@@ -214,7 +209,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/kitchen/main_screen.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="217">
-              <caret line="247" lean-forward="true" selection-start-line="247" selection-end-line="247" />
+              <caret line="247" selection-start-line="247" selection-end-line="247" />
             </state>
           </provider>
         </entry>
@@ -223,7 +218,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/KitchenController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="608">
-              <caret line="144" column="93" lean-forward="true" selection-start-line="144" selection-start-column="93" selection-end-line="144" selection-end-column="93" />
+              <caret line="144" column="93" selection-start-line="144" selection-start-column="93" selection-end-line="144" selection-end-column="93" />
             </state>
           </provider>
         </entry>
@@ -1085,21 +1080,21 @@
     <entry file="file://$PROJECT_DIR$/resources/views/kitchen/main_screen.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
-          <caret line="247" lean-forward="true" selection-start-line="247" selection-end-line="247" />
+          <caret line="247" selection-start-line="247" selection-end-line="247" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/KitchenController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
-          <caret line="144" column="93" lean-forward="true" selection-start-line="144" selection-start-column="93" selection-end-line="144" selection-end-column="93" />
+          <caret line="144" column="93" selection-start-line="144" selection-start-column="93" selection-end-line="144" selection-end-column="93" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/DayReportEmail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2544">
-          <caret line="178" column="63" lean-forward="true" selection-start-line="178" selection-start-column="63" selection-end-line="178" selection-end-column="63" />
+          <caret line="178" column="63" selection-start-line="178" selection-start-column="63" selection-end-line="178" selection-end-column="63" />
           <folding>
             <element signature="e#40#71#0#PHP" expanded="true" />
           </folding>
