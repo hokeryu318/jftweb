@@ -205,6 +205,27 @@
             <td align="center"><b>23</b></td>
             <td align="center"><b>0</b></td>
         </tr>
+        @for($i=0;$i<count($hourly_cooktime_ranking);$i++)
+            <tr>
+                <td align="left">{{ $hourly_cooktime_ranking[$i]['item_name'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['cook_avg_time'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['10'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['11'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['12'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['13'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['14'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['15'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['16'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['17'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['18'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['19'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['20'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['21'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['22'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['23'] }}</td>
+                <td align="right">{{ $hourly_cooktime_ranking[$i]['0'] }}</td>
+            </tr>
+        @endfor
     </table>
 
     </body>
