@@ -99,8 +99,10 @@ class CountNotificationController extends Controller
         $orderdish = OrderDish::findOrFail($request->selected_id);
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
+            $orderdish->ready_time = Null;
         } else {
             $orderdish->ready_flag = 1;
+            $orderdish->ready_time = $this->get_current_time();
         }
         $orderdish->save();
         return $orderdish;

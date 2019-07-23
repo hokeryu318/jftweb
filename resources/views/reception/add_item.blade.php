@@ -173,21 +173,21 @@
             }
             qty_number_obj.html(qty_number);
         } else { // amend for cancel item
-            if(arg == 'plus') {
-                qty_number ++;
-            } else {
-
-                qty_number --;
-
-            }
-            if(qty_number < 10) {
-                if(qty_number == 1) {
-                    qty_number = '01';
-                } else {
-                    qty_number = '0' + qty_number;
-                }
-            }
-            qty_number_obj.html(qty_number);
+            // if(arg == 'plus') {
+            //     qty_number ++;
+            // } else {
+            //
+            //     qty_number --;
+            //
+            // }
+            // if(qty_number < 10) {
+            //     if(qty_number == 1) {
+            //         qty_number = '01';
+            //     } else {
+            //         qty_number = '0' + qty_number;
+            //     }
+            // }
+            // qty_number_obj.html(qty_number);
         }
 
     }
