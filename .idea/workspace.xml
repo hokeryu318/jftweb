@@ -72,7 +72,7 @@
           <entry key="env" value="83" />
           <entry key="js" value="725" />
           <entry key="json" value="1" />
-          <entry key="php" value="35438" />
+          <entry key="php" value="35444" />
           <entry key="vue" value="7217" />
         </counts>
       </usages-collector>
@@ -83,7 +83,7 @@
           <entry key="CSS" value="1300" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="725" />
-          <entry key="PHP" value="11732" />
+          <entry key="PHP" value="11738" />
           <entry key="PLAIN_TEXT" value="122" />
           <entry key="Vue.js" value="7217" />
         </counts>
@@ -168,8 +168,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="776">
-              <caret line="673" column="79" selection-start-line="673" selection-start-column="79" selection-end-line="673" selection-end-column="79" />
+            <state relative-caret-position="198">
+              <caret line="600" column="46" selection-start-line="600" selection-start-column="46" selection-end-line="600" selection-end-column="46" />
               <folding>
                 <element signature="e#40#72#0#PHP" expanded="true" />
               </folding>
@@ -567,12 +567,12 @@
       <workItem from="1562557673877" duration="29997000" />
       <workItem from="1562969368408" duration="4472000" />
       <workItem from="1563003149478" duration="16550000" />
-      <workItem from="1563100481451" duration="126919000" />
+      <workItem from="1563100481451" duration="127182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="965811000" />
+    <option name="totallyTimeSpent" value="966074000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -1014,8 +1014,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="776">
-          <caret line="673" column="79" selection-start-line="673" selection-start-column="79" selection-end-line="673" selection-end-column="79" />
+        <state relative-caret-position="198">
+          <caret line="600" column="46" selection-start-line="600" selection-start-column="46" selection-end-line="600" selection-end-column="46" />
           <folding>
             <element signature="e#40#72#0#PHP" expanded="true" />
           </folding>

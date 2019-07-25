@@ -598,13 +598,13 @@ class ReceptionController extends Controller
         $abn = "ABN : ".$profile->abn;
 
         $order_id = request()->get('order_id');
-        $table_ids = OrderTable::where('id', $order_id)->pluck('table_id');
+        $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
         $table_name = "";
         foreach($table_ids as $table_id) {
             $table_name .= $this->get_table_name($table_id).'+';
         }
         $table_name = rtrim($table_name, '+');
-        $guest = Order::where('order_id', $order_id)->pluck('guest')->first();
+        $guest = Order::where('id', $order_id)->pluck('guest')->first();
         $table = "    Table  : ".$table_name." (".$guest." Guests)";
         $current_date = date('d F Y');
         $current_time = date('H:i:s');
