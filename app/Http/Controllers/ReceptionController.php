@@ -604,12 +604,12 @@ class ReceptionController extends Controller
             $table_name .= $this->get_table_name($table_id).'+';
         }
         $table_name = rtrim($table_name, '+');
-        $guest = Order::where('id', $order_id)->pluck('guest');
-        $table = "Table  : ".$table_name." (".$guest." Guests)";
+        $guest = Order::where('order_id', $order_id)->pluck('guest')->first();
+        $table = "    Table  : ".$table_name." (".$guest." Guests)";
         $current_date = date('d F Y');
         $current_time = date('H:i:s');
         $day = date("D", strtotime($current_date));
-        $date = "Date  : ".$day.", ".$current_date.", ".$current_time;
+        $date = "    Date  : ".$day.", ".$current_date.", ".$current_time;
 
         $tip = request()->get('tip');
         $sub_total = request()->get('sub_total');
@@ -631,11 +631,11 @@ class ReceptionController extends Controller
             $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
             $logo_image = EscposImage::load("receipt/img1.png");
-            $printer->graphics($logo_image, 2 | 2);
+            $printer->graphics($logo_image, 3 | 2);
 
             $printer->setFont(Printer::FONT_A);
 
-            $printer->setTextSize(2,1);//1~8 of width and height, can change textsize
+            $printer->setTextSize(3,2);//1~8 of width and height, can change textsize
             $printer->setEmphasis(true);
             $printer->text("$title\n");
 
@@ -660,18 +660,18 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             // loop
-            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "Description", "Price", "Qty", "Total");
+            $line = sprintf('%-40.40s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
             $printer->text($line);
-            $printer->text(".......................\n");
-            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
-            $printer->text($line1);
-            $line2 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY BLACK", "$10.00", "2", "$20.00");
-            $printer->text($line2);
+            $printer->text(".............................................\n");
+//            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
+//            $printer->text($line1);
+//            $line2 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY BLACK", "$10.00", "2", "$20.00");
+//            $printer->text($line2);
             // end loop
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("-----------------------\n");
+            $printer->text("----------------------------------------------\n");
 
 
 
