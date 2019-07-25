@@ -631,7 +631,7 @@ class ReceptionController extends Controller
             $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
             $logo_image = EscposImage::load("receipt/img1.png");
-            $printer->graphics($logo_image);
+            $printer->graphics($logo_image, 2 | 2);
 
             $printer->setFont(Printer::FONT_A);
 
@@ -647,7 +647,7 @@ class ReceptionController extends Controller
             $printer->text("$abn\n");
 
             $printer->setEmphasis(true);
-            $printer->text("-----------------------\n");
+            $printer->text("----------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setEmphasis(false);
@@ -656,7 +656,7 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("-----------------------\n");
+            $printer->text("----------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             // loop
