@@ -382,6 +382,7 @@ class ReceptionController extends Controller
 
         $order_id = request()->order_id;
         $order_dish_id = request()->order_dish_id;
+        $count = OrderDish::where('id', $order_dish_id)->pluck('count')->first();
 
         $categories = Category::get()->toArray();
         $dishes = array();
@@ -396,7 +397,7 @@ class ReceptionController extends Controller
                 }
             }
         }
-//        dd($order_id);
+
         $category_all = array();
         foreach ($categories as $category) {
             $category_all[$category['id']] = $category;
@@ -405,7 +406,8 @@ class ReceptionController extends Controller
                 $category_all[$category['id']]['children'] = $sub_categories;
             }
         }
-        return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes', 'order_dish_id'));
+        return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes', 'order_dish_id', 'count'));
+
     }
 
     public function add_item() {
@@ -450,37 +452,37 @@ class ReceptionController extends Controller
         $order_dish->save();
 
         //display changed data
-        $order_dishes = OrderDish::where('order_id', $order_id)->get();
-
-        foreach($order_dishes as $order_dish) {
-
-            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
-            $order_dish->dish_name_en = $dish_list->name_en;
-
-            $order_dish->options = $order_dish->Order_Option()->get();
-            $items_price = 0;
-            foreach ($order_dish->options as $option) {
-
-                if($option->option_id)
-                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
-                else
-                    $option->option_name = '';
-
-                if($option->item_id) {
-
-                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-                    $option->item_name = $option_items->name;
-                    $items_price += $option_items->price;
-                }
-                else {
-                    $option->item_name = '';
-                    $items_price = 0;
-                }
-
-            }
-            $order_dish->each_price = $order_dish->dish_price + $items_price;
-            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
-        }
+//        $order_dishes = OrderDish::where('order_id', $order_id)->get();
+//
+//        foreach($order_dishes as $order_dish) {
+//
+//            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
+//            $order_dish->dish_name_en = $dish_list->name_en;
+//
+//            $order_dish->options = $order_dish->Order_Option()->get();
+//            $items_price = 0;
+//            foreach ($order_dish->options as $option) {
+//
+//                if($option->option_id)
+//                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
+//                else
+//                    $option->option_name = '';
+//
+//                if($option->item_id) {
+//
+//                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
+//                    $option->item_name = $option_items->name;
+//                    $items_price += $option_items->price;
+//                }
+//                else {
+//                    $option->item_name = '';
+//                    $items_price = 0;
+//                }
+//
+//            }
+//            $order_dish->each_price = $order_dish->dish_price + $items_price;
+//            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+//        }
 
         //broadcast to kitchen
         $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);
@@ -488,6 +490,32 @@ class ReceptionController extends Controller
 
 //        return (string)view('reception.item_list', compact('order_dishes'))->render();
         return $order_id;
+    }
+
+    public function change_count()
+    {
+        $order_id = request()->order_id;
+        $order_dish_id = request()->order_dish_id;
+        $amend_count = request()->qty;
+        $count = OrderDish::where('id', $order_dish_id)->pluck('count')->first() + $amend_count;
+        $amend_time = $this->get_current_time();
+
+        OrderDish::where('id', $order_dish_id)->update(['amend_count' => $amend_count, 'count' => $count, 'amend_time'=>$amend_time]);
+
+        $items_price = OrderOption::where('order_dish_id', $order_dish_id)->sum('item_price');
+
+        //save total price
+        $order_dish = OrderDish::find($order_dish_id);
+        $order_dish->total_price = ($order_dish->dish_price + $items_price) * $count;
+        $order_dish->save();
+
+        //broadcast to kitchen
+        $dish_id = OrderDish::where('id', $order_dish_id)->pluck('dish_id')->first();
+        $group_id = Dish::where('id', $dish_id)->pluck('group_id');
+        broadcast(new ChangeCountEvent($group_id));
+
+//        return $added_dish;
+
     }
 
     public function dish_list()
@@ -607,9 +635,9 @@ class ReceptionController extends Controller
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $logo_image = EscposImage::load("{{asset('receipt/'.$logo_image_name)}}", false);
-            $logo_image = EscposImage::load("{{asset('receipt/img1.PNG')}}");
+//            $logo_image = EscposImage::load("{{asset('receipt/img1.PNG')}}");
 //            $printer->bitImage($logo_image);
-            $printer->graphics($logo_image);
+//            $printer->graphics($logo_image);
 
 //            $printer->setFont(Printer::FONT_A);
 //            $printer->setFont(Printer::FONT_B);

@@ -91,7 +91,7 @@
                             @if(count($order_dishes) > 0)
                                 @foreach($order_dishes as $order_dish)
                                     {{--<tr onclick="select_item({{ $order_dish->id }})">--}}
-                                    <tr onclick="select_item({{ $order_dish->id }})">
+                                    <tr onclick="select_item({{ $order_dish->id }})" id="item_{{ $order_dish->id }}">
                                         <td class="td1"><h6><span class="fs-25">{{ $order_dish->dish_name_en }}
                                                     @foreach($order_dish->options as $option)
                                                         [{{ $option->option_name }}: {{ $option->item_name }}]
@@ -280,14 +280,14 @@
         $('#thirdModal').modal("toggle");
     }
 
-    $("#data tr").click(function() {
-        var selected = $(this).hasClass("highlight");
-        $("#data tr").removeClass("highlight");
-
-        if(!selected)
-            $(this).addClass("highlight");
-
-    });
+    // $("#data tr").click(function() {
+    //     var selected = $(this).hasClass("highlight");
+    //     $("#data tr").removeClass("highlight");
+    //
+    //     if(!selected)
+    //         $(this).addClass("highlight");
+    //
+    // });
 
     function select_item(selected_dish_id) {
 
@@ -338,7 +338,7 @@
         });
         $('#thirdModal').modal("toggle");
     }
-    function onAddItemCancel() {
+    function onCancel() {
 
         $('#thirdModal').html('');
         $('#thirdModal').modal("hide");

@@ -47,12 +47,12 @@ Route::get('reception/view_review', 'ReceptionController@view_review')->name('re
 Route::get('reception/view_note', 'ReceptionController@view_note')->name('reception.view_note');
 Route::get('reception/accounting', 'ReceptionController@accounting')->name('reception.accounting');
 Route::post('reception/cancel_bill', 'ReceptionController@cancel_bill')->name('reception.cancel_bill');
-Route::get('reception/amend', 'ReceptionController@amend')->name('reception.amend');
 Route::get('reception/tip', 'ReceptionController@tip')->name('reception.tip');
 Route::get('reception/discount', 'ReceptionController@discount')->name('reception.discount');
 Route::get('reception/amend', 'ReceptionController@amend')->name('reception.amend');
 Route::post('reception/dish_list', 'ReceptionController@dish_list')->name('reception.dish_list');
 Route::post('reception/add_item', 'ReceptionController@add_item')->name('reception.add_item');
+Route::post('reception/change_count', 'ReceptionController@change_count')->name('reception.change_count');
 Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
 Route::post('reception/print', 'ReceptionController@print')->name('reception.print');
 

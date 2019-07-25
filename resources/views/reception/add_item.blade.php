@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-2">
                     <div class="row qty_text">
-                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">@if($order_dish_id != 0) 00 @else 01 @endif</span>
+                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">0</span>
                     </div>
                 </div>
                 <div class="col-5">
@@ -111,10 +111,14 @@
         </div>
         <div class="col-4" style="margin-left: -6px;">
             <div class="amend_btn" style="background: #1EC2C9;color: white;margin: 12px 0 0 43px; padding-left: 42px;" onclick="onApply()">
-                <aa class="fs-25" style="margin-right: 20px;">APPLY</aa>
+                @if($order_dish_id != 0)
+                    <aa class="fs-25" style="margin-right: -6px;">CHANGE</aa>
+                @else
+                    <aa class="fs-25" style="margin-right: 20px;">APPLY</aa>
+                @endif
                 <img src="{{ asset('img/Group728white.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
-            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="onAddItemCancel()">
+            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="onCancel()">
                 <aa class="fs-25" style="margin-left: 25px;">CANCEL</aa>
                 <img src="{{ asset('img/Group728black.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
@@ -126,6 +130,7 @@
 
     var select_list = [];
     var order_dish_id = <?php echo(json_encode($order_dish_id))?>;
+    var count = <?php echo(json_encode($count))?>;
 
     $(document).ready(function(){
         $(".category_parent").first().addClass('selected_category_color');
@@ -156,39 +161,31 @@
     function plusQty(arg){
         var qty_number_obj = $("#qty");
         var qty_number = qty_number_obj.html();
-        if(order_dish_id == 0) { // add item
-            if(arg == 'plus') {
-                qty_number ++;
+
+        if(arg == 'plus') {
+            qty_number ++;
+        } else {
+            if(order_dish_id == 0) {
+                if(qty_number > 0) {
+                    qty_number --;
+                }
             } else {
-                if(qty_number > 1) {
+                if(parseInt(count) + parseInt(qty_number) < 1) {
+                    alert('The count for this item is ' + count + '.\n Please select qty by small than count!');
+                } else {
+
                     qty_number --;
                 }
             }
-            if(qty_number < 10) {
-                if(qty_number == 1) {
-                    qty_number = '01';
-                } else {
-                    qty_number = '0' + qty_number;
-                }
-            }
-            qty_number_obj.html(qty_number);
-        } else { // amend for cancel item
-            // if(arg == 'plus') {
-            //     qty_number ++;
-            // } else {
-            //
-            //     qty_number --;
-            //
-            // }
-            // if(qty_number < 10) {
-            //     if(qty_number == 1) {
-            //         qty_number = '01';
-            //     } else {
-            //         qty_number = '0' + qty_number;
-            //     }
-            // }
-            // qty_number_obj.html(qty_number);
         }
+        // if(qty_number < 10) {
+        //     if(qty_number == 1) {
+        //         qty_number = '01';
+        //     } else {
+        //         qty_number = '0' + qty_number;
+        //     }
+        // }
+        qty_number_obj.html(qty_number);
 
     }
 
@@ -223,54 +220,76 @@
     //Apply
     function onApply(){
         var order_id =  <?php echo(json_encode($order_id)) ?>;
-        //select get dish and option list for add
-        select_list = [];
-        var tmp = 0
-        $("input:checkbox:checked").each(function(){
-            var val = $(this).val();
-            var val_arr = val.split(':');
-            if(tmp == 0){
-                tmp = val_arr[0];
-                select_list.push(val);
-            }
-            else{
-                if(tmp != val_arr[0]) {
-                    alert('You can select only 1 dish!');
-                } else {
+
+        if(order_dish_id == 0) {// add item
+            //select get dish and option list for add
+            select_list = [];
+            var tmp = 0
+            $("input:checkbox:checked").each(function(){
+                var val = $(this).val();
+                var val_arr = val.split(':');
+                if(tmp == 0){
+                    tmp = val_arr[0];
                     select_list.push(val);
                 }
-            }
-        });
+                else{
+                    if(tmp != val_arr[0]) {
+                        alert('You can select only 1 dish!');
+                    } else {
+                        select_list.push(val);
+                    }
+                }
+            });
 
-        if(select_list.length == 0){
-            alert('Please select dish and options!');
-        } else {
+            if(select_list.length == 0){
+                alert('Please select dish and options!');
+            } else {
+                var qty_number_obj = $("#qty");
+                var qty = qty_number_obj.html();
+
+                if(qty == 0) {
+                    alert('Please set qty!');
+                } else {
+                    $('#thirdModal').html('');
+                    $('#thirdModal').modal('hide');
+
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ route('reception.add_item') }}",
+                        data:{
+                            order_id: order_id, select_list: select_list, qty: qty, _token:"{{ csrf_token() }}"
+                        },
+                        success: function(result){
+                            location.href = window.location.href;
+                        }
+                    });
+                }
+            }
+        } else {// change count of item
             var qty_number_obj = $("#qty");
             var qty = qty_number_obj.html();
 
             if(qty == 0) {
                 alert('Please set qty!');
             } else {
+
                 $('#thirdModal').html('');
                 $('#thirdModal').modal('hide');
 
-                // console.log(order_id);
-                // console.log(select_list);
-                // console.log(qty);
                 $.ajax({
                     type:"POST",
-                    url:"{{ route('reception.add_item') }}",
+                    url:"{{ route('reception.change_count') }}",
                     data:{
-                        order_id: order_id, select_list: select_list, qty: qty, _token:"{{ csrf_token() }}"
+                        order_dish_id: order_dish_id, qty: qty, _token:"{{ csrf_token() }}"
                     },
                     success: function(result){
-                        // console.log(result);
-//                        $('#item_list').html(result);
+                        // console.dir(result);
                         location.href = window.location.href;
                     }
                 });
             }
         }
+
     }
 
 </script>
