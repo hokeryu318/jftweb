@@ -593,7 +593,7 @@ class ReceptionController extends Controller
         $profile = Receipt::profile();
         $logo_image_name = $profile->logo_image;
         $title = "TAX INVOICE";
-        $description = "425 Springvale Rd.Foresthill, Vic 3131";
+        $address = $profile->address;
         $tel = "TEL : ".$profile->phone;
         $abn = "ABN : ".$profile->abn;
 
@@ -611,11 +611,6 @@ class ReceptionController extends Controller
         $day = date("D", strtotime($current_date));
         $date = "Date  : ".$day.", ".$current_date.", ".$current_time;
 
-
-
-
-
-
         $tip = request()->get('tip');
         $sub_total = request()->get('sub_total');
         $discount = request()->get('discount');
@@ -627,72 +622,69 @@ class ReceptionController extends Controller
         $amount = request()->get('amount');
         $change = request()->get('change');
 
-
-
+        //print part
         $connector = new NetworkPrintConnector($this->printerIp, $this->printerPort);
         $printer = new Printer($connector);
 
         try {
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-//            $logo_image = EscposImage::load("{{asset('receipt/img1.PNG')}}");
-//            $printer->bitImage($logo_image);
+//            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
+            $logo_image = EscposImage::load("receipt/img1.png");
             $printer->graphics($logo_image);
 
-            $printer->feed();
-
-            $printer->setTextSize(1,1);
             $printer->setFont(Printer::FONT_A);
+
+            $printer->setTextSize(2,2);//1~8 of width and height, can change textsize
             $printer->setEmphasis(true);
             $printer->text("$title\n");
 
-            $printer->feed(1);
-
             $printer->setTextSize(1,1);
-            $printer->setFont(Printer::FONT_B);
+
             $printer->setEmphasis(false);
-            $printer->text("$title\n");
+            $printer->text("$address\n");
+            $printer->text("$tel\n");
+            $printer->text("$abn\n");
 
-            $printer->feed(2);
-
-            $printer->setTextSize(1,1);
-            $printer->setFont(Printer::FONT_C);
             $printer->setEmphasis(true);
-            $printer->text("$title\n");
+            $printer->text("-----------------------\n");
+
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->setEmphasis(false);
+            $printer->text("$table\n");
+            $printer->text("$date\n");
+
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->setEmphasis(true);
+            $printer->text("-----------------------\n");
+
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            // loop
+            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "Description", "Price", "Qty", "Total");
+            $printer->text($line);
+            $printer->text(".......................\n");
+            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
+            $printer->text($line1);
+            $line2 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY BLACK", "$10.00", "2", "$20.00");
+            $printer->text($line2);
+            // end loop
+
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->setEmphasis(true);
+            $printer->text("-----------------------\n");
+
+
 
 //            $printer->setFont(Printer::FONT_A);
 //            $printer->setFont(Printer::FONT_B);
 //            $printer->setFont(Printer::FONT_C);
 
-            for($i=1;$i<9;$i++) {
-                $printer->setTextSize($i, $i);
-                $printer->text("title\n");
-            }
+//            for($i=1;$i<9;$i++) {
+//                $printer->setTextSize($i, $i);
+//                $printer->text("title\n");
+//            }
 
-//            $printer->setTextSize(5,5);//1~8 of width and height, can change textsize
-//            //Print top text
-//            $printer->setEmphasis(true);
-//            $printer->text("$title\n");
-//            $printer->setEmphasis(false);
-//            $printer->text("$description\n");
-//            $printer->text("$tel\n");
-//            $printer->text("$abn\n");
-//            $printer->setEmphasis(true);
-//            $printer->text("-----------------------\n");
-//
-//            //Print table and date
-//            $printer->setEmphasis(false);
-//            $printer->text("$table\n");
-//            $printer->text("$date\n");
-//            $printer->setEmphasis(true);
-//            $printer->text("-----------------------\n");
-//
-//            // loop
-//            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name1", "quantity", "price", "total");
-//            $printer->text($line);
-//            $printer->text("\n");
-//            // end loop
+
 //
 //            // loop
 //            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name2", "quantity", "price", "total");
