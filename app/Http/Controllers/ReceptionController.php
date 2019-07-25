@@ -635,7 +635,7 @@ class ReceptionController extends Controller
 
             $printer->setFont(Printer::FONT_A);
 
-            $printer->setTextSize(2,2);//1~8 of width and height, can change textsize
+            $printer->setTextSize(2,1);//1~8 of width and height, can change textsize
             $printer->setEmphasis(true);
             $printer->text("$title\n");
 
