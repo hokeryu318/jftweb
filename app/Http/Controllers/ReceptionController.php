@@ -679,20 +679,12 @@ class ReceptionController extends Controller
 //            $printer->setFont(Printer::FONT_B);
 //            $printer->setFont(Printer::FONT_C);
 
-//            for($i=1;$i<9;$i++) {
-//                $printer->setTextSize($i, $i);
-//                $printer->text("title\n");
-//            }
-
-
 //
 //            // loop
 //            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name2", "quantity", "price", "total");
 //            $printer->text($line);
 //            $printer->text("\n");
 //            // end loop
-
-
 
             $printer->cut();
         } finally {
