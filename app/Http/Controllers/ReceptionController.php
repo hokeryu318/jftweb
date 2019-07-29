@@ -36,7 +36,7 @@ class ReceptionController extends Controller
     public $printerIp = '192.168.192.150';
     public $printerPort = 9100;
 
-    //reception main screen ===========================================================================================
+    //reception main screen ============================================================================================
     //seated   : order.status = seated;
     //waiting  : order.status = waiting; (calling_time is not null)
     //bookings : order.status = booking;
@@ -605,11 +605,11 @@ class ReceptionController extends Controller
         }
         $table_name = rtrim($table_name, '+');
         $guest = Order::where('id', $order_id)->pluck('guest')->first();
-        $table = "    Table  : ".$table_name." (".$guest." Guests)";
+        $table = "   Table  : ".$table_name." (".$guest." Guests)";
         $current_date = date('d F Y');
         $current_time = date('H:i:s');
         $day = date("D", strtotime($current_date));
-        $date = "    Date  : ".$day.", ".$current_date.", ".$current_time;
+        $date = "   Date   : ".$day.", ".$current_date.", ".$current_time;
 
         $tip = request()->get('tip');
         $sub_total = request()->get('sub_total');
@@ -675,23 +675,30 @@ class ReceptionController extends Controller
 
 
 
-//            $printer->setFont(Printer::FONT_A);
-//            $printer->setFont(Printer::FONT_B);
-//            $printer->setFont(Printer::FONT_C);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->setEmphasis(true);
+            $printer->text("----------------------------------------------\n");
 
-//
-//            // loop
-//            $line = sprintf('%-40.40s %5.0f %13.2f %13.2f', "item_name2", "quantity", "price", "total");
-//            $printer->text($line);
-//            $printer->text("\n");
-//            // end loop
+            $printer->setEmphasis(false);
+            $printer->text("Thank you for choosing\n");
+
+            $printer->setTextSize(3,2);
+            $printer->setEmphasis(true);
+            $printer->text("Nishiki AN\n");
+
+            $printer->setEmphasis(false);
+            $printer->text("Operator Reception / No : JB10CB10\n");
+
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->setEmphasis(true);
+            $printer->text("----------------------------------------------\n");
 
             $printer->cut();
         } finally {
             $printer -> close();
         }
 
-        return 'success';
+        return $order_id;
     }
 
     //edit order part ==================================================================================================
