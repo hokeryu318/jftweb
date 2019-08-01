@@ -486,7 +486,7 @@ class ReceptionController extends Controller
         }
 
         //broadcast to kitchen
-        $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);dd($added_dish);
+        $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);
         broadcast(new KitchenEvent($added_dish));
 
 //        return (string)view('reception.item_list', compact('order_dishes'))->render();
