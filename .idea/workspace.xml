@@ -109,7 +109,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/reception/accounting.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
@@ -118,7 +118,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceptionController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="705">
@@ -415,7 +415,7 @@
       <path value="$PROJECT_DIR$/vendor/mike42/escpos-php" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-1805" />
     <option name="y" value="42" />
     <option name="width" value="1696" />
@@ -526,12 +526,12 @@
       <workItem from="1563100481451" duration="130505000" />
       <workItem from="1564203519820" duration="623000" />
       <workItem from="1564320830758" duration="4650000" />
-      <workItem from="1564613074609" duration="4115000" />
+      <workItem from="1564613074609" duration="4381000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="978785000" />
+    <option name="totallyTimeSpent" value="979051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="26" width="1696" height="1026" extended-state="6" />
@@ -896,13 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reception/accounting.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="494" column="44" selection-start-line="494" selection-start-column="44" selection-end-line="494" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -917,6 +910,13 @@
           <folding>
             <element signature="e#40#72#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reception/accounting.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="494" column="44" selection-start-line="494" selection-start-column="44" selection-end-line="494" selection-end-column="44" />
         </state>
       </provider>
     </entry>
