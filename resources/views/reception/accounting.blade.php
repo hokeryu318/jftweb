@@ -492,18 +492,6 @@
                     {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
                     {{--success: function(result){--}}
                         {{--// console.log(result);--}}
-                        {{--if(confirm("Would you like a receipt?")) {--}}
-                            {{--$.ajax({--}}
-                                {{--type:"POST",--}}
-                                {{--url:"{{ route('reception.print') }}",--}}
-                                {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
-                                {{--success: function(result){--}}
-                                    {{--console.dir(result);--}}
-                                {{--}--}}
-                            {{--});--}}
-                        {{--} else {--}}
-
-                        {{--}--}}
                         {{--$("#save-pay").submit();--}}
                     {{--}--}}
                 {{--});--}}

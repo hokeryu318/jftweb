@@ -36,7 +36,7 @@ class ReceptionController extends Controller
     public $printerIp = '192.168.192.150';
     public $printerPort = 9100;
 
-    //reception main screen ===========================================================================================
+    //reception main screen ============================================================================================
     //seated   : order.status = seated;
     //waiting  : order.status = waiting; (calling_time is not null)
     //bookings : order.status = booking;
@@ -453,37 +453,37 @@ class ReceptionController extends Controller
         $order_dish->save();
 
         //display changed data
-//        $order_dishes = OrderDish::where('order_id', $order_id)->get();
-//
-//        foreach($order_dishes as $order_dish) {
-//
-//            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
-//            $order_dish->dish_name_en = $dish_list->name_en;
-//
-//            $order_dish->options = $order_dish->Order_Option()->get();
-//            $items_price = 0;
-//            foreach ($order_dish->options as $option) {
-//
-//                if($option->option_id)
-//                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
-//                else
-//                    $option->option_name = '';
-//
-//                if($option->item_id) {
-//
-//                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-//                    $option->item_name = $option_items->name;
-//                    $items_price += $option_items->price;
-//                }
-//                else {
-//                    $option->item_name = '';
-//                    $items_price = 0;
-//                }
-//
-//            }
-//            $order_dish->each_price = $order_dish->dish_price + $items_price;
-//            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
-//        }
+        $order_dishes = OrderDish::where('order_id', $order_id)->get();
+
+        foreach($order_dishes as $order_dish) {
+
+            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
+            $order_dish->dish_name_en = $dish_list->name_en;
+
+            $order_dish->options = $order_dish->Order_Option()->get();
+            $items_price = 0;
+            foreach ($order_dish->options as $option) {
+
+                if($option->option_id)
+                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
+                else
+                    $option->option_name = '';
+
+                if($option->item_id) {
+
+                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
+                    $option->item_name = $option_items->name;
+                    $items_price += $option_items->price;
+                }
+                else {
+                    $option->item_name = '';
+                    $items_price = 0;
+                }
+
+            }
+            $order_dish->each_price = $order_dish->dish_price + $items_price;
+            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+        }
 
         //broadcast to kitchen
         $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);
@@ -630,7 +630,7 @@ class ReceptionController extends Controller
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-            $logo_image = EscposImage::load("receipt/img1.png");
+            $logo_image = EscposImage::load("receipt/img1.PNG");
             $printer->graphics($logo_image, 3 | 2);
 
             $printer->setFont(Printer::FONT_A);
@@ -659,6 +659,12 @@ class ReceptionController extends Controller
             $printer->text("----------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
+
+            foreach (array(512, 256, 128, 64) as $width) {
+                $printer->setPrintWidth($width);
+                $printer->text("page width {$width}\n");
+            }
+            
             // loop
             $line = sprintf('%-40.40s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
             $printer->text($line);
