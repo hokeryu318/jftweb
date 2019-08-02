@@ -660,10 +660,10 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
 
-            foreach (array(512, 256, 128, 64) as $width) {
-                $printer->setPrintWidth($width);
-                $printer->text("page width {$width}\n");
-            }
+//            foreach (array(512, 256, 128, 64) as $width) {
+//                $printer->setPrintWidth($width);
+//                $printer->text("page width {$width}\n");
+//            }
 
             // loop
             $line = sprintf('%1.0s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
