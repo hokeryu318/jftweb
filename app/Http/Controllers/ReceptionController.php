@@ -666,7 +666,7 @@ class ReceptionController extends Controller
 //            }
 
             // loop
-            $line = sprintf('%1.0s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
+            $line = sprintf('%-40.40s %-40.40s %-40.40s %-40.40s', "Description", "Price", "Qty", "Total");
             $printer->text($line);
             $printer->text(".............................................\n");
 //            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
@@ -690,7 +690,7 @@ class ReceptionController extends Controller
 
             $printer->setTextSize(3,2);
             $printer->setEmphasis(true);
-            $printer->text("Nishiki AN\n");
+            $printer->text("NishikiAN\n");
 
             $printer->setTextSize(1,1);
             $printer->setEmphasis(false);
