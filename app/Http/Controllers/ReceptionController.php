@@ -660,8 +660,13 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
 
+            foreach (array(512, 256, 128, 64) as $width) {
+                $printer->setPrintWidth($width);
+                $printer->text("page width {$width}\n");
+            }
+
             // loop
-            $line = sprintf('%-40.40s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
+            $line = sprintf('%1.0s %1.0s %1.0s %1.0s', "Description", "Price", "Qty", "Total");
             $printer->text($line);
             $printer->text(".............................................\n");
 //            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
@@ -687,6 +692,7 @@ class ReceptionController extends Controller
             $printer->setEmphasis(true);
             $printer->text("Nishiki AN\n");
 
+            $printer->setTextSize(1,1);
             $printer->setEmphasis(false);
             $printer->text("Operator Reception / No : JB10CB10\n");
 
