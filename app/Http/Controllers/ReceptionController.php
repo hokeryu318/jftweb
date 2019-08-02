@@ -628,77 +628,86 @@ class ReceptionController extends Controller
 
         try {
             //Print top logo
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-//            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-            $logo_image = EscposImage::load("receipt/img1.png");
-            $printer->graphics($logo_image, 3 | 2);
+//            $printer->setJustification(Printer::JUSTIFY_CENTER);
+////            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
+//            $logo_image = EscposImage::load("receipt/img1.png");
+//            $printer->graphics($logo_image, 3 | 2);
+//
+//            $printer->setFont(Printer::FONT_A);
+//
+//            $printer->setTextSize(3,2);//1~8 of width and height, can change textsize
+//            $printer->setEmphasis(true);
+//            $printer->text("$title\n");
+//
+//            $printer->setTextSize(1,1);
+//
+//            $printer->setEmphasis(false);
+//            $printer->text("$address\n");
+//            $printer->text("$tel\n");
+//            $printer->text("$abn\n");
+//
+//            $printer->setEmphasis(true);
+//            $printer->text("----------------------------------------------\n");
+//
+//            $printer->setJustification(Printer::JUSTIFY_LEFT);
+//            $printer->setEmphasis(false);
+//            $printer->text("$table\n");
+//            $printer->text("$date\n");
+//
+//            $printer->setJustification(Printer::JUSTIFY_CENTER);
+//            $printer->setEmphasis(true);
+//            $printer->text("----------------------------------------------\n");
+//
+//            $printer->setJustification(Printer::JUSTIFY_LEFT);
+//
+////            foreach (array(512, 256, 128, 64) as $width) {
+////                $printer->setPrintWidth($width);
+////                $printer->text("page width {$width}\n");
+////            }
+//
+//            // loop
+//            $line = sprintf('%-40.40s %-40.40s %-40.40s %-40.40s', "Description", "Price", "Qty", "Total");
+//            $printer->text($line);
+//            $printer->text(".............................................\n");
+////            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
+////            $printer->text($line1);
+////            $line2 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY BLACK", "$10.00", "2", "$20.00");
+////            $printer->text($line2);
+//            // end loop
+//
+//            $printer->setJustification(Printer::JUSTIFY_CENTER);
+//            $printer->setEmphasis(true);
+//            $printer->text("----------------------------------------------\n");
+//
+//
+//
+//            $printer->setJustification(Printer::JUSTIFY_CENTER);
+//            $printer->setEmphasis(true);
+//            $printer->text("----------------------------------------------\n");
+//
+//            $printer->setEmphasis(false);
+//            $printer->text("Thank you for choosing\n");
+//
+//            $printer->setTextSize(3,2);
+//            $printer->setEmphasis(true);
+//            $printer->text("NishikiAN\n");
+//
+//            $printer->setTextSize(1,1);
+//            $printer->setEmphasis(false);
+//            $printer->text("Operator Reception / No : JB10CB10\n");
+//
+//            $printer->setJustification(Printer::JUSTIFY_CENTER);
+//            $printer->setEmphasis(true);
+//            $printer->text("----------------------------------------------\n");
 
-            $printer->setFont(Printer::FONT_A);
 
-            $printer->setTextSize(3,2);//1~8 of width and height, can change textsize
-            $printer->setEmphasis(true);
-            $printer->text("$title\n");
-
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setTextSize(1,1);
 
-            $printer->setEmphasis(false);
-            $printer->text("$address\n");
-            $printer->text("$tel\n");
-            $printer->text("$abn\n");
-
-            $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
-
-            $printer->setJustification(Printer::JUSTIFY_LEFT);
-            $printer->setEmphasis(false);
-            $printer->text("$table\n");
-            $printer->text("$date\n");
-
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
-
-            $printer->setJustification(Printer::JUSTIFY_LEFT);
-
-//            foreach (array(512, 256, 128, 64) as $width) {
-//                $printer->setPrintWidth($width);
-//                $printer->text("page width {$width}\n");
-//            }
-
-            // loop
-            $line = sprintf('%-40.40s %-40.40s %-40.40s %-40.40s', "Description", "Price", "Qty", "Total");
+            $line = sprintf('%-20.00s %-80.00s %-200.00s %-200.00s', "Description", "Price", "Qty", "Total");
             $printer->text($line);
             $printer->text(".............................................\n");
-//            $line1 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY REGULAR", "$8.80", "1", "$8.80");
-//            $printer->text($line1);
-//            $line2 = sprintf('%-40.40s %5.0f %13.2f %13.2f', "ASAHI SUPER DRY BLACK", "$10.00", "2", "$20.00");
-//            $printer->text($line2);
-            // end loop
 
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
-
-
-
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
-
-            $printer->setEmphasis(false);
-            $printer->text("Thank you for choosing\n");
-
-            $printer->setTextSize(3,2);
-            $printer->setEmphasis(true);
-            $printer->text("NishikiAN\n");
-
-            $printer->setTextSize(1,1);
-            $printer->setEmphasis(false);
-            $printer->text("Operator Reception / No : JB10CB10\n");
-
-            $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
 
             $printer->cut();
         } finally {
