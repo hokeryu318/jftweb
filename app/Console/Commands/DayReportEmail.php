@@ -376,8 +376,11 @@ class DayReportEmail extends Command
                     return $b['cook_avg_time'] <=> $a['cook_avg_time'];
                 });
 
+                // ===10. Feedbacks ===
+                $feedbacks = DB::table('orders')->whereDate('created_at', date('Y-m-d'))->where('review', '<>', Null)->get();
+
                 $sheet->loadView('emails.sales_day')->with(compact('order_pay', 'sales_data', 'card_type', 'card_sales_data', 'hour_sales_data',
-                    'category_sales_data', 'item_sales_data', 'hourly_item_ranking', 'hourly_cooktime_ranking'));
+                    'category_sales_data', 'item_sales_data', 'hourly_item_ranking', 'hourly_cooktime_ranking', 'feedbacks'));
 
             });
 

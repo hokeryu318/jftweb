@@ -228,6 +228,26 @@
         @endfor
     </table>
 
+    <h3> 10. Feedbacks </h3>
+    <table>
+        <tr>
+            <td align="center"><b>Time</b></td>
+            <td align="center"><b>Table</b></td>
+            <td align="center"><b>Name</b></td>
+            <td align="center"><b>Rate</b></td>
+            <td align="center"><b>Comment</b></td>
+        </tr>
+        @foreach($feedbacks as $feedback)
+            <tr>
+                <td align="left">{{ substr($feedback->time, 11, 5) }}</td>
+                <td align="left">{{ $feedback->table_name }}</td>
+                <td align="left">{{ $feedback->customer_name }}</td>
+                <td align="left">{{ $feedback->review_type }}</td>
+                <td align="left">{{ $feedback->review }}</td>
+            </tr>
+        @endforeach
+    </table>
+
     </body>
 
     <style>

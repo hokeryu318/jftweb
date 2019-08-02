@@ -680,7 +680,8 @@ class ReceptionController extends Controller
 //            $printer->setEmphasis(true);
 //            $printer->text("----------------------------------------------\n");
 //
-//
+            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.$sub_total));
+            $printer -> text(new print_table1('GST', '$'.$gst));
 //
 //            $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $printer->setEmphasis(true);
