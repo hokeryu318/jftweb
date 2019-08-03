@@ -17,6 +17,7 @@ use App\Model\Table;
 use App\Model\OrderTable;
 use Illuminate\Http\Request;
 use App\Events\KitchenEvent;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -55,7 +56,11 @@ class CustomerController extends Controller
         $last_order_time = Order::orderBy('time', 'desc')->pluck('time')->first();
 //        dd($order_table);
 //        dd($dishes);
-        return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time'));
+
+        $img_name = Storage::disk('dishes')->files();
+        $img_name = json_encode($img_name);
+
+        return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time'))->with('img_name',$img_name);
     }
 //    public function dish_list()
 //    {

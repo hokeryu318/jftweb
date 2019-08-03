@@ -29,13 +29,14 @@ class TransactionController extends Controller
         $search_display_date = date("d M Y", strtotime($search_date));
 
         if(request()->get('sortType') == "asc"){
-            $order_obj = Order::whereDate('time', $search_date)->orderBy('time','desc')->get();
+            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2)->orderBy('time','desc')->get();
             $sort = "desc";
         }else{
-            $order_obj = Order::whereDate('time', $search_date)->orderBy('time','asc')->get();
+            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2)->orderBy('time','asc')->get();
             $sort = "asc";
         }
 
+        $daily_all_amount = 0;
         foreach($order_obj as $order)
         {
 //            $table_display_name = '';
@@ -48,16 +49,18 @@ class TransactionController extends Controller
 //            $order->table_display_name = rtrim($table_display_name, '+');
             $order->table_display_name = $order->table_name;
             $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
-
+            $daily_all_amount += $order->amount;
         }
 //        dd($order_obj);
-        return view('admin.transaction.list')->with(compact('order_obj', 'search_display_date', 'sort'));
+        return view('admin.transaction.list')->with(compact('order_obj', 'search_display_date', 'sort', 'daily_all_amount'));
     }
 
     public function src_trans() {
 
         $src_date = request()->src_date;
-        $order_obj = Order::whereDate('time', $src_date)->get();
+        $order_obj = Order::whereDate('time', $src_date)->where('pay_flag',2)->get();
+        $daily_all_amount = 0;
+
         foreach($order_obj as $order)
         {
             $table_display_name = '';
@@ -69,12 +72,12 @@ class TransactionController extends Controller
             $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
             $order->table_display_name = rtrim($table_display_name, '+');
             $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
-
+            $daily_all_amount += $order->amount;
         }
 
         $sort = 'asc';
         $search_display_date = $src_date;
-        return view('admin.transaction.src_list')->with(compact('order_obj', 'search_display_date', 'sort'));
+        return view('admin.transaction.src_list')->with(compact('order_obj', 'search_display_date', 'sort', 'daily_all_amount'));
     }
 
 }

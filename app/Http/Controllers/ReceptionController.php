@@ -960,6 +960,18 @@ class ReceptionController extends Controller
         return $booking_order;
     }
 
+    public function finish_pay() {
+
+        $order_id = request()->order_id;
+        $order = Order::findOrFail($order_id);
+        $order->pay_flag = 1;
+        $order->save();
+
+        //show count_notification on reception screen
+        $count_notification = $this->CountNotification();
+        broadcast(new NotificationEvent($count_notification));
+
+        $booking_order = $this->get_booking_order($order_id);
+        return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
+    }
 }
-
-

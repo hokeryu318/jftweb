@@ -37,3 +37,4 @@
         </table>
     </div>
 </div>
+<input type="hidden" id="daily_all_amount" value="{{ $daily_all_amount }}">

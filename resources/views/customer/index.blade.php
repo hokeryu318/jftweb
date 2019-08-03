@@ -12,8 +12,72 @@
     <link rel="stylesheet" href="{{asset('customer_css/all.css')}}">
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
+<style>
+    #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
+    /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
+    @keyframes fadein {
+        from { opacity: 0.9; }
+        to   { opacity: 1; }
+    }
+    @-webkit-keyframes fadein {
+        from { opacity: 0.9; }
+        to   { opacity: 0; }
+    }*/
+
+    /*.slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    }
+
+    .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    }
+
+    .active {
+    background-color: #717171;
+    }
+
+    .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    }
+
+    @-webkit-keyframes fade {
+        from {opacity: .4} 
+        to {opacity: 1}
+    }
+
+    @keyframes fade {
+        from {opacity: .4} 
+        to {opacity: 1}
+    }
+
+    @media only screen and (max-width: 300px) {
+        .text {font-size: 11px}
+    }*/
+
+</style>
+
 <body>
 <div id="app">
+    <input type="hidden" id="img_name" value="{{ $img_name }}">
     <nav>
         <input type="hidden" id="order_id" value="{{ $order->id }}" />
         <div class="brand">
@@ -207,7 +271,83 @@
 
     $(document).ready(function(){
         $(".category_parent").first().addClass('selected_category_color');
+
+/*        var mousetimeout;
+        var screensaver_active = false;
+        var idletime = 5;
+
+        function show_screensaver(){
+            $('#screensaver').fadeIn();
+            var img_path = img_name.value;
+            img_path = img_path.substr(1,img_path.length-2);
+            var div_img = img_path.split(",");
+            var i = 0, cnt = div_img.length;
+            setInterval(function(){
+                document.getElementById("screensaver").innerHTML='<img src={!! asset("dishes/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
+                if( cnt > i + 1 ) i++;
+                else i = 0;
+            },10000);
+        }
+
+        function stop_screensaver(){
+            $('#screensaver').fadeOut();
+            screensaver_active = false;
+        }
+
+        $(document).mousemove(function(){
+            clearTimeout(mousetimeout);
+            
+            if (screensaver_active) {
+                stop_screensaver();
+            }
+
+            mousetimeout = setTimeout(function(){
+                show_screensaver();
+            }, 1000 * idletime); // 5 secs			
+        });*/
+
+        (function(poll, timeout){
+
+            var _idle = false,
+                _lastActive = 0,
+                _activeNow = function() {
+                    _lastActive = new Date();
+
+                    if (_idle) {
+                        $('#screensaver').hide();
+                        _idle = false;
+                    }
+                },
+                _poll = function() {
+
+                    var elapsed = (new Date()) - _lastActive;
+                    var img_path = img_name.value;
+                    img_path = img_path.substr(1,img_path.length-2);
+                    var div_img = img_path.split(",");
+                    var i = 0, cnt = div_img.length;
+
+                    if ((elapsed > timeout) && !_idle) {
+                        $('#screensaver').fadeIn(5000);
+                        _idle = true;
+
+                        setInterval(function(){ 
+                            path = 
+                            document.getElementById("screensaver").innerHTML='<img src={!! asset("dishes/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
+                            if( cnt > i + 1 ) i++;
+                            else i = 0;
+                        }, 8000);
+
+                    }
+                }
+
+            $(window).bind('mousemove click keypress resize focus', _activeNow);
+
+            window.setInterval(_poll, poll);
+
+            _activeNow();
+        })(1000*110, 8000);  
     });
+
     $(".header").click(function () {
         $header = $(this);
         $content = $header.next();
@@ -726,6 +866,6 @@
 <div id="thirdModal" class="modal"></div>
 {{--<div id="feedbackModal" class>
     l"></div>--}}
-
+    <div id="screensaver" class="mySlides fade"></div>
 </body>
 </html>

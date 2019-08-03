@@ -14,10 +14,13 @@
     <div class="pttbook"></div>
     <div class="widthh pt-4 blackgrey">
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <h4 class="text-white h4-responsive font-weight-bold ml-3 fs-30">TRANSACTION HISTORY</h4>
             </div>
-            <div class="col-6">
+            <div class="col-4">
+                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Cash Amount: ${{ $daily_all_amount }}" readonly/>
+            </div>
+            <div class="col-4">
                 <a onclick="window.history.back()">
                     <span class="">
                         <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
@@ -126,9 +129,9 @@
             url:"{{ route('admin.src_trans') }}",
             data:{src_date: src_dates},
             success: function(result){
-                //console.log(result);
+                //console.log(result);                
                 document.getElementById("data_view").innerHTML = result;
-
+                document.getElementById("all_amount").value = "Today's Total Cash Amount: $" + daily_all_amount.value;
             }
         });
     }

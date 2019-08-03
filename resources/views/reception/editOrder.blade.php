@@ -94,10 +94,15 @@
                                   name="customer_notes" id="customer-review">{{$booking_order->review}}</textarea>
                     </div>
 
-                    <div style="margin-bottom: 40px; margin-left: 25px; marign-right: 25px;">
+                    <div id="pay_state" style="margin-bottom: 40px; margin-left: 25px; marign-right: 25px;">
                         @if($booking_order->pay_flag == 0)
                             <div class="edit_order_edit_order" onclick="edit_order({{ $booking_order->order_id }})">
                                 <span class="fs-25">EDIT ORDER</span>
+                                <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;">
+                            </div>
+                            {{--<div class="edit_order_edit_order" onclick="finish_pay('{{$tb_nm}}', '{{ $starting_time }}', '{{ $total }}', '{{ $without_gst_price }}', '{{ $gst_price }}')">--}}
+                            <div class="edit_order_edit_order" onclick="finish_pay({{ $booking_order->order_id }})">
+                                <span class="fs-25">ISSUE A BILL</span>
                                 <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;">
                             </div>
                             <div class="edit_order_space" style="padding: 12px 445px 12px 0;">
@@ -134,7 +139,8 @@
                                 @endif
                             @endif
                         @elseif($booking_order->pay_flag == 1)
-                            <div class="edit_order_calling_img">
+                            @include('reception.editOrder_pay')
+                            {{--<div class="edit_order_calling_img">
                                 <img src="{{ asset('img/calling1.png') }}" style="width: 65px; margin-top: -10px;">
                             </div>
                             <div class="edit_order_process_bill">
@@ -182,7 +188,7 @@
                                     </div>
                                     @endif
                                 @endif
-                            @endif
+                            @endif--}}
                         @endif
                     </div>
                 </div>
@@ -385,6 +391,20 @@
 
         }
 
+        function finish_pay(order_id) {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('reception.finish_pay') }}",
+                data:{
+                    order_id: order_id, 
+                    _token:"{{ csrf_token() }}"
+                },
+                success: function(result){
+                    document.getElementById("pay_state").innerHTML = result;
+                }
+            });
+        }
     </script>
 
     <div id="myModal" class="modal"></div>

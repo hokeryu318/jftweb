@@ -55,6 +55,7 @@ Route::post('reception/add_item', 'ReceptionController@add_item')->name('recepti
 Route::post('reception/change_count', 'ReceptionController@change_count')->name('reception.change_count');
 Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
 Route::post('reception/print', 'ReceptionController@print')->name('reception.print');
+Route::post('reception/finish_pay', 'ReceptionController@finish_pay')->name('reception.finish_pay');
 
 //customer
 Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');

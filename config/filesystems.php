@@ -64,6 +64,11 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'dishes' => [
+            'driver' => 'local',
+            'root'   => public_path('/dishes'),
+        ],
+
     ],
 
 ];
