@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\OrderDish;
 use Illuminate\Http\Request;
 use App\Model\Order;
+use App\Model\OrderPay;
 
 class TransactionController extends Controller
 {
@@ -29,10 +30,18 @@ class TransactionController extends Controller
         $search_display_date = date("d M Y", strtotime($search_date));
 
         if(request()->get('sortType') == "asc"){
-            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2)->orderBy('time','desc')->get();
+            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
+            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
+                    ->select(['orders.*',])
+                    ->where('order_pay.pay_method','CASH')
+                    ->orderBy('orders.time','asc')->get();
             $sort = "desc";
         }else{
-            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2)->orderBy('time','asc')->get();
+            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
+            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
+                    ->select(['orders.*',])
+                    ->where('order_pay.pay_method','CASH')
+                    ->orderBy('orders.time','asc')->get();
             $sort = "asc";
         }
 
@@ -58,7 +67,11 @@ class TransactionController extends Controller
     public function src_trans() {
 
         $src_date = request()->src_date;
-        $order_obj = Order::whereDate('time', $src_date)->where('pay_flag',2)->get();
+        $order_obj = Order::whereDate('time', $src_date)->where('pay_flag',2);
+        $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
+                ->select(['orders.*',])
+                ->where('order_pay.pay_method','CASH')
+                ->get();
         $daily_all_amount = 0;
 
         foreach($order_obj as $order)
