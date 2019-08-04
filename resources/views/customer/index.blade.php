@@ -838,7 +838,7 @@
         var diff = (current_time.getTime() - last_order_time.getTime())/1000;
         diff /= 60;
         diff = Math.round(diff);
-        if(diff > 0)
+        if((diff > 0) && (diff > 90))
             document.getElementById("time").innerHTML = diff;
         else
             document.getElementById("time").innerHTML = 0;
