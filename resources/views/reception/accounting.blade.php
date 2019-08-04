@@ -446,6 +446,7 @@
 
     function Payment(pay_method) {
 
+        var order_dishes = <?php echo(json_encode($order_dishes))?>;
         var tip = parseFloat(document.getElementById("tip_value").textContent.substring(1)).toFixed(2);
         var sub_total = parseFloat(document.getElementById("sub_total").textContent.substring(1)).toFixed(2);
         var tmp_discount_obj = document.getElementById("discount_value").textContent.split('(');
@@ -479,7 +480,7 @@
                     $.ajax({
                         type:"POST",
                         url:"{{ route('reception.print') }}",
-                        data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+                        data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
                         success: function(result){
                             console.dir(result);
                         }
@@ -487,13 +488,13 @@
                 }
 
                 {{--$.ajax({--}}
-                    {{--type:"POST",--}}
-                    {{--url:"{{ route('reception.pay') }}",--}}
-                    {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
-                    {{--success: function(result){--}}
-                        {{--// console.log(result);--}}
-                        {{--$("#save-pay").submit();--}}
-                    {{--}--}}
+                {{--type:"POST",--}}
+                {{--url:"{{ route('reception.pay') }}",--}}
+                {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
+                {{--success: function(result){--}}
+                {{--// console.log(result);--}}
+                {{--$("#save-pay").submit();--}}
+                {{--}--}}
                 {{--});--}}
                 // window.history.back();
             }
