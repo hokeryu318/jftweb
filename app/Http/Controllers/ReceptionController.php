@@ -720,7 +720,7 @@ class ReceptionController extends Controller
             $printer -> close();
         }
 
-        return $order_dishes;
+        return $order_id;
     }
 
     //edit order part ==================================================================================================
