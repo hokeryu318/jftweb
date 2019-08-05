@@ -667,10 +667,10 @@ class ReceptionController extends Controller
             $printer->text("       .......................................\n");
 
             // loop
-            $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
-            $printer->text($line1."\n");
-            $line2 = sprintf('%13.2f %0.2s %13.2f %0.2s %13.2f', "8.80", "×", "1", "=", "8.80");
-            $printer->text($line2."\n");
+//            $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
+//            $printer->text($line1."\n");
+//            $line2 = sprintf('%13.2f %0.2s %13.2f %0.2s %13.2f', "8.80", "×", "1", "=", "8.80");
+//            $printer->text($line2."\n");
             // end loop
 
 //            foreach($order_dishes as $order_dish) {
