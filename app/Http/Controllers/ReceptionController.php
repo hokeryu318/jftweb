@@ -662,20 +662,20 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
 
-            $printer->setEmphasis(false);
-            $printer->text("Description\n");
-            $printer->text("       .......................................\n");
+//            $printer->setEmphasis(false);
+//            $printer->text("Description\n");
+//            $printer->text("       .......................................\n");
 
             // loop
-            $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
-            $printer->text($line1."\n");
-            $line2 = sprintf('%7.2f %0.2s %7.0f %0.2s %7.2f', "118.80", "×", "2", "=", "237.60");
-            $printer->text($line2."\n");
+//            $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
+//            $printer->text($line1."\n");
+//            $line2 = sprintf('%7.2f %0.2s %7.0f %0.2s %7.2f', "118.80", "×", "2", "=", "237.60");
+//            $printer->text($line2."\n");
             // end loop
 
 //            foreach($order_dishes as $order_dish) {
 //                // loop
-//                $line = sprintf('%-40.40s %13.2f %5.0f %13.2f', $order_dish->dish_name_en, $order_dish->each_price, $order_dish->count, $order_dish->sub_total);
+//                $line = sprintf('%-40.40s %7.2f %5.0f %7.2f', $order_dish->dish_name_en, $order_dish->each_price, $order_dish->count, $order_dish->sub_total);
 //                $printer->text($line."\n");
 //                // end loop
 //            }
