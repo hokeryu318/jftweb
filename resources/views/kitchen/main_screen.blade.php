@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="col-sm-2" style="padding: 18px 0 0 18px;">
-                    <div style="margin-left: 38px;margin-bottom: 6px;"><img src="{{ asset('img/reprint_docket.png') }}" class="reprint"></div>
+                    <div style="margin-left: 38px;margin-bottom: 6px;"><img src="{{ asset('img/reprint_docket.png') }}" class="reprint" onclick="docket()"></div>
                     <div style="font-size: 17px;font-weight: 700;">Reprint Docket</div>
                 </div>
             </div>
@@ -155,6 +155,21 @@
 
         // clearInterval(myVar);
         // var myVar = setInterval(myTimer, 1000);
+    }
+
+    //reprint docket
+    function docket()
+    {
+        var group_id = $("#group_id").val();
+        $.ajax({
+            type:"GET",
+            url:"{{ route('kitchen.docket') }}",
+            data:{ group_id:group_id },
+            success: function(result){
+                $('#ReprintDocketModal').html(result);
+            }
+        });
+        $("#ReprintDocketModal").modal("toggle");
     }
 
     // modal for dish click
@@ -309,6 +324,8 @@
 <div class="modal fade" id="ChangeGroupModal" role="dialog"></div>
 {{--dish_select--}}
 <div class="modal fade" id="ExtractCookingName" role="dialog"></div>
+{{--reprint docket--}}
+<div class="modal fade" id="ReprintDocketModal" role="dialog"></div>
 </body>
 </html>
 

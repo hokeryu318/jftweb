@@ -4,28 +4,9 @@
     <div class="container-fluid" style="position: sticky; top: 0;">
         <div class="ex_co_modal_header">
             <div class="col-sm-10" style="padding: 24px 0 0 30px;">
-                @if($filter_flag == 1)
-                    <div style="font-size: 28px">
-                        <b>
-                            All orders for
-                            @if(count($order_dishes) > 0)
-                                {{ $order_dishes[0]->dish_name_en }}({{ count($order_dishes) }})
-                            @endif
-                        </b>
-                    </div>
-                @elseif($filter_flag == 2)
-                    <div style="font-size: 28px">
-                        <b>
-                            All orders for
-                            @if(count($order_dishes) > 0)
-                                {{ $order_dishes[0]->display_table }}({{ count($order_dishes) }})
-                            @endif
-                        </b>
-                    </div>
-                @endif
             </div>
             <div class="col-sm-2" style="padding: 18px 0 0 0px;">
-                <p class="ex_co_right_close" data-dismiss="modal" onclick="extract_modal_close()"><img src="{{ asset('img/close.png') }}" style="width: 45px;height: 45px;"></p>
+                <p class="ex_co_right_close" data-dismiss="modal" onclick="docket_modal_close()"><img src="{{ asset('img/close.png') }}" style="width: 45px;height: 45px;"></p>
             </div>
         </div>
     </div>
@@ -92,9 +73,9 @@
     var parentURL = window.parent.location.href;
 
     //modal_close
-    function extract_modal_close()
+    function docket_modal_close()
     {
-        $("#ExtractCookingName").modal("hide");
+        $("#ReprintDocketModal").modal("hide");
         window.location.replace(parentURL);
     }
 

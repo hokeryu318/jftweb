@@ -84,8 +84,8 @@ Route::get('kitchen/change_group', 'KitchenController@change_group')->name('kitc
 Route::post('kitchen/ready', 'KitchenController@ready')->name('kitchen.ready');
 Route::get('kitchen/extract_cooking_name', 'KitchenController@extract_cooking_name')->name('kitchen.extract_cooking_name');
 Route::get('kitchen/extract_table_number', 'KitchenController@extract_table_number')->name('kitchen.extract_table_number');
-//Route::get('kitchen/history_reprint', 'KitchenController@history_reprint')->name('kitchen.history_reprint');
-//Route::get('kitchen/docket', 'KitchenController@docket')->name('kitchen.docket');
+Route::get('kitchen/docket', 'KitchenController@docket')->name('kitchen.docket');
+Route::get('kitchen/reprint', 'KitchenController@reprint')->name('kitchen.reprint');
 
 //admin
 //Route::group(['middleware' => 'checkadmin'], function(){

@@ -5,7 +5,7 @@
 <div class="edit_order_process_bill">
     <a style="color: white;" href="{{ route('reception.accounting', ['order_id' => $booking_order->order_id]) }}">
         <span class="fs-25">PROCESS BILL</span>
-        <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin-left: 20px;">
+        <img src="{{ asset('img/Group728white.png') }}" style="height:20px; margin: -8px 0 0 20px;">
     </a>
 </div>
 

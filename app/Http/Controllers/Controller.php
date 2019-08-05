@@ -39,7 +39,7 @@ class Controller extends BaseController
     {
         $hour = substr($time_data, 0,2);
         $min = substr($time_data, 2 );
-        if($hour <= 12) {
+        if($hour < 12) {
             $display_time = $hour.$min.' AM';
         }
         else {

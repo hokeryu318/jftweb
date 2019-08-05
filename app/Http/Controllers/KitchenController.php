@@ -223,6 +223,23 @@ class KitchenController extends Controller
         return $order_id_text;
     }
 
+    public function docket() {
+
+        $group_id = request()->group_id;
+        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
+        if(count($order_ids) > 0) {
+            $order_dishes = OrderDish::whereIn('order_id', $order_ids)->where('ready_flag', '1')->orderBy('created_at', 'ASC')->get();
+            $order_dishes = $this->get_order_dish($order_dishes);
+        }
+
+        foreach($order_dishes as $order_dish) {
+            $order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
+        }
+
+
+        return view('kitchen.docket_modal')->with(compact('order_dishes'));
+    }
+
 //    public function get_change_group_dish(Request $request)
 //    {
 //
