@@ -669,7 +669,7 @@ class ReceptionController extends Controller
             // loop
             $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
             $printer->text($line1."\n");
-            $line2 = sprintf('%13.2f %0.2s %13.2f %0.2s %13.2f', "8.80", "×", "1", "=", "8.80");
+            $line2 = sprintf('%7.2f %0.2s %7.0f %0.2s %7.2f', "118.80", "×", "2", "=", "237.60");
             $printer->text($line2."\n");
             // end loop
 
@@ -684,6 +684,7 @@ class ReceptionController extends Controller
             $printer->setEmphasis(true);
             $printer->text("----------------------------------------------\n");
 
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer -> text(new print_table1('Sub Total(Inc GST)', $sub_total, true));
             $printer -> text(new print_table1('GST', $gst, true));
 
