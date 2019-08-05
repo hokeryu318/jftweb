@@ -685,16 +685,16 @@ class ReceptionController extends Controller
             $printer->text("----------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
-            $printer -> text(new print_table1('Sub Total(Inc GST)', $sub_total, true));
-            $printer -> text(new print_table1('GST', $gst, true));
+            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.$sub_total));
+            $printer -> text(new print_table1('GST', '$'.$gst));
 
             $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
             $printer -> text(new print_table1('Grand Total', $total, true));
             $printer -> selectPrintMode();
 
-            $printer -> text(new print_table1('Payment', $amount, true));
-            $printer -> text(new print_table1('('.$pay_method.')', $amount, true));
-            $printer -> text(new print_table1('Change Due', $change, true));
+            $printer -> text(new print_table1('Payment', '$'.$amount));
+            $printer -> text(new print_table1('('.$pay_method.')', '$'.$amount));
+            $printer -> text(new print_table1('Change Due', '$'.$change));
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
