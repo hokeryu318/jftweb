@@ -25,7 +25,7 @@
         </div>
         <div style="height: 480px;overflow: scroll;padding-right: 15px;">
             <table>            
-            @if(!empty($order_dishes))
+            @if(count($order_dishes) > 0)
                 <input type="hidden" id="order_dishes" value="{{ $order_dishes }}">
                 @foreach($order_dishes as $key => $order_dish)
                     <tr class="modal_dish_list">

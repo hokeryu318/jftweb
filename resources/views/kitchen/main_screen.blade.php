@@ -161,15 +161,21 @@
     function docket()
     {
         var group_id = $("#group_id").val();
+        
         $.ajax({
             type:"GET",
             url:"{{ route('kitchen.docket') }}",
             data:{ group_id:group_id },
             success: function(result){
-                $('#ReprintDocketModal').html(result);
+                if(result == '')    alert("There is no data for reprint!");
+                else{
+                    $('#ReprintDocketModal').html(result);
+                    $("#ReprintDocketModal").modal("toggle");
+                }
+                
             }
         });
-        $("#ReprintDocketModal").modal("toggle");
+        
     }
 
     // modal for dish click
