@@ -167,10 +167,10 @@ class CountNotificationController extends Controller
                 $printer->setEmphasis(true);
                 $printer -> text($table_name);
                 $printer->setJustification(Printer::JUSTIFY_RIGHT);
+                $printer->setEmphasis(false);
+                $printer -> text('QTY:');               
                 $printer->setEmphasis(true);
                 $printer -> text($qty);
-                $printer->setEmphasis(false);
-                $printer -> text('QTY:');
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
@@ -181,7 +181,7 @@ class CountNotificationController extends Controller
                 foreach($order_options as $order_option) {
                     $printer->text( "[" . $order_option->option_name . ":");
                     $printer->setEmphasis(true);
-                    $printer->text($order_option->item_name);
+                    $printer->text("<b>".$order_option->item_name."</b>");
                     $printer->setEmphasis(false);
                     $printer->text("]");
                 }       
