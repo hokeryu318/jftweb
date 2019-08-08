@@ -57,7 +57,7 @@ class CustomerController extends Controller
 //        dd($order_table);
 //        dd($dishes);
 
-        $img_name = Storage::disk('dishes')->files();
+        $img_name = Storage::disk('screen')->files();
         $img_name = json_encode($img_name);
 
         return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time'))->with('img_name',$img_name);

@@ -7,6 +7,7 @@ use App\Model\Item;
 use App\Model\Option;
 use App\Model\Order;
 use App\Model\OrderDish;
+use App\Model\OrderOption;
 use App\Model\OrderTable;
 use App\Model\Table;
 use Illuminate\Http\Request;
@@ -17,6 +18,12 @@ use App\Events\KitchenEvent;
 use App\Events\PayEvent;
 use App\Events\NotificationEvent;
 use App\Events\AttendEvent;
+
+use App\Http\Controllers\print_table1;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
 
 class KitchenController extends Controller
 {
@@ -121,6 +128,72 @@ class KitchenController extends Controller
         } else {
             $orderdish->ready_flag = 1;
             $orderdish->ready_time = $this->get_current_time();
+
+            //print part
+            $printerIp = '192.168.192.151';
+            $printerPort = 9100;
+
+            $ready_time = $orderdish->created_at;
+            $time = substr($ready_time,11);
+            $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
+
+            $qty = $orderdish->count;
+            
+            $table_ids = OrderTable::where('order_id', $orderdish->order_id)->pluck('table_id');
+            $table_name = "";
+            foreach($table_ids as $table_id) {
+                $table_name .= $this->get_table_name($table_id).'+';
+            }
+            $table_name = rtrim($table_name, '+');
+
+            $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
+
+            $order_options = OrderOption::where('order_dish_id',$orderdish->id)->get();
+            
+            foreach($order_options as $order_option) {
+
+                if($order_option->option_id)
+                    $order_option->option_name = Option::where('id', $order_option->option_id)->pluck('name')->first();
+                else
+                    $order_option->option_name = '';
+
+                if($order_option->item_id) 
+                    $order_option->item_name = Item::where('id', $order_option->item_id)->pluck('name')->first();
+                else 
+                    $order_option->item_name = '';
+
+            }
+
+            $connector = new NetworkPrintConnector($printerIp, $printerPort);
+            $printer = new Printer($connector);
+
+            try {
+
+                $printer->setJustification(Printer::JUSTIFY_LEFT);
+                $printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
+                $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));
+
+                $printer->setJustification(Printer::JUSTIFY_LEFT);
+                $printer->setTextSize(1,1);
+                $printer->setEmphasis(false);
+                $printer->text($dish_name);
+                
+                foreach($order_options as $order_option) {
+                    $printer->text( "[" . $order_option->option_name . ":");
+                    $printer->setEmphasis(true);
+                    $printer->text($order_option->item_name);
+                    $printer->setEmphasis(false);
+                    $printer->text("]");
+                }       
+                
+                $printer->text("\n");
+
+                $printer->cut();
+
+            } finally {
+                $printer -> close();
+            }
+            
         }
         $orderdish->save();
 
@@ -291,4 +364,56 @@ class KitchenController extends Controller
 //        return $change_group_dish;
 //
 //    }
+
+    public function reprint(Request $request)
+    {
+        $order_dish = $request1->order_dish;
+
+        $table_name = $deshes->display_table;
+
+        $printerIp = '192.168.192.151';
+        $printerPort = 9100;
+
+        $ready_time = $order_dish->created_at;
+        $time = substr($ready_time,11);
+        $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
+
+        $qty = $order_dish->count;
+        
+        $table_name = $order_dish->display_table;
+
+        $dish_name = $order_dish->dish_name_en;
+ 
+        $connector = new NetworkPrintConnector($printerIp, $printerPort);
+        $printer = new Printer($connector);
+
+        try {
+
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
+            $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));
+
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->setTextSize(1,1);
+            $printer->setEmphasis(false);
+            $printer->text($dish_name);
+            
+            foreach($order_dish->options as $option) {
+                $printer->text( "[" . $option->option_name . ":");
+                $printer->setEmphasis(true);
+                $printer->text($option->item_name);
+                $printer->setEmphasis(false);
+                $printer->text("]");
+            }       
+            
+            $printer->text("\n");
+
+            $printer->cut();
+
+        } finally {
+            $printer -> close();
+        }
+        
+        return $time;
+    }
 }

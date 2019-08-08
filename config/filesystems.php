@@ -64,9 +64,9 @@ return [
             'url' => env('AWS_URL'),
         ],
 
-        'dishes' => [
+        'screen' => [
             'driver' => 'local',
-            'root'   => public_path('/dishes'),
+            'root'   => public_path('/screen'),
         ],
 
     ],

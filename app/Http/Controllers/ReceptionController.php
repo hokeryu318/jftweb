@@ -637,7 +637,7 @@ class ReceptionController extends Controller
 
             $printer->setFont(Printer::FONT_A);
 
-            $printer->setTextSize(3,2);//1~8 of width and height, can change textsize
+            $printer->setTextSize(2,1);//1~8 of width and height, can change textsize
             $printer->setEmphasis(true);
             $printer->text("$title\n");
 
@@ -649,7 +649,7 @@ class ReceptionController extends Controller
             $printer->text("$abn\n");
 
             $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
+            $printer->text("------------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setEmphasis(false);
@@ -658,38 +658,57 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
+            $printer->text("------------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
 
-//            $printer->setEmphasis(false);
-//            $printer->text("Description\n");
-//            $printer->text("       .......................................\n");
+            $printer->setEmphasis(false);
+            $printer->text("Description                 Price   Qty Total   \n");
+            $printer->text("................................................\n");
 
-            // loop
-//            $line1 = sprintf('%-40.40s', "ASAHI SUPER DRY REGULAR");
-//            $printer->text($line1."\n");
-//            $line2 = sprintf('%7.2f %0.2s %7.0f %0.2s %7.2f', "118.80", "×", "2", "=", "237.60");
-//            $printer->text($line2."\n");
-            // end loop
+            foreach($order_dishes as $order_dish) {
 
-//            foreach($order_dishes as $order_dish) {
-//                // loop
-//                $line = sprintf('%-40.40s %7.2f %5.0f %7.2f', $order_dish->dish_name_en, $order_dish->each_price, $order_dish->count, $order_dish->sub_total);
+                $dish_len = strlen($order_dish['dish_name_en']);
+                $mod = fmod($dish_len, 27);
+                if($mod > 0)
+                    $line_count = (int)($dish_len / 27) + 1;
+                else
+                    $line_count = (int)($dish_len / 27);
+
+                for($i=1;$i<=$line_count;$i++) {
+                    if($dish_len > 27) {
+                        if($i==1) {
+                            $printer->text(substr($order_dish['dish_name_en'], 0, 27).' '.str_pad('$'.sprintf('%0.2f', $order_dish['each_price']), 8, ' ', STR_PAD_RIGHT)
+                                .str_pad($order_dish['count'], 4, ' ', STR_PAD_RIGHT).str_pad('$'.sprintf('%0.2f', $order_dish['sub_total']), 8, ' ', STR_PAD_RIGHT));
+                        } else {
+                            $printer->text("\n");
+                            $printer->text(substr($order_dish['dish_name_en'], ($i-1)*27, 27).' ');
+                        }
+                    } else {
+                        $printer->text(str_pad($order_dish['dish_name_en'], 28, ' ', STR_PAD_RIGHT).str_pad('$'.sprintf('%0.2f', $order_dish['each_price']), 8, ' ', STR_PAD_RIGHT)
+                            .str_pad($order_dish['count'], 4, ' ', STR_PAD_RIGHT).str_pad('$'.sprintf('%0.2f', $order_dish['sub_total']), 8, ' ', STR_PAD_RIGHT));
+                    }
+
+                }
+
+                $printer->text("\n");
+                // loop
+//                $line = sprintf('%-40.40s %7.2f %5.0f %7.2f', $order_dish['dish_name_en'], $order_dish['each_price'], $order_dish['count'], $order_dish['sub_total']);
 //                $printer->text($line."\n");
-//                // end loop
-//            }
+                // end loop
+            }
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
+            $printer->text("------------------------------------------------\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->setEmphasis(false);
             $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.$sub_total));
             $printer -> text(new print_table1('GST', '$'.$gst));
 
             $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
-            $printer -> text(new print_table1('Grand Total', $total, true));
+            $printer -> text(new print_table1('Grand Total', '$'.$total));
             $printer -> selectPrintMode();
 
             $printer -> text(new print_table1('Payment', '$'.$amount));
@@ -698,12 +717,12 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
+            $printer->text("------------------------------------------------\n");
 
             $printer->setEmphasis(false);
             $printer->text("Thank you for choosing\n");
 
-            $printer->setTextSize(3,2);
+            $printer->setTextSize(2,1);
             $printer->setEmphasis(true);
             $printer->text("Nishiki AN\n");
 
@@ -713,7 +732,7 @@ class ReceptionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
-            $printer->text("----------------------------------------------\n");
+            $printer->text("------------------------------------------------\n");
 
             $printer->cut();
 
@@ -721,7 +740,7 @@ class ReceptionController extends Controller
             $printer -> close();
         }
 
-        return $order_id;
+        return $order_dishes;
     }
 
     //edit order part ==================================================================================================

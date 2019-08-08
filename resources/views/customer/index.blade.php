@@ -332,7 +332,7 @@
 
                         setInterval(function(){ 
                             path = 
-                            document.getElementById("screensaver").innerHTML='<img src={!! asset("dishes/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
+                            document.getElementById("screensaver").innerHTML='<img src={!! asset("screen/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
                             if( cnt > i + 1 ) i++;
                             else i = 0;
                         }, 8000);
