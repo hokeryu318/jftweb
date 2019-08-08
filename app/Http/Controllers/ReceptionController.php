@@ -669,20 +669,20 @@ class ReceptionController extends Controller
             foreach($order_dishes as $order_dish) {
 
                 $dish_len = strlen($order_dish['dish_name_en']);
-                $mod = fmod($dish_len, 27);
+                $mod = fmod($dish_len, 23);
                 if($mod > 0)
-                    $line_count = (int)($dish_len / 27) + 1;
+                    $line_count = (int)($dish_len / 23) + 1;
                 else
-                    $line_count = (int)($dish_len / 27);
+                    $line_count = (int)($dish_len / 23);
 
                 for($i=1;$i<=$line_count;$i++) {
-                    if($dish_len > 27) {
+                    if($dish_len > 23) {
                         if($i==1) {
-                            $printer->text(substr($order_dish['dish_name_en'], 0, 27).' '.str_pad('$'.sprintf('%0.2f', $order_dish['each_price']), 8, ' ', STR_PAD_RIGHT)
+                            $printer->text(substr($order_dish['dish_name_en'], 0, 23).'     '.str_pad('$'.sprintf('%0.2f', $order_dish['each_price']), 8, ' ', STR_PAD_RIGHT)
                                 .str_pad($order_dish['count'], 4, ' ', STR_PAD_RIGHT).str_pad('$'.sprintf('%0.2f', $order_dish['sub_total']), 8, ' ', STR_PAD_RIGHT));
                         } else {
                             $printer->text("\n");
-                            $printer->text(substr($order_dish['dish_name_en'], ($i-1)*27, 27).' ');
+                            $printer->text(substr($order_dish['dish_name_en'], ($i-1)*23, 23).'     ');
                         }
                     } else {
                         $printer->text(str_pad($order_dish['dish_name_en'], 28, ' ', STR_PAD_RIGHT).str_pad('$'.sprintf('%0.2f', $order_dish['each_price']), 8, ' ', STR_PAD_RIGHT)
