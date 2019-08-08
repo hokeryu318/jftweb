@@ -24,9 +24,9 @@
             </table>
         </div>
         <div style="height: 480px;overflow: scroll;padding-right: 15px;">
-            <table>
-            <input type="hidden" id="order_dishes" value="{{ $order_dishes }}">
-            @if(count($order_dishes) > 0)
+            <table>            
+            @if(!empty($order_dishes))
+                <input type="hidden" id="order_dishes" value="{{ $order_dishes }}">
                 @foreach($order_dishes as $key => $order_dish)
                     <tr class="modal_dish_list">
                         <td width="12%">
@@ -79,15 +79,18 @@
 
     function reprint($order_dish)
     {
+        var order = $order_dish;
+        
         $.ajax({
             type:"POST",
             url:"{{ route('kitchen.reprint') }}",
-            data:{ order_dish: "{{ $order_dish }}", _token: "{{ csrf_token() }}" },
+            data:{ order_dish: order, _token: "{{ csrf_token() }}" },
             success: function(result){
                 console.log(result.data);
                 //window.open(result);
             }
-        });
+        });           
+
     }
 
 </script>
