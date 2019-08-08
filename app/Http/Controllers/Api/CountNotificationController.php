@@ -167,10 +167,10 @@ class CountNotificationController extends Controller
                 $printer->setEmphasis(true);
                 $printer -> text($table_name);
                 $printer->setJustification(Printer::JUSTIFY_RIGHT);
-                $printer->setEmphasis(false);
-                $printer -> text('QTY:');
                 $printer->setEmphasis(true);
                 $printer -> text($qty);
+                $printer->setEmphasis(false);
+                $printer -> text('QTY:');
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
