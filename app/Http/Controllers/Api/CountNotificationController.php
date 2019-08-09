@@ -153,34 +153,41 @@ class CountNotificationController extends Controller
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
                 $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));*/
-                $printer->setTextSize(2,2);
+                $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
                 $printer -> text('TIME:' . $time);
-                $printer -> text('          DATE:' . $date);
+                $printer->text("\n");
+                $printer -> text('DATE:' . $date);
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
-                $printer->setTextSize(2,2);
+                $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
                 $printer -> text('TABLE:');
                 $printer->setEmphasis(true);
+                $printer->setTextSize(2,2);
                 $printer -> text($table_name);
+                $printer->text("\n");
                 $printer->setEmphasis(false);
-                $printer -> text('          QTY:');               
+                $printer->setTextSize(1,2);
+                $printer -> text('QTY:');               
                 $printer->setEmphasis(true);
+                $printer->setTextSize(2,2);
                 $printer -> text($qty);
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
-                $printer->setTextSize(2,2);
+                $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
                 
                 foreach($order_options as $order_option) {
                     $printer->text( "[" . $order_option->option_name . ":");
                     $printer->setEmphasis(true);
+                    $printer->setTextSize(2,2);
                     $printer->text($order_option->item_name);
                     $printer->setEmphasis(false);
+                    $printer->setTextSize(1,2);
                     $printer->text("]");
                 }       
                 
