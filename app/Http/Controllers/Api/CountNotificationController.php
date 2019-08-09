@@ -156,8 +156,7 @@ class CountNotificationController extends Controller
                 $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
                 $printer -> text('TIME:' . $time);
-                $printer->text("\n");
-                $printer -> text('DATE:' . $date);
+                $printer -> text('                  DATE:' . $date);
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
@@ -166,8 +165,9 @@ class CountNotificationController extends Controller
                 $printer -> text('TABLE:');
                 $printer->setEmphasis(true);
                 $printer->setTextSize(2,2);
-                $printer -> text($table_name);
-                $printer->text("\n");
+                $qty_len = strlen($qty);
+                $table_len = 19 - $qty_len;
+                $printer -> text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
                 $printer->setEmphasis(false);
                 $printer->setTextSize(1,2);
                 $printer -> text('QTY:');               
