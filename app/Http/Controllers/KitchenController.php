@@ -193,6 +193,7 @@ class KitchenController extends Controller
                 $printer->setEmphasis(true);
                 $printer->setTextSize(2,2);
                 $printer -> text($qty);
+                $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 $printer->setTextSize(1,2);
