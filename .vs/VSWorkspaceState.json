@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\Console",
+    "\\app\\Console\\Commands"
+  ],
+  "SelectedNode": "\\app\\Console\\Commands\\DayReportEmail.php",
+  "PreviewInSolutionExplorer": false
+}

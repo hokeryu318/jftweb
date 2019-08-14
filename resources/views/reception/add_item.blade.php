@@ -224,25 +224,28 @@
         if(order_dish_id == 0) {// add item
             //select get dish and option list for add
             select_list = [];
-            var tmp = 0
+            var tmp = '';
             $("input:checkbox:checked").each(function(){
                 var val = $(this).val();
-                var val_arr = val.split(':');
-                if(tmp == 0){
-                    tmp = val_arr[0];
-                    select_list.push(val);
-                }
-                else{
-                    if(tmp != val_arr[0]) {
-                        alert('You can select only 1 dish!');
-                    } else {
-                        select_list.push(val);
-                    }
-                }
+                // var val_arr = val.split(':');
+                // if(tmp == 0){
+                //     tmp = val_arr[0];
+                //     select_list.push(val);
+                // }
+                // else{
+                //     if(tmp != val_arr[0]) {
+                //         alert('You can select only 1 dish!');
+                //     } else {
+                //         select_list.push(val);
+                //     }
+                // }
+                select_list.push(val);
             });
 
             if(select_list.length == 0){
                 alert('Please select dish and options!');
+            }else if(select_list.length > 1) {
+                alert('You can select only 1 dish!');
             } else {
                 var qty_number_obj = $("#qty");
                 var qty = qty_number_obj.html();

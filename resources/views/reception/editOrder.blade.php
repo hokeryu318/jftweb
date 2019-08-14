@@ -105,13 +105,13 @@
                                 <span class="fs-25">ISSUE A BILL</span>
                                 <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;">
                             </div>
-                            <div class="edit_order_space" style="padding: 12px 445px 12px 0;">
+                            <div class="edit_order_space" style="padding: 12px 221px 12px 0;">
 
                             </div>
                             @if($booking_order->status == 'booking')
                                 <div class="edit_order_calling_img1">
                                     <img style="width: 50px;" src="{{ asset('img/alarm2.png') }}">
-                                    <div class="edit_order_calling_time fs-25">1 sec</div>
+                                    <div class="edit_order_calling_time fs-25">0 sec</div>
                                 </div>
                                 <div class="edit_order_attended">
                                     <span class="fs-25">ATTENDED</span>

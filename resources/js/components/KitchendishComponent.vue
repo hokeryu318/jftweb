@@ -119,7 +119,7 @@
                 var selected_id = id;
                 axios.post('/api/ready', {selected_id: selected_id})
                     .then(response => {
-                        // console.log(response.data);
+                        console.dir(response.data);
                     })
             },
 

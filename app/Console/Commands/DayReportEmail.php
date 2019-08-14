@@ -45,7 +45,7 @@ class DayReportEmail extends Command
 
         date_default_timezone_set("Australia/Melbourne");
 
-        Excel::create('sales_data', function($excel) {
+        Excel::create('sales_report', function($excel) {
 
             $excel->sheet('Sales Day Report', function($sheet) {
 
@@ -66,6 +66,7 @@ class DayReportEmail extends Command
                 $sales_data['refund_total'] = 0;
                 $sales_data['discount_total'] = 0;
                 $sales_data['tip_total'] = 0;
+
                 foreach($order_pay as $ord_pay) {
                     $sales_data['total_sales'] += $ord_pay->total;
                     $sales_data['gross_total'] += $ord_pay->without_gst;
@@ -386,7 +387,7 @@ class DayReportEmail extends Command
 
         })->store('xlsx', public_path('excel/exports'));
 
-        $filename = public_path().'/excel/exports/sales_data.xlsx';
+        $filename = public_path().'/excel/exports/sales_report.xlsx';
 
         Mail::to('manager@kuromatsu.com.au')->send(new SalesDayReportEmail($filename));
     }

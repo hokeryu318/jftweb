@@ -145,7 +145,7 @@
         $.ajax({
             type:"GET",
             url:"{{ route('reception.amend') }}",
-            data:{order_id: order_id},
+            data:{order_id: order_id, order_dish_id: 0},
             success: function(result){
                 // console.log(result);
                 $('#thirdModal').html(result);

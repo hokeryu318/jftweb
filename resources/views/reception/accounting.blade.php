@@ -35,11 +35,12 @@
     <input type="hidden" id="duration" value="{{ $duration }}" />
     <div class="accounting" id="accounting">
         <div class="accounting_header">
-                <span class="close" style="margin: 0 35px 0 0;" onclick="window.history.back()">
+                {{--<span class="close" style="margin: 0 35px 0 0;" onclick="window.history.back()">--}}
+                <a class="close" style="margin: 0 35px 0 0;" href="{{ route('reception.seated', ['status' => 'seated']) }}">
                     <h2>
                         <img src="{{ asset('img/Group1101.png') }}" width="25" height="25" class="float-right mt-3 mr-3" />
                     </h2>
-                </span>
+                </a>
             <div class="col-lg-11 pr-0 col-xl-11" style="padding: 20px 0 0 40px;">
                 <div>
                     <h5><span class="fs-25" style="font-weight: 700;">NAME: </span><span class="fs-25">{{ $customer_name }}</span></h5>
@@ -134,9 +135,9 @@
                                     <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
                                 </span>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td onclick="select_item(0)"></td>
+                            <td onclick="select_item(0)"></td>
+                            <td onclick="select_item(0)"></td>
                         </tr>
                     </table>
                 </div>
