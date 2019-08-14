@@ -105,7 +105,17 @@ class DayReportEmail extends Command
 
                 // ===3. Discounts ===
 
-                // ===4. Canceled Items ===
+                // ===4. Canceled Items ====
+                $order_cancel_dish = DB::table('order_dish_match')->whereDate('created_at', date('Y-m-d'))->where('amend_count', '<', 0)->get();
+
+                $cancel_items = array();
+                for($i=0;$i<count($order_cancel_dish);$i++) {
+                    $cancel_items[$i]['amend_time'] = $order_cancel_dish[$i]->amend_time;
+                    $cancel_items[$i]['id'] = DB::table('order_pay')->where('order_id', $order_cancel_dish[$i]->order_id)->pluck('id')->first();
+
+                    $option_price = DB::table('order_option_match')->where('order_dish_id', $order_cancel_dish[$i]->id)->sum('item_price');
+                    $cancel_items[$i]['cancel_price'] = (-1) * ($order_cancel_dish[$i]->dish_price + $option_price) * $order_cancel_dish[$i]->amend_count;
+                }
 
                 // ===5. Hour Sales Data ===
                 $hour_sales_data = array();
@@ -380,7 +390,7 @@ class DayReportEmail extends Command
                 // ===10. Feedbacks ===
                 $feedbacks = DB::table('orders')->whereDate('created_at', date('Y-m-d'))->where('review', '<>', Null)->get();
 
-                $sheet->loadView('emails.sales_day')->with(compact('order_pay', 'sales_data', 'card_type', 'card_sales_data', 'hour_sales_data',
+                $sheet->loadView('emails.sales_day')->with(compact('order_pay', 'sales_data', 'card_type', 'card_sales_data', 'cancel_items', 'hour_sales_data',
                     'category_sales_data', 'item_sales_data', 'hourly_item_ranking', 'hourly_cooktime_ranking', 'feedbacks'));
 
             });

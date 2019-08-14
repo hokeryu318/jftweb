@@ -85,11 +85,14 @@
 
     <h3> 4. Canceled Items </h3>
     <table>
-        <tr>
-            <td align="left">xxx</td>
-            <td align="left">Reception</td>
-            <td align="right">-$0.00</td>
-        </tr>
+
+        @for($i=0;$i<count($cancel_items);$i++)
+            <tr>
+                <td align="left">{{ substr($cancel_items[$i]['amend_time'], 11, 5) }}({{ $cancel_items[$i]['id'] }})</td>
+                <td align="right">Reception</td>
+                <td align="right">-${{ number_format($cancel_items[$i]['cancel_price'], 2) }}</td>
+            </tr>
+        @endfor
     </table>
 
     <h3> 5. Hour Sales Data </h3>
