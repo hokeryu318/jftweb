@@ -4,7 +4,7 @@
     </head>
 
     <body>
-    <h3>Sales Data Report({{ Date('Y/m/d H:i:s') }})</h3>
+    <h3>({{ $receipt->shop_name }}) Daily Sales Report({{ Date('Y/m/d H:i:s') }})</h3>
 
     <h3> 1. Sales Data </h3>
     <table>

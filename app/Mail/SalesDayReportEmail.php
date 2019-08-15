@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Model\Receipt;
 class SalesDayReportEmail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -31,7 +32,8 @@ class SalesDayReportEmail extends Mailable
     public function build()
     {
         $address = 'jft@email.com';
-        $subject = 'Sales Day Reporing';
+        $receipt = Receipt::find(1);
+        $subject = '('.$receipt->shop_name.')'.' Daily Sales Report';
         $name = 'Manager';
 
         return $this->view('emails.index')

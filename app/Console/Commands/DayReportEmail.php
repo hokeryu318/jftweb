@@ -390,7 +390,7 @@ class DayReportEmail extends Command
                 // ===10. Feedbacks ===
                 $feedbacks = DB::table('orders')->whereDate('created_at', date('Y-m-d'))->where('review', '<>', Null)->get();
 
-                $sheet->loadView('emails.sales_day')->with(compact('order_pay', 'sales_data', 'card_type', 'card_sales_data', 'cancel_items', 'hour_sales_data',
+                $sheet->loadView('emails.sales_day')->with(compact('receipt', 'order_pay', 'sales_data', 'card_type', 'card_sales_data', 'cancel_items', 'hour_sales_data',
                     'category_sales_data', 'item_sales_data', 'hourly_item_ranking', 'hourly_cooktime_ranking', 'feedbacks'));
 
             });
