@@ -85,7 +85,7 @@
                 <pay-finish-component order_id="{{ $order->id }}"></pay-finish-component>
             </p>
 
-            <img src="{{asset('img/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
+            <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
         </div>
         <div class="category_container">
             @foreach($category_all as $key => $category)
@@ -184,7 +184,7 @@
             @if($ds->sold_out == 0)
                 <div class="card" onclick="orderNow({{$ds->id}})">
                     <div class="card-header">
-                        <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}" alt="chicken">
+                        <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}">
                         <div class="headerSpan">
                             <div class="specialBadge">
                                 @if($ds->badge_id > 0)
