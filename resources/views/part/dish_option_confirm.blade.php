@@ -60,7 +60,7 @@
     <div class="modalConfirmContent">
         <div class="dish-content">
             <div class="menuClassesHeader" style="width: 100%;">Base</div>
-            <img src="{{asset('dishes/'.$dish->image)}}" alt="chicken" style="width:269px;height:269px;margin-left:5px;">
+            <img @if($dish->image) src="{{asset('dishes/'.$dish->image)}}" @endif style="width:269px;height:269px;margin-left:5px;">
             <div class="confirmDishFooter">
                 @if(session('language') == 1)
                     {{$dish->name_cn}}
@@ -86,7 +86,7 @@
                 @for($j=0;$j<count($slt_items[$i]['items_id_arr']);$j++)
                     <div class="confirmGrid">
                         <div class="gridContent">
-                            <img src="{{asset('options/'.$slt_items[$i][$j]['image'])}}" alt="chicken" style="width:90px;height:90px;margin-left:5px;">
+                            <img @if($slt_items[$i][$j]['image']) src="{{asset('options/'.$slt_items[$i][$j]['image'])}}" @endif style="width:90px;height:90px;margin-left:5px;">
                         </div>
                         <div class="gridContent-op">
                             <div class="confirmOption">

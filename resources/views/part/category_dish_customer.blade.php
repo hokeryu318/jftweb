@@ -2,7 +2,7 @@
     @if($ds->sold_out == 0)
         <div class="card" onclick="orderNow({{$ds->id}})">
             <div class="card-header">
-                <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}" alt="chicken">
+                <img class="cardImg" @if($ds->image) src="{{asset('dishes/'.$ds->image)}}" @endif>
                 <div class="headerSpan">
                     <div class="specialBadge">
                         @if($ds->badge_id > 0)
@@ -37,7 +37,7 @@
     @else
         <div class="card outStock">
             <div class="card-header">
-                <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}" alt="chicken">
+                <img class="cardImg" @if($ds->image) src="{{asset('dishes/'.$ds->image)}}" @endif>
                 <div class="headerSpan">
                     <div class="specialBadge">
                         @if($ds->badge_id > 0)

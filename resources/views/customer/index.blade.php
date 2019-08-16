@@ -179,81 +179,81 @@
         </div>
     </header>
 
-        <section id="dish-content">
-        @foreach ($dishes as $ds)
-            @if($ds->sold_out == 0)
-                <div class="card" onclick="orderNow({{$ds->id}})">
-                    <div class="card-header">
-                        <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}">
-                        <div class="headerSpan">
-                            <div class="specialBadge">
-                                @if($ds->badge_id > 0)
-                                    <img src="{{asset('badges/'.$ds->badge->filepath)}}" alt="" srcset="" height="38px">
-                                @endif
-                            </div>
-                            <div class="fab">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
+    <section id="dish-content">
+    @foreach ($dishes as $ds)
+        @if($ds->sold_out == 0)
+            <div class="card" onclick="orderNow({{$ds->id}})">
+                <div class="card-header">
+                    <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}">
+                    <div class="headerSpan">
+                        <div class="specialBadge">
+                            @if($ds->badge_id > 0)
+                                <img src="{{asset('badges/'.$ds->badge->filepath)}}" alt="" srcset="" height="38px">
+                            @endif
+                        </div>
+                        <div class="fab">
+                            <i class="fas fa-plus-circle"></i>
                         </div>
                     </div>
-                    <div class="card-content">
-                        <p class="text_limit_character dish_description">
-                            @if(session('language') == 1)
-                                {{$ds->name_cn}}
-                            @elseif(session('language') == 2)
-                                {{$ds->name_jp}}
-                            @else
-                                {{$ds->name_en}}
+                </div>
+                <div class="card-content">
+                    <p class="text_limit_character dish_description">
+                        @if(session('language') == 1)
+                            {{$ds->name_cn}}
+                        @elseif(session('language') == 2)
+                            {{$ds->name_jp}}
+                        @else
+                            {{$ds->name_en}}
+                        @endif
+                    </p>
+                    <footer>
+                        @if($ds->discount != '')
+                        <div class="discountedPrice">
+                            ${{ number_format($ds->discount, 2) }}
+                        </div>
+                        @endif
+                        <div @if($ds->discount != '') class="price striked" @else class="price unstriked" @endif>${{ number_format($ds->price, 2) }}</div>
+                    </footer>
+                </div>
+            </div>
+        @else
+            <div class="card outStock">
+                <div class="card-header">
+                    <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}">
+                    <div class="headerSpan">
+                        <div class="specialBadge">
+                            @if($ds->badge_id > 0)
+                                <img src="{{asset('badges/'.$ds->badge->filepath)}}" alt="" srcset="" height="38px">
                             @endif
-                        </p>
-                        <footer>
-                            @if($ds->discount != '')
+                        </div>
+                        <div class="fab">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p class="text_limit_character dish_description">
+                        @if(session('language') == 1)
+                            {{$ds->name_cn}}
+                        @elseif(session('language') == 2)
+                            {{$ds->name_jp}}
+                        @else
+                            {{$ds->name_en}}
+                        @endif
+                    </p>
+                    <footer>
+                        @if($ds->discount != '')
                             <div class="discountedPrice">
                                 ${{ number_format($ds->discount, 2) }}
                             </div>
-                            @endif
-                            <div @if($ds->discount != '') class="price striked" @else class="price unstriked" @endif>${{ number_format($ds->price, 2) }}</div>
-                        </footer>
-                    </div>
+                        @endif
+                        <div @if($ds->discount != '') class="price striked" @else class="price unstriked" @endif>${{ number_format($ds->price, 2) }}</div>
+                    </footer>
                 </div>
-            @else
-                <div class="card outStock">
-                    <div class="card-header">
-                        <img class="cardImg" src="{{asset('dishes/'.$ds->image)}}" alt="chicken">
-                        <div class="headerSpan">
-                            <div class="specialBadge">
-                                @if($ds->badge_id > 0)
-                                    <img src="{{asset('badges/'.$ds->badge->filepath)}}" alt="" srcset="" height="38px">
-                                @endif
-                            </div>
-                            <div class="fab">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p class="text_limit_character dish_description">
-                            @if(session('language') == 1)
-                                {{$ds->name_cn}}
-                            @elseif(session('language') == 2)
-                                {{$ds->name_jp}}
-                            @else
-                                {{$ds->name_en}}
-                            @endif
-                        </p>
-                        <footer>
-                            @if($ds->discount != '')
-                                <div class="discountedPrice">
-                                    ${{ number_format($ds->discount, 2) }}
-                                </div>
-                            @endif
-                            <div @if($ds->discount != '') class="price striked" @else class="price unstriked" @endif>${{ number_format($ds->price, 2) }}</div>
-                        </footer>
-                    </div>
-                </div>
-            @endif
-        @endforeach
-    </section>
+            </div>
+        @endif
+    @endforeach
+</section>
 </main>
 </div>
 
