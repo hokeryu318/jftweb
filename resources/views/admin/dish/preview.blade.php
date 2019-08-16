@@ -56,7 +56,7 @@
                         <div style="height:34vh; overflow:auto">
                             @foreach ($obj->options as $op)
                                 @if($op->photo_visible != "1")
-                                    <h5 class="font-weight-bold d-block border-bottom fs-25"><b>{{ $op->name }}</b></h5>
+                                    <h5 class="font-weight-bold d-block border-bottom fs-25"><b>{{ $op->display_name_en }}</b></h5>
                                 <div class="ml-4 pl-2">
                                     @foreach ($op->items as $it)
                                         <div class="form-check mb-2">
