@@ -1,5 +1,5 @@
 @foreach ($dishes as $ds)
-    <li class="btn white pt-2 radius pb-2 mb-3 pl-2 pr-2 w-95 waves-effect waves-light category-dish" type="button"
+    <li class="btn white pt-2 radius pb-2 mb-3 pl-2 pr-2 w-95 waves-effect waves-light category-dish"
         data-dish="{{ $ds->id }}"
         data-category = "{{$ds->categories_id}}"
         onclick="onDish(this)"

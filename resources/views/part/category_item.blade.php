@@ -1,4 +1,4 @@
-<li class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light cat-button" type="button"
+<li class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light cat-button"
     onclick="onMain(this)"
     data-id="{{ $cat->id }}"
     data-hassubs="{{ $cat->has_subs }}"
@@ -14,3 +14,5 @@
         </span>
     </h6>
 </li>
+
+
