@@ -97,6 +97,7 @@ Route::get('kitchen/reprint', 'KitchenController@reprint')->name('kitchen.reprin
     Route::post('admin/category/dish_list', 'CategoryController@dish_list')->name('admin.category.dish_list');
     Route::get('admin/category/dish_delete/{id}', 'CategoryController@dish_delete')->name('admin.category.dish_delete');
     Route::get('admin/category/dish_add', 'CategoryController@dish_add')->name('admin.category.dish_add');
+    Route::post('admin/category/edit_title', 'CategoryController@edit_title')->name('admin.category.edit_title');
 
     Route::get('admin/dish', 'DishController@index')->name('admin.dish');
     Route::get('admin/dish/preview/{id}', 'DishController@preview')->name('admin.dish.preview');
@@ -157,3 +158,25 @@ Route::get('kitchen/reprint', 'KitchenController@reprint')->name('kitchen.reprin
     Route::post('admin/setting/sendmail_post', 'SettingController@sendmail_post')->name('admin.setting.sendmail.post');
 //});
 
+
+use Illuminate\Support\Facades\Input;
+//Route::get('admin/category/order-dish', 'CategoryController@order_dish')->name('order-dish'); 
+Route::get('order-dish',function(){
+    $menu = DB::table('dishes')->orderBy('order','ASC')->get();
+    $itemID = Input::get('itemID');
+    $itemIndex = Input::get('itemIndex');
+
+    foreach($menu as $value){
+        return DB::table('dishes')->where('id','=',$itemID)->update(array('order'=> $itemIndex));
+    }
+});
+
+Route::get('order-category',function(){
+    $menu = DB::table('categories')->orderBy('order','ASC')->get();
+    $itemID = Input::get('itemID');
+    $itemIndex = Input::get('itemIndex');
+
+    foreach($menu as $value){
+        return DB::table('categories')->where('id','=',$itemID)->update(array('order'=> $itemIndex));
+    }
+});

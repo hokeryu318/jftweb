@@ -11,11 +11,11 @@ class Category extends Model
 
     public function subs()
     {
-        return $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id')->orderby('order');
     }
 
     public function dishes(){
-        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id');
+        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->orderby('order');
     }
 
     public function parent()
@@ -25,7 +25,7 @@ class Category extends Model
 
     public static function get_mains()
     {
-        return self::where('parent_id', '=', null)->get();
+        return self::where('parent_id', '=', null)->orderby('order')->get();
     }
 
 }

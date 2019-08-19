@@ -15,6 +15,55 @@
         text-align: center;
     }
 </style>
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script>
+    $(function(){
+      $("#scroll-dish").sortable({
+        stop: function(){
+          $.map($(this).find('li'), function(el) {
+            var itemID = el.id;
+            var itemIndex = $(el).index();
+            $.ajax({
+              url:'{{URL::to("order-dish")}}',
+              type:'GET',
+              dataType:'json',
+              data: {itemID:itemID, itemIndex: itemIndex},
+            })
+          });
+        }
+      });
+      $("#category-scroll").sortable({
+        stop: function(){
+          $.map($(this).find('li'), function(el) {
+            var itemID = el.id;
+            var itemIndex = $(el).index();
+            $.ajax({
+              url:'{{URL::to("order-category")}}',
+              type:'GET',
+              dataType:'json',
+              data: {itemID:itemID, itemIndex: itemIndex},
+            })
+          });
+        }
+      });
+       $("#subcategory-scroll").sortable({
+        stop: function(){
+          $.map($(this).find('li'), function(el) {
+            var itemID = el.id;
+            var itemIndex = $(el).index();
+            $.ajax({
+              url:'{{URL::to("order-category")}}',
+              type:'GET',
+              dataType:'json',
+              data: {itemID:itemID, itemIndex: itemIndex},
+            })
+          });
+        }
+      });
+    });
+</script>
 <div class="">
     <div style="padding-top:8%;"></div>
 
@@ -37,10 +86,13 @@
                                 @endforeach
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
-                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" data-toggle="modal" data-target="#addCategoryModal">
+                                <button class="btn bg-info radius pt-2 pb-2 pr-2 pl-2 waves-effect waves-light" data-toggle="modal" data-target="#addCategoryModal">
                                     <h6 class="mb-0 font-weight-bold fs-25">ADD</h6>
                                 </button>
-                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteMainCategory">
+                                <button class="btn bg-info radius pt-2 pb-2 pr-3 pl-3 waves-effect waves-light" onclick="onMainTitleEdit()">
+                                    <h6 class="mb-0 font-weight-bold fs-25">EDIT</h6>
+                                </button>
+                                <button class="btn black radius pt-2 pb-2 pr-3 pl-3 waves-effect waves-light" id="deleteMainCategory">
                                     <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                                 </button>
                             </div>
@@ -69,6 +121,36 @@
                                             <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                                         </button>
                                         <button type="submit" class="btn btn-primary waves-effect waves-light fs-25" onclick="addMainCategory()">
+                                            APPLY
+                                            <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="editCategoryTitleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                                        </button>
+                                    </div>
+                                    <div class="modal-body pr-4">
+                                        <h5 class="text-info font-weight-normal fs-25">English</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_en_cat" id="current_en_cat">
+		                                <h5 class="text-info font-weight-normal fs-25">Mandarine</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_cn_cat" id="current_cn_cat">
+                                        <h5 class="text-info font-weight-normal fs-25">Japanese</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_jp_cat" id="current_jp_cat">
+                                        <input type="hidden" id="current_parent_id" name="current_parent_id">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                                            CANCEL
+                                            <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light fs-25" onclick="onTitleCng()">
                                             APPLY
                                             <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
                                         </button>
@@ -106,6 +188,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="editSubTitleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                                        </button>
+                                    </div>
+                                    <div class="modal-body pr-4">
+                                        <h5 class="text-info font-weight-normal fs-25">English</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_sub_en_cat" id="current_sub_en_cat">
+		                                <h5 class="text-info font-weight-normal fs-25">Mandarine</h5>
+		                                <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_sub_cn_cat" id="current_sub_cn_cat">
+                                        <h5 class="text-info font-weight-normal fs-25">Japanese</h5>
+                                        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="current_sub_jp_cat" id="current_sub_jp_cat">
+                                        <input type="hidden" id="current_sub_parent_id" name="current_sub_parent_id">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                                            CANCEL
+                                            <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light fs-25" onclick="onSubTitleCng()">
+                                            APPLY
+                                            <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-6" style="border-right:1px solid grey">
                             <h5 class="white-text font-weight-bold pl-2 fs-25" style="width:90%; margin:0 auto">SUB CATEGORY</h5>
                             <h6 class="white-text d-inline pl-4 fs-23">USE SUB CATEGORY
@@ -119,10 +231,13 @@
 
                             </div>
                             <div class="col-lg-12 pl-0 pr-0 mt-4 pt-2 align-center">
-                                <button class="btn bg-info radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" onclick="onSubAdd()">
+                                <button class="btn bg-info radius pt-2 pb-2 pr-2 pl-2 waves-effect waves-light" onclick="onSubAdd()">
                                     <h6 class="mb-0 font-weight-bold fs-25">ADD</h6>
                                 </button>
-                                <button class="btn black radius pt-2 pb-2 pr-4 pl-4 waves-effect waves-light" id="deleteSubCategory">
+                                <button class="btn bg-info radius pt-2 pb-2 pr-3 pl-3 waves-effect waves-light" onclick="onSubTitleEdit()">
+                                    <h6 class="mb-0 font-weight-bold fs-25">EDIT</h6>
+                                </button>
+                                <button class="btn black radius pt-2 pb-2 pr-3 pl-3 waves-effect waves-light" id="deleteSubCategory">
                                     <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                                 </button>
                             </div>
@@ -260,14 +375,98 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    //$(document).ready(function(){
         // $('.hspace-category').height($('.switch-style').outerHeight(true));
+    //});
+
+    var changePosition = function(requestData){
+
+        $.ajax({
+            'url': '/sort',
+            'type': 'POST',
+            'data': requestData,
+            'success': function(data) {
+                if (data.success) {
+                    App.notify.success('Saved!');
+                } else {
+                    App.notify.validationError(data.errors);
+                }
+            },
+            'error': function(){
+                App.notify.danger('Something wrong!');
+            }
+        });
+    };
+
+    $(document).ready(function(){
+        var $sortableTable = $('.sortable');
+        if ($sortableTable.length > 0) {
+            $sortableTable.sortable({
+                handle: '.sortable-handle',
+                axis: 'y',
+                update: function(a, b){
+
+                    var entityName = $(this).data('entityname');
+                    var $sorted = b.item;
+
+                    var $previous = $sorted.prev();
+                    var $next = $sorted.next();
+
+                    if ($previous.length > 0) {
+                        changePosition({
+                            parentId: $sorted.data('parentid'),
+                            type: 'moveAfter',
+                            entityName: entityName,
+                            id: $sorted.data('itemid'),
+                            positionEntityId: $previous.data('itemid')
+                        });
+                    } else if ($next.length > 0) {
+                        changePosition({
+                            parentId: $sorted.data('parentid'),
+                            type: 'moveBefore',
+                            entityName: entityName,
+                            id: $sorted.data('itemid'),
+                            positionEntityId: $next.data('itemid')
+                        });
+                    } else {
+                        App.notify.danger('Something wrong!');
+                    }
+                },
+                cursor: "move"
+            });
+        }
+        $('.sortable td').each(function(){
+            $(this).css('width', $(this).width() +'px');
+        });
     });
-    var currentMain = '';
+
+   var currentMain = '';
     var currentSub = '';
     var clickedSub = 0;
     var haveSub = 0;
 
+    function onMainTitleEdit(){
+        if(currentMain != ''){
+            $('#current_parent_id').val(currentMain);
+            $('#editCategoryTitleModal').modal('toggle');
+            // currentMain = '';
+        }
+        else{
+            $("#confirm_letter")[0].innerText = "Please select the Category.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+    }
+    function onSubTitleEdit(){
+        if(currentSub != ''){
+            $('#current_sub_parent_id').val(currentSub);
+            $('#editSubTitleModal').modal('toggle');
+            // currentMain = '';
+        }
+        else{
+            $("#confirm_letter")[0].innerText = "Please select the Sub Category.";
+            $("#confirm_parent_category").modal('toggle');
+        }
+    }
     function onMain(obj){
         currentSub = '';
         haveSub = 0;
@@ -349,6 +548,76 @@
                     $('#name_cn_cat').val('');
                     $('#name_jp_cat').val('');
                     $('#addCategoryModal').modal('hide');
+                }
+            });
+        }
+    }
+    function onTitleCng()
+    {
+        var parent_id = $('#current_parent_id').val();
+        var name_en = $('#current_en_cat').val();
+        if(name_en == '') {
+            alert('Please input English name!');
+        } else {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('admin.category.edit_title') }}",
+                data:{
+                    name_en : $('#current_en_cat').val(),
+                    name_cn : $('#current_cn_cat').val(),
+                    name_jp : $('#current_jp_cat').val(),
+                    parent_id : parent_id,
+                    _token : "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    if(parent_id != ''){
+
+                        var html='';
+                        if(result.length > 15)   html = result.substr(0,15) + "...";
+                        else html = result;
+    
+                        document.getElementById("c_ti_" + currentMain).innerHTML = html;
+                    } 
+                    $('#current_en_cat').val('');
+                    $('#current_cn_cat').val('');
+                    $('#current_jp_cat').val('');
+                    $('#editCategoryTitleModal').modal('hide');
+                }
+            });
+        }
+    }
+    function onSubTitleCng()
+    {
+        var parent_id = $('#current_sub_parent_id').val();
+        var name_en = $('#current_sub_en_cat').val();
+        if(name_en == '') {
+            alert('Please input English name!');
+        } else {
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('admin.category.edit_title') }}",
+                data:{
+                    name_en : $('#current_sub_en_cat').val(),
+                    name_cn : $('#current_sub_cn_cat').val(),
+                    name_jp : $('#current_sub_jp_cat').val(),
+                    parent_id : parent_id,
+                    _token : "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    if(parent_id != ''){
+
+                        var html = '';
+                        if(result.length > 15)   html = result.substr(0,15) + "...";
+                        else html = result;
+    
+                        document.getElementById("s_ti_" + currentSub).innerHTML = html;
+                    } 
+                    $('#current_en_cat').val('');
+                    $('#current_cn_cat').val('');
+                    $('#current_jp_cat').val('');
+                    $('#editSubTitleModal').modal('hide');
                 }
             });
         }

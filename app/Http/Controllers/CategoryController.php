@@ -6,14 +6,15 @@ use App\Model\DishCategory;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Dish;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
     //
     public function index()
     {
-        $categories = Category::where('parent_id' ,'=', null)->get();
-        $dishes = Dish::get();
+        $categories = Category::where('parent_id' ,'=', null)->orderby('order')->get();
+        $dishes = Dish::orderby('order')->get();
         return view('admin.category.list')->with(compact('categories', 'dishes'));
     }
 
@@ -36,6 +37,22 @@ class CategoryController extends Controller
         }
 
         //return redirect()->route('admin.category');
+    }
+
+    public function edit_title()
+    {
+        $parent = Category::find(request()->parent_id);
+
+        if(!is_null($parent)){
+            $parent->name_en = request()->name_en;
+            $parent->name_cn = request()->name_cn;
+            $parent->name_jp = request()->name_jp;
+            $parent->has_subs = 1;
+            $parent->save();
+            return request()->name_en;
+            //return (string)view('part.category_item', ['cat' => $parent])->render();
+            //return (string)view('part.subcategory_item', ['sub' => $parent])->render();
+        } 
     }
 
     public function delete($id){

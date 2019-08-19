@@ -35,7 +35,7 @@ class CustomerController extends Controller
         }
         $table_name = rtrim($table_name, '+');
         //echo $table_name;
-        $categories = Category::get()->toArray();
+        $categories = Category::orderby('order')->get()->toArray();
         $dishes = array();
         if(count($categories) > 0){
             $category_record = Category::find($categories[0]['id']);
@@ -48,7 +48,7 @@ class CustomerController extends Controller
         foreach ($categories as $category) {
             $category_all[$category['id']] = $category;
             if($category['has_subs'] == 1){
-                $sub_categories = Category::where('parent_id', $category['id'])->get()->toArray();
+                $sub_categories = Category::where('parent_id', $category['id'])->orderby('order')->get()->toArray();
                 $category_all[$category['id']]['children'] = $sub_categories;
             }
         }
