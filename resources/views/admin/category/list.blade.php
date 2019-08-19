@@ -440,7 +440,7 @@
         });
     });
 
-   var currentMain = '';
+    var currentMain = '';
     var currentSub = '';
     var clickedSub = 0;
     var haveSub = 0;

@@ -5,8 +5,8 @@
     <h6 class="font-weight-bold black-text mb-0 text-left cat-caption">
         <span class="fa fa-navicon" style="margin:-12px 9px 0 9px;"></span>
         <span class="fs-25" id="s_ti_{{ $sub->id }}">
-            @if(strlen($sub->name_en) > 15)
-                {{ substr($sub->name_en, 0, 15)."..." }}
+            @if(strlen($sub->name_en) > 11)
+                {{ substr($sub->name_en, 0, 11)."..." }}
             @else
                 {{ $sub->name_en }}
             @endif
