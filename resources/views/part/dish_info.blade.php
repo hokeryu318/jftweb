@@ -38,7 +38,7 @@
                         <img src="{{asset('badges/'.$dish->badge->filepath)}}" alt="" srcset="" style="position: absolute;" height="45px">
                     @endif
                 </div>
-                <img src="{{asset('dishes/'.$dish->image)}}" alt="chicken" width="300px" height="340px">
+                <img @if($dish->image) src="{{asset('dishes/'.$dish->image)}}" @endif width="300px" height="340px">
             </div>
             <div class="rightContent">
                 <div class="contentHeader" style="width: 99.5%; border-radius: 0px;">
@@ -144,7 +144,7 @@
                         <img src="{{asset('badges/'.$dish->badge->filepath)}}" alt="" srcset="" style="position: absolute;" height="45px">
                     @endif
                 </div>
-                <img src="{{asset('dishes/'.$dish->image)}}" alt="chicken" width="300px" height="410px">
+                <img @if($dish->image) src="{{asset('dishes/'.$dish->image)}}" @endif width="300px" height="410px">
             </div>
             <div class="rightContent">
                 <div class="scrollable menu">

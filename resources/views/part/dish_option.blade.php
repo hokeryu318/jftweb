@@ -72,7 +72,7 @@
     <div class="modalContent-option-wide">
         @foreach($items as $item)
             <div class="gridContent">
-                <img src="{{asset('options/'.$item->image)}}" style="width:70px;height:70px;" alt="chicken">
+                <img src="{{asset('options/'.$item->image)}}" style="width:70px;height:70px;">
             </div>
             <div class="gridContent-check" onclick="selectItem()">
                 <label class="container">{{$item->name}}
