@@ -15,7 +15,7 @@
         text-align: center;
     }
 </style>
-<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script>
@@ -96,6 +96,7 @@
                                     <h6 class="mb-0 font-weight-bold fs-25">Delete</h6>
                                 </button>
                             </div>
+                            <input type="hidden" id="add_flag" name="add_flag">
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -490,6 +491,7 @@
             success: function(result){
                 $('#subcategory-scroll').html(result.subcategory_list);
                 $('#scroll-dish').html(result.dishes);
+                $('#add_flag').val(result.add_flag);
                 if(result.subs_count > 0){
                     $('#chk_hassubs').prop('checked', true);
                 }
@@ -655,6 +657,11 @@
         }
     }
     function onSubAdd(){
+        if( $('#add_flag').val() == 1 ){
+            $("#confirm_letter")[0].innerText = "Please delete the Dishes.";
+            $("#confirm_parent_category").modal('toggle');
+            return;
+        }
         if($('#chk_hassubs').is(':checked') && currentMain != ''){
             $('#parent_id').val(currentMain);
             $('#addModal').modal('toggle');

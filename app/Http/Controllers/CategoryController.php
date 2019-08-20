@@ -81,7 +81,9 @@ class CategoryController extends Controller
         $subs_count = count($subs);
         $shtml = (string)view('part.subcategory_list', compact('subs'))->render();
         $dish_html = self::dish_list();
-        return response()->json(['subcategory_list' => $shtml, 'dishes' => $dish_html, 'subs_count' => $subs_count]);
+        if(empty($shtml) && !empty($dish_html))   $add_flag = 1;
+        else    $add_flag = '';
+        return response()->json(['subcategory_list' => $shtml, 'dishes' => $dish_html, 'subs_count' => $subs_count, 'add_flag' => $add_flag]);
     }
 
     public function dish_list()
