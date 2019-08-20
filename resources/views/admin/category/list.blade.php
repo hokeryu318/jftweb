@@ -657,7 +657,7 @@
         }
     }
     function onSubAdd(){
-        if( $('#add_flag').val() == 1 ){
+        if( $('#add_flag').val() == 1 && $('#dish_count').val() != 0 ){
             $("#confirm_letter")[0].innerText = "Please delete the Dishes.";
             $("#confirm_parent_category").modal('toggle');
             return;
