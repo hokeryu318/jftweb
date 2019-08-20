@@ -52,7 +52,9 @@
                             <td width="52%" style="padding-left: 0;"><span class="fs-25">{{ $d->name_en }}</span></td>
                             <td width="12%" style="padding-left: 9px;">
                                 @if($d->group_id)
-                                    <span class="fs-25">{{ $d->group_name }}</span>
+                                    <span class="fs-25">
+                                        {{ $d->group_name }}
+                                    </span>
                                 @endif
                             </td>
                             <td width="12%" style="padding-left: 9px;"><span class="fs-25">$ {{ number_format($d->price, 2) }}</span></td>

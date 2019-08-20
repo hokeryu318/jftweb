@@ -667,7 +667,7 @@
     }
     function onSubAdd(){
         if( $('#add_flag').val() == 1 && $('#dish_count').val() != 0 ){
-            $("#confirm_letter")[0].innerText = "Please delete the Dishes.";
+            $("#confirm_letter")[0].innerText = "For add SubCategory, must delete the Dishes to MainCategory.";
             $("#confirm_parent_category").modal('toggle');
             return;
         }

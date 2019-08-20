@@ -55,7 +55,7 @@ class CustomerController extends Controller
 
         $last_order_time = Order::orderBy('time', 'desc')->pluck('time')->first();
 //        dd($order_table);
-//        dd($dishes);
+//        dd($categories);
 
         $img_name = Storage::disk('screen')->files();
         $img_name = json_encode($img_name);
