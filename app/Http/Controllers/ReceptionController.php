@@ -321,41 +321,45 @@ class ReceptionController extends Controller
         }
 
         $order_dishes = OrderDish::where('order_id', $order_id)->get();
-        dd($order_dishes);
+
         $total = 0;
         foreach($order_dishes as $order_dish) {
 
             $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
-            $order_dish->dish_name_en = $dish_list->name_en;
 
-            $order_dish->options = $order_dish->Order_Option()->get();
-            $items_price = 0;
-            foreach ($order_dish->options as $option) {
+            if($dish_list) {
+                $order_dish->dish_name_en = $dish_list->name_en;
+
+                $order_dish->options = $order_dish->Order_Option()->get();
+                $items_price = 0;
+                foreach ($order_dish->options as $option) {
 //                $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
 //                $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
 //                $option->item_name = $option_items->name;
 //                $items_price += $option_items->price;
 
-                if($option->option_id)
-                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
-                else
-                    $option->option_name = '';
+                    if($option->option_id)
+                        $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
+                    else
+                        $option->option_name = '';
 
-                if($option->item_id) {
+                    if($option->item_id) {
 
-                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-                    $option->item_name = $option_items->name;
-                    $items_price += $option_items->price;
+                        $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
+                        $option->item_name = $option_items->name;
+                        $items_price += $option_items->price;
+                    }
+                    else {
+                        $option->item_name = '';
+                        $items_price = 0;
+                    }
+
                 }
-                else {
-                    $option->item_name = '';
-                    $items_price = 0;
-                }
-
+                $order_dish->each_price = $order_dish->dish_price + $items_price;
+                $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+                $total += $order_dish->sub_total;
             }
-            $order_dish->each_price = $order_dish->dish_price + $items_price;
-            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
-            $total += $order_dish->sub_total;
+
         }
 
         $gst = Receipt::profile()->gst;
