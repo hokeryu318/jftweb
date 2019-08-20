@@ -321,12 +321,11 @@ class ReceptionController extends Controller
         }
 
         $order_dishes = OrderDish::where('order_id', $order_id)->get();
-
+        dd($order_dishes);
         $total = 0;
         foreach($order_dishes as $order_dish) {
 
             $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
-            dd($dish_list);
             $order_dish->dish_name_en = $dish_list->name_en;
 
             $order_dish->options = $order_dish->Order_Option()->get();
