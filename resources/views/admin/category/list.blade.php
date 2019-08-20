@@ -498,6 +498,13 @@
                 else {
                     $('#chk_hassubs').prop('checked', false);
                 }
+                if(result.subcategory_list != '')
+                {
+                    clickedSub = 0;
+                    haveSub = 1;
+                }
+                else
+                    haveSub = 0;
             }
         });
     }
@@ -652,6 +659,8 @@
                     $('#name_cn').val('');
                     $('#name_jp').val('');
                     $('#addModal').modal('hide');
+                    clickedSub = 0;
+                    haveSub = 1;
                 }
             });
         }
@@ -866,6 +875,7 @@
                         },
                         success: function(result){
                             $('#scroll-dish').html(result);
+                            $('#add_flag').val('0');
                         }
                     });
                     if(currentSub != '')
@@ -897,6 +907,8 @@
                         $("[data-dish='" + current_dish + "']").remove();
                         $("#confirm_category_modal").modal('hide');
                         current_dish = '';
+                        var cnt = $('#dish_count').val() - 1;
+                        $('#dish_count').val(cnt);
                     }
                 }
             });
