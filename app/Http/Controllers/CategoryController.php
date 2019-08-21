@@ -47,7 +47,6 @@ class CategoryController extends Controller
             $parent->name_en = request()->name_en;
             $parent->name_cn = request()->name_cn;
             $parent->name_jp = request()->name_jp;
-            $parent->has_subs = 1;
             $parent->save();
             return request()->name_en;
             //return (string)view('part.category_item', ['cat' => $parent])->render();
