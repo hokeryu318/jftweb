@@ -89,6 +89,7 @@ class OptionController extends Controller
             }
         } else {
             $obj = Option::find(request()->id);
+            $obj->name = request()->name;
             $obj->display_name_en = request()->display_name_en;
             $obj->display_name_cn = request()->display_name_cn;
             $obj->display_name_jp = request()->display_name_jp;
