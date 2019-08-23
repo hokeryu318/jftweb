@@ -28,9 +28,9 @@
             <p>Base</p>
 
             @if($dish->discount != '')
-                <span class="discountedPrice">${{ number_format($dish->price, 2) }}</span>
+                <span class="discountedPrice">${{ number_format($dish->price, 2) }}&nbsp;</span>
             @else
-                <span class="price">${{ number_format($dish->price, 2) }}</span>
+                <span class="price">${{ number_format($dish->price, 2) }}&nbsp;</span>
             @endif
 
             <span>

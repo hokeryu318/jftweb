@@ -689,8 +689,6 @@
             }
         });
 
-        console.dir(option_price);
-
         var opt_itm = '';
         var itm_price = '';
         var display_item_price = '';
@@ -701,24 +699,26 @@
             for(var i=0;i<option_price.length;i++) {
                 opt_itm = option_price[i][1].split(':');
                 itm_price = opt_itm[1];
-                if(itm_price != '') {
+
+                if(itm_price != 0.00) {
                     if(itm_price < 0) {
                         display_item_price = "<span class='price'>" + "$" + (-1)*itm_price + "</span>";
                         sign = ' - ';
-                    }
-                    else {
+                    } else {
                         display_item_price = "<span class='price'>" + "$" + itm_price + "</span>";
                         sign = ' + ';
                     }
                 }
-                else
+                else {
                     display_item_price = "";
+                    sign = ' + ';
+                }
                 option_price_str += "<span class='price'>" + sign + "</span>" + opt_itm[0] + display_item_price;
             }
         }
         else {
             if(number_selection == '') {
-                alert('Number selection is empty. Please ask to waiter!');
+                alert('Number selection for this item is empty. Please ask to waiter!');
             } else {
                 alert('You can select ' + number_selection + ' only for this option.');
             }
