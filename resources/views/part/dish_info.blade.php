@@ -97,7 +97,7 @@
                 @if($count == 0)
                     <button class="cta" onclick="nextModal('thx');">Order now</button>
                 @else
-                    <button class="cta" onclick="nextModal('main');">SELECT XXX</button>
+                    <button class="cta" onclick="nextModal('main');">SELECT ...</button>
                 @endif
             </div>
         </div>
@@ -147,8 +147,9 @@
                 <img @if($dish->image) src="{{asset('dishes/'.$dish->image)}}" @endif width="300px" height="410px">
             </div>
             <div class="rightContent">
-                <div class="scrollable menu">
-                    <div class="menuClassesHeader" style="font-size: 1.2em;">Please Select</div>
+                <div class="menuClassesHeader" style="font-size: 1.2em;">Please Select</div>
+                <div class="scrollable menu" style="height:350px;">
+                    {{--<div class="menuClassesHeader" style="font-size: 1.2em;">Please Select</div>--}}
                     <?php $index = 0?>
                     @foreach($options as $option)
                         <?php $index ++?>

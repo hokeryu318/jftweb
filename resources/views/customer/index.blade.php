@@ -296,16 +296,16 @@
 
         $(document).mousemove(function(){
             clearTimeout(mousetimeout);
-            
+
             if (screensaver_active) {
                 stop_screensaver();
             }
 
             mousetimeout = setTimeout(function(){
                 show_screensaver();
-            }, 1000 * idletime); // 5 secs			
+            }, 1000 * idletime); // 5 secs
         });*/
-        
+
         (function(poll, timeout){
 
             var _idle = false,
@@ -330,8 +330,8 @@
                         $('#screensaver').fadeIn(5000);
                         _idle = true;
 
-                        setInterval(function(){ 
-                            path = 
+                        setInterval(function(){
+                            path =
                             document.getElementById("screensaver").innerHTML='<img src={!! asset("screen/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
                             if( cnt > i + 1 ) i++;
                             else i = 0;
@@ -340,10 +340,10 @@
                     }
                 }
 
-            $(window).bind('click', _activeNow);            
+            $(window).bind('click', _activeNow);
 
             /*$(window).click(function(){
-                _activeNow();			
+                _activeNow();
             });*/
 
             window.setInterval(_poll, poll);
@@ -389,6 +389,7 @@
              }
         });
     }
+
     function onDishes1(category_id){
 
         var selected_obj = $("#category_"+category_id);
@@ -405,6 +406,7 @@
             }
         });
     }
+
     function orderNow(dish_id){
 
         $('#myModal').html('');
@@ -503,12 +505,14 @@
                 break;
         }
     }
+
     function next_page(option_id_arr, index){
 
         var dish_id = $("#dish-id").val();
         var items_id = $("#items-id").val();
      // console.log(items_id);
         selected_items_id.push(items_id);
+        console.dir(selected_items_id);
 
         if(chk_prev_flag == 1)
             index++;
@@ -601,9 +605,63 @@
         $('#thirdModal').modal('hide');
     }
 
+    // function selectItem(){
+    //
+    //     var display_name = $("#display_name").val();
+    //     var option_price_obj = $("#option_price");
+    //     var number_selection = $("#number_selection").val();
+    //     var items_id_obj = $("#items-id");
+    //
+    //     var option_price = [];
+    //     var items_id = [];
+    //
+    //     $("input:checkbox").each(function(){
+    //         var name = $(this).attr("name");
+    //         var it_chk_val = '';
+    //         if($("input:checkbox[name="+name+"]:checked").length > 0) {
+    //             if($("input:checkbox[name="+name+"]:checked").val()) {
+    //                 it_chk_val = parseFloat($("input:checkbox[name="+name+"]:checked").val());
+    //                 option_price.push([name, it_chk_val.toFixed(2)]);
+    //             }
+    //             else {
+    //                 option_price.push([name, '']);
+    //             }
+    //             items_id.push([name]);
+    //         }
+    //     });
+    //
+    //     var itm_price = '';
+    //     var display_item_price = '';
+    //     var option_price_str = '';
+    //     if(option_price.length <= number_selection) {
+    //         for(var i=0;i<option_price.length;i++) {
+    //             itm_price = option_price[i][1];
+    //             if(itm_price != '')
+    //                 display_item_price = "<span class='price'>" + "$" + itm_price + "</span>";
+    //             else
+    //                 display_item_price = "";
+    //             option_price_str += "<span class='price'> + </span>" + display_name + display_item_price;
+    //         }
+    //     }
+    //     else {
+    //         alert('You can select ' + number_selection + ' only for this option.');
+    //         //all check info format
+    //         $("input:checkbox").each(function(){
+    //             var id = $(this).attr("id");
+    //             document.getElementById(id).checked = false;
+    //             option_price = [];
+    //             items_id = [];
+    //         });
+    //     }
+    //
+    //     option_price_obj.html(option_price_str);
+    //     items_id_obj.val(items_id);
+    // }
+
     function selectItem(){
 
         var display_name = $("#display_name").val();
+
         var option_price_obj = $("#option_price");
         var number_selection = $("#number_selection").val();
         var items_id_obj = $("#items-id");
@@ -615,9 +673,14 @@
             var name = $(this).attr("name");
             var it_chk_val = '';
             if($("input:checkbox[name="+name+"]:checked").length > 0) {
+                var op_vals = [];
                 if($("input:checkbox[name="+name+"]:checked").val()) {
-                    it_chk_val = parseFloat($("input:checkbox[name="+name+"]:checked").val());
-                    option_price.push([name, it_chk_val.toFixed(2)]);
+                    var op_val = $("input:checkbox[name="+name+"]:checked").val();
+                    op_vals = op_val.split(':');
+
+                    // it_chk_val = parseFloat(op_vals[1]);
+                    // option_price.push([name, op_vals[0] + ':' + parseFloat(op_vals[1]).toFixed(2)]);
+                    option_price.push([name, op_val]);
                 }
                 else {
                     option_price.push([name, '']);
@@ -626,21 +689,39 @@
             }
         });
 
+        console.dir(option_price);
+
+        var opt_itm = '';
         var itm_price = '';
         var display_item_price = '';
+        var sign = '';
         var option_price_str = '';
+
         if(option_price.length <= number_selection) {
             for(var i=0;i<option_price.length;i++) {
-                itm_price = option_price[i][1];
-                if(itm_price != '')
-                    display_item_price = "<span class='price'>" + "$" + itm_price + "</span>";
+                opt_itm = option_price[i][1].split(':');
+                itm_price = opt_itm[1];
+                if(itm_price != '') {
+                    if(itm_price < 0) {
+                        display_item_price = "<span class='price'>" + "$" + (-1)*itm_price + "</span>";
+                        sign = ' - ';
+                    }
+                    else {
+                        display_item_price = "<span class='price'>" + "$" + itm_price + "</span>";
+                        sign = ' + ';
+                    }
+                }
                 else
                     display_item_price = "";
-                option_price_str += "<span class='price'>+</span>" + display_name + display_item_price;
+                option_price_str += "<span class='price'>" + sign + "</span>" + opt_itm[0] + display_item_price;
             }
         }
         else {
-            alert('You can select ' + number_selection + ' only for this option.');
+            if(number_selection == '') {
+                alert('Number selection is empty. Please ask to waiter!');
+            } else {
+                alert('You can select ' + number_selection + ' only for this option.');
+            }
             //all check info format
             $("input:checkbox").each(function(){
                 var id = $(this).attr("id");
@@ -648,11 +729,11 @@
                 option_price = [];
                 items_id = [];
             });
+
         }
 
         option_price_obj.html(option_price_str);
         items_id_obj.val(items_id);
-        // console.log(items_id);
     }
 
     function reviewOrder(option_id_arr, index){

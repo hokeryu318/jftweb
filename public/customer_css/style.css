@@ -331,12 +331,18 @@ section{
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: auto;
     grid-gap: 40px;
-    height: 373px;
+    height: 320px;
 }
 .modalContent-option-wide{
     margin: 15px 17px 0px 12px;
     display: grid;
     grid-template-columns: repeat(8,1fr);
+    /*grid-template-rows: auto auto auto auto;*/
+    /*grid-gap: 10px;*/
+    grid-auto-rows: max-content;
+    grid-row-gap: 10px;
+    height: 50%;
+    overflow-y: auto;
 }
 .modalContent-3{
     margin-top: 8px ;
@@ -542,8 +548,7 @@ section{
 
 
 .btnBottom-1{
-    float: right;
-    position: fixed;
+    float: left;
     font-weight: 100;
     font-size: 1.5rem;
     background: #A6A6A6;

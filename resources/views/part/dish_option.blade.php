@@ -7,7 +7,7 @@
     <input type="hidden" id="number_selection" value="{{$option->number_selection}}">
 
     {{--<span class="close" onclick="$('#thirdModal').modal('hide');Global_format();">&times;</span>--}}
-    <img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin-right: 12px;" class="close" onclick="$('#thirdModal').modal('toggle')" />
+    <img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin-right: 12px;" class="close" onclick="base_page()" />
     <div class="modalHeader" style="padding-left: 12px;">
         <h3>
             @if(session('language') == 1)
@@ -31,30 +31,45 @@
             <p>Base</p>
 
             @if($dish->discount != '')
-                <span class="discountedPrice">${{ number_format($dish->price, 2) }}</span>
+                <span class="discountedPrice">${{ number_format($dish->price, 2) }}&nbsp;</span>
             @else
-                <span class="price">${{ number_format($dish->price, 2) }}</span>
+                <span class="price">${{ number_format($dish->price, 2) }}&nbsp;</span>
             @endif
-
+            <span>
             @if($slt_items)
                 @for($i=0;$i<count($slt_items);$i++)
                     @for($j=0;$j<count($slt_items[$i]['items_id_arr']);$j++)
-                        <span class='price'>+</span>
+                        @if($slt_items[$i][$j]['price'] < 0)
+                            <span class="price">-</span>
+                        @else
+                            <span class="price">+</span>
+                        @endif
                         <span>
-                            @if(session('language') == 1)
-                                {{ $slt_items[$i]['display_name_cn'] }}
-                            @elseif(session('language') == 2)
-                                {{ $slt_items[$i]['display_name_jp'] }}
-                            @else
-                                {{ $slt_items[$i]['display_name_en'] }}
+                            {{--@if(session('language') == 1)--}}
+                                {{--{{ $slt_items[$i]['display_name_cn'] }}--}}
+                            {{--@elseif(session('language') == 2)--}}
+                                {{--{{ $slt_items[$i]['display_name_jp'] }}--}}
+                            {{--@else--}}
+                                {{--{{ $slt_items[$i]['display_name_en'] }}--}}
+                            {{--@endif--}}
+                            {{ $slt_items[$i][$j]['name'] }}
+                        </span>
+                        {{--<span class="price">@if($slt_items[$i][$j]['price'] != 0){{ '$'.number_format($slt_items[$i][$j]['price'], 2) }}@endif</span>--}}
+                        <span class="price">
+                            @if($slt_items[$i][$j]['price'] != 0)
+                                @if($slt_items[$i][$j]['price'] < 0)
+                                    {{ '$'.number_format((-1)*$slt_items[$i][$j]['price'], 2) }}
+                                @else
+                                    {{ '$'.number_format($slt_items[$i][$j]['price'], 2) }}
+                                @endif
                             @endif
                         </span>
-                        <span class="price">@if($slt_items[$i][$j]['price'] != 0){{ '$'.number_format($slt_items[$i][$j]['price'], 2) }}@endif</span>
                     @endfor
                 @endfor
             @endif
-
             <span id="option_price"></span>
+            </span>
+
         </div>
     </div>
     <div class="contentHeader" style="margin: 13px 2px 0 12px;">
@@ -85,8 +100,8 @@
                             (-${{ number_format((-1)*$item->price, 2) }})
                         @endif
                     </span>
-                    {{--<input type="radio" name="radio">--}}
-                    <input type="checkbox" class="checked_items" value="{{$item->price}}" name="{{$item->id}}" id="check_{{$item->id}}">
+                    {{--<input type="checkbox" class="checked_items" value="{{$item->price}}" name="{{$item->id}}" id="check_{{$item->id}}">--}}
+                    <input type="checkbox" class="checked_items" value="{{$item->name}}:{{number_format($item->price, 2)}}" name="{{$item->id}}" id="check_{{$item->id}}">
                     <span class="checkmark"></span>
                 </label>
             </div>

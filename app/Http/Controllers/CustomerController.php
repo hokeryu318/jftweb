@@ -156,21 +156,33 @@ class CustomerController extends Controller
             $items_id_arr = explode(',', $selected);
 
             if($items_id_arr[0]) {
-                $op_id = Item::where('id', $items_id_arr[0])->pluck('option_id');
-                $slt_items[$i]['display_name_en'] = Option::where('id', $op_id)->pluck('display_name_en')->first();
-                $slt_items[$i]['display_name_cn'] = Option::where('id', $op_id)->pluck('display_name_cn')->first();
-                $slt_items[$i]['display_name_jp'] = Option::where('id', $op_id)->pluck('display_name_jp')->first();
                 $slt_items[$i]['items_id_arr'] = $items_id_arr;
-
                 $j = 0;
                 foreach($items_id_arr as $its_id) {
-                    $it_pri = Item::where('id', $its_id)->pluck('price')->first();
-                    $slt_items[$i][$j]['price'] = $it_pri;
+                    $it_pri = Item::where('id', $its_id)->get()->first();
+                    $slt_items[$i][$j]['name'] = $it_pri->name;
+                    $slt_items[$i][$j]['price'] = $it_pri->price;
                     $j++;
                 }
-
                 $i++;
             }
+
+//            if($items_id_arr[0]) {
+//                $op_id = Item::where('id', $items_id_arr[0])->pluck('option_id');
+//                $slt_items[$i]['display_name_en'] = Option::where('id', $op_id)->pluck('display_name_en')->first();
+//                $slt_items[$i]['display_name_cn'] = Option::where('id', $op_id)->pluck('display_name_cn')->first();
+//                $slt_items[$i]['display_name_jp'] = Option::where('id', $op_id)->pluck('display_name_jp')->first();
+//                $slt_items[$i]['items_id_arr'] = $items_id_arr;
+//
+//                $j = 0;
+//                foreach($items_id_arr as $its_id) {
+//                    $it_pri = Item::where('id', $its_id)->pluck('price')->first();
+//                    $slt_items[$i][$j]['price'] = $it_pri;
+//                    $j++;
+//                }
+//
+//                $i++;
+//            }
 
         }
 
@@ -213,21 +225,33 @@ class CustomerController extends Controller
             $items_id_arr = explode(',', $selected);
 
             if($items_id_arr[0]) {
-                $op_id = Item::where('id', $items_id_arr[0])->pluck('option_id');
-                $slt_items[$i]['display_name_en'] = Option::where('id', $op_id)->pluck('display_name_en')->first();
-                $slt_items[$i]['display_name_cn'] = Option::where('id', $op_id)->pluck('display_name_cn')->first();
-                $slt_items[$i]['display_name_jp'] = Option::where('id', $op_id)->pluck('display_name_jp')->first();
                 $slt_items[$i]['items_id_arr'] = $items_id_arr;
-
                 $j = 0;
                 foreach($items_id_arr as $its_id) {
-                    $it_pri = Item::where('id', $its_id)->pluck('price')->first();
-                    $slt_items[$i][$j]['price'] = $it_pri;
+                    $it_pri = Item::where('id', $its_id)->get()->first();
+                    $slt_items[$i][$j]['name'] = $it_pri->name;
+                    $slt_items[$i][$j]['price'] = $it_pri->price;
                     $j++;
                 }
-
                 $i++;
             }
+
+//            if($items_id_arr[0]) {
+//                $op_id = Item::where('id', $items_id_arr[0])->pluck('option_id');
+//                $slt_items[$i]['display_name_en'] = Option::where('id', $op_id)->pluck('display_name_en')->first();
+//                $slt_items[$i]['display_name_cn'] = Option::where('id', $op_id)->pluck('display_name_cn')->first();
+//                $slt_items[$i]['display_name_jp'] = Option::where('id', $op_id)->pluck('display_name_jp')->first();
+//                $slt_items[$i]['items_id_arr'] = $items_id_arr;
+//
+//                $j = 0;
+//                foreach($items_id_arr as $its_id) {
+//                    $it_pri = Item::where('id', $its_id)->pluck('price')->first();
+//                    $slt_items[$i][$j]['price'] = $it_pri;
+//                    $j++;
+//                }
+//
+//                $i++;
+//            }
 
         }
 
