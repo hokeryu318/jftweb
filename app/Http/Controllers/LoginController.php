@@ -15,13 +15,39 @@ use App\Model\Order;
 class LoginController extends Controller
 {
     //
-    public function getLogin()
+    public function getLogin(Request $request)
     {
         //get ip address from database
         $profile = Receipt::profile();
         //last get table number(ordered already)
         $table_last = Table::where('index', 0)->orderBy('id', 'desc')->first();
         return view('login')->with(compact('table_last', 'profile'));
+    }
+
+    public function appLogin(Request $request){
+
+        $urls = $request->url;
+
+        $url_list = explode('#', $urls);
+        $role = $url_list[1];
+        $url = $url_list[0];
+
+        session(['role' => $role]);
+
+        if($role == 'reception' || $role == 'master') {
+            return redirect()->route('reception.seated', ['status' => 'seated']);
+        } elseif($role == 'menu') {
+            $list = explode('*', $url);
+            $or_tb_list = explode('?', $list[1]);
+            $or_list = explode('=', $or_tb_list[0]);
+            $order_id = $or_list[1];
+            $tb_list = explode('=', $or_tb_list[1]);
+            $table_id = $tb_list[1];
+            return redirect()->route('customer.index', ['order_id'=>$order_id, 'table_id'=>$table_id]);
+        } elseif($role == 'kitchen') {
+            return redirect(route('kitchen.main_screen'));
+        }
+
     }
 
     public function postLogin(Request $request){

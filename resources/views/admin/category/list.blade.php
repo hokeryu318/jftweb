@@ -306,7 +306,7 @@
                                     <div class="col-8"><label class="txtdemibold mt-2 fs-25">{{$dish->name_en}}</label></div>
                                     <div class="col-4">
                                         <div class="float-right mt-2">
-                                            <label class="bs-switch ">
+                                            <label class="bs-switch">
                                                 <input type="checkbox" onclick="setDishId(this, '{{$dish->id}}');" class="common_check" id="dish_id_{{$dish->id}}">
                                                 <span class="slider round"></span>
                                             </label>

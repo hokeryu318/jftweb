@@ -11,9 +11,11 @@
 |
 */
 
+Route::get('/', 'LoginController@getLogin');
+//Route::post('/', 'LoginController@getLogin');
 Route::get('/', 'LoginController@getLogin')->name('loginform');
-Route::get('login', 'LoginController@getLogin')->name('loginform');
 Route::post('login', 'LoginController@postLogin')->name('login');
+//Route::get('login', 'LoginController@appLogin')->name('applogin');
 Route::post('change_ip', 'LoginController@change_ip')->name('change_ip');
 
 Route::get('admin/login', 'LoginController@adminLogin')->name('admin.check');
