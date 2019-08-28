@@ -144,13 +144,14 @@
     function onDishes(category_id){
         select_list = [];
         var selected_obj = $("#category_"+category_id);
+        var order_id =  <?php echo(json_encode($order_id)) ?>;
         $(".common_category").removeClass("selected_category_color");
         selected_obj.toggleClass('selected_category_color');
         $.ajax({
             type:"POST",
             url:"{{ route('reception.dish_list') }}",
             data:{
-                category: category_id, _token:"{{ csrf_token() }}"
+                category: category_id, _token:"{{ csrf_token() }}",order_id: order_id
             },
             success: function(result){
                 $('#dish-content').html(result);

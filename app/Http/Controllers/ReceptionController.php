@@ -24,6 +24,8 @@ use App\Model\Dish;
 use App\Model\Option;
 use App\Model\Item;
 use App\Model\Room;
+use App\Model\Holiday;
+use App\Model\Timeslot;
 
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -523,14 +525,72 @@ class ReceptionController extends Controller
     public function dish_list()
     {
         $category = Category::find(request()->category);
-        $dishes = $category->dishes;
-        foreach($dishes as $dish){
-            $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-            $dish->options = $dish->options()->get();
-            foreach($dish->options as $option){
-                $option->item = Item::where('option_id', $option->id)->get();
+        $order = Order::find(request()->order_id);
+        $menu_time = $order->time;
+        $time = substr($menu_time,11,5);
+        $date = date('d M Y', strtotime($menu_time));
+
+        $chk_holiday = Holiday::where('holiday_date',$date)->get();
+        
+        if( $time > '08:00' && $time < '12:00' )
+        {
+            $eat_in = "eatin_breakfast";
+            $eat_in1 = "morning_on";
+        } 
+        elseif( $time > '12:00' && $time < '14:00'  )
+        {
+            $eat_in = "eatin_lunch";
+            $eat_in1 = "lunch_on";
+        } 
+        elseif( $time > '14:00' && $time < '17:30'  )
+        {
+            $eat_in = "eatin_tea";
+            $eat_in1 = "tea_on";
+        } 
+        elseif( $time > '17:30' && $time < '22:00'  )
+        {
+            $eat_in = "eatin_dinner";
+            $eat_in1 = "dinner_on";
+        } 
+        //elseif( ($time > '22:00' || $time < '02:00') ) $eat_in = "eatin_dinner";
+        else
+        {
+            $eat_in = "";
+            $eat_in1 = "";
+        } 
+
+        if(count($chk_holiday) > 0)
+        {
+            $holiday = Timeslot::find(9);
+            
+            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                    $dish->options = $dish->options()->get();
+                    foreach($dish->options as $option){
+                        $option->item = Item::where('option_id', $option->id)->get();
+                    }
+                } 
             }
+            else 
+                $dishes = "";
         }
+        else
+        {
+            if(!empty($eat_in))    $dishes = $category->eat_dishes($eat_in);
+            else $dishes = $category->dishes;  
+
+            foreach($dishes as $dish){
+                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                $dish->options = $dish->options()->get();
+                foreach($dish->options as $option){
+                    $option->item = Item::where('option_id', $option->id)->get();
+                }
+            }      
+        }
+
         return (string)view('reception.dish_list', compact('dishes'))->render();
     }
 

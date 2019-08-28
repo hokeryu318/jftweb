@@ -18,6 +18,10 @@ class Category extends Model
         return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->orderby('order');
     }
 
+    public function eat_dishes($eat_in){
+        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->where($eat_in,1)->orderby('order')->get();
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
