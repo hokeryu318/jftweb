@@ -136,12 +136,18 @@ class CustomerController extends Controller
         }
         else
         {
-            if(!empty($eat_in))    $dishes = $category->eat_dishes($eat_in);
-            else $dishes = $category->dishes;  
+            $timeslot = Timeslot::find(1);
 
-            foreach($dishes as $dish){
-                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-            }        
+            if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                } 
+            } 
+            else 
+                $dishes = "";
+                   
         }
 
         return (string)view('part.category_dish_customer', compact('dishes'))->render();

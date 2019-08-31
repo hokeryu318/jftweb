@@ -579,16 +579,21 @@ class ReceptionController extends Controller
         }
         else
         {
-            if(!empty($eat_in))    $dishes = $category->eat_dishes($eat_in);
-            else $dishes = $category->dishes;  
+            $timeslot = Timeslot::find(1);
 
-            foreach($dishes as $dish){
-                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-                $dish->options = $dish->options()->get();
-                foreach($dish->options as $option){
-                    $option->item = Item::where('option_id', $option->id)->get();
-                }
-            }      
+            if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                    $dish->options = $dish->options()->get();
+                    foreach($dish->options as $option){
+                        $option->item = Item::where('option_id', $option->id)->get();
+                    }
+                }   
+            } 
+            else 
+                $dishes = "";                          
         }
 
         return (string)view('reception.dish_list', compact('dishes'))->render();

@@ -20,11 +20,13 @@ class CategoryController extends Controller
 
     public function add()
     {
+        $max = Category::max('id');
         $new = new Category();
         $new->name_en = request()->name_en;
         $new->name_cn = request()->name_cn;
         $new->name_jp = request()->name_jp;
         $new->parent_id = request()->parent_id;
+        $new->order =  $max + 1;
         $new->save();
 
         $parent = Category::find(request()->parent_id);
