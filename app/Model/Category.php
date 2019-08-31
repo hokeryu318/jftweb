@@ -15,7 +15,11 @@ class Category extends Model
     }
 
     public function dishes(){
-        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->orderby('order');
+        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->where('active',1)->orderby('order');
+    }
+
+    public function eat_dishes($eat_in){
+        return $this->hasManyThrough(Dish::class, DishCategory::class, 'categories_id', 'id', 'id', 'dish_id')->where('active',1)->where($eat_in,1)->orderby('order')->get();
     }
 
     public function parent()

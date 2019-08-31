@@ -117,6 +117,7 @@ class DishController extends Controller
     public function store()
     {
         if(is_null(request()->id)){
+            $max = Dish::max('id');
             $obj = new Dish();
             $obj->name_en = request()->get('name_en');
             $obj->name_cn = request()->get('name_cn');
@@ -125,6 +126,7 @@ class DishController extends Controller
             $obj->desc_cn = request()->get('desc_cn');
             $obj->desc_jp = request()->get('desc_jp');
             $obj->price = request()->get('price');
+            $obj->order =  $max + 1;
             //$obj->category_id = request()->get('category_id');
             //$obj->sub_category_id = request()->get('sub_category_id');
             if(request()->get('groups')) {

@@ -15,6 +15,8 @@ use App\Model\Order;
 use App\Model\Receipt;
 use App\Model\Table;
 use App\Model\OrderTable;
+use App\Model\Holiday;
+use App\Model\Timeslot;
 use Illuminate\Http\Request;
 use App\Events\KitchenEvent;
 use Illuminate\Support\Facades\Storage;
@@ -79,10 +81,75 @@ class CustomerController extends Controller
     public function dish_list()
     {
         $category = Category::find(request()->category);
-        $dishes = $category->dishes;
-        foreach($dishes as $dish){
-            $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+
+        $menu_time = request()->time_slot;
+        $time = substr($menu_time,11,5);
+        $date = date('d M Y', strtotime($menu_time));
+        /*if( $time > $time_slot->morning_starts && $time < $time_slot->morning_ends && $time_slot->morning_on == 1 ) $eat_in = "eatin_breakfast";
+        elseif( $time > $time_slot->lunch_starts && $time < $time_slot->lunch_ends && $time_slot->lunch_on == 1 ) $eat_in = "eatin_lunch";
+        elseif( $time > $time_slot->tea_starts && $time < $time_slot->tea_ends && $time_slot->tea_on == 1 ) $eat_in = "eatin_tea";
+        elseif( $time > $time_slot->dinner_starts && $time < $time_slot->dinner_ends && $time_slot->dinner_on == 1 ) $eat_in = "eatin_dinner";
+        elseif( $time > $time_slot->latenight_starts && $time < $time_slot->latenight_ends && $time_slot->latenight_on == 1 ) $eat_in = "eatin_latenight";*/
+
+        $chk_holiday = Holiday::where('holiday_date',$date)->get();
+        
+        if( $time > '08:00' && $time < '12:00' )
+        {
+            $eat_in = "eatin_breakfast";
+            $eat_in1 = "morning_on";
+        } 
+        elseif( $time > '12:00' && $time < '14:00'  )
+        {
+            $eat_in = "eatin_lunch";
+            $eat_in1 = "lunch_on";
+        } 
+        elseif( $time > '14:00' && $time < '17:30'  )
+        {
+            $eat_in = "eatin_tea";
+            $eat_in1 = "tea_on";
+        } 
+        elseif( $time > '17:30' && $time < '22:00'  )
+        {
+            $eat_in = "eatin_dinner";
+            $eat_in1 = "dinner_on";
+        } 
+        //elseif( ($time > '22:00' || $time < '02:00') ) $eat_in = "eatin_dinner";
+        else
+        {
+            $eat_in = "";
+            $eat_in1 = "";
+        } 
+
+        if(count($chk_holiday) > 0)
+        {
+            $holiday = Timeslot::find(9);
+            
+            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                }   
+            }
+            else 
+                $dishes = "";
         }
+        else
+        {
+            $timeslot = Timeslot::find(1);
+
+            if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                } 
+            } 
+            else 
+                $dishes = "";
+                   
+        }
+
         return (string)view('part.category_dish_customer', compact('dishes'))->render();
     }
     public function dish_info()

@@ -1,3 +1,4 @@
+@if(!empty($dishes))
 @foreach ($dishes as $ds)
     @if($ds->sold_out == 0)
         <ul id="myUL">
@@ -35,7 +36,7 @@
         </ul>
     @endif
 @endforeach
-
+@endif
 <style>
 
     ul, #myUL {

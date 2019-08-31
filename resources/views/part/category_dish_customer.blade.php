@@ -1,3 +1,4 @@
+@if(!empty($dishes))
 @foreach ($dishes as $ds)
     @if($ds->sold_out == 0)
         <div class="card" onclick="orderNow({{$ds->id}})">
@@ -71,3 +72,4 @@
         </div>
     @endif
 @endforeach
+@endif
