@@ -70,6 +70,7 @@
             <table class="table text-white txtdemibold" style="width: 99%;">
                 <tbody>
                 @foreach($discounts as $discount)
+                    @if($discount->dish)
                     <tr onclick="onrow(this)" @if($discount->end_type == 1) class="text-discount bg-lightgrey" @endif  data-url="{{route("admin.discount.edit", ["id" => $discount->id])}}">
                         <td width="12%" style="padding-left: 0;"><span class="fs-25">{{($discount->start != "") ? date("d F Y", strtotime($discount->start)) : ""}}</span></td>
                         <td width="12%" style="padding-left: 3px;"><span class="fs-25">{{($discount->end != "") ? date("d F Y", strtotime($discount->end)) : ""}}</span></td>
@@ -81,6 +82,7 @@
                         <td width="7%" style="padding-left: 10px;">@if($discount->timeslot_tea == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
                         <td width="7%" style="padding-left: 10px;">@if($discount->timeslot_dinner == 1) <img src="{{asset('img/Group904.png')}}" height="20" /> @endif</td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>

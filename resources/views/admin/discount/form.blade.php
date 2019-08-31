@@ -77,7 +77,7 @@
                                     <option value="{{ $ds->id }}" data-price="{{$ds->price}}" @if(isset($dish) && $ds->id == $dish) selected @endif>{{ $ds->name_en }}</option>
                                 @endforeach
                             </select>
-                            <label class="text-blue float-right text-right fs-23" id="rrp_price">List Price: $ {{ number_format($ds->price, 2) }}</label>
+                            <label class="text-blue float-right text-right fs-23" id="rrp_price">List Price: $ {{ number_format($dishes[0]->price, 2) }}</label>
                         </div>
                         <div class="form-group">
                             <div>

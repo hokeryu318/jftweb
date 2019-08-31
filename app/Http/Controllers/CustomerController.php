@@ -37,7 +37,7 @@ class CustomerController extends Controller
         //echo $table_name;
         $categories = Category::orderby('order')->get()->toArray();
         $dishes = array();
-        if(count($categories) > 0){
+        if(count($categories) > 0) {
             $category_record = Category::find($categories[0]['id']);
             $dishes = $category_record->dishes;
             foreach($dishes as $dish){
