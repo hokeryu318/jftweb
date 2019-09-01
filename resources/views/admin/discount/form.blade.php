@@ -88,6 +88,8 @@
                             <label class="text-blue float-right  text-right fs-23" id="gst_value">
                                 @if ($obj->discount > 0)
                                     (Included GST: $ {{ number_format($obj->discount*$gst/100, 2) }})
+                                @else
+                                    &nbsp;
                                 @endif
                             </label>
                         </div>

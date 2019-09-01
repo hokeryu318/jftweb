@@ -35,7 +35,7 @@ class DishController extends Controller
         return view('admin.dish.list')->with(compact('dishes', 'sort'));
     }
 
-    public function edit($id){
+    public function edit($id) {
         $obj = Dish::find($id);
 
         $groups = Kitchen::get();

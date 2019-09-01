@@ -12,7 +12,7 @@
     <div class="container-fluid pb-3 blackgrey" style="height: auto;">
         <form method="POST" action="{{ route('admin.dish.store') }}" enctype='multipart/form-data' name="edit_dish" onSubmit="return validateform()">
             <input type="hidden" value="{{ $obj->id }}" name="id">
-            <input type="hidden" name="category_id" id="checked_ids" value="{{isset($dish_cats_ids) ? $dish_cats_ids : ""}}">
+            <input type="hidden" name="category_id" id="checked_ids" value="{{isset($dish_cats_ids) ? $dish_cats_ids : ''}}">
             <div style="padding-top:8%;">
             </div>
             <div class="widthh pt-3 pb-3 mb-3 white" style="height: auto;">
@@ -22,7 +22,7 @@
                     <div class="col-1">
                         <a href="
                         @if(isset($obj->id))
-                            {{route('admin.dish.preview',["id"=>$obj->id])}}
+                            {{route('admin.dish.preview',['id'=>$obj->id])}}
                         @else
                             {{ route('admin.dish') }}
                         @endif">
@@ -39,37 +39,37 @@
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Name of dish</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_en" id="name_en" value="{{ $obj->name_en }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 95px;" name="name_en" id="name_en">{{ $obj->name_en }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Name of dish (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_cn" id="name_cn" value="{{ $obj->name_cn }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 95px;" name="name_cn" id="name_cn">{{ $obj->name_cn }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Name of dish (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="name_jp" id="name_jp" value="{{ $obj->name_jp }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 95px;" name="name_jp" id="name_jp">{{ $obj->name_jp }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Description</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="desc_en" value="{{ $obj->desc_en }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 150px;" name="desc_en">{{ $obj->desc_en }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Description (Mandarine)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;" name="desc_cn" value="{{ $obj->desc_cn }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 150px;" name="desc_cn">{{ $obj->desc_cn }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Description (Japanese)</label>
                                 </div>
-                                <input type="text" class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;"  name="desc_jp" value="{{ $obj->desc_jp }}" />
+                                <textarea class="outline-0 border-blue h4rem pl-3" style="font-size: 25px;width: 595px; height: 150px;" name="desc_jp">{{ $obj->desc_jp }}</textarea>
                             </div>
                             <div class="form-group">
                                 <div>
@@ -197,7 +197,7 @@
                             @if($obj->groups)
                                 @foreach ($obj->groups as $grp)
                                     <div class="mt-2 group-element">
-                                        <select class="border-blue select-width-blue mr-1 option-padding group-select pl-3 fs-25" name="groups[]" id="groups">
+                                        <select class="border-blue select-width-blue mr-1 option-padding group-select pl-3 fs-25" name="groups[]" id="groups" style="width: 585px;">
                                             @foreach ($groups as $g)
                                                 <option value="{{ $g->id }}"
                                                         @if(substr($grp, 1, -1) == $g->id)
@@ -228,21 +228,6 @@
 
                     <div class="row pl-4">
                         <div class="col-6">
-                            {{--<div class="form-group">--}}
-                                {{--<div>--}}
-                                    {{--<label class="text-blue txtdemibold fs-25">Group</label>--}}
-                                {{--</div>--}}
-                                {{--<select type="text" class="outline-0 border-blue w-100 option-padding pl-3 fs-25" id="group" name="group_id">--}}
-                                    {{--<option value="">Choose a Group</option>--}}
-                                    {{--@foreach ($groups as $g)--}}
-                                        {{--<option value="{{ $g->id }}"--}}
-                                                {{--@if($g->id == $obj->group_id)--}}
-                                                {{--selected--}}
-                                                {{--@endif--}}
-                                                {{--> {{ $g->name }} </option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
                             <div class="form-group">
                                 <div>
                                     <label class="text-blue txtdemibold fs-25">Badge</label>

@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th class="border-0 fs-3 pd" scope="col" width="52%">
-                            <a href="{{route("admin.dish.sort", ["sortType" => $sort])}}" class="text-white fs-25">
+                            <a href="{{route('admin.dish.sort', ['sortType' => $sort])}}" class="text-white fs-25">
                                 <b>ITEM</b>
                                 @if($sort == "asc")
                                     <img src="{{ asset('img/Path444.png') }}" height="20" style="margin: -1px 0 0 5px;" />
