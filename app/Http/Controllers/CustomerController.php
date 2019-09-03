@@ -85,68 +85,155 @@ class CustomerController extends Controller
         $menu_time = request()->time_slot;
         $time = substr($menu_time,11,5);
         $date = date('d M Y', strtotime($menu_time));
-        /*if( $time > $time_slot->morning_starts && $time < $time_slot->morning_ends && $time_slot->morning_on == 1 ) $eat_in = "eatin_breakfast";
-        elseif( $time > $time_slot->lunch_starts && $time < $time_slot->lunch_ends && $time_slot->lunch_on == 1 ) $eat_in = "eatin_lunch";
-        elseif( $time > $time_slot->tea_starts && $time < $time_slot->tea_ends && $time_slot->tea_on == 1 ) $eat_in = "eatin_tea";
-        elseif( $time > $time_slot->dinner_starts && $time < $time_slot->dinner_ends && $time_slot->dinner_on == 1 ) $eat_in = "eatin_dinner";
-        elseif( $time > $time_slot->latenight_starts && $time < $time_slot->latenight_ends && $time_slot->latenight_on == 1 ) $eat_in = "eatin_latenight";*/
 
-        $chk_holiday = Holiday::where('holiday_date',$date)->get();
+        $timeslot = Timeslot::find(1);
         
-        if( $time > '08:00' && $time < '12:00' )
+        $breakfast_time = $timeslot->morning_starts;
+        if( substr($breakfast_time,-2) == "AM" ) $breakfast_time = substr($breakfast_time,0,5);
+        else{
+            $first_time = (int)substr($breakfast_time,0,2);
+            $first_time += 12;
+            $last_time = substr($breakfast_time,2,3);
+            $breakfast_time = $first_time . $last_time;
+        }
+        
+        $lunch_time = $timeslot->lunch_starts;
+        if( substr($lunch_time,-2) == "AM" ) $lunch_time = substr($lunch_time,0,5);
+        else{
+            $first_time = (int)substr($lunch_time,0,2);
+            $first_time += 12;
+            $last_time = substr($lunch_time,2,3);
+            $lunch_time = $first_time . $last_time;
+        }
+        
+        $tea_time = $timeslot->tea_starts;
+        if( substr($tea_time,-2) == "AM" ) $tea_time = substr($tea_time,0,5);
+        else{
+            $first_time = (int)substr($tea_time,0,2);
+            $first_time += 12;
+            $last_time = substr($tea_time,2,3);
+            $tea_time = $first_time . $last_time;
+        }
+        
+        $dinner_time = $timeslot->dinner_starts;
+        if( substr($dinner_time,-2) == "AM" ) $dinner_time = substr($dinner_time,0,5);
+        else{
+            $first_time = (int)substr($dinner_time,0,2);
+            $first_time += 12;
+            $last_time = substr($dinner_time,2,3);
+            $dinner_time = $first_time . $last_time;
+        }
+        
+        $latenight_time = $timeslot->latenight_starts;
+        if( substr($latenight_time,-2) == "AM" ) $latenight_time = substr($latenight_time,0,5);
+        else{
+            $first_time = (int)substr($latenight_time,0,2);
+            $first_time += 12;
+            $last_time = substr($latenight_time,2,3);
+            $latenight_time = $first_time . $last_time;
+        }
+        
+        if( $time >= $breakfast_time && $time < $lunch_time )
         {
             $eat_in = "eatin_breakfast";
             $eat_in1 = "morning_on";
         } 
-        elseif( $time > '12:00' && $time < '14:00'  )
+        elseif( $time >= $lunch_time && $time < $tea_time  )
         {
             $eat_in = "eatin_lunch";
             $eat_in1 = "lunch_on";
         } 
-        elseif( $time > '14:00' && $time < '17:30'  )
+        elseif( $time >= $tea_time && $time < $dinner_time  )
         {
             $eat_in = "eatin_tea";
             $eat_in1 = "tea_on";
         } 
-        elseif( $time > '17:30' && $time < '22:00'  )
+        elseif( $time >= $dinner_time && $time < $latenight_time  )
         {
             $eat_in = "eatin_dinner";
             $eat_in1 = "dinner_on";
         } 
-        //elseif( ($time > '22:00' || $time < '02:00') ) $eat_in = "eatin_dinner";
         else
         {
             $eat_in = "";
             $eat_in1 = "";
         } 
 
+        $week = date('w', strtotime($menu_time));
+        switch($week)
+        {
+            case 0:
+                $time_week = Timeslot::find(8);
+                break;
+            case 1:
+                $time_week = Timeslot::find(2);
+                break;
+            case 2:
+                $time_week = Timeslot::find(3);
+                break;
+            case 3:
+                $time_week = Timeslot::find(4);
+                break;
+            case 4:
+                $time_week = Timeslot::find(5);
+                break;
+            case 5:
+                $time_week = Timeslot::find(6);
+                break;
+            case 6:
+                $time_week = Timeslot::find(7);
+                break;
+
+        }
+        
+        $eat_opt = $time_week->$eat_in1;
+        $day_on = $time_week->day_on;
+
+        $holiday = Timeslot::find(9);
+
+        if($holiday->day_on == 1)   $chk_holiday = Holiday::where('holiday_date',$date)->get();
+        else $chk_holiday = [];
+
         if(count($chk_holiday) > 0)
         {
-            $holiday = Timeslot::find(9);
-            
             if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
             {
                 $dishes = $category->eat_dishes($eat_in);
                 foreach($dishes as $dish){
                     $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-                }   
+                }
             }
             else 
-                $dishes = "";
+                $dishes = "";                
+
         }
         else
         {
-            $timeslot = Timeslot::find(1);
+            $all_week = Timeslot::get();
 
-            if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+            if( $all_week[1]->day_on == 0 && $all_week[2]->day_on  == 0 && $all_week[3]->day_on  == 0 && $all_week[4]->day_on  == 0 && $all_week[5]->day_on  == 0 && $all_week[6]->day_on  == 0 && $all_week[7]->day_on  == 0)
             {
-                $dishes = $category->eat_dishes($eat_in);
-                foreach($dishes as $dish){
-                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+                {
+                    $dishes = $category->eat_dishes($eat_in);
+                    foreach($dishes as $dish){
+                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                    } 
                 } 
-            } 
-            else 
-                $dishes = "";
+                else 
+                    $dishes = "";               
+            }
+            else{
+                if(!empty($eat_in1) && $eat_opt == 1 && $day_on == 1)    
+                {
+                    $dishes = $category->eat_dishes($eat_in);
+                    foreach($dishes as $dish){
+                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                    } 
+                } 
+                else 
+                    $dishes = "";                
+            }
                    
         }
 

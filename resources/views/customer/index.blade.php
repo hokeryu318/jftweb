@@ -382,7 +382,7 @@
             type:"POST",
             url:"{{ route('customer.dish_list') }}",
             data:{
-                category: category_id, _token:"{{ csrf_token() }}"
+                category: category_id, _token:"{{ csrf_token() }}",time_slot:"{{$order->time}}"
             },
             success: function(result){
                 $('#dish-content').html(result);
