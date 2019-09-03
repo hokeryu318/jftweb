@@ -388,9 +388,9 @@ class ReceptionController extends Controller
         $order_dish_id = request()->order_dish_id;
         $count = OrderDish::where('id', $order_dish_id)->pluck('count')->first();
 
-        $categories = Category::orderby('order')->get()->toArray();
+        $categories = Category::orderby('order')->get();
         $dishes = array();
-        if(count($categories) > 0){
+        /*if(count($categories) > 0){
             $category_record = Category::find($categories[0]['id']);
             $dishes = $category_record->dishes;
             foreach($dishes as $dish){
@@ -400,16 +400,46 @@ class ReceptionController extends Controller
                     $option->item = Item::where('option_id', $option->id)->get();
                 }
             }
-        }
+        }*/
+
+        $order = Order::find(request()->order_id);
 
         $category_all = array();
-        foreach ($categories as $category) {
-            $category_all[$category['id']] = $category;
-            if($category['has_subs'] == 1){
-                $sub_categories = Category::where('parent_id', $category['id'])->orderby('order')->get()->toArray();
-                $category_all[$category['id']]['children'] = $sub_categories;
+        if(count($categories) > 0){
+            foreach ($categories as $category) {
+                $dishes = [];
+                if($category->has_subs != 1 && empty($category->parent_id)) {
+                    $dishes = $this->get_dishes($category,$order->time);
+                    if(!empty($dishes) &&  count($dishes) > 0 ) {
+                        $category_all[$category->id] = $category;
+                    }
+                }
+                elseif($category->has_subs == 1) {
+                    $main_sub_categories = array();
+                    $sub_categories = Category::where('parent_id', $category->id)->orderby('order')->get();
+
+                    if(!empty($sub_categories) &&  count($sub_categories) > 0 ) {
+                        foreach ($sub_categories as $sub_category) {
+                            $sub_dishes = $this->get_dishes($sub_category,$order->time);
+                            if(!empty($sub_dishes) && count($sub_dishes) > 0) {
+                                $dishes = $sub_dishes;
+                                array_push($main_sub_categories ,$sub_category);
+                            }
+                        }                        
+                    }
+                    else {
+                        $dishes = $this->get_dishes($category,$order->time);
+                    }
+                    if(!empty($dishes) && count($dishes) > 0 ) {
+                        $category_all[$category->id] = $category;
+                        $category_all[$category->id]['children'] = $main_sub_categories;
+                    }
+                }
+
             }
         }
+       
+        $dishes = [];
         return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes', 'order_dish_id', 'count'));
 
     }
@@ -527,7 +557,9 @@ class ReceptionController extends Controller
         $category = Category::find(request()->category);
         $order = Order::find(request()->order_id);
         $menu_time = $order->time;
-        $time = substr($menu_time,11,5);
+
+        $dishes = $this->get_dishes($category,$menu_time);
+        /*$time = substr($menu_time,11,5);
         $date = date('d M Y', strtotime($menu_time));
 
         $timeslot = Timeslot::find(1);
@@ -692,7 +724,7 @@ class ReceptionController extends Controller
                     $dishes = "";                
             }
                       
-        }
+        }*/
 
         return (string)view('reception.dish_list', compact('dishes'))->render();
     }
@@ -1110,5 +1142,175 @@ class ReceptionController extends Controller
 
         $booking_order = $this->get_booking_order($order_id);
         return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
+    }
+    
+    public function get_dishes($category,$menu_time) {
+        $time = substr($menu_time,11,5);
+        $date = date('d M Y', strtotime($menu_time));
+
+        $timeslot = Timeslot::find(1);
+        
+        $breakfast_time = $timeslot->morning_starts;
+        if( substr($breakfast_time,-2) == "AM" ) $breakfast_time = substr($breakfast_time,0,5);
+        else{
+            $first_time = (int)substr($breakfast_time,0,2);
+            $first_time += 12;
+            $last_time = substr($breakfast_time,2,3);
+            $breakfast_time = $first_time . $last_time;
+        }
+        
+        $lunch_time = $timeslot->lunch_starts;
+        if( substr($lunch_time,-2) == "AM" ) $lunch_time = substr($lunch_time,0,5);
+        else{
+            $first_time = (int)substr($lunch_time,0,2);
+            $first_time += 12;
+            $last_time = substr($lunch_time,2,3);
+            $lunch_time = $first_time . $last_time;
+        }
+        
+        $tea_time = $timeslot->tea_starts;
+        if( substr($tea_time,-2) == "AM" ) $tea_time = substr($tea_time,0,5);
+        else{
+            $first_time = (int)substr($tea_time,0,2);
+            $first_time += 12;
+            $last_time = substr($tea_time,2,3);
+            $tea_time = $first_time . $last_time;
+        }
+        
+        $dinner_time = $timeslot->dinner_starts;
+        if( substr($dinner_time,-2) == "AM" ) $dinner_time = substr($dinner_time,0,5);
+        else{
+            $first_time = (int)substr($dinner_time,0,2);
+            $first_time += 12;
+            $last_time = substr($dinner_time,2,3);
+            $dinner_time = $first_time . $last_time;
+        }
+        
+        $latenight_time = $timeslot->latenight_starts;
+        if( substr($latenight_time,-2) == "AM" ) $latenight_time = substr($latenight_time,0,5);
+        else{
+            $first_time = (int)substr($latenight_time,0,2);
+            $first_time += 12;
+            $last_time = substr($latenight_time,2,3);
+            $latenight_time = $first_time . $last_time;
+        }
+        
+        if( $time >= $breakfast_time && $time < $lunch_time )
+        {
+            $eat_in = "eatin_breakfast";
+            $eat_in1 = "morning_on";
+        } 
+        elseif( $time >= $lunch_time && $time < $tea_time  )
+        {
+            $eat_in = "eatin_lunch";
+            $eat_in1 = "lunch_on";
+        } 
+        elseif( $time >= $tea_time && $time < $dinner_time  )
+        {
+            $eat_in = "eatin_tea";
+            $eat_in1 = "tea_on";
+        } 
+        elseif( $time >= $dinner_time && $time < $latenight_time  )
+        {
+            $eat_in = "eatin_dinner";
+            $eat_in1 = "dinner_on";
+        } 
+        else
+        {
+            $eat_in = "";
+            $eat_in1 = "";
+        } 
+
+        $week = date('w', strtotime($menu_time));
+        switch($week)
+        {
+            case 0:
+                $time_week = Timeslot::find(8);
+                break;
+            case 1:
+                $time_week = Timeslot::find(2);
+                break;
+            case 2:
+                $time_week = Timeslot::find(3);
+                break;
+            case 3:
+                $time_week = Timeslot::find(4);
+                break;
+            case 4:
+                $time_week = Timeslot::find(5);
+                break;
+            case 5:
+                $time_week = Timeslot::find(6);
+                break;
+            case 6:
+                $time_week = Timeslot::find(7);
+                break;
+
+        }
+        
+        $eat_opt = $time_week->$eat_in1;
+        $day_on = $time_week->day_on;
+
+
+        $holiday = Timeslot::find(9);
+
+        if($holiday->day_on == 1)   $chk_holiday = Holiday::where('holiday_date',$date)->get();
+        else $chk_holiday = [];
+
+        if(count($chk_holiday) > 0)
+        {
+
+            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
+            {
+                $dishes = $category->eat_dishes($eat_in);
+                foreach($dishes as $dish){
+                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                    $dish->options = $dish->options()->get();
+                    foreach($dish->options as $option){
+                        $option->item = Item::where('option_id', $option->id)->get();
+                    }
+                } 
+            }
+            else 
+                $dishes = "";
+        }
+        else
+        {
+            $all_week = Timeslot::get();
+
+            if( $all_week[1]->day_on == 0 && $all_week[2]->day_on  == 0 && $all_week[3]->day_on  == 0 && $all_week[4]->day_on  == 0 && $all_week[5]->day_on  == 0 && $all_week[6]->day_on  == 0 && $all_week[7]->day_on  == 0)
+            {
+                if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+                {
+                    $dishes = $category->eat_dishes($eat_in);
+                    foreach($dishes as $dish){
+                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                        $dish->options = $dish->options()->get();
+                        foreach($dish->options as $option){
+                            $option->item = Item::where('option_id', $option->id)->get();
+                        }
+                    }   
+                } 
+                else 
+                    $dishes = "";                
+            }
+            else{
+                if(!empty($eat_in1) && $eat_opt == 1 && $day_on == 1)    
+                {
+                    $dishes = $category->eat_dishes($eat_in);
+                    foreach($dishes as $dish){
+                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                        $dish->options = $dish->options()->get();
+                        foreach($dish->options as $option){
+                            $option->item = Item::where('option_id', $option->id)->get();
+                        }
+                    }  
+                } 
+                else 
+                    $dishes = "";                
+            }
+                      
+        }
+        return $dishes;
     }
 }
