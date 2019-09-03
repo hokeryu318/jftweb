@@ -17,6 +17,7 @@ class LoginController extends Controller
 
         $ip = Receipt::find(1)->pluck('ip_address')->first();
         $ip = 'http://'.$ip;
+        $ip = 'http://'.'192.168.1.100';
 
         $role = $request->role;
         $password = $request->password;
