@@ -84,14 +84,9 @@ class LoginController extends Controller
 
     public function get_table() {
 
-        //get ip address from database
-        $profile = Receipt::profile();
-        $ip_address = $profile->ip_address;
-        //last get table number(ordered already)
         $table_last = Table::where('index', 0)->orderBy('id', 'desc')->first()->name;
 
         $response = [
-            'ip_address' => $ip_address,
             'table_last' => $table_last
         ];
 

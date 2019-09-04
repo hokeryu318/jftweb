@@ -58,9 +58,10 @@
                         </div>
                         <div class="col-6 text-left">
                             <select class="custom-input pt-1 pb-1" id="role" name="role" onchange="select_role('role')">
+                                <option value="menu" class="select-option">Menu</option>
                                 <option value="reception" class="select-option">Reception</option>
                                 <option value="kitchen" class="select-option">Kitchen</option>
-                                <option value="menu" class="select-option">Menu</option>
+                                {{--<option value="menu" class="select-option">Menu</option>--}}
                                 <option value="master" class="select-option">Master</option>
                             </select>
                         </div>
@@ -70,7 +71,7 @@
                             <h4 class="mb-0 white-text lg-font">Table Number</h4>
                         </div>
                         <div class="col-6">
-                            <input class="custom-input" name="table" />
+                            <input class="custom-input" name="table" value="{{ $table_last['name'] }}" />
                         </div>
                     </div>
                     <div class="row  mt-5 pt-3">
@@ -156,7 +157,6 @@
 
         if(val == 'menu') {
             table_last_name = table_last['name'];
-            console.log(table_last_name);
             document.querySelector('input[name=table]').value = table_last_name;
         } else {
             document.querySelector('input[name=table]').value = '';
