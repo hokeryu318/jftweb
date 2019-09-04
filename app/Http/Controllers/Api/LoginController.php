@@ -34,7 +34,7 @@ class LoginController extends Controller
         if(Hash::check($password, $user->password)){
             session(['role' => $role]);
             if($request->role == "reception" || $request->role == "master") {
-                $url = $ip.'/jftweb/public/reception/seated?status=seated';
+                $url = $ip.'/reception/seated?status=seated';
                 $message = 'reception success';
             }
             else if($request->role == "menu"){
@@ -46,7 +46,7 @@ class LoginController extends Controller
                         if(count($order) > 0){
                             $order_id = $order[0]->id;
                             $table_id = $table[0]->id;
-                            $url = $ip.'/jftweb/public/customer/index/'.$order_id.'?table_id='.$table_id;
+                            $url = $ip.'/customer/index/'.$order_id.'?table_id='.$table_id;
                             $message = 'menu success';
                         }
                         else{
@@ -65,7 +65,7 @@ class LoginController extends Controller
                 }
             }
             else if($request->role == "kitchen") {
-                $url = $ip.'/jftweb/public/kitchen/main_screen';
+                $url = $ip.'/kitchen/main_screen';
                 $message = 'kitchen success';
             }
 
