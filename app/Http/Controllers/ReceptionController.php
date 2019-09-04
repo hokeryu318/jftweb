@@ -941,7 +941,7 @@ class ReceptionController extends Controller
     //edit order part ==================================================================================================
     public function editOrder() {
 
-        $order_id = request()->order_id;
+        $order_id = request()->order_id;dd($order_id);
         $booking_order = $this->get_booking_order($order_id);
         return (string)view('reception.editOrder', compact('booking_order'))->render();
     }

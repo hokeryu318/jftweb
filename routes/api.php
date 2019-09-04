@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //login api
-Route::post('login', 'API\LoginController@login');
-Route::get('get_table', 'API\LoginController@get_table');
+Route::post('login', 'Api\LoginController@login');
+Route::get('get_table', 'Api\LoginController@get_table');
 
 // other api
 Route::get('CountNotification', 'Api\CountNotificationController@CountNotification');
