@@ -85,9 +85,11 @@ class LoginController extends Controller
     public function get_table() {
 
         $table_last = Table::where('index', 0)->orderBy('id', 'desc')->first()->name;
+        $logo_image = Receipt::find(1)->pluck('logo_image')->first();
 
         $response = [
-            'table_last' => $table_last
+            'table_last' => $table_last,
+            'logo_image' => '/receipt/'.$logo_image
         ];
 
         return response()->json($response, 200);
