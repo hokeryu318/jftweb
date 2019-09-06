@@ -94,7 +94,10 @@
         <div class="row pt-0 pb-0" style="height: 75px;">
             <div class="col-1" style="margin-right:25px">
                 <a href="#" class="white-text" id="menu-open-btn">
-                    <h1 class="mb-0"><span class="fa fa-navicon" style="margin: 11px 0 0 5px;font-size: 52px;"></span></h1>
+                    {{--<h1 class="mb-0">--}}
+                        {{--<span class="fa fa-navicon" style="margin: 11px 0 0 5px;font-size: 52px;"></span>--}}
+                    {{--</h1>--}}
+                    <img src="{{ asset('img/top_menu.png') }}" style="margin-top: 10px;">
                 </a>
             </div>
             <div class="col-7">
