@@ -291,7 +291,7 @@
             var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
             var calling_count = document.getElementById("calling_count").innerText;
             if(calling_count == 0) {
-                if(mobile) alert('There is no calling data.');
+                if(ipad) alert('There is no calling data.');
             }
             else {
                 $('#myModal').html('');
