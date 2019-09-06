@@ -179,7 +179,7 @@
                 <p class="prepareStatus" style="padding: 0 60px 0 60px;">This dish will be prepared straight away</p>
             </div>
             <div class="padding10">
-                <button class="cta-wide" style="width: 90%;" onclick="next_page('{{$option_id_arr}}', '0')">
+                <button class="cta-wide" style="width: 90%;margin-bottom: 20px;" onclick="next_page('{{$option_id_arr}}', '0')">
                     Select
                     @if(session('language') == 1)
                         {{$options[0]->display_name_cn}}

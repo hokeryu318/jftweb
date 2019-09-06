@@ -33,10 +33,10 @@
         <div class="container-fluid hh black lg-height">
             <div class="container pt-5">
                 <div class="row pt-5 mt">
-                    <div class="col-4 pt-5">
+                    <div class="col-4 pt-5" style="height: 650px;">
                         <img class="lg-img-ht mt-auto mb-auto" src="{{ asset('receipt/'.$profile->logo_image) }}" />
                     </div>
-                    <div class="col-8 pt-5">
+                    <div class="col-8 pt-5" style="height: 650px;">
                         <h1 class="white-text mb-5 mt-0 pt-0">
                             @if($slag == 'setting')
                                 Setting
