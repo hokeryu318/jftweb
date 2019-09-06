@@ -718,7 +718,7 @@
                                             @else
                                                 <e class="alarm" style="margin-left:-7px;width: 25px;height: 23px;"></e>
                                             @endif
-                                            @if($order->calling_time != Null)
+                                            @if($order->ordertables[0]->calling_time != Null)
                                                 <img class="alarm" style="width: 21px;height: 23px;" src="{{ asset('img/alarm.png') }}">
                                             @else
                                                 <e class="alarm" style="width: 21px;height: 23px;"></e>

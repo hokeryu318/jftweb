@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 pr-0 col-xl-2" style="margin-left: -41px;">
-                                <div class="row p-0 m-0">
+                                <div class="row p-0 m-0 ml-3">
                                     @if($order->pay_flag == '1')
                                         <img class="alarm" style="margin-left:-7px;width:30px;height:27px;" src="{{ asset('img/calling.png') }}">
                                     @else
@@ -48,7 +48,7 @@
                                     @else
                                         <e class="alarm" style="width: 27px;height: 29px;"></e>
                                     @endif
-                                    @if($order->note != Null)
+                                    @if($order->review != Null)
                                         <img class="alarm" style="width:30px;height:28px;" src="{{ asset('img/msg.png') }}">
                                     @else
                                         <e class="alarm" style="width: 35px;height: 28px;"></e>

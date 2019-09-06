@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 pr-0 col-xl-2" style="margin-left: -41px;">
-                                <div class="row p-0 m-0">
+                                <div class="row p-0 m-0 ml-3">
                                     @if($order->pay_flag == '1')
                                         <img class="alarm" style="margin-left:-7px;width:30px;height:27px;" src="{{ asset('img/calling.png') }}">
                                     @else

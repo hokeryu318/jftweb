@@ -70,7 +70,7 @@ class SaleController extends Controller
                     }
                     $guest_count += $order->guest;
                     $order_count ++;
-                    if($order->calling_time != Null)
+                    if($order->ordertables[0]->calling_time != Null)
                         $calls_count ++;
                     if($order->review != Null)
                         $feedback_count ++;
