@@ -9,13 +9,15 @@
             padding-bottom : 0.6rem;
         }
     </style>
-    <div class="container-fluid pb-3 blackgrey" style="height: auto;">
+    {{--<div class="container-fluid pb-3 blackgrey" style="height: auto;">--}}
+    <div class="container-fluid pb-3 blackgrey">
         <form method="POST" action="{{ route('admin.dish.store') }}" enctype='multipart/form-data' name="edit_dish" onSubmit="return validateform()">
             <input type="hidden" value="{{ $obj->id }}" name="id">
             <input type="hidden" name="category_id" id="checked_ids" value="{{isset($dish_cats_ids) ? $dish_cats_ids : ''}}">
             <div style="padding-top:8%;">
             </div>
-            <div class="widthh pt-3 pb-3 mb-3 white" style="height: auto;">
+            {{--<div class="widthh pt-3 pb-3 mb-3 white" style="height: auto;">--}}
+            <div class="widthh pt-3 pb-3 mb-3 white" style="height: 885px;overflow: auto;">
                 <div class="row">
                     <div class="col-11">
                     </div>

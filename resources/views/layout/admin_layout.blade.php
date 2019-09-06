@@ -97,7 +97,7 @@
                     {{--<h1 class="mb-0">--}}
                         {{--<span class="fa fa-navicon" style="margin: 11px 0 0 5px;font-size: 52px;"></span>--}}
                     {{--</h1>--}}
-                    <img src="{{ asset('img/top_menu.png') }}" style="margin-top: 10px;">
+                    <img src="{{ asset('img/top_menu.png') }}" style="margin-top: 13px;">
                 </a>
             </div>
             <div class="col-7">

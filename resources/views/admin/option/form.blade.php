@@ -3,7 +3,7 @@
 @section('title', 'DISH')
 
 @section('content')
-<div class="container-fluid pb-5 blackgrey" style="height: auto;min-height: 870px;">
+<div class="container-fluid pb-5 blackgrey" style="height: 1024px;min-height: 870px;">
     <div style="padding-top:8.5%;"></div>
 
     <div class="popupp" id="popupp"></div>
@@ -22,7 +22,8 @@
         <button class="addOptionbtn mcenter fs-25" style="width: 200px;">Change Photo</button>
     </div>
 
-    <div class="widthh pb-2 pt-3 white" style="height: auto;min-height: 862px;">
+    {{--<div class="widthh pb-2 pt-3 white" style="height: auto;min-height: 862px;">--}}
+    <div class="widthh pb-2 pt-3 white" style="overflow:auto;">
         <div class="row">
             <div class="col-12">
                 <a><span class="">
