@@ -486,6 +486,8 @@
 
             if(selected_index == ""){
                 alert("Please select the table or line!");
+//                $("#alert-string")[0].innerText = "There is no calling data.";
+//                $("#java-alert").modal('toggle');
                 return;
             }
             var display_table_name = $('#selected-name').val();
@@ -494,7 +496,9 @@
                 $("#selected-"+selected_index+" h6")[0].innerText = display_table_name;
                 tables_arr[selected_index]['name'] = display_table_name;
             } else {
-                alert("You can't named the line.");
+                //alert("You can't named the line.");
+                $("#alert-string")[0].innerText = "You can't named the line.";
+                $("#java-alert").modal('toggle');
                 $("#selected-name").val('');
             }
 //            var tbnm = document.getElementById("tb_nm").offsetWidth;
@@ -582,7 +586,9 @@
         function changeCoordinate(type, aroma)
         {
             if(tmp_selected_arr == ""){
-                alert("Please select the table or line!");
+                //alert("Please select the table or line!");
+                $("#alert-string")[0].innerText = "Please select the table or line!";
+                $("#java-alert").modal('toggle');
                 return;
             }
             if(selected_type <  9){//"line"
@@ -726,7 +732,9 @@
                                     "</div>";
                             }
                         } else {
-                            alert("You can't create seat for over 8.");
+                            //alert("You can't create seat for over 8.");
+                            $("#alert-string")[0].innerText = "You can't create seat for over 8.";
+                            $("#java-alert").modal('toggle');
                             break;
                         }
                     }else{
@@ -927,7 +935,9 @@
 
         $("#selected-value").keyup(function() {
             if(selected_index == ""){
-                alert("Please select the table or line!");
+                //alert("Please select the table or line!");
+                $("#alert-string")[0].innerText = "Please select the table or line!";
+                $("#java-alert").modal('toggle');
                 return;
             }
             var selected_value = $("#selected-value").val();
@@ -941,7 +951,9 @@
 
         $("#selected-x").keyup(function(){
             if(selected_index == ""){
-                alert("Please select the table or line!");
+                //alert("Please select the table or line!!");
+                $("#alert-string")[0].innerText = "Please select the table or line!";
+                $("#java-alert").modal('toggle');
                 return;
             }
             var coordinate_x = $("#selected-x").val();
@@ -963,7 +975,9 @@
 
         $("#selected-y").keyup(function(){
             if(selected_index == ""){
-                alert("Please select the table or line!");
+                //alert("Please select the table or line!");
+                $("#alert-string")[0].innerText = "Please select the table or line!";
+                $("#java-alert").modal('toggle');
                 return;
             }
             var coordinate_y = $("#selected-y").val();
@@ -985,7 +999,9 @@
 
         $("#delete-selected-obj").click(function(){
             if(selected_index == ""){
-                alert("Please select the table or line!");
+                //alert("Please select the table or line!");
+                $("#alert-string")[0].innerText = "Please select the table or line!";
+                $("#java-alert").modal('toggle');
                 return;
             }
             var saved_arr = JSON.stringify(tables_arr);
