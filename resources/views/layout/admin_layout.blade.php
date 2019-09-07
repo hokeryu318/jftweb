@@ -136,6 +136,27 @@
         </div>
     </header>
 
+    <div class="modal fade" id="java-alert" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                    </button>
+                </div>
+                <div class="modal-body pr-4">
+                    <p id="alert-string" class="text-center fs-25"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light waves-effect waves-light fs-25" data-dismiss="modal">
+                        Close
+                        <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('content')
 
@@ -255,7 +276,9 @@
 
             var ready_to_pay = document.getElementById("ready_to_pay").innerText;
             if(ready_to_pay == 0) {
-                alert('There is no pay data.');
+//                alert('There is no pay data.');
+                $("#alert-string")[0].innerText = "There is no pay data.";
+                $("#java-alert").modal('toggle');
             }
             else {
                 $('#myModal').html('');
@@ -292,10 +315,11 @@
 
         //view calling
         $('#calling_count').click(function(){
-            var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
             var calling_count = document.getElementById("calling_count").innerText;
             if(calling_count == 0) {
-                if(mobile) alert('There is no calling data.');
+                //alert('There is no calling data.');
+                $("#alert-string")[0].innerText = "There is no calling data.";
+                $("#java-alert").modal('toggle');
             }
             else {
                 $('#myModal').html('');
@@ -334,7 +358,9 @@
 
             var review_count = document.getElementById("review_count").innerText;
             if(review_count == 0) {
-                alert('There is no review data.');
+//                alert('There is no review data.');
+                $("#alert-string")[0].innerText = "There is no review data.";
+                $("#java-alert").modal('toggle');
             }
             else {
                 $('#myModal').html('');
@@ -356,7 +382,9 @@
 
             var note_count = document.getElementById("note_count").innerText;
             if(note_count == 0) {
-                alert('There is no note data.');
+//                alert('There is no note data.');
+                $("#alert-string")[0].innerText = "There is no note data.";
+                $("#java-alert").modal('toggle');
             }
             else {
                 $('#myModal').html('');
