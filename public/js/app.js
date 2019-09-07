@@ -1962,7 +1962,8 @@ __webpack_require__.r(__webpack_exports__);
       var selected_id = id;
       axios.post('/api/ready', {
         selected_id: selected_id
-      }).then(function (response) {// console.log(response.data);
+      }).then(function (response) {
+        console.dir(response.data);
       });
     }
   }
@@ -48343,10 +48344,12 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("td", { attrs: { width: "8%" } }, [
-                _c("img", {
-                  staticClass: "general",
-                  attrs: { src: "/dishes/" + group_order_dish.dish_image }
-                })
+                group_order_dish.dish_image !== null
+                  ? _c("img", {
+                      staticClass: "general",
+                      attrs: { src: "/dishes/" + group_order_dish.dish_image }
+                    })
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c(
@@ -61220,8 +61223,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\jftweb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\jftweb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\jftweb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\jftweb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

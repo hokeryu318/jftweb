@@ -83,7 +83,9 @@
 
     function onadd(){
         if($('.element:visible').length >= 5){
-            alert("You can't register over 5.");
+            //alert("You can't register over 5.");
+            $("#alert-string")[0].innerText = "You can't register over 5.";
+            $("#java-alert").modal('toggle');
             return;
         }
         var payment_name = prompt('Please enter payment type');

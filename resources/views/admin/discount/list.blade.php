@@ -164,7 +164,10 @@
         if(chk_discount != 1) {
             document.location.href = "{{ route('admin.discount.add') }}";
         } else {
-            alert('There is no dishes for discount.');
+            //alert('There is no dishes for discount.');
+            $("#alert-string")[0].innerText = "There is no dishes for discount.";
+            $("#java-alert").modal('toggle');
+
         }
     }
 </script>

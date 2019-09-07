@@ -350,7 +350,9 @@
             if(type == "start"){
                 compare_result = CompareDate("start", selected_date, time_index);
                 if(compare_result == 0){
-                    alert("Start time must smaller than end time");
+                    //alert("Start time must smaller than end time");
+                    $("#alert-string")[0].innerText = "Start time must smaller than end time";
+                    $("#java-alert").modal('toggle');
                     return;
                 }
                 $("#start-date-save").val(selected_date);
@@ -361,7 +363,9 @@
             }else{
                 compare_result = CompareDate("end", selected_date, time_index);
                 if(compare_result == 0){
-                    alert("End time must smaller than start time");
+                    //alert("End time must smaller than start time");
+                    $("#alert-string")[0].innerText = "End time must smaller than start time";
+                    $("#java-alert").modal('toggle');
                     return;
                 }
                 $("#end-date-save").val(selected_date);
@@ -471,7 +475,9 @@
             var discount_value = $("#discount-value").val();
 
             if(!discount_value) {
-                alert('Plesae input Discounted Price!');
+                //alert('Plesae input Discounted Price!');
+                $("#alert-string")[0].innerText = "Plesae input Discounted Price!";
+                $("#java-alert").modal('toggle');
                 return false;
             }
             return true;

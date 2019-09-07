@@ -37,7 +37,7 @@
                             </div>
                         </td>
                         <td width="10%"><b>{{ $order_dish->display_table }}</b><br>({{ $order_dish->table_count }})</td>
-                        <td width="10%"><img src="{{ asset('dishes/'.$order_dish->dish_image) }}" class="general"></td>
+                        <td width="10%"><img @if($order_dish->dish_image) src="{{ asset('dishes/'.$order_dish->dish_image) }}" class="general" @endif></td>
                         <td  width="56%">
                             <b>{{ $order_dish->dish_name_en }}</b>
                             <br>

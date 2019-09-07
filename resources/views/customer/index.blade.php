@@ -11,8 +11,10 @@
 
     <link rel="stylesheet" href="{{asset('customer_css/style.css')}}">
     <link rel="stylesheet" href="{{asset('customer_css/all.css')}}">
+
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
+
 <style>
     #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
     /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
@@ -721,7 +723,9 @@
             if(number_selection == '') {
                 alert('Number selection for this item is empty. Please ask to waiter!');
             } else {
-                alert('You can select ' + number_selection + ' only for this option.');
+                //alert('You can select ' + number_selection + ' only for this option.');
+                $("#alert-string")[0].innerText = 'You can select ' + number_selection + ' only for this option.';
+                $("#java-alert").modal('toggle');
             }
             //all check info format
             $("input:checkbox").each(function(){

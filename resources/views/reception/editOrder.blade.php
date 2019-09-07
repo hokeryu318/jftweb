@@ -206,7 +206,9 @@
             var review = $('#customer-review').val();
             if(review) {//there is review
                 if(!review_type){
-                    alert('Please select review type!');
+                    //alert('Please select review type!');
+                    $("#alert-string")[0].innerText = "Please select review type!";
+                    $("#java-alert").modal('toggle');
                 }
                 else {
                     $.ajax({

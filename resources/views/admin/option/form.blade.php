@@ -273,7 +273,9 @@
             });
             console.log(invalidCt);
             if(invalidCt > 1){
-                alert('Please upload photos');
+                //alert('Please upload photos');
+                $("#alert-string")[0].innerText = "Please upload photos";
+                $("#java-alert").modal('toggle');
                 return;
             }
         }
@@ -294,10 +296,17 @@
         var name = $('#name').val();
         var name_en = $('#name_en').val();
         var count_item = $("div[id^=aaa]").length;
-        if(name == '')
-            alert('Please input Name!');
-        else if(name_en == '')
-            alert('Please input Display Name!');
+        if(name == '') {
+            //alert('Please input Name!');
+            $("#alert-string")[0].innerText = "Please input Name!";
+            $("#java-alert").modal('toggle');
+        }
+        else if(name_en == '') {
+            //alert('Please input Display Name!');
+            $("#alert-string")[0].innerText = "Please input Display Name!";
+            $("#java-alert").modal('toggle');
+        }
+
         // else if(count_item == 0)
         //     alert('Please add Option(Include Option and Price)!');
         else
@@ -337,7 +346,9 @@
             current_image_obj = $(this);
         }
         else {
-            alert('You can not change photo. Please check Show Photo option!');
+            //alert('You can not change photo. Please check Show Photo option!');
+            $("#alert-string")[0].innerText = "You can not change photo. Please check Show Photo option!";
+            $("#java-alert").modal('toggle');
         }
 
         // $('#popupimg').attr('src', $(this).attr('src'));
@@ -385,7 +396,9 @@
             $('.file-image', parent).trigger('click');
         }
         else {
-            alert('You can not change photo. Please check Show Photo option!');
+            //alert('You can not change photo. Please check Show Photo option!');
+            $("#alert-string")[0].innerText = "You can not change photo. Please check Show Photo option!";
+            $("#java-alert").modal('toggle');
         }
 
     }

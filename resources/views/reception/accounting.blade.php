@@ -28,6 +28,28 @@
 
 </head>
 
+<div class="modal fade" id="java-alert" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-top: -750px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="alert-string" class="text-center fs-20"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                    Close
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <body>
 <form method="POST" id="save-pay" action="{{ route('reception.pay', ['status' => $status]) }}">
     @csrf
@@ -465,10 +487,14 @@
         var balance = parseFloat(document.getElementById("balance").textContent.replace(',', '').substring(1)).toFixed(2);
         var change = amount - balance;
         if($('#amount_tender').val() == '$') {
-            alert('There is no amount data.\nPlease input Amount data!');
+            //alert('There is no amount data.\nPlease input Amount data!');
+            $("#alert-string")[0].innerText = "There is no amount data.\nPlease input Amount data!";
+            $("#java-alert").modal('toggle');
         } else {
             if(change < 0) {
-                alert('Amount is smaller than Balance.\nPlease inpunt Amount correctly!');
+                //alert('Amount is smaller than Balance.\nPlease inpunt Amount correctly!');
+                $("#alert-string")[0].innerText = "Amount is smaller than Balance.\nPlease inpunt Amount correctly!";
+                $("#java-alert").modal('toggle');
                 document.getElementById("change").textContent = '';
             } else {
                 document.getElementById("change").textContent = '$' + change.toFixed(2).toString();
@@ -481,7 +507,7 @@
                 if(confirm("Would you like a receipt?")) {
                     $.ajax({
                         type:"POST",
-                        url:"{{ route('reception.print') }}",
+                        url:"{{ route('reception.account_print') }}",
                         data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
                         success: function(result){
                             console.dir(result);

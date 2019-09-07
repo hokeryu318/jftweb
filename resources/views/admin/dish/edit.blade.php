@@ -853,13 +853,19 @@
             var category = $("#checked_ids").val();
             // var opts = e.options[e.selectedIndex].value;
             if(!name_en) {
-                alert('Please input Name of dish!');
+                //alert('Please input Name of dish!');
+                $("#alert-string")[0].innerText = "Please input Name of dish!";
+                $("#java-alert").modal('toggle');
                 return false;
             } else if(!name_cn) {
-                alert('Please input Name of dish(Mandarine)!');
+                //alert('Please input Name of dish(Mandarine)!');
+                $("#alert-string")[0].innerText = "Please input Name of dish(Mandarine)!";
+                $("#java-alert").modal('toggle');
                 return false;
             } else if(!name_jp) {
-                alert('Please input Name of dish(Japanese)!');
+                //alert('Please input Name of dish(Japanese)!');
+                $("#alert-string")[0].innerText = "Please input Name of dish(Japanese)!";
+                $("#java-alert").modal('toggle');
                 return false;
             }
             // else if(!group) {
@@ -867,10 +873,14 @@
             //     return false;
             // }
             else if(!price) {
-                alert('Please select a Price!');
+                //alert('Please select a Price!');
+                $("#alert-string")[0].innerText = "Please select a Price!";
+                $("#java-alert").modal('toggle');
                 return false;
             } else if(!category) {
-                alert('Please select a Category!');
+                //alert('Please select a Category!');
+                $("#alert-string")[0].innerText = "Please select a Category!";
+                $("#java-alert").modal('toggle');
                 return false;
             } //else if(!opts) {
             //     alert('Please select a Option!');

@@ -12,7 +12,7 @@
                 <b>{{ group_order_dish.display_table }}</b><br>({{ group_order_dish.table_count }})
             </td>
             <td width="8%">
-                <img :src="'/dishes/' + group_order_dish.dish_image" class="general">
+                <img v-if="group_order_dish.dish_image !== null" :src="'/dishes/' + group_order_dish.dish_image" class="general">
             </td>
             <td width="56%" class="dish_list" :data-id=group_order_dish.dish_id>
                 <b>{{ group_order_dish.dish_name_en }}</b>

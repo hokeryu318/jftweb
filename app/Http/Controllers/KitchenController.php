@@ -391,9 +391,9 @@ class KitchenController extends Controller
 
     public function reprint(Request $request)
     {
-        $order_dish = $request1->order_dish;
+        $order_dish = $request->order_dish;
 
-        $table_name = $deshes->display_table;
+        //$table_name = $deshes->display_table;
 
         $printerIp = '192.168.192.151';
         $printerPort = 9100;

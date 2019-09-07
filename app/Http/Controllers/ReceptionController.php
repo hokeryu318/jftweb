@@ -784,7 +784,7 @@ class ReceptionController extends Controller
         return redirect()->route('reception.seated', ['status'=>'seated']);
     }
 
-    public function print() {
+    public function account_print() {
 
         $profile = Receipt::profile();
         $logo_image_name = $profile->logo_image;

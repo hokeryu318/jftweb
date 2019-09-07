@@ -900,13 +900,17 @@
         function changeTab(arg){
             if(arg == "group" || arg == "table" || arg == "name" || arg == "notes"){
                 if($("#timepicker1").val() == 'Select Time') {
-                    alert("Please select the time");
+                    //alert("Please select the time");
+                    $("#alert-string")[0].innerText = "Please select the time";
+                    $("#java-alert").modal('toggle');
                     return;
                 }
             }
             if(arg == "name" || arg == "notes"){
                 if($("#selected-table").val() == 0){
-                    alert("Please select the table");
+                    //alert("Please select the table");
+                    $("#alert-string")[0].innerText = "Please select the table";
+                    $("#java-alert").modal('toggle');
                     return;
                 }
             }
@@ -1092,7 +1096,9 @@
                 changeTab(arg);
             }else{
                 if($("#selected-table").val() == 0){
-                    alert("Please select the table");
+                    //alert("Please select the table");
+                    $("#alert-string")[0].innerText = "Please select the table";
+                    $("#java-alert").modal('toggle');
                     return;
                 }
                 var selected_date = $('#calendar-picker').data().date;

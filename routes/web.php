@@ -56,7 +56,7 @@ Route::post('reception/dish_list', 'ReceptionController@dish_list')->name('recep
 Route::post('reception/add_item', 'ReceptionController@add_item')->name('reception.add_item');
 Route::post('reception/change_count', 'ReceptionController@change_count')->name('reception.change_count');
 Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
-Route::post('reception/print', 'ReceptionController@print')->name('reception.print');
+Route::post('reception/account_print', 'ReceptionController@account_print')->name('reception.account_print');
 Route::post('reception/finish_pay', 'ReceptionController@finish_pay')->name('reception.finish_pay');
 
 //customer
