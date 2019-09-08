@@ -852,7 +852,13 @@
             for(var i=0;i<order_side.length;i++){
 
                 duration = order_side[i].duration;
-                order_time = new Date(order_side[i].time);
+
+                order_time = order_side[i].time;
+                var dateParts = order_time.substr(0,10).split('-');
+                var timePart = order_time.substr(11);
+                order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+                order_time = new Date(order_time);
+
                 if(duration == 0) {
                     document.getElementById("time_" + i).innerHTML = 'Takeaway';
                 } else if(duration == 1) {
@@ -921,7 +927,13 @@
                 if(table_obj[i]['order'].length > 0) {
 
                     duration = table_obj[i]['order'][0]['duration'];
-                    order_time = new Date(table_obj[i]['order'][0]['time']);
+
+                    order_time = table_obj[i]['order'][0]['time'];
+                    var dateParts = order_time.substr(0,10).split('-');
+                    var timePart = order_time.substr(11);
+                    order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+                    order_time = new Date(order_time);
+
                     status = table_obj[i]['order'][0]['status'];
 
                     if(duration == 0) {

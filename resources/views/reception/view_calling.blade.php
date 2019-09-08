@@ -128,11 +128,10 @@
 
             duration = order_side[i].duration;
 
-            //order_time = new Date(order_side[i].time);
-            var dateParts = order_side[i].time.substr(0,10).split('-');
-            var timePart = order_side[i].time.substr(11);
+            order_time = order_side[i].time;
+            var dateParts = order_time.substr(0,10).split('-');
+            var timePart = order_time.substr(11);
             order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
-
             order_time = new Date(order_time);
 
             if(duration == 0) {
@@ -186,7 +185,14 @@
             }
 
             if(order_side[i].attend_time == null) {
-                calling_time = new Date(order_side[i].calling_time);
+                //calling_time = new Date(order_side[i].calling_time);
+
+                var dateParts = order_side[i].calling_time.substr(0,10).split('-');
+                var timePart = order_side[i].calling_time.substr(11);
+                calling_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+
+                calling_time = new Date(calling_time);
+
                 diff = (current_time.getTime() - calling_time.getTime())/1000;
                 diff = Math.round(diff);
                 document.getElementById("calling_time_" + i).innerHTML = diff + 'sec';

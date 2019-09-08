@@ -72,7 +72,12 @@
         var elapsed_time = '';
         for(var i=0;i<attend_info.length;i++){
             if(attend_info[i].attended_time == '') {
-                calling_time = new Date(attend_info[i].calling_time);
+                //calling_time = new Date(attend_info[i].calling_time);
+                var dateParts = attend_info[i].calling_time.substr(0,10).split('-');
+                var timePart = attend_info[i].calling_time.substr(11);
+                calling_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+                calling_time = new Date(calling_time);
+
                 elapsed_time = (current_time.getTime() - calling_time.getTime())/1000;
                 elapsed_time = Math.round(elapsed_time);
                 document.getElementById("time1_" + i).innerHTML = elapsed_time + ' sec';

@@ -322,7 +322,12 @@
         function myTimer() {
 
             var duration = <?php echo json_encode($booking_order->duration) ?>;
-            var order_time = new Date(<?php echo json_encode($booking_order->starting_time) ?>);
+            var order_time = <?php echo json_encode($booking_order->starting_time) ?>;
+            var dateParts = order_time.substr(0,10).split('-');
+            var timePart = order_time.substr(11);
+            order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+            order_time = new Date(order_time);
+
             // console.log(order_time);
             var current_time =  new Date();
             var elapsed_time = '';

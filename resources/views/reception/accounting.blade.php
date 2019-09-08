@@ -534,7 +534,12 @@
     var myVar = setInterval(myTimer, 1000);
     function myTimer() {
 
-        var order_time = new Date(<?php echo json_encode($time) ?>);
+        var order_time = <?php echo json_encode($time) ?>;
+        var dateParts = order_time.substr(0,10).split('-');
+        var timePart = order_time.substr(11);
+        order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+        order_time = new Date(order_time);
+
         var duration = '<?php echo json_encode($duration) ?>';
 
         var current_time =  new Date();

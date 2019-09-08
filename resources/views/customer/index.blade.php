@@ -926,7 +926,6 @@
         var dateParts = last_order_time.substr(0,10).split('-');
         var timePart = last_order_time.substr(11);
         last_order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
-
         last_order_time = new Date(last_order_time);
 
         var current_time =  new Date();

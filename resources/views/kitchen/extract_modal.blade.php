@@ -91,7 +91,12 @@
         var elapsed_time = '';
         for(var i=0;i<order_dishes.length;i++){
 
-            order_time = new Date(order_dishes[i].created_at);
+            //order_time = new Date(order_dishes[i].created_at);
+            var dateParts = order_dishes[i].created_at.substr(0,10).split('-');
+            var timePart = order_dishes[i].created_at.substr(11);
+            order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+            order_time = new Date(order_time);
+
             elapsed_time = (current_time.getTime() - order_time.getTime())/1000;
             elapsed_time /= 60;
             elapsed_time = Math.round(elapsed_time);
