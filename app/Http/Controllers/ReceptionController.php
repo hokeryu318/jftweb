@@ -448,11 +448,16 @@ class ReceptionController extends Controller
 
         $select_list = request()->select_list;
         $items_id = array();
-        for($i=0;$i<count($select_list);$i++) {
-            $selected_item = explode(":", $select_list[$i]);
-            $dish_id = $selected_item[0];
-            array_push($items_id, $selected_item[1]);
-        }
+//        if($select_list != '') {
+            for($i=0;$i<count($select_list);$i++) {
+                $selected_item = explode(":", $select_list[$i]);
+                $dish_id = $selected_item[0];
+                array_push($items_id, $selected_item[1]);
+            }
+//        } else {
+//
+//        }
+
 
         $order_id = request()->order_id;
         $count = request()->qty;

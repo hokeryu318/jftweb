@@ -63,7 +63,8 @@
                                             <li>
                                                 @if($option->photo_visible == 0)
                                                     <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
-                                                           onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')" style="width:20px;height:20px;" />
+                                                           onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')"
+                                                           style="width:20px;height:20px;" />
                                                 @else
                                                     <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
                                                            onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}')"
@@ -108,6 +109,11 @@
                     <img src="{{asset('img/qty_up.png')}}" style="width: 60px;margin: 17px 0px 0 -15px;" onclick="plusQty('plus')" />
                 </div>
             </div>
+            <div class="row" style="margin-top: 30px">
+                <div class="col-12" style="text-align: center;">
+                    <p style="color: white;font-size: 20px;">You must set QTY</p>
+                </div>
+            </div>
         </div>
         <div class="col-4" style="margin-left: -6px;">
             <div class="amend_btn" style="background: #1EC2C9;color: white;margin: 12px 0 0 43px; padding-left: 42px;" onclick="onApply()">
@@ -128,7 +134,9 @@
 
 <script>
 
-    var select_list = [];
+    //var select_list = [];
+    var select_dish_id = '';
+    var select_item_ids = [];
     var order_dish_id = <?php echo(json_encode($order_dish_id))?>;
     var count = <?php echo(json_encode($count))?>;
 
@@ -201,11 +209,12 @@
     }
 
     //select Item
-    function selectItem(number_selection, dish_id, option_id) {
+    function selectItem(number_selection, dish_id, option_id, item_id) {
 
         var ds_op = dish_id + option_id;
+        var checkedValue = document.querySelector(".checked_items_" + ds_op + ":checked").value;console.dir(checkedValue);
         var checked_cnt = $(".checked_items_" + ds_op + ":checked").length;
-        if(checked_cnt > number_selection) {
+        if(checked_cnt > 2) {
             if(number_selection == 1)
                 alert('You can select only 1 item!');
             else
@@ -214,8 +223,26 @@
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].checked = false;
             }
+            select_item_ids = [];
+        } else {
+            select_item_ids = checkedValue;
         }
+        console.dir(select_item_ids);
 
+    }
+
+    function selectDishes(dish_id) {
+        select_dish_id = '';
+        select_item_ids = [];
+        var selected_dish_obj = $("#op_" + dish_id);
+        $(".common_dish").removeClass("selected_category_color");
+        selected_dish_obj.toggleClass('selected_category_color');
+        select_dish_id = dish_id;
+        //console.dir(select_dish_id);
+    }
+
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
     }
 
     //Apply
@@ -224,54 +251,60 @@
 
         if(order_dish_id == 0) {// add item
             //select get dish and option list for add
-            select_list = [];
-            var tmp = '';
-            $("input:checkbox:checked").each(function(){
-                var val = $(this).val();
-                var val_arr = val.split(':');
-                if(tmp == 0){
-                    tmp = val_arr[0];
-                    select_list.push(val);
-                }
-                else{
-                    if(tmp != val_arr[0]) {
-                        alert('You can select only 1 dish!');
-                    } else {
-                        select_list.push(val);
-                    }
-                }
-            });
 
-            if(select_list.length == 0){
-                alert('Please select dish and options!');
-            } else {
+//            var tmp = '';
+//            $("input:checkbox:checked").each(function(){
+//                var val = $(this).val();
+//
+//                if(tmp == 0){
+//                    tmp = val;
+//                    select_item_ids.push(val);
+//                }
+//                else{
+//                    if(tmp == val) {
+//                        //alert('You can select only 1 dish!');
+//                        select_item_ids = [];
+//                    } else {
+//                        select_item_ids.push(val);
+//                    }
+//                }
+//            });
+//
+//            select_item_ids = select_item_ids.filter( onlyUnique );
+//
+//            console.dir(select_dish_id);
+//            console.dir(select_item_ids);
+
+//            if(select_list.length == 0){
+//                alert('Please select dish and options!');
+//            } else {
                 var qty_number_obj = $("#qty");
                 var qty = qty_number_obj.html();
 
                 if(qty == 0) {
-                    alert('Please set qty!');
+                    //alert('Please set qty!');
                 } else {
                     $('#thirdModal').html('');
                     $('#thirdModal').modal('hide');
 
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ route('reception.add_item') }}",
-                        data:{
-                            order_id: order_id, select_list: select_list, qty: qty, _token:"{{ csrf_token() }}"
-                        },
-                        success: function(result){
-                            location.href = window.location.href;
-                        }
-                    });
+                    {{--$.ajax({--}}
+                        {{--type:"POST",--}}
+                        {{--url:"{{ route('reception.add_item') }}",--}}
+                        {{--data:{--}}
+                            {{--order_id: order_id, select_list: select_list, qty: qty, _token:"{{ csrf_token() }}"--}}
+                        {{--},--}}
+                        {{--success: function(result){--}}
+                            {{--location.href = window.location.href;--}}
+                        {{--}--}}
+                    {{--});--}}
                 }
-            }
+//            }
         } else {// change count of item
             var qty_number_obj = $("#qty");
             var qty = qty_number_obj.html();
 
             if(qty == 0) {
-                alert('Please set qty!');
+                //alert('Please set qty!');
             } else {
 
                 $('#thirdModal').html('');

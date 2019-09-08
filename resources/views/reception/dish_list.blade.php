@@ -2,7 +2,12 @@
 @foreach ($dishes as $ds)
     @if($ds->sold_out == 0)
         <ul id="myUL">
-            <li><span class="caret fs-25">{{ $ds->name_en }}</span>
+            <li>
+                @if(count($ds->options) > 0)
+                    <span class="caret common_dish fs-25" id="op_{{ $ds->id }}" onclick="selectDishes({{ $ds->id }})">{{ $ds->name_en }}</span>
+                @else
+                    <span class="common_dish fs-25" id="op_{{ $ds->id }}" onclick="selectDishes({{ $ds->id }})">&nbsp;&nbsp;&nbsp;-{{ $ds->name_en }}</span>
+                @endif
                 <ul class="nested">
                     @foreach ($ds->options as $option)
                         <li>
@@ -17,11 +22,12 @@
                                 @foreach ($option->item as $item)
                                     <li>
                                         @if($option->photo_visible == 0)
-                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
-                                                   onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')" style="width:20px;height:20px;" />
+                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$item->id}}"
+                                                   onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}', '{{$item->id}}')"
+                                                   style="width:20px;height:20px;" />
                                         @else
-                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
-                                                   onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}')"
+                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$item->id}}"
+                                                   onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}', '{{$item->id}}')"
                                                    style="width:20px;height:20px;" />
                                         @endif
                                         <span class="fs-25">{{ $item->name }}</span>
@@ -93,4 +99,5 @@
             this.classList.toggle("caret-down");
         });
     }
+
 </script>

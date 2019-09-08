@@ -337,6 +337,10 @@ class KitchenController extends Controller
         else    return '';
     }
 
+    public function java_alert() {
+        return view('kitchen.java_alert');
+    }
+
 //    public function get_change_group_dish(Request $request)
 //    {
 //

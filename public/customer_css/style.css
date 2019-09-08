@@ -854,3 +854,30 @@ section{
     height: 80%;
     overflow-y: auto;
 }
+
+.alert_modal_content {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    outline: 0;
+    width: 400px;
+    height: 150px;
+    margin: -20px 0px 0 310px;
+    border-radius: 5px;
+}
+.ex_co_modal_header {
+    height: 80px;
+    margin: 0px 0px 0px -18px;
+}
+.ex_co_right_close {
+    float: right;
+    margin: -40px 20px 0 0;
+}
+.ex_co_modal_header {
+    height: 80px;
+    margin: 0px 0px 0px -18px;
+}

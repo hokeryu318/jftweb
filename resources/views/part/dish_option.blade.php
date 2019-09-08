@@ -127,3 +127,40 @@
             <button class="btnBottom-2" onclick="option_previous_page('{{$option_ids}}','{{$count}}')">&#9664; BACK</button>
     </div>
 </div>
+
+{{--customer alert1--}}
+<div class="modal fade" id="java-alert1" role="dialog"></div>
+<div id="java-alert2" class="modal">
+    <div class="alert_modal_content">
+        <div class="container-fluid" style="position: sticky; top: 0;">
+            <div class="ex_co_modal_header">
+                <div class="col-sm-10" style="padding: 24px 0 0 30px;">
+
+                </div>
+                <div class="col-sm-2" style="padding: 18px 0 0 0px;">
+                    <p class="ex_co_right_close" data-dismiss="modal" onclick="alert_modal_close()">
+                        <img src="{{ asset('img/Group1101.png') }}" style="width: 20px;height: 20px;">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="position: sticky; top: 0;">
+            <div class="ex_co_modal_header">
+                <div class="col-sm-12" style="text-align: center;">
+                    <p style="font-size: 18px;">Please select number of option correctly!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function alert_modal_close()
+    {
+
+        $('#java-alert2').html('');
+        $('#java-alert2').modal('hide');
+        $('#thirdModal').modal('show');
+
+    }
+</script>

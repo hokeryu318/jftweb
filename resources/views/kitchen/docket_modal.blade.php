@@ -1,4 +1,4 @@
-{{--extract_cooking_name--}}
+
 <div class="reprint_modal_content">
     <div class="container-fluid" style="position: sticky; top: 0;">
         <div class="ex_co_modal_header">
@@ -73,7 +73,7 @@
     //modal_close
     function extract_modal_close()
     {
-        $("#ExtractCookingName").modal("hide");
+        $("#ReprintDocketModal").modal("hide");
         window.location.replace(parentURL);
     }
 

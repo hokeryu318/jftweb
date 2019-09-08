@@ -11,10 +11,8 @@
 
     <link rel="stylesheet" href="{{asset('customer_css/style.css')}}">
     <link rel="stylesheet" href="{{asset('customer_css/all.css')}}">
-
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
-
 <style>
     #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
     /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
@@ -697,7 +695,7 @@
         var display_item_price = '';
         var sign = '';
         var option_price_str = '';
-
+        //alert(option_price.length);
         if(option_price.length <= number_selection) {
             for(var i=0;i<option_price.length;i++) {
                 opt_itm = option_price[i][1].split(':');
@@ -718,15 +716,15 @@
                 }
                 option_price_str += "<span class='price'>" + sign + "</span>" + opt_itm[0] + display_item_price;
             }
+
         }
         else {
-            if(number_selection == '') {
-                alert('Number selection for this item is empty. Please ask to waiter!');
-            } else {
-                //alert('You can select ' + number_selection + ' only for this option.');
-                $("#alert-string")[0].innerText = 'You can select ' + number_selection + ' only for this option.';
-                $("#java-alert").modal('toggle');
-            }
+//            if(number_selection == '') {
+//                alert('Number selection for this item is empty. Please ask to waiter!');
+//            } else {
+//                //alert('You can select ' + number_selection + ' only for this option.');
+//                $('#java-alert2').modal('show');
+//            }
             //all check info format
             $("input:checkbox").each(function(){
                 var id = $(this).attr("id");
@@ -928,10 +926,11 @@
         var diff = (current_time.getTime() - last_order_time.getTime())/1000;
         diff /= 60;
         diff = Math.round(diff);
-        if((diff > 0) && (diff > 90))
-            document.getElementById("time").innerHTML = diff;
-        else
-            document.getElementById("time").innerHTML = 0;
+//        if((diff > 0) && (diff > 90))
+//            document.getElementById("time").innerHTML = diff;
+//        else
+//            document.getElementById("time").innerHTML = 0;
+        document.getElementById("time").innerHTML = current_time;
     }
 
 </script>
@@ -956,6 +955,6 @@
 <div id="thirdModal" class="modal"></div>
 {{--<div id="feedbackModal" class>
     l"></div>--}}
-    
+
 </body>
 </html>

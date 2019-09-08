@@ -16,27 +16,6 @@
 <body>
 <input type="hidden" id="group_id" value="{{ $group_id }}">
 
-<div class="modal fade" id="java-alert" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="margin-top: -750px;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
-                </button>
-            </div>
-            <div class="modal-body pr-4">
-                <p id="alert-string" class="text-center fs-20"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
-                    Close
-                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="main">
     <div id="app">
         <div class="container-fluid" style="position: sticky; top: 0;">
@@ -193,9 +172,15 @@
             success: function(result){
                 if(result == '') {
                     //alert("There is no data for reprint!");
-//                    $("#alert-string")[0].innerText = "There is no data for reprint!";
-//                    $("#java-alert").modal('toggle');
-                    setTimeout(function(){alert('not broken!');},200)
+                    $.ajax({
+                        type:"GET",
+                        url:"{{ route('kitchen.java_alert') }}",
+                        data:{ },
+                        success: function(result1){
+                            $('#java-alert').html(result1);
+                            $("#java-alert").modal('toggle');
+                        }
+                    });
                 } else{
                     $('#ReprintDocketModal').html(result);
                     $("#ReprintDocketModal").modal("toggle");
@@ -358,6 +343,8 @@
 <div class="modal fade" id="ExtractCookingName" role="dialog"></div>
 {{--reprint docket--}}
 <div class="modal fade" id="ReprintDocketModal" role="dialog"></div>
+{{--kitchen alert--}}
+<div class="modal fade" id="java-alert" role="dialog"></div>
 </body>
 </html>
 

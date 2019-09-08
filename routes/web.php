@@ -88,6 +88,7 @@ Route::get('kitchen/extract_cooking_name', 'KitchenController@extract_cooking_na
 Route::get('kitchen/extract_table_number', 'KitchenController@extract_table_number')->name('kitchen.extract_table_number');
 Route::get('kitchen/docket', 'KitchenController@docket')->name('kitchen.docket');
 Route::get('kitchen/reprint', 'KitchenController@reprint')->name('kitchen.reprint');
+Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_alert');
 
 //admin
 //Route::group(['middleware' => 'checkadmin'], function(){
