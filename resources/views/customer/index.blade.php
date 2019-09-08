@@ -922,15 +922,19 @@
     function myTimer() {
 
         var last_order_time = new Date(<?php echo json_encode($last_order_time) ?>);
+
+        var dateParts = last_order_time.substring(0,10).split('-');
+        var timePart = last_order_time.substr(11);
+        last_order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+
         var current_time =  new Date();
         var diff = (current_time.getTime() - last_order_time.getTime())/1000;
         diff /= 60;
         diff = Math.round(diff);
-//        if((diff > 0) && (diff > 90))
-//            document.getElementById("time").innerHTML = diff;
-//        else
-//            document.getElementById("time").innerHTML = 0;
-        document.getElementById("time").innerHTML = current_time;
+        if((diff > 0) && (diff > 90))
+            document.getElementById("time").innerHTML = diff;
+        else
+            document.getElementById("time").innerHTML = 0;
     }
 
 </script>
