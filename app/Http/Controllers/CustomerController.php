@@ -783,67 +783,47 @@ class CustomerController extends Controller
 
         $timeslot = Timeslot::find(1);
         
-        $breakfast_time = $timeslot->morning_starts;
-        if( substr($breakfast_time,-2) == "AM" ) $breakfast_time = substr($breakfast_time,0,5);
-        else{
-            $first_time = (int)substr($breakfast_time,0,2);
-            $first_time += 12;
-            $last_time = substr($breakfast_time,2,3);
-            $breakfast_time = $first_time . $last_time;
-        }
+        $breakfast_time_starts = $timeslot->morning_starts;
+        $breakfast_time_starts = $this->get_eat_time($breakfast_time_starts);
+        $breakfast_time_ends = $timeslot->morning_ends;
+        $breakfast_time_ends = $this->get_eat_time($breakfast_time_ends);
         
-        $lunch_time = $timeslot->lunch_starts;
-        if( substr($lunch_time,-2) == "AM" ) $lunch_time = substr($lunch_time,0,5);
-        else{
-            $first_time = (int)substr($lunch_time,0,2);
-            $first_time += 12;
-            $last_time = substr($lunch_time,2,3);
-            $lunch_time = $first_time . $last_time;
-        }
+        $lunch_time_starts = $timeslot->lunch_starts;
+        $lunch_time_starts = $this->get_eat_time($lunch_time_starts);
+        $lunch_time_ends = $timeslot->lunch_ends;
+        $lunch_time_ends = $this->get_eat_time($lunch_time_ends);
         
-        $tea_time = $timeslot->tea_starts;
-        if( substr($tea_time,-2) == "AM" ) $tea_time = substr($tea_time,0,5);
-        else{
-            $first_time = (int)substr($tea_time,0,2);
-            $first_time += 12;
-            $last_time = substr($tea_time,2,3);
-            $tea_time = $first_time . $last_time;
-        }
+        $tea_time_starts = $timeslot->tea_starts;
+        $tea_time_starts = $this->get_eat_time($tea_time_starts);
+        $tea_time_ends = $timeslot->tea_ends;
+        $tea_time_ends = $this->get_eat_time($tea_time_ends);
         
-        $dinner_time = $timeslot->dinner_starts;
-        if( substr($dinner_time,-2) == "AM" ) $dinner_time = substr($dinner_time,0,5);
-        else{
-            $first_time = (int)substr($dinner_time,0,2);
-            $first_time += 12;
-            $last_time = substr($dinner_time,2,3);
-            $dinner_time = $first_time . $last_time;
-        }
+        $dinner_time_starts = $timeslot->dinner_starts;
+        $dinner_time_starts = $this->get_eat_time($dinner_time_starts);
+        $dinner_time_ends = $timeslot->dinner_ends;
+        $dinner_time_ends = $this->get_eat_time($dinner_time_ends);
         
-        $latenight_time = $timeslot->latenight_starts;
-        if( substr($latenight_time,-2) == "AM" ) $latenight_time = substr($latenight_time,0,5);
-        else{
-            $first_time = (int)substr($latenight_time,0,2);
-            $first_time += 12;
-            $last_time = substr($latenight_time,2,3);
-            $latenight_time = $first_time . $last_time;
-        }
+        $latenight_time_starts = $timeslot->latenight_starts;
+        $latenight_time_starts = $this->get_eat_time($latenight_time_starts);
+        $latenight_time_ends = $timeslot->latenight_ends;
+        $latenight_time_ends = $this->get_eat_time($latenight_time_ends);
         
-        if( $time >= $breakfast_time && $time < $lunch_time )
+        if( $time >= $breakfast_time_starts && $time < $breakfast_time_ends )
         {
             $eat_in = "eatin_breakfast";
             $eat_in1 = "morning_on";
         } 
-        elseif( $time >= $lunch_time && $time < $tea_time  )
+        elseif( $time >= $lunch_time_starts && $time < $lunch_time_ends  )
         {
             $eat_in = "eatin_lunch";
             $eat_in1 = "lunch_on";
         } 
-        elseif( $time >= $tea_time && $time < $dinner_time  )
+        elseif( $time >= $tea_time_starts && $time < $tea_time_ends  )
         {
             $eat_in = "eatin_tea";
             $eat_in1 = "tea_on";
         } 
-        elseif( $time >= $dinner_time && $time < $latenight_time  )
+        elseif( $time >= $dinner_time_starts && $time < $dinner_time_ends  )
         {
             $eat_in = "eatin_dinner";
             $eat_in1 = "dinner_on";
@@ -852,7 +832,7 @@ class CustomerController extends Controller
         {
             $eat_in = "";
             $eat_in1 = "";
-        } 
+        }
 
         $week = date('w', strtotime($menu_time));
         switch($week)
@@ -935,5 +915,33 @@ class CustomerController extends Controller
         return $dishes;
     }
 
+    public function get_eat_time($eat_time)
+    {
+        if( substr($eat_time,-2) == "AM" ){
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '00' . $last_time;
+            }
+            else{
+                $eat_time = substr($eat_time,0,5);
+            }
+            
+        } 
+        else{
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '12' . $last_time;
+            }
+            else{
+                $first_time = (int)substr($eat_time,0,2);
+                $first_time += 12;
+                $last_time = substr($eat_time,2,3);
+                $eat_time = $first_time . $last_time;                
+            }
+
+        }
+
+        return $eat_time;
+    }
 
 }
