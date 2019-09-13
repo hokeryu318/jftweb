@@ -287,6 +287,31 @@
     </div>
 </form>
 
+<div class="modal fade" id="java-alert-confirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-top: -750px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('img/Group1101.png') }}" style="width:25px;height:25px;" class="float-right" />
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="alert-string-confirm" class="text-center fs-20"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                    Close
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20">
+                    OK
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var order_dish_id = 0;
     //amend button click
@@ -504,26 +529,31 @@
                 var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
                 // alert(order_id + '/' + balance + '/' + amount + '/' + change + '/' + tip + '/' + sub_total + '/' + discount + '/' + total + '/' + without_gst + '/' + gst);
 
-                if(confirm("Would you like a receipt?")) {
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ route('reception.account_print') }}",
-                        data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
-                        success: function(result){
-                            console.dir(result);
-                        }
-                    });
-                }
 
-                $.ajax({
-                    type:"POST",
-                    url:"{{ route('reception.pay') }}",
-                    data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
-                    success: function(result){
+                $("#alert-string-confirm")[0].innerText = "Would you like a receipt?";
+                $("#java-alert-confirm").modal('toggle');
+
+
+                {{--if(confirm("Would you like a receipt?")) {--}}
+                    {{--$.ajax({--}}
+                        {{--type:"POST",--}}
+                        {{--url:"{{ route('reception.account_print') }}",--}}
+                        {{--data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
+                        {{--success: function(result){--}}
+                            {{--console.dir(result);--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--}--}}
+
+                {{--$.ajax({--}}
+                    {{--type:"POST",--}}
+                    {{--url:"{{ route('reception.pay') }}",--}}
+                    {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
+                    {{--success: function(result){--}}
                         {{--// console.log(result);--}}
-                        $("#save-pay").submit();
-                        }
-                    });
+                        {{--$("#save-pay").submit();--}}
+                    {{--}--}}
+                {{--});--}}
                 // window.history.back();
             }
         }

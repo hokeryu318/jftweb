@@ -26,6 +26,7 @@ use App\Model\Item;
 use App\Model\Room;
 use App\Model\Holiday;
 use App\Model\Timeslot;
+use App\Model\Kitchen;
 
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -35,9 +36,6 @@ use App\Http\Controllers\print_table1;
 
 class ReceptionController extends Controller
 {
-
-    public $printerIp = '192.168.192.150';
-    public $printerPort = 9100;
 
     //reception main screen ============================================================================================
     //seated   : order.status = seated;
@@ -792,6 +790,10 @@ class ReceptionController extends Controller
     public function account_print() {
 
         $profile = Receipt::profile();
+
+        $printerIp = $profile->printer_ip;
+        $printerPort = 9100;
+
         $logo_image_name = $profile->logo_image;
         $title = "TAX INVOICE";
         $address = $profile->address;
@@ -825,7 +827,7 @@ class ReceptionController extends Controller
         $change = request()->get('change');
 
         //print part
-        $connector = new NetworkPrintConnector($this->printerIp, $this->printerPort);
+        $connector = new NetworkPrintConnector($printerIp, $printerPort);
         $printer = new Printer($connector);
 
         try {

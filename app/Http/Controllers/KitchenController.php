@@ -130,7 +130,9 @@ class KitchenController extends Controller
             $orderdish->ready_time = $this->get_current_time();
 
             //print part
-            $printerIp = '192.168.192.151';
+            //$printerIp = '192.168.192.151';
+            $group_id = $request->group_id;
+            $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
             $printerPort = 9100;
 
             $ready_time = $orderdish->created_at;
@@ -259,8 +261,10 @@ class KitchenController extends Controller
         }
 
         $filter_flag = 1;
-//        dd($order_dishes);
-        return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'dish_id'));
+
+        $group_id = request()->group_id;
+
+        return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'dish_id', 'group_id'));
 
     }
 
@@ -271,9 +275,12 @@ class KitchenController extends Controller
         $order_id = OrderTable::where('table_id', $table_id)->pluck('order_id')->first();
         $order_dishes = OrderDish::where('order_id', $order_id)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
         $order_dishes = $this->get_order_dish($order_dishes);
+
         $filter_flag = 2;
-//        dd($order_dishes);
-        return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'table_id'));
+
+        $group_id = request()->group_id;
+
+        return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'table_id', 'group_id'));
     }
 
     public function get_order_dish($group_order_dishes, $group_id = 0)
@@ -333,7 +340,7 @@ class KitchenController extends Controller
             $order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
         }
 
-        if(count($order_dishes) > 0)    return view('kitchen.docket_modal')->with(compact('order_dishes'));
+        if(count($order_dishes) > 0)    return view('kitchen.docket_modal')->with(compact('order_dishes', 'group_id'));
         else    return '';
     }
 
@@ -399,7 +406,9 @@ class KitchenController extends Controller
 
         //$table_name = $deshes->display_table;
 
-        $printerIp = '192.168.192.151';
+        //$printerIp = '192.168.192.151';
+        $group_id = $request->group_id;
+        $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
         $printerPort = 9100;
 
         $ready_time = $order_dish->created_at;

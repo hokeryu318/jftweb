@@ -212,9 +212,9 @@
     function selectItem(number_selection, dish_id, option_id, item_id) {
 
         var ds_op = dish_id + option_id;
-        var checkedValue = document.querySelector(".checked_items_" + ds_op + ":checked").value;console.dir(checkedValue);
+        var checkedValue = document.querySelector(".checked_items_" + ds_op + ":checked").value;
         var checked_cnt = $(".checked_items_" + ds_op + ":checked").length;
-        if(checked_cnt > 2) {
+        if(checked_cnt > number_selection) {
             if(number_selection == 1)
                 alert('You can select only 1 item!');
             else

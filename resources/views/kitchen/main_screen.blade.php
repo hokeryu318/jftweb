@@ -195,10 +195,11 @@
     $(document).ready(function() {
         $(".main").on("click", ".dish_list", function () {
             var dish_id = $(this).attr("data-id");
+            var group_id = <?php echo(json_encode($group_id))?>;
             $.ajax({
                 type:"GET",
                 url:"{{ route('kitchen.extract_cooking_name') }}",
-                data:{ dish_id: dish_id },
+                data:{ dish_id: dish_id, group_id: group_id },
                 success: function(result){
                     $('#ExtractCookingName').html(result);
                 }
@@ -211,10 +212,11 @@
     $(document).ready(function() {
         $(".main").on("click", ".table_list", function () {
             var table_id = $(this).attr("data-id");
+            var group_id = <?php echo(json_encode($group_id))?>;
             $.ajax({
                 type:"GET",
                 url:"{{ route('kitchen.extract_table_number') }}",
-                data:{ table_id: table_id },
+                data:{ table_id: table_id, group_id: group_id },
                 success: function(result){
                     $('#ExtractCookingName').html(result);
                 }
@@ -224,13 +226,13 @@
     });
 
     // ready check on dish and table modal
-    function ready(ready_id, filter_flag, id)
+    function ready(ready_id, filter_flag, id, group_id)
     {
         $.ajax({
             type:'POST',
             url:'{{ route('kitchen.ready') }}',
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            data: { selected_id : ready_id, filter_flag: filter_flag, id: id },
+            data: { selected_id : ready_id, filter_flag: filter_flag, id: id, group_id: group_id },
             success: function(data){
                 $('#ExtractCookingName').html(data);
             }

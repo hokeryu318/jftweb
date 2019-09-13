@@ -1959,9 +1959,12 @@ __webpack_require__.r(__webpack_exports__);
     ready: function ready(id, key) {
       // this.group_order_dishes.splice(key, 1);
       // this.group_order_dishes.pop(6-key);
+      console.dir(this.group);
       var selected_id = id;
+      var group_id = this.group;
       axios.post('/api/ready', {
-        selected_id: selected_id
+        selected_id: selected_id,
+        group_id: group_id
       }).then(function (response) {
         console.dir(response.data);
       });

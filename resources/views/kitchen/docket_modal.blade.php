@@ -54,7 +54,7 @@
                                 {{--</a>--}}
                                 <a style="color: white;">
                                     <span class="fs-25">REPRINT</span>
-                                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;" onclick="reprint('{{ $order_dish }}')">
+                                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;" onclick="reprint('{{ $order_dish }}', '{{ $group_id }}')">
                                 </a>
                             </div>
                         </td>
@@ -77,14 +77,13 @@
         window.location.replace(parentURL);
     }
 
-    function reprint($order_dish)
+    function reprint(order_dish, group_id)
     {
-        var order = $order_dish;
-        
+
         $.ajax({
             type:"POST",
             url:"{{ route('kitchen.reprint') }}",
-            data:{ order_dish: order, _token: "{{ csrf_token() }}" },
+            data:{ order_dish: order_dish, group_id: group_id, _token: "{{ csrf_token() }}" },
             success: function(result){
                 console.log(result.data);
                 //window.open(result);

@@ -116,8 +116,10 @@
             ready(id, key) {
                 // this.group_order_dishes.splice(key, 1);
                 // this.group_order_dishes.pop(6-key);
+                console.dir(this.group);
                 var selected_id = id;
-                axios.post('/api/ready', {selected_id: selected_id})
+                var group_id = this.group;
+                axios.post('/api/ready', {selected_id: selected_id, group_id: group_id})
                     .then(response => {
                         console.dir(response.data);
                     })

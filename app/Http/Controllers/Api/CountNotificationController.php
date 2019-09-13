@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\Kitchen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -102,6 +103,7 @@ class CountNotificationController extends Controller
 
     public function ready(Request $request)
     {
+
         $orderdish = OrderDish::findOrFail($request->selected_id);
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
@@ -111,7 +113,9 @@ class CountNotificationController extends Controller
             $orderdish->ready_time = $this->get_current_time();
 
             //print part
-            $printerIp = '192.168.192.151';
+            //$printerIp = '192.168.192.151';
+            $group_id = $request->group_id;
+            $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
             $printerPort = 9100;
 
             $ready_time = $orderdish->created_at;

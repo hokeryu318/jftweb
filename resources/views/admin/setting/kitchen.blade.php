@@ -7,8 +7,11 @@
     <div id="content" style="height: 500px;overflow-x: hidden;overflow-y: auto;">
         @foreach($kitchens as $kitchen)
         <div class="row ml-4 pl-2 element">
-            <div class="col-9 pt-2">
-                <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name fs-25" style="width:100%;" value="{{ $kitchen->name }}" name="orgitem">
+            <div class="col-5 pt-2">
+                <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name1 fs-25" style="width:100%;" value="{{ $kitchen->name }}" name="orgitem[]">
+            </div>
+            <div class="col-4 pt-2">
+                <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name2 fs-25" style="width:100%;" value="{{ $kitchen->printer_ip }}" name="printeritem[]">
             </div>
             <div class="col-3 pt-2">
                 <button type="button" class="btn black radius-1 ptb pr-5 pl-5 delete-btn" data-id="{{ $kitchen->id }}" onclick="deleteGroup(this)">
@@ -22,8 +25,11 @@
     </form>
 
     <div class="row ml-4 pl-2 element" id="original" style="display:none">
-        <div class="col-9 pt-2">
-            <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name fs-25" style="width:100%" name="new[]">
+        <div class="col-5 pt-2">
+            <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name1 fs-25" style="width:100%" name="new1[]">
+        </div>
+        <div class="col-4 pt-2">
+            <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold name2 fs-25" style="width:100%" name="new2[]">
         </div>
         <div class="col-3 pt-2">
             <button class="btn black radius-1 ptb pr-5 pl-5" data-id="0" onclick="deleteGroup(this)">
@@ -33,8 +39,11 @@
     </div>
 
     <div class="row mt-2 ml-4 pl-2">
-        <div class="col-9 pt-2">
+        <div class="col-5 pt-2">
             <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold addinput fs-25" style="width:100%">
+        </div>
+        <div class="col-4 pt-2">
+            <input class="card pt-2 pb-2 pl-4 pr-4 font-weight-bold addprint fs-25" style="width:100%">
         </div>
         <div class="col-3 pt-2">
             <button class="btn black radius-1 ptb pr-4 pl-4" style="width: 185px;" onclick="addGroup()">
@@ -61,22 +70,28 @@
 <script>
     function addGroup()
     {
-        var name = $('.addinput').val();
-        if(name == "") return;
+        var name1 = $('.addinput').val();
+        var name2 = $('.addprint').val();
+        if(name1 == "" || name2 == "") return;
         var div = $('#original').clone();
         $(div).show();
-        $('.name', div).val(name);
+        $('.name1', div).val(name1);
+        $('.name2', div).val(name2);
         $('#content').append(div);
         $('.addinput').val('');
+        $('.addprint').val('');
     }
     function deleteGroup(obj){
         var id = $(obj).data('id');
         if(id > 0){
             var parent = $(obj).closest('.element');
             parent.hide();
-            var name_edit = $('.name', parent);
-            name_edit.attr('name', 'removed[]');
-            name_edit.attr('value', id);
+            var name_edit1 = $('.name1', parent);
+            name_edit1.attr('name', 'removed1[]');
+            name_edit1.attr('value', id);
+            var name_edit2 = $('.name2', parent);
+            name_edit2.attr('name', 'removed2[]');
+            name_edit2.attr('value', id);
         }
         else
             $(obj).closest('.element').remove();
