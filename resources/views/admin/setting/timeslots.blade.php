@@ -435,9 +435,37 @@
         </a>
     </div>
 </div>
+<div class="modal fade" id="java-alert1" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-top: -50px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="alert-string1" class="text-center fs-20"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                    Close
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="search_data" value="{{ $search_data }}">
 <script type="text/javascript" src="{{ asset('js/timepicki.js') }}"></script>
 <script>
     $(document).ready(function(){
+        var data = $("#search_data").val();
+        if(data != "")
+        {
+            $("#alert-string1")[0].innerText = data;
+            $("#java-alert1").modal('toggle');            
+        }
+
         //$(".time-element").timepicki({start_time: ["06", "00", "AM"]});
         $(".time-element").each(function(i, obj){
             var init_time = $(obj).val();

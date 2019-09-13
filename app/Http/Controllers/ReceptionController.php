@@ -1153,90 +1153,6 @@ class ReceptionController extends Controller
         $time = substr($menu_time,11,5);
         $date = date('d M Y', strtotime($menu_time));
 
-        $timeslot = Timeslot::find(1);
-        
-        $breakfast_time_starts = $timeslot->morning_starts;
-        $breakfast_time_starts = $this->get_eat_time($breakfast_time_starts);
-        $breakfast_time_ends = $timeslot->morning_ends;
-        $breakfast_time_ends = $this->get_eat_time($breakfast_time_ends);
-        
-        $lunch_time_starts = $timeslot->lunch_starts;
-        $lunch_time_starts = $this->get_eat_time($lunch_time_starts);
-        $lunch_time_ends = $timeslot->lunch_ends;
-        $lunch_time_ends = $this->get_eat_time($lunch_time_ends);
-        
-        $tea_time_starts = $timeslot->tea_starts;
-        $tea_time_starts = $this->get_eat_time($tea_time_starts);
-        $tea_time_ends = $timeslot->tea_ends;
-        $tea_time_ends = $this->get_eat_time($tea_time_ends);
-        
-        $dinner_time_starts = $timeslot->dinner_starts;
-        $dinner_time_starts = $this->get_eat_time($dinner_time_starts);
-        $dinner_time_ends = $timeslot->dinner_ends;
-        $dinner_time_ends = $this->get_eat_time($dinner_time_ends);
-        
-        $latenight_time_starts = $timeslot->latenight_starts;
-        $latenight_time_starts = $this->get_eat_time($latenight_time_starts);
-        $latenight_time_ends = $timeslot->latenight_ends;
-        $latenight_time_ends = $this->get_eat_time($latenight_time_ends);
-        
-        if( $time >= $breakfast_time_starts && $time < $breakfast_time_ends )
-        {
-            $eat_in = "eatin_breakfast";
-            $eat_in1 = "morning_on";
-        } 
-        elseif( $time >= $lunch_time_starts && $time < $lunch_time_ends  )
-        {
-            $eat_in = "eatin_lunch";
-            $eat_in1 = "lunch_on";
-        } 
-        elseif( $time >= $tea_time_starts && $time < $tea_time_ends  )
-        {
-            $eat_in = "eatin_tea";
-            $eat_in1 = "tea_on";
-        } 
-        elseif( $time >= $dinner_time_starts && $time < $dinner_time_ends  )
-        {
-            $eat_in = "eatin_dinner";
-            $eat_in1 = "dinner_on";
-        } 
-        else
-        {
-            $eat_in = "";
-            $eat_in1 = "";
-        } 
-
-        $week = date('w', strtotime($menu_time));
-        switch($week)
-        {
-            case 0:
-                $time_week = Timeslot::find(8);
-                break;
-            case 1:
-                $time_week = Timeslot::find(2);
-                break;
-            case 2:
-                $time_week = Timeslot::find(3);
-                break;
-            case 3:
-                $time_week = Timeslot::find(4);
-                break;
-            case 4:
-                $time_week = Timeslot::find(5);
-                break;
-            case 5:
-                $time_week = Timeslot::find(6);
-                break;
-            case 6:
-                $time_week = Timeslot::find(7);
-                break;
-
-        }
-        
-        $eat_opt = $time_week->$eat_in1;
-        $day_on = $time_week->day_on;
-
-
         $holiday = Timeslot::find(9);
 
         if($holiday->day_on == 1)   $chk_holiday = Holiday::where('holiday_date',$date)->get();
@@ -1244,58 +1160,68 @@ class ReceptionController extends Controller
 
         if(count($chk_holiday) > 0)
         {
+            $result = $this->get_time_slot($holiday,$time);
 
-            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
-            {
-                $dishes = $category->eat_dishes($eat_in);
-                foreach($dishes as $dish){
-                    $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-                    $dish->options = $dish->options()->get();
-                    foreach($dish->options as $option){
-                        $option->item = Item::where('option_id', $option->id)->get();
-                    }
-                } 
-            }
-            else 
-                $dishes = "";
         }
         else
         {
-            $all_week = Timeslot::get();
-
-            if( $all_week[1]->day_on == 0 && $all_week[2]->day_on  == 0 && $all_week[3]->day_on  == 0 && $all_week[4]->day_on  == 0 && $all_week[5]->day_on  == 0 && $all_week[6]->day_on  == 0 && $all_week[7]->day_on  == 0)
+            $week = date('w', strtotime($menu_time));
+            switch($week)
             {
-                if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
-                {
-                    $dishes = $category->eat_dishes($eat_in);
-                    foreach($dishes as $dish){
-                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-                        $dish->options = $dish->options()->get();
-                        foreach($dish->options as $option){
-                            $option->item = Item::where('option_id', $option->id)->get();
-                        }
-                    }   
-                } 
-                else 
-                    $dishes = "";                
+                case 0:
+                    $timeslot = Timeslot::find(8);
+                    break;
+                case 1:
+                    $timeslot = Timeslot::find(2);
+                    break;
+                case 2:
+                    $timeslot = Timeslot::find(3);
+                    break;
+                case 3:
+                    $timeslot = Timeslot::find(4);
+                    break;
+                case 4:
+                    $timeslot = Timeslot::find(5);
+                    break;
+                case 5:
+                    $timeslot = Timeslot::find(6);
+                    break;
+                case 6:
+                    $timeslot = Timeslot::find(7);
+                    break;
+    
+            }
+
+            $day_on = $timeslot->day_on;
+
+            if( $day_on == 1 )
+            {
+                $result = $this->get_time_slot($timeslot,$time);
+               
             }
             else{
-                if(!empty($eat_in1) && $eat_opt == 1 && $day_on == 1)    
-                {
-                    $dishes = $category->eat_dishes($eat_in);
-                    foreach($dishes as $dish){
-                        $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
-                        $dish->options = $dish->options()->get();
-                        foreach($dish->options as $option){
-                            $option->item = Item::where('option_id', $option->id)->get();
-                        }
-                    }  
-                } 
-                else 
-                    $dishes = "";                
+                $timeslot1 = Timeslot::find(1);
+                $result = $this->get_time_slot($timeslot1,$time);
+              
             }
                       
         }
+
+        
+        if( !empty($result))  
+        {
+            $dishes = $category->eat_dishes($result);
+            foreach($dishes as $dish){
+                $dish->discount = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):'';
+                $dish->options = $dish->options()->get();
+                foreach($dish->options as $option){
+                    $option->item = Item::where('option_id', $option->id)->get();
+                }
+            } 
+        }
+        else 
+            $dishes = "";
+            
         return $dishes;
     }
 
@@ -1327,4 +1253,61 @@ class ReceptionController extends Controller
 
         return $eat_time;
     }
+
+    public function get_time_slot($timeslot,$time)
+    {
+        $breakfast_time_starts = $timeslot->morning_starts;
+        $breakfast_time_starts = $this->get_eat_time($breakfast_time_starts);
+        $breakfast_time_ends = $timeslot->morning_ends;
+        $breakfast_time_ends = $this->get_eat_time($breakfast_time_ends);
+        
+        $lunch_time_starts = $timeslot->lunch_starts;
+        $lunch_time_starts = $this->get_eat_time($lunch_time_starts);
+        $lunch_time_ends = $timeslot->lunch_ends;
+        $lunch_time_ends = $this->get_eat_time($lunch_time_ends);
+        
+        $tea_time_starts = $timeslot->tea_starts;
+        $tea_time_starts = $this->get_eat_time($tea_time_starts);
+        $tea_time_ends = $timeslot->tea_ends;
+        $tea_time_ends = $this->get_eat_time($tea_time_ends);
+        
+        $dinner_time_starts = $timeslot->dinner_starts;
+        $dinner_time_starts = $this->get_eat_time($dinner_time_starts);
+        $dinner_time_ends = $timeslot->dinner_ends;
+        $dinner_time_ends = $this->get_eat_time($dinner_time_ends);
+        
+        $latenight_time_starts = $timeslot->latenight_starts;
+        $latenight_time_starts = $this->get_eat_time($latenight_time_starts);
+        $latenight_time_ends = $timeslot->latenight_ends;
+        $latenight_time_ends = $this->get_eat_time($latenight_time_ends);
+        
+        if( $time >= $breakfast_time_starts && $time < $breakfast_time_ends && $timeslot->morning_on == 1 )
+        {
+            $time_chk[0] = "eatin_breakfast";
+            $time_chk[1] = "morning_on";
+        } 
+        elseif( $time >= $lunch_time_starts && $time < $lunch_time_ends  && $timeslot->lunch_on == 1  )
+        {
+            $time_chk[0] = "eatin_lunch";
+            $time_chk[1] = "lunch_on";
+        } 
+        elseif( $time >= $tea_time_starts && $time < $tea_time_ends  && $timeslot->tea_on == 1  )
+        {
+            $time_chk[0] = "eatin_tea";
+            $time_chk[1] = "tea_on";
+        } 
+        elseif( $time >= $dinner_time_starts && $time < $dinner_time_ends  && $timeslot->dinner_on == 1  )
+        {
+            $time_chk[0] = "eatin_dinner";
+            $time_chk[1] = "dinner_on";
+        } 
+        else
+        {
+            $time_chk[0] = "";
+            $time_chk[1] = "";
+        }
+
+        return $time_chk[0];
+    }
+
 }

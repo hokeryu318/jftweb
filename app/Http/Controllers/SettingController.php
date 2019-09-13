@@ -23,14 +23,16 @@ class SettingController extends Controller
     }
     public function timeslots()
     {
+        $search_data = "";
         $slots = Timeslot::get();
-        return view('admin.setting.timeslots')->with(compact('slots'));
+        return view('admin.setting.timeslots')->with(compact('slots'))->with(compact('search_data'));
     }
     public function htimeslots()
     {
+        $search_data = "";
         $slot = Timeslot::find(9);
         $holidays = Holiday::get();
-        return view('admin.setting.htimeslots')->with(compact('slot', 'holidays'));
+        return view('admin.setting.htimeslots')->with(compact('slot', 'holidays'))->with(compact('search_data'));
     }
     public function customer()
     {
@@ -134,9 +136,21 @@ class SettingController extends Controller
     public function timeslot_post()
     {
         //dd(request());
+        $search_data = "";
         $regular = Timeslot::find(1);
         if(request()->has('regular-morning-on')){
             $regular->morning_on = 1;
+            if($this->get_eat_time(request()->input('regular-morning-start')) > $this->get_eat_time(request()->input('regular-morning-end')))
+            {
+                $search_data = "In Morning Start time is greater than End time";
+            }  
+            else{
+                $chk_data = $this->check_time(request()->input('regular-morning-start'),request(),0,'regular');
+                if(!$chk_data) $search_data = "There is greater than the start time in Morning.";
+                $chk_data = $this->check_time(request()->input('regular-morning-end'),request(),0,'regular');
+                if(!$chk_data) $search_data = "There is greater than the end time in Morning.";                
+            }
+
             $regular->morning_starts = request()->input('regular-morning-start');
             $regular->morning_ends = request()->input('regular-morning-end');
         } else {
@@ -144,6 +158,17 @@ class SettingController extends Controller
         }
         if(request()->has('regular-lunch-on')){
             $regular->lunch_on = 1;
+            if($this->get_eat_time(request()->input('regular-lunch-start')) > $this->get_eat_time(request()->input('regular-lunch-end')))
+            {
+                $search_data = "In Lunch Start time is greater than End time";
+            }  
+            else{
+                $chk_data = $this->check_time(request()->input('regular-lunch-start'),request(),1,'regular');
+                if(!$chk_data) $search_data = "There is greater than the start time in Lunch.";
+                $chk_data = $this->check_time(request()->input('regular-lunch-end'),request(),1,'regular');
+                if(!$chk_data) $search_data = "There is greater than the end time in Lunch.";                
+            }
+
             $regular->lunch_starts = request()->input('regular-lunch-start');
             $regular->lunch_ends = request()->input('regular-lunch-end');
         } else {
@@ -151,6 +176,17 @@ class SettingController extends Controller
         }
         if(request()->has('regular-tea-on')){
             $regular->tea_on = 1;
+            if($this->get_eat_time(request()->input('regular-tea-start')) > $this->get_eat_time(request()->input('regular-tea-end')))
+            {
+                $search_data = "In Tea Start time is greater than End time";
+            }  
+            else{
+                $chk_data = $this->check_time(request()->input('regular-tea-start'),request(),2,'regular');
+                if(!$chk_data) $search_data = "There is greater than the start time in Tea.";
+                $chk_data = $this->check_time(request()->input('regular-tea-end'),request(),2,'regular');
+                if(!$chk_data) $search_data = "There is greater than the end time in Tea.";                
+            }
+
             $regular->tea_starts = request()->input('regular-tea-start');
             $regular->tea_ends = request()->input('regular-tea-end');
         } else {
@@ -158,6 +194,17 @@ class SettingController extends Controller
         }
         if(request()->has('regular-dinner-on')){
             $regular->dinner_on = 1;
+            if($this->get_eat_time(request()->input('regular-dinner-start')) > $this->get_eat_time(request()->input('regular-dinner-end')))
+            {
+                $search_data = "In Dinner Start time is greater than End time";
+            }  
+            else{
+                $chk_data = $this->check_time(request()->input('regular-dinner-start'),request(),3,'regular');
+                if(!$chk_data) $search_data = "There is greater than the start time in Dinner.";
+                $chk_data = $this->check_time(request()->input('regular-dinner-end'),request(),3,'regular');
+                if(!$chk_data) $search_data = "There is greater than the end time in Dinner.";               
+            }
+
             $regular->dinner_starts = request()->input('regular-dinner-start');
             $regular->dinner_ends = request()->input('regular-dinner-end');
         } else {
@@ -165,30 +212,50 @@ class SettingController extends Controller
         }
         if(request()->has('regular-latenight-on')){
             $regular->latenight_on = 1;
+            if($this->get_eat_time1(request()->input('regular-latenight-start')) > $this->get_eat_time1(request()->input('regular-latenight-end')))
+            {
+                $search_data = "In Late Start time is greater than End time";
+            }  
+            else{
+                $chk_data = $this->check_time(request()->input('regular-latenight-start'),request(),4,'regular');
+                if(!$chk_data) $search_data = "There is greater than the start time in Late.";
+                $chk_data = $this->check_time(request()->input('regular-latenight-end'),request(),4,'regular');
+                if(!$chk_data) $search_data = "There is greater than the end time in Late.";                
+            }
+
             $regular->latenight_starts = request()->input('regular-latenight-start');
             $regular->latenight_ends = request()->input('regular-latenight-end');
         } else {
             $regular->latenight_on = 0;
         }
-        $regular->save();
+        if(empty($search_data))  $regular->save();
 
         // dd(request());
         $monday = Timeslot::find(2);
-        self::saveTimeSlot(request(), $monday, 'monday');
+        $result_data = self::saveTimeSlot(request(), $monday, 'monday', 2);
+        if(!empty($result_data))  $search_data = $result_data;
         $tuesday = Timeslot::find(3);
-        self::saveTimeSlot(request(), $tuesday, 'tuesday');
+        $result_data = self::saveTimeSlot(request(), $tuesday, 'tuesday', 3);
+        if(!empty($result_data))  $search_data = $result_data;
         $wednesday = Timeslot::find(4);
-        self::saveTimeSlot(request(), $wednesday, 'wednesday');
+        $result_data = self::saveTimeSlot(request(), $wednesday, 'wednesday', 4);
+        if(!empty($result_data))  $search_data = $result_data;
         $thursday = Timeslot::find(5);
-        self::saveTimeSlot(request(), $thursday, 'thursday');
+        $result_data = self::saveTimeSlot(request(), $thursday, 'thursday', 5);
+        if(!empty($result_data))  $search_data = $result_data;
         $friday = Timeslot::find(6);
-        self::saveTimeSlot(request(), $friday, 'friday');
+        $result_data = self::saveTimeSlot(request(), $friday, 'friday', 6);
+        if(!empty($result_data))  $search_data = $result_data;
         $saturday = Timeslot::find(7);
-        self::saveTimeSlot(request(), $saturday, 'saturday');
+        $result_data = self::saveTimeSlot(request(), $saturday, 'saturday', 7);
+        if(!empty($result_data))  $search_data = $result_data;
         $sunday = Timeslot::find(8);
-        self::saveTimeSlot(request(), $sunday, 'sunday');
+        $result_data = self::saveTimeSlot(request(), $sunday, 'sunday', 8);
+        if(!empty($result_data))  $search_data = $result_data;
 
-        return redirect()->route('admin.setting.timeslots');
+        //return redirect()->route('admin.setting.timeslots')->with(compact('search_data'));
+        $slots = Timeslot::get();
+        return view('admin.setting.timeslots')->with(compact('slots'))->with(compact('search_data'));
     }
 
     public function htimeslot_post(){
@@ -208,15 +275,30 @@ class SettingController extends Controller
             }
         }
         $holiday = Timeslot::find(9);
-        self::saveTimeSlot(request(), $holiday, 'holiday');
-        return redirect()->route('admin.setting.htimeslots');
+        $search_data = self::saveTimeSlot(request(), $holiday, 'holiday',9);
+        //return redirect()->route('admin.setting.htimeslots');
+        $slot = Timeslot::find(9);
+        $holidays = Holiday::get();
+        return view('admin.setting.htimeslots')->with(compact('slot', 'holidays'))->with(compact('search_data'));
     }
 
-    private function saveTimeSlot($req, $obj, $key){
+    private function saveTimeSlot($req, $obj, $key, $id){
+        $search_data = "";
         if($req->has($key.'-on')){
             $obj->day_on = 1;
             if($req->has($key.'-morning-on')){
                 $obj->morning_on = 1;
+                if($this->get_eat_time(request()->input($key.'-morning-start')) > $this->get_eat_time(request()->input($key.'-morning-end')))
+                {
+                    $search_data = "In Morning of " . $key . " Start time is greater than End time";
+                }  
+                else{
+                    $chk_data = $this->check_time(request()->input($key.'-morning-start'),$req,0, $key);
+                    if(!$chk_data) $search_data = "There is greater than the start time in Morning of " . $key . ".";
+                    $chk_data = $this->check_time(request()->input($key.'-morning-end'),$req,0, $key);
+                    if(!$chk_data) $search_data = "There is greater than the end time in Morning of " . $key . ".";                    
+                }
+
                 $obj->morning_starts = $req->input($key.'-morning-start');
                 $obj->morning_ends = $req->input($key.'-morning-end');
             } else {
@@ -224,6 +306,17 @@ class SettingController extends Controller
             }
             if($req->has($key.'-lunch-on')){
                 $obj->lunch_on = 1;
+                if($this->get_eat_time(request()->input($key.'-lunch-start')) > $this->get_eat_time(request()->input($key.'-lunch-end'))) 
+                {
+                    $search_data = "In Lunch of " . $key . " Start time is greater than End time";
+                } 
+                else{
+                    $chk_data = $this->check_time(request()->input($key.'-lunch-start'),$req,1, $key);
+                    if(!$chk_data) $search_data = "There is greater than the start time in Lunch of " . $key . ".";
+                    $chk_data = $this->check_time(request()->input($key.'-lunch-end'),$req,1, $key);
+                    if(!$chk_data) $search_data = "There is greater than the end time in Lunch of " . $key . ".";
+                }
+                
                 $obj->lunch_starts = $req->input($key.'-lunch-start');
                 $obj->lunch_ends = $req->input($key.'-lunch-end');
             } else {
@@ -231,6 +324,17 @@ class SettingController extends Controller
             }
             if($req->has($key.'-tea-on')){
                 $obj->tea_on = 1;
+                if($this->get_eat_time(request()->input($key.'-tea-start')) > $this->get_eat_time(request()->input($key.'-tea-end'))) 
+                {
+                    $search_data = "In Tea of " . $key . " Start time is greater than End time";
+                } 
+                else{
+                    $chk_data = $this->check_time(request()->input($key.'-tea-start'),$req,2, $key);
+                    if(!$chk_data) $search_data = "There is greater than the start time in Tea of " . $key . ".";
+                    $chk_data = $this->check_time(request()->input($key.'-tea-end'),$req,2, $key);
+                    if(!$chk_data) $search_data = "There is greater than the end time in Tea of " . $key . ".";                   
+                }
+
                 $obj->tea_starts = $req->input($key.'-tea-start');
                 $obj->tea_ends = $req->input($key.'-tea-end');
             } else {
@@ -238,6 +342,17 @@ class SettingController extends Controller
             }
             if($req->has($key.'-dinner-on')){
                 $obj->dinner_on = 1;
+                if($this->get_eat_time(request()->input($key.'-dinner-start')) > $this->get_eat_time(request()->input($key.'-dinner-end')))
+                {
+                     $search_data = "In Dinner of " . $key . " Start time is greater than End time";
+                } 
+                else{
+                    $chk_data = $this->check_time(request()->input($key.'-dinner-start'),$req,3, $key);
+                    if(!$chk_data) $search_data = "There is greater than the start time in Dinner of " . $key . ".";
+                    $chk_data = $this->check_time(request()->input($key.'-dinner-end'),$req,3, $key);
+                    if(!$chk_data) $search_data = "There is greater than the end time in Dinner of " . $key . ".";                    
+                }
+
                 $obj->dinner_starts = $req->input($key.'-dinner-start');
                 $obj->dinner_ends = $req->input($key.'-dinner-end');
             } else {
@@ -245,6 +360,17 @@ class SettingController extends Controller
             }
             if($req->has($key.'-latenight-on')){
                 $obj->latenight_on = 1;
+                if($this->get_eat_time1(request()->input($key.'-latenight-start')) > $this->get_eat_time1(request()->input($key.'-latenight-end')))
+                {
+                    $search_data = "In Late of " . $key . " Start time is greater than End time";
+                }  
+                else{
+                    $chk_data = $this->check_time(request()->input($key.'-latenight-start'),$req,4, $key);
+                    if(!$chk_data) $search_data = "There is greater than the start time in Late of " . $key . ".";
+                    $chk_data = $this->check_time(request()->input($key.'-latenight-end'),$req,4, $key);
+                    if(!$chk_data) $search_data = "There is greater than the end time in Late of " . $key . ".";                    
+                }
+
                 $obj->latenight_starts = $req->input($key.'-latenight-start');
                 $obj->latenight_ends = $req->input($key.'-latenight-end');
             } else {
@@ -263,7 +389,9 @@ class SettingController extends Controller
             $obj->dinner_on = 0;
             $obj->latenight_on = 0;
         }
-        $obj->save();
+        if(empty($search_data))  $obj->save();
+
+        return $search_data;
     }
     public function addbadge()
     {
@@ -403,5 +531,228 @@ class SettingController extends Controller
             }
         }
         return redirect()->route('admin.setting.sendmail');
+    }
+
+    public function check_time($time1,$req,$chk,$sup)
+    {
+        if(empty($time1)) return true;
+
+        $time = $this->get_eat_time($time1);
+
+        $breakfast_time_starts = $req->input($sup.'-morning-start');
+        $breakfast_time_starts = $this->get_eat_time($breakfast_time_starts);
+        $breakfast_time_ends = $req->input($sup.'-morning-end');
+        $breakfast_time_ends = $this->get_eat_time($breakfast_time_ends);
+        
+        $lunch_time_starts = $req->input($sup.'-lunch-start');
+        $lunch_time_starts = $this->get_eat_time($lunch_time_starts);
+        $lunch_time_ends = $req->input($sup.'-lunch-end');
+        $lunch_time_ends = $this->get_eat_time($lunch_time_ends);
+        
+        $tea_time_starts = $req->input($sup.'-tea-start');
+        $tea_time_starts = $this->get_eat_time($tea_time_starts);
+        $tea_time_ends = $req->input($sup.'-tea-end');
+        $tea_time_ends = $this->get_eat_time($tea_time_ends);
+        
+        $dinner_time_starts = $req->input($sup.'-dinner-start');
+        $dinner_time_starts = $this->get_eat_time($dinner_time_starts);
+        $dinner_time_ends = $req->input($sup.'-dinner-end');
+        $dinner_time_ends = $this->get_eat_time($dinner_time_ends);
+        
+        $latenight_time_starts = $req->input($sup.'-latenight-start');
+        $latenight_time_starts = $this->get_eat_time1($latenight_time_starts);
+        $latenight_time_ends = $req->input($sup.'-latenight-end');
+        $latenight_time_ends = $this->get_eat_time1($latenight_time_ends);
+        
+        switch($chk)
+        {
+            case 0:
+                if( !empty($lunch_time_starts) && $time > $lunch_time_starts && $req->has($sup.'-lunch-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($tea_time_starts) && $time > $tea_time_starts && $req->has($sup.'-tea-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($dinner_time_starts) && $time > $dinner_time_starts && $req->has($sup.'-dinner-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($latenight_time_starts) && $time > $latenight_time_starts && $req->has($sup.'-latenight-on'))
+                {
+                    $data = false;
+                }
+                else
+                {
+                    $data = true;
+                }
+                break;
+            case 1:
+                if( !empty($breakfast_time_ends) && $time < $breakfast_time_ends && $req->has($sup.'-morning-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($tea_time_starts) && $time > $tea_time_starts && $req->has($sup.'-tea-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($dinner_time_starts) && $time > $dinner_time_starts && $req->has($sup.'-dinner-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($latenight_time_starts) && $time > $latenight_time_starts && $req->has($sup.'-latenight-on'))
+                {
+                    $data = false;
+                }
+                else
+                {
+                    $data = true;
+                }
+                break;
+            case 2:
+                if( !empty($lunch_time_ends) && $time < $lunch_time_ends && $req->has($sup.'-lunch-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($breakfast_time_ends) && $time < $breakfast_time_ends && $req->has($sup.'-morning-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($dinner_time_starts) && $time > $dinner_time_starts && $req->has($sup.'-dinner-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($latenight_time_starts) && $time > $latenight_time_starts && $req->has($sup.'-latenight-on'))
+                {
+                    $data = false;
+                }
+                else
+                {
+                    $data = true;
+                }
+                break;
+            case 3:
+                if( !empty($lunch_time_ends) && $time < $lunch_time_ends && $req->has($sup.'-lunch-on') )
+                {
+                    $data = false;
+                }
+                elseif(!empty($tea_time_ends) && $time < $tea_time_ends && $req->has($sup.'-tea-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($breakfast_time_ends) && $time < $breakfast_time_ends && $req->has($sup.'-morning-on'))
+                {
+                    $data = false;
+                }
+                elseif(!empty($latenight_time_starts) && $time > $latenight_time_starts && $req->has($sup.'-latenight-on'))
+                {
+                    $data = false;
+                }
+                else
+                {
+                    $data = true;
+                }
+                break;
+            case 4:
+                if( substr($time1,-2) == "PM" ){
+                    if( !empty($lunch_time_ends) && $time < $lunch_time_ends && $req->has($sup.'-lunch-on') )
+                    {
+                        $data = false;
+                    }
+                    elseif(!empty($tea_time_ends) && $time < $tea_time_ends && $req->has($sup.'-tea-on'))
+                    {
+                        $data = false;
+                    }
+                    elseif(!empty($dinner_time_ends) && $time < $dinner_time_ends && $req->has($sup.'-dinner-on'))
+                    {
+                        $data = false;
+                    }
+                    elseif(!empty($breakfast_time_ends) && $time < $breakfast_time_ends && $req->has($sup.'-morning-on'))
+                    {
+                        $data = false;
+                    }
+                    else
+                    {
+                        $data = true;
+                    }
+                }
+                else{
+                    if(!empty($breakfast_time_starts) && $time > $breakfast_time_starts && $req->has($sup.'-morning-on'))
+                    {
+                        $data = false;
+                    }
+                    else
+                    {
+                        $data = true;
+                    }
+                }
+                break;
+            default:
+                $data = true;
+        }
+
+        return $data;
+    }
+
+    public function get_eat_time($eat_time)
+    {
+        if( substr($eat_time,-2) == "AM" ){
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '00' . $last_time;
+            }
+            else{
+                $eat_time = substr($eat_time,0,5);
+            }
+            
+        } 
+        else{
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '12' . $last_time;
+            }
+            else{
+                $first_time = (int)substr($eat_time,0,2);
+                $first_time += 12;
+                $last_time = substr($eat_time,2,3);
+                $eat_time = $first_time . $last_time;                
+            }
+
+        }
+
+        return $eat_time;
+    }
+
+    public function get_eat_time1($eat_time)
+    {
+        if( substr($eat_time,-2) == "AM" ){
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '24' . $last_time;
+            }
+            else{
+                $first_time = (int)substr($eat_time,0,2);
+                $first_time += 24;
+                $last_time = substr($eat_time,2,3);
+                $eat_time = $first_time . $last_time; 
+            }
+            
+        } 
+        else{
+            if( substr($eat_time,0,2) == 12 ){
+                $last_time = substr($eat_time,2,3);
+                $eat_time = '12' . $last_time;
+            }
+            else{
+                $first_time = (int)substr($eat_time,0,2);
+                $first_time += 12;
+                $last_time = substr($eat_time,2,3);
+                $eat_time = $first_time . $last_time;                
+            }
+
+        }
+
+        return $eat_time;
     }
 }
