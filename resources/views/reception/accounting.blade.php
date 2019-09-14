@@ -539,7 +539,7 @@
                 //regist to database
                 var order_id = $('#order_id').val();
                 var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
-                alert(order_id + '/' + balance + '/' + amount + '/' + change + '/' + tip + '/' + sub_total + '/' + discount + '/' + total + '/' + without_gst + '/' + gst);
+                //alert(order_id + '/' + balance + '/' + amount + '/' + change + '/' + tip + '/' + sub_total + '/' + discount + '/' + total + '/' + without_gst + '/' + gst);
 
                 $.ajax({
                     type:"POST",
@@ -550,7 +550,7 @@
                         $("#save-pay").submit();
                     }
                 });
-                // window.history.back();
+                window.history.back();
             }
         }
 
@@ -608,7 +608,7 @@
                     data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
                     success: function(result){
                         // console.log(result);
-                        $("#save-pay").submit();
+                        //$("#save-pay").submit();
                     }
                 });
                 // window.history.back();

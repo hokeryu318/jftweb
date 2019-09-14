@@ -745,7 +745,7 @@ class ReceptionController extends Controller
     public function pay() {
 
         $order_id = request()->order_id;
-        $count = OrderPay::where('order_id', $order_id)->get()->count();//dd($count);
+//        $count = OrderPay::where('order_id', $order_id)->get()->count();//dd($count);
 //        if($count > 0) {
 //            $orderPay = OrderPay::where('order_id', $order_id)->get()->first();
 //            $orderPay->tip = request()->get('tip');
@@ -786,7 +786,7 @@ class ReceptionController extends Controller
         $pay_status = 'pay_'.$order_id;
         broadcast(new PayEvent($pay_status));
 
-//        return 'success';
+//        /return 'success';
         return redirect()->route('reception.seated', ['status'=>'seated']);
     }
 
