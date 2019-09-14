@@ -760,6 +760,9 @@ class ReceptionController extends Controller
 //            $orderPay->change = request()->get('change');
 //            $orderPay->update();
 //        } else {
+
+
+
         $orderPay = new OrderPay();
         $orderPay->order_id = request()->get('order_id');
         $orderPay->tip = request()->get('tip');
@@ -773,7 +776,7 @@ class ReceptionController extends Controller
         $orderPay->amount = request()->get('amount');
         $orderPay->change = request()->get('change');
         $orderPay->save();
-        OrderPay::where('order_id', Null)->delete();
+//        OrderPay::where('order_id', Null)->delete();
 //        }
 
         Order::where('id', $order_id)->update(['pay_flag' => 2]);

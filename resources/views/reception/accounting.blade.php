@@ -299,11 +299,11 @@
                 <p id="alert-string-confirm" class="text-center fs-20"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" id="cancelbtn">
                     Close
                     <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                 </button>
-                <button type="button" class="btn btn-light waves-effect waves-light fs-20">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" id="confirmbtn">
                     OK
                     <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                 </button>
@@ -311,6 +311,8 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="paymethod" />
 
 <script>
     var order_dish_id = 0;
@@ -495,6 +497,68 @@
 
     function Payment(pay_method) {
 
+        document.getElementById('paymethod').value = pay_method;
+        $("#alert-string-confirm")[0].innerText = "Would you like a receipt?";
+        $("#cancelbtn").attr("onclick", "cancel_print()");
+        $("#confirmbtn").attr("onclick", "account_print()");
+        $("#java-alert-confirm").modal('toggle');
+    }
+
+    function cancel_print() {
+
+        var pay_method = document.getElementById('paymethod').value;
+        var order_dishes = <?php echo(json_encode($order_dishes))?>;
+        var tip = parseFloat(document.getElementById("tip_value").textContent.substring(1)).toFixed(2);
+        var sub_total = parseFloat(document.getElementById("sub_total").textContent.substring(1)).toFixed(2);
+        var tmp_discount_obj = document.getElementById("discount_value").textContent.split('(');
+        var discount = parseFloat(tmp_discount_obj[0].substring(1)).toFixed(2);
+        var total = parseFloat(document.getElementById("total").textContent.substring(1)).toFixed(2);
+        var without_gst = parseFloat(document.getElementById("without_gst").textContent.substring(1)).toFixed(2);
+        var gst = parseFloat(document.getElementById("gst_pr").textContent.substring(1)).toFixed(2);
+
+        var am = $('#amount_tender').val();
+        if(am.toString().indexOf('$') < 0) {
+            $('#amount_tender').val('$' + am);
+        }
+        var amount = parseFloat($('#amount_tender').val().replace(',', '').substring(1)).toFixed(2);
+        var balance = parseFloat(document.getElementById("balance").textContent.replace(',', '').substring(1)).toFixed(2);
+        var change = amount - balance;
+        if($('#amount_tender').val() == '$') {
+            //alert('There is no amount data.\nPlease input Amount data!');
+            $("#alert-string")[0].innerText = "There is no amount data.\nPlease input Amount data!";
+            $("#java-alert").modal('toggle');
+        } else {
+            if(change < 0) {
+                //alert('Amount is smaller than Balance.\nPlease inpunt Amount correctly!');
+                $("#alert-string")[0].innerText = "Amount is smaller than Balance.\nPlease inpunt Amount correctly!";
+                $("#java-alert").modal('toggle');
+                document.getElementById("change").textContent = '';
+            } else {
+                document.getElementById("change").textContent = '$' + change.toFixed(2).toString();
+
+                //regist to database
+                var order_id = $('#order_id').val();
+                var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
+                alert(order_id + '/' + balance + '/' + amount + '/' + change + '/' + tip + '/' + sub_total + '/' + discount + '/' + total + '/' + without_gst + '/' + gst);
+
+                $.ajax({
+                    type:"POST",
+                    url:"{{ route('reception.pay') }}",
+                    data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+                    success: function(result){
+                        // console.log(result);
+                        $("#save-pay").submit();
+                    }
+                });
+                // window.history.back();
+            }
+        }
+
+    }
+
+    function account_print() {
+
+        var pay_method = document.getElementById('paymethod').value;
         var order_dishes = <?php echo(json_encode($order_dishes))?>;
         var tip = parseFloat(document.getElementById("tip_value").textContent.substring(1)).toFixed(2);
         var sub_total = parseFloat(document.getElementById("sub_total").textContent.substring(1)).toFixed(2);
@@ -529,35 +593,27 @@
                 var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
                 // alert(order_id + '/' + balance + '/' + amount + '/' + change + '/' + tip + '/' + sub_total + '/' + discount + '/' + total + '/' + without_gst + '/' + gst);
 
+                $.ajax({
+                    type:"POST",
+                    url:"{{ route('reception.account_print') }}",
+                    data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+                    success: function(result){
+                        console.dir(result);
+                    }
+                });
 
-                $("#alert-string-confirm")[0].innerText = "Would you like a receipt?";
-                $("#java-alert-confirm").modal('toggle');
-
-
-                {{--if(confirm("Would you like a receipt?")) {--}}
-                    {{--$.ajax({--}}
-                        {{--type:"POST",--}}
-                        {{--url:"{{ route('reception.account_print') }}",--}}
-                        {{--data:{ order_id: order_id, order_dishes: order_dishes, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
-                        {{--success: function(result){--}}
-                            {{--console.dir(result);--}}
-                        {{--}--}}
-                    {{--});--}}
-                {{--}--}}
-
-                {{--$.ajax({--}}
-                    {{--type:"POST",--}}
-                    {{--url:"{{ route('reception.pay') }}",--}}
-                    {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
-                    {{--success: function(result){--}}
-                        {{--// console.log(result);--}}
-                        {{--$("#save-pay").submit();--}}
-                    {{--}--}}
-                {{--});--}}
+                $.ajax({
+                    type:"POST",
+                    url:"{{ route('reception.pay') }}",
+                    data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+                    success: function(result){
+                        // console.log(result);
+                        $("#save-pay").submit();
+                    }
+                });
                 // window.history.back();
             }
         }
-
     }
 
     //timer part
