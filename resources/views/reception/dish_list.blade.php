@@ -8,7 +8,7 @@
                 @else
                     <span class="common_dish fs-25" id="op_{{ $ds->id }}" onclick="selectDishes({{ $ds->id }})">&nbsp;&nbsp;&nbsp;-{{ $ds->name_en }}</span>
                 @endif
-                <ul class="nested">
+                <ul class="nested display-none1">
                     @foreach ($ds->options as $option)
                         <li>
                             <span class="caret fs-25">{{ $option->name }}:
