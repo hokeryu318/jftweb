@@ -63,7 +63,10 @@ class OptionController extends Controller
             $obj->display_name_cn = request()->display_name_cn;
             $obj->display_name_jp = request()->display_name_jp;
             $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
-            $obj->number_selection = request()->number_selection;
+            if(($obj->multi_select == 1) && (request()->number_selection == null))
+                $obj->number_selection = 1;
+            else
+                $obj->number_selection = request()->number_selection;
             $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
             $obj->save();
 
@@ -94,7 +97,10 @@ class OptionController extends Controller
             $obj->display_name_cn = request()->display_name_cn;
             $obj->display_name_jp = request()->display_name_jp;
             $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
-            $obj->number_selection = request()->number_selection;
+            if(($obj->multi_select == 1) && (request()->number_selection == null))
+                $obj->number_selection = 1;
+            else
+                $obj->number_selection = request()->number_selection;
             $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
             $obj->save();
 

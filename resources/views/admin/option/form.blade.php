@@ -1,6 +1,6 @@
 @extends('layout.admin_layout')
 
-@section('title', 'DISH')
+@section('title', 'OPTION')
 
 @section('content')
 <div class="container-fluid pb-5 blackgrey" style="height: 1024px;min-height: 870px;">

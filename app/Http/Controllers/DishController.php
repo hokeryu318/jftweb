@@ -19,7 +19,7 @@ class DishController extends Controller
     //
     public function index(){
 
-        $dishes = Dish::get();//dd($dishes);
+        $dishes = Dish::orderBy('name_en', 'asc')->get();//dd($dishes);
         $sort = "desc";
 
         foreach($dishes as $ds)
@@ -255,10 +255,10 @@ class DishController extends Controller
     public function sortDish()
     {
         if(request()->get('sortType') == "asc"){
-            $dishes = Dish::orderBy('name_en','desc')->get();
+            $dishes = Dish::orderBy('name_en','asc')->get();
             $sort = "desc";
         }else{
-            $dishes = Dish::orderBy('name_en','asc')->get();
+            $dishes = Dish::orderBy('name_en','desc')->get();
             $sort = "asc";
         }
 
