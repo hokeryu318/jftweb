@@ -117,6 +117,14 @@ class SettingController extends Controller
     }
     public function kitchen_post()
     {
+        if(request()->has('removed1')){
+            $removeitems = request()->removed1;
+            foreach($removeitems as $item){
+                $kitchen = Kitchen::find($item);
+                $kitchen->delete();
+            }
+        }
+
         if((request()->has('new1')) && (request()->has('new2'))){
             $newitems1 = request()->new1;
             $newitems2 = request()->new2;
@@ -134,7 +142,7 @@ class SettingController extends Controller
             if((request()->has('orgitem')) && (request()->has('printeritem'))){
                 $orgitem = request()->orgitem;
                 $printeritem = request()->printeritem;
-                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');
+                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');//dd($ids);
                 foreach($ids as $key => $id){
                     $kitchen = Kitchen::where('id', $id)->update(['name' => $orgitem[$key]]);
                     $kitchen = Kitchen::where('id', $id)->update(['printer_ip' => $printeritem[$key]]);
@@ -142,13 +150,6 @@ class SettingController extends Controller
             }
         }
 
-        if(request()->has('removed1')){
-            $removeitems = request()->removed1;
-            foreach($removeitems as $item){
-                $kitchen = Kitchen::find($item);
-                $kitchen->delete();
-            }
-        }
         return redirect()->route('admin.setting.kitchen');
     }
     public function timeslot_post()
