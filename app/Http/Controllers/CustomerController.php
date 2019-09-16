@@ -653,22 +653,26 @@ class CustomerController extends Controller
 
         $table_id = request()->table_id;
         $orderTable = OrderTable::where('table_id', $table_id)->first();
-        $order_ids = OrderTable::where('table_id', $table_id)->pluck('order_id');
+        $order_id = OrderTable::where('table_id', $table_id)->pluck('order_id');//dd($order_id);
+        $calls = Order::where('id', $order_id[0])->pluck('calls')->first();
         if($orderTable->calling_time == Null) {
             $now = $this->get_current_time();
             $orderTable->calling_time = $now;
             $orderTable->attend_time = Null;
 
-            OrderTable::whereIn('order_id', $order_ids)->update(['calling_time' => $now]);
-            OrderTable::whereIn('order_id', $order_ids)->update(['attend_time' => Null]);
+            OrderTable::where('order_id', $order_id)->update(['calling_time' => $now]);
+            OrderTable::where('order_id', $order_id)->update(['attend_time' => Null]);
+
+            $calls += 1;
 
         } else {
             $orderTable->calling_time = Null;
             $orderTable->attend_time = Null;
-            OrderTable::whereIn('order_id', $order_ids)->update(['calling_time' => Null]);
-            OrderTable::whereIn('order_id', $order_ids)->update(['attend_time' => Null]);
+            OrderTable::whereIn('order_id', $order_id)->update(['calling_time' => Null]);
+            OrderTable::whereIn('order_id', $order_id)->update(['attend_time' => Null]);
         }
         $orderTable->save();
+        Order::where('id', $order_id[0])->update(['calls' => $calls]);
 
         //show count_notification on reception screen
         $count_notification = $this->CountNotification();

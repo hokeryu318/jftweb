@@ -29,7 +29,7 @@ Route::get('admin/booking/edit', 'BookingController@edit')->name('admin.booking.
 Route::get('admin/transactions', 'TransactionController@index')->name('admin.transaction');
 Route::get('admin/src_trans', 'TransactionController@src_trans')->name('admin.src_trans');
 
-Route::get('admin/review', 'SaleController@review')->name('admin.review');
+//Route::get('admin/review', 'SaleController@review')->name('admin.review');
 
 //reception
 Route::get('reception/seated', 'ReceptionController@seated')->name('reception.seated');

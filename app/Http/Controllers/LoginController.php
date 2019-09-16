@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\OrderTable;
 use App\Model\Receipt;
 use Hash;
 

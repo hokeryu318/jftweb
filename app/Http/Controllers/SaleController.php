@@ -71,8 +71,7 @@ class SaleController extends Controller
                     }
                     $guest_count += $order->guest;
                     $order_count ++;
-                    if($order->ordertables[0]->calling_time != Null)
-                        $calls_count ++;
+                    $calls_count += $order->calls;
                     if($order->review != Null)
                         $feedback_count ++;
                 }
@@ -102,7 +101,6 @@ class SaleController extends Controller
             $daily_review[$i]['calls'] = $calls_count;
             //get feedback
             $daily_review[$i]['feedback'] = $feedback_count;
-
 
         }
 
@@ -178,87 +176,87 @@ class SaleController extends Controller
             array_multisort($sale, SORT_ASC, $order_obj_array);
             $worst_sellers = $order_obj_array;
         }
-//        dd($daily_review);
+//        dd($search_day);
 //        dd($monthly_sales);
         return view('admin.saledata')->with(compact('daily_review', 'monthly_sales', 'best_sellers', 'worst_sellers', 'date_seller', 'search_day'));
     }
 
-    public function date_seller(Request $request) {
+//    public function date_seller(Request $request) {
+//
+//        $option = $request->option;
+//
+//        return $option;
+//    }
 
-        $option = $request->option;
+//    public function review()
+//    {
+//        if(request()->has('search_date')) {//by date change
+//            $search_date = request()->search_date;
+//            if(request()->d_s == 'up') {
+//                $search_date = date('Y-m-d', strtotime(' +1 day', strtotime($search_date)));
+//            } else if(request()->d_s == 'down') {
+//                $search_date = date('Y-m-d', strtotime(' -1 day', strtotime($search_date)));
+//            }
+//            $search_date = date('Y-m-d', strtotime($search_date));
+//        } else {//date nochange
+//            $search_date = date('Y-m-d', strtotime($this->get_current_time()));
+//        }
+//        $search_display_date = date("d M Y", strtotime($search_date));
+//
+//        $order_obj = Order::whereDate('time', $search_date)->where('review', '!=', Null)->orderBy('time')->orderBy('table_name')->get();
+//        $table_obj = Table::get();
+//        $order_obj = $this->get_order_obj($order_obj);
+//        foreach($order_obj as $orderObj) {
+//            $count_calling = 0;
+//            foreach($orderObj->ordertables as $orderTable) {
+//                if($orderTable->calling_time != Null)
+//                    $count_calling +=1;
+//            }
+//            $orderObj->calling_count = $count_calling;
+//        }
+//
+//        return view('admin.review')->with(compact('order_obj', 'search_display_date'));
+//    }
+//
+//    public function get_order_obj($order_obj) {
+//
+//        $order_tables = array();
+//
+//        foreach($order_obj as $order)
+//        {
+//            $table_display_names = array();
+//            $table_order_names = array();
+//            if(count($order->ordertables) > 0){
+//                foreach ($order->ordertables as $ordertables) {
+//                    $order_tables[] = $ordertables['table_id'];
+//                    $table_display_names[] = $this->get_table_name($ordertables['table_id']);
+//                }
+//                $table_order_names[] = $this->get_table_name($order->ordertables[0]['table_id']);//get first table only in order
+//            }
+//            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+//            $order->table_display_names = $table_display_names;
+//            $order->table_order_names = $table_order_names;
+//        }
+//
+//        return $order_obj;
+//    }
 
-        return $option;
-    }
-
-    public function review()
-    {
-        if(request()->has('search_date')) {//by date change
-            $search_date = request()->search_date;
-            if(request()->d_s == 'up') {
-                $search_date = date('Y-m-d', strtotime(' +1 day', strtotime($search_date)));
-            } else if(request()->d_s == 'down') {
-                $search_date = date('Y-m-d', strtotime(' -1 day', strtotime($search_date)));
-            }
-            $search_date = date('Y-m-d', strtotime($search_date));
-        } else {//date nochange
-            $search_date = date('Y-m-d', strtotime($this->get_current_time()));
-        }
-        $search_display_date = date("d M Y", strtotime($search_date));
-
-        $order_obj = Order::whereDate('time', $search_date)->where('review', '!=', Null)->orderBy('time')->orderBy('table_name')->get();
-        $table_obj = Table::get();
-        $order_obj = $this->get_order_obj($order_obj);
-        foreach($order_obj as $orderObj) {
-            $count_calling = 0;
-            foreach($orderObj->ordertables as $orderTable) {
-                if($orderTable->calling_time != Null)
-                    $count_calling +=1;
-            }
-            $orderObj->calling_count = $count_calling;
-        }
-       
-        return view('admin.review')->with(compact('order_obj', 'search_display_date'));
-    }
-
-    public function get_order_obj($order_obj) {
-
-        $order_tables = array();
-
-        foreach($order_obj as $order)
-        {
-            $table_display_names = array();
-            $table_order_names = array();
-            if(count($order->ordertables) > 0){
-                foreach ($order->ordertables as $ordertables) {
-                    $order_tables[] = $ordertables['table_id'];
-                    $table_display_names[] = $this->get_table_name($ordertables['table_id']);
-                }
-                $table_order_names[] = $this->get_table_name($order->ordertables[0]['table_id']);//get first table only in order
-            }
-            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
-            $order->table_display_names = $table_display_names;
-            $order->table_order_names = $table_order_names;
-        }
-
-        return $order_obj;
-    }
-
-    public function src_review() {
-
-        $src_date = request()->src_date;
-        $order_obj = Order::whereDate('time', $src_date)->where('review', '!=', Null)->orderBy('time')->orderBy('table_name')->get();
-        
-        $table_obj = Table::get();
-        $order_obj = $this->get_order_obj($order_obj);
-        foreach($order_obj as $orderObj) {
-            $count_calling = 0;
-            foreach($orderObj->ordertables as $orderTable) {
-                if($orderTable->calling_time != Null)
-                    $count_calling +=1;
-            }
-            $orderObj->calling_count = $count_calling;
-        }
-        $search_display_date = $src_date;
-        return view('admin.review_src')->with(compact('order_obj', 'search_display_date'));
-    }
+//    public function src_review() {
+//
+//        $src_date = request()->src_date;
+//        $order_obj = Order::whereDate('time', $src_date)->where('review', '!=', Null)->orderBy('time')->orderBy('table_name')->get();
+//
+//        $table_obj = Table::get();
+//        $order_obj = $this->get_order_obj($order_obj);
+//        foreach($order_obj as $orderObj) {
+//            $count_calling = 0;
+//            foreach($orderObj->ordertables as $orderTable) {
+//                if($orderTable->calling_time != Null)
+//                    $count_calling +=1;
+//            }
+//            $orderObj->calling_count = $count_calling;
+//        }
+//        $search_display_date = $src_date;
+//        return view('admin.review_src')->with(compact('order_obj', 'search_display_date'));
+//    }
 }

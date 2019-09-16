@@ -133,12 +133,12 @@
     </div>
 </div>
 
-<script>
-    function onRow(){
-        window.location = "{{ route('admin.review') }}";
-    }
+{{--<script>--}}
+    {{--function onRow(){--}}
+        {{--window.location = "{{ route('admin.review') }}";--}}
+    {{--}--}}
 
-</script>
+{{--</script>--}}
 <style>
     .saletable {
         border-collapse: collapse;
