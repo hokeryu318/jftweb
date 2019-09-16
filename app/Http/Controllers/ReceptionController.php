@@ -837,7 +837,7 @@ class ReceptionController extends Controller
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
 //            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-            $logo_image = EscposImage::load("receipt/img1.png");
+            $logo_image = EscposImage::load("receipt/".$logo_image_name);
             $printer->graphics($logo_image, 3 | 2);
 
             $printer->setFont(Printer::FONT_A);

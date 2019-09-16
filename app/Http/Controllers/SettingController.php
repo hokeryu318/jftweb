@@ -117,30 +117,52 @@ class SettingController extends Controller
     }
     public function kitchen_post()
     {
-        if((request()->has('new1')) && (request()->has('new2'))){
-            $newitems1 = request()->new1;
-            $newitems2 = request()->new2;
+        dd(request()->orgitem);
+//        if((request()->has('new1')) && (request()->has('new2'))){
+//            $newitems1 = request()->new1;
+//            $newitems2 = request()->new2;
+//
+//            foreach($newitems1 as $key => $item){
+//                $kitchen = new Kitchen();
+//                $kitchen->name = $item;
+//                $kitchen->printer_ip = $newitems2[$key];
+//                $kitchen->save();
+//            }
+//
+//            if((request()->has('orgitem')) && (request()->has('printeritem'))){
+//                $orgitem = request()->orgitem;
+//                $printeritem = request()->printeritem;
+//                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');
+//                foreach($ids as $key => $id){
+//                    $kitchen = Kitchen::where('id', $id)->update(['name' => $orgitem[$key]]);
+//                    $kitchen = Kitchen::where('id', $id)->update(['printer_ip' => $printeritem[$key]]);
+//                }
+//            }
+//        } else {
+//
+//            if((request()->has('orgitem')) && (request()->has('printeritem'))){
+//                $orgitem = request()->orgitem;
+//                $printeritem = request()->printeritem;
+//                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');
+//                foreach($ids as $key => $id){
+//                    $kitchen = Kitchen::where('id', $id)->update(['name' => $orgitem[$key]]);
+//                    $kitchen = Kitchen::where('id', $id)->update(['printer_ip' => $printeritem[$key]]);
+//                }
+//            }
+//        }
 
-            foreach($newitems1 as $key => $item){
-                $kitchen = new Kitchen();
-                $kitchen->name = $item;
-                $kitchen->printer_ip = $newitems2[$key];
-                $kitchen->save();
-            }
-        }
-
-        if((!request()->has('new1')) && (!request()->has('new2'))){
-
-            if((request()->has('orgitem')) && (request()->has('printeritem'))){
-                $orgitem = request()->orgitem;
-                $printeritem = request()->printeritem;
-                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');
-                foreach($ids as $key => $id){
-                    $kitchen = Kitchen::where('id', $id)->update(['name' => $orgitem[$key]]);
-                    $kitchen = Kitchen::where('id', $id)->update(['printer_ip' => $printeritem[$key]]);
-                }
-            }
-        }
+//        if((!request()->has('new1')) && (!request()->has('new2'))){
+//
+//            if((request()->has('orgitem')) && (request()->has('printeritem'))){
+//                $orgitem = request()->orgitem;
+//                $printeritem = request()->printeritem;
+//                $ids = Kitchen::where('id' ,'>' ,0)->pluck('id');
+//                foreach($ids as $key => $id){
+//                    $kitchen = Kitchen::where('id', $id)->update(['name' => $orgitem[$key]]);
+//                    $kitchen = Kitchen::where('id', $id)->update(['printer_ip' => $printeritem[$key]]);
+//                }
+//            }
+//        }
 
         if(request()->has('removed1')){
             $removeitems = request()->removed1;

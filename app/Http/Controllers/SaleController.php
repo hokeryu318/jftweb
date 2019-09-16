@@ -61,6 +61,7 @@ class SaleController extends Controller
             $dish_ids[$i] = array();
             $calls_count = 0;
             $feedback_count = 0;
+
             foreach($order_obj as $order) {
                 if(substr($order->time, 0, 10) == $date){
                     $sales += OrderDish::where('order_id', $order->id)->sum('total_price');
