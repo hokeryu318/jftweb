@@ -780,7 +780,7 @@ class ReceptionController extends Controller
 //        }
 
         Order::where('id', $order_id)->update(['pay_flag' => 2]);
-        OrderTable::where('order_id', $order_id)->delete();
+//        OrderTable::where('order_id', $order_id)->delete();
 
         //show pay finish status on customer
         $pay_status = 'pay_'.$order_id;

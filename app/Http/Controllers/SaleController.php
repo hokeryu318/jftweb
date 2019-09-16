@@ -77,6 +77,7 @@ class SaleController extends Controller
                         $feedback_count ++;
                 }
             }
+
             //get sales
             if($sales > 0) {
                 $daily_review[$i]['sales'] = '$'.$sales;
@@ -101,6 +102,8 @@ class SaleController extends Controller
             $daily_review[$i]['calls'] = $calls_count;
             //get feedback
             $daily_review[$i]['feedback'] = $feedback_count;
+
+
         }
 
         $monthly_sales = array();

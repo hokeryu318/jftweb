@@ -24,7 +24,7 @@
                     </a>
                 </div>
                 <a onclick="window.history.back()">
-                    <span class="" style="position:relative;top:55px ;right:10px">
+                    <span class="" style="position:relative;right:10px">
                         <img src="{{ asset('img/Group1100.png') }}" width="25" height="25" class="float-right" style="margin-top:12px;" />
                     </span>
                 </a>

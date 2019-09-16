@@ -930,7 +930,13 @@
             var form = $("#save-form");
             var saved_arr = JSON.stringify(tables_arr);
             $("#saved-arr").val(saved_arr);
-            form.submit();
+            if($('#selected-' + selected_index + ' h6')[0].innerHTML == '') {
+                $("#alert-string")[0].innerText = "Please input table name!";
+                $("#java-alert").modal('toggle');
+            } else {
+                form.submit();
+            }
+            //form.submit();
         }
 
         $("#selected-value").keyup(function() {
