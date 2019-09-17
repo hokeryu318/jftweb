@@ -166,7 +166,7 @@ class ReceptionController extends Controller
             $table_id_arr = explode(',', $table_ids);
             foreach ($table_id_arr as $id) {
                 $order_table_obj = new OrderTable();
-                $order_table_obj->order_id = request()->get('order_id');
+                $order_table_obj->rder_id = request()->get('order_id');
                 $order_table_obj->table_id = $id;
                 $order_table_obj->save();
             }
@@ -183,6 +183,7 @@ class ReceptionController extends Controller
             $order_obj->note = request()->get('customer_notes');
             $status = request()->get('status');
             $order_obj->status = $status;
+            $order_obj->calls = 0;
             $order_obj->save();
             $table_ids = request()->get('table_id');
             $table_id_arr = explode(',', $table_ids);
