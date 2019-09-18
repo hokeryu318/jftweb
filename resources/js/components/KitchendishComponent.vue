@@ -132,7 +132,6 @@
                     return;
                 }
                 this.isReady = true;
-                $('#chk_group_order_dish_4').disabled = true;
                 this.chk_group_order_dishes[selected_id] = 1;
                 console.dir("------>>>>"+selected_id+"--------->>>>>"+this.chk_group_order_dishes[selected_id]);
                 

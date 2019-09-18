@@ -195,10 +195,13 @@ class CountNotificationController extends Controller
                 
                 $printer->text("\n");
                 $printer->cut();
-                $printer -> close();
             } catch (\Exception $e) {
                 //return $e->getMessage();
-            } finally {}
+            } finally {
+                if (isset($printer)) {
+                    $printer -> close();
+                }
+            }
         }
 
         $orderdish->save();    

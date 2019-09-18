@@ -122,6 +122,7 @@ class KitchenController extends Controller
     public function ready(Request $request)
     {
         $orderdish = OrderDish::findOrFail($request->selected_id);
+        $group_id = 0;
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
             $orderdish->ready_time = Null;
@@ -166,10 +167,9 @@ class KitchenController extends Controller
 
             }
 
-            $connector = new NetworkPrintConnector($printerIp, $printerPort);
-            $printer = new Printer($connector);
-
             try {
+                $connector = new NetworkPrintConnector($printerIp, $printerPort);
+                $printer = new Printer($connector);
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
@@ -213,11 +213,13 @@ class KitchenController extends Controller
                 }      
                 
                 $printer->text("\n");
-
                 $printer->cut();
-
+            } catch (\Exception $e) {
+                //return $e->getMessage();
             } finally {
-                $printer -> close();
+                if (isset($printer)) {
+                    $printer -> close();
+                }
             }
             
         }
@@ -236,7 +238,7 @@ class KitchenController extends Controller
                     $order_dishes = $this->get_order_dish($order_dishes);
             }
 
-            return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'dish_id'));
+            return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'dish_id', 'group_id'));
         }
         elseif($filter_flag == 2)
         {
@@ -244,7 +246,7 @@ class KitchenController extends Controller
             $order_id = OrderTable::where('table_id', $table_id)->pluck('order_id')->first();
             $order_dishes = OrderDish::where('order_id', $order_id)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
-            return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'table_id'));
+            return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'table_id', 'group_id'));
         }
 
 //        return $orderdish->ready_flag;
@@ -332,7 +334,11 @@ class KitchenController extends Controller
         $group_id = request()->group_id;
         $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
         if(count($order_ids) > 0) {
-            $order_dishes = OrderDish::whereIn('order_id', $order_ids)->where('ready_flag', '1')->orderBy('created_at', 'ASC')->get();
+            $order_dishes = OrderDish::whereIn('order_id', $order_ids)
+                ->join('dishes', 'dishes.id', '=', 'order_dish_match.dish_id')
+                ->where('dishes.group_id', 'like', '%&' . $group_id . '&%')
+                ->where('order_dish_match.ready_flag', '1')
+                ->orderBy('order_dish_match.created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
         }
 
@@ -340,8 +346,11 @@ class KitchenController extends Controller
             $order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
         }
 
-        if(count($order_dishes) > 0)    return view('kitchen.docket_modal')->with(compact('order_dishes', 'group_id'));
-        else    return '';
+        if(count($order_dishes) > 0) {
+            return view('kitchen.docket_modal')->with(compact('order_dishes', 'group_id'));
+        } else {
+            return '';
+        }
     }
 
     public function java_alert() {
