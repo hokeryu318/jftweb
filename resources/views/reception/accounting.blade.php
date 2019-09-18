@@ -593,16 +593,16 @@
             }
         });
 
-        {{--$.ajax({--}}
-            {{--type:"POST",--}}
-            {{--url:"{{ route('reception.pay') }}",--}}
-            {{--data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },--}}
-            {{--success: function(result){--}}
-                {{--$("#java-alert-confirm").modal('hide');--}}
-                {{--window.location.href = "{{URL::to('reception/seated?status=seated')}}";--}}
-                {{--//$("#save-pay").submit();--}}
-            {{--}--}}
-        {{--});--}}
+        $.ajax({
+            type:"POST",
+            url:"{{ route('reception.pay') }}",
+            data:{ order_id: order_id, pay_method: pay_method, balance: balance, amount: amount, change: change, tip: tip, sub_total: sub_total, discount: discount, total: total, without_gst: without_gst, gst: gst, _token: "{{ csrf_token() }}" },
+            success: function(result){
+                $("#java-alert-confirm").modal('hide');
+                window.location.href = "{{URL::to('reception/seated?status=seated')}}";
+                //$("#save-pay").submit();
+            }
+        });
     }
 
 
