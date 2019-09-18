@@ -819,6 +819,7 @@ class ReceptionController extends Controller
         $address = $profile->address;
         $tel = "TEL : ".$profile->phone;
         $abn = "ABN : ".$profile->abn;
+        $shop_name = $profile->shop_name;
 
         $order_id = request()->get('order_id');
         $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
@@ -946,7 +947,7 @@ class ReceptionController extends Controller
 
             $printer->setTextSize(2,1);
             $printer->setEmphasis(true);
-            $printer->text("Nishiki AN\n");
+            $printer->text("$shop_name\n");
 
             $printer->setTextSize(1,1);
             $printer->setEmphasis(false);
