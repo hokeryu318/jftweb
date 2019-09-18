@@ -853,8 +853,8 @@ class ReceptionController extends Controller
         try {
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
-            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-//            $logo_image = EscposImage::load("receipt/".$logo_image_name);
+//            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
+            $logo_image = EscposImage::load("receipt/logo.png");
             $printer->graphics($logo_image, 3 | 2);
 
             $printer->setFont(Printer::FONT_A);
