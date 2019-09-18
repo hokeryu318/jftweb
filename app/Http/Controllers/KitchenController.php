@@ -164,7 +164,6 @@ class KitchenController extends Controller
                     $order_option->item_name = Item::where('id', $order_option->item_id)->pluck('name')->first();
                 else 
                     $order_option->item_name = '';
-
             }
 
             try {
@@ -337,7 +336,7 @@ class KitchenController extends Controller
             $order_dishes = OrderDish::whereIn('order_id', $order_ids)
                 ->join('dishes', 'dishes.id', '=', 'order_dish_match.dish_id')
                 ->where('dishes.group_id', 'like', '%&' . $group_id . '&%')
-                ->where('order_dish_match.ready_flag', '1')
+                //->where('order_dish_match.ready_flag', '1')
                 ->orderBy('order_dish_match.created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
         }
@@ -411,29 +410,54 @@ class KitchenController extends Controller
 
     public function reprint(Request $request)
     {
-        $order_dish = $request->order_dish;
+        $order_dish_id = $request->order_dish_id;
 
-        //$table_name = $deshes->display_table;
+        $orderdish = OrderDish::findOrFail($order_dish_id);
+        if (!$orderdish) {
+            return;
+        }
 
         //$printerIp = '192.168.192.151';
         $group_id = $request->group_id;
         $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
         $printerPort = 9100;
 
-        $ready_time = $order_dish->created_at;
+        $ready_time = $orderdish->created_at;
         $time = substr($ready_time,11);
         $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
 
-        $qty = $order_dish->count;
+        //$qty = $orderdish->count;
+        //$table_name = $orderdish->display_table;
+        //$dish_name = $orderdish->dish_name_en;
+        $qty = $orderdish->count;
+            
+        $table_ids = OrderTable::where('order_id', $orderdish->order_id)->pluck('table_id');
+        $table_name = "";
+        foreach($table_ids as $table_id) {
+            $table_name .= $this->get_table_name($table_id).'+';
+        }
+        $table_name = rtrim($table_name, '+');
+
+        $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
+
+        $order_options = OrderOption::where('order_dish_id',$orderdish->id)->get();
         
-        $table_name = $order_dish->display_table;
+        foreach($order_options as $order_option) {
 
-        $dish_name = $order_dish->dish_name_en;
+            if($order_option->option_id)
+                $order_option->option_name = Option::where('id', $order_option->option_id)->pluck('name')->first();
+            else
+                $order_option->option_name = '';
+
+            if($order_option->item_id) 
+                $order_option->item_name = Item::where('id', $order_option->item_id)->pluck('name')->first();
+            else 
+                $order_option->item_name = '';
+        }
  
-        $connector = new NetworkPrintConnector($printerIp, $printerPort);
-        $printer = new Printer($connector);
-
         try {
+            $connector = new NetworkPrintConnector($printerIp, $printerPort);
+            $printer = new Printer($connector);
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
@@ -466,7 +490,7 @@ class KitchenController extends Controller
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
                 
-                foreach($order_dish->options as $option) {
+                foreach($orderdish->options as $option) {
                     $printer->text( "[" . $option->option_name . ":");
                     $printer->setEmphasis(true);
                     $printer->setTextSize(2,2);
@@ -480,8 +504,12 @@ class KitchenController extends Controller
 
             $printer->cut();
 
+        } catch (\Exception $e) {
+            //return $e->getMessage();
         } finally {
-            $printer -> close();
+            if (isset($printer)) {
+                $printer -> close();
+            }
         }
         
         return $time;

@@ -39,22 +39,21 @@
                         <td width="10%"><b>{{ $order_dish->display_table }}</b><br>({{ $order_dish->table_count }})</td>
                         <td width="10%"><img @if($order_dish->dish_image) src="{{ asset('dishes/'.$order_dish->dish_image) }}" class="general" @endif></td>
                         <td  width="52%">
-                            <b>{{ $order_dish->dish_name_en }}</b>
-                            <br>
+                            <div style="font-size: 1.4em"><b>{{ $order_dish->dish_name_en }}</b></div>
                             @foreach($order_dish->options as $option)
                                 {{ $option->option_name }}: <b>{{ $option->item_name }}</b>&nbsp;
                             @endforeach
                         </td>
                         <td width="8%"><span class="multiple">&times;</span>&nbsp;<span class="qty">{{ $order_dish->count }}</span></td>
                         <td width="8%">
-                            <div class="reprint">
+                            <div class="reprint" onclick="reprint('{{ $order_dish->id }}', '{{ $group_id }}')">
                                 {{--<a style="color: white;" href="{{ route('reception.accounting', ['order_id' => $booking_order->order_id]) }}">--}}
                                     {{--<span class="fs-25">PROCESS BILL</span>--}}
                                     {{--<img src="{{ asset('img/Group728white.png') }}" style="height:20px; margin: -8px 0 0 20px;">--}}
                                 {{--</a>--}}
                                 <a style="color: white;">
                                     <span class="fs-25">REPRINT</span>
-                                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;" onclick="reprint('{{ $order_dish }}', '{{ $group_id }}')">
+                                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;" onclick="reprint('{{ $order_dish->id }}', '{{ $group_id }}')">
                                 </a>
                             </div>
                         </td>
@@ -77,15 +76,15 @@
         window.location.replace(parentURL);
     }
 
-    function reprint(order_dish, group_id)
+    function reprint(order_dish_id, group_id)
     {
 
         $.ajax({
             type:"POST",
             url:"{{ route('kitchen.reprint') }}",
-            data:{ order_dish: order_dish, group_id: group_id, _token: "{{ csrf_token() }}" },
+            data:{ order_dish_id: order_dish_id, group_id: group_id, _token: "{{ csrf_token() }}" },
             success: function(result){
-                console.log(result.data);
+                console.log(result);
                 //window.open(result);
             }
         });           

@@ -333,8 +333,6 @@
                         "</span>";
                 }
             }
-            
-
         }
 
         document.getElementById("red_count").innerText = red_count;
