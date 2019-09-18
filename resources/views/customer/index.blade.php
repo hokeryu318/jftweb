@@ -354,7 +354,10 @@
                 show_screensaver();
             }, 1000 * idletime); // 5 secs
         });*/
-        var idletime = {{ $screentime->screen_time }};
+        var idletime = 5;
+        @if ($screentime)
+            idletime = {{ $screentime->screen_time }};
+        @endif
         (function(poll, timeout){
 
             var _idle = false,
