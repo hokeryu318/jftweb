@@ -819,7 +819,7 @@ class ReceptionController extends Controller
         $address = $profile->address;
         $tel = "TEL : ".$profile->phone;
         $abn = "ABN : ".$profile->abn;
-        $shop_name = "ABN : ".$profile->shop_name;
+        $shop_name = $profile->shop_name;
 
         $order_id = request()->get('order_id');
         $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
