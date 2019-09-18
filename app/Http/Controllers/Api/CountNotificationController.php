@@ -146,13 +146,11 @@ class CountNotificationController extends Controller
                     $order_option->item_name = Item::where('id', $order_option->item_id)->pluck('name')->first();
                 else 
                     $order_option->item_name = '';
-
             }
 
-            $connector = new NetworkPrintConnector($printerIp, $printerPort);
-            $printer = new Printer($connector);
-
             try {
+                $connector = new NetworkPrintConnector($printerIp, $printerPort);
+                $printer = new Printer($connector);
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
@@ -196,12 +194,11 @@ class CountNotificationController extends Controller
                 }       
                 
                 $printer->text("\n");
-
                 $printer->cut();
-
-            } finally {
                 $printer -> close();
-            }
+            } catch (\Exception $e) {
+                //return $e->getMessage();
+            } finally {}
         }
 
         $orderdish->save();    

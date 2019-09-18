@@ -293,7 +293,7 @@
         var red_count = 0;
         var yellow_count = 0;
         var green_count = 0;
-
+        
         for(var i=0;i<group_order_dishes.length;i++){
 
             //order_time = new Date(group_order_dishes[i].created_at);
@@ -305,31 +305,35 @@
             elapsed_time = (current_time.getTime() - order_time.getTime())/1000;
             elapsed_time /= 60;
             elapsed_time = Math.round(elapsed_time);
-
-            if(elapsed_time >= 0 && elapsed_time < 10) {
-                document.getElementById("time_" + i + "_" + group_id).innerHTML =
-                    "<span class=\"circle_middle\">\n" +
-                    "    <p class=\"data green\">" + elapsed_time + "</p>\n" +
-                    "</span>";
-                green_count++;
-            } else if(elapsed_time >= 10 && elapsed_time < 20) {
-                document.getElementById("time_" + i + "_" + group_id).innerHTML =
-                    "<span class=\"circle_middle\">\n" +
-                    "    <p class=\"data yellow\">" + elapsed_time + "</p>\n" +
-                    "</span>";
-                yellow_count++;
-            } else if(elapsed_time >= 20 && elapsed_time <= 999) {
-                document.getElementById("time_" + i + "_" + group_id).innerHTML =
-                    "<span class=\"circle_big\">\n" +
-                    "    <p class=\"data red\">" + elapsed_time + "</p>\n" +
-                    "</span>";
-                red_count++;
-            } else {
-                document.getElementById("time_" + i + "_" + group_id).innerHTML =
-                    "<span class=\"circle_big\">\n" +
-                    "    <p class=\"data red\">...</p>\n" +
-                    "</span>";
+            
+            var divObj = document.getElementById("time_" + i + "_" + group_id);
+            if (divObj !== null) {
+                if(elapsed_time >= 0 && elapsed_time < 10) {
+                    document.getElementById("time_" + i + "_" + group_id).innerHTML =
+                        "<span class=\"circle_middle\">\n" +
+                        "    <p class=\"data green\">" + elapsed_time + "</p>\n" +
+                        "</span>";
+                    green_count++;
+                } else if(elapsed_time >= 10 && elapsed_time < 20) {
+                    document.getElementById("time_" + i + "_" + group_id).innerHTML =
+                        "<span class=\"circle_middle\">\n" +
+                        "    <p class=\"data yellow\">" + elapsed_time + "</p>\n" +
+                        "</span>";
+                    yellow_count++;
+                } else if(elapsed_time >= 20 && elapsed_time <= 999) {
+                    document.getElementById("time_" + i + "_" + group_id).innerHTML =
+                        "<span class=\"circle_big\">\n" +
+                        "    <p class=\"data red\">" + elapsed_time + "</p>\n" +
+                        "</span>";
+                    red_count++;
+                } else {
+                    document.getElementById("time_" + i + "_" + group_id).innerHTML = 
+                        "<span class=\"circle_big\">\n" +
+                        "    <p class=\"data red\">...</p>\n" +
+                        "</span>";
+                }
             }
+            
 
         }
 

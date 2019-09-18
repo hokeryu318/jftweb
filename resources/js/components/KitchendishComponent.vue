@@ -3,7 +3,7 @@
     <!--<table v-for="(group_order_dish, key) in group_order_dishes.slice().reverse()">-->
     <table v-for="(group_order_dish, key) in group_order_dishes">
         <!--<tr v-if="group_order_dish.ready_flag === 0">-->
-        <tr>
+        <tr :id="'tr_group_order_dish_'+group_order_dish.id">
             <td width="7%" align="center">
                 <div :id="'time_' + key + '_' + group"></div>
             </td>
@@ -27,8 +27,8 @@
             </td>
             <td width="8%">
                 <label class="checkbox_container">
-                    <input v-if="group_order_dish.ready_flag === 1" type="checkbox" checked="checked" >
-                    <input v-else type="checkbox" >
+                    <input v-if="group_order_dish.ready_flag === 1 || chk_group_order_dishes[group_order_dish.id] == 1" :id="'chk_group_order_dish_'+group_order_dish.id" :disabled="isReady" type="checkbox" checked="checked">
+                    <input v-else type="checkbox" :id="'chk_group_order_dish_'+group_order_dish.id" :disabled="isReady">
                     <span class="checkboxmark" v-on:click="ready(group_order_dish.id, key)"></span>
                 </label>
             </td>
@@ -44,6 +44,8 @@
         data: function(){
             return {
                 group_order_dishes: [],
+                chk_group_order_dishes: [],
+                isReady: false
             }
         },
         mounted() {
@@ -80,6 +82,9 @@
                         order_id: event.added_dish.order_id,
                         total_price: event.added_dish.total_price
                     });
+                    this.chk_group_order_dishes[event.added_dish.id] = 0;
+                    console.dir(event.added_dish.id);
+                    console.dir(event.added_dish.id+"----------------"+this.chk_group_order_dishes[event.added_dish.id]);
                     // this.group_order_dishes.reverse();//display array reverse
 
                     location.href = window.location.href;
@@ -119,10 +124,25 @@
                 console.dir(this.group);
                 var selected_id = id;
                 var group_id = this.group;
+                console.dir("------>>>>"+this.chk_group_order_dishes[selected_id]);
+                if (this.chk_group_order_dishes[selected_id] == 1) {
+                    return;
+                }
+                if (this.isReady) {
+                    return;
+                }
+                this.isReady = true;
+                $('#chk_group_order_dish_4').disabled = true;
+                this.chk_group_order_dishes[selected_id] = 1;
+                console.dir("------>>>>"+selected_id+"--------->>>>>"+this.chk_group_order_dishes[selected_id]);
+                
                 axios.post('/api/ready', {selected_id: selected_id, group_id: group_id})
                     .then(response => {
+                        this.isReady = false;
                         console.dir(response.data);
+                        $('#tr_group_order_dish_'+selected_id).remove();
                     })
+                console.dir(this.chk_group_order_dishes[selected_id]);
             },
 
         }

@@ -8,7 +8,7 @@
             <p class="ch_gr_right_close" data-dismiss="modal"><img src="{{ asset('img/close.png') }}" style="width: 45px;height: 45px;"></p>
         </div>
         <div class="ch_gr_modal_body">
-            <div>
+            <div class="ch_gr_modal_body_content">
                 @foreach($group_data as $gr_data)
                     <label class="radio_container">{{ $gr_data->name }}
                         @if($gr_data->id == $group_id)

@@ -249,6 +249,12 @@ img.reprint {
     height: 370px;
     overflow: auto;
 }
+.ch_gr_modal_body_content {
+    overflow: auto;
+    word-wrap: break-word;
+    margin: auto;
+    width: 65%;
+}
 .ch_hd_tx {
     margin: 40px 0 0 0;
     font-size: 25px;
@@ -270,8 +276,7 @@ img.reprint {
     -ms-user-select: none;
     user-select: none;
     border-bottom: 1px solid #ddd;
-    margin: 0 0 0 200px;
-    width: 357px;
+    width: 100%;
     padding: 17px 0 15px 55px;
 }
 
