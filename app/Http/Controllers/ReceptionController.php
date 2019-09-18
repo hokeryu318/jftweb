@@ -125,6 +125,11 @@ class ReceptionController extends Controller
             foreach ($order_table_obj as $order) {
                 $table_ids[] = $order['table_id'];
             }
+
+            $default_duration_id = $order_get->duration;
+        }
+        else{
+            $default_duration_id = $this->get_default_duration_id();
         }
 
         foreach($table_obj as $table) {
@@ -137,7 +142,7 @@ class ReceptionController extends Controller
         else
             $table_display_name = '';
 
-        $default_duration_id = $this->get_default_duration_id();
+        
 
 //        dd($table_ids);
 
@@ -166,7 +171,7 @@ class ReceptionController extends Controller
             $table_id_arr = explode(',', $table_ids);
             foreach ($table_id_arr as $id) {
                 $order_table_obj = new OrderTable();
-                $order_table_obj->rder_id = request()->get('order_id');
+                $order_table_obj->order_id = request()->get('order_id');
                 $order_table_obj->table_id = $id;
                 $order_table_obj->save();
             }
@@ -389,6 +394,7 @@ class ReceptionController extends Controller
 
         $categories = Category::orderby('order')->get();
         $dishes = array();
+        $temp_dishes = array();
         /*if(count($categories) > 0){
             $category_record = Category::find($categories[0]['id']);
             $dishes = $category_record->dishes;
@@ -405,6 +411,7 @@ class ReceptionController extends Controller
 
         $category_all = array();
         if(count($categories) > 0){
+            $i = 0;
             foreach ($categories as $category) {
                 $dishes = [];
                 if($category->has_subs != 1 && empty($category->parent_id)) {
@@ -412,6 +419,9 @@ class ReceptionController extends Controller
                     if(!empty($dishes) &&  count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
                     }
+
+                    if($i == 0) $temp_dishes = $dishes;
+                    if(!empty($dishes)) $i++;
                 }
                 elseif($category->has_subs == 1) {
                     $main_sub_categories = array();
@@ -424,10 +434,16 @@ class ReceptionController extends Controller
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
                             }
+
+                            if($i == 0) $temp_dishes = $dishes;
+                            if(!empty($dishes)) $i++;
                         }                        
                     }
                     else {
                         $dishes = $this->get_dishes($category,$order->time);
+
+                        if($i == 0) $temp_dishes = $dishes;
+                        if(!empty($dishes)) $i++;
                     }
                     if(!empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
@@ -438,7 +454,7 @@ class ReceptionController extends Controller
             }
         }
        
-        $dishes = [];
+        $dishes = $temp_dishes;
         return view('reception.add_item')->with(compact('order_id', 'category_all', 'dishes', 'order_dish_id', 'count'));
 
     }
@@ -837,8 +853,8 @@ class ReceptionController extends Controller
         try {
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
-//            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
-            $logo_image = EscposImage::load("receipt/".$logo_image_name);
+            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
+//            $logo_image = EscposImage::load("receipt/".$logo_image_name);
             $printer->graphics($logo_image, 3 | 2);
 
             $printer->setFont(Printer::FONT_A);
@@ -1108,6 +1124,7 @@ class ReceptionController extends Controller
         $order_table = OrderTable::where('order_id', $order_id)->get()->first();
         $calling_time = $order_table->calling_time;
         $attend_time = $order_table->attend_time;
+        $table_id = $order_table->table_id;
 
         $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
         $table_name = array();
@@ -1133,6 +1150,7 @@ class ReceptionController extends Controller
         $booking_order->pay_flag = $pay_flag;
         $booking_order->calling_time = $calling_time;
         $booking_order->attend_time = $attend_time;
+        $booking_order->table_id = $table_id;
         if($attend_time != null)
             $booking_order->attended_time = intval(strtotime($booking_order->attend_time)-strtotime($booking_order->calling_time));
         $booking_order->status = $status;

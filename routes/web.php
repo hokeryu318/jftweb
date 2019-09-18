@@ -136,6 +136,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::get('admin/setting/timeslots', 'SettingController@timeslots')->name('admin.setting.timeslots');
     Route::get('admin/setting/htimeslots', 'SettingController@htimeslots')->name('admin.setting.htimeslots');
     Route::get('admin/setting/customer', 'SettingController@customer')->name('admin.setting.customer');
+    Route::get('admin/setting/screentime', 'SettingController@screentime')->name('admin.setting.screentime');
 
     Route::get('admin/setting/gst', 'SettingController@gst')->name('admin.setting.gst');
     Route::post('admin/setting/gst', 'SettingController@gstpost')->name('admin.setting.gst.save');
@@ -156,6 +157,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::post('admin/setting/customerpost', 'SettingController@customer_post')->name('admin.setting.customer.save');
     Route::post('admin/setting/languagepost', 'SettingController@language_post')->name('admin.setting.language.save');
     Route::post('admin/setting/passwordpost', 'SettingController@password_post')->name('admin.setting.password.save');
+    Route::post('admin/setting/screentimepost', 'SettingController@screentime_post')->name('admin.setting.screentime.save');
     Route::post('admin/setting/activebadge', 'SettingController@active_badge')->name('admin.setting.activebadge');
     Route::post('admin/setting/paymentpost', 'SettingController@payment_post')->name('admin.setting.payment.post');
     Route::post('admin/setting/sendmail_post', 'SettingController@sendmail_post')->name('admin.setting.sendmail.post');

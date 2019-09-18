@@ -17,6 +17,7 @@ use App\Model\Table;
 use App\Model\OrderTable;
 use App\Model\Holiday;
 use App\Model\Timeslot;
+use App\Model\Screentime;
 use Illuminate\Http\Request;
 use App\Events\KitchenEvent;
 use Illuminate\Support\Facades\Storage;
@@ -39,6 +40,7 @@ class CustomerController extends Controller
         //echo $table_name;
         $categories = Category::orderby('order')->get();
         $dishes = array();
+        $temp_dishes = array();
         /*if(count($categories) > 0) {
             $category_record = Category::find($categories[0]['id']);
             $dishes = $category_record->dishes;
@@ -50,6 +52,7 @@ class CustomerController extends Controller
         
         $category_all = array();
         if(count($categories) > 0) {
+            $i = 0;
             foreach ($categories as $category) {
                 $dishes = [];
                 if($category->has_subs != 1 && empty($category->parent_id)) {
@@ -57,6 +60,9 @@ class CustomerController extends Controller
                     if( !empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
                     }
+                    
+                    if($i == 0) $temp_dishes = $dishes;
+                    if(!empty($dishes)) $i++;
                 }
                 elseif($category->has_subs == 1) {
                     $main_sub_categories = array();
@@ -69,10 +75,16 @@ class CustomerController extends Controller
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
                             }
+                            
+                            if($i == 0) $temp_dishes = $dishes;
+                            if(!empty($dishes)) $i++;
                         }                        
                     }
                     else {
                         $dishes = $this->get_dishes($category,$order->time);
+                        
+                        if($i == 0) $temp_dishes = $dishes;
+                        if(!empty($dishes)) $i++;
                     }
                     if( !empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
@@ -87,12 +99,14 @@ class CustomerController extends Controller
 //        dd($order_table);
 //        dd($categories);
 
-        $dishes = [];
+        $dishes = $temp_dishes;
 
         $img_name = Storage::disk('screen')->files();
         $img_name = json_encode($img_name);
 
-        return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time'))->with('img_name',$img_name);
+        $screentime = Screentime::orderby('id','desc')->get()->first();
+
+        return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'last_order_time', 'screentime'))->with('img_name',$img_name);
     }
 //    public function dish_list()
 //    {

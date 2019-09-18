@@ -89,6 +89,7 @@
             <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
         </div>
         <div class="category_container">
+            @php $i=0; @endphp
             @foreach($category_all as $key => $category)
                 @if(isset($category['has_subs']) && $category['has_subs'] == 1)
                     <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">
@@ -102,36 +103,84 @@
                             @endif
                         </span>
                     </div>
-                    <div class="display-none" id="cat-{{ $category['id'] }}">
-                        <ul class="category_child">
-                            @foreach($category['children'] as $child)
-                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
-                                    @if(session('language') == 1)
-                                        - {{$child['name_cn']}}
-                                    @elseif(session('language') == 2)
-                                        - {{$child['name_jp']}}
+                    @if($i == 0)
+                        <div class="display-none" style="display: block;" id="cat-{{ $category['id'] }}">
+                            <ul class="category_child">
+                                @foreach($category['children'] as $child)
+                                    @if($i == 0)
+                                        <li id="category_{{$child['id']}}" class="common_category selected_category_color" onclick="onDishes1({{ $child['id'] }})">
+                                            @if(session('language') == 1)
+                                                - {{$child['name_cn']}}
+                                            @elseif(session('language') == 2)
+                                                - {{$child['name_jp']}}
+                                            @else
+                                                - {{$child['name_en']}}
+                                            @endif
+                                        </li>
                                     @else
-                                        - {{$child['name_en']}}
+                                        <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
+                                            @if(session('language') == 1)
+                                                - {{$child['name_cn']}}
+                                            @elseif(session('language') == 2)
+                                                - {{$child['name_jp']}}
+                                            @else
+                                                - {{$child['name_en']}}
+                                            @endif
+                                        </li>
                                     @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @else
-                    @if($category['parent_id'] == "")
-                        <div class="category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
-                            <span>
-                                @if(session('language') == 0)
-                                    {{$category['name_en']}}
-                                @elseif(session('language') == 1)
-                                    {{$category['name_cn']}}
-                                @else
-                                    {{$category['name_jp']}}
-                                @endif
-                            </span>
+                                    @php $i++; @endphp
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <div class="display-none" id="cat-{{ $category['id'] }}">
+                            <ul class="category_child">
+                                @foreach($category['children'] as $child)
+                                    <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
+                                        @if(session('language') == 1)
+                                            - {{$child['name_cn']}}
+                                        @elseif(session('language') == 2)
+                                            - {{$child['name_jp']}}
+                                        @else
+                                            - {{$child['name_en']}}
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
+                @else
+                    @if($i == 0)
+                        @if($category['parent_id'] == "")
+                            <div class="category_parent common_category selected_category_color" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
+                                <span>
+                                    @if(session('language') == 0)
+                                        {{$category['name_en']}}
+                                    @elseif(session('language') == 1)
+                                        {{$category['name_cn']}}
+                                    @else
+                                        {{$category['name_jp']}}
+                                    @endif
+                                </span>
+                            </div>
+                        @endif
+                    @else
+                        @if($category['parent_id'] == "")
+                            <div class="category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
+                                <span>
+                                    @if(session('language') == 0)
+                                        {{$category['name_en']}}
+                                    @elseif(session('language') == 1)
+                                        {{$category['name_cn']}}
+                                    @else
+                                        {{$category['name_jp']}}
+                                    @endif
+                                </span>
+                            </div>
+                        @endif
+                    @endif
                 @endif
+                @php $i++; @endphp
             @endforeach
         </div>
     </nav>
@@ -271,8 +320,7 @@
      //////////////////////////////////////////********************************************************************************************************************************
 
     $(document).ready(function(){
-        $(".category_parent").first().addClass('selected_category_color');
-
+        //$(".category_parent").first().addClass('selected_category_color');
         /*var mousetimeout;
         var screensaver_active = false;
         var idletime = 5;
@@ -306,7 +354,7 @@
                 show_screensaver();
             }, 1000 * idletime); // 5 secs
         });*/
-
+        var idletime = {{ $screentime->screen_time }};
         (function(poll, timeout){
 
             var _idle = false,
@@ -336,7 +384,7 @@
                             document.getElementById("screensaver").innerHTML='<img src={!! asset("screen/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
                             if( cnt > i + 1 ) i++;
                             else i = 0;
-                        }, 8000);
+                        }, idletime*1000);
 
                     }
                 }
@@ -367,11 +415,15 @@
     }
 
     function onDishes(category_id){
-
+        /*var catContent = document.getElementsByClassName('display');
+        for (var i = 0; i < catContents.length; i++) {
+            catContent[i].class = 'display-none';
+        }*/
         var catContents = document.getElementsByClassName('display-none');
         for (var i = 0; i < catContents.length; i++) {
             catContents[i].style.display = 'none';
         }
+
 
 //        var catContentIdToShow = 'cat' + category_id;
 //        document.getElementById(catContentIdToShow).style.display = 'block';
@@ -387,7 +439,7 @@
             },
             success: function(result){
                 $('#dish-content').html(result);
-             }
+            }
         });
     }
 
@@ -935,7 +987,7 @@
         if((diff > 0) && (diff > 90))
             document.getElementById("time").innerHTML = diff;
         else
-            document.getElementById("time").innerHTML = 0;
+            document.getElementById("time").innerHTML = "—";
     }
 
 </script>

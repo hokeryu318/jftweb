@@ -22,6 +22,7 @@
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.timeslots') }}"><a class="anchor-white fs-25" style="color:white" href="#">Time Slots</a></li>
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.htimeslots') }}"><a class="anchor-white fs-25" style="color:white" href="#">Holiday Time Slots</a></li>
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.customer') }}"><a class="anchor-white fs-25" style="color:white" href="#">New Customer</a></li>
+                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.screentime') }}"><a class="anchor-white fs-25" style="color:white" href="#">Screen Time</a></li>
                         </ul>
                         <ul class="col-lg-12 pl-0 w-100 mt-3" style="list-style-type:none">
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.gst') }}"><a class="anchor-white fs-25" style="color:white" href="#">GST</a></li>

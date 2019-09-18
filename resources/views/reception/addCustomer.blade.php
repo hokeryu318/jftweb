@@ -152,7 +152,8 @@
                                 </div>
                                 <div class="col-4">
                                     <h5 class="time_content_title fs-30">TIME</h5>
-                                    <input id="timepicker1" type="text" name="timepicker1" style="text-align: center;margin-bottom: 40px;font-size: 25px;" value="Select Time" />
+                                    <input id="timepicker1" type="text" name="timepicker1" style="text-align: center;margin-bottom: 40px;font-size: 25px;" 
+                                    value="Select Time" />
                                     <span class="now_btn" onclick="current_time()">Now</span>
                                 </div>
                                 <div class="col-4">
@@ -900,10 +901,10 @@
         function changeTab(arg){
             if(arg == "group" || arg == "table" || arg == "name" || arg == "notes"){
                 if($("#timepicker1").val() == 'Select Time') {
-                    //alert("Please select the time");
-                    $("#alert-string")[0].innerText = "Please select the time";
-                    $("#java-alert").modal('toggle');
-                    return;
+                    //$("#alert-string")[0].innerText = "Please select the time";
+                    //$("#java-alert").modal('toggle');
+                    //return;
+                    current_time();
                 }
             }
             if(arg == "name" || arg == "notes"){

@@ -13,6 +13,7 @@ use App\Model\Holiday;
 use App\Model\Badge;
 use App\Model\Payment;
 use App\Model\Mail;
+use App\Model\Screentime;
 class SettingController extends Controller
 {
     //
@@ -38,6 +39,12 @@ class SettingController extends Controller
     {
         $profile = Receipt::profile();
         return view('admin.setting.customer')->with(compact('profile'));
+    }
+    public function screentime()
+    {
+        $screentime = Screentime::orderby('id','desc')->get()->first();
+        $profile = Receipt::profile();
+        return view('admin.setting.screentime')->with(compact('screentime'))->with(compact('profile'));
     }
     public function gst()
     {
@@ -414,20 +421,42 @@ class SettingController extends Controller
     }
     public function addbadge()
     {
-        $img_name = request()->get('image-name');
-        if(Badge::where('name', $img_name)->exists()){
-            return redirect()->route('admin.setting.badge');
+        $b_name = request()->get('b-name');
+        if(!empty($b_name)) {
+            $img_name = request()->get('image-name');
+            if( $b_name != $img_name ) {
+                if(Badge::where('name', $img_name)->exists()){
+                    return redirect()->route('admin.setting.badge');
+                }                
+            }
+
+            $file = request()->file('image-file');
+            $destinationPath = 'badges';
+            $destinationFile = $file->getClientOriginalName();
+            $file->move($destinationPath, $destinationFile);
+
+            $badge = Badge::find($b_name);
+            $badge->name = $img_name;
+            $badge->filepath = $destinationFile;
+            $badge->update();
+        }
+        else {
+            $img_name = request()->get('image-name');
+            if(Badge::where('name', $img_name)->exists()){
+                return redirect()->route('admin.setting.badge');
+            }
+
+            $file = request()->file('image-file');
+            $destinationPath = 'badges';
+            $destinationFile = $file->getClientOriginalName();
+            $file->move($destinationPath, $destinationFile);
+
+            $badge = new Badge();
+            $badge->name = $img_name;
+            $badge->filepath = $destinationFile;
+            $badge->save();
         }
 
-        $file = request()->file('image-file');
-        $destinationPath = 'badges';
-        $destinationFile = $file->getClientOriginalName();
-        $file->move($destinationPath, $destinationFile);
-
-        $badge = new Badge();
-        $badge->name = $img_name;
-        $badge->filepath = $destinationFile;
-        $badge->save();
 
         return redirect()->route('admin.setting.badge');
     }
@@ -492,6 +521,19 @@ class SettingController extends Controller
         }
 
         return redirect()->route('admin.setting.password');
+
+    }
+    public function screentime_post()
+    {
+        if(request()->new_time){
+                $user_menu = new Screentime();
+                $user_menu->screen_time = request()->new_time;
+                $user_menu->save();
+        }
+        
+        $screentime = Screentime::orderby('id','desc')->get()->first();
+        $profile = Receipt::profile();
+        return view('admin.setting.screentime')->with(compact('screentime'))->with(compact('profile'));
 
     }
     public function active_badge()
