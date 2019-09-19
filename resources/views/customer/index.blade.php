@@ -91,8 +91,16 @@
         <div class="category_container">
             @php $i=0; @endphp
             @foreach($category_all as $key => $category)
-                @if(isset($category['has_subs']) && $category['has_subs'] == 1)
-                    <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">
+                @if(isset($category['has_subs']) && $category['has_subs'] == 1 && !empty($category['children']))
+                    @php  $first = $category['id']; @endphp
+                    @foreach($category['children'] as $child)
+                        @php 
+                            $first = $child['id'];                             
+                            break;
+                        @endphp
+                    @endforeach
+                    
+                    <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$first}})">
                         <span>
                             @if(session('language') == 1)
                                 {{$category['name_cn']}}
@@ -418,15 +426,11 @@
     }
 
     function onDishes(category_id){
-        /*var catContent = document.getElementsByClassName('display');
-        for (var i = 0; i < catContents.length; i++) {
-            catContent[i].class = 'display-none';
-        }*/
+        
         var catContents = document.getElementsByClassName('display-none');
         for (var i = 0; i < catContents.length; i++) {
             catContents[i].style.display = 'none';
         }
-
 
 //        var catContentIdToShow = 'cat' + category_id;
 //        document.getElementById(catContentIdToShow).style.display = 'block';
@@ -447,7 +451,6 @@
     }
 
     function onDishes1(category_id){
-
         var selected_obj = $("#category_"+category_id);
         $(".common_category").removeClass("selected_category_color");
         selected_obj.toggleClass('selected_category_color');
@@ -877,7 +880,7 @@
             type:"POST",
             url:"{{ route('customer.add_review') }}",
             data:{
-                order_id: order_id, review_type: review_type, review: review, _token:"{{ csrf_token() }}"
+                order_id: order_id, review_type: review_type, review: review,table_id: {{ $table_id }},_token:"{{ csrf_token() }}"
             },
             success: function(result){
                 // console.log(result);

@@ -33,7 +33,7 @@
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.badge') }}"><a class="anchor-white fs-25" style="color:white" href="#">Badges</a></li>
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.language') }}"><a class="anchor-white fs-25" style="color:white" href="#">Multilingual</a></li>
                             <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.password') }}"><a class="anchor-white fs-25" style="color:white" href="#">Password</a></li>
-                            <li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.sendmail') }}"><a class="anchor-white fs-25" style="color:white" href="#">SendMail</a></li>
+                            {{--<li class="menu1 fontbig" onclick="onmenu(this)" data-url="{{ route('admin.setting.sendmail') }}"><a class="anchor-white fs-25" style="color:white" href="#">SendMail</a></li>--}}
                         </ul>
                     </div>
                 </div>

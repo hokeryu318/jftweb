@@ -82,6 +82,7 @@ class CustomerController extends Controller
                     }
                     else {
                         $dishes = $this->get_dishes($category,$order->time);
+                        $main_sub_categories = [];
                         
                         if($i == 0) $temp_dishes = $dishes;
                         if(!empty($dishes)) $i++;
@@ -656,7 +657,7 @@ class CustomerController extends Controller
         $order->save();
 
         //show count_notification on reception screen
-        $count_notification = $this->CountNotification();
+        $count_notification = $this->CountNotification1(request()->table_id,4);
         broadcast(new NotificationEvent($count_notification));
 
         return $order;
@@ -678,18 +679,20 @@ class CustomerController extends Controller
             OrderTable::where('order_id', $order_id)->update(['attend_time' => Null]);
 
             $calls += 1;
+            $count_notification = $this->CountNotification1($table_id,2);
 
         } else {
             $orderTable->calling_time = Null;
             $orderTable->attend_time = Null;
             OrderTable::whereIn('order_id', $order_id)->update(['calling_time' => Null]);
             OrderTable::whereIn('order_id', $order_id)->update(['attend_time' => Null]);
+            $count_notification = $this->CountNotification1($table_id,3);
         }
         $orderTable->save();
         Order::where('id', $order_id[0])->update(['calls' => $calls]);
 
         //show count_notification on reception screen
-        $count_notification = $this->CountNotification();
+        
         broadcast(new NotificationEvent($count_notification));
 
         return $orderTable->calling_time;
@@ -789,7 +792,9 @@ class CustomerController extends Controller
         $gst_price = request()->gst_price;
 
         //show count_notification on reception screen
-        $count_notification = $this->CountNotification();
+        
+        $id = Table::where('name',$table_name)->get()->first();
+        $count_notification = $this->CountNotification1($id->id,1);
         broadcast(new NotificationEvent($count_notification));
 
         return (string)view('customer.view_pay', compact('table_name', 'starting_time', 'total', 'gst_price', 'without_gst_price'))->render();

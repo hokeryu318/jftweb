@@ -147,13 +147,13 @@
                             <div class="row" style="margin-top: 50px;">
                                 <div class="col-4">
                                     <h5 class="date_content_title fs-30">DATE</h5>
-                                    <div id="calendar-picker" class="w-100 fs-20">
+                                    <div id="calendar-picker" class="w-100 fs-20" @if(!empty($order_get)) data-date="{{substr($order_get->time,0,10)}}" @endif data-date-format="yyyy-mm-dd" >
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <h5 class="time_content_title fs-30">TIME</h5>
                                     <input id="timepicker1" type="text" name="timepicker1" style="text-align: center;margin-bottom: 40px;font-size: 25px;" 
-                                    value="Select Time" />
+                                    @if(empty($order_get)) value="Select Time" @else value="{{date_format(date_create(substr($order_get->time,11,5)),"h:i A")}}" @endif />
                                     <span class="now_btn" onclick="current_time()">Now</span>
                                 </div>
                                 <div class="col-4">
@@ -843,7 +843,7 @@
                                     <h3 class="mb-0 font-weight-bold">CANCEL
                                         <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;"></h3>
                                 </button>
-                                <button type="button" id="seat-btn" onclick="nextTab('group')" class="btn black">
+                                <button type="button" id="seat-btn" onclick="nextTab('group')" class="btn black" >
                                     <h3 class="mb-0 font-weight-bold">SEAT
                                     <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;"></h3>
                                 </button>
@@ -1114,7 +1114,8 @@
                         day = '0' + day;
                     selected_date = year + '-' + month + '-' + day;
                 }else{
-                    selected_date = $('#calendar-picker').data().date.slice(0, -6);
+                    //selected_date = $('#calendar-picker').data().date.slice(0, -6);
+                    selected_date = $('#calendar-picker').data().date;
                 }
 
                 var time_selected = document.getElementById("timepicker1").value;
@@ -1126,7 +1127,9 @@
 
                 $("#selected-duration").val($("#duration-select").val());
                 $("#selected-time").val(selected_date + " " + time_selected + ":00");
+                $("#seat-btn").toggleClass('disabled');
                 $("#save-customer").submit();
+                
             }
         }
 

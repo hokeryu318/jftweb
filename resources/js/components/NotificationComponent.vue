@@ -28,6 +28,24 @@
                 // console.log(event.count_notification.ready_pay_count);
                 this.count_notification = event.count_notification;
                 // console.log(this.count_notification.ready_pay_count);
+                if( this.count_notification.selected == 1 ){
+                    document.getElementById("belled_icon_"+this.count_notification.table_id).src = "/img/calling.png";
+                    document.getElementById("belled_list_"+this.count_notification.table_id).src = "/img/calling.png";                    
+                }
+                else if( this.count_notification.selected == 2 ) {
+                    document.getElementById("call_icon_"+this.count_notification.table_id).src = "/img/alarm.png";                    
+                    document.getElementById("call_list_"+this.count_notification.table_id).src = "/img/alarm.png";
+                }
+                else if( this.count_notification.selected == 3 ) {
+                    document.getElementById("call_icon_"+this.count_notification.table_id).src = "";
+                    document.getElementById("call_list_"+this.count_notification.table_id).src = "";
+                    document.getElementById("call_list_"+this.count_notification.table_id).style = "";
+                }
+                else if( this.count_notification.selected == 4 ) {
+                    document.getElementById("review_icon_"+this.count_notification.table_id).src = "/img/msg.png";
+                    document.getElementById("review_list_"+this.count_notification.table_id).src = "/img/msg.png";
+                }
+                    
             });
         },
     };

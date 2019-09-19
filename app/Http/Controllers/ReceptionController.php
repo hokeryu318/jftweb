@@ -801,6 +801,7 @@ class ReceptionController extends Controller
 
         //show pay finish status on customer
         $pay_status = 'pay_'.$order_id;
+        session(['login_table_name' => 'a2']);
         broadcast(new PayEvent($pay_status));
 
 //        /return 'success';

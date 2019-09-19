@@ -134,6 +134,37 @@ class Controller extends BaseController
         return $count_notification;
     }
 
+    public function CountNotification1($table_id,$selected)
+    {
+
+        $count_notification = array();
+
+        //ready_pay_count
+        $count_notification['ready_pay_count'] = Order::where('pay_flag', 1)->get()->count();
+
+        //calling_count
+        $count_notification['calling_count'] = OrderTable::where('calling_time', '<>', null)->distinct()->pluck('order_id')->count();
+
+        //attend_count
+        $count_notification['attend_count'] = OrderTable::where('calling_time', '<>', null)->where('attend_time', null)->distinct()->pluck('order_id')->count();
+
+        //review_count
+        $count_notification['review_count'] = Order::where('pay_flag',  '<>', 2)->where('review', '!=', Null)->get()->count();
+
+        //note_count
+        $count_notification['note_count'] = Order::where('pay_flag',  '<>', 2)->where('note', '!=', Null)->get()->count();
+
+        //display count of seated and booking status
+        $count_notification['seated'] = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
+        $count_notification['bookings'] = Order::where('pay_flag',  '<>', 2)->where('status', 'booking')->get()->count();
+
+        $count_notification['table_id'] = $table_id - 1;
+
+        $count_notification['selected'] = $selected;
+
+        return $count_notification;
+    }
+
     //get_added_dish for broadcast in customer part
     public function get_added_dish($dish, $order_id, $order_dish_id)
     {
