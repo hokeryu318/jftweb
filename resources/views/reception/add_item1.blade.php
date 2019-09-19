@@ -5,38 +5,21 @@
             @foreach($category_all as $key => $category)
                 @if(isset($category['has_subs']) && $category['has_subs'] == 1)
                     <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">
-                        {{--                        <img src="{{asset("img/collapse1.png")}}" style="width: 15px;" />--}}
                         <span class="fs-25">{{$category['name_en']}}</span>
                     </div>
-                    <div class="display-none">
+                    <div class="display-none" id="cat-{{ $category['id'] }}">
                         <ul class="category_child">
                             @foreach($category['children'] as $child)
-                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes({{ $child['id'] }})">
+                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
                                     -<span class="fs-25">{{$child['name_en']}}</span></li>
                             @endforeach
                         </ul>
                     </div>
-
-                    {{--<ul id="myUL">--}}
-                    {{--<li><span class="caret common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">{{ $category['name_en'] }}</span>--}}
-                    {{--<ul class="nested">--}}
-                    {{--@foreach($category['children'] as $child)--}}
-                    {{--<li id="category_{{$child['id']}}" class="common_category" onclick="onDishes({{ $child['id'] }})">-{{$child['name_en']}}</li>--}}
-                    {{--@endforeach--}}
-                    {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
                 @else
                     @if($category['parent_id'] == "")
                         <div class="category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
-                            {{--                            <img src="{{asset("img/collapse1.png")}}" style="width: 17px;" />--}}
                             <span class="fs-25">{{$category['name_en']}}</span>
                         </div>
-                        {{--<ul id="myUL">--}}
-                        {{--<li>--}}
-                        {{--<span class="caret common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">{{ $category['name_en'] }}</span>--}}
-                        {{--</li>--}}
-                        {{--</ul>--}}
                     @endif
                 @endif
             @endforeach
@@ -49,8 +32,8 @@
                         <ul id="myUL">
                             <li><span class="caret fs-25">{{ $ds->name_en }}</span>
                                 <ul class="nested">
-                                    @foreach ($ds->options as $option)
-                                        <li>
+                                @foreach ($ds->options as $option)
+                                    <li>
                                         <span class="caret fs-25">{{ $option->name }}:
                                             @if($option->photo_visible == 0 || $option->number_selection == 1)
                                                 (You can select only 1 item.)
@@ -58,24 +41,25 @@
                                                 (You can select only {{ $option->number_selection }} items.)
                                             @endif
                                         </span>
-                                            <ul class="nested">
-                                                @foreach ($option->item as $item)
-                                                    <li>
-                                                        @if($option->photo_visible == 0)
-                                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
-                                                                   onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')" style="width:20px;height:20px;" />
-                                                        @else
-                                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
-                                                                   onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}')"
-                                                                   style="width:20px;height:20px;" />
-                                                        @endif
-                                                        <span class="fs-25">{{ $item->name }}</span>
-                                                        @if($item->price) <span class="fs-25">(${{ number_format($item->price, 2) }})</span> @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                    @endforeach
+                                        <ul class="nested">
+                                        @foreach ($option->item as $item)
+                                            <li>
+                                                @if($option->photo_visible == 0)
+                                                    <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
+                                                           onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')"
+                                                           style="width:20px;height:20px;" />
+                                                @else
+                                                    <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
+                                                           onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}')"
+                                                           style="width:20px;height:20px;" />
+                                                @endif
+                                                <span class="fs-25">{{ $item->name }}</span>
+                                                    @if($item->price) <span class="fs-25">(${{ number_format($item->price, 2) }})</span> @endif
+                                            </li>
+                                        @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -108,6 +92,11 @@
                     <img src="{{asset('img/qty_up.png')}}" style="width: 60px;margin: 17px 0px 0 -15px;" onclick="plusQty('plus')" />
                 </div>
             </div>
+            <div class="row" style="margin-top: 30px">
+                <div class="col-12" style="text-align: center;">
+                    <p style="color: white;font-size: 20px;">You must set QTY</p>
+                </div>
+            </div>
         </div>
         <div class="col-4" style="margin-left: -6px;">
             <div class="amend_btn" style="background: #1EC2C9;color: white;margin: 12px 0 0 43px; padding-left: 42px;" onclick="onApply()">
@@ -128,7 +117,8 @@
 
 <script>
 
-    var select_list = [];
+    var select_dish_id = '';
+    var select_item_ids = [];
     var order_dish_id = <?php echo(json_encode($order_dish_id))?>;
     var count = <?php echo(json_encode($count))?>;
 
@@ -142,16 +132,43 @@
     });
 
     function onDishes(category_id){
-        select_list = [];
-        order_id = $('#order_id').val();
+
+        var order_id =  <?php echo(json_encode($order_id)) ?>;
+
+        var catContents = document.getElementsByClassName('display-none');
+        for (var i = 0; i < catContents.length; i++) {
+            catContents[i].style.display = 'none';
+        }
+
         var selected_obj = $("#category_"+category_id);
         $(".common_category").removeClass("selected_category_color");
         selected_obj.toggleClass('selected_category_color');
+
         $.ajax({
             type:"POST",
             url:"{{ route('reception.dish_list') }}",
             data:{
-                order_id: order_id, category: category_id, _token:"{{ csrf_token() }}"
+                category: category_id, order_id: order_id, _token:"{{ csrf_token() }}"
+            },
+            success: function(result){
+                $('#dish-content').html(result);
+            }
+        });
+    }
+
+    function onDishes1(category_id){
+
+        var order_id =  <?php echo(json_encode($order_id)) ?>;
+
+        var selected_obj = $("#category_"+category_id);
+        $(".common_category").removeClass("selected_category_color");
+        selected_obj.toggleClass('selected_category_color');
+
+        $.ajax({
+            type:"POST",
+            url:"{{ route('reception.dish_list') }}",
+            data:{
+                category: category_id, order_id: order_id, _token:"{{ csrf_token() }}"
             },
             success: function(result){
                 $('#dish-content').html(result);
@@ -200,6 +217,133 @@
         });
     }
 
+    {{--//select Item--}}
+    {{--function selectItem(number_selection, dish_id, option_id, item_id) {--}}
+
+        {{--var ds_op = dish_id + option_id;--}}
+        {{--var checkedValue = document.querySelector(".checked_items_" + ds_op + ":checked").value;--}}
+        {{--var checked_cnt = $(".checked_items_" + ds_op + ":checked").length;--}}
+        {{--if(checked_cnt > number_selection) {--}}
+            {{--if(number_selection == 1)--}}
+                {{--alert('You can select only 1 item!');--}}
+            {{--else--}}
+                {{--alert('You can select only ' + number_selection + ' items!');--}}
+            {{--var inputs = document.querySelectorAll('.checked_items_' + ds_op);--}}
+            {{--for (var i = 0; i < inputs.length; i++) {--}}
+                {{--inputs[i].checked = false;--}}
+            {{--}--}}
+            {{--select_item_ids = [];--}}
+        {{--} else {--}}
+            {{--select_item_ids = checkedValue;--}}
+        {{--}--}}
+        {{--//console.dir(select_item_ids);--}}
+
+    {{--}--}}
+
+    function selectDishes(dish_id) {
+
+        // var dishContents = document.getElementsByClassName('display-none1');
+        // for (var i = 0; i < dishContents.length; i++) {
+        //     dishContents[i].style.display = 'none';
+        // }
+
+        select_dish_id = '';
+        select_item_ids = [];
+        var selected_dish_obj = $("#op_" + dish_id);
+        $(".common_dish").removeClass("selected_category_color");
+        selected_dish_obj.toggleClass('selected_category_color');
+        select_dish_id = dish_id;
+        //console.dir(select_dish_id);
+    }
+
+    {{--function onlyUnique(value, index, self) {--}}
+        {{--return self.indexOf(value) === index;--}}
+    {{--}--}}
+
+    {{--//Apply--}}
+    {{--function onApply(){--}}
+        {{--var order_id =  <?php echo(json_encode($order_id)) ?>;--}}
+
+        {{--if(order_dish_id == 0) {// add item--}}
+            {{--//select get dish and option list for add--}}
+
+           {{--var tmp = '';--}}
+           {{--$("input:checkbox:checked").each(function(){--}}
+               {{--var val = $(this).val();--}}
+
+               {{--if(tmp == 0){--}}
+                   {{--tmp = val;--}}
+                   {{--select_item_ids.push(val);--}}
+               {{--}--}}
+               {{--else{--}}
+                   {{--if(tmp == val) {--}}
+                       {{--//alert('You can select only 1 dish!');--}}
+                       {{--select_item_ids = [];--}}
+                   {{--} else {--}}
+                       {{--select_item_ids.push(val);--}}
+                   {{--}--}}
+               {{--}--}}
+           {{--});--}}
+
+           {{--select_item_ids = select_item_ids.filter( onlyUnique );--}}
+
+           {{--console.dir(select_dish_id);--}}
+           {{--console.dir(select_item_ids);--}}
+
+           {{--if(select_list.length == 0){--}}
+               {{--alert('Please select dish and options!');--}}
+           {{--} else {--}}
+                {{--var qty_number_obj = $("#qty");--}}
+                {{--var qty = qty_number_obj.html();--}}
+
+                {{--if(qty == 0) {--}}
+                    {{--//alert('Please set qty!');--}}
+                {{--} else {--}}
+                    {{--$('#thirdModal').html('');--}}
+                    {{--$('#thirdModal').modal('hide');--}}
+
+                    {{--$.ajax({--}}
+                        {{--type:"POST",--}}
+                        {{--url:"{{ route('reception.add_item') }}",--}}
+                        {{--data:{--}}
+                            {{--order_id: order_id, select_list: select_list, qty: qty, _token:"{{ csrf_token() }}"--}}
+                        {{--},--}}
+                        {{--success: function(result){--}}
+                            {{--location.href = window.location.href;--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--}--}}
+           {{--}--}}
+        {{--} else {// change count of item--}}
+            {{--var qty_number_obj = $("#qty");--}}
+            {{--var qty = qty_number_obj.html();--}}
+
+            {{--if(qty == 0) {--}}
+                {{--//alert('Please set qty!');--}}
+            {{--} else {--}}
+
+                {{--$('#thirdModal').html('');--}}
+                {{--$('#thirdModal').modal('hide');--}}
+
+                {{--$.ajax({--}}
+                    {{--type:"POST",--}}
+                    {{--url:"{{ route('reception.change_count') }}",--}}
+                    {{--data:{--}}
+                        {{--order_dish_id: order_dish_id, qty: qty, _token:"{{ csrf_token() }}"--}}
+                    {{--},--}}
+                    {{--success: function(result){--}}
+                        {{--// console.dir(result);--}}
+                        {{--location.href = window.location.href;--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
+        {{--}--}}
+
+    {{--}--}}
+
+
+    ///////////////////////////////////
+
     //select Item
     function selectItem(number_selection, dish_id, option_id) {
 
@@ -217,17 +361,6 @@
         }
 
     }
-
-    // function selectDishes(dish_id) {
-    //
-    //     // select_dish_id = '';
-    //     // select_item_ids = [];
-    //     var selected_dish_obj = $("#op_" + dish_id);
-    //     $(".common_dish").removeClass("selected_category_color");
-    //     selected_dish_obj.toggleClass('selected_category_color');
-    //     // select_dish_id = dish_id;
-    //     //console.dir(select_dish_id);
-    // }
 
     //Apply
     function onApply(){
@@ -304,6 +437,7 @@
 
     }
 
+
 </script>
 
 <style>
@@ -322,20 +456,20 @@
     }
 
     .dish {
-        width: 50px;
-        height: 660px;
-        background: white;
-        padding-top: 15px;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+         width: 50px;
+         height: 660px;
+         background: white;
+         padding-top: 15px;
+         overflow-x: hidden;
+         overflow-y: auto;
+     }
 
     .qty {
         width: 250px;
         /*background: red;*/
         margin-left: 45px;
     }
-
+    
     .qty_text {
         width: 80px;
         height: 75px;
@@ -348,7 +482,7 @@
     .selected_category_color{
         color: #039BFA;
     }
-
+    
     ul {
         margin-bottom: 0;
 
@@ -383,7 +517,7 @@
     .caret-down::before {
         -ms-transform: rotate(90deg); /* IE 9 */
         -webkit-transform: rotate(90deg); /* Safari */'
-    transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 
     .nested {

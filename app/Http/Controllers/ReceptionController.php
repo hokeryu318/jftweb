@@ -463,16 +463,11 @@ class ReceptionController extends Controller
 
         $select_list = request()->select_list;
         $items_id = array();
-//        if($select_list != '') {
-            for($i=0;$i<count($select_list);$i++) {
-                $selected_item = explode(":", $select_list[$i]);
-                $dish_id = $selected_item[0];
-                array_push($items_id, $selected_item[1]);
-            }
-//        } else {
-//
-//        }
-
+        for($i=0;$i<count($select_list);$i++) {
+            $selected_item = explode(":", $select_list[$i]);
+            $dish_id = $selected_item[0];
+            array_push($items_id, $selected_item[1]);
+        }
 
         $order_id = request()->order_id;
         $count = request()->qty;
@@ -583,7 +578,7 @@ class ReceptionController extends Controller
         $date = date('d M Y', strtotime($menu_time));
 
         $timeslot = Timeslot::find(1);
-        
+
         $breakfast_time = $timeslot->morning_starts;
         if( substr($breakfast_time,-2) == "AM" ) $breakfast_time = substr($breakfast_time,0,5);
         else{
@@ -592,7 +587,7 @@ class ReceptionController extends Controller
             $last_time = substr($breakfast_time,2,3);
             $breakfast_time = $first_time . $last_time;
         }
-        
+
         $lunch_time = $timeslot->lunch_starts;
         if( substr($lunch_time,-2) == "AM" ) $lunch_time = substr($lunch_time,0,5);
         else{
@@ -601,7 +596,7 @@ class ReceptionController extends Controller
             $last_time = substr($lunch_time,2,3);
             $lunch_time = $first_time . $last_time;
         }
-        
+
         $tea_time = $timeslot->tea_starts;
         if( substr($tea_time,-2) == "AM" ) $tea_time = substr($tea_time,0,5);
         else{
@@ -610,7 +605,7 @@ class ReceptionController extends Controller
             $last_time = substr($tea_time,2,3);
             $tea_time = $first_time . $last_time;
         }
-        
+
         $dinner_time = $timeslot->dinner_starts;
         if( substr($dinner_time,-2) == "AM" ) $dinner_time = substr($dinner_time,0,5);
         else{
@@ -619,7 +614,7 @@ class ReceptionController extends Controller
             $last_time = substr($dinner_time,2,3);
             $dinner_time = $first_time . $last_time;
         }
-        
+
         $latenight_time = $timeslot->latenight_starts;
         if( substr($latenight_time,-2) == "AM" ) $latenight_time = substr($latenight_time,0,5);
         else{
@@ -628,32 +623,32 @@ class ReceptionController extends Controller
             $last_time = substr($latenight_time,2,3);
             $latenight_time = $first_time . $last_time;
         }
-        
+
         if( $time >= $breakfast_time && $time < $lunch_time )
         {
             $eat_in = "eatin_breakfast";
             $eat_in1 = "morning_on";
-        } 
+        }
         elseif( $time >= $lunch_time && $time < $tea_time  )
         {
             $eat_in = "eatin_lunch";
             $eat_in1 = "lunch_on";
-        } 
+        }
         elseif( $time >= $tea_time && $time < $dinner_time  )
         {
             $eat_in = "eatin_tea";
             $eat_in1 = "tea_on";
-        } 
+        }
         elseif( $time >= $dinner_time && $time < $latenight_time  )
         {
             $eat_in = "eatin_dinner";
             $eat_in1 = "dinner_on";
-        } 
+        }
         else
         {
             $eat_in = "";
             $eat_in1 = "";
-        } 
+        }
 
         $week = date('w', strtotime($menu_time));
         switch($week)
@@ -681,7 +676,7 @@ class ReceptionController extends Controller
                 break;
 
         }
-        
+
         $eat_opt = $time_week->$eat_in1;
         $day_on = $time_week->day_on;
 
@@ -694,7 +689,7 @@ class ReceptionController extends Controller
         if(count($chk_holiday) > 0)
         {
 
-            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )  
+            if( !empty($eat_in1) && $holiday->$eat_in1 == 1 )
             {
                 $dishes = $category->eat_dishes($eat_in);
                 foreach($dishes as $dish){
@@ -703,9 +698,9 @@ class ReceptionController extends Controller
                     foreach($dish->options as $option){
                         $option->item = Item::where('option_id', $option->id)->get();
                     }
-                } 
+                }
             }
-            else 
+            else
                 $dishes = "";
         }
         else
@@ -714,7 +709,7 @@ class ReceptionController extends Controller
 
             if( $all_week[1]->day_on == 0 && $all_week[2]->day_on  == 0 && $all_week[3]->day_on  == 0 && $all_week[4]->day_on  == 0 && $all_week[5]->day_on  == 0 && $all_week[6]->day_on  == 0 && $all_week[7]->day_on  == 0)
             {
-                if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)    
+                if(!empty($eat_in1) && $timeslot->$eat_in1 == 1)
                 {
                     $dishes = $category->eat_dishes($eat_in);
                     foreach($dishes as $dish){
@@ -723,13 +718,13 @@ class ReceptionController extends Controller
                         foreach($dish->options as $option){
                             $option->item = Item::where('option_id', $option->id)->get();
                         }
-                    }   
-                } 
-                else 
-                    $dishes = "";                
+                    }
+                }
+                else
+                    $dishes = "";
             }
             else{
-                if(!empty($eat_in1) && $eat_opt == 1 && $day_on == 1)    
+                if(!empty($eat_in1) && $eat_opt == 1 && $day_on == 1)
                 {
                     $dishes = $category->eat_dishes($eat_in);
                     foreach($dishes as $dish){
@@ -738,12 +733,12 @@ class ReceptionController extends Controller
                         foreach($dish->options as $option){
                             $option->item = Item::where('option_id', $option->id)->get();
                         }
-                    }  
-                } 
-                else 
-                    $dishes = "";                
+                    }
+                }
+                else
+                    $dishes = "";
             }
-                      
+
         }*/
 
         return (string)view('reception.dish_list', compact('dishes'))->render();
@@ -777,8 +772,6 @@ class ReceptionController extends Controller
 //            $orderPay->change = request()->get('change');
 //            $orderPay->update();
 //        } else {
-
-
 
         $orderPay = new OrderPay();
         $orderPay->order_id = request()->get('order_id');

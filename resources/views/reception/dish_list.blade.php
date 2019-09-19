@@ -1,14 +1,8 @@
-@if(!empty($dishes))
 @foreach ($dishes as $ds)
     @if($ds->sold_out == 0)
         <ul id="myUL">
-            <li>
-                @if(count($ds->options) > 0)
-                    <span class="caret common_dish fs-25" id="op_{{ $ds->id }}" onclick="selectDishes({{ $ds->id }})">{{ $ds->name_en }}</span>
-                @else
-                    <span class="common_dish fs-25" id="op_{{ $ds->id }}" onclick="selectDishes({{ $ds->id }})">&nbsp;&nbsp;&nbsp;-{{ $ds->name_en }}</span>
-                @endif
-                <ul class="nested display-none1">
+            <li><span class="caret fs-25">{{ $ds->name_en }}</span>
+                <ul class="nested">
                     @foreach ($ds->options as $option)
                         <li>
                             <span class="caret fs-25">{{ $option->name }}:
@@ -22,16 +16,15 @@
                                 @foreach ($option->item as $item)
                                     <li>
                                         @if($option->photo_visible == 0)
-                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$item->id}}"
-                                                   onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}', '{{$item->id}}')"
-                                                   style="width:20px;height:20px;" />
+                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
+                                                   onclick="selectItem(1, '{{ $ds->id }}', '{{ $option->id }}')" style="width:20px;height:20px;" />
                                         @else
-                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$item->id}}"
-                                                   onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}', '{{$item->id}}')"
+                                            <input type="checkbox" class="checked_items_{{ $ds->id }}{{ $option->id }}" value="{{$ds->id}}:{{$item->id}}"
+                                                   onclick="selectItem('{{ $option->number_selection }}', '{{ $ds->id }}', '{{ $option->id }}')"
                                                    style="width:20px;height:20px;" />
                                         @endif
                                         <span class="fs-25">{{ $item->name }}</span>
-                                            @if($item->price) <span class="fs-25">(${{ number_format($item->price, 2) }})</span> @endif
+                                        @if($item->price) <span class="fs-25">(${{ number_format($item->price, 2) }})</span> @endif
                                     </li>
                                 @endforeach
                             </ul>
@@ -42,7 +35,7 @@
         </ul>
     @endif
 @endforeach
-@endif
+
 <style>
 
     ul, #myUL {
@@ -72,7 +65,7 @@
     .caret-down::before {
         -ms-transform: rotate(90deg); /* IE 9 */
         -webkit-transform: rotate(90deg); /* Safari */'
-        transform: rotate(90deg);
+    transform: rotate(90deg);
     }
 
     .nested {
@@ -84,8 +77,8 @@
     }
 
     .selected_category_color{
-         color: #039BFA;
-     }
+        color: #039BFA;
+    }
 </style>
 
 <script>
@@ -99,5 +92,4 @@
             this.classList.toggle("caret-down");
         });
     }
-
 </script>
