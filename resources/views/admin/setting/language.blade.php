@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="card pt-3 pb-2 ml-5 mt-2 col-lg-12 pr-0" style="width: 895px;">
+    {{--<div class="card pt-3 pb-2 ml-5 mt-2 col-lg-12 pr-0" style="width: 895px;">
         <div class="row">
             <div class="col-6 pl-4">
                 <h5 class="font-weight-normal fs-25">Korean</h5>
@@ -37,7 +37,7 @@
                 </label>
             </div>
         </div>
-    </div>
+    </div>--}}
     <div class="card pt-3 pb-2 ml-5 mt-2 col-lg-12 pr-0" style="width: 895px;">
         <div class="row">
             <div class="col-6 pl-4">

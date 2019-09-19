@@ -797,11 +797,15 @@ class ReceptionController extends Controller
 //        }
 
         Order::where('id', $order_id)->update(['pay_flag' => 2]);
+
+        $login_info = OrderTable::where('order_id', $order_id)->get()->first();;
+        $login_table = Table::where('id',$login_info->table_id)->get()->first();;
+        session(['login_table_name' => $login_table->name]);
         OrderTable::where('order_id', $order_id)->delete();
 
         //show pay finish status on customer
         $pay_status = 'pay_'.$order_id;
-        session(['login_table_name' => 'a2']);
+        
         broadcast(new PayEvent($pay_status));
 
 //        /return 'success';

@@ -71,7 +71,7 @@
                             <h4 class="mb-0 white-text lg-font">Table Number</h4>
                         </div>
                         <div class="col-6">
-                            <input class="custom-input" name="table" value="{{ $table_last['name'] }}" />
+                            <input class="custom-input" name="table" value="{{ session('login_table_name') }}" />
                         </div>
                     </div>
                     <div class="row  mt-5 pt-3">
