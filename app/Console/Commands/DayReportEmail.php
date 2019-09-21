@@ -50,9 +50,9 @@ class DayReportEmail extends Command
             $excel->sheet('Sales Day Report', function($sheet) {
 
                 // ===1. Sales Data ===
-                $order_pay = DB::table('order_pay')->whereDate('created_at', date('Y-m-d'))->get();
+                $order_pay = DB::table('order_pay')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->get();
                 $receipt = DB::table('receipt')->find(1);
-                $orders = DB::table('orders')->whereDate('created_at', date('Y-m-d'))->get();
+                $orders = DB::table('orders')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->get();
 
                 $sales_data['total_sales'] = 0;
                 $sales_data['gross_total'] = 0;
@@ -106,7 +106,7 @@ class DayReportEmail extends Command
                 // ===3. Discounts ===
 
                 // ===4. Canceled Items ====
-                $order_cancel_dish = DB::table('order_dish_match')->whereDate('created_at', date('Y-m-d'))->where('amend_count', '<', 0)->get();
+                $order_cancel_dish = DB::table('order_dish_match')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->where('amend_count', '<', 0)->get();
 
                 $cancel_items = array();
                 for($i=0;$i<count($order_cancel_dish);$i++) {
@@ -135,7 +135,7 @@ class DayReportEmail extends Command
                 // ===6. Category Sales Data ===
                 $categories = DB::table('categories')->get()->toArray();
 
-                $category_sale_view = DB::table('category_sales')->whereDate('created_at', date('Y-m-d'))->get()->toArray();
+                $category_sale_view = DB::table('category_sales')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->get()->toArray();
 //            dd($category_sale_view[0]->name_en);
                 $category_sales_data = array();
                 for($i=0;$i<count($categories);$i++) {
@@ -154,7 +154,7 @@ class DayReportEmail extends Command
                 // ===7. Item Sales Data ===
                 $items = DB::table('items')->get()->toArray();
 
-                $item_sale_view = DB::table('item_sales')->whereDate('created_at', date('Y-m-d'))->get();
+                $item_sale_view = DB::table('item_sales')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->get();
 //            dd($item_sale_view);
                 $item_sales_data = array();
                 for($i=0;$i<count($items);$i++) {
@@ -388,7 +388,7 @@ class DayReportEmail extends Command
                 });
 
                 // ===10. Feedbacks ===
-                $feedbacks = DB::table('orders')->whereDate('created_at', date('Y-m-d'))->where('review', '<>', Null)->get();
+                $feedbacks = DB::table('orders')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->where('review', '<>', Null)->get();
 
                 $sheet->loadView('emails.sales_day')->with(compact('receipt', 'order_pay', 'sales_data', 'card_type', 'card_sales_data', 'cancel_items', 'hour_sales_data',
                     'category_sales_data', 'item_sales_data', 'hourly_item_ranking', 'hourly_cooktime_ranking', 'feedbacks'));
