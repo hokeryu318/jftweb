@@ -627,8 +627,9 @@ class CustomerController extends Controller
 
         $profile = Receipt::find(1);
         $lang_data = array(0=>'English');
-        if($profile->lang_jp == 1)  array_push($lang_data, '日本語');
         if($profile->lang_cn == 1)  array_push($lang_data, '普通話');
+        if($profile->lang_jp == 1)  array_push($lang_data, '日本語');
+        
         
         $lang_id = request()->session()->get('language');
         return (string)view('customer.lang_select', compact('lang_data', 'lang_id'))->render();

@@ -11,7 +11,6 @@
         <div style="font-size: 25px;">
             <span>
                 Your bill has been created.<br>
-                Please make a payment at the reception.
             </span>
         </div>
     </div>

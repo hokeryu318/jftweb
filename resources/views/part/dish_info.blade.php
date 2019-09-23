@@ -41,9 +41,11 @@
                 <img @if($dish->image) src="{{asset('dishes/'.$dish->image)}}" @endif width="300px" height="340px">
             </div>
             <div class="rightContent">
+                @if( count($options)>0 )
                 <div class="contentHeader" style="width: 99.5%; border-radius: 0px;">
                     Please choose:
                 </div>
+                @endif
                 <div class="scrollable menu">
                     @foreach($options as $option)
                         <div class="menuClasses">

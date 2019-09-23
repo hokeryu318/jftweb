@@ -221,7 +221,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div>
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -265,7 +265,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -311,7 +311,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center"></span>
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -357,7 +357,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center" style="margin-left: 73px;"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -405,7 +405,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -454,7 +454,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -503,7 +503,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -554,7 +554,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -605,7 +605,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div @if($table->id == $table_id) bg-selected @endif class="table-area white table-c-style text-center" style="margin-left: 38px;">
+                                                                    <div @if($table->id == $table_id) bg-selected @endif class="table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -914,6 +914,8 @@
                     $("#java-alert").modal('toggle');
                     return;
                 }
+
+                /*if($("#duration-select").val() == 5 && )*/
             }
             $(".top-menu-btn").removeClass('top-menu-active');
             $(".tab-detail").css('display', 'none');

@@ -59,7 +59,7 @@
                         <img style="width: 70px;height: 60px;margin: 0 0 0 25px;" src="{{ asset('img/note1.png') }}">
                         <span class="fs-20" style="font-weight: 700;">Customer Note</span>
                         {{--<span onclick="edit({{ $booking_order->order_id }})" class="edit_order_edit_btn">--}}
-                            <span onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $booking_order->table_id, "order_id" => $booking_order->order_id, "status" => $booking_order->status ]) }}'" class="edit_order_edit_btn">
+                            <span onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $booking_order->table_id, "order_id" => $booking_order->order_id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'" class="edit_order_edit_btn">
                             <b class="fs-25">EDIT</b>
                             <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -8px 0 0 20px;">
                         </span>

@@ -5,10 +5,10 @@
     <div style="margin: -50px 0 25px 245px;">
         <span>Starting time:<br><b>{{date('H:i, d F Y', strtotime($starting_time))}}</b></span>
     </div>
-    <div>
-        {{--<span class="close" style="margin: -85px -13px 0 0;" onclick="$('#myModal').modal('hide');">&times;</span>--}}
+    {{--<div>
+        <span class="close" style="margin: -85px -13px 0 0;" onclick="$('#myModal').modal('hide');">&times;</span>
         <img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin: -80px -9px 0 2px;" class="close" onclick="$('#myModal').modal('toggle')" />
-    </div>
+    </div>--}}
     <div style="margin-bottom: 20px;">
         <div style="padding-right: 15px;">
             <table style="width: 100%;border-bottom: solid 2px black;">

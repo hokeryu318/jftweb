@@ -166,9 +166,10 @@ class KitchenController extends Controller
                     $order_option->item_name = '';
             }
 
+            $connector = new NetworkPrintConnector($printerIp, $printerPort);
+            $printer = new Printer($connector);
+            
             try {
-                $connector = new NetworkPrintConnector($printerIp, $printerPort);
-                $printer = new Printer($connector);
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
@@ -197,11 +198,12 @@ class KitchenController extends Controller
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
-                $printer->setTextSize(1,2);
+                $printer->setTextSize(2,2);
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
                 
                 foreach($order_options as $order_option) {
+                    $printer->setTextSize(1,2);
                     $printer->text( "[" . $order_option->option_name . ":");
                     $printer->setEmphasis(true);
                     $printer->setTextSize(2,2);
@@ -212,13 +214,11 @@ class KitchenController extends Controller
                 }      
                 
                 $printer->text("\n");
+
                 $printer->cut();
-            } catch (\Exception $e) {
-                //return $e->getMessage();
+
             } finally {
-                if (isset($printer)) {
-                    $printer -> close();
-                }
+                $printer -> close();
             }
             
         }
@@ -336,7 +336,8 @@ class KitchenController extends Controller
             $order_dishes = OrderDish::whereIn('order_id', $order_ids)
                 ->join('dishes', 'dishes.id', '=', 'order_dish_match.dish_id')
                 ->where('dishes.group_id', 'like', '%&' . $group_id . '&%')
-                //->where('order_dish_match.ready_flag', '1')
+                ->where('order_dish_match.ready_flag', '1')
+                ->orderBy('order_dish_match.ready_time', 'DESC')
                 ->orderBy('order_dish_match.created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
         }
@@ -454,12 +455,12 @@ class KitchenController extends Controller
             else 
                 $order_option->item_name = '';
         }
- 
-        try {
-            $connector = new NetworkPrintConnector($printerIp, $printerPort);
-            $printer = new Printer($connector);
 
-            $printer->setJustification(Printer::JUSTIFY_LEFT);
+        $connector = new NetworkPrintConnector($printerIp, $printerPort);
+        $printer = new Printer($connector);
+
+        try {
+                $printer->setJustification(Printer::JUSTIFY_LEFT);
                 /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
                 $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));*/
                 $printer->setTextSize(1,2);
@@ -504,12 +505,8 @@ class KitchenController extends Controller
 
             $printer->cut();
 
-        } catch (\Exception $e) {
-            //return $e->getMessage();
         } finally {
-            if (isset($printer)) {
-                $printer -> close();
-            }
+            $printer -> close();
         }
         
         return $time;

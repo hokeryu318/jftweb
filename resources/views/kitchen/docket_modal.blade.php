@@ -14,11 +14,12 @@
         <div style="padding-right: 15px;">
             <table>
                 <tr style="height: 50px;">
-                    <td class="head" width="10.5%">Time</td>
+                    <td class="head" width="10%">Time</td>
                     <td class="head" width="9%">Table No</td>
                     <td class="head" width="9%">ITEM</td>
-                    <td class="head" width="45%"></td>
+                    <td class="head" width="38%"></td>
                     <td class="head" width="9%">QTY</td>
+                    <td class="head" width="14%">Ready Time</td>
                     <td class="head" width="11%">DOCKET</td>
                 </tr>
             </table>
@@ -32,19 +33,20 @@
                         <td width="12%">
                             <div>
                                 <span>
-                                    {{ $order_dish->time }}
+                                    {{ date_format(date_create($order_dish->created_at),"h:i A") }}
                                 </span>
                             </div>
                         </td>
                         <td width="10%"><b>{{ $order_dish->display_table }}</b><br>({{ $order_dish->table_count }})</td>
                         <td width="10%"><img @if($order_dish->dish_image) src="{{ asset('dishes/'.$order_dish->dish_image) }}" class="general" @endif></td>
-                        <td  width="52%">
+                        <td  width="40%">
                             <div style="font-size: 1.4em"><b>{{ $order_dish->dish_name_en }}</b></div>
                             @foreach($order_dish->options as $option)
                                 {{ $option->option_name }}: <b>{{ $option->item_name }}</b>&nbsp;
                             @endforeach
                         </td>
                         <td width="8%"><span class="multiple">&times;</span>&nbsp;<span class="qty">{{ $order_dish->count }}</span></td>
+                        <td width="12%"><span>{{ date_format(date_create($order_dish->ready_time),"h:i A") }}</span></td>
                         <td width="8%">
                             <div class="reprint" onclick="reprint('{{ $order_dish->id }}', '{{ $group_id }}')">
                                 {{--<a style="color: white;" href="{{ route('reception.accounting', ['order_id' => $booking_order->order_id]) }}">--}}

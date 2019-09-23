@@ -41,7 +41,7 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
@@ -80,7 +80,12 @@
                                 <div style="height: 110px;">
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                            @if($table->order[0]->status == 'booking')
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
+                                            @else
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'"
+                                            @endif
+                                            >
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
@@ -88,33 +93,32 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
                                                     {{$table->display_time}}
                                                 </a>
+                                            @endif
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -137,7 +141,7 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
@@ -178,7 +182,12 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                        @if($table->order[0]->status == 'booking')
+                                            onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
+                                        @else
+                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'"
+                                        @endif
+                                        >
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
@@ -186,33 +195,32 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
                                                     {{$table->display_time}}
                                                 </a>
+                                            @endif
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -237,7 +245,7 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
@@ -289,7 +297,7 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking')
+                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                 <a class="font-weight-bold red-text">
                                                     BOOKED
                                                     <br>
@@ -341,7 +349,7 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking')
+                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                     <a class="font-weight-bold red-text">
                                                         BOOKED
                                                         <br>
@@ -395,7 +403,7 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking')
+                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                     <a class="font-weight-bold red-text">
                                                         BOOKED
                                                         <br>
@@ -449,33 +457,32 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking')
+                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
                                                     <a class="font-weight-bold red-text">
                                                         BOOKED
                                                         <br>
                                                         {{$table->display_time}}
                                                     </a>
+                                                @endif
+                                                @if($table->order[0]->pay_flag == '1')
+                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    @if($table->order[0]->pay_flag == '1')
-                                                        <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="belled_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->orderTable[0]->calling_time != Null)
-                                                        <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="call_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->review != Null)
-                                                        <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="review_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->note != Null)
-                                                        <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                    @else
-                                                        <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                    @endif
+                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                @endif
+                                                @if($table->orderTable[0]->calling_time != Null)
+                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                @else
+                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->review != Null)
+                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                @else
+                                                    <img class="alarm" id="review_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->note != Null)
+                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
+                                                @else
+                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
                                                 @endif
                                             </div>
                                         </div>

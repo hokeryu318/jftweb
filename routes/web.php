@@ -163,6 +163,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::post('admin/setting/sendmail_post', 'SettingController@sendmail_post')->name('admin.setting.sendmail.post');
 //});
 
+Route::get('admin/now_sendmail', 'ReceptionController@now_sendmail')->name('admin.now_sendmail');
 
 use Illuminate\Support\Facades\Input;
 //Route::get('admin/category/order-dish', 'CategoryController@order_dish')->name('order-dish'); 
