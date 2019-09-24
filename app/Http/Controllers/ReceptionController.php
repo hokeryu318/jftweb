@@ -1701,5 +1701,7 @@ class ReceptionController extends Controller
 
         $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
         Mail::to($email_address)->send(new SalesDayReportEmail($filename));
+
+        return redirect()->route('admin.transaction');
     }
 }
