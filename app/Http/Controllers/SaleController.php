@@ -87,7 +87,7 @@ class SaleController extends Controller
             $dish_ids[$i] = array_unique($dish_ids[$i]);
             $groups[$i] = array();
             $groups[$i] = Dish::whereIn('id', $dish_ids[$i])->pluck('group_id')->toArray();
-            $groups[$i] = array_unique($groups[$i]);
+            //$groups[$i] = array_unique($groups[$i]);
             if(count($groups[$i]) > 0) {
                 $daily_review[$i]['group'] = count($groups[$i]);
             } else {

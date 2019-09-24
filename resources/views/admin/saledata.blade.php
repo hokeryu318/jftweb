@@ -1,6 +1,6 @@
 @extends('layout.admin_layout')
 
-@section('title', 'Settings')
+@section('title', 'Sales Data')
 
 @section('content')
 <div class="pbb1 blackgrey" style="height: 1024px;">
