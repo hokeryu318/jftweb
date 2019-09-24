@@ -975,21 +975,72 @@
 
     function myTimer() {
 
-        var last_order_time = <?php echo json_encode($last_order_time) ?>;
-
-        var dateParts = last_order_time.substr(0,10).split('-');
-        var timePart = last_order_time.substr(11);
-        last_order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
-        last_order_time = new Date(last_order_time);
+        var order = <?php echo json_encode($order) ?>;
 
         var current_time =  new Date();
-        var diff = (current_time.getTime() - last_order_time.getTime())/1000;
-        diff /= 60;
-        diff = Math.round(diff);
-        if((diff > 0) && (diff > 90))
-            document.getElementById("time").innerHTML = diff;
-        else
-            document.getElementById("time").innerHTML = "—";
+        var duration = '';
+        var elapsed_time = '';
+        var order_time = '';
+
+        duration = order.duration;
+
+        order_time = order.time;
+        var dateParts = order_time.substr(0,10).split('-');
+        var timePart = order_time.substr(11);
+        order_time = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0] + ' ' + timePart;
+        order_time = new Date(order_time);
+
+        if(duration == 0) {
+            document.getElementById("time").innerHTML = 'Takeaway';
+        } else if(duration == 1) {
+            order_time.setMinutes( order_time.getMinutes() + 30 );
+            elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+            elapsed_time /= 60;
+            elapsed_time = Math.round(elapsed_time);
+            if(elapsed_time > 0) {
+                document.getElementById("time").innerHTML = elapsed_time;
+            }
+            else {
+                document.getElementById("time").innerHTML = '0';
+            }
+        } else if(duration == 2) {
+            order_time.setMinutes( order_time.getMinutes() + 60 );
+            elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+            elapsed_time /= 60;
+            elapsed_time = Math.round(elapsed_time);
+            if(elapsed_time > 0) {
+                document.getElementById("time").innerHTML = elapsed_time;
+            }
+            else {
+                document.getElementById("time").innerHTML = '0';
+            }
+        } else if(duration == 3) {
+            order_time.setMinutes( order_time.getMinutes() + 90 );
+            elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+            elapsed_time /= 60;
+            elapsed_time = Math.round(elapsed_time);
+            if(elapsed_time > 0) {
+                document.getElementById("time").innerHTML = elapsed_time;
+            }
+            else {
+                document.getElementById("time").innerHTML = '0';
+            }
+        } else if(duration == 4) {
+            order_time.setMinutes( order_time.getMinutes() + 120 );
+            elapsed_time = (order_time.getTime() - current_time.getTime())/1000;
+            elapsed_time /= 60;
+            elapsed_time = Math.round(elapsed_time);
+            if(elapsed_time > 0) {
+                document.getElementById("time").innerHTML = elapsed_time;
+            }
+            else {
+                document.getElementById("time").innerHTML = '0';
+            }
+        } else if(duration == 5) {
+            document.getElementById("time").innerHTML = '—';
+        }
+
+        //     document.getElementById("time").innerHTML = "—";
     }
 
 </script>
