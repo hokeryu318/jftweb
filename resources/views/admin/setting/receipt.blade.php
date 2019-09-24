@@ -18,26 +18,35 @@
             <button class="btn bg-info radius-1 pt-2 pb-2 pr-4 pl-4 mt-4 fs-25" onclick="onFile()">CHANGE LOGO</button>
         </div>
     </div>
-    <div class=" mt-3">
-        <h6 class="font-weight-bold text-info fs-25">Shop Name</h6>
-        <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->shop_name }}" id="input_shop_name"/>
+
+    <div style="height: 470px;overflow-y: scroll;">
+        <div class=" mt-3">
+            <h6 class="font-weight-bold text-info fs-25">Shop Name</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->shop_name }}" id="input_shop_name"/>
+        </div>
+        <div class=" mt-2">
+            <h6 class="font-weight-bold text-info fs-25">ABN</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->abn }}" id="input_abn"/>
+        </div>
+        <div class="mt-2">
+            <h6 class="font-weight-bold text-info fs-25">Address</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->address }}" id="input_address"/>
+        </div>
+        <div class="mt-2">
+            <h6 class="font-weight-bold text-info fs-25">Phone</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->phone }}" id="input_phone"/>
+        </div>
+        <div class="mt-2">
+            <h6 class="font-weight-bold text-info fs-25">PrinterIp</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->printer_ip }}" id="input_printer_ip"/>
+        </div>
+        <div class="mt-2">
+            <h6 class="font-weight-bold text-info fs-25">Email Address</h6>
+            <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->email_address }}" id="input_email_address"/>
+        </div>
+
     </div>
-    <div class=" mt-2">
-        <h6 class="font-weight-bold text-info fs-25">ABN</h6>
-        <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->abn }}" id="input_abn"/>
-    </div>
-    <div class="mt-2">
-        <h6 class="font-weight-bold text-info fs-25">Address</h6>
-        <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->address }}" id="input_address"/>
-    </div>
-    <div class="mt-2">
-        <h6 class="font-weight-bold text-info fs-25">Phone</h6>
-        <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->phone }}" id="input_phone"/>
-    </div>
-    <div class="mt-2">
-        <h6 class="font-weight-bold text-info fs-25">PrinterIp</h6>
-        <input style="border:1px solid grey;border-radius:5px;font-size: 25px;width: 895px;" class="white pl-2 pt-1 pb-1" value="{{ $profile->printer_ip }}" id="input_printer_ip"/>
-    </div>
+
     <div style="margin-bottom:70px"></div>
 
     {{--<div class="col-11 mt-5 pr-2 text-right">--}}
@@ -67,6 +76,7 @@
     <input type="hidden" name="address" id="address">
     <input type="hidden" name="phone" id="phone">
     <input type="hidden" name="printer_ip" id="printer_ip">
+    <input type="hidden" name="email_address" id="email_address">
 </form>
 <form action="{{ route('admin.setting.changelogo') }}" method="POST" id="image_form" enctype='multipart/form-data'>
     <input id="image-file" type="file" style="position:fixed; top:-100px" name="image-file" accept="image/x-png, image/gif, image/jpeg">
@@ -81,6 +91,7 @@
         $('#address').val($('#input_address').val());
         $('#phone').val($('#input_phone').val());
         $('#printer_ip').val($('#input_printer_ip').val());
+        $('#email_address').val($('#input_email_address').val());
         $('#post').submit();
     }
 // change logo

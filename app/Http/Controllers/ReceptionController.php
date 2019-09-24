@@ -1342,9 +1342,9 @@ class ReceptionController extends Controller
 
     public function now_sendmail()
     {
+
         date_default_timezone_set("Australia/Melbourne");
         
-
         Excel::create('sales_report', function($excel) {
 
             $excel->sheet('Sales Day Report', function($sheet) {
@@ -1455,7 +1455,7 @@ class ReceptionController extends Controller
                 $items = DB::table('items')->get()->toArray();
 
                 $item_sale_view = DB::table('item_sales')->whereDate('created_at', $now_date)->get();
-//            dd($item_sale_view);
+
                 $item_sales_data = array();
                 for($i=0;$i<count($items);$i++) {
                     $item_sales_data[$i]['id'] = $items[$i]->id;
@@ -1699,6 +1699,7 @@ class ReceptionController extends Controller
 
         $filename = public_path().'/excel/exports/sales_report.xlsx';
 
-        Mail::to('manager@kuromatsu.com.au')->send(new SalesDayReportEmail($filename));
+        $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
+        Mail::to($email_address)->send(new SalesDayReportEmail($filename));
     }
 }

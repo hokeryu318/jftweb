@@ -14,6 +14,7 @@ use App\Model\Badge;
 use App\Model\Payment;
 use App\Model\Mail;
 use App\Model\Screentime;
+
 class SettingController extends Controller
 {
     //
@@ -78,6 +79,7 @@ class SettingController extends Controller
         $profile->address = request()->address;
         $profile->phone = request()->phone;
         $profile->printer_ip = request()->printer_ip;
+        $profile->email_address = request()->email_address;
         $profile->save();
         return redirect()->route('admin.setting.receipt');
     }
