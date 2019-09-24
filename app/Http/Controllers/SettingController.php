@@ -85,14 +85,10 @@ class SettingController extends Controller
     }
     public function changelogo()
     {
-//        $img_name = request()->get('image-name');
-//        if(Receipt::where('logo_image', $img_name)->exists()){
-//            return redirect()->route('admin.setting.receipt');
-//        }
         // change logo image
         $file = request()->file('image-file');
         $destinationPath = 'receipt';
-        $destinationFile = $file->getClientOriginalName();//dd($destinationFile);
+        $destinationFile = 'logo.png';
         $file->move($destinationPath, $destinationFile);
 
         // update receipt logo_image
