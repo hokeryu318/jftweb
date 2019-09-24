@@ -64,7 +64,7 @@
                         <td class="head" width="56%"></td>
                         <td class="head" width="7%">QTY</td>
                         <td class="head" width="9%" onclick="window.location.replace(window.parent.location.href);">
-                            <span class="ready_btn">Ready</span>
+                            <span>Ready</span>
                         </td>
                     </tr>
                 </table>

@@ -343,7 +343,8 @@ class KitchenController extends Controller
         }
 
         foreach($order_dishes as $order_dish) {
-            $order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
+            //$order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
+            $order_dish->time = Order::where('id', $order_dish->order_id)->pluck('time')->first();
         }
 
         if(count($order_dishes) > 0) {

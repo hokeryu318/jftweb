@@ -39,7 +39,7 @@
                         <td width="10%"><b>{{ $order_dish->display_table }}</b><br>({{ $order_dish->table_count }})</td>
                         <td width="10%"><img @if($order_dish->dish_image) src="{{ asset('dishes/'.$order_dish->dish_image) }}" class="general" @endif></td>
                         <td  width="56%">
-                            <div style="font-size: 1.4em"><b>{{ $order_dish->dish_name_en }}</b></div>
+                            <div><b>{{ $order_dish->dish_name_en }}</b></div>
                             @foreach($order_dish->options as $option)
                                 {{ $option->option_name }}: <b>{{ $option->item_name }}</b>&nbsp;
                             @endforeach

@@ -15,7 +15,7 @@
                 <img v-if="group_order_dish.dish_image !== null" :src="'/dishes/' + group_order_dish.dish_image" class="general">
             </td>
             <td width="56%" class="dish_list" :data-id=group_order_dish.dish_id>
-                <div style="font-size: 1.4em"><b>{{ group_order_dish.dish_name_en }}</b></div>
+                <div><b>{{ group_order_dish.dish_name_en }}</b></div>
                 <div v-for="option in group_order_dish.options">
                 {{ option.option_name }}: <b>{{ option.item_name }}</b>&nbsp;
                 </div>
