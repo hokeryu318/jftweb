@@ -1700,9 +1700,10 @@ class ReceptionController extends Controller
         $filename = public_path().'/excel/exports/sales_report.xlsx';
 
         $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
-        if($email_address)
+        if($email_address) {
             Mail::to($email_address)->send(new SalesDayReportEmail($filename));
+            return redirect()->route('admin.transaction');
+        }
 
-        return redirect()->route('admin.transaction');
     }
 }
