@@ -33,7 +33,7 @@
                                 <div>
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
@@ -83,7 +83,7 @@
                                             @if($table->order[0]->status == 'booking')
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
                                             @else
-                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'"
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'"
                                             @endif
                                             >
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
@@ -133,7 +133,7 @@
                                 <div style="height: 110px;">
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
@@ -185,7 +185,7 @@
                                         @if($table->order[0]->status == 'booking')
                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
                                         @else
-                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'"
+                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'"
                                         @endif
                                         >
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
@@ -237,7 +237,7 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
@@ -289,7 +289,7 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                             @endif
@@ -341,7 +341,7 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
@@ -395,7 +395,7 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
@@ -449,7 +449,7 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
@@ -693,7 +693,7 @@
                     @foreach($order_side_obj as $kk => $order)
                         @foreach($order->table_order_names as $key => $ordertables)
                             <div class="border w-100 pt-2 pr-1 table_seated_list"
-                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id ]) }}'">
+                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id, 'status' => $status ]) }}'">
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
