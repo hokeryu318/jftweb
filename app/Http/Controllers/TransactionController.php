@@ -14,7 +14,7 @@ class TransactionController extends Controller
     {
         //bookings : order.status = booking;
 
-        $sort = "desc";
+        $sort = "asc";
 
         if(request()->has('search_date')) {//by date change
             $search_date = request()->search_date;
@@ -29,20 +29,46 @@ class TransactionController extends Controller
         }
         $search_display_date = date("d M Y", strtotime($search_date));
 
+        $order_obj = collect();
+
         if(request()->get('sortType') == "asc"){
-            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
-            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
-                    ->select(['orders.*',])
-                    ->where('order_pay.pay_method','CASH')
-                    ->orderBy('orders.time','asc')->get();
-            $sort = "desc";
-        }else{
-            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
-            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
-                    ->select(['orders.*',])
-                    ->where('order_pay.pay_method','CASH')
-                    ->orderBy('orders.time','asc')->get();
-            $sort = "asc";
+//            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
+//            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
+//                    ->select(['orders.*',])
+//                    ->where('order_pay.pay_method','CASH')
+//                    ->orderBy('orders.time','asc')->get();
+//            $sort = "desc";
+
+            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
+            if(count($order_ids) > 0) {
+                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'asc')->get();
+                foreach($order_obj as $order) {
+                    $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+                    $order->table_display_name = $order->table_name;
+                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
+                }
+                $sort = "desc";
+            }
+
+        } else {
+//            $order_obj = Order::whereDate('time', $search_date)->where('pay_flag',2);
+//            $order_obj = $order_obj->leftjoin('order_pay','orders.id','=','order_pay.order_id')
+//                    ->select(['orders.*',])
+//                    ->where('order_pay.pay_method','CASH')
+//                    ->orderBy('orders.time','asc')->get();
+//            $sort = "asc";
+
+            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
+            if(count($order_ids) > 0) {
+                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'desc')->get();
+                foreach($order_obj as $order) {
+                    $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+                    $order->table_display_name = $order->table_name;
+                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
+                }
+                $sort = "asc";
+            }
+
         }
 
         $daily_all_amount = 0;
