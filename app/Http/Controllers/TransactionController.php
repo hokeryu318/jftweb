@@ -60,7 +60,7 @@ class TransactionController extends Controller
             $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
             $daily_all_amount += $order->amount;
         }
-        //dd($order_obj);
+//        dd($order_obj);
         return view('admin.transaction.list')->with(compact('order_obj', 'search_display_date', 'sort', 'daily_all_amount'));
     }
 
