@@ -82,7 +82,7 @@ class Controller extends BaseController
 
     public function get_current_time() {
 //        date_default_timezone_set("Asia/Shanghai");
-        date_default_timezone_set("Australia/Melbourne");
+//        date_default_timezone_set("Australia/Melbourne");
         $current_datetime = date('Y-m-d H:i:s');
         return $current_datetime;
     }

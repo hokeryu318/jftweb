@@ -1344,7 +1344,7 @@ class ReceptionController extends Controller
     public function now_sendmail()
     {
 
-        date_default_timezone_set("Australia/Melbourne");
+//        date_default_timezone_set("Australia/Melbourne");
         
         Excel::create('sales_report', function($excel) {
 
@@ -1698,7 +1698,7 @@ class ReceptionController extends Controller
 
         })->store('xlsx', public_path('excel/exports'));
 
-        $filename = public_path().'/excel/exports1/sales_report.xlsx';
+        $filename = public_path().'/excel/exports/sales_report.xlsx';
 
         $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
         if($email_address != Null)
