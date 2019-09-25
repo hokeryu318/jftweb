@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Model\Order;
 use App\Model\OrderTable;
+use App\Model\Booked;
 use Illuminate\Support\Facades\View;
 
 class AlarmCount
@@ -34,7 +35,7 @@ class AlarmCount
 
         //display count of seated and booking status
         $count_notification->seated = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
-        $count_notification->bookings = Order::where('pay_flag',  '<>', 2)->where('status', 'booking')->get()->count();
+        $count_notification->bookings = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
 
         View::share(compact('count_notification'));
 

@@ -221,7 +221,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div>
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -265,7 +265,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -311,7 +311,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center"></span>
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -357,7 +357,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center" style="margin-left: 73px;"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -405,7 +405,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -454,7 +454,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -503,7 +503,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -554,7 +554,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -605,7 +605,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div @if($table->id == $table_id) bg-selected @endif class="table-area white table-c-style text-center" style="margin-left: 38px;" @if($table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div @if($table->id == $table_id) bg-selected @endif class="table-area white table-c-style text-center" style="margin-left: 38px;" @if($status='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -909,13 +909,84 @@
             }
             if(arg == "name" || arg == "notes"){
                 if($("#selected-table").val() == 0){
-                    //alert("Please select the table");
                     $("#alert-string")[0].innerText = "Please select the table";
                     $("#java-alert").modal('toggle');
                     return;
                 }
+                var table_obj_book = <?php echo json_encode($table_obj) ?>;
 
-                /*if($("#duration-select").val() == 5 && )*/
+                var current_date =  new Date();
+                var order_start_time = '';
+                var order_end_time = '';
+                var status = '';
+                var order_time = '';
+
+                var order_duration = $('#duration-select').val();
+                order_duration = replace_time(parseInt(order_duration));
+
+                var selected_date = $('#calendar-picker').data().date;
+                if(selected_date == undefined){
+                    var d = new Date();
+                    var year = d.getFullYear();
+                    var month = d.getMonth() + 1;
+                    if (month < 10)
+                        month = '0' + month;
+                    var day = d.getDate();
+                    if (day < 10)
+                        day = '0' + day;
+                    selected_date = year + '-' + month + '-' + day;
+                }else{
+                    //selected_date = $('#calendar-picker').data().date.slice(0, -6);
+                    selected_date = $('#calendar-picker').data().date;
+                }
+
+                var time_selected = document.getElementById("timepicker1").value;
+                var hour = parseFloat(time_selected.substring(0, 2));
+                if(time_selected.substring(time_selected.length-2, time_selected.length) == 'PM') {
+                    hour += 12;
+                }
+                time_selected = hour.toString() + time_selected.substring(time_selected.length-6,  time_selected.length-3);
+
+                $("#selected-time").val(selected_date + " " + time_selected + ":00");
+
+                order_time = $('#selected-time').val();
+                
+                order_start_time = new Date(order_time.substr(0,4),parseInt(order_time.substr(5,2)),parseInt(order_time.substr(8,2)),parseInt(order_time.substr(11,2)),parseInt(order_time.substr(14,2)));
+                order_start_time = order_start_time.getTime();
+                if(order_duration == 'Unlimited') order_duration = 24 - parseInt(order_time.substr(11,2));
+                order_end_time = order_start_time + order_duration * 60 * 1000;
+                //alert(parseInt(order_time.substr(8,2))+"-"+parseInt(order_time.substr(11,2)) + ":" + parseInt(order_time.substr(14,2)) + ";" +order_duration);
+                var table_id = $("#selected-table").val();
+                table_id = table_id.split(",");
+                
+                for(var i=0;i<table_id.length;i++){
+                    var book_data = table_obj_book[table_id[i]-1]['book'];
+                    var book_duration = '';
+                    var book_start_time = '';
+                    var book_end_time = '';
+                    var book_time = '';
+
+                    if(undefined !== book_data && book_data.length > 0) {
+                        for(var j=0;j<book_data.length;j++) {
+                            book_time = book_data[j]['time'];
+                            book_duration = book_data[j]['duration'];
+                            book_duration = replace_time(parseInt(book_duration));
+                            if(book_duration == 'Unlimited') book_duration = 24 - parseInt(book_time.substr(11,2));
+                            book_start_time = new Date(book_time.substr(0,4),parseInt(book_time.substr(5,2)),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
+                            book_start_time = book_start_time.getTime();
+                            book_end_time = book_start_time + book_duration * 60 * 1000;
+                            //alert(parseInt(book_time.substr(11,2))+':'+parseInt(book_time.substr(14,2))+";"+book_data[j]['duration']);
+                            //alert(book_start_time + 'qq' + order_start_time + 'aa' + book_end_time + 'zz' + order_end_time);
+                            if( (order_start_time < book_start_time && book_start_time < order_end_time) || (book_start_time < order_start_time && order_start_time < book_end_time) ) {
+                                $("#alert-string")[0].innerText = "Booking be made from "+parseInt(book_time.substr(11,2))+":"+parseInt(book_time.substr(14,2))+" already";
+                                $("#java-alert").modal('toggle');
+                                return;
+                            }
+                        }
+                    }
+                    //alert(table_obj_book[table_id[i]-1]['book'][0]['time']);
+                }
+                
             }
             $(".top-menu-btn").removeClass('top-menu-active');
             $(".tab-detail").css('display', 'none');
@@ -1256,6 +1327,32 @@
             }
         }
 
+        function replace_time(order_duration)
+        {
+            var order_duration1 = '';
+            switch(order_duration)
+            {
+                case 0:
+                    order_duration1 = "Takeaway";
+                    break;
+                case 1:
+                    order_duration1 = 30;
+                    break;
+                case 2:
+                    order_duration1 = 60;
+                    break;
+                case 3:
+                    order_duration1 = 90;
+                    break;
+                case 4:
+                    order_duration1 = 120;
+                    break;
+                case 5:
+                    order_duration1 = "Unlimited";
+                    break;
+            }
+            return order_duration1;
+        }
     </script>
 
 @endsection

@@ -43,7 +43,7 @@ class TransactionController extends Controller
             if(count($order_ids) > 0) {
                 $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'asc')->get();
                 foreach($order_obj as $order) {
-                    $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+                    $order->display_time = date_format(date_create($order->time),"h:i A");
                     $order->table_display_name = $order->table_name;
                     $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
                 }
@@ -62,7 +62,7 @@ class TransactionController extends Controller
             if(count($order_ids) > 0) {
                 $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'desc')->get();
                 foreach($order_obj as $order) {
-                    $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+                    $order->display_time = date_format(date_create($order->time),"h:i A");
                     $order->table_display_name = $order->table_name;
                     $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
                 }
@@ -80,7 +80,7 @@ class TransactionController extends Controller
 //                    $table_display_name .= $this->get_table_name($ordertables['table_id']).'+';
 //                }
 //            }
-            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+            $order->display_time = date_format(date_create($order->time),"h:i A");
 //            $order->table_display_name = rtrim($table_display_name, '+');
             $order->table_display_name = $order->table_name;
             $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
@@ -108,7 +108,7 @@ class TransactionController extends Controller
                     $table_display_name .= $this->get_table_name($ordertables['table_id']).'+';
                 }
             }
-            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+            $order->display_time = date_format(date_create($order->time),"h:i A");
             $order->table_display_name = rtrim($table_display_name, '+');
             $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
             $daily_all_amount += $order->amount;

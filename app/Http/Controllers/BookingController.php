@@ -44,7 +44,7 @@ class BookingController extends Controller
                     $table_display_name .= $this->get_table_name($ordertables['table_id']).'+';
                 }
             }
-            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+            $order->display_time = date_format(date_create($order->time),"h:i A");
             $order->table_display_name = substr($table_display_name, 0, -1);
         }
 //        dd($order_obj);

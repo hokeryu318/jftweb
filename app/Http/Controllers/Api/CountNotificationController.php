@@ -13,6 +13,7 @@ use App\Model\OrderDish;
 use App\Model\OrderOption;
 use App\Model\Option;
 use App\Model\Item;
+use App\Model\Booked;
 use App\Http\Controllers\print_table1;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -43,7 +44,7 @@ class CountNotificationController extends Controller
 
         //display count of seated and booking status
         $count_notification['seated'] = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
-        $count_notification['bookings'] = Order::where('pay_flag',  '<>', 2)->where('status', 'booking')->get()->count();
+        $count_notification['bookings'] = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
 
         return $count_notification;
     }

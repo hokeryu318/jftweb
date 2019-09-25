@@ -23,9 +23,10 @@
         </div>
         <div class="room-content" id="room-content">
             <div class="room-div">
+            <input type="hidden" id="book_table_obj" value="{{ json_encode($table_obj) }}">
+            @if($status != "booking")
                 @foreach($table_obj as $key => $table)
                     @if(count($table->order) > 0)
-                        {{--<div class="table-common" onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, 'order_id' => $table->order[0]->id, "status" => $status ]) }}'" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">--}}
                         <div class="table-common" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                             @if($table->type == 0)
                             <div style="margin: 0 0 0 0;">
@@ -33,41 +34,39 @@
                                 <div>
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -80,26 +79,20 @@
                                 <div style="height: 110px;">
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                            @if($table->order[0]->status == 'booking')
-                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
-                                            @else
-                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'"
-                                            @endif
-                                            >
+                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
-                                            @endif
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -133,41 +126,39 @@
                                 <div style="height: 110px;">
                                     <div class="white table-c-style text-center">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -182,26 +173,20 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                        @if($table->order[0]->status == 'booking')
-                                            onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'"
-                                        @else
-                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'"
-                                        @endif
-                                        >
+                                            onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
-                                            @endif
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -237,41 +222,39 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -289,41 +272,39 @@
                                 <div style="height: 118px;">
                                     <div class="white table-c-style text-center" style="margin-left: 38px;">
                                         <div style="width: 118px;height: 118px;"
-                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                <a class="font-weight-bold red-text">
-                                                    BOOKED
-                                                    <br>
-                                                    {{$table->display_time}}
-                                                </a>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
-                                                @endif
-                                                @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                @endif
-                                                @if($table->order[0]->note != Null)
-                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                @else
-                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                @endif
+                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
                                             @endif
                                         </div>
                                     </div>
@@ -341,41 +322,39 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                    <a class="font-weight-bold red-text">
-                                                        BOOKED
-                                                        <br>
-                                                        {{$table->display_time}}
-                                                    </a>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                                @if($table->order[0]->pay_flag == '1')
+                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    @if($table->order[0]->pay_flag == '1')
-                                                        <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="belled_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->orderTable[0]->calling_time != Null)
-                                                        <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="call_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->review != Null)
-                                                        <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                    @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->note != Null)
-                                                        <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                    @else
-                                                        <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                    @endif
+                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                @endif
+                                                @if($table->orderTable[0]->calling_time != Null)
+                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                @else
+                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->review != Null)
+                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                @else
+                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->note != Null)
+                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
+                                                @else
+                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
                                                 @endif
                                             </div>
                                         </div>
@@ -395,41 +374,39 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                    <a class="font-weight-bold red-text">
-                                                        BOOKED
-                                                        <br>
-                                                        {{$table->display_time}}
-                                                    </a>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                                @if($table->order[0]->pay_flag == '1')
+                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    @if($table->order[0]->pay_flag == '1')
-                                                        <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="belled_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->orderTable[0]->calling_time != Null)
-                                                        <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="call_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->review != Null)
-                                                        <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
-                                                    @else
-                                                        <img class="alarm" id="review_icon_{{$key}}">
-                                                    @endif
-                                                    @if($table->order[0]->note != Null)
-                                                        <img class="alarm" src="{{ asset('img/note.png') }}">
-                                                    @else
-                                                        <e class="alarm" style="width: 19px;height: 16px;"></e>
-                                                    @endif
+                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                @endif
+                                                @if($table->orderTable[0]->calling_time != Null)
+                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                @else
+                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->review != Null)
+                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                @else
+                                                    <img class="alarm" id="review_icon_{{$key}}">
+                                                @endif
+                                                @if($table->order[0]->note != Null)
+                                                    <img class="alarm" src="{{ asset('img/note.png') }}">
+                                                @else
+                                                    <e class="alarm" style="width: 19px;height: 16px;"></e>
                                                 @endif
                                             </div>
                                         </div>
@@ -449,21 +426,20 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, 'status' => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->order[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                @if($table->order[0]->status == 'booking'  && $table->current_time < 3600)
-                                                    <a class="font-weight-bold red-text">
-                                                        BOOKED
-                                                        <br>
-                                                        {{$table->display_time}}
-                                                    </a>
-                                                @endif
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                                 @if($table->order[0]->pay_flag == '1')
                                                     <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -503,8 +479,14 @@
                                     <div>
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -516,8 +498,14 @@
                                     <div style="height: 110px;">
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -531,8 +519,14 @@
                                     <div style="height: 110px;">
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -546,8 +540,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -563,8 +563,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
                                             </div>
                                         </div>
                                     </div>
@@ -581,8 +587,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -599,8 +611,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -619,8 +637,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -639,8 +663,14 @@
                                     <div style="height: 118px;">
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
-                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status ]) }}'">
+                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -665,6 +695,589 @@
                         </div>
                     @endif
                 @endforeach
+            @elseif($status == "booking")
+                @foreach($table_obj as $key => $table)
+                    @if(count($table->order) > 0)
+                        <div class="table-common" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            @if($table->type == 0)
+                            <div style="margin: 0 0 0 0;">
+                                <div style="display: inline-block;">
+                                <div>
+                                    <div class="white table-c-style text-center">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>                                            
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            @elseif($table->type == 1)
+                            <div style="margin: 0 0 0 0;">
+                                <div style="display: inline-block;">
+                                <div style="height: 110px;">
+                                    <div class="white table-c-style text-center">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                            @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-center"></span>
+                            </div>
+                            </div>
+                            @elseif($table->type == 2)
+                            <div style="margin: -4px 0 0 0;">
+                                <div style="display: inline-block;">
+                                <span class="ch-1 ch-ena ch-top ch-top-center"></span>
+                                <div style="height: 110px;">
+                                    <div class="white table-c-style text-center">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                            @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-center"></span>
+                            </div>
+                            </div>
+                            @elseif($table->type == 3)
+                            <div style="margin: -4px 0 0 -38px;">
+                                <div style="display: inline-block;">
+                                <span class="ch-1 ch-ena ch-top ch-top-center" style="margin-left: 73px;"></span>
+                                <div style="height: 118px;">
+                                    <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                            @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                            </div>
+                            </div>
+                            @elseif($table->type == 4)
+                            <div style="margin: -4px 0 0 -38px;">
+                                <div style="display: inline-block;">
+                                <span class="ch-1 ch-ena ch-top ch-top-left"></span>
+                                <span class="ch-1 ch-ena ch-top ch-top-right"></span>
+                                <div style="height: 118px;">
+                                    <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                            @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                            </div>
+                            </div>
+                            @elseif($table->type == 5)
+                            <div style="margin: -4px 0 0 6px;">
+                                <span class="ch-2 ch-ena ch-left ch-left-center"></span>
+                                <div style="display: inline-block;">
+                                <span class="ch-1 ch-ena ch-top ch-top-left"></span>
+                                <span class="ch-1 ch-ena ch-top ch-top-right"></span>
+                                <div style="height: 118px;">
+                                    <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                        <div style="width: 118px;height: 118px;"
+                                            @if(count($table->book) > 0)
+                                             onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @else
+                                             onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                            @endif
+                                            >
+                                            @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
+                                            @endif
+                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <br>
+                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                            </h6>
+                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                &nbsp;
+                                                <br>
+                                                &nbsp;
+                                                <br>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                            </div>
+                            </div>
+                            @elseif($table->type == 6)
+                            <div style="margin: -4px 0 0 6px;">
+                                <span class="ch-2 ch-ena ch-left ch-left-center"></span>
+                                <div style="display: inline-block;">
+                                    <span class="ch-1 ch-ena ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-ena ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                    <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
+                                                @endif
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                    <br>
+                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                </h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-ena ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table->type == 7)
+                            <div style="margin: -4px 0 0 5px;">
+                                <span class="ch-2 ch-ena ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-ena ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block;">
+                                    <span class="ch-1 ch-ena ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-ena ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                    <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
+                                                @endif
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                    <br>
+                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                </h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-ena ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table->type == 8)
+                            <div style="margin: -4px 0 0 6px;">
+                                <span class="ch-2 ch-ena ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-ena ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block;">
+                                    <span class="ch-1 ch-ena ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-ena ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
+                                                    <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
+                                                @endif
+                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                    <br>
+                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                </h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-ena ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-ena ch-right ch-right-top"></span>
+                                <span class="ch-2 ch-ena ch-right ch-right-bottom"></span>
+                            </div>
+                            @endif
+                        </div>
+                    @else
+                        <div class="table-common" id="selected-{{$key}}"  style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            @if($table->type == 0)
+                            <div style="margin: 0 0 0 0;">
+                                <div style="display: inline-block;">
+                                    <div>
+                                        <div class="white table-c-style-disable text-center">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @elseif($table->type == 1)
+                            <div style="margin: 0 0 0 0">
+                                <div style="display: inline-block;">
+                                    <div style="height: 110px;">
+                                        <div class="white table-c-style-disable text-center">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                
+                                                    <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                        &nbsp;
+                                                        <br>
+                                                        &nbsp;
+                                                        <br>
+                                                    </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
+                                </div>
+                            </div>
+                            @elseif($table->type == 2)
+                            <div style="margin: 0 0 0 0">
+                                <div style="display: inline-block; margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-center"></span>
+                                    <div style="height: 110px;">
+                                        <div class="white table-c-style-disable text-center">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-center"></span>
+                                </div>
+                            </div>
+                            @elseif($table->type == 3)
+                            <div style="margin: 0 0 0 -38px;">
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-center" style="margin-left: 73px;"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                            </div>
+                            @elseif($table->type == 4)
+                            <div style="margin: 0 0 0 -38px;">
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                            </div>
+                            @elseif($table->type == 5)
+                            <div style="margin: 0 0 0 6px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                            </div>
+                            @elseif($table->type == 6)
+                            <div style="margin: 0 0 0 6px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-center"></span>
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table->type == 7)
+                            <div style="margin: 0 0 0 5px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-center"></span>
+                            </div>
+                            @elseif($table->type == 8)
+                            <div style="margin: 0 0 0 5px;">
+                                <span class="ch-2 ch-dis ch-left ch-left-top"></span>
+                                <span class="ch-2 ch-dis ch-left ch-left-bottom"></span>
+                                <div style="display: inline-block;margin-top: -4px;">
+                                    <span class="ch-1 ch-dis ch-top ch-top-left"></span>
+                                    <span class="ch-1 ch-dis ch-top ch-top-right"></span>
+                                    <div style="height: 118px;">
+                                        <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
+                                            <div style="width: 118px;height: 118px;"
+                                                @if(count($table->book) > 0)
+                                                onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $table->book[0]->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @else
+                                                onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
+                                                @endif
+                                                >
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
+                                                    &nbsp;
+                                                    <br>
+                                                    &nbsp;
+                                                    <br>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-left"></span>
+                                    <span class="ch-1 ch-dis ch-bottom ch-bottom-right"></span>
+                                </div>
+                                <span class="ch-2 ch-dis ch-right ch-right-top"></span>
+                                <span class="ch-2 ch-dis ch-right ch-right-bottom"></span>
+                            </div>
+                            @endif
+                        </div>
+                    @endif
+                    @if($table->type == 9){{--Line--}}
+                        <div class="table-common" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                            <div class="text-center line-style"
+                                 @if($table->index == "1"){{--right--}}
+                                 style="padding-right: 200px;"
+                                 @else
+                                 style="padding-bottom: 200px;"
+                                 @endif>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
             </div>
         </div>
         <div class="table_detail">
@@ -684,16 +1297,17 @@
                 <a href="{{route('reception.seated', ['status'=>'booking'])}}" class="col-4 black-text" style="margin-right:-5px;">
                     <span class="font-weight-bold fs-20">BOOKINGS</span>
                     <img src="{{ asset('img/bookings.png') }}" style="width:55px;height:55px;"/>
-                    <span class="font-weight-bold fs-30">{{ $count_notification->bookings }}</span>
+                    <span class="font-weight-bold fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
                     @if($status == 'booking') <div class="tab_activate"></div> @endif
                 </a>
             </div>
             <div style="height:695px;overflow-x:hidden; overflow-y:auto;width: 385px;">
                 <div class="row" style="width: 100%;">
+                @if($status != "booking")
                     @foreach($order_side_obj as $kk => $order)
                         @foreach($order->table_order_names as $key => $ordertables)
                             <div class="border w-100 pt-2 pr-1 table_seated_list"
-                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id, 'status' => $status ]) }}'">
+                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id ]) }}'">
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
@@ -758,6 +1372,57 @@
                             </div>
                         @endforeach
                     @endforeach
+                @else
+                    @foreach($order_side_obj as $kk => $order)
+                        @foreach($order->table_order_names as $key => $ordertables)
+                            <div class="border w-100 pt-2 pr-1 table_seated_list" id="side_book_{{$order->id}}" style="display: block;"
+                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id ]) }}'">
+                                <div class="row w-100 p-0 m-0">
+                                    <div class="col-lg-3 pr-0 col-xl-3">
+                                        <div class="row" style="margin-left: -10px;">
+                                            <p class="red-text font-weight-bold ml-0 fs-20" style="margin-left: 0px;">&nbsp;</p>
+                                        </div>
+                                        <div class="row table_name fs-20" style="text-align:center;">
+                                            <table>
+                                                <tr>
+                                                    @if(count($order->table_display_names) > 1)
+                                                        <img src="{{asset('img/plus_red.png')}}" class="corner">
+                                                    @endif
+                                                    <td style="width: 100px;height: 80px;background: #000;color:white;text-align: center;-ms-word-break: break-all;word-break: break-all;">
+                                                        <b class="fs-25">
+                                                            @if(strlen($ordertables) > 12)
+                                                                {{ substr($ordertables, 0, 12)."..." }}
+                                                            @else
+                                                                {{ $ordertables }}
+                                                            @endif
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 pr-0 col-xl-6">
+                                        <div class="row p-0 m-0">
+                                            &nbsp;
+                                        </div>
+                                        <div class="row pl-2 pt-3">
+                                            <p class=" pfont mb-0 black-text fs-20" style="word-break: break-all; line-height: 20px;">{{ $order->customer_name }}<br>{{ $order->display_time }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="offset-1 col-2 pr-0 text-right">
+                                        <div class="row pl-2">
+                                            <img src="{{asset('img/head1.png')}}" width="30" height="30">
+                                            <p class="font-weight-bold middle-ver fs-25">{{ $order->guest }}</p>
+                                        </div>
+                                        <div class="row mt-4 pl-3">
+                                            <img src="{{asset('img/chat1.png')}}" width="40" height="40" style="margin: -15px 0 0 -10px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endforeach
+                @endif
                 </div>
             </div>
             <div class="row">
@@ -847,7 +1512,9 @@
         }
 
         //timer part
-        var myVar = setInterval(myTimer, 1000);
+        @if($status != 'booking')
+            var myVar = setInterval(myTimer, 1000);
+        @endif
         function myTimer() {
 
             var order_side = <?php echo json_encode($order_side_obj) ?>;
@@ -1002,6 +1669,85 @@
             }
         }
 
+        var table_obj_book = <?php echo json_encode($table_obj) ?>;
 
+        var myVar_book = setInterval(myTimer_book, 1000);
+
+        function myTimer_book() {
+            var current_date =  new Date();
+            var offset = 10;
+            var utc = current_date.getTime() + (current_date.getTimezoneOffset() * 60000);
+            var nd = new Date(utc + (3600000*offset));
+            var current_time =nd.getTime();
+            var duration = '';
+            var elapsed_time = '';
+            var order_time = '';
+            var status = '';
+            
+            for(var i=0;i<table_obj_book.length;i++){
+                if(undefined !== table_obj_book[i]['book'] && table_obj_book[i]['book'].length > 0) {
+                    
+                    var book_time = table_obj_book[i]['book'][0]['time'];
+                    order_time = new Date(book_time.substr(0,4),(parseInt(book_time.substr(5,2))-1),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
+                    elapsed_time = order_time.getTime() - current_time;
+                    //alert(order_time);
+                    if( elapsed_time > 0 && elapsed_time < 3600 * 1000 && table_obj_book[i]['book'][0]['timer_flag'] == 0 ) {
+                        var sub_time = get_book_data(order_time);
+                        document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
+                    }
+                    else if (elapsed_time < 0 && elapsed_time > -3000) {
+                        
+                        document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
+                        document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
+                        $.ajax({
+                            type:"POST",
+                            url:"{{ route('reception.book_end') }}",
+                            data:{
+                                book_id: table_obj_book[i]['book'][0]['id'],
+                                _token:"{{ csrf_token() }}"
+                            },
+                            success: function(data){
+                                document.getElementById("book_cnt").innerHTML = data.status;
+                                table_obj_book = data.table_obj;                                
+                            }
+                        });
+                    }
+                }
+            }
+ 
+        }
+
+        function get_book_data(order_time)
+        {
+            var hours = order_time.getHours();
+            var min = order_time.getMinutes();
+            var sub_time = '';
+
+            if (min < 10) {
+                min = '0' + min;
+            }
+
+            if (hours == 0) {
+                sub_time = '12:' + min + ' AM';
+            }
+            else if (hours > 0 && hours < 10) {
+                sub_time = '0'+ hours + ':' + min + ' AM';
+            }
+            else if (hours > 9 && hours < 12) {
+                sub_time = hours + ':' + min + ' AM';
+            }
+            else if (hours == 12) {
+                sub_time = hours + ':' + min + ' PM';
+            }
+            else if (hours > 12 && hours < 22) {
+                sub_time = '0'+ (hours - 12) + ':' + min + ' PM';
+            }
+            else if (hours > 21) {
+                sub_time = hours + ':' + min + ' PM';
+            }
+
+            return sub_time;
+        }
+        
     </script>
 @endsection

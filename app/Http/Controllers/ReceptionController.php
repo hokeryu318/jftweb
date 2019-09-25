@@ -25,6 +25,8 @@ use App\Model\Item;
 use App\Model\Room;
 use App\Model\Holiday;
 use App\Model\Timeslot;
+use App\Model\Booked;
+use App\Model\BookedTable;
 use App\Model\Kitchen;
 
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
@@ -38,7 +40,6 @@ use App\Mail\SalesDayReportEmail;
 use Illuminate\Support\Facades\DB;
 use Excel;
 use phpDocumentor\Reflection\Types\Null_;
-
 class ReceptionController extends Controller
 {
 
@@ -49,6 +50,17 @@ class ReceptionController extends Controller
 
     public function seated()
     {
+        $old_befores = Booked::where('timer_flag',0)->get();
+        if(count($old_befores) > 0) {
+            foreach($old_befores as $old_before) {
+                $remain_time = strtotime($old_before->time) - time();
+                if($remain_time < 0) {
+                    Booked::where('id', $old_before->id)->update(['timer_flag' => 1]);
+                }
+            }
+        }
+
+        $booking_cnt = Booked::where('timer_flag',0)->get()->count();
 
         $status = (request()->get('status'));
         switch($status){
@@ -63,7 +75,7 @@ class ReceptionController extends Controller
                     $order_side_obj = collect();
                 break;
             case 'booking'://booking
-                $order_side_obj = Order::where('pay_flag', '<>', 2)->where('status', 'booking')->get();
+                $order_side_obj = Booked::where('timer_flag', 0)->where('status', 'booking')->orderby('time')->get();
                 break;
         }
 
@@ -81,20 +93,24 @@ class ReceptionController extends Controller
             }
         }
 
-        $order_side_obj = $this->get_order_obj($order_side_obj);
+        if($status == "booking")
+            $order_side_obj = $this->get_book_obj($order_side_obj);
+        else
+            $order_side_obj = $this->get_order_obj($order_side_obj);
 
         foreach($table_obj as $table) {
             if(count($table->order) > 0) {
-                $table->display_time = $this->get_time_data(substr($table->order[0]->time, 11, 5));
-                $table->current_time = strtotime($table->order[0]->time) - strtotime($this->get_current_time());
+                $table->display_time = date_format(date_create($table->order[0]->time),"h:i A");
             }     
-            
-                 
+            if(count($table->book) > 0) {
+                    $table->display_time1 = date_format(date_create($table->book[0]->time),"h:i A");
+                    $table->current_time1 = strtotime($table->book[0]->time) - strtotime($this->get_current_time());
+            }      
         }
 
         $room_size = Room::find(1);
 
-        return view('reception.seated')->with(compact('order_tables', 'table_obj', 'order_obj', 'order_side_obj', 'room_size', 'status'));
+        return view('reception.seated')->with(compact('order_tables', 'table_obj', 'order_obj', 'order_side_obj', 'room_size', 'status', 'booking_cnt'));
     }
 
     //Booking part
@@ -116,7 +132,6 @@ class ReceptionController extends Controller
         $table_id = request()->get('table_id');
         $order_id = request()->get('order_id');
         $status = request()->get('status');
-        $order_side_obj = request()->get('order_side_obj');
         foreach($order_obj as $order){
             if(count($order->ordertables) > 0){
                 foreach ($order->ordertables as $ordertables) {
@@ -124,22 +139,43 @@ class ReceptionController extends Controller
                 }
             }
         }
-        if($order_id > 0){
-            $order_get = Order::find($order_id);
-            $order_table_obj = OrderTable::where('order_id', $order_id)->get()->toArray();
-            foreach ($order_table_obj as $order) {
-                $table_ids[] = $order['table_id'];
+        if($status == "booking")
+        {
+            if($order_id > 0){
+                $order_get = Booked::find($order_id);
+                $order_table_obj = BookedTable::where('book_id', $order_id)->get()->toArray();
+                foreach ($order_table_obj as $order) {
+                    $table_ids[] = $order['table_id'];
+                }
+    
+                $default_duration_id = $order_get->duration;
             }
+            else{
+                $default_duration_id = $this->get_default_duration_id();
+            }
+        }
+        else
+        {
+            if($order_id > 0){
+                $order_get = Order::find($order_id);
+                $order_table_obj = OrderTable::where('order_id', $order_id)->get()->toArray();
+                foreach ($order_table_obj as $order) {
+                    $table_ids[] = $order['table_id'];
+                }
 
-            $default_duration_id = $order_get->duration;
+                $default_duration_id = $order_get->duration;
+            }
+            else{
+                $default_duration_id = $this->get_default_duration_id();
+            }
         }
-        else{
-            $default_duration_id = $this->get_default_duration_id();
-        }
+
 
         foreach($table_obj as $table) {
             if(count($table->order) > 0)
-                $table->display_time = $this->get_time_data(substr($table->order[0]->time, 11, 5));
+                $table->display_time = date_format(date_create($table->order[0]->time),"h:i A");
+            if(count($table->book) > 0)
+                $table->display_time_book = date_format(date_create($table->book[0]->time),"h:i A");
         }
 
         if($table_id != 0)
@@ -153,62 +189,126 @@ class ReceptionController extends Controller
 
         $room_size = Room::find(1);
 
-        return view('reception.addCustomer')->with(compact('order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders', 'table_display_name', 'default_duration_id', 'room_size', 'status','order_side_obj'));
+        return view('reception.addCustomer')->with(compact('order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders', 'table_display_name', 'default_duration_id', 'room_size', 'status'));
     }
 
     public function store()
     {
-        if(request()->get('order_id') > 0)  //edit
+        if(request()->get('status') != 'booking')
         {
-            $order_obj = Order::find(request()->get('order_id'));
-            $order_obj->time = request()->get('time');
-            $order_obj->guest = request()->get('guest_number');
-            $order_obj->duration = request()->get('duration');
-            $order_obj->customer_name = request()->get('customer_name');
-            $order_obj->contact_number = request()->get('contact_number');
-            $order_obj->email = request()->get('email_address');
-            $order_obj->note = request()->get('customer_notes');
-            $status = request()->get('status');
-            $order_obj->status = $status;
-            $order_obj->update();
-            OrderTable::where('order_id',request()->get('order_id'))->delete();
-            $table_ids = request()->get('table_id');
-            $table_id_arr = explode(',', $table_ids);
-            foreach ($table_id_arr as $id) {
-                $order_table_obj = new OrderTable();
-                $order_table_obj->order_id = request()->get('order_id');
-                $order_table_obj->table_id = $id;
-                $order_table_obj->save();
+            if(request()->get('order_id') > 0)  //edit
+            {
+                $order_obj = Order::find(request()->get('order_id'));
+                $order_obj->time = request()->get('time');
+                $order_obj->guest = request()->get('guest_number');
+                $order_obj->duration = request()->get('duration');
+                $order_obj->customer_name = request()->get('customer_name');
+                $order_obj->contact_number = request()->get('contact_number');
+                $order_obj->email = request()->get('email_address');
+                $order_obj->note = request()->get('customer_notes');
+                $status = request()->get('status');
+                $order_obj->status = $status;
+                $order_obj->update();
+                OrderTable::where('order_id',request()->get('order_id'))->delete();
+                $table_ids = request()->get('table_id');
+                $table_id_arr = explode(',', $table_ids);
+                $table_name = '';
+                foreach ($table_id_arr as $id) {
+                    $table_name .= $this->get_table_name($id).'+';
+                    $order_table_obj = new OrderTable();
+                    $order_table_obj->order_id = request()->get('order_id');
+                    $order_table_obj->table_id = $id;
+                    $order_table_obj->save();
+                }
+                $table_name = rtrim($table_name, '+');
+                Order::where('id', $order_obj->id)->update(['table_name' => $table_name]);
+            }
+            else  //add
+            {
+                $order_obj = new Order();
+                $order_obj->time = request()->get('time');
+                $order_obj->guest = request()->get('guest_number');
+                $order_obj->duration = request()->get('duration');
+                $order_obj->customer_name = request()->get('customer_name');
+                $order_obj->contact_number = request()->get('contact_number');
+                $order_obj->email = request()->get('email_address');
+                $order_obj->note = request()->get('customer_notes');
+                $status = request()->get('status');
+                $order_obj->status = $status;
+                $order_obj->calls = 0;
+                $order_obj->save();
+                $table_ids = request()->get('table_id');
+                $table_id_arr = explode(',', $table_ids);
+                $table_name = '';
+                foreach ($table_id_arr as $id) {
+                    $table_name .= $this->get_table_name($id).'+';
+                    $order_table_obj = new OrderTable();
+                    $order_table_obj->order_id = $order_obj->id;
+                    $order_table_obj->table_id = $id;
+                    $order_table_obj->save();
+                }
+                $table_name = rtrim($table_name, '+');
+                Order::where('id', $order_obj->id)->update(['table_name' => $table_name]);
             }
         }
-        else  //add
+        else
         {
-            $order_obj = new Order();
-            $order_obj->time = request()->get('time');
-            $order_obj->guest = request()->get('guest_number');
-            $order_obj->duration = request()->get('duration');
-            $order_obj->customer_name = request()->get('customer_name');
-            $order_obj->contact_number = request()->get('contact_number');
-            $order_obj->email = request()->get('email_address');
-            $order_obj->note = request()->get('customer_notes');
-            $status = request()->get('status');
-            $order_obj->status = $status;
-            $order_obj->calls = 0;
-            $order_obj->save();
-            $table_ids = request()->get('table_id');
-            $table_id_arr = explode(',', $table_ids);
-            $table_name = '';
-            foreach ($table_id_arr as $id) {
-                $table_name .= $this->get_table_name($id).'+';
-                $order_table_obj = new OrderTable();
-                $order_table_obj->order_id = $order_obj->id;
-                $order_table_obj->table_id = $id;
-                $order_table_obj->save();
+            if(request()->get('order_id') > 0)  //edit
+            {
+                $order_obj = Booked::find(request()->get('order_id'));
+                $order_obj->time = request()->get('time');
+                $order_obj->guest = request()->get('guest_number');
+                $order_obj->duration = request()->get('duration');
+                $order_obj->customer_name = request()->get('customer_name');
+                $order_obj->contact_number = request()->get('contact_number');
+                $order_obj->email = request()->get('email_address');
+                $order_obj->note = request()->get('customer_notes');
+                $status = request()->get('status');
+                $order_obj->status = $status;
+                $order_obj->update();
+                BookedTable::where('book_id',request()->get('order_id'))->delete();
+                $table_ids = request()->get('table_id');
+                $table_id_arr = explode(',', $table_ids);
+                $table_name = '';
+                foreach ($table_id_arr as $id) {
+                    $table_name .= $this->get_table_name($id).'+';
+                    $order_table_obj = new BookedTable();
+                    $order_table_obj->book_id = request()->get('order_id');
+                    $order_table_obj->table_id = $id;
+                    $order_table_obj->save();
+                }
+                $table_name = rtrim($table_name, '+');
+                Booked::where('id', $order_obj->id)->update(['table_name' => $table_name]);
             }
-            $table_name = rtrim($table_name, '+');
-            Order::where('id', $order_obj->id)->update(['table_name' => $table_name]);
+            else  //add
+            {
+                $order_obj = new Booked();
+                $order_obj->time = request()->get('time');
+                $order_obj->guest = request()->get('guest_number');
+                $order_obj->duration = request()->get('duration');
+                $order_obj->customer_name = request()->get('customer_name');
+                $order_obj->contact_number = request()->get('contact_number');
+                $order_obj->email = request()->get('email_address');
+                $order_obj->note = request()->get('customer_notes');
+                $status = request()->get('status');
+                $order_obj->status = $status;
+                $order_obj->calls = 0;
+                $order_obj->save();
+                $table_ids = request()->get('table_id');
+                $table_id_arr = explode(',', $table_ids);
+                $table_name = '';
+                foreach ($table_id_arr as $id) {
+                    $table_name .= $this->get_table_name($id).'+';
+                    $order_table_obj = new BookedTable();
+                    $order_table_obj->book_id = $order_obj->id;
+                    $order_table_obj->table_id = $id;
+                    $order_table_obj->save();
+                }
+                $table_name = rtrim($table_name, '+');
+                Booked::where('id', $order_obj->id)->update(['table_name' => $table_name]);
+            }
         }
-
+        
         return redirect()->route('reception.seated', ['status'=>$status]);
     }
 
@@ -317,7 +417,7 @@ class ReceptionController extends Controller
         $order_data = Order::select('customer_name', 'time', 'duration', 'guest', 'status')->where('id', $order_id)->get()->first();
         $customer_name = $order_data->customer_name;
         $time = $order_data->time;
-        $starting_time = $this->get_time_data(substr($time, 11, 5));
+        $starting_time = date_format(date_create($time),"h:i A");
         $duration_time = $this->customers[$order_data->duration];
         $duration = $order_data->duration;
         $during_time = $this->get_during_minutes($time);
@@ -975,7 +1075,10 @@ class ReceptionController extends Controller
         $order_id = request()->order_id;
         $status = request()->status;
         $order_side_obj = request()->order_side_obj;
-        $booking_order = $this->get_booking_order($order_id);
+        if($status == "booking")
+            $booking_order = $this->get_booking_order1($order_id);
+        else
+            $booking_order = $this->get_booking_order($order_id);
         //return (string)view('reception.editOrder', compact('booking_order','status','order_side_obj'))->render();
         return view('reception.editOrder')->with(compact('booking_order','status','order_side_obj'));
     }
@@ -1093,11 +1196,34 @@ class ReceptionController extends Controller
                 }
                 $table_order_names[] = $this->get_table_name($order->ordertables[0]['table_id']);//get first table only in order
             }
-            $order->display_time = $this->get_time_data(substr($order->time, 11, 5));
+            $order->display_time = date_format(date_create($order->time),"h:i A");
             $order->table_display_names = $table_display_names;
             $order->table_order_names = $table_order_names;
         }
 //      dd($order_obj);
+        return $order_obj;
+    }
+
+    public function get_book_obj($order_obj) {
+
+        $order_tables = array();
+
+        foreach($order_obj as $order)
+        {
+            $table_display_names = array();
+            $table_order_names = array();
+            if(count($order->bookedtables) > 0){
+                foreach ($order->bookedtables as $ordertables) {
+                    $table_display_names[] = $this->get_table_name($ordertables['table_id']);
+                }
+                $table_order_names[] = $this->get_table_name($order->bookedtables[0]['table_id']);//get first table only in order
+            }
+            $order->display_time = date_format(date_create($order->time),"h:i A");
+            $order->table_display_names = $table_display_names;
+            $order->table_order_names = $table_order_names;
+
+        }
+
         return $order_obj;
     }
 
@@ -1118,7 +1244,7 @@ class ReceptionController extends Controller
         $customer_name = $order_data->customer_name;
         $starting_time = $order_data->time;
         $date = substr($starting_time, 0, 10);
-        $time = $this->get_time_data(substr($starting_time, 11, 5));
+        $time = date_format(date_create($starting_time),"h:i A");
         $duration = $order_data->duration;
         $duration_time = $this->customers[$duration];
         $guest = $order_data->guest;
@@ -1134,6 +1260,59 @@ class ReceptionController extends Controller
         $table_id = $order_table->table_id;
 
         $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
+        $table_name = array();
+        foreach($table_ids as $table_id) {
+            $tb_name = $this->get_table_name($table_id);//dd($tb_name);
+            $table_name[] = $tb_name;
+        }
+
+        //============
+        $booking_order = collect();
+        $booking_order->order_id = $order_id;
+        $booking_order->customer_name = $customer_name;
+        $booking_order->starting_time = $starting_time;
+        $booking_order->date = $date;
+        $booking_order->time = $time;
+        $booking_order->duration = $duration;
+        $booking_order->duration_time = $duration_time;
+        $booking_order->guest = $guest;
+        $booking_order->note = $note;
+        $booking_order->review_type = $review_type;
+        $booking_order->review = $review;
+        $booking_order->table_name = $table_name;
+        $booking_order->pay_flag = $pay_flag;
+        $booking_order->calling_time = $calling_time;
+        $booking_order->attend_time = $attend_time;
+        $booking_order->table_id = $table_id;
+        if($attend_time != null)
+            $booking_order->attended_time = intval(strtotime($booking_order->attend_time)-strtotime($booking_order->calling_time));
+        $booking_order->status = $status;
+
+        return $booking_order;
+    }
+
+    public function get_booking_order1($order_id) {
+
+        $order_data = Booked::where('id', $order_id)->get()->first();
+        $customer_name = $order_data->customer_name;
+        $starting_time = $order_data->time;
+        $date = substr($starting_time, 0, 10);
+        $time = date_format(date_create($starting_time),"h:i A");
+        $duration = $order_data->duration;
+        $duration_time = $this->customers[$duration];
+        $guest = $order_data->guest;
+        $note = $order_data->note;
+        $review_type = $order_data->review_type;
+        $review = $order_data->review;
+        $pay_flag = $order_data->pay_flag;
+        $status = $order_data->status;
+
+        $order_table = BookedTable::where('book_id', $order_id)->get()->first();
+        $calling_time = $order_table->calling_time;
+        $attend_time = $order_table->attend_time;
+        $table_id = $order_table->table_id;
+
+        $table_ids = BookedTable::where('book_id', $order_id)->pluck('table_id');
         $table_name = array();
         foreach($table_ids as $table_id) {
             $tb_name = $this->get_table_name($table_id);//dd($tb_name);
@@ -1343,9 +1522,9 @@ class ReceptionController extends Controller
 
     public function now_sendmail()
     {
-
-//        date_default_timezone_set("Australia/Melbourne");
+        date_default_timezone_set("Australia/Melbourne");
         
+
         Excel::create('sales_report', function($excel) {
 
             $excel->sheet('Sales Day Report', function($sheet) {
@@ -1456,7 +1635,7 @@ class ReceptionController extends Controller
                 $items = DB::table('items')->get()->toArray();
 
                 $item_sale_view = DB::table('item_sales')->whereDate('created_at', $now_date)->get();
-
+//            dd($item_sale_view);
                 $item_sales_data = array();
                 for($i=0;$i<count($items);$i++) {
                     $item_sales_data[$i]['id'] = $items[$i]->id;
@@ -1700,11 +1879,27 @@ class ReceptionController extends Controller
 
         $filename = public_path().'/excel/exports/sales_report.xlsx';
 
-        $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
-        if($email_address != Null)
-            Mail::to($email_address)->send(new SalesDayReportEmail($filename));
+        Mail::to('manager@kuromatsu.com.au')->send(new SalesDayReportEmail($filename));
+    }
 
-        return redirect()->route('admin.transaction');
+    public function book_end()
+    {
+        $book_id = request()->get('book_id');
+        Booked::where('id', $book_id)->update(['timer_flag' => 1]);
+        $result = Booked::where('timer_flag',0)->get()->count();
 
+        $table_obj = Table::get();
+        
+        foreach($table_obj as $table) {
+            if(count($table->order) > 0) {
+                $table->display_time = date_format(date_create($table->order[0]->time),"h:i A");
+            }     
+            if(count($table->book) > 0) {
+                    $table->display_time1 = date_format(date_create($table->book[0]->time),"h:i A");
+                    $table->current_time1 = strtotime($table->book[0]->time) - strtotime($this->get_current_time());
+            }      
+        }
+
+        return response()->json(['status' => $result,'table_obj' => $table_obj]);
     }
 }

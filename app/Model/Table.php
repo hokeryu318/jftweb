@@ -18,4 +18,14 @@ class Table extends Model
     {
         return $this->hasMany(OrderTable::class, 'table_id');
     }
+
+    public function book()
+    {
+        return $this->hasManyThrough(Booked::class, BookedTable::class, 'table_id', 'id', 'id', 'book_id')->where('timer_flag','0')->orderby('time');
+    }
+
+    public function bookTable()
+    {
+        return $this->hasMany(OrderTable::class, 'table_id');
+    }
 }

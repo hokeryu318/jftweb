@@ -17,6 +17,8 @@ use App\Model\Dish;
 use App\Model\OrderDish;
 use App\Model\Option;
 use App\Model\Item;
+use App\Model\Booked;
+use App\Model\BookedTable;
 
 class Controller extends BaseController
 {
@@ -129,7 +131,7 @@ class Controller extends BaseController
 
         //display count of seated and booking status
         $count_notification['seated'] = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
-        $count_notification['bookings'] = Order::where('pay_flag',  '<>', 2)->where('status', 'booking')->get()->count();
+        $count_notification['bookings'] = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
 
         return $count_notification;
     }
@@ -156,7 +158,7 @@ class Controller extends BaseController
 
         //display count of seated and booking status
         $count_notification['seated'] = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
-        $count_notification['bookings'] = Order::where('pay_flag',  '<>', 2)->where('status', 'booking')->get()->count();
+        $count_notification['bookings'] = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
 
         $count_notification['table_id'] = $table_id - 1;
 
