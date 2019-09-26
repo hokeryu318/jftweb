@@ -18,16 +18,45 @@
 <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>-->
-<script>
-    //var clickHandler = ('ontouchstart' in document.documentElement ? "touchstart" : "click");
 
-    //$("li").bind(clickHandler, function(e) {
-    //    alert("clicked or tapped. This button used: " + clickHandler);
+<script>
+    function touchHandler(event)
+    {
+        var touches = event.changedTouches,
+            first = touches[0],
+            type = "";
+
+        switch(event.type)
+        {
+        case "touchstart": type = "mousedown"; break;
+        case "touchmove":  type = "mousemove"; break;        
+        case "touchend":   type = "mouseup"; break;
+        default: return;
+        }
+
+        //initMouseEvent(type, canBubble, cancelable, view, clickCount, 
+        //           screenX, screenY, clientX, clientY, ctrlKey, 
+        //           altKey, shiftKey, metaKey, button, relatedTarget);
+        var simulatedEvent = document.createEvent("MouseEvent");
+        simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+                            first.screenX, first.screenY, 
+                            first.clientX, first.clientY, false, 
+                            false, false, false, 0/*left*/, null);
+
+        first.target.dispatchEvent(simulatedEvent);
+        event.preventDefault();
+    }
+
+    function init() 
+    {
+        document.addEventListener("touchstart", touchHandler, true);
+        document.addEventListener("touchmove", touchHandler, true);
+        document.addEventListener("touchend", touchHandler, true);
+        document.addEventListener("touchcancel", touchHandler, true);    
+    }
     
     $(function(){
+      init();
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
