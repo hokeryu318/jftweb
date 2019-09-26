@@ -38,22 +38,24 @@
         event.preventDefault();
     }
 
-    function inits()
-    {
+    function init()
+    {alert('KK');
         document.addEventListener("touchstart", touchHandler, true);
         document.addEventListener("touchmove", touchHandler, true);
         document.addEventListener("touchend", touchHandler, true);
         document.addEventListener("touchcancel", touchHandler, true);
     }
     
-    $(document).ready(function() {
-        inits();
-    });
-
+    // $(document).ready(function() {
+    //     init();
+    // });
+    //
     $(function(){
+
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
+              init();
             var itemID = el.id;
             var itemIndex = $(el).index();
             $.ajax({
