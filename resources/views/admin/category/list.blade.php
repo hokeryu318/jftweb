@@ -69,7 +69,8 @@
         document.addEventListener("touchcancel", touchHandler, true);    
     }
     
-    $(function(){
+    // $(function(){
+    $(document).ready(function(){
       init();
       $("#scroll-dish").sortable({
         stop: function(){
