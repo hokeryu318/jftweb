@@ -966,7 +966,7 @@
                     var book_end_time = '';
                     var book_time = '';
 
-                    if(undefined !== table_obj_book[table_id[i]-1]['book']) {
+                    if(undefined !== table_obj_book[table_id[i]-1]) {
                         book_data = table_obj_book[table_id[i]-1]['book'];
                     }
 
