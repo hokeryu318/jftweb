@@ -16,12 +16,12 @@
     }
 </style>
 <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
-{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
-{{--<script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>--}}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
-<script src="jquery.ui.touch-punch.min.js"></script>
+{{--<script src="http://code.jquery.com/jquery.min.js"></script>--}}
+{{--<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>--}}
+{{--<script src="jquery.ui.touch-punch.min.js"></script>--}}
 
 <script>
     function touchHandler(event)
@@ -87,7 +87,8 @@
     // $(function(){
     $(document).ready(function(){
       init();
-      $("#scroll-dish").draggable({
+      $("#scroll-dish").draggable();
+      $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
             var itemID = el.id;
