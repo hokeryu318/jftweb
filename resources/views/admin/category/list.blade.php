@@ -39,7 +39,7 @@
     }
 
     function init()
-    {alert('KK');
+    {
         document.addEventListener("touchstart", touchHandler, true);
         document.addEventListener("touchmove", touchHandler, true);
         document.addEventListener("touchend", touchHandler, true);
@@ -95,12 +95,24 @@
           });
         }
       });
+       $("#sortable").sortable();
     });
+
+
 
 //});
 </script>
 <div class="">
     <div style="padding-top:8%;"></div>
+
+    <ul id="sortable">
+        <li>Item One</li>
+        <li>Item Two</li>
+        <li>Item Three</li>
+        <li>Item Four</li>
+        <li>Item Five</li>
+        <li>Item Six</li>
+    </ul>
 
     <div class="widthh blackgrey pt-4" style="height: 885px;">
         <a onclick="window.history.back()">
