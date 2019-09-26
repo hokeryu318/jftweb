@@ -128,7 +128,7 @@
                         <li class="top-menu-btn font-weight-bold">
                             <div class="text-center-btn name_menu">
                                 <a id="name-tab" class="black-text fs-25" onclick="changeTab('name');">
-                                    <div class="text-center name_menu" id="name-tab-div">@if($order_id > 0) {{$order_get->customer_name}}@else Walk-in {{$table_id}} @endif</div>
+                                    <div class="text-center name_menu" id="name-tab-div">{{$customer_name}}</div>
                                 </a>
                             </div>
                         </li>
@@ -820,7 +820,7 @@
                         <div id="menu3" class="container display-none tab-detail"><br>
                             <div class=" mt-5">
                                 <h6 class="font-weight-bold fs-25">CUSTOMER NAME</h6>
-                                <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1 fs-25" value="@if($order_id > 0) {{$order_get->customer_name}}@else Walked-in {{$table_id}} @endif" name="customer_name" id="customer-name"/>
+                                <input style="border:1px solid grey;border-radius:5px;" class="white pl-2 w-100 pt-1 pb-1 fs-25" value="{{$customer_name}}" name="customer_name" id="customer-name"/>
                             </div>
                             <div class=" mt-2">
                                 <h6 class="font-weight-bold fs-25">CONTACT NUMBER</h6>

@@ -59,6 +59,7 @@ Route::post('reception/pay', 'ReceptionController@pay')->name('reception.pay');
 Route::post('reception/account_print', 'ReceptionController@account_print')->name('reception.account_print');
 Route::post('reception/finish_pay', 'ReceptionController@finish_pay')->name('reception.finish_pay');
 Route::post('reception/book_end', 'ReceptionController@book_end')->name('reception.book_end');
+Route::get('reception/zoom_back', 'ReceptionController@zoom_back')->name('reception.zoom_back');
 
 //customer
 Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');

@@ -132,6 +132,7 @@ class ReceptionController extends Controller
         $table_id = request()->get('table_id');
         $order_id = request()->get('order_id');
         $status = request()->get('status');
+        $customer_name = "";
         foreach($order_obj as $order){
             if(count($order->ordertables) > 0){
                 foreach ($order->ordertables as $ordertables) {
@@ -183,13 +184,29 @@ class ReceptionController extends Controller
         else
             $table_display_name = '';
 
-        
+        if($order_id > 0)
+            $customer_name = $order_get->customer_name;
+        else {
+            $today = date('Y-m-d');
+            $today_order = Order::where('created_at','>=',$today.' 00:00:00')->orderby('created_at','desc')->get()->first();
+            if(empty($today_order)) $customer_name = "Walked-in 00";
+            else {
+                $customer_name = $today_order->customer_name;
+                $last_name = (int)substr($customer_name,-2);
+                $last_name++;
+                if($last_name<10) {
+                    $last_name = '0' . $last_name;
+                }
+                $customer_name = substr($customer_name,0,-2) . $last_name;                
+            }
+
+        }
 
 //        dd($table_ids);
 
         $room_size = Room::find(1);
 
-        return view('reception.addCustomer')->with(compact('order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders', 'table_display_name', 'default_duration_id', 'room_size', 'status'));
+        return view('reception.addCustomer')->with(compact('order_tables', 'table_ids', 'table_obj', 'order_get', 'table_id', 'order_id', 'orders', 'table_display_name', 'default_duration_id', 'room_size', 'status', 'customer_name'));
     }
 
     public function store()
@@ -1900,60 +1917,8 @@ class ReceptionController extends Controller
         if($email_address != Null)
             Mail::to($email_address)->send(new SalesDayReportEmail($filename));
 
-        $sort = "asc";
-
-        if(request()->has('search_date')) {//by date change
-            $search_date = request()->search_date;
-            if(request()->d_s == 'up') {
-                $search_date = date('Y-m-d', strtotime(' +1 day', strtotime($search_date)));
-            } else if(request()->d_s == 'down') {
-                $search_date = date('Y-m-d', strtotime(' -1 day', strtotime($search_date)));
-            }
-            $search_date = date('Y-m-d', strtotime($search_date));
-        } else {//date nochange
-            $search_date = date('Y-m-d', strtotime($this->get_current_time()));
-        }
-        $search_display_date = date("d M Y", strtotime($search_date));
-
-        $order_obj = collect();
-
-        if(request()->get('sortType') == "asc"){
-
-            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
-            if(count($order_ids) > 0) {
-                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'asc')->get();
-                foreach($order_obj as $order) {
-                    $order->display_time = date_format(date_create($order->time),"h:i A");
-                    $order->table_display_name = $order->table_name;
-                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
-                }
-                $sort = "desc";
-            }
-
-        } else {
-            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
-            if(count($order_ids) > 0) {
-                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'desc')->get();
-                foreach($order_obj as $order) {
-                    $order->display_time = date_format(date_create($order->time),"h:i A");
-                    $order->table_display_name = $order->table_name;
-                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
-                }
-                $sort = "asc";
-            }
-
-        }
-
-        $daily_all_amount = 0;
-        foreach($order_obj as $order)
-        {
-
-            $order->display_time = date_format(date_create($order->time),"h:i A");
-            $order->table_display_name = $order->table_name;
-            $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
-            $daily_all_amount += $order->amount;
-        }
-        return view('admin.transaction.list')->with(compact('order_obj', 'search_display_date', 'sort', 'daily_all_amount')); 
+        return response()->json(['status' => 'success']);
+        
     }
 
     public function book_end()
@@ -1975,5 +1940,13 @@ class ReceptionController extends Controller
         }
 
         return response()->json(['status' => $result,'table_obj' => $table_obj]);
+    }
+
+    public function zoom_back()
+    {
+        session()->put('scale_value',request()->get('scale_value'));
+        $status = request()->get('status');
+        //return response()->json(['status' => session('scale_value')]);
+        return redirect()->route('reception.seated', ['status' => $status]);
     }
 }
