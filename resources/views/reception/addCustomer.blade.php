@@ -171,7 +171,7 @@
                         </div>
                         <div id="menu1" class="tab-detail display-none"><br>
                             <div class="offset-2 col-lg-8 col-xl-8 pl-0 " style="margin-top: 50px;">
-                                <input value="@if($order_id > 0) {{$order_get->guest}} @else 1 @endif"
+                                <input value="@if($order_id > 0){{$order_get->guest}}@else 1 @endif"
                                        id="guest-number" class="font-20 font-weight-bold form-control d-inline mr-4 border-guest-input text-center"
                                        style="height: 50px;width:280px;" name="guest_number"/>
                                 <span class="h4 text-info" style="padding-top:10px;color: #1ec2c9 !important;">GUEST</span><br>
@@ -960,11 +960,15 @@
                 table_id = table_id.split(",");
                 
                 for(var i=0;i<table_id.length;i++){
-                    var book_data = table_obj_book[table_id[i]-1]['book'];
+                    var book_data = '';
                     var book_duration = '';
                     var book_start_time = '';
                     var book_end_time = '';
                     var book_time = '';
+
+                    if(undefined !== table_obj_book[table_id[i]-1]['book']) {
+                        book_data = table_obj_book[table_id[i]-1]['book'];
+                    }
 
                     if(undefined !== book_data && book_data.length > 0) {
                         for(var j=0;j<book_data.length;j++) {
