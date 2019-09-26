@@ -46,16 +46,14 @@
         document.addEventListener("touchcancel", touchHandler, true);
     }
     
-    // $(document).ready(function() {
-    //     init();
-    // });
-    //
-    $(function(){
+    $(document).ready(function() {
+        init();
+    });
 
+    $(function(){
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
-              init();
             var itemID = el.id;
             var itemIndex = $(el).index();
             $.ajax({
@@ -95,24 +93,12 @@
           });
         }
       });
-       $("#sortable").sortable();
     });
-
-
 
 //});
 </script>
 <div class="">
     <div style="padding-top:8%;"></div>
-
-    <ul id="sortable">
-        <li>Item One</li>
-        <li>Item Two</li>
-        <li>Item Three</li>
-        <li>Item Four</li>
-        <li>Item Five</li>
-        <li>Item Six</li>
-    </ul>
 
     <div class="widthh blackgrey pt-4" style="height: 885px;">
         <a onclick="window.history.back()">
