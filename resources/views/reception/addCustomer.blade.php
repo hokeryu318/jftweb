@@ -171,7 +171,7 @@
                         </div>
                         <div id="menu1" class="tab-detail display-none"><br>
                             <div class="offset-2 col-lg-8 col-xl-8 pl-0 " style="margin-top: 50px;">
-                                <input value="@if($order_id > 0){{$order_get->guest}}@else 1 @endif"
+                                <input value="@if($order_id > 0){{$order_get->guest}}@endif"
                                        id="guest-number" class="font-20 font-weight-bold form-control d-inline mr-4 border-guest-input text-center"
                                        style="height: 50px;width:280px;" name="guest_number"/>
                                 <span class="h4 text-info" style="padding-top:10px;color: #1ec2c9 !important;">GUEST</span><br>
@@ -907,6 +907,13 @@
                     current_time();
                 }
             }
+            if(arg == "table") {
+                if($("#guest-number").val() == '') {
+                    $("#alert-string")[0].innerText = "Please input the guest";
+                    $("#java-alert").modal('toggle');
+                    return;
+                }
+            }
             if(arg == "name" || arg == "notes"){
                 if($("#selected-table").val() == 0){
                     $("#alert-string")[0].innerText = "Please select the table";
@@ -967,24 +974,24 @@
                     var book_time = '';
 
                     if(undefined !== table_obj_book[table_id[i]-1]) {
-                        book_data = table_obj_book[table_id[i]-1]['book'];
-                    }
+                        book_data = table_obj_book[table_id[i]-1]['book'];                    
 
-                    if(undefined !== book_data && book_data.length > 0) {
-                        for(var j=0;j<book_data.length;j++) {
-                            book_time = book_data[j]['time'];
-                            book_duration = book_data[j]['duration'];
-                            book_duration = replace_time(parseInt(book_duration));
-                            if(book_duration == 'Unlimited') book_duration = 24 - parseInt(book_time.substr(11,2));
-                            book_start_time = new Date(book_time.substr(0,4),parseInt(book_time.substr(5,2)),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
-                            book_start_time = book_start_time.getTime();
-                            book_end_time = book_start_time + book_duration * 60 * 1000;
-                            //alert(parseInt(book_time.substr(11,2))+':'+parseInt(book_time.substr(14,2))+";"+book_data[j]['duration']);
-                            //alert(book_start_time + 'qq' + order_start_time + 'aa' + book_end_time + 'zz' + order_end_time);
-                            if( (order_start_time < book_start_time && book_start_time < order_end_time) || (book_start_time < order_start_time && order_start_time < book_end_time) ) {
-                                $("#alert-string")[0].innerText = "Booking be made from "+parseInt(book_time.substr(11,2))+":"+parseInt(book_time.substr(14,2))+" already";
-                                $("#java-alert").modal('toggle');
-                                return;
+                        if(undefined !== book_data && book_data.length > 0) {
+                            for(var j=0;j<book_data.length;j++) {
+                                book_time = book_data[j]['time'];
+                                book_duration = book_data[j]['duration'];
+                                book_duration = replace_time(parseInt(book_duration));
+                                if(book_duration == 'Unlimited') book_duration = 24 - parseInt(book_time.substr(11,2));
+                                book_start_time = new Date(book_time.substr(0,4),parseInt(book_time.substr(5,2)),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
+                                book_start_time = book_start_time.getTime();
+                                book_end_time = book_start_time + book_duration * 60 * 1000;
+                                //alert(parseInt(book_time.substr(11,2))+':'+parseInt(book_time.substr(14,2))+";"+book_data[j]['duration']);
+                                //alert(book_start_time + 'qq' + order_start_time + 'aa' + book_end_time + 'zz' + order_end_time);
+                                if( (order_start_time < book_start_time && book_start_time < order_end_time) || (book_start_time < order_start_time && order_start_time < book_end_time) ) {
+                                    $("#alert-string")[0].innerText = "Booking be made from "+parseInt(book_time.substr(11,2))+":"+parseInt(book_time.substr(14,2))+" already";
+                                    $("#java-alert").modal('toggle');
+                                    return;
+                                }
                             }
                         }
                     }
