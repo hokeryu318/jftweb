@@ -47,12 +47,11 @@
     }
     
     // $(function(){
-    $(document).ready(function(){
-      // init();
-      $("#scroll-dish").addEventListener("touchstart", touchHandler, true);
-      $("#scroll-dish").addEventListener("touchmove", touchHandler, true);
-      $("#scroll-dish").addEventListener("touchend", touchHandler, true);
-      $("#scroll-dish").addEventListener("touchcancel", touchHandler, true);
+    $(document).ready(function() {
+        init();
+    });
+
+    $(function(){
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
