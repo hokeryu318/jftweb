@@ -26,20 +26,20 @@
 <script>
     function touchHandler(event)
     {
-        var touches = event.changedTouches,
-            first = touches[0],
-            type = "";
-
-        if(event.type == "touchstart") {
-            type = "mousedown";
-        } else if(event.type == "touchmove") {
-            type = "mousemove";
-        } else if(event.type == "touchend") {
-            type = "mouseup";
-        } else {
-            return;
-        }
-
+        // var touches = event.changedTouches,
+        //     first = touches[0],
+        //     type = "";
+        //
+        // // if(event.type == "touchstart") {
+        // //     type = "mousedown";
+        // // } else if(event.type == "touchmove") {
+        // //     type = "mousemove";
+        // // } else if(event.type == "touchend") {
+        // //     type = "mouseup";
+        // // } else {
+        // //     return;
+        // // }
+        //
         // switch(event.type)
         // {
         //     case "touchstart": type = "mousedown"; break;
@@ -47,17 +47,32 @@
         //     case "touchend":   type = "mouseup"; break;
         //     default: return;
         // }
+        //
+        // //initMouseEvent(type, canBubble, cancelable, view, clickCount,
+        // //           screenX, screenY, clientX, clientY, ctrlKey,
+        // //           altKey, shiftKey, metaKey, button, relatedTarget);
+        // var simulatedEvent = document.createEvent("MouseEvent");
+        // simulatedEvent.initMouseEvent(type, true, true, window, 1,
+        //                     first.screenX, first.screenY,
+        //                     first.clientX, first.clientY, false,
+        //                     false, false, false, 0/*left*/, null);
+        //
+        // first.target.dispatchEvent(simulatedEvent);
+        // event.preventDefault();
 
-        //initMouseEvent(type, canBubble, cancelable, view, clickCount, 
-        //           screenX, screenY, clientX, clientY, ctrlKey, 
-        //           altKey, shiftKey, metaKey, button, relatedTarget);
+        var touch = event.changedTouches[0];
+
         var simulatedEvent = document.createEvent("MouseEvent");
-        simulatedEvent.initMouseEvent(type, true, true, window, 1, 
-                            first.screenX, first.screenY, 
-                            first.clientX, first.clientY, false, 
-                            false, false, false, 0/*left*/, null);
+        simulatedEvent.initMouseEvent({
+                touchstart: "mousedown",
+                touchmove: "mousemove",
+                touchend: "mouseup"
+            }[event.type], true, true, window, 1,
+            touch.screenX, touch.screenY,
+            touch.clientX, touch.clientY, false,
+            false, false, false, 0, null);
 
-        first.target.dispatchEvent(simulatedEvent);
+        touch.target.dispatchEvent(simulatedEvent);
         event.preventDefault();
     }
 
