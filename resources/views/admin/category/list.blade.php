@@ -73,6 +73,7 @@
             document.addEventListener("touchend", touchHandler, true);
             document.addEventListener("touchcancel", touchHandler, true);
         }
+        init();
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
