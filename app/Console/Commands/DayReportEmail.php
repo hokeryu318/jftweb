@@ -255,105 +255,120 @@ class DayReportEmail extends Command
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['10'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['10'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 11) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['11'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['11'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 12) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['12'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['12'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 13) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['13'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['13'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 14) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['14'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['14'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 15) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['15'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['15'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 16) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['16'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['16'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 17) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['17'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['17'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 18) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['18'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['18'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 19) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['19'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['19'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 20) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['20'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['20'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 21) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['21'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['21'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 22) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['22'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['22'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 23) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['23'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['23'] = round($elapsed / $count_temp);
                             }
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 0) {
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
                                 $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
-                                $hourly_cooktime_ranking[$i]['0'] = round($elapsed / $count_temp);
+                                if($count_temp != 0)
+                                    $hourly_cooktime_ranking[$i]['0'] = round($elapsed / $count_temp);
                             }
 
                             $hourly_cooktime_ranking[$i]['cook_avg_time'] = round(($hourly_cooktime_ranking[$i]['10'] * $hourly_item_ranking[$i]['10'] +
