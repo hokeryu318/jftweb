@@ -19,6 +19,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
+{{--<script src="http://code.jquery.com/jquery.min.js"></script>--}}
+{{--<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>--}}
+{{--<script src="jquery.ui.touch-punch.min.js"></script>--}}
+
 <script>
     function touchHandler(event)
     {
@@ -26,13 +30,23 @@
             first = touches[0],
             type = "";
 
-        switch(event.type)
-        {
-        case "touchstart": type = "mousedown"; break;
-        case "touchmove":  type = "mousemove"; break;        
-        case "touchend":   type = "mouseup"; break;
-        default: return;
+        if(event.type == "touchstart") {
+            type = "mousedown";
+        } else if(event.type == "touchmove") {
+            type = "mousemove";
+        } else if(event.type == "touchend") {
+            type = "mouseup";
+        } else {
+            return;
         }
+
+        // switch(event.type)
+        // {
+        //     case "touchstart": type = "mousedown"; break;
+        //     case "touchmove":  type = "mousemove"; break;
+        //     case "touchend":   type = "mouseup"; break;
+        //     default: return;
+        // }
 
         //initMouseEvent(type, canBubble, cancelable, view, clickCount, 
         //           screenX, screenY, clientX, clientY, ctrlKey, 
