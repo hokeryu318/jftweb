@@ -21,7 +21,7 @@
                 <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Cash Amount: ${{ $daily_all_amount }}" readonly/>
             </div>
             <div class="col-3" style="text-align: right;top: 5px;">
-                <a class="src_trans fs-25" href="{{ route('admin.now_sendmail') }}">
+                <a class="src_trans fs-25" onclick="now_sendmail()">
                     Finish the day now
                 </a>
             </div>
@@ -139,6 +139,17 @@
                 //console.log(result);                
                 document.getElementById("data_view").innerHTML = result;
                 document.getElementById("all_amount").value = "Today's Total Cash Amount: $" + daily_all_amount.value;
+            }
+        });
+    }
+
+    function now_sendmail() {
+        $.ajax({
+            type:"GET",
+            url:"{{ route('admin.now_sendmail') }}",
+            data:{},
+            success: function(result){
+                //alert("asd");
             }
         });
     }

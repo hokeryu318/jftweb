@@ -1880,6 +1880,61 @@ class ReceptionController extends Controller
         $filename = public_path().'/excel/exports/sales_report.xlsx';
 
         Mail::to('manager@kuromatsu.com.au')->send(new SalesDayReportEmail($filename));
+
+        $sort = "asc";
+
+        if(request()->has('search_date')) {//by date change
+            $search_date = request()->search_date;
+            if(request()->d_s == 'up') {
+                $search_date = date('Y-m-d', strtotime(' +1 day', strtotime($search_date)));
+            } else if(request()->d_s == 'down') {
+                $search_date = date('Y-m-d', strtotime(' -1 day', strtotime($search_date)));
+            }
+            $search_date = date('Y-m-d', strtotime($search_date));
+        } else {//date nochange
+            $search_date = date('Y-m-d', strtotime($this->get_current_time()));
+        }
+        $search_display_date = date("d M Y", strtotime($search_date));
+
+        $order_obj = collect();
+
+        if(request()->get('sortType') == "asc"){
+
+            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
+            if(count($order_ids) > 0) {
+                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'asc')->get();
+                foreach($order_obj as $order) {
+                    $order->display_time = date_format(date_create($order->time),"h:i A");
+                    $order->table_display_name = $order->table_name;
+                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
+                }
+                $sort = "desc";
+            }
+
+        } else {
+            $order_ids = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->pluck('order_id');
+            if(count($order_ids) > 0) {
+                $order_obj = Order::whereIn('id', $order_ids)->orderBy('time', 'desc')->get();
+                foreach($order_obj as $order) {
+                    $order->display_time = date_format(date_create($order->time),"h:i A");
+                    $order->table_display_name = $order->table_name;
+                    $order->amount = Orderpay::where('order_id', $order->id)->pluck('total')->first();
+                }
+                $sort = "asc";
+            }
+
+        }
+
+        $daily_all_amount = 0;
+        foreach($order_obj as $order)
+        {
+
+            $order->display_time = date_format(date_create($order->time),"h:i A");
+            $order->table_display_name = $order->table_name;
+            $order->amount = OrderDish::where('order_id', $order->id)->sum('total_price');
+            $daily_all_amount += $order->amount;
+        }
+        return view('admin.transaction.list')->with(compact('order_obj', 'search_display_date', 'sort', 'daily_all_amount')); 
     }
 
     public function book_end()

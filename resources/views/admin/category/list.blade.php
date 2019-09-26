@@ -18,7 +18,15 @@
 <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>-->
 <script>
+    //var clickHandler = ('ontouchstart' in document.documentElement ? "touchstart" : "click");
+
+    //$("li").bind(clickHandler, function(e) {
+    //    alert("clicked or tapped. This button used: " + clickHandler);
+    
     $(function(){
       $("#scroll-dish").sortable({
         stop: function(){
@@ -63,6 +71,8 @@
         }
       });
     });
+
+//});
 </script>
 <div class="">
     <div style="padding-top:8%;"></div>
