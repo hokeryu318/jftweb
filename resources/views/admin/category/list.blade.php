@@ -38,7 +38,7 @@
         event.preventDefault();
     }
 
-    function init() 
+    function inits()
     {
         document.addEventListener("touchstart", touchHandler, true);
         document.addEventListener("touchmove", touchHandler, true);
@@ -46,9 +46,8 @@
         document.addEventListener("touchcancel", touchHandler, true);
     }
     
-    // $(function(){
     $(document).ready(function() {
-        init();
+        inits();
     });
 
     $(function(){
