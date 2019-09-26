@@ -15,51 +15,14 @@
         text-align: center;
     }
 </style>
-<!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.0-alpha.2/jquery.mobile-1.4.0-alpha.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-
-{{--<script src="http://code.jquery.com/jquery.min.js"></script>--}}
-{{--<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>--}}
-{{--<script src="jquery.ui.touch-punch.min.js"></script>--}}
 
 <script>
     function touchHandler(event)
     {
-        // var touches = event.changedTouches,
-        //     first = touches[0],
-        //     type = "";
-        //
-        // // if(event.type == "touchstart") {
-        // //     type = "mousedown";
-        // // } else if(event.type == "touchmove") {
-        // //     type = "mousemove";
-        // // } else if(event.type == "touchend") {
-        // //     type = "mouseup";
-        // // } else {
-        // //     return;
-        // // }
-        //
-        // switch(event.type)
-        // {
-        //     case "touchstart": type = "mousedown"; break;
-        //     case "touchmove":  type = "mousemove"; break;
-        //     case "touchend":   type = "mouseup"; break;
-        //     default: return;
-        // }
-        //
-        // //initMouseEvent(type, canBubble, cancelable, view, clickCount,
-        // //           screenX, screenY, clientX, clientY, ctrlKey,
-        // //           altKey, shiftKey, metaKey, button, relatedTarget);
-        // var simulatedEvent = document.createEvent("MouseEvent");
-        // simulatedEvent.initMouseEvent(type, true, true, window, 1,
-        //                     first.screenX, first.screenY,
-        //                     first.clientX, first.clientY, false,
-        //                     false, false, false, 0/*left*/, null);
-        //
-        // first.target.dispatchEvent(simulatedEvent);
-        // event.preventDefault();
-
         var touch = event.changedTouches[0];
 
         var simulatedEvent = document.createEvent("MouseEvent");
@@ -87,7 +50,6 @@
     // $(function(){
     $(document).ready(function(){
       init();
-      $("#scroll-dish").draggable();
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
