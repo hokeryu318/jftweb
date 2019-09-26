@@ -40,15 +40,19 @@
 
     function init() 
     {
-        document.getElementById("scroll-dish").addEventListener("touchstart", touchHandler, true);
-        document.getElementById("scroll-dish").addEventListener("touchmove", touchHandler, true);
-        document.getElementById("scroll-dish").addEventListener("touchend", touchHandler, true);
-        document.getElementById("scroll-dish").addEventListener("touchcancel", touchHandler, true);
+        document.addEventListener("touchstart", touchHandler, true);
+        document.addEventListener("touchmove", touchHandler, true);
+        document.addEventListener("touchend", touchHandler, true);
+        document.addEventListener("touchcancel", touchHandler, true);
     }
     
     // $(function(){
     $(document).ready(function(){
-      init();
+      // init();
+      $("#scroll-dish").addEventListener("touchstart", touchHandler, true);
+      $("#scroll-dish").addEventListener("touchmove", touchHandler, true);
+      $("#scroll-dish").addEventListener("touchend", touchHandler, true);
+      $("#scroll-dish").addEventListener("touchcancel", touchHandler, true);
       $("#scroll-dish").sortable({
         stop: function(){
           $.map($(this).find('li'), function(el) {
