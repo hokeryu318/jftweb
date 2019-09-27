@@ -1,4 +1,4 @@
-<li class="btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light subcat" onclick="onSub(this)"
+<li class="ui-state-default btn white pt-2 radius pb-2 mb-3 pl-2 w-95 pr-0  waves-effect waves-light subcat" onclick="onSub(this)"
     data-id="{{ $sub->id }}"
     data-parent="{{ $sub->parent_id }}"
     id="{{ $sub->id }}">
