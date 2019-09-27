@@ -888,6 +888,12 @@
             forceParse: 0
         });
 
+        $(document).ready(function(){
+            var screen_scale = "{{null !== session('scale_value1') ? session('scale_value1') : 100}}";
+            $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
+            $("#scale-value").text(screen_scale + '%');
+        });
+
         //Now
         $('#now-time-picker').picker({
                 data: data_arr,
@@ -921,7 +927,7 @@
                     return;
                 }
                 var table_obj_book = <?php echo json_encode($table_obj) ?>;
-
+                
                 var current_date =  new Date();
                 var order_start_time = '';
                 var order_end_time = '';
@@ -972,44 +978,48 @@
                     var book_start_time = '';
                     var book_end_time = '';
                     var book_time = '';
+                    for(var k = 0; k < table_obj_book.length;k++) {
+                        if(undefined !== table_obj_book[k] && table_id[i] == table_obj_book[k]['id']) {
+                            book_data = table_obj_book[k]['book'];                    
 
-                    if(undefined !== table_obj_book[table_id[i]-1]) {
-                        book_data = table_obj_book[table_id[i]-1]['book'];                    
-
-                        if(undefined !== book_data && book_data.length > 0) {
-                            for(var j=0;j<book_data.length;j++) {
-                                book_time = book_data[j]['time'];
-                                book_duration = book_data[j]['duration'];
-                                book_duration = replace_time(parseInt(book_duration));
-                                if(book_duration == 'Unlimited') book_duration = 24 - parseInt(book_time.substr(11,2));
-                                book_start_time = new Date(book_time.substr(0,4),parseInt(book_time.substr(5,2)),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
-                                book_start_time = book_start_time.getTime();
-                                book_end_time = book_start_time + book_duration * 60 * 1000;
-                                //alert(parseInt(book_time.substr(11,2))+':'+parseInt(book_time.substr(14,2))+";"+book_data[j]['duration']);
-                                //alert(book_start_time + 'qq' + order_start_time + 'aa' + book_end_time + 'zz' + order_end_time);
-                                if( (order_start_time < book_start_time && book_start_time < order_end_time) || (book_start_time < order_start_time && order_start_time < book_end_time) ) {
-                                    $("#alert-string")[0].innerText = "Booking be made from "+parseInt(book_time.substr(11,2))+":"+parseInt(book_time.substr(14,2))+" already";
-                                    $("#java-alert").modal('toggle');
-                                    return;
+                            if(undefined !== book_data && book_data.length > 0) {
+                                for(var j=0;j<book_data.length;j++) {
+                                    book_time = book_data[j]['time'];
+                                    book_duration = book_data[j]['duration'];
+                                    book_duration = replace_time(parseInt(book_duration));
+                                    if(book_duration == 'Unlimited') book_duration = 24 - parseInt(book_time.substr(11,2));
+                                    book_start_time = new Date(book_time.substr(0,4),parseInt(book_time.substr(5,2)),parseInt(book_time.substr(8,2)),parseInt(book_time.substr(11,2)),parseInt(book_time.substr(14,2)));
+                                    book_start_time = book_start_time.getTime();
+                                    book_end_time = book_start_time + book_duration * 60 * 1000;
+                                    //alert(parseInt(book_time.substr(11,2))+':'+parseInt(book_time.substr(14,2))+";"+book_data[j]['duration']);
+                                    //alert(book_start_time + 'qq' + order_start_time + 'aa' + book_end_time + 'zz' + order_end_time);
+                                    if( (order_start_time < book_start_time && book_start_time < order_end_time) || (book_start_time < order_start_time && order_start_time < book_end_time) ) {
+                                        $("#alert-string")[0].innerText = "Booking be made from "+parseInt(book_time.substr(11,2))+":"+parseInt(book_time.substr(14,2))+" already";
+                                        $("#java-alert").modal('toggle');
+                                        return;
+                                    }
                                 }
                             }
                         }
                     }
-                    //alert(table_obj_book[table_id[i]-1]['book'][0]['time']);
                 }
                 var cnt = 0;
                 var type = 0;
                 for(var i=0;i<table_id.length;i++){
-                    if(undefined !== table_obj_book[table_id[i]-1]) {
-                        type = table_obj_book[table_id[i]-1]['type'];
+                    for(var j = 0; j < table_obj_book.length;j++) {
+                        if(undefined !== table_obj_book[j] && table_id[i] == table_obj_book[j]['id']) {
+                            type = table_obj_book[j]['type'];
+                        }
                     }
-                    cnt += type;
+                    if(cnt != 'unlimit' && type == 0 ) cnt = 'unlimit';
+                    else if(cnt != 'unlimit')   cnt += type;
                 }
-                /*if(cnt<$("#guest-number").val()) {
+                //alert(cnt + "ww" + $("#guest-number").val());
+                if(cnt != 'unlimit' && cnt<$("#guest-number").val()) {
                     $("#alert-string")[0].innerText = "The number of seats is than smaller the guest.";
                     $("#java-alert").modal('toggle');
                     return;
-                }*/
+                }
                 
             }
             $(".top-menu-btn").removeClass('top-menu-active');
@@ -1123,6 +1133,13 @@
             }else{
                 $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
             }
+            $.ajax({
+                type: "get",
+                url: "{{ route('reception.zoom_back1') }}",
+                data: {scale_value: scale_value,status:"{{ $status }}",_token:"{{ csrf_token() }}"},
+                success: function(data) {
+                }
+            });
             scale_value_obj.text(scale_value+"%");
         }
 
@@ -1141,6 +1158,13 @@
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
             }
+            $.ajax({
+                type: "get",
+                url: "{{ route('reception.zoom_back1') }}",
+                data: {scale_value: scale_value,status:"{{ $status }}",_token:"{{ csrf_token() }}"},
+                success: function(data) {
+                }
+            });
             scale_value_obj.text(scale_value+"%");
 
         }

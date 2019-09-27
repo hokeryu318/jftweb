@@ -1949,4 +1949,12 @@ class ReceptionController extends Controller
         //return response()->json(['status' => session('scale_value')]);
         return redirect()->route('reception.seated', ['status' => $status]);
     }
+
+    public function zoom_back1()
+    {
+        session()->put('scale_value1',request()->get('scale_value'));
+        $status = request()->get('status');
+        //return response()->json(['status' => session('scale_value')]);
+        return redirect()->route('reception.seated', ['status' => $status]);
+    }
 }
