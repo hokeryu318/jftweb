@@ -2,43 +2,62 @@
 <div class="add_item_modal">
     <div class="row" style="margin: 0 0 10px 30px;">
         <div class="col-4 category">
+            @php $i=0; @endphp
             @foreach($category_all as $key => $category)
-                @if(isset($category['has_subs']) && $category['has_subs'] == 1)
-                    <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">
-                        {{--                        <img src="{{asset("img/collapse1.png")}}" style="width: 15px;" />--}}
+                @if(isset($category['has_subs']) && $category['has_subs'] == 1 && !empty($category['children']))
+                    @php  $first = $category['id']; @endphp
+                    @foreach($category['children'] as $child)
+                        @php 
+                            $first = $child['id'];                             
+                            break;
+                        @endphp
+                    @endforeach
+                    <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$first}})">
                         <span class="fs-25">{{$category['name_en']}}</span>
                     </div>
+                    @if($i == 0)
+                    <div class="display-none" style="display: block;">
+                        <ul class="category_child">
+                            @foreach($category['children'] as $child)
+                                @if($i == 0)
+                                <li id="category_{{$child['id']}}" class="common_category selected_category_color" onclick="onDishes1({{ $child['id'] }})">
+                                    -<span class="fs-25">{{$child['name_en']}}</span></li>
+                                @else
+                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
+                                    -<span class="fs-25">{{$child['name_en']}}</span></li>
+                                @endif
+                                @php $i++; @endphp
+                            @endforeach
+                        </ul>
+                    </div>
+                    @else
                     <div class="display-none">
                         <ul class="category_child">
                             @foreach($category['children'] as $child)
-                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes({{ $child['id'] }})">
+                                <li id="category_{{$child['id']}}" class="common_category" onclick="onDishes1({{ $child['id'] }})">
                                     -<span class="fs-25">{{$child['name_en']}}</span></li>
                             @endforeach
                         </ul>
                     </div>
-
-                    {{--<ul id="myUL">--}}
-                    {{--<li><span class="caret common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">{{ $category['name_en'] }}</span>--}}
-                    {{--<ul class="nested">--}}
-                    {{--@foreach($category['children'] as $child)--}}
-                    {{--<li id="category_{{$child['id']}}" class="common_category" onclick="onDishes({{ $child['id'] }})">-{{$child['name_en']}}</li>--}}
-                    {{--@endforeach--}}
-                    {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
+                    @endif
                 @else
-                    @if($category['parent_id'] == "")
-                        <div class="category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
-                            {{--                            <img src="{{asset("img/collapse1.png")}}" style="width: 17px;" />--}}
-                            <span class="fs-25">{{$category['name_en']}}</span>
-                        </div>
-                        {{--<ul id="myUL">--}}
-                        {{--<li>--}}
-                        {{--<span class="caret common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id']}})">{{ $category['name_en'] }}</span>--}}
-                        {{--</li>--}}
-                        {{--</ul>--}}
+                    @if($i == 0)
+                        @if($category['parent_id'] == "")
+                            <div class="category_parent common_category selected_category_color" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
+                                {{--                            <img src="{{asset("img/collapse1.png")}}" style="width: 17px;" />--}}
+                                <span class="fs-25">{{$category['name_en']}}</span>
+                            </div>
+                        @endif
+                    @else
+                        @if($category['parent_id'] == "")
+                            <div class="category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$category['id'] }})">
+                                {{--                            <img src="{{asset("img/collapse1.png")}}" style="width: 17px;" />--}}
+                                <span class="fs-25">{{$category['name_en']}}</span>
+                            </div>
+                        @endif
                     @endif
                 @endif
+                @php $i++; @endphp
             @endforeach
         </div>
         <div class="space"></div>
@@ -47,6 +66,13 @@
                 @foreach ($dishes as $ds)
                     @if($ds->sold_out == 0)
                         <ul id="myUL">
+                            @if(count($ds->options) == 0)
+                            <li>
+                                <input type="checkbox" class="checked_items_{{ $ds->id }}0" value="{{$ds->id}}:0"
+                                onclick="selectItem(1, '{{ $ds->id }}',0)" style="width:20px;height:20px;" />
+                                <span class="fs-25">{{ $ds->name_en }}</span>
+                            </li>           
+                            @else
                             <li><span class="caret fs-25">{{ $ds->name_en }}</span>
                                 <ul class="nested">
                                     @foreach ($ds->options as $option)
@@ -78,6 +104,7 @@
                                     @endforeach
                                 </ul>
                             </li>
+                            @endif
                         </ul>
                     @endif
                 @endforeach
@@ -137,7 +164,7 @@
                 <p id="alert-string1" class="text-center fs-20"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" onclick="$('#java-alert1').modal('hide');">
                     Close
                     <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                 </button>
@@ -151,9 +178,9 @@
     var order_dish_id = <?php echo(json_encode($order_dish_id))?>;
     var count = <?php echo(json_encode($count))?>;
 
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         $(".category_parent").first().addClass('selected_category_color');
-    });
+    });*/
     $(".header").click(function () {
         $header = $(this);
         $content = $header.next();
@@ -161,6 +188,30 @@
     });
 
     function onDishes(category_id){
+        var catContents = document.getElementsByClassName('display-none');
+        for (var i = 0; i < catContents.length; i++) {
+            catContents[i].style.display = 'none';
+        }
+
+        select_list = [];
+        order_id = $('#order_id').val();
+        var selected_obj = $("#category_"+category_id);
+        $(".common_category").removeClass("selected_category_color");
+        selected_obj.toggleClass('selected_category_color');
+        $.ajax({
+            type:"POST",
+            url:"{{ route('reception.dish_list') }}",
+            data:{
+                order_id: order_id, category: category_id, _token:"{{ csrf_token() }}"
+            },
+            success: function(result){
+                $('#dish-content').html(result);
+            }
+        });
+    }
+
+    function onDishes1(category_id){
+
         select_list = [];
         order_id = $('#order_id').val();
         var selected_obj = $("#category_"+category_id);
@@ -191,7 +242,8 @@
                 }
             } else {
                 if(parseInt(count) + parseInt(qty_number) < 1) {
-                    alert('The count for this item is ' + count + '.\n Please select qty by small than count!');
+                    $("#alert-string1")[0].innerText = 'The count for this item is ' + count + '.\n Please select qty by small than count!';
+                    $("#java-alert1").modal('toggle');
                 } else {
 
                     qty_number --;
@@ -225,10 +277,14 @@
         var ds_op = dish_id + option_id;
         var checked_cnt = $(".checked_items_" + ds_op + ":checked").length;
         if(checked_cnt > number_selection) {
-            if(number_selection == 1)
-                alert('You can select only 1 item!');
-            else
-                alert('You can select only ' + number_selection + ' items!');
+            if(number_selection == 1) {
+                $("#alert-string1")[0].innerText = "You can select only 1 item!";
+                $("#java-alert1").modal('toggle');                
+            }
+            else {
+                $("#alert-string1")[0].innerText = 'You can select only ' + number_selection + ' items!';
+                $("#java-alert1").modal('toggle');                
+            }
             var inputs = document.querySelectorAll('.checked_items_' + ds_op);
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].checked = false;
@@ -265,28 +321,29 @@
                 }
                 else{
                     if(tmp != val_arr[0]) {
-                        alert('You can select only 1 dish!');
+                        $("#alert-string1")[0].innerText = "You can select only 1 dish!";
+                        $("#java-alert1").modal('toggle');
                     } else {
                         select_list.push(val);
                     }
                 }
             });
-
+            
             if(select_list.length == 0){
-                alert('Please select dish and options!');
-                //$("#alert-string1")[0].innerText = "Please select dish and options!";
-                //$("#java-alert1").modal('toggle');
+                $("#alert-string1")[0].innerText = "Please select dish and options!";
+                $("#java-alert1").modal('toggle');
                 return;
             } else {
                 var qty_number_obj = $("#qty");
                 var qty = qty_number_obj.html();
-
+                
                 if(qty == 0) {
-                    alert('Please set qty!');
+                    $("#alert-string1")[0].innerText = "Please set qty!";
+                    $("#java-alert1").modal('toggle');
                 } else {
                     $('#thirdModal').html('');
                     $('#thirdModal').modal('hide');
-
+                    
                     $.ajax({
                         type:"POST",
                         url:"{{ route('reception.add_item') }}",
@@ -302,11 +359,12 @@
         } else {// change count of item
             var qty_number_obj = $("#qty");
             var qty = qty_number_obj.html();
-
+            
             if(qty == 0) {
-                alert('Please set qty!');
+                $("#alert-string1")[0].innerText = "Please set qty!";
+                $("#java-alert1").modal('toggle');
             } else {
-
+                
                 $('#thirdModal').html('');
                 $('#thirdModal').modal('hide');
 

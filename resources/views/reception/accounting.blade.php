@@ -117,7 +117,7 @@
                                 @foreach($order_dishes as $order_dish)
                                     {{--<tr onclick="select_item({{ $order_dish->id }})">--}}
                                     <tr onclick="select_item({{ $order_dish->id }})" id="item_{{ $order_dish->id }}">
-                                        <td class="td1"><h6><span class="fs-25">{{ $order_dish->dish_name_en }}
+                                        <td class="td1" id="td_{{ $order_dish->id }}" style="color:black;"><h6><span class="fs-25">{{ $order_dish->dish_name_en }}
                                                     @foreach($order_dish->options as $option)
                                                         [{{ $option->option_name }}: {{ $option->item_name }}]
                                                     @endforeach
@@ -342,6 +342,12 @@
     // });
 
     function select_item(selected_dish_id) {
+
+        var select_color = document.getElementsByClassName('td1');
+        for(var i=0;i<select_color.length;i++) {
+            select_color[i].style.color = 'black';
+        }
+        document.getElementById('td_'+selected_dish_id).style.color = 'blue';
 
         order_dish_id = selected_dish_id;
 

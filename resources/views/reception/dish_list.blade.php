@@ -1,6 +1,13 @@
 @foreach ($dishes as $ds)
     @if($ds->sold_out == 0)
         <ul id="myUL">
+            @if(count($ds->options) == 0)
+                <li>
+                    <input type="checkbox" class="checked_items_{{ $ds->id }}0" value="{{$ds->id}}:0"
+                    onclick="selectItem(1, '{{ $ds->id }}',0)" style="width:20px;height:20px;" />
+                    <span class="fs-25">{{ $ds->name_en }}</span>
+                </li>           
+            @else
             <li><span class="caret fs-25">{{ $ds->name_en }}</span>
                 <ul class="nested">
                     @foreach ($ds->options as $option)
@@ -32,6 +39,7 @@
                     @endforeach
                 </ul>
             </li>
+            @endif
         </ul>
     @endif
 @endforeach
