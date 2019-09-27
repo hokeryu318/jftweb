@@ -1005,11 +1005,11 @@
                     }
                     cnt += type;
                 }
-                if(cnt<$("#guest-number").val()) {
+                /*if(cnt<$("#guest-number").val()) {
                     $("#alert-string")[0].innerText = "The number of seats is than smaller the guest.";
                     $("#java-alert").modal('toggle');
                     return;
-                }
+                }*/
                 
             }
             $(".top-menu-btn").removeClass('top-menu-active');

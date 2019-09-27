@@ -125,7 +125,26 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="java-alert1" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-top: -750px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('img/Group1101.png') }}"  style="width:25px;height:25px;" class="float-right" />
+                </button>
+            </div>
+            <div class="modal-body pr-4">
+                <p id="alert-string1" class="text-center fs-20"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
+                    Close
+                    <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
     var select_list = [];
@@ -186,7 +205,6 @@
         //         qty_number = '0' + qty_number;
         //     }
         // }
-        alert(qty_number);
         qty_number_obj.html(qty_number);
 
     }
@@ -256,6 +274,9 @@
 
             if(select_list.length == 0){
                 alert('Please select dish and options!');
+                //$("#alert-string1")[0].innerText = "Please select dish and options!";
+                //$("#java-alert1").modal('toggle');
+                return;
             } else {
                 var qty_number_obj = $("#qty");
                 var qty = qty_number_obj.html();
