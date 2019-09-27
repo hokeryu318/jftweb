@@ -17,7 +17,7 @@
             </div>
             <div class="text-center display_scale">
                 <img src="{{ asset('img/plus_full.png') }}" class="plus_btn" onclick="tableZoomIn()"/>
-                <p class="font-weight-bold pt5 scale_value" id="scale-value">100%</p>
+                <p class="font-weight-bold pt5 scale_value" id="scale-value"></p>
                 <img src="{{ asset('img/minus.png') }}" class="minus_btn" onclick="tableZoomOut();"/>
             </div>
         </div>
@@ -1446,6 +1446,11 @@
         //     document.getElementById('room-content').style.marginTop = '12px';
         //     $("#exit-fullscreen").show('slow');
         // });
+        $(document).ready(function(){
+            var screen_scale = "{{null !== session('scale_value') ? session('scale_value') : 100}}";
+            $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
+            $("#scale-value").text(screen_scale + '%');
+        });
 
         $("#display-all").click(function(){
 
@@ -1490,6 +1495,13 @@
             }else{
                 $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
             }
+            $.ajax({
+                type: "get",
+                url: "{{ route('reception.zoom_back') }}",
+                data: {scale_value: scale_value,status:"{{ $status }}",_token:"{{ csrf_token() }}"},
+                success: function(data) {
+                }
+            });
             scale_value_obj.text(scale_value+"%");
         }
 
@@ -1508,6 +1520,13 @@
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
             }
+            $.ajax({
+                type: "get",
+                url: "{{ route('reception.zoom_back') }}",
+                data: {scale_value: scale_value,status:"{{ $status }}",_token:"{{ csrf_token() }}"},
+                success: function(data) {
+                }
+            });
             scale_value_obj.text(scale_value+"%");
         }
 
@@ -1696,8 +1715,9 @@
                         document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
                     }
                     else if (elapsed_time < 0 && elapsed_time > -3000) {
-                        
-                        document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
+                        @if($status != 'booking')                        
+                            document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
+                        @endif
                         document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
                         $.ajax({
                             type:"POST",
