@@ -186,6 +186,7 @@
         //         qty_number = '0' + qty_number;
         //     }
         // }
+        alert(qty_number);
         qty_number_obj.html(qty_number);
 
     }

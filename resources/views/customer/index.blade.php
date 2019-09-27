@@ -202,7 +202,7 @@
             <h6>&nbsp;</h6>
             <div class="tTime">
                 <h3>Start time</h3>
-                <h2>{{date('H:i d F Y', strtotime($order->time))}}</h2>
+                <h2>{{date('H:i d f Y', strtotime($order->time))}}</h2>
             </div>
         </div>
         {{--@if($order_table->calling_time)--}}
