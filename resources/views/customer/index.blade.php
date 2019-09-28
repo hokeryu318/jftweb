@@ -492,7 +492,7 @@
 
     function plusQty(arg){
         var qty_number_obj = $("#numOfItems");
-        var qty_number = qty_number_obj.html();
+        var qty_number = qty_number_obj.text();
         if(arg == 'plus'){
             qty_number ++;
         }else{

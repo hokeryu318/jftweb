@@ -160,7 +160,7 @@ class Controller extends BaseController
         $count_notification['seated'] = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
         $count_notification['bookings'] = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
 
-        $count_notification['table_id'] = $table_id - 1;
+        $count_notification['table_id'] = $table_id;
 
         $count_notification['selected'] = $selected;
 

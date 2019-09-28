@@ -49,19 +49,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -94,19 +94,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -141,19 +141,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -188,19 +188,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -237,19 +237,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -287,19 +287,19 @@
                                                 <br>
                                             </a>
                                             @if($table->order[0]->pay_flag == '1')
-                                                <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_icon_{{$key}}">
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
                                             @endif
                                             @if($table->orderTable[0]->calling_time != Null)
-                                                <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_icon_{{$key}}">
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->review != Null)
-                                                <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                             @endif
                                             @if($table->order[0]->note != Null)
                                                 <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -337,19 +337,19 @@
                                                     <br>
                                                 </a>
                                                 @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                                 @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                    <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                                 @else
-                                                <img class="alarm" id="review_icon_{{$key}}">
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->note != Null)
                                                     <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -389,19 +389,19 @@
                                                     <br>
                                                 </a>
                                                 @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                                 @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                    <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                                 @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
+                                                    <img class="alarm" id="review_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->note != Null)
                                                     <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -441,19 +441,19 @@
                                                     <br>
                                                 </a>
                                                 @if($table->order[0]->pay_flag == '1')
-                                                    <img class="alarm" id="belled_icon_{{$key}}" src="{{ asset('img/calling.png') }}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
-                                                    <img class="alarm" id="belled_icon_{{$key}}">
+                                                    <img class="alarm" id="belled_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->orderTable[0]->calling_time != Null)
-                                                    <img class="alarm" id="call_icon_{{$key}}" src="{{ asset('img/alarm.png') }}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
                                                 @else
-                                                    <img class="alarm" id="call_icon_{{$key}}">
+                                                    <img class="alarm" id="call_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->review != Null)
-                                                    <img class="alarm" id="review_icon_{{$key}}" src="{{ asset('img/msg.png') }}">
+                                                    <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
                                                 @else
-                                                    <img class="alarm" id="review_icon_{{$key}}">
+                                                    <img class="alarm" id="review_icon_{{$table->id}}">
                                                 @endif
                                                 @if($table->order[0]->note != Null)
                                                     <img class="alarm" src="{{ asset('img/note.png') }}">
@@ -717,7 +717,27 @@
                                             <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
-                                            </h6>                                            
+                                            </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -748,6 +768,26 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -780,6 +820,26 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -812,6 +872,26 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -846,6 +926,26 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -881,6 +981,26 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
+                                            @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                             <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                 &nbsp;
                                                 <br>
@@ -916,6 +1036,26 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
+                                                @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                                 <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                     &nbsp;
                                                     <br>
@@ -953,6 +1093,26 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
+                                                @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                                 <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                     &nbsp;
                                                     <br>
@@ -990,6 +1150,26 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
+                                                @if($table->order[0]->pay_flag == '1')
+                                                <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
+                                            @else
+                                                <img class="alarm" id="belled_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->orderTable[0]->calling_time != Null)
+                                                <img class="alarm" id="call_icon_{{$table->id}}" src="{{ asset('img/alarm.png') }}">
+                                            @else
+                                                <img class="alarm" id="call_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->review != Null)
+                                                <img class="alarm" id="review_icon_{{$table->id}}" src="{{ asset('img/msg.png') }}">
+                                            @else
+                                                <img class="alarm" id="review_icon_{{$table->id}}">
+                                            @endif
+                                            @if($table->order[0]->note != Null)
+                                                <img class="alarm" src="{{ asset('img/note.png') }}">
+                                            @else
+                                                <e class="alarm" style="width: 19px;height: 16px;"></e>
+                                            @endif
                                                 <a class="font-weight-bold red-text" id="time_book_{{$key}}">
                                                     &nbsp;
                                                     <br>
@@ -1335,19 +1515,19 @@
                                     <div class="col-lg-6 pr-0 col-xl-6">
                                         <div class="row p-0 m-0">
                                             @if($order->pay_flag == '1')
-                                                <img class="alarm" id="belled_list_{{$order->ordertables[0]['table_id']-1}}" style="margin-left:-7px;width: 25px;height: 23px;" src="{{ asset('img/calling.png') }}">
+                                                <img class="alarm" id="belled_list_{{$order->ordertables[0]['table_id']}}" style="margin-left:-7px;width: 25px;height: 23px;" src="{{ asset('img/calling.png') }}">
                                             @else
-                                                <img class="alarm" id="belled_list_{{$order->ordertables[0]['table_id']-1}}">
+                                                <img class="alarm" id="belled_list_{{$order->ordertables[0]['table_id']}}">
                                             @endif
                                             @if($order->ordertables[0]->calling_time != Null)
-                                                <img class="alarm" id="call_list_{{$order->ordertables[0]['table_id']-1}}" style="width: 21px;height: 23px;" src="{{ asset('img/alarm.png') }}">
+                                                <img class="alarm" id="call_list_{{$order->ordertables[0]['table_id']}}" style="width: 21px;height: 23px;" src="{{ asset('img/alarm.png') }}">
                                             @else
-                                                <img class="alarm" id="call_list_{{$order->ordertables[0]['table_id']-1}}">
+                                                <img class="alarm" id="call_list_{{$order->ordertables[0]['table_id']}}">
                                             @endif
                                             @if($order->review != Null)
-                                                <img class="alarm" id="review_list_{{$order->ordertables[0]['table_id']-1}}" style="width: 25px;height: 21px;" src="{{ asset('img/msg.png') }}">
+                                                <img class="alarm" id="review_list_{{$order->ordertables[0]['table_id']}}" style="width: 25px;height: 21px;" src="{{ asset('img/msg.png') }}">
                                             @else
-                                                <img class="alarm" id="review_list_{{$order->ordertables[0]['table_id']-1}}">
+                                                <img class="alarm" id="review_list_{{$order->ordertables[0]['table_id']}}">
                                             @endif
                                             @if($order->note != Null)
                                                 <img class="alarm" style="width: 25px;height: 19px;" src="{{ asset('img/note.png') }}">

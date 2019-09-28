@@ -231,7 +231,7 @@
 
     function plusQty(arg){
         var qty_number_obj = $("#qty");
-        var qty_number = qty_number_obj.html();
+        var qty_number = qty_number_obj.text();
 
         if(arg == 'plus') {
             qty_number ++;
@@ -335,7 +335,7 @@
                 return;
             } else {
                 var qty_number_obj = $("#qty");
-                var qty = qty_number_obj.html();
+                var qty = qty_number_obj.text();
                 
                 if(qty == 0) {
                     $("#alert-string1")[0].innerText = "Please set qty!";
@@ -358,7 +358,7 @@
             }
         } else {// change count of item
             var qty_number_obj = $("#qty");
-            var qty = qty_number_obj.html();
+            var qty = qty_number_obj.text();
             
             if(qty == 0) {
                 $("#alert-string1")[0].innerText = "Please set qty!";

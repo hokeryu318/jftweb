@@ -91,7 +91,7 @@
 
     function plusQty(arg, id){
         var qty_number_obj = $("#qty_" + id);
-        var qty_number = qty_number_obj.html();
+        var qty_number = qty_number_obj.text();
         if(arg == 'plus'){
             qty_number ++;
         }else{

@@ -77,6 +77,9 @@ class ReceptionController extends Controller
             case 'booking'://booking
                 $order_side_obj = Booked::where('timer_flag', 0)->where('status', 'booking')->orderby('time')->get();
                 break;
+            default:
+                $order_side_obj = Order::where('pay_flag', '<>', 2)->where('status', 'seated')->get();
+                break;            
         }
 
         $order_obj = Order::where('pay_flag', '<>', 2)->get();
@@ -530,7 +533,7 @@ class ReceptionController extends Controller
         }*/
 
         $order = Order::find(request()->order_id);
-
+        
         $category_all = array();
         if(count($categories) > 0){
             $i = 0;
@@ -551,6 +554,7 @@ class ReceptionController extends Controller
 
                     if(!empty($sub_categories) &&  count($sub_categories) > 0 ) {
                         foreach ($sub_categories as $sub_category) {
+                            
                             $sub_dishes = $this->get_dishes($sub_category,$order->time,$order->menu_type);
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {
                                 $dishes = $sub_dishes;
@@ -647,8 +651,8 @@ class ReceptionController extends Controller
                 if($option->item_id) {
 
                     $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-                    $option->item_name = $option_items->name;
-                    $items_price += $option_items->price;
+                    $option->item_name = $option_items['name'];
+                    $items_price += $option_items['price'];
                 }
                 else {
                     $option->item_name = '';
@@ -995,8 +999,8 @@ class ReceptionController extends Controller
                 if($option->item_id) {
 
                     $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-                    $option->item_name = $option_items->name;
-                    $items_price += $option_items->price;
+                    $option->item_name = $option_items['name'];
+                    $items_price += $option_items['price'];
                 }
                 else {
                     $option->item_name = '';
