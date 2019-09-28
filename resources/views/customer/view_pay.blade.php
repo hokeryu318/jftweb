@@ -1,7 +1,8 @@
 <div class="pay1_modal-content">
 
-    <div style="margin: -19px -127px 19px 0px;">
-        <img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin-right: 8px;" class="close" onclick="$('#thirdModal').modal('toggle')" />
+    <div style="margin: -19px -127px 19px 0px;" data-target="#thirdModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+        {{--<img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin-right: 8px;" class="close" onclick="$('#thirdModal').modal('toggle')" />--}}
+        <img src="{{asset('img/close.png')}}" style="width:40px;height: 40px;margin-right: 8px;" class="close" />
     </div>
 
     <div style="text-align: center; margin-bottom: 15px;">

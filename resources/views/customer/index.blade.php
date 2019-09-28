@@ -974,7 +974,8 @@
             }
         });
         $('#myModal').modal("hide");
-        $('#thirdModal').modal("show");
+        // $('#thirdModal').modal("show");
+        $('#thirdModal').modal({backdrop: 'static', keyboard: false});
         // $("#thirdModal").toggle();
         // setTimeout(function(){
         //     $("#thirdModal").hide();
