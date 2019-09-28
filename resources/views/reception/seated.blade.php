@@ -1487,7 +1487,7 @@
                     @foreach($order_side_obj as $kk => $order)
                         @foreach($order->table_order_names as $key => $ordertables)
                             <div class="border w-100 pt-2 pr-1 table_seated_list"
-                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id ]) }}'">
+                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
@@ -1556,7 +1556,7 @@
                     @foreach($order_side_obj as $kk => $order)
                         @foreach($order->table_order_names as $key => $ordertables)
                             <div class="border w-100 pt-2 pr-1 table_seated_list" id="side_book_{{$order->id}}" style="display: block;"
-                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id ]) }}'">
+                                 onclick="window.location='{{ route("reception.editOrder", [ 'order_id' => $order->id, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">

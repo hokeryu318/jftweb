@@ -940,8 +940,8 @@ class ReceptionController extends Controller
             $booking_order = $this->get_booking_order1($order_id);
         else
             $booking_order = $this->get_booking_order($order_id);
-        //return (string)view('reception.editOrder', compact('booking_order','status','order_side_obj'))->render();
-        return view('reception.editOrder')->with(compact('booking_order','status','order_side_obj'));
+        return (string)view('reception.editOrder', compact('booking_order','status','order_side_obj'))->render();
+        //return view('reception.editOrder')->with(compact('booking_order','status','order_side_obj'));
     }
 
     public function edit_note_review() {
