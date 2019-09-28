@@ -496,6 +496,13 @@ class SettingController extends Controller
                 $user_menu->save();
             }
         }
+        if(request()->has('password_takeawaymenu')){
+            if(substr(request()->password_takeawaymenu, 0, 1) != "*") {
+                $user_takeawaymenu = Role::where('name', 'takeawaymenu')->get()->first();
+                $user_takeawaymenu->password = Hash::make(request()->password_takeawaymenu);
+                $user_takeawaymenu->save();
+            }
+        }
         if(request()->has('password_kitchen')){
             if(substr(request()->password_kitchen, 0, 1) != "*") {
                 $user_kitchen = Role::where('name', 'kitchen')->get()->first();

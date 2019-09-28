@@ -61,12 +61,12 @@
     }
 
     @-webkit-keyframes fade {
-        from {opacity: .4} 
+        from {opacity: .4}
         to {opacity: 1}
     }
 
     @keyframes fade {
-        from {opacity: .4} 
+        from {opacity: .4}
         to {opacity: 1}
     }
 
@@ -94,12 +94,12 @@
                 @if(isset($category['has_subs']) && $category['has_subs'] == 1 && !empty($category['children']))
                     @php  $first = $category['id']; @endphp
                     @foreach($category['children'] as $child)
-                        @php 
-                            $first = $child['id'];                             
+                        @php
+                            $first = $child['id'];
                             break;
                         @endphp
                     @endforeach
-                    
+
                     <div class="header category_parent common_category" id="category_{{$category['id']}}" onclick="onDishes({{$first}})">
                         <span>
                             @if(session('language') == 1)
@@ -202,7 +202,7 @@
             <h6>&nbsp;</h6>
             <div class="tTime">
                 <h3>Start time</h3>
-                <h2>{{date('H:i d f Y', strtotime($order->time))}}</h2>
+                <h2>{{date('H:i d M Y', strtotime($order->time))}}</h2>
             </div>
         </div>
         {{--@if($order_table->calling_time)--}}
@@ -422,7 +422,7 @@
     }
 
     function onDishes(category_id){
-        
+
         var catContents = document.getElementsByClassName('display-none');
         for (var i = 0; i < catContents.length; i++) {
             catContents[i].style.display = 'none';
@@ -434,14 +434,20 @@
         var selected_obj = $("#category_"+category_id);
         $(".common_category").removeClass("selected_category_color");
         selected_obj.toggleClass('selected_category_color');
+
+        var order = <?php echo json_encode($order) ?>;
         $.ajax({
             type:"POST",
             url:"{{ route('customer.dish_list') }}",
             data:{
-                category: category_id, _token:"{{ csrf_token() }}",time_slot:"{{$order->time}}"
+                category: category_id, time_slot:"{{$order->time}}", menu_type: order['menu_type'], _token:"{{ csrf_token() }}"
             },
             success: function(result){
                 $('#dish-content').html(result);
+                $('#dish-content').scrollTop(0);
+                $('#dish-content').animate({
+                    scrollTop: 0
+                }, 'slow');
             }
         });
     }
@@ -450,14 +456,19 @@
         var selected_obj = $("#category_"+category_id);
         $(".common_category").removeClass("selected_category_color");
         selected_obj.toggleClass('selected_category_color');
+        var order = <?php echo json_encode($order) ?>;
         $.ajax({
             type:"POST",
             url:"{{ route('customer.dish_list') }}",
             data:{
-                category: category_id, _token:"{{ csrf_token() }}",time_slot:"{{$order->time}}"
+                category: category_id, time_slot:"{{$order->time}}", menu_type: order['menu_type'], _token:"{{ csrf_token() }}"
             },
             success: function(result){
                 $('#dish-content').html(result);
+                $('#dish-content').scrollTop(0);
+                $('#dish-content').animate({
+                    scrollTop: 0
+                }, 'slow');
             }
         });
     }

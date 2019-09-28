@@ -59,9 +59,9 @@
                         <div class="col-6 text-left">
                             <select class="custom-input pt-1 pb-1" id="role" name="role" onchange="select_role('role')">
                                 <option value="menu" class="select-option">Menu</option>
+                                <option value="takeawaymenu" class="select-option">TakeAwayMenu</option>
                                 <option value="reception" class="select-option">Reception</option>
                                 <option value="kitchen" class="select-option">Kitchen</option>
-                                {{--<option value="menu" class="select-option">Menu</option>--}}
                                 <option value="master" class="select-option">Master</option>
                             </select>
                         </div>
@@ -155,8 +155,8 @@
         var val = obj.options[idx].value;
         var txt  = obj.options[idx].text;
 
-        if(val == 'menu') {
-            table_last_name = table_last['name'];
+        if(val == 'menu' || val == 'takeawaymenu') {
+            table_last_name = table_last;
             document.querySelector('input[name=table]').value = table_last_name;
         } else {
             document.querySelector('input[name=table]').value = '';

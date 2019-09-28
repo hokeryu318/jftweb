@@ -11,6 +11,14 @@
             @endif
             />
     </div>
+    <div class="mt-2">
+        <h6 class="font-weight-bold text-info fs-25">TakeAwayMenu</h6>
+        <input style="border:1px solid grey;border-radius:5px;width: 870px;" class="white pl-4" type="password" name="password_takeawaymenu"
+            @if($profile->password_takeawaymenu != '')
+                value="********"
+            @endif
+        />
+    </div>
     <div class=" mt-2">
         <h6 class="font-weight-bold text-info fs-25">Kitchen</h6>
         <input style="border:1px solid grey;border-radius:5px;width: 870px;" class="white pl-4" type="password" name="password_kitchen"
@@ -37,7 +45,7 @@
     </div>
     @csrf
     </form>
-    <div style="margin-bottom:302px"></div>
+    <div style="margin-bottom:205px"></div>
 
     {{--<div class="col-11 mt-5 pr-2 text-right margin" >--}}
         {{--<a href="#" class="btn bg-white black-text pt-2 pb-2 pr-2 pl-2"><h5 class="black-text mb-0">Cancel ></h5></a>--}}

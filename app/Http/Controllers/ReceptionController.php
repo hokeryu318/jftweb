@@ -537,7 +537,7 @@ class ReceptionController extends Controller
             foreach ($categories as $category) {
                 $dishes = [];
                 if($category->has_subs != 1 && empty($category->parent_id)) {
-                    $dishes = $this->get_dishes($category,$order->time);
+                    $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
                     if(!empty($dishes) &&  count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
                     }
@@ -551,7 +551,7 @@ class ReceptionController extends Controller
 
                     if(!empty($sub_categories) &&  count($sub_categories) > 0 ) {
                         foreach ($sub_categories as $sub_category) {
-                            $sub_dishes = $this->get_dishes($sub_category,$order->time);
+                            $sub_dishes = $this->get_dishes($sub_category,$order->time,$order->menu_type);
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
@@ -562,7 +562,7 @@ class ReceptionController extends Controller
                         }                        
                     }
                     else {
-                        $dishes = $this->get_dishes($category,$order->time);
+                        $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
 
                         if($i == 0) $temp_dishes = $dishes;
                         if(!empty($dishes)) $i++;
@@ -699,8 +699,9 @@ class ReceptionController extends Controller
         $category = Category::find(request()->category);
         $order = Order::find(request()->order_id);
         $menu_time = $order->time;
+        $menu_type = $order->menu_type;
 
-        $dishes = $this->get_dishes($category,$menu_time);
+        $dishes = $this->get_dishes($category,$menu_time,$menu_type);
         
         return (string)view('reception.dish_list', compact('dishes'))->render();
     }
@@ -1215,7 +1216,7 @@ class ReceptionController extends Controller
         return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
     }
     
-    public function get_dishes($category,$menu_time) {
+    public function get_dishes($category,$menu_time,$menu_type) {
         $time = substr($menu_time,11,5);
         $date = date('d M Y', strtotime($menu_time));
 
@@ -1286,8 +1287,9 @@ class ReceptionController extends Controller
             } 
         }
         else 
-            $dishes = "";
-            
+//            $dishes = "";
+            $dishes = [];
+
         return $dishes;
     }
 
@@ -1320,7 +1322,7 @@ class ReceptionController extends Controller
         return $eat_time;
     }
 
-    public function get_time_slot($timeslot,$time)
+    public function get_time_slot($timeslot,$time,$menu_type)
     {
         $breakfast_time_starts = $timeslot->morning_starts;
         $breakfast_time_starts = $this->get_eat_time($breakfast_time_starts);
@@ -1346,27 +1348,43 @@ class ReceptionController extends Controller
         $latenight_time_starts = $this->get_eat_time($latenight_time_starts);
         $latenight_time_ends = $timeslot->latenight_ends;
         $latenight_time_ends = $this->get_eat_time($latenight_time_ends);
-        
+
         if( $time >= $breakfast_time_starts && $time < $breakfast_time_ends && $timeslot->morning_on == 1 )
         {
-            $time_chk[0] = "eatin_breakfast";
+            if($menu_type == 'menu') {
+                $time_chk[0] = "eatin_breakfast";
+            } else if($menu_type == 'takeawaymenu') {
+                $time_chk[0] = "takeaway_breakfast";
+            }
             $time_chk[1] = "morning_on";
-        } 
+        }
         elseif( $time >= $lunch_time_starts && $time < $lunch_time_ends  && $timeslot->lunch_on == 1  )
         {
-            $time_chk[0] = "eatin_lunch";
+            if($menu_type == 'menu') {
+                $time_chk[0] = "eatin_lunch";
+            } else if($menu_type == 'takeawaymenu') {
+                $time_chk[0] = "takeaway_lunch";
+            }
             $time_chk[1] = "lunch_on";
-        } 
+        }
         elseif( $time >= $tea_time_starts && $time < $tea_time_ends  && $timeslot->tea_on == 1  )
         {
-            $time_chk[0] = "eatin_tea";
+            if($menu_type == 'menu') {
+                $time_chk[0] = "eatin_tea";
+            } else if($menu_type == 'takeawaymenu') {
+                $time_chk[0] = "takeaway_tea";
+            }
             $time_chk[1] = "tea_on";
-        } 
+        }
         elseif( $time >= $dinner_time_starts && $time < $dinner_time_ends  && $timeslot->dinner_on == 1  )
         {
-            $time_chk[0] = "eatin_dinner";
+            if($menu_type == 'menu') {
+                $time_chk[0] = "eatin_dinner";
+            } else if($menu_type == 'takeawaymenu') {
+                $time_chk[0] = "takeaway_dinner";
+            }
             $time_chk[1] = "dinner_on";
-        } 
+        }
         else
         {
             $time_chk[0] = "";

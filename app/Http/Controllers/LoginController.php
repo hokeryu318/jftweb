@@ -21,7 +21,8 @@ class LoginController extends Controller
         //get ip address from database
         $profile = Receipt::profile();
         //last get table number(ordered already)
-        $table_last = Table::where('index', 0)->orderBy('id', 'desc')->first();
+        //$table_last = Table::where('index', 0)->orderBy('id', 'desc')->first();
+        $table_last = request()->session()->get('login_table_name');
         return view('login')->with(compact('table_last', 'profile'));
     }
 
@@ -64,15 +65,16 @@ class LoginController extends Controller
             if($request->role == "reception" || $request->role == "master") {
                 return redirect()->route('reception.seated', ['status' => 'seated']);
             }
-            else if($request->role == "menu"){
+            else if($request->role == "menu" || $request->role == "takeawaymenu"){
+                $menu_type = $request->role;
                 $table_name = $request->table;
                 if($table_name) {
-//                    $table_name = str_replace(' ', '', $table_name);
-                    $table = Table::select('id')->where('name', $table_name)->get();//dd($table);
+                    $table = Table::select('id')->where('name', $table_name)->get();
                     if(count($table) > 0){
                         $order = $table[0]->order;
                         if(count($order) > 0){
                             $order_id = $order[0]->id;
+                            Order::where('id', $order_id)->update(['menu_type' => $menu_type]);
                             return redirect()->route('customer.index', ['order_id'=>$order_id, 'table_id'=>$table[0]->id]);
                         }
                         else{
