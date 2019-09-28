@@ -472,8 +472,8 @@ class ReceptionController extends Controller
                 if($option->item_id) {
 
                     $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
-                    $option->item_name = $option_items->name;
-                    $items_price += $option_items->price;
+                    $option->item_name = $option_items['name'];
+                    $items_price += $option_items['price'];
                 }
                 else {
                     $option->item_name = '';
