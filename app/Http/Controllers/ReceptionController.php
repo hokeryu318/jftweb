@@ -1263,12 +1263,12 @@ class ReceptionController extends Controller
 
             if( $day_on == 1 )
             {
-                $result = $this->get_time_slot($timeslot,$time);
+                $result = $this->get_time_slot($timeslot,$time,$menu_type);
                
             }
             else{
                 $timeslot1 = Timeslot::find(1);
-                $result = $this->get_time_slot($timeslot1,$time);
+                $result = $this->get_time_slot($timeslot1,$time,$menu_type);
               
             }
                       
