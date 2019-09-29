@@ -161,19 +161,19 @@ class LoginController extends Controller
         Receipt::where('id', 1)->update(['ip_address' => $changed_ip]);
     }
 
-    public function rename_dish() {
-        $dish_arr = Dish::select('id', 'image')->get()->toArray();
-        for($i=0;$i<count($dish_arr);$i++) {
-            if($dish_arr[$i]['image'] != null) {
-                $rename = "dish_".$dish_arr[$i]['id'].".png";
-                try {
-                    rename(public_path().'/dishes/'.$dish_arr[$i]['image'], public_path().'/dishes/'.$rename);
-                    Dish::where('id', $dish_arr[$i]['id'])->update(['image' => $rename]);
-                } catch (\Exception $ex) {
-                    echo($dish_arr[$i]['id'].'<br>');
-                }
-            }
-        }
+//    public function rename_dish() {
+//        $dish_arr = Dish::select('id', 'image')->get()->toArray();
+//        for($i=0;$i<count($dish_arr);$i++) {
+//            if($dish_arr[$i]['image'] != null) {
+//                $rename = "dish_".$dish_arr[$i]['id'].".png";
+//                try {
+//                    rename(public_path().'/dishes/'.$dish_arr[$i]['image'], public_path().'/dishes/'.$rename);
+//                    Dish::where('id', $dish_arr[$i]['id'])->update(['image' => $rename]);
+//                } catch (\Exception $ex) {
+//                    echo($dish_arr[$i]['id'].'<br>');
+//                }
+//            }
+//        }
 
 //        $item_arr = Item::select('id', 'image')->get()->toArray();
 //        for($i=0;$i<count($item_arr);$i++) {
@@ -187,5 +187,5 @@ class LoginController extends Controller
 //                }
 //            }
 //        }
-    }
+//    }
 }
