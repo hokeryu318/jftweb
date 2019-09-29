@@ -58,11 +58,11 @@
                         </div>
                         <div class="col-6 text-left">
                             <select class="custom-input pt-1 pb-1" id="role" name="role" onchange="select_role('role')">
-                                <option value="menu" class="select-option">Menu</option>
-                                <option value="takeawaymenu" class="select-option">TakeAwayMenu</option>
-                                <option value="reception" class="select-option">Reception</option>
-                                <option value="kitchen" class="select-option">Kitchen</option>
-                                <option value="master" class="select-option">Master</option>
+                                <option value="Menu" class="select-option">Menu</option>
+                                <option value="TakeAwayMenu" class="select-option">TakeAwayMenu</option>
+                                <option value="Reception" class="select-option">Reception</option>
+                                <option value="Kitchen" class="select-option">Kitchen</option>
+                                <option value="Master" class="select-option">Master</option>
                             </select>
                         </div>
                     </div>

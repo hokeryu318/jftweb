@@ -941,36 +941,36 @@ class CustomerController extends Controller
         
         if( $time >= $breakfast_time_starts && $time < $breakfast_time_ends && $timeslot->morning_on == 1 )
         {
-            if($menu_type == 'menu') {
+            if($menu_type == 'Menu') {
                 $time_chk[0] = "eatin_breakfast";
-            } else if($menu_type == 'takeawaymenu') {
+            } else if($menu_type == 'TakeawayMenu') {
                 $time_chk[0] = "takeaway_breakfast";
             }
             $time_chk[1] = "morning_on";
         }
         elseif( $time >= $lunch_time_starts && $time < $lunch_time_ends  && $timeslot->lunch_on == 1  )
         {
-            if($menu_type == 'menu') {
+            if($menu_type == 'Menu') {
                 $time_chk[0] = "eatin_lunch";
-            } else if($menu_type == 'takeawaymenu') {
+            } else if($menu_type == 'TakeawayMenu') {
                 $time_chk[0] = "takeaway_lunch";
             }
             $time_chk[1] = "lunch_on";
         } 
         elseif( $time >= $tea_time_starts && $time < $tea_time_ends  && $timeslot->tea_on == 1  )
         {
-            if($menu_type == 'menu') {
+            if($menu_type == 'Menu') {
                 $time_chk[0] = "eatin_tea";
-            } else if($menu_type == 'takeawaymenu') {
+            } else if($menu_type == 'TakeawayMenu') {
                 $time_chk[0] = "takeaway_tea";
             }
             $time_chk[1] = "tea_on";
         } 
         elseif( $time >= $dinner_time_starts && $time < $dinner_time_ends  && $timeslot->dinner_on == 1  )
         {
-            if($menu_type == 'menu') {
+            if($menu_type == 'Menu') {
                 $time_chk[0] = "eatin_dinner";
-            } else if($menu_type == 'takeawaymenu') {
+            } else if($menu_type == 'TakeawayMenu') {
                 $time_chk[0] = "takeaway_dinner";
             }
             $time_chk[1] = "dinner_on";

@@ -64,10 +64,10 @@ class LoginController extends Controller
         }
         if(Hash::check($password, $user->password)){
             session(['role' => $name]);
-            if($request->role == "reception" || $request->role == "master") {
+            if($request->role == "Reception" || $request->role == "Master") {
                 return redirect()->route('reception.seated', ['status' => 'seated']);
             }
-            else if($request->role == "menu" || $request->role == "takeawaymenu"){
+            else if($request->role == "Menu" || $request->role == "TakeawayMenu"){
                 $menu_type = $request->role;
                 $table_name = $request->table;
                 if($table_name) {
@@ -94,7 +94,7 @@ class LoginController extends Controller
                     return redirect(route('loginform'))->with(compact('alert'));
                 }
             }
-            else if($request->role == "kitchen") {
+            else if($request->role == "Kitchen") {
                 return redirect(route('kitchen.main_screen'));
             }
         } else {

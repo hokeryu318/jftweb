@@ -34,11 +34,11 @@ class LoginController extends Controller
 
         if(Hash::check($password, $user->password)){
             session(['role' => $role]);
-            if($request->role == "reception" || $request->role == "master") {
+            if($request->role == "Reception" || $request->role == "Master") {
                 $url = $ip.'/reception/seated?status=seated';
                 $message = 'reception success';
             }
-            else if($request->role == "menu" || $request->role == "takeawaymenu"){
+            else if($request->role == "Menu" || $request->role == "TakeawayMenu"){
                 $menu_type = $request->role;
                 $table_name = $request->table;
                 if($table_name) {
@@ -67,7 +67,7 @@ class LoginController extends Controller
                     $message = "Please enter table name!";
                 }
             }
-            else if($request->role == "kitchen") {
+            else if($request->role == "Kitchen") {
                 $url = $ip.'/kitchen/main_screen';
                 $message = 'kitchen success';
             }
