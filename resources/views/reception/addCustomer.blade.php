@@ -216,12 +216,12 @@
                                         <input type="hidden" name="" id="table_obj" value="{{ $table_obj }}">
                                         @foreach($table_obj as $key => $table)
                                             @if(count($table->order) > 0)
-                                                <div class="table-common" id="selected-{{$table->id}}" {{--onclick="selectObject('{{$table->id}}')"--}} style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                                                <div class="table-common" id="selected-{{$table->id}}" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                                                     @if($table->type == 0)
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div>
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -265,7 +265,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
@@ -311,7 +311,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center"></span>
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -357,7 +357,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-ena ch-top ch-top-center" style="margin-left: 73px;"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -405,7 +405,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
@@ -454,7 +454,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -503,7 +503,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
@@ -554,7 +554,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -605,7 +605,7 @@
                                                                 <span class="ch-1 ch-ena ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-ena ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div @if($table->id == $table_id) bg-selected @endif class="table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->id == $table_id) onclick="selectObject('{{$table->id}}')" @endif>
+                                                                    <div class="@if($table->order[0]->id == $order_id) bg-selected @endif table-area white table-c-style text-center" style="margin-left: 38px;" @if($status=='booking' || $table->order[0]->id == $order_id) onclick="selectObject('{{$table->id}}')" @endif id="{{$table->id}}">
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
@@ -653,12 +653,12 @@
                                                 </div>
                                             @else
                                                 <input type="hidden" id="table_id" value="{{ $table->id }}">
-                                                <div class="table-common" id="selected-{{$table->id}}" {{--onclick="selectObject('{{$table->id}}')"--}} style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
+                                                <div class="table-common" id="selected-{{$table->id}}" style="margin: {{$table['y']*20}}px 10px 10px {{$table['x']*20}}px;">
                                                     @if($table->type == 0)
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div>
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -670,7 +670,7 @@
                                                         <div style="margin: 0 0 0 0;">
                                                             <div style="display: inline-block;">
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -684,7 +684,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-dis ch-top ch-top-center"></span>
                                                                 <div style="height: 110px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -698,7 +698,7 @@
                                                             <div style="display: inline-block;">
                                                                 <span class="ch-1 ch-dis ch-top ch-top-center" style="margin-left: 73px;"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -714,7 +714,7 @@
                                                                 <span class="ch-1 ch-dis ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-dis ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -731,7 +731,7 @@
                                                                 <span class="ch-1 ch-dis ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-dis ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -748,7 +748,7 @@
                                                                 <span class="ch-1 ch-dis ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-dis ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -767,7 +767,7 @@
                                                                 <span class="ch-1 ch-dis ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-dis ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -786,7 +786,7 @@
                                                                 <span class="ch-1 ch-dis ch-top ch-top-left"></span>
                                                                 <span class="ch-1 ch-dis ch-top ch-top-right"></span>
                                                                 <div style="height: 118px;">
-                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;">
+                                                                    <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
                                                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
                                                                         </div>
@@ -906,14 +906,13 @@
 
         function changeTab(arg){
             if(arg == "group" || arg == "table" || arg == "name" || arg == "notes"){
+
                 if($("#timepicker1").val() == 'Select Time') {
-                    //$("#alert-string")[0].innerText = "Please select the time";
-                    //$("#java-alert").modal('toggle');
-                    //return;
                     current_time();
                 }
             }
             if(arg == "table") {
+
                 if($("#guest-number").val() == '') {
                     $("#alert-string")[0].innerText = "Please input the guest";
                     $("#java-alert").modal('toggle');
@@ -921,11 +920,13 @@
                 }
             }
             if(arg == "name" || arg == "notes"){
+
                 if($("#selected-table").val() == 0){
                     $("#alert-string")[0].innerText = "Please select the table";
                     $("#java-alert").modal('toggle');
                     return;
                 }
+                //compare booking time
                 var table_obj_book = <?php echo json_encode($table_obj) ?>;
                 
                 var current_date =  new Date();
@@ -969,21 +970,20 @@
                 if(order_duration == 'Unlimited') order_duration = 24 - parseInt(order_time.substr(11,2));
                 order_end_time = order_start_time + order_duration * 60 * 1000;
                 //alert(parseInt(order_time.substr(8,2))+"-"+parseInt(order_time.substr(11,2)) + ":" + parseInt(order_time.substr(14,2)) + ";" +order_duration);
-                var table_id = $("#selected-table").val();
-                table_id = table_id.split(",");
+                var select_obj = document.getElementsByClassName('bg-selected');
                 
-                for(var i=0;i<table_id.length;i++){
+                for(var i=0;i<select_obj.length;i++){ //selected tables
                     var book_data = '';
                     var book_duration = '';
                     var book_start_time = '';
                     var book_end_time = '';
                     var book_time = '';
-                    for(var k = 0; k < table_obj_book.length;k++) {
-                        if(undefined !== table_obj_book[k] && table_id[i] == table_obj_book[k]['id']) {
+                    for(var k = 0; k < table_obj_book.length;k++) { //all tables
+                        if(undefined !== table_obj_book[k] && select_obj[i].id == table_obj_book[k]['id']) {
                             book_data = table_obj_book[k]['book'];                    
 
                             if(undefined !== book_data && book_data.length > 0) {
-                                for(var j=0;j<book_data.length;j++) {
+                                for(var j=0;j<book_data.length;j++) { //already booked tables
                                     book_time = book_data[j]['time'];
                                     book_duration = book_data[j]['duration'];
                                     book_duration = replace_time(parseInt(book_duration));
@@ -1003,23 +1003,29 @@
                         }
                     }
                 }
+                //compare number of selected tables with guest
                 var cnt = 0;
                 var type = 0;
-                for(var i=0;i<table_id.length;i++){
+                var table_id = '';
+                for(var i=0;i<select_obj.length;i++){
                     for(var j = 0; j < table_obj_book.length;j++) {
-                        if(undefined !== table_obj_book[j] && table_id[i] == table_obj_book[j]['id']) {
+                        if(undefined !== table_obj_book[j] && select_obj[i].id == table_obj_book[j]['id']) {
                             type = table_obj_book[j]['type'];
                         }
                     }
                     if(cnt != 'unlimit' && type == 0 ) cnt = 'unlimit';
                     else if(cnt != 'unlimit')   cnt += type;
+
+                    table_id += select_obj[i].id + ',';
                 }
-                //alert(cnt + "ww" + $("#guest-number").val());
+                
                 if(cnt != 'unlimit' && cnt<$("#guest-number").val()) {
                     $("#alert-string")[0].innerText = "The number of seats is than smaller the guest.";
                     $("#java-alert").modal('toggle');
                     return;
                 }
+                //selected tables save
+                $("#selected-table").val(table_id.substr(0,table_id.length-1));
                 
             }
             $(".top-menu-btn").removeClass('top-menu-active');
