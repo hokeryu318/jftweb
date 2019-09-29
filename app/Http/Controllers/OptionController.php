@@ -65,8 +65,10 @@ class OptionController extends Controller
             $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
             if(($obj->multi_select == 1) && (request()->number_selection == null))
                 $obj->number_selection = 1;
-            else
+            if(($obj->multi_select == 1) && (request()->number_selection != null))
                 $obj->number_selection = request()->number_selection;
+            if($obj->multi_select == 0)
+                $obj->number_selection = 1;
             $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
             $obj->save();
 
@@ -99,8 +101,10 @@ class OptionController extends Controller
             $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
             if(($obj->multi_select == 1) && (request()->number_selection == null))
                 $obj->number_selection = 1;
-            else
+            if(($obj->multi_select == 1) && (request()->number_selection != null))
                 $obj->number_selection = request()->number_selection;
+            if($obj->multi_select == 0)
+                $obj->number_selection = 1;
             $obj->photo_visible = request()->photo_visible == "on" ? '1' : '0';
             $obj->save();
 
