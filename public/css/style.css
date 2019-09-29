@@ -2173,3 +2173,12 @@ td.key_panel_1 {
     max-width: 800px;
     margin: 100px auto;
 }
+
+.ml-0,
+.mx-0 {
+  margin-bottom:10px!important;
+}
+
+.ml-01 {
+  margin-bottom:-10px!important;
+}
