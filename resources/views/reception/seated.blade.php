@@ -1,6 +1,9 @@
 @extends('layout.admin_layout')
 @section('title', 'Reception')
 @section('content')
+@php 
+ $scren_scale = null !== session('scale_value') ? session('scale_value') : 100;
+@endphp
 <div style="padding-top:4%;"></div>
 <div class="container-fluid mt-5">
     <div class="row">
@@ -42,12 +45,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -87,12 +86,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -134,12 +129,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -181,12 +172,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -230,12 +217,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -280,12 +263,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -330,12 +309,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -382,12 +357,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -434,12 +405,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -481,12 +448,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -500,12 +463,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -521,12 +480,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -542,12 +497,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -565,12 +516,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                             <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -589,12 +536,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -613,12 +556,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -639,12 +578,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -665,12 +600,8 @@
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -718,12 +649,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -768,12 +695,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -820,12 +743,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -872,12 +791,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -926,12 +841,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -981,12 +892,8 @@
                                                 <br>
                                                 <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                             </h6>
-                                            <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                &nbsp;
-                                                <br>
-                                                &nbsp;
-                                                <br>
-                                            </a>
+                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            </p>
                                             @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
@@ -1036,12 +943,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -1093,12 +996,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -1150,12 +1049,8 @@
                                                     <br>
                                                     <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                                 @if($table->order[0]->pay_flag == '1')
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
@@ -1202,12 +1097,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1225,14 +1116,9 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                
-                                                    <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                        &nbsp;
-                                                        <br>
-                                                        &nbsp;
-                                                        <br>
-                                                    </a>
+                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>                                                
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1253,12 +1139,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1279,12 +1161,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1307,12 +1185,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1336,12 +1210,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1365,12 +1235,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1396,12 +1262,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1427,12 +1289,8 @@
                                                 @endif
                                                 >
                                                 <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <a class="font-weight-bold red-text" id="time_book_{{$key}}">
-                                                    &nbsp;
-                                                    <br>
-                                                    &nbsp;
-                                                    <br>
-                                                </a>
+                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1626,11 +1484,11 @@
         //     document.getElementById('room-content').style.marginTop = '12px';
         //     $("#exit-fullscreen").show('slow');
         // });
-        $(document).ready(function(){
+        //$(document).ready(function(){
             var screen_scale = "{{null !== session('scale_value') ? session('scale_value') : 100}}";
             $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
             $("#scale-value").text(screen_scale + '%');
-        });
+        //});
 
         $("#display-all").click(function(){
 
@@ -1668,6 +1526,7 @@
             if(scale_value != 100){
                 $(".plus_btn").attr("src", "{{ asset('img/plus.png') }}");
                 scale_value = parseInt(scale_value) + 10;
+                
                 if(scale_value == 100){
                     $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
                 }
@@ -1683,6 +1542,7 @@
                 }
             });
             scale_value_obj.text(scale_value+"%");
+            screen_scale = scale_value;
         }
 
         function tableZoomOut(){
@@ -1693,6 +1553,7 @@
 
             if(scale_value > 10){
                 scale_value = scale_value - 10;
+                
                 if(scale_value == 10){
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
@@ -1708,6 +1569,7 @@
                 }
             });
             scale_value_obj.text(scale_value+"%");
+            screen_scale = scale_value;
         }
 
         //timer part
@@ -1811,7 +1673,12 @@
 
                     if(duration == 0) {
                         if(status != 'booking') {
-                            document.getElementById("time1_" + i).innerHTML = 'Takeaway';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = 'Takeaway';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 1) {
                         order_time.setMinutes( order_time.getMinutes() + 30 );
@@ -1819,10 +1686,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 2) {
                         order_time.setMinutes( order_time.getMinutes() + 60 );
@@ -1830,10 +1707,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 3) {
                         order_time.setMinutes( order_time.getMinutes() + 90 );
@@ -1841,10 +1728,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 4) {
                         order_time.setMinutes( order_time.getMinutes() + 120 );
@@ -1852,14 +1749,29 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            } 
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
-                            document.getElementById("time1_" + i).innerHTML = 'Unlimited';
+                            if(screen_scale > 20) {
+                                document.getElementById("time1_" + i).innerHTML = 'Unlimited';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }                   
                         }
                     }
 
@@ -1892,13 +1804,23 @@
                     //alert(order_time);
                     if( elapsed_time > 0 && elapsed_time < 3600 * 1000 && table_obj_book[i]['book'][0]['timer_flag'] == 0 ) {
                         var sub_time = get_book_data(order_time);
-                        document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
+                        if(screen_scale > 20) {
+                            document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
+                        }
+                        else {
+                            document.getElementById("time_book_" + i).innerHTML = '';
+                        }
                     }
                     else if (elapsed_time < 0 && elapsed_time > -3000) {
                         @if($status != 'booking')                        
                             document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
                         @endif
-                        document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
+                        if(screen_scale > 20) {
+                            document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
+                        }
+                        else {
+                            document.getElementById("time_book_" + i).innerHTML = '';
+                        }
                         $.ajax({
                             type:"POST",
                             url:"{{ route('reception.book_end') }}",
