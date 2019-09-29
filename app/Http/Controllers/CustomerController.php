@@ -796,10 +796,17 @@ class CustomerController extends Controller
         $gst_price = request()->gst_price;
 
         //show count_notification on reception screen
+
+        $table_names = explode('+',$table_name);
+        for($i=0;$i<count($table_names);$i++) {
+            $id = Table::where('name',trim($table_names[$i]))->get()->first();
+            $count_notification = $this->CountNotification1($id->id,1);
+            broadcast(new NotificationEvent($count_notification));
+        }
         
-        $id = Table::where('name',$table_name)->get()->first();
-        $count_notification = $this->CountNotification1($id->id,1);
-        broadcast(new NotificationEvent($count_notification));
+//        $id = Table::where('name',$table_name)->get()->first();
+//        $count_notification = $this->CountNotification1($id->id,1);
+//        broadcast(new NotificationEvent($count_notification));
 
         return (string)view('customer.view_pay', compact('table_name', 'starting_time', 'total', 'gst_price', 'without_gst_price'))->render();
     }
