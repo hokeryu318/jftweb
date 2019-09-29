@@ -59,7 +59,7 @@
                         <div class="col-6 text-left">
                             <select class="custom-input pt-1 pb-1" id="role" name="role" onchange="select_role('role')">
                                 <option value="Menu" class="select-option">Menu</option>
-                                <option value="TakeAwayMenu" class="select-option">TakeAwayMenu</option>
+                                <option value="TakeawayMenu" class="select-option">TakeawayMenu</option>
                                 <option value="Reception" class="select-option">Reception</option>
                                 <option value="Kitchen" class="select-option">Kitchen</option>
                                 <option value="Master" class="select-option">Master</option>
