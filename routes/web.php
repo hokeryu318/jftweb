@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/rename_dish', 'LoginController@rename_dish');
+
 Route::get('/', 'LoginController@getLogin');
 //Route::post('/', 'LoginController@getLogin');
 Route::get('/', 'LoginController@getLogin')->name('loginform');

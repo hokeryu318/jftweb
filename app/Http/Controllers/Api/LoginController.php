@@ -9,6 +9,7 @@ use Hash;
 use App\Model\Role;
 use App\Model\Table;
 use App\Model\Receipt;
+use App\Model\Order;
 
 class LoginController extends Controller
 {
@@ -37,7 +38,8 @@ class LoginController extends Controller
                 $url = $ip.'/reception/seated?status=seated';
                 $message = 'reception success';
             }
-            else if($request->role == "menu"){
+            else if($request->role == "menu" || $request->role == "takeawaymenu"){
+                $menu_type = $request->role;
                 $table_name = $request->table;
                 if($table_name) {
                     $table = Table::select('id')->where('name', $table_name)->get();
@@ -46,6 +48,7 @@ class LoginController extends Controller
                         if(count($order) > 0){
                             $order_id = $order[0]->id;
                             $table_id = $table[0]->id;
+                            Order::where('id', $order_id)->update(['menu_type' => $menu_type]);
                             $url = $ip.'/customer/index/'.$order_id.'?table_id='.$table_id;
                             $message = 'menu success';
                         }

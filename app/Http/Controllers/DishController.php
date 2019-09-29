@@ -148,11 +148,12 @@ class DishController extends Controller
             $obj->takeaway_lunch = request()->get('takeaway_lunch') == "on" ? 1 : 0;
             $obj->takeaway_tea = request()->get('takeaway_tea') == "on" ? 1 : 0;
             $obj->takeaway_dinner = request()->get('takeaway_dinner') == "on" ? 1 : 0;
+            $obj->save();
 
             $file = request()->file('image');
             if($file != null){
                 $destinationPath = 'dishes';
-                $destinationFile = $file->getClientOriginalName();
+                $destinationFile = "dish_".$obj->id.".png";
                 $file->move($destinationPath, $destinationFile);
                 $obj->image = $destinationFile;
             }
@@ -212,7 +213,7 @@ class DishController extends Controller
             $file = request()->file('image');
             if($file != null){
                 $destinationPath = 'dishes';
-                $destinationFile = $file->getClientOriginalName();
+                $destinationFile = "dish_".$obj->id.".png";
                 $file->move($destinationPath, $destinationFile);
                 $obj->image = $destinationFile;
             }

@@ -81,11 +81,12 @@ class OptionController extends Controller
                     $item->name = $n['name'];
                     $item->price = $n['price'];
                     $item->stock = $n['stock'];
+                    $item->save();
                     if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
 
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = $file->getClientOriginalName();
+                        $destinationFile = "item_".$item->id.".png";
                         $file->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
@@ -119,7 +120,7 @@ class OptionController extends Controller
                     if(isset(request()->file('prev-data')[$id]['image']) != null){
                         $image = request()->file('prev-data')[$id]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = $image->getClientOriginalName();
+                        $destinationFile = "item_".$item->id.".png";
                         $image->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
@@ -140,10 +141,11 @@ class OptionController extends Controller
                     $item->name = $n['name'];
                     $item->price = $n['price'];
                     $item->stock = $n['stock'];
+                    $item->save();
                     if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = $file->getClientOriginalName();
+                        $destinationFile = "item_".$item->id.".png";
                         $file->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }

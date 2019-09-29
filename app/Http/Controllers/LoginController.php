@@ -12,6 +12,8 @@ use App\Events\NotificationEvent;
 use App\Model\Role;
 use App\Model\Table;
 use App\Model\Order;
+use App\Model\Dish;
+use App\Model\Item;
 
 class LoginController extends Controller
 {
@@ -157,5 +159,33 @@ class LoginController extends Controller
     {
         $changed_ip = $request->changed_ip;
         Receipt::where('id', 1)->update(['ip_address' => $changed_ip]);
+    }
+
+    public function rename_dish() {
+//        $dish_arr = Dish::select('id', 'image')->get()->toArray();
+//        for($i=0;$i<count($dish_arr);$i++) {
+//            if($dish_arr[$i]['image'] != null) {
+//                $rename = "dish_".$dish_arr[$i]['id'].".png";
+//                try {
+//                    rename(public_path().'/dishes/'.$dish_arr[$i]['image'], public_path().'/dishes/'.$rename);
+//                    Dish::where('id', $dish_arr[$i]['id'])->update(['image' => $rename]);
+//                } catch (\Exception $ex) {
+//                    echo($dish_arr[$i]['id'].'<br>');
+//                }
+//            }
+//        }
+
+        $item_arr = Item::select('id', 'image')->get()->toArray();
+        for($i=0;$i<count($item_arr);$i++) {
+            if($item_arr[$i]['image'] != null) {
+                $rename = "item_".$item_arr[$i]['id'].".png";
+                try {
+                    rename(public_path().'/options/'.$item_arr[$i]['image'], public_path().'/options/'.$rename);
+                    Item::where('id', $item_arr[$i]['id'])->update(['image' => $rename]);
+                } catch (\Exception $ex) {
+                    echo($item_arr[$i]['id'].'<br>');
+                }
+            }
+        }
     }
 }
