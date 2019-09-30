@@ -14,6 +14,11 @@
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
 <style>
+    .scrolling-content {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        height:100%; /*A value other than height:auto needs to be set*/
+    }
     #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
     /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
     @keyframes fadein {
@@ -237,7 +242,7 @@
         </div>
     </header>
 
-    <section id="dish-content">
+    <section id="dish-content" class="scrolling-content">
     @foreach ($dishes as $ds)
         @if($ds->sold_out == 0)
             <div class="card" onclick="orderNow({{$ds->id}})">
