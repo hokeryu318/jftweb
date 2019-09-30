@@ -371,7 +371,7 @@
         @if ($screentime)
             idletime = {{ $screentime->screen_time }};
         @endif
-        (function(poll, timeout){
+        /*(function(poll, timeout){
 
             var _idle = false,
                 _lastActive = 0,
@@ -410,7 +410,7 @@
             window.setInterval(_poll, poll);
 
             _activeNow();
-        })(1000*110, 8000);
+        })(1000*110, 8000);*/
     });
 
     $(".header").click(function () {
