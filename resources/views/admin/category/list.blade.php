@@ -353,10 +353,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ui.touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-<script>$('#category-scroll').draggable();</script>
-<script>$('#scroll-dish').draggable();</script>
-<script>$('#subcategory-scroll').draggable();</script>
-
 <script>
     function touchHandler(event)
     {
@@ -389,20 +385,20 @@
         init();
     });
     $(function(){
-        {{--$("#scroll-dish").sortable({--}}
-            {{--stop: function(){--}}
-                {{--$.map($(this).find('li'), function(el) {--}}
-                    {{--var itemID = el.id;--}}
-                    {{--var itemIndex = $(el).index();--}}
-                    {{--$.ajax({--}}
-                        {{--url:'{{URL::to("order-dish")}}',--}}
-                        {{--type:'GET',--}}
-                        {{--dataType:'json',--}}
-                        {{--data: {itemID:itemID, itemIndex: itemIndex},--}}
-                    {{--})--}}
-                {{--});--}}
-            {{--}--}}
-        {{--});--}}
+        $("#scroll-dish").sortable({
+            stop: function(){
+                $.map($(this).find('li'), function(el) {
+                    var itemID = el.id;
+                    var itemIndex = $(el).index();
+                    $.ajax({
+                        url:'{{URL::to("order-dish")}}',
+                        type:'GET',
+                        dataType:'json',
+                        data: {itemID:itemID, itemIndex: itemIndex},
+                    })
+                });
+            }
+        });
         $("#category-scroll").sortable({
             stop: function(){
                 $.map($(this).find('li'), function(el) {
