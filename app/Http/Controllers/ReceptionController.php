@@ -533,7 +533,9 @@ class ReceptionController extends Controller
         }*/
         
         $order = Order::find(request()->order_id);
+        
         if(empty($order->menu_type))    $menu_type = 'menu';
+        else $menu_type = $order->menu_type;
         
         $category_all = array();
         if(count($categories) > 0){
@@ -557,7 +559,7 @@ class ReceptionController extends Controller
                     if(!empty($sub_categories) &&  count($sub_categories) > 0 ) {
                         
                         foreach ($sub_categories as $sub_category) {
-                            //dd($sub_category);
+                            //dd($menu_type);
                             $sub_dishes = $this->get_dishes($sub_category,$order->time,$menu_type);
                             
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {

@@ -145,7 +145,7 @@
                 @endif
                 <img src="{{ asset('img/Group728white.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
-            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="onCancel()">
+            <div class="amend_btn" style="background: white;color: black;margin: 12px 0 0 43px;padding-left: 15px;" onclick="$('#thirdModal').modal('hide');">
                 <aa class="fs-25" style="margin-left: 25px;">CANCEL</aa>
                 <img src="{{ asset('img/Group728black.png') }}" style="height:18px;margin: -8px 0 0 43px;">
             </div>
