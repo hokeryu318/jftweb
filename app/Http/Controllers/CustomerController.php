@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotificationEvent;
+use App\Events\SelfEvent;
+
 use App\Model\Category;
 use App\Model\DishCategory;
 use App\Model\Dish;
@@ -698,6 +700,8 @@ class CustomerController extends Controller
         //show count_notification on reception screen
         
         broadcast(new NotificationEvent($count_notification));
+
+        broadcast(new SelfEvent($order_id));
 
         return $orderTable->calling_time;
     }
