@@ -40,7 +40,7 @@
                                     </span>
                                 </div>
                                 <div style="display: inline-block;">
-                                    <img src="{{asset('img/qty_up1.png')}}" style="width: 30px;" onclick="plusQty('plus', '{{$order_dish->id}}')" />
+                                    <img src="{{asset('img/qty_up1.png')}}" style="width: 30px;" onclick="plusQty1('plus', '{{$order_dish->id}}')" />
                                 </div>
                             </td>
                             <td width="15%" align="center">
@@ -89,13 +89,13 @@
 
 <script>
 
-    function plusQty(arg, id){
+    function plusQty1(arg, id){        
         var qty_number_obj = $("#qty_" + id);
-        var qty_number = qty_number_obj.text();
+        var qty_number = qty_number_obj.text();        
         if(arg == 'plus'){
             qty_number ++;
         }else{
-            if(qty_number > 1){
+            if(qty_number > 0){
                 qty_number --;
             }
         }

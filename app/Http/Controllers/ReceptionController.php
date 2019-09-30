@@ -531,8 +531,9 @@ class ReceptionController extends Controller
                 }
             }
         }*/
-
+        
         $order = Order::find(request()->order_id);
+        if(empty($order->menu_type))    $menu_type = 'menu';
         
         $category_all = array();
         if(count($categories) > 0){
@@ -540,11 +541,12 @@ class ReceptionController extends Controller
             foreach ($categories as $category) {
                 $dishes = [];
                 if($category->has_subs != 1 && empty($category->parent_id)) {
-                    $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
+                   
+                    $dishes = $this->get_dishes($category,$order->time,$menu_type);
                     if(!empty($dishes) &&  count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
                     }
-
+                    
                     if($i == 0) $temp_dishes = $dishes;
                     if(!empty($dishes)) $i++;
                 }
@@ -553,9 +555,11 @@ class ReceptionController extends Controller
                     $sub_categories = Category::where('parent_id', $category->id)->orderby('order')->get();
 
                     if(!empty($sub_categories) &&  count($sub_categories) > 0 ) {
+                        
                         foreach ($sub_categories as $sub_category) {
+                            //dd($sub_category);
+                            $sub_dishes = $this->get_dishes($sub_category,$order->time,$menu_type);
                             
-                            $sub_dishes = $this->get_dishes($sub_category,$order->time,$order->menu_type);
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
@@ -566,7 +570,8 @@ class ReceptionController extends Controller
                         }                        
                     }
                     else {
-                        $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
+                        
+                        $dishes = $this->get_dishes($category,$order->time,$menu_type);
 
                         if($i == 0) $temp_dishes = $dishes;
                         if(!empty($dishes)) $i++;
@@ -1231,8 +1236,7 @@ class ReceptionController extends Controller
 
         if(count($chk_holiday) > 0)
         {
-            $result = $this->get_time_slot($holiday,$time);
-
+            $result = $this->get_time_slot($holiday,$time,$menu_type);
         }
         else
         {
