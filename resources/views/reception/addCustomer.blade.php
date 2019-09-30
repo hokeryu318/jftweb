@@ -956,7 +956,7 @@
 
                 var time_selected = document.getElementById("timepicker1").value;
                 var hour = parseFloat(time_selected.substring(0, 2));
-                if(time_selected.substring(time_selected.length-2, time_selected.length) == 'PM') {
+                if(time_selected.substring(time_selected.length-2, time_selected.length) == 'PM' && time_selected.substring(0, 2) != '12') {
                     hour += 12;
                 }
                 time_selected = hour.toString() + time_selected.substring(time_selected.length-6,  time_selected.length-3);
@@ -1247,7 +1247,7 @@
 
                 var time_selected = document.getElementById("timepicker1").value;
                 var hour = parseFloat(time_selected.substring(0, 2));
-                if(time_selected.substring(time_selected.length-2, time_selected.length) == 'PM') {
+                if(time_selected.substring(time_selected.length-2, time_selected.length) == 'PM' && time_selected.substring(0, 2) != '12') {
                     hour += 12;
                 }
                 time_selected = hour.toString() + time_selected.substring(time_selected.length-6,  time_selected.length-3);
