@@ -35,7 +35,10 @@ class AlarmCount
 
         //display count of seated and booking status
         $count_notification->seated = Order::where('pay_flag',  '<>', 2)->where('status', 'seated')->get()->count();
-        $count_notification->bookings = Booked::where('timer_flag', 0)->where('status', 'booking')->get()->count();
+
+        $current_date = date('Y-m-d');
+        $count_notification->bookings = Booked::where('timer_flag', 0)->where('time', '<=',$current_date . " 23:59:59" )
+            ->where('time', '>=',$current_date . " 00:00:00" )->where('status', 'booking')->get()->count();
 
         View::share(compact('count_notification'));
 

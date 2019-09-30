@@ -47,7 +47,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -88,7 +88,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -131,7 +131,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -174,7 +174,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -219,7 +219,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -265,7 +265,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -311,7 +311,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -359,7 +359,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -407,7 +407,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -651,7 +651,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -697,7 +697,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -745,7 +745,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -793,7 +793,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -843,7 +843,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -894,7 +894,7 @@
                                             </h6>
                                             <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                             </p>
-                                            @if($table->order[0]->pay_flag == '1')
+                                            @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                             @else
                                                 <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -945,7 +945,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -998,7 +998,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -1051,7 +1051,7 @@
                                                 </h6>
                                                 <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
-                                                @if($table->order[0]->pay_flag == '1')
+                                                @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
                                                 @else
                                                     <img class="alarm" id="belled_icon_{{$table->id}}">
@@ -1551,10 +1551,10 @@
             var scale_value_all = scale_value_obj.text();
             var scale_value = scale_value_all.slice(0, -1);
 
-            if(scale_value > 10){
+            if(scale_value > 20){
                 scale_value = scale_value - 10;
                 
-                if(scale_value == 10){
+                if(scale_value == 20){
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
@@ -1673,8 +1673,11 @@
 
                     if(duration == 0) {
                         if(status != 'booking') {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 50) {
                                 document.getElementById("time1_" + i).innerHTML = 'Takeaway';
+                            }
+                            else if(screen_scale == 50) {
+                                document.getElementById("time1_" + i).innerHTML = '----';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
@@ -1686,7 +1689,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1694,7 +1697,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1707,7 +1710,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1715,7 +1718,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1728,7 +1731,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1736,7 +1739,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1749,7 +1752,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1757,7 +1760,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 40) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1766,8 +1769,11 @@
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
-                            if(screen_scale > 30) {
+                            if(screen_scale > 50) {
                                 document.getElementById("time1_" + i).innerHTML = 'Unlimited';
+                            }                            
+                            else if(screen_scale == 50) {
+                                document.getElementById("time1_" + i).innerHTML = '----';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
@@ -1804,7 +1810,7 @@
                     //alert(order_time);
                     if( elapsed_time > 0 && elapsed_time < 3600 * 1000 && table_obj_book[i]['book'][0]['timer_flag'] == 0 ) {
                         var sub_time = get_book_data(order_time);
-                        if(screen_scale > 30) {
+                        if(screen_scale > 50) {
                             document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
                         }
                         else {
@@ -1815,7 +1821,7 @@
                         @if($status != 'booking')                        
                             document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
                         @endif
-                        if(screen_scale > 30) {
+                        if(screen_scale > 50) {
                             document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
                         }
                         else {

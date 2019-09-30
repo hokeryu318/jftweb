@@ -60,7 +60,10 @@ class ReceptionController extends Controller
             }
         }
 
-        $booking_cnt = Booked::where('timer_flag',0)->get()->count();
+        $current_date = date('Y-m-d');
+
+        $booking_cnt = Booked::where('timer_flag',0)->where('time', '<=',$current_date . " 23:59:59" )
+            ->where('time', '>=',$current_date . " 00:00:00" )->where('status', 'booking')->get()->count();
 
         $status = (request()->get('status'));
         switch($status){
@@ -75,7 +78,8 @@ class ReceptionController extends Controller
                     $order_side_obj = collect();
                 break;
             case 'booking'://booking
-                $order_side_obj = Booked::where('timer_flag', 0)->where('status', 'booking')->orderby('time')->get();
+                $order_side_obj = Booked::where('timer_flag', 0)->where('time', '<=',$current_date . " 23:59:59" )
+                ->where('time', '>=',$current_date . " 00:00:00" )->where('status', 'booking')->orderby('time')->get();
                 break;
             default:
                 $order_side_obj = Order::where('pay_flag', '<>', 2)->where('status', 'seated')->get();

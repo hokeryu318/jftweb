@@ -1155,9 +1155,9 @@
             var scale_value_all = scale_value_obj.text();
             var scale_value = scale_value_all.slice(0, -1);
 
-            if(scale_value > 10){
+            if(scale_value > 20){
                 scale_value = scale_value - 10;
-                if(scale_value == 10){
+                if(scale_value == 20){
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
@@ -1324,7 +1324,15 @@
 
                     if(duration == 0) {
                         if(status != 'booking') {
-                            document.getElementById("time1_" + i).innerHTML = 'Takeaway';
+                            if(screen_scale > 50) {
+                                document.getElementById("time1_" + i).innerHTML = 'Takeaway';
+                            }
+                            else if(screen_scale == 50) {
+                                document.getElementById("time1_" + i).innerHTML = '----';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 1) {
                         order_time.setMinutes( order_time.getMinutes() + 30 );
@@ -1332,10 +1340,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 2) {
                         order_time.setMinutes( order_time.getMinutes() + 60 );
@@ -1343,10 +1361,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 3) {
                         order_time.setMinutes( order_time.getMinutes() + 90 );
@@ -1354,10 +1382,20 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                     } else if(duration == 4) {
                         order_time.setMinutes( order_time.getMinutes() + 120 );
@@ -1365,14 +1403,32 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = elapsed_time;
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            document.getElementById("time1_" + i).innerHTML = '0';
+                            if(screen_scale > 40) {
+                                document.getElementById("time1_" + i).innerHTML = '0';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            } 
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
-                            document.getElementById("time1_" + i).innerHTML = 'Unlimited';
+                            if(screen_scale > 50) {
+                                document.getElementById("time1_" + i).innerHTML = 'Unlimited';
+                            }                            
+                            else if(screen_scale == 50) {
+                                document.getElementById("time1_" + i).innerHTML = '----';
+                            }
+                            else {
+                                document.getElementById("time1_" + i).innerHTML = '';
+                            }   
                         }
                     }
 

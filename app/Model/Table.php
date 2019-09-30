@@ -21,7 +21,9 @@ class Table extends Model
 
     public function book()
     {
-        return $this->hasManyThrough(Booked::class, BookedTable::class, 'table_id', 'id', 'id', 'book_id')->where('timer_flag','0')->orderby('time');
+        $current_date = date('Y-m-d');
+        return $this->hasManyThrough(Booked::class, BookedTable::class, 'table_id', 'id', 'id', 'book_id')->where('timer_flag','0')
+            ->where('time', '<=',$current_date . " 23:59:59" )->where('time', '>=',$current_date . " 00:00:00" )->orderby('time');
     }
 
     public function bookTable()
