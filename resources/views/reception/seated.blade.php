@@ -1788,7 +1788,7 @@
 
         var table_obj_book = <?php echo json_encode($table_obj) ?>;
 
-        var myVar_book = setInterval(myTimer_book, 1000);
+        //var myVar_book = setInterval(myTimer_book, 1000);
 
         function myTimer_book() {
             var current_date =  new Date();

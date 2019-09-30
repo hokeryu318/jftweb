@@ -972,7 +972,7 @@
                 //alert(parseInt(order_time.substr(8,2))+"-"+parseInt(order_time.substr(11,2)) + ":" + parseInt(order_time.substr(14,2)) + ";" +order_duration);
                 var select_obj = document.getElementsByClassName('bg-selected');
                 
-                for(var i=0;i<select_obj.length;i++){ //selected tables
+                /*for(var i=0;i<select_obj.length;i++){ //selected tables
                     var book_data = '';
                     var book_duration = '';
                     var book_start_time = '';
@@ -1002,7 +1002,7 @@
                             }
                         }
                     }
-                }
+                }*/
                 //compare number of selected tables with guest
                 var cnt = 0;
                 var type = 0;
