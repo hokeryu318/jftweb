@@ -888,11 +888,11 @@
             forceParse: 0
         });
 
-        $(document).ready(function(){
+        //$(document).ready(function(){
             var screen_scale = "{{null !== session('scale_value1') ? session('scale_value1') : 100}}";
             $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
             $("#scale-value").text(screen_scale + '%');
-        });
+        //});
 
         //Now
         $('#now-time-picker').picker({

@@ -1332,7 +1332,7 @@
                     <span class="font-weight-bold fs-30">{{ $count_notification->calling_count }}</span>
                     @if($status == 'waiting') <div class="tab_activate"></div> @endif
                 </a>
-                <a href="{{route('reception.seated', ['status'=>'booking'])}}" class="col-4 black-text" style="margin-right:-5px;">
+                <a {{--href="{{route('reception.seated', ['status'=>'booking'])}}"--}} class="col-4 black-text" style="margin-right:-5px;">
                     <span class="font-weight-bold fs-20">BOOKINGS</span>
                     <img src="{{ asset('img/bookings.png') }}" style="width:55px;height:55px;"/>
                     <span class="font-weight-bold fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
