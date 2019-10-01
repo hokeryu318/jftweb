@@ -334,27 +334,34 @@ class KitchenController extends Controller
     public function docket() {
 
         $group_id = request()->group_id;
-        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
+        $current_date = date('Y-m-d');
+        $order_ids = Order::whereDate('created_at', $current_date)->pluck('id');
+//        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
+
         if(count($order_ids) > 0) {
             $order_dishes = OrderDish::whereIn('order_id', $order_ids)
                 ->join('dishes', 'dishes.id', '=', 'order_dish_match.dish_id')
                 ->where('dishes.group_id', 'like', '%&' . $group_id . '&%')
                 ->where('order_dish_match.ready_flag', '1')
+                ->select('order_dish_match.*')
                 ->orderBy('order_dish_match.ready_time', 'DESC')
                 ->orderBy('order_dish_match.created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
-        }
 
-        foreach($order_dishes as $order_dish) {
-            //$order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
-            $order_dish->time = Order::where('id', $order_dish->order_id)->pluck('time')->first();
-        }
+            foreach($order_dishes as $order_dish) {
+                //$order_dish->time = $this->get_time_data(substr($order_dish->created_at, 11, 5));
+                $order_dish->time = Order::where('id', $order_dish->order_id)->pluck('time')->first();
+            }
 
-        if(count($order_dishes) > 0) {
-            return view('kitchen.docket_modal')->with(compact('order_dishes', 'group_id'));
+            if(count($order_dishes) > 0) {
+                return view('kitchen.docket_modal')->with(compact('order_dishes', 'group_id'));
+            } else {
+                return '';
+            }
         } else {
             return '';
         }
+
     }
 
     public function java_alert() {
@@ -427,19 +434,15 @@ class KitchenController extends Controller
         $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
         $printerPort = 9100;
 
-        $ready_time = $orderdish->created_at;
-//        $time = substr($ready_time,11);
+        $ready_time = $orderdish->ready_time;
+        $time = substr($ready_time,11);
         $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
 
-        //$qty = $orderdish->count;
-        //$table_name = $orderdish->display_table;
-        //$dish_name = $orderdish->dish_name_en;
         $qty = $orderdish->count;
 
         $order_id = $orderdish->order_id;
         $order = Order::where('id', $order_id)->get()->first();
         $table_name = $order->table_name;
-        $time = substr($order->time,11);
 
         $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
 
@@ -511,6 +514,6 @@ class KitchenController extends Controller
             $printer -> close();
         }
         
-        return $table_name;
+        return $time;
     }
 }
