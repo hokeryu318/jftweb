@@ -17,7 +17,7 @@
     .scrolling-content {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        height:100%; /*A value other than height:auto needs to be set*/
+        /*height:100%; !*A value other than height:auto needs to be set*!*/
     }
     #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
     /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
@@ -913,15 +913,15 @@
             },
             success: function(result){
                 {{--console.log(result);--}}
-                if(result != '') {
-                    document.getElementById("calling_staff").style.background="#C9B92E";
-                    document.getElementById("calling_staff").innerHTML="<img src=\"{{asset('img/calling_staff.png')}}\" width=\"60px\">\n" +
-                        "                    <h3 style=\"color: white;\">CALLING</h3>";
-                } else {
-                    document.getElementById("calling_staff").style.background="";
-                    document.getElementById("calling_staff").innerHTML="<img src=\"{{asset('img/call_staff.png')}}\" width=\"60px\" style=\"margin-top: 10px;\">\n" +
-                        "                    <h3>CALL STAFF</h3>";
-                }
+                {{--if(result != '') {--}}
+                    {{--document.getElementById("calling_staff").style.background="#C9B92E";--}}
+                    {{--document.getElementById("calling_staff").innerHTML="<img src=\"{{asset('img/calling_staff.png')}}\" width=\"60px\">\n" +--}}
+                        {{--"                    <h3 style=\"color: white;\">CALLING111</h3>";--}}
+                {{--} else {--}}
+                    {{--document.getElementById("calling_staff").style.background="";--}}
+                    {{--document.getElementById("calling_staff").innerHTML="<img src=\"{{asset('img/call_staff.png')}}\" width=\"60px\" style=\"margin-top: 10px;\">\n" +--}}
+                        {{--"                    <h3>CALL STAFF222</h3>";--}}
+                {{--}--}}
             }
         });
     });

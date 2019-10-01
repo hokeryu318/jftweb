@@ -425,25 +425,23 @@ class KitchenController extends Controller
         $printerPort = 9100;
 
         $ready_time = $orderdish->created_at;
-        $time = substr($ready_time,11);
+//        $time = substr($ready_time,11);
         $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
 
         //$qty = $orderdish->count;
         //$table_name = $orderdish->display_table;
         //$dish_name = $orderdish->dish_name_en;
         $qty = $orderdish->count;
-            
-        $table_ids = OrderTable::where('order_id', $orderdish->order_id)->pluck('table_id');
-        $table_name = "";
-        foreach($table_ids as $table_id) {
-            $table_name .= $this->get_table_name($table_id).'+';
-        }
-        $table_name = rtrim($table_name, '+');
+
+        $order_id = $orderdish->order_id;
+        $order = Order::where('id', $order_id)->get()->first();
+        $table_name = $order->table_name;
+        $time = substr($order->time,11);
 
         $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
 
         $order_options = OrderOption::where('order_dish_id',$orderdish->id)->get();
-        
+
         foreach($order_options as $order_option) {
 
             if($order_option->option_id)
@@ -451,9 +449,9 @@ class KitchenController extends Controller
             else
                 $order_option->option_name = '';
 
-            if($order_option->item_id) 
+            if($order_option->item_id)
                 $order_option->item_name = Item::where('id', $order_option->item_id)->pluck('name')->first();
-            else 
+            else
                 $order_option->item_name = '';
         }
 
@@ -481,7 +479,7 @@ class KitchenController extends Controller
                 $printer -> text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
                 $printer->setEmphasis(false);
                 $printer->setTextSize(1,2);
-                $printer -> text('QTY:');               
+                $printer -> text('QTY:');
                 $printer->setEmphasis(true);
                 $printer->setTextSize(2,2);
                 $printer -> text($qty);
@@ -491,7 +489,7 @@ class KitchenController extends Controller
                 $printer->setTextSize(2,2);
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
-                
+
                 foreach($orderdish->options as $option) {
                     $printer->text( "[" . $option->option_name . ":");
                     $printer->setEmphasis(true);
@@ -500,8 +498,8 @@ class KitchenController extends Controller
                     $printer->setEmphasis(false);
                     $printer->setTextSize(1,2);
                     $printer->text("]");
-                }       
-            
+                }
+
             $printer->text("\n");
 
             $printer->cut();
@@ -510,6 +508,6 @@ class KitchenController extends Controller
             $printer -> close();
         }
         
-        return $time;
+        return $table_name;
     }
 }
