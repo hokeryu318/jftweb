@@ -32,7 +32,7 @@
                             </td>
                             <td width="20%" align="center">
                                 <div style="display: inline-block;">
-                                    <img src="{{asset('img/qty_down1.png')}}" style="width: 30px;" onclick="plusQty('minus', '{{$order_dish->id}}')" />
+                                    <img src="{{asset('img/qty_down1.png')}}" style="width: 30px;" onclick="plusQty1('minus', '{{$order_dish->id}}')" />
                                 </div>
                                 <div class="edit_order1_qty">
                                     <span id="qty_{{$order_dish->id}}" style="text-align: center;padding-top: 10px;font-size: 25px;">
