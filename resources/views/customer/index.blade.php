@@ -319,7 +319,7 @@
 </section>
 </main>
 </div>
-{{--<div id="screensaver"></div>--}}
+<div id="screensaver"></div>
 <script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -333,45 +333,11 @@
      //////////////////////////////////////////********************************************************************************************************************************
 
     $(document).ready(function(){
-        //$(".category_parent").first().addClass('selected_category_color');
-        /*var mousetimeout;
-        var screensaver_active = false;
-        var idletime = 5;
-
-        function show_screensaver(){
-            $('#screensaver').fadeIn();
-            var img_path = img_name.value;
-            img_path = img_path.substr(1,img_path.length-2);
-            var div_img = img_path.split(",");
-            var i = 0, cnt = div_img.length;
-            setInterval(function(){
-                document.getElementById("screensaver").innerHTML='<img src={!! asset("screen/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
-                if( cnt > i + 1 ) i++;
-                else i = 0;
-            },3000);
-        }
-
-        function stop_screensaver(){
-            $('#screensaver').fadeOut();
-            screensaver_active = false;
-        }
-
-        $(document).mousemove(function(){
-            clearTimeout(mousetimeout);
-
-            if (screensaver_active) {
-                stop_screensaver();
-            }
-
-            mousetimeout = setTimeout(function(){
-                show_screensaver();
-            }, 1000 * idletime); // 5 secs
-        });*/
         var idletime = 5;
         @if ($screentime)
             idletime = {{ $screentime->screen_time }};
         @endif
-        {{--(function(poll, timeout){
+        (function(poll, timeout){
 
             var _idle = false,
                 _lastActive = 0,
@@ -410,7 +376,7 @@
             window.setInterval(_poll, poll);
 
             _activeNow();
-        })(1000*110, 8000);--}}
+        })(1000*110, 8000);
     });
 
     $(".header").click(function () {
