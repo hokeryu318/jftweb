@@ -107,7 +107,10 @@ class KitchenController extends Controller
         }
 
 //        dd($attend_info);
-        return view('kitchen.calling_modal')->with(compact('attend_info'));
+        if(count($attend_info) > 0)
+            return view('kitchen.calling_modal')->with(compact('attend_info'));
+        else
+            echo('<script>$("#CallingModal").modal("hide");</script>');
     }
 
     //change_group

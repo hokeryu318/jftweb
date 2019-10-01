@@ -395,7 +395,10 @@ class ReceptionController extends Controller
         }
 
 //        dd($order_obj);
-        return view('reception.view_calling')->with(compact('order_obj'));
+        if(count($order_obj) > 0)
+            return view('reception.view_calling')->with(compact('order_obj'));
+        else
+            echo('<script>$("#myModal").modal("hide");</script>');
 
     }
 
