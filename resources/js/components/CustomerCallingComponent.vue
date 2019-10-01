@@ -6,7 +6,7 @@
     </div>
     <div v-else-if="this.attend_status === 1" style="width: 230px;" id="calling_staff">
         <img :src="'/img/call_staff.png'" width="60px" style="margin-top: 10px;">
-        <h3>CALL STAFF0</h3>
+        <h3>CALL STAFF</h3>
     </div>
 
 </template>
@@ -70,9 +70,11 @@
                         // this.attend_status = 1;
                         // location.href = window.location.href;
 
-                        document.getElementById("calling_staff").style.background = "";
-                        document.getElementById("calling_staff").innerHTML = "<img src=\"/img/call_staff.png\" width=\"60px\" style=\"margin-top: 10px;\">\n" +
-                            "        <h3>CALL STAFF</h3>";
+                        this.attend_status = 1;
+
+                        // document.getElementById("calling_staff").style.background = "";
+                        // document.getElementById("calling_staff").innerHTML = "<img src=\"/img/call_staff.png\" width=\"60px\" style=\"margin-top: 10px;\">\n" +
+                        //     "        <h3>CALL STAFF</h3>";
                     }
 
                 });
