@@ -701,7 +701,7 @@ class CustomerController extends Controller
         
         broadcast(new NotificationEvent($count_notification));
 
-        broadcast(new SelfEvent($order_id));
+        broadcast(new SelfEvent($order_id[0], $orderTable->calling_time));
 
         return $orderTable->calling_time;
     }

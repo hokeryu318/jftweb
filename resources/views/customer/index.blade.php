@@ -17,7 +17,7 @@
     .scrolling-content {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        height:100%; /*A value other than height:auto needs to be set*/
+        /*height:100%; !*A value other than height:auto needs to be set*!*/
     }
     #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
     /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}

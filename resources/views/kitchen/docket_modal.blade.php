@@ -49,14 +49,8 @@
                         <td width="12%"><span>{{ date_format(date_create($order_dish->ready_time),"h:i A") }}</span></td>
                         <td width="8%">
                             <div class="reprint" onclick="reprint('{{ $order_dish->id }}', '{{ $group_id }}')">
-                                {{--<a style="color: white;" href="{{ route('reception.accounting', ['order_id' => $booking_order->order_id]) }}">--}}
-                                    {{--<span class="fs-25">PROCESS BILL</span>--}}
-                                    {{--<img src="{{ asset('img/Group728white.png') }}" style="height:20px; margin: -8px 0 0 20px;">--}}
-                                {{--</a>--}}
-                                <a style="color: white;">
-                                    <span class="fs-25">REPRINT</span>
-                                    <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;" onclick="reprint('{{ $order_dish->id }}', '{{ $group_id }}')">
-                                </a>
+                                <span class="fs-25" style="color: white;">REPRINT</span>
+                                <img src="{{ asset('img/Group728white.png') }}" style="height:18px; margin: -6px 0 0 0;">
                             </div>
                         </td>
                     </tr>
