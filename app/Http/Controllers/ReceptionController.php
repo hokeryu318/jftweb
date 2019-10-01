@@ -1414,7 +1414,6 @@ class ReceptionController extends Controller
     public function now_sendmail()
     {
         date_default_timezone_set("Australia/Melbourne");
-        
 
         Excel::create('sales_report', function($excel) {
 
@@ -1625,7 +1624,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['10'] = round($elapsed / $count_temp);
                             }
@@ -1633,7 +1633,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['11'] = round($elapsed / $count_temp);
                             }
@@ -1641,7 +1642,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['12'] = round($elapsed / $count_temp);
                             }
@@ -1649,7 +1651,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['13'] = round($elapsed / $count_temp);
                             }
@@ -1657,7 +1660,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['14'] = round($elapsed / $count_temp);
                             }
@@ -1665,7 +1669,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['15'] = round($elapsed / $count_temp);
                             }
@@ -1673,7 +1678,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['16'] = round($elapsed / $count_temp);
                             }
@@ -1681,7 +1687,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['17'] = round($elapsed / $count_temp);
                             }
@@ -1689,7 +1696,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['18'] = round($elapsed / $count_temp);
                             }
@@ -1697,7 +1705,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['19'] = round($elapsed / $count_temp);
                             }
@@ -1705,7 +1714,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['20'] = round($elapsed / $count_temp);
                             }
@@ -1713,7 +1723,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['21'] = round($elapsed / $count_temp);
                             }
@@ -1721,7 +1732,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['22'] = round($elapsed / $count_temp);
                             }
@@ -1729,7 +1741,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['23'] = round($elapsed / $count_temp);
                             }
@@ -1737,7 +1750,8 @@ class ReceptionController extends Controller
                                 $count_temp = 0;
                                 $elapsed = 0;
                                 $count_temp += $item_sale_view[$j]->count;
-                                $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
+                                if($item_sale_view[$j]->ready_time != null)
+                                    $elapsed += (int)((strtotime($item_sale_view[$j]->ready_time) - strtotime($item_sale_view[$j]->start_time)) / 60);
                                 if($count_temp != 0)
                                     $hourly_cooktime_ranking[$i]['0'] = round($elapsed / $count_temp);
                             }
