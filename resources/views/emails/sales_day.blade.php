@@ -75,17 +75,18 @@
     <h3> 3. Discounts </h3>
     <table>
         @foreach($order_pay as $ord_pay)
+            @if($ord_pay->discount != 0)
             <tr>
                 <td align="left">{{ substr($ord_pay->created_at, 11, 5) }}({{ $ord_pay->id }})</td>
                 <td align="left">Reception</td>
-                <td align="right">@if($ord_pay->discount == 0) &nbsp; @else -${{ number_format($ord_pay->discount, 2) }} @endif</td>
+                <td align="right">-${{ number_format($ord_pay->discount, 2) }}</td>
             </tr>
+            @endif
         @endforeach
     </table>
 
     <h3> 4. Canceled Items </h3>
     <table>
-
         @for($i=0;$i<count($cancel_items);$i++)
             <tr>
                 <td align="left">{{ substr($cancel_items[$i]['amend_time'], 11, 5) }}({{ $cancel_items[$i]['id'] }})</td>
