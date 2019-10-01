@@ -33,7 +33,7 @@
                         <td width="12%">
                             <div>
                                 <span>
-                                    {{ date_format(date_create($order_dish->time),"h:i A") }}
+                                    {{ date_format(date_create($order_dish->created_at),"h:i A") }}
                                 </span>
                             </div>
                         </td>
