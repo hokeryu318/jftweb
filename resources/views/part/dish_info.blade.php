@@ -184,22 +184,22 @@
                 <button class="cta-wide" style="width: 90%;margin-bottom: 20px;" onclick="next_page('{{$option_id_arr}}', '0')">
                     Select
                     @if(session('language') == 1)
-                        @if(strlen($options[0]->display_name_cn) < 24)
+                        @if(strlen($options[0]->display_name_cn) < 21)
                             {{$options[0]->display_name_cn}}
                         @else
-                            {!! substr($options[0]->display_name_cn,0,24) . "..." !!}
+                            {!! substr($options[0]->display_name_cn,0,21) . "..." !!}
                         @endif
                     @elseif(session('language') == 2)
-                        @if(strlen($options[0]->display_name_jp) < 24)
+                        @if(strlen($options[0]->display_name_jp) < 21)
                             {{$options[0]->display_name_jp}}
                         @else
-                            {!! substr($options[0]->display_name_jp,0,24) . "..." !!}
+                            {!! substr($options[0]->display_name_jp,0,21) . "..." !!}
                         @endif
                     @else
-                        @if(strlen($options[0]->display_name_en) < 15)
+                        @if(strlen($options[0]->display_name_en) < 13)
                             {{$options[0]->display_name_en}}
                         @else
-                            {!! substr($options[0]->display_name_en,0,14) . "..." !!}
+                            {!! substr($options[0]->display_name_en,0,12) . "..." !!}
                         @endif
                     @endif
                     &#9654;
