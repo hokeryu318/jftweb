@@ -1522,30 +1522,30 @@ class ReceptionController extends Controller
                 }
 
                 // ===7. Item Sales Data ===
-                $items = DB::table('items')->get()->toArray();
-
-                $item_sale_view = DB::table('item_sales')->whereDate('created_at', $now_date)->get();
-//            dd($item_sale_view);
+                $sql = "SELECT dishes.name_en, SUM(order_dish_match.count) as count, SUM(order_pay.total) as total
+                        FROM dishes, order_dish_match, order_option_match, order_pay
+                        WHERE order_pay.created_at = " . $now_date . "
+                              AND order_option_match.order_dish_id = order_dish_match.id 
+                              AND order_dish_match.dish_id = dishes.id 
+                              AND order_dish_match.order_id = order_pay.order_id
+                        GROUP BY order_dish_match.dish_id";
+                $item_sale_view = DB::select($sql);
+                //dd($item_sale_view);
                 $item_sales_data = array();
-                for($i=0;$i<count($items);$i++) {
-                    $item_sales_data[$i]['id'] = $items[$i]->id;
-                    $item_sales_data[$i]['name'] = $items[$i]->name;
-                    $item_sales_data[$i]['qty'] = 0;
-                    $item_sales_data[$i]['sales'] = 0;
-                    for($j=0;$j<count($item_sale_view);$j++) {
-                        if($item_sales_data[$i]['id'] == $item_sale_view[$j]->item_id) {
-                            $item_sales_data[$i]['qty'] += $item_sale_view[$j]->count;
-                            $item_sales_data[$i]['sales'] += $item_sale_view[$j]->total;
-                        }
-                    }
+                for($i=0;$i<count($item_sale_view);$i++) {
+                    $item_sales_data[$i]['name'] = $item_sale_view[$i]->name_en;
+                    $item_sales_data[$i]['qty'] = $item_sale_view[$i]->count;
+                    $item_sales_data[$i]['sales'] = $item_sale_view[$i]->total;
                 }
 
                 // ===8. Hourly Item Ranking ===
+                $items = DB::table('dishes')->orderBy('id')->get()->toArray();
+                $item_sale_view = DB::table('item_sales')->whereDate('created_at', $now_date)->get();
                 //get item_id list
                 $item_id_all_list = array();
                 $item_id_list = array();
                 for($i=0;$i<count($item_sale_view);$i++) {
-                    array_push($item_id_all_list, $item_sale_view[$i]->item_id);
+                    array_push($item_id_all_list, $item_sale_view[$i]->dish_id);
                     $item_id_list = array_values(array_unique($item_id_all_list));
                 }
 
@@ -1560,9 +1560,9 @@ class ReceptionController extends Controller
                     $hourly_item_ranking[$i]['item_total'] = 0;
                     for($j=0;$j<count($item_sale_view);$j++) {
 
-                        if($item_id_list[$i] == $item_sale_view[$j]->item_id) {
+                        if($item_id_list[$i] == $item_sale_view[$j]->dish_id) {
 
-                            $hourly_item_ranking[$i]['item_name'] = $item_sale_view[$j]->name;
+                            $hourly_item_ranking[$i]['item_name'] = $item_sale_view[$j]->name_en;
 
                             if(substr($item_sale_view[$j]->start_time, 11, 3) == 10)
                                 $hourly_item_ranking[$i]['10'] += $item_sale_view[$j]->count;
@@ -1616,7 +1616,7 @@ class ReceptionController extends Controller
                     $hourly_cooktime_ranking[$i]['cook_avg_time'] = 0;
 
                     for($j=0;$j<count($item_sale_view);$j++) {
-                        if($item_id_list[$i] == $item_sale_view[$j]->item_id) {
+                        if($item_id_list[$i] == $item_sale_view[$j]->dish_id) {
 
                             $hourly_cooktime_ranking[$i]['item_name'] = $item_sale_view[$j]->name;
 
