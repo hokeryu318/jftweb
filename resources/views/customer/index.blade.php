@@ -325,15 +325,20 @@
 <script type="text/javascript">
     var csrfToken = $('[name="csrf_token"]').attr('content');
 
-    setInterval(refreshToken, 60000); // 1 min
+    setInterval(refreshToken, 120000); // 2 min
 
     function refreshToken(){
-        $.get('refresh-csrf').done(function(data){
-            csrfToken = data; // the new token
+        $.ajax({
+            type:"GET",
+            url:"{{ url('refresh-csrf') }}",
+            data:{},
+            success: function(result){
+                csrfToken = result;
+            }
         });
     }
 
-    setInterval(refreshToken, 60000); // 1 min
+    setInterval(refreshToken, 120000); //2 min
 
 </script>
 
