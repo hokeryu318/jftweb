@@ -113,11 +113,23 @@
             <button class="btnBottom-3" onclick="next_page('{{$option_ids}}','{{$count}}')" >
                 SELECT
                 @if(session('language') == 1)
-                    {{ $options[$count]->display_name_cn }}
+                    @if(strlen($options[0]->display_name_cn) < 24)
+                        {{$options[0]->display_name_cn}}
+                    @else
+                        {!! substr($options[0]->display_name_cn,0,24) . "..." !!}
+                    @endif
                 @elseif(session('language') == 2)
-                    {{ $options[$count]->display_name_jp }}
+                    @if(strlen($options[0]->display_name_jp) < 24)
+                        {{$options[0]->display_name_jp}}
+                    @else
+                        {!! substr($options[0]->display_name_jp,0,24) . "..." !!}
+                    @endif
                 @else
-                    {{ $options[$count]->display_name_en }}
+                    @if(strlen($options[0]->display_name_en) < 15)
+                        {{$options[0]->display_name_en}}
+                    @else
+                        {!! substr($options[0]->display_name_en,0,14) . "..." !!}
+                    @endif
                 @endif
                 &#9654;
             </button>
