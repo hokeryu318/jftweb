@@ -16,69 +16,13 @@
 <style>
     .scrolling-content {
         overflow-y: scroll;
+        overflow-x: hidden; 
         -webkit-overflow-scrolling: touch;
-        /*height:100%; !*A value other than height:auto needs to be set*!*/
     }
-    #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }
-    /*#screensaver img { -webkit-animation: fadein 2s;animation: fadein 2s;}
-    @keyframes fadein {
-        from { opacity: 0.9; }
-        to   { opacity: 1; }
-    }
-    @-webkit-keyframes fadein {
-        from { opacity: 0.9; }
-        to   { opacity: 0; }
+    /*:not(html) {
+        -webkit-transform: translate3d(0, 0, 0);
     }*/
-
-    /*.slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    .text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-    }
-
-    .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-    }
-
-    .active {
-    background-color: #717171;
-    }
-
-    .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-    }
-
-    @-webkit-keyframes fade {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
-
-    @keyframes fade {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
-
-    @media only screen and (max-width: 300px) {
-        .text {font-size: 11px}
-    }*/
-
+    #screensaver { position: absolute; width: 100%; height:100%; left:0px; top: 0px; display: none; z-index:9999; }    
 </style>
 
 <body>
@@ -93,7 +37,7 @@
 
             <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
         </div>
-        <div class="category_container">
+        <div class="brand">
             @php $i=0; @endphp
             @foreach($category_all as $key => $category)
                 @if(isset($category['has_subs']) && $category['has_subs'] == 1 && !empty($category['children']))
@@ -319,7 +263,7 @@
 </section>
 </main>
 </div>
-{{--<div id="screensaver"></div>--}}
+<div id="screensaver"></div>
 <script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript">
@@ -353,11 +297,11 @@
      //////////////////////////////////////////********************************************************************************************************************************
 
     $(document).ready(function(){
-        var idletime = 5;
+        var idletime = 120;
         @if ($screentime)
             idletime = {{ $screentime->screen_time }};
         @endif
-        /*(function(poll, timeout){
+        (function(poll, timeout){
 
             var _idle = false,
                 _lastActive = 0,
@@ -378,15 +322,14 @@
                     var i = 0, cnt = div_img.length;
 
                     if ((elapsed > timeout) && !_idle) {
-                        $('#screensaver').fadeIn(5000);
+                        $('#screensaver').fadeIn();
                         _idle = true;
 
                         setInterval(function(){
-                            path =
                             document.getElementById("screensaver").innerHTML='<img src={!! asset("screen/'+div_img[i].substr(1,div_img[i].length-2)+'") !!} width="100%">';
                             if( cnt > i + 1 ) i++;
                             else i = 0;
-                        }, idletime*1000);
+                        }, 5000);
 
                     }
                 }
@@ -396,7 +339,7 @@
             window.setInterval(_poll, poll);
 
             _activeNow();
-        })(1000*110, 8000);*/
+        })(1000, 1000*idletime);
     });
 
     $(".header").click(function () {
