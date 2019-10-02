@@ -18,6 +18,7 @@
         overflow-y: scroll;
         overflow-x: hidden; 
         -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
     }
     /*:not(html) {
         -webkit-transform: translate3d(0, 0, 0);
