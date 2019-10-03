@@ -1321,21 +1321,21 @@
         <div class="table_detail">
             <div class="row tab-header">
                 <a href="{{route('reception.seated', ['status'=>'seated'])}}" class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="fs-20">SEATED</span>
+                    <span class="font-weight-bold fs-20">SEATED</span>
                     <img src="{{ asset('img/seated.png') }}" style="width:65px;height:55px;"/>
-                    <span class="fs-30" style="margin-left: 2px">{{ $count_notification->seated }}</span>
+                    <span class="font-weight-bold fs-30" style="margin-left: 2px">{{ $count_notification->seated }}</span>
                     @if($status == 'seated') <div class="tab_activate"></div> @endif
                 </a>
                 <a href="{{route('reception.seated', ['status'=>'waiting'])}}" class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="fs-20">WAITING</span>
+                    <span class="font-weight-bold fs-20">WAITING</span>
                     <img src="{{ asset('img/waiting.png') }}" style="width:55px;height:55px;"/>
-                    <span class="fs-30">{{ $count_notification->calling_count }}</span>
+                    <span class="font-weight-bold fs-30">{{ $count_notification->calling_count }}</span>
                     @if($status == 'waiting') <div class="tab_activate"></div> @endif
                 </a>
-                <a {{--href="{{route('reception.seated', ['status'=>'booking'])}}"--}} class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="fs-20">BOOKINGS</span>
+                <a class="col-4 black-text" style="margin-right:-5px;">
+                    <span class="font-weight-bold fs-20">BOOKINGS</span>
                     <img src="{{ asset('img/bookings.png') }}" style="width:55px;height:55px;"/>
-                    <span class="fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
+                    <span class="font-weight-bold fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
                     @if($status == 'booking') <div class="tab_activate"></div> @endif
                 </a>
             </div>
@@ -1349,7 +1349,7 @@
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
-                                            <p class="red-text ml-0 fs-20" style="margin-left: 0px;" id="time_{{$kk}}"></p>
+                                            <p class="red-text font-weight-bold ml-0 fs-20" style="margin-left: 0px;" id="time_{{$kk}}"></p>
                                         </div>
                                         <div class="row table_name fs-20" style="text-align:center;">
                                             <table>
@@ -1400,7 +1400,7 @@
                                     <div class="offset-1 col-2 pr-0 text-right">
                                         <div class="row pl-2">
                                             <img src="{{asset('img/head1.png')}}" width="30" height="30">
-                                            <p class="middle-ver fs-25">{{ $order->guest }}</p>
+                                            <p class="font-weight-bold middle-ver fs-25">{{ $order->guest }}</p>
                                         </div>
                                         <div class="row mt-4 pl-3">
                                             <img src="{{asset('img/chat1.png')}}" width="40" height="40" style="margin: -15px 0 0 -10px;">
@@ -1418,7 +1418,7 @@
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
-                                            <p class="red-text ml-0 fs-20" style="margin-left: 0px;">&nbsp;</p>
+                                            <p class="red-text font-weight-bold ml-0 fs-20" style="margin-left: 0px;">&nbsp;</p>
                                         </div>
                                         <div class="row table_name fs-20" style="text-align:center;">
                                             <table>
@@ -1450,7 +1450,7 @@
                                     <div class="offset-1 col-2 pr-0 text-right">
                                         <div class="row pl-2">
                                             <img src="{{asset('img/head1.png')}}" width="30" height="30">
-                                            <p class="middle-ver fs-25">{{ $order->guest }}</p>
+                                            <p class="font-weight-bold middle-ver fs-25">{{ $order->guest }}</p>
                                         </div>
                                         <div class="row mt-4 pl-3">
                                             <img src="{{asset('img/chat1.png')}}" width="40" height="40" style="margin: -15px 0 0 -10px;">
