@@ -267,25 +267,25 @@
 <div id="screensaver"></div>
 <script src="{{ asset('js/app.js') }}"></script>
 
-{{--<script type="text/javascript">--}}
-    {{--var csrfToken = $('[name="csrf_token"]').attr('content');--}}
+<script type="text/javascript">
+    var csrfToken = $('[name="csrf_token"]').attr('content');
 
-    {{--setInterval(refreshToken, 120000); // 2 min--}}
+    setInterval(refreshToken, 120000); // 2 min
 
-    {{--function refreshToken(){--}}
-        {{--$.ajax({--}}
-            {{--type:"GET",--}}
-            {{--url:"{{ url('refresh-csrf') }}",--}}
-            {{--data:{},--}}
-            {{--success: function(result){--}}
-                {{--csrfToken = result;--}}
-            {{--}--}}
-        {{--});--}}
-    {{--}--}}
+    function refreshToken(){
+        $.ajax({
+            type:"GET",
+            url:"{{ url('refresh-csrf') }}",
+            data:{},
+            success: function(result){
+                csrfToken = result;
+            }
+        });
+    }
 
-    {{--setInterval(refreshToken, 120000); //2 min--}}
+    setInterval(refreshToken, 120000); //2 min
 
-{{--</script>--}}
+</script>
 
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script>
