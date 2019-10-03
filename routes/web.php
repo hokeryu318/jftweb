@@ -13,9 +13,9 @@
 
 //Route::get('/rename_dish', 'LoginController@rename_dish');
 
-Route::get('refresh-csrf', function(){
-    return csrf_token();
-});
+//Route::get('refresh-csrf', function(){
+//    return csrf_token();
+//});
 
 Route::get('/', 'LoginController@getLogin');
 //Route::post('/', 'LoginController@getLogin');
