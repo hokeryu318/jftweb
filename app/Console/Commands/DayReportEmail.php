@@ -134,19 +134,26 @@ class DayReportEmail extends Command
 
                 // ===6. Category Sales Data ===
                 $categories = DB::table('categories')->get()->toArray();
-
-                $category_sale_view = DB::table('category_sales')->whereDate('created_at', date('Y-m-d',strtotime("-1 days")))->get()->toArray();
-//            dd($category_sale_view[0]->name_en);
+                $category_sale_view = DB::table('category_sales')->whereDate('created_at',date('Y-m-d',strtotime("-1 days")))->get()->toArray();
                 $category_sales_data = array();
                 for($i=0;$i<count($categories);$i++) {
                     $category_sales_data[$i]['id'] = $categories[$i]->id;
                     $category_sales_data[$i]['name'] = $categories[$i]->name_en;
                     $category_sales_data[$i]['qty'] = 0;
                     $category_sales_data[$i]['sales'] = 0;
+                    $category_sales_data[$i]['qty1'] = 0;
+                    $category_sales_data[$i]['sales1'] = 0;
+                    $category_sales_data[$i]['is_parent'] = 0;
                     for($j=0;$j<count($category_sale_view);$j++) {
-                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->categories_id) {
+                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->category_id) {
                             $category_sales_data[$i]['qty'] += $category_sale_view[$j]->count;
                             $category_sales_data[$i]['sales'] += $category_sale_view[$j]->total;
+                        }
+
+                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->parent_id) {
+                            $category_sales_data[$i]['is_parent'] = 1;
+                            $category_sales_data[$i]['qty1'] += $category_sale_view[$j]->count;
+                            $category_sales_data[$i]['sales1'] += $category_sale_view[$j]->total;
                         }
                     }
                 }

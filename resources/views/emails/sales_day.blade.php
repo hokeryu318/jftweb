@@ -122,8 +122,8 @@
         @for($i=0;$i<count($category_sales_data);$i++)
             <tr>
                 <td align="left">{{ ($i+1).'.'.$category_sales_data[$i]['name'] }}</td>
-                <td align="right">{{ $category_sales_data[$i]['qty'] }}</td>
-                <td align="right">${{ number_format($category_sales_data[$i]['sales'], 2) }}</td>
+                <td align="right">@if($category_sales_data[$i]['is_parent'] == 0) {{ $category_sales_data[$i]['qty'] }} @else {{ $category_sales_data[$i]['qty1'] }} @endif</td>
+                <td align="right">@if($category_sales_data[$i]['is_parent'] == 0) ${{ number_format($category_sales_data[$i]['sales'], 2) }} @else ${{ number_format($category_sales_data[$i]['sales1'], 2) }} @endif</td>
             </tr>
         @endfor
     </table>

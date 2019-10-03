@@ -1504,19 +1504,26 @@ class ReceptionController extends Controller
 
                 // ===6. Category Sales Data ===
                 $categories = DB::table('categories')->get()->toArray();
-
-                $category_sale_view = DB::table('category_sales')->whereDate('created_at', $now_date)->get()->toArray();
-//            dd($category_sale_view[0]->name_en);
+                $category_sale_view = DB::table('category_sales')->whereDate('created_at',$now_date)->get()->toArray();
                 $category_sales_data = array();
                 for($i=0;$i<count($categories);$i++) {
                     $category_sales_data[$i]['id'] = $categories[$i]->id;
                     $category_sales_data[$i]['name'] = $categories[$i]->name_en;
                     $category_sales_data[$i]['qty'] = 0;
                     $category_sales_data[$i]['sales'] = 0;
+                    $category_sales_data[$i]['qty1'] = 0;
+                    $category_sales_data[$i]['sales1'] = 0;
+                    $category_sales_data[$i]['is_parent'] = 0;
                     for($j=0;$j<count($category_sale_view);$j++) {
-                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->categories_id) {
+                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->category_id) {
                             $category_sales_data[$i]['qty'] += $category_sale_view[$j]->count;
                             $category_sales_data[$i]['sales'] += $category_sale_view[$j]->total;
+                        }
+
+                        if($category_sales_data[$i]['id'] == $category_sale_view[$j]->parent_id) {
+                            $category_sales_data[$i]['is_parent'] = 1;
+                            $category_sales_data[$i]['qty1'] += $category_sale_view[$j]->count;
+                            $category_sales_data[$i]['sales1'] += $category_sale_view[$j]->total;
                         }
                     }
                 }
@@ -1529,6 +1536,7 @@ class ReceptionController extends Controller
                               AND order_dish_match.dish_id = dishes.id 
                               AND order_dish_match.order_id = order_pay.order_id
                         GROUP BY order_dish_match.dish_id";
+
                 $item_sale_view = DB::select($sql);
                 //dd($item_sale_view);
                 $item_sales_data = array();
@@ -1539,7 +1547,6 @@ class ReceptionController extends Controller
                 }
 
                 // ===8. Hourly Item Ranking ===
-                $items = DB::table('dishes')->orderBy('id')->get()->toArray();
                 $item_sale_view = DB::table('item_sales')->whereDate('created_at', $now_date)->get();
                 //get item_id list
                 $item_id_all_list = array();
