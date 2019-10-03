@@ -335,7 +335,7 @@ class KitchenController extends Controller
 
         $group_id = request()->group_id;
         $current_date = date('Y-m-d');
-        $order_ids = Order::whereDate('created_at', $current_date)->pluck('id');
+        $order_ids = Order::whereDate('created_at', $current_date)->where('pay_flag', '<>', 2)->pluck('id');
 //        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
 
         if(count($order_ids) > 0) {
