@@ -22,7 +22,6 @@
             }
         },
         mounted() {
-
             this.orderid = this.order_id;
             if(this.calling_time != "") {
                 this.attend_status = 0;
@@ -34,25 +33,6 @@
             // console.dir(this.attend_status);
         },
         created() {
-            // Echo.channel('attend-channel')//public channel
-            // .listen('AttendEvent', (event) => {
-            //     this.attend = event.attend_status[0];
-            //     console.dir(this.attend);
-            //     console.dir(this.orderid);
-            //
-            //     // location.href = window.location.href;
-            //     if(this.attend == this.orderid)
-            //     {
-            //         // this.attend_status = 1;
-            //         // location.href = window.location.href;
-            //
-            //         document.getElementById("calling_staff").style.background = "";
-            //         document.getElementById("calling_staff").innerHTML = "<img src=\"/img/call_staff.png\" width=\"60px\" style=\"margin-top: 10px;\">\n" +
-            //             "        <h3>CALL STAFF</h3>";
-            //     }
-            //
-            // });
-
             this.get_attend();
             this.get_self();
         },

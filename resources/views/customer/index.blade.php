@@ -147,7 +147,8 @@
         <div class="tInfo btn">
             <div class="tNumber">
                 <h3>Table Number</h3>
-                <h2>{{$table_name}}</h2>
+                {{--<h2>{{$table_name}}</h2>--}}
+                <display-table-component table_name="{{ $table_name }}"></display-table-component>
             </div>
             <h6>&nbsp;</h6>
             <div class="tTime">

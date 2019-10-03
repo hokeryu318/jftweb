@@ -26,6 +26,7 @@ Vue.component('kitchendish-component', require('./components/KitchendishComponen
 Vue.component('kitchencalling-component', require('./components/KitchencallingComponent.vue').default);
 Vue.component('pay-finish-component', require('./components/PayfinishComponent.vue').default);
 Vue.component('customer-calling-component', require('./components/CustomerCallingComponent.vue').default);
+Vue.component('display-table-component', require('./components/DisplayTableComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

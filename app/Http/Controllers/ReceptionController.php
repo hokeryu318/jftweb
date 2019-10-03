@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChangeCountEvent;
 use App\Events\KitchenEvent;
+use App\Events\TableMoveEvent;
 use Illuminate\Http\Request;
 
 use App\Events\NotificationEvent;
@@ -246,6 +247,8 @@ class ReceptionController extends Controller
                 }
                 $table_name = rtrim($table_name, '+');
                 Order::where('id', $order_obj->id)->update(['table_name' => $table_name]);
+
+                broadcast(new TableMoveEvent($table_name));
             }
             else  //add
             {
