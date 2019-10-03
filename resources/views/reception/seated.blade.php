@@ -1323,19 +1323,19 @@
                 <a href="{{route('reception.seated', ['status'=>'seated'])}}" class="col-4 black-text" style="margin-right:-5px;">
                     <span class="font-weight-bold fs-20">SEATED</span>
                     <img src="{{ asset('img/seated.png') }}" style="width:65px;height:55px;"/>
-                    <span class="font-weight-bold fs-30" style="margin-left: 2px">{{ $count_notification->seated }}</span>
+                    <span class="font-weight-bold fs-25" style="margin-left: 2px">{{ $count_notification->seated }}</span>
                     @if($status == 'seated') <div class="tab_activate"></div> @endif
                 </a>
                 <a href="{{route('reception.seated', ['status'=>'waiting'])}}" class="col-4 black-text" style="margin-right:-5px;">
                     <span class="font-weight-bold fs-20">WAITING</span>
                     <img src="{{ asset('img/waiting.png') }}" style="width:55px;height:55px;"/>
-                    <span class="font-weight-bold fs-30">{{ $count_notification->calling_count }}</span>
+                    <span class="font-weight-bold fs-25">{{ $count_notification->calling_count }}</span>
                     @if($status == 'waiting') <div class="tab_activate"></div> @endif
                 </a>
                 <a class="col-4 black-text" style="margin-right:-5px;">
                     <span class="font-weight-bold fs-20">BOOKINGS</span>
                     <img src="{{ asset('img/bookings.png') }}" style="width:55px;height:55px;"/>
-                    <span class="font-weight-bold fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
+                    <span class="font-weight-bold fs-25" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
                     @if($status == 'booking') <div class="tab_activate"></div> @endif
                 </a>
             </div>
