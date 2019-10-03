@@ -225,9 +225,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -269,9 +269,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -315,9 +315,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -361,9 +361,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -409,9 +409,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -458,9 +458,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -507,9 +507,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -558,9 +558,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -609,9 +609,9 @@
                                                                         @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                                             <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 125px;top: 8px;">
                                                                         @endif
-                                                                        <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}
+                                                                        <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                                             <br>
-                                                                            <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                                            <p class="black-text ml-0" id="time1_{{$key}}"></p>
                                                                         </h6>
                                                                         @if($table->order[0]->status == 'booking')
                                                                             <a class="font-weight-bold red-text">
@@ -660,7 +660,7 @@
                                                                 <div>
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -672,7 +672,7 @@
                                                                 <div style="height: 110px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -686,7 +686,7 @@
                                                                 <div style="height: 110px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -700,7 +700,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -716,7 +716,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -733,7 +733,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -750,7 +750,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -769,7 +769,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -788,7 +788,7 @@
                                                                 <div style="height: 118px;">
                                                                     <div class="@if($table->id == $table_id) bg-selected @endif table-area white table-c-style-disable text-center" style="margin-left: 38px;" id="{{$table->id}}">
                                                                         <div style="width: 118px;height: 118px;" onclick="selectObject('{{$table->id}}')">
-                                                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
+                                                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -888,11 +888,13 @@
             forceParse: 0
         });
 
-        //$(document).ready(function(){
-            var screen_scale = "{{null !== session('scale_value1') ? session('scale_value1') : 100}}";
-            $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
-            $("#scale-value").text(screen_scale + '%');
-        //});
+        var screen_scale = "{{null !== session('scale_value1') ? session('scale_value1') : 100}}";
+        $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
+        $("#scale-value").text(screen_scale + '%');
+        var table_info = document.getElementById('table_info');
+        for(var i=0;i<table_info.length;i++) {
+            table_info[i].style.fontSize = screen_scale*0.001 + 'pt';
+        }
 
         //Now
         $('#now-time-picker').picker({
@@ -1136,6 +1138,9 @@
                     $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
+                for(var i=0;i<table_info.length;i++) {
+                    table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                }
             }else{
                 $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
             }
@@ -1161,6 +1166,9 @@
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
+                for(var i=0;i<table_info.length;i++) {
+                    table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                }
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
             }
@@ -1324,15 +1332,15 @@
 
                     if(duration == 0) {
                         if(status != 'booking') {
-                            if(screen_scale > 50) {
+                            if(screen_scale > 30) {
                                 document.getElementById("time1_" + i).innerHTML = 'Takeaway';
                             }
-                            else if(screen_scale == 50) {
-                                document.getElementById("time1_" + i).innerHTML = '----';
+                            else if(screen_scale == 30) {
+                                document.getElementById("time1_" + i).innerHTML = 'Takeaway';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
-                            }
+                            } 
                         }
                     } else if(duration == 1) {
                         order_time.setMinutes( order_time.getMinutes() + 30 );
@@ -1340,7 +1348,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1348,7 +1356,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1361,7 +1369,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1369,7 +1377,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1382,7 +1390,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1390,7 +1398,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1403,7 +1411,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1411,7 +1419,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1420,15 +1428,15 @@
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
-                            if(screen_scale > 50) {
+                            if(screen_scale > 30) {
                                 document.getElementById("time1_" + i).innerHTML = 'Unlimited';
-                            }                            
-                            else if(screen_scale == 50) {
-                                document.getElementById("time1_" + i).innerHTML = '----';
+                            }
+                            else if(screen_scale == 30) {
+                                document.getElementById("time1_" + i).innerHTML = 'Unlimit';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
-                            }   
+                            } 
                         }
                     }
 
