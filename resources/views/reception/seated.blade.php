@@ -8,7 +8,7 @@
 <div class="container-fluid mt-5">
     <div class="row">
         <div class="text-center exit_fullscreen display-none" id="exit-fullscreen">
-            <span class="white-text font-weight-bold exit_fullscreen_letter">EXIT FULL SCREEN</span>
+            <span class="white-text exit_fullscreen_letter">EXIT FULL SCREEN</span>
             <img src="{{ asset('img/exit-fullscreen.png') }}"/>
         </div>
     </div>
@@ -16,11 +16,11 @@
         <div class="col-1 pr-0 pl-0 text-center" style="margin-right: -45px;" id="display-method">
             <div class="text-center display_all_content" id="display-all">
                 <img src="{{ asset('img/arrow.png') }}" class="display_all_btn"/>
-                <p class="white-text font-weight-bold display_all">DISPLAY ALL TABLE</p>
+                <p class="white-text display_all">DISPLAY ALL TABLE</p>
             </div>
             <div class="text-center display_scale">
                 <img src="{{ asset('img/plus_full.png') }}" class="plus_btn" onclick="tableZoomIn()"/>
-                <p class="font-weight-bold pt5 scale_value" id="scale-value"></p>
+                <p class="pt5 scale_value" id="scale-value"></p>
                 <img src="{{ asset('img/minus.png') }}" class="minus_btn" onclick="tableZoomOut();"/>
             </div>
         </div>
@@ -41,11 +41,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -82,11 +82,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -125,11 +125,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -168,11 +168,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -213,11 +213,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -259,11 +259,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -305,11 +305,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -353,11 +353,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -401,11 +401,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                     <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -447,8 +447,8 @@
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -462,8 +462,8 @@
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -479,8 +479,8 @@
                                         <div class="white table-c-style-disable text-center">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -496,8 +496,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -515,8 +515,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                            <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             </div>
                                         </div>
@@ -535,8 +535,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -555,8 +555,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -577,8 +577,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -599,8 +599,8 @@
                                         <div class="white table-c-style-disable text-center" style="margin-left: 38px;">
                                             <div style="width: 118px;height: 118px;"
                                                  onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'">
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -645,11 +645,11 @@
                                              @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -691,11 +691,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: -12px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -739,11 +739,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -787,11 +787,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -837,11 +837,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -888,11 +888,11 @@
                                             @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                 <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                             @endif
-                                            <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                            <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                 <br>
-                                                <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                <p class="ml-0"  id="time1_{{$key}}"></p>
                                             </h6>
-                                            <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                            <p class="red-text ml-01" id="time_book_{{$key}}">
                                             </p>
                                             @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -939,11 +939,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -992,11 +992,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -1045,11 +1045,11 @@
                                                 @if(in_array($table->id, $order_tables) && (count($table->order[0]->ordertables) > 1))
                                                     <img class="table_a_red_plus" src="{{asset('img/plus_red.png')}}" style="left: 126px;top: 8px;">
                                                 @endif
-                                                <h6 class="font-weight-bold grey-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
+                                                <h6 id="table_info" class="black-text wb" style="margin-bottom: -15px;">{{ $table["name"] }}
                                                     <br>
-                                                    <p class="grey-text font-weight-bold ml-0" id="time1_{{$key}}"></p>
+                                                    <p class="ml-0"  id="time1_{{$key}}"></p>
                                                 </h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                                 @if($table->order[0]->pay_flag == '1' && $scren_scale > 20)
                                                 <img class="alarm" id="belled_icon_{{$table->id}}" src="{{ asset('img/calling.png') }}">
@@ -1096,8 +1096,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1116,8 +1116,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>                                                
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>                                                
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1138,8 +1138,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1160,8 +1160,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1184,8 +1184,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1209,8 +1209,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1234,8 +1234,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1261,8 +1261,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1288,8 +1288,8 @@
                                                 onclick="window.location='{{ route("reception.addCustomer", [ "table_id" => $table->id, "order_id" => 0, "status" => $status, "order_side_obj" => $order_side_obj ]) }}'"
                                                 @endif
                                                 >
-                                                <h6 class="font-weight-bold grey-text wb">{{ $table["name"] }}</h6>
-                                                <p class="font-weight-bold red-text ml-01" id="time_book_{{$key}}">
+                                                <h6 class="black-text wb">{{ $table["name"] }}</h6>
+                                                <p class="red-text ml-01" id="time_book_{{$key}}">
                                                 </p>
                                             </div>
                                         </div>
@@ -1321,21 +1321,21 @@
         <div class="table_detail">
             <div class="row tab-header">
                 <a href="{{route('reception.seated', ['status'=>'seated'])}}" class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="font-weight-bold fs-20">SEATED</span>
+                    <span class="fs-20">SEATED</span>
                     <img src="{{ asset('img/seated.png') }}" style="width:65px;height:55px;"/>
-                    <span class="font-weight-bold fs-30" style="margin-left: 2px">{{ $count_notification->seated }}</span>
+                    <span class="fs-30" style="margin-left: 2px">{{ $count_notification->seated }}</span>
                     @if($status == 'seated') <div class="tab_activate"></div> @endif
                 </a>
                 <a href="{{route('reception.seated', ['status'=>'waiting'])}}" class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="font-weight-bold fs-20">WAITING</span>
+                    <span class="fs-20">WAITING</span>
                     <img src="{{ asset('img/waiting.png') }}" style="width:55px;height:55px;"/>
-                    <span class="font-weight-bold fs-30">{{ $count_notification->calling_count }}</span>
+                    <span class="fs-30">{{ $count_notification->calling_count }}</span>
                     @if($status == 'waiting') <div class="tab_activate"></div> @endif
                 </a>
                 <a {{--href="{{route('reception.seated', ['status'=>'booking'])}}"--}} class="col-4 black-text" style="margin-right:-5px;">
-                    <span class="font-weight-bold fs-20">BOOKINGS</span>
+                    <span class="fs-20">BOOKINGS</span>
                     <img src="{{ asset('img/bookings.png') }}" style="width:55px;height:55px;"/>
-                    <span class="font-weight-bold fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
+                    <span class="fs-30" id="book_cnt">{{ $booking_cnt /*$count_notification->bookings*/ }}</span>
                     @if($status == 'booking') <div class="tab_activate"></div> @endif
                 </a>
             </div>
@@ -1349,7 +1349,7 @@
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
-                                            <p class="red-text font-weight-bold ml-0 fs-20" style="margin-left: 0px;" id="time_{{$kk}}"></p>
+                                            <p class="red-text ml-0 fs-20" style="margin-left: 0px;" id="time_{{$kk}}"></p>
                                         </div>
                                         <div class="row table_name fs-20" style="text-align:center;">
                                             <table>
@@ -1400,7 +1400,7 @@
                                     <div class="offset-1 col-2 pr-0 text-right">
                                         <div class="row pl-2">
                                             <img src="{{asset('img/head1.png')}}" width="30" height="30">
-                                            <p class="font-weight-bold middle-ver fs-25">{{ $order->guest }}</p>
+                                            <p class="middle-ver fs-25">{{ $order->guest }}</p>
                                         </div>
                                         <div class="row mt-4 pl-3">
                                             <img src="{{asset('img/chat1.png')}}" width="40" height="40" style="margin: -15px 0 0 -10px;">
@@ -1418,7 +1418,7 @@
                                 <div class="row w-100 p-0 m-0">
                                     <div class="col-lg-3 pr-0 col-xl-3">
                                         <div class="row" style="margin-left: -10px;">
-                                            <p class="red-text font-weight-bold ml-0 fs-20" style="margin-left: 0px;">&nbsp;</p>
+                                            <p class="red-text ml-0 fs-20" style="margin-left: 0px;">&nbsp;</p>
                                         </div>
                                         <div class="row table_name fs-20" style="text-align:center;">
                                             <table>
@@ -1450,7 +1450,7 @@
                                     <div class="offset-1 col-2 pr-0 text-right">
                                         <div class="row pl-2">
                                             <img src="{{asset('img/head1.png')}}" width="30" height="30">
-                                            <p class="font-weight-bold middle-ver fs-25">{{ $order->guest }}</p>
+                                            <p class="middle-ver fs-25">{{ $order->guest }}</p>
                                         </div>
                                         <div class="row mt-4 pl-3">
                                             <img src="{{asset('img/chat1.png')}}" width="40" height="40" style="margin: -15px 0 0 -10px;">
@@ -1484,11 +1484,15 @@
         //     document.getElementById('room-content').style.marginTop = '12px';
         //     $("#exit-fullscreen").show('slow');
         // });
-        //$(document).ready(function(){
-            var screen_scale = "{{null !== session('scale_value') ? session('scale_value') : 100}}";
-            $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
-            $("#scale-value").text(screen_scale + '%');
-        //});
+
+        var screen_scale = "{{null !== session('scale_value') ? session('scale_value') : 100}}";
+        $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
+        var table_info = document.getElementById('table_info');
+        for(var i=0;i<table_info.length;i++) {
+            table_info[i].style.fontSize = screen_scale*0.001 + 'pt';
+        }
+            
+        $("#scale-value").text(screen_scale + '%');
 
         $("#display-all").click(function(){
 
@@ -1531,6 +1535,9 @@
                     $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
+                for(var i=0;i<table_info.length;i++) {
+                    table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                }
             }else{
                 $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
             }
@@ -1558,6 +1565,9 @@
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
+                for(var i=0;i<table_info.length;i++) {
+                    table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                }
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
             }
@@ -1673,15 +1683,15 @@
 
                     if(duration == 0) {
                         if(status != 'booking') {
-                            if(screen_scale > 50) {
+                            if(screen_scale > 30) {
                                 document.getElementById("time1_" + i).innerHTML = 'Takeaway';
                             }
-                            else if(screen_scale == 50) {
-                                document.getElementById("time1_" + i).innerHTML = '----';
+                            else if(screen_scale == 30) {
+                                document.getElementById("time1_" + i).innerHTML = 'Takeaway';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
-                            }
+                            } 
                         }
                     } else if(duration == 1) {
                         order_time.setMinutes( order_time.getMinutes() + 30 );
@@ -1689,7 +1699,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1697,7 +1707,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1710,7 +1720,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1718,7 +1728,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1731,7 +1741,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1739,7 +1749,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1752,7 +1762,7 @@
                         elapsed_time /= 60;
                         elapsed_time = Math.round(elapsed_time);
                         if((elapsed_time >= 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                             }
                             else {
@@ -1760,7 +1770,7 @@
                             }
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 40) {
+                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
                             }
                             else {
@@ -1769,15 +1779,15 @@
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
-                            if(screen_scale > 50) {
+                            if(screen_scale > 30) {
                                 document.getElementById("time1_" + i).innerHTML = 'Unlimited';
-                            }                            
-                            else if(screen_scale == 50) {
-                                document.getElementById("time1_" + i).innerHTML = '----';
+                            }
+                            else if(screen_scale == 30) {
+                                document.getElementById("time1_" + i).innerHTML = 'Unlimit';
                             }
                             else {
                                 document.getElementById("time1_" + i).innerHTML = '';
-                            }                   
+                            } 
                         }
                     }
 
@@ -1810,7 +1820,7 @@
                     //alert(order_time);
                     if( elapsed_time > 0 && elapsed_time < 3600 * 1000 && table_obj_book[i]['book'][0]['timer_flag'] == 0 ) {
                         var sub_time = get_book_data(order_time);
-                        if(screen_scale > 50) {
+                        if(screen_scale > 20) {
                             document.getElementById("time_book_" + i).innerHTML = 'BOOK' + '<br>' + sub_time + '<br>';
                         }
                         else {
@@ -1821,7 +1831,7 @@
                         @if($status != 'booking')                        
                             document.getElementById('side_book_'+ table_obj_book[i]['book'][0]['id']).style.display = "none";
                         @endif
-                        if(screen_scale > 50) {
+                        if(screen_scale > 20) {
                             document.getElementById("time_book_" + i).innerHTML = '&nbsp;' + '<br>' + '&nbsp;' + '<br>';
                         }
                         else {
