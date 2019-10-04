@@ -514,6 +514,6 @@ class KitchenController extends Controller
             $printer -> close();
         }
         
-        return $time;
+        return $table_name;
     }
 }
