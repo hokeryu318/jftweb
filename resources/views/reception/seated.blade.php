@@ -1566,7 +1566,8 @@
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
                 for(var i=0;i<table_info.length;i++) {
-                    table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                    // table_info[i].style.fontSize = scale_value*0.001 + 'pt';
+                    table_info[i].style.webkitTextSizeAdjust = scale_value*0.001 + 'pt';
                 }
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
