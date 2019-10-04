@@ -2,7 +2,7 @@ DROP VIEW IF EXISTS `item_sales`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `item_sales` AS SELECT
 	dishes.name_en,
 	order_dish_match.count,
-    order_pay.total,
+    order_dish_match.total_price as total,
     order_pay.id,
     order_dish_match.order_id,
     order_dish_match.dish_id,
