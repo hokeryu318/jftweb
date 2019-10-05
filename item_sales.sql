@@ -12,11 +12,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 FROM
   dishes,	
   order_dish_match,
-	order_option_match,
 	order_pay
 WHERE
   dishes.id = order_dish_match.dish_id	
-AND order_option_match.order_dish_id = order_dish_match.id 
 AND order_dish_match.order_id = order_pay.order_id
 ORDER BY order_dish_match.dish_id ;
 SET FOREIGN_KEY_CHECKS=1;
