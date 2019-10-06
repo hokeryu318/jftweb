@@ -1489,7 +1489,7 @@
         $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
         var table_info = document.getElementsByClassName('black-text wb');
         for(var i=0;i<table_info.length;i++) {
-            table_info[i].style.fontSize = screen_scale*0.15 + 'px';
+            table_info[i].style.fontSize = screen_scale*0.2 + 'px';
         }
             
         $("#scale-value").text(screen_scale + '%');
@@ -1536,10 +1536,7 @@
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
                 for(var i=0;i<table_info.length;i++) {
-                    table_info[i].style.fontSize = scale_value*0.15 + 'px';
-                    /*var style = window.getComputedStyle(table_info[i], null).getPropertyValue('font-size');
-                    var currentSize = parseFloat(style);
-                    table_info[i].style.fontSize = (currentSize + 1) + 'px';*/
+                    table_info[i].style.fontSize = scale_value*0.2 + 'px';
                 }
             }else{
                 $(".plus_btn").attr("src", "{{ asset('img/plus_full.png') }}");
@@ -1561,19 +1558,15 @@
             var scale_value_all = scale_value_obj.text();
             var scale_value = scale_value_all.slice(0, -1);
 
-            if(scale_value > 20){
+            if(scale_value > 10){
                 scale_value = scale_value - 10;
                 
-                if(scale_value == 20){
+                if(scale_value == 10){
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
                 for(var i=0;i<table_info.length;i++) {
-                    table_info[i].style.fontSize = scale_value*0.15 + 'px';
-                    /*var style = window.getComputedStyle(table_info[i], null).getPropertyValue('font-size');
-                    var currentSize = parseFloat(style);
-                    alert(currentSize);
-                    table_info[i].style.fontSize = (currentSize - 1) + 'px';*/
+                    table_info[i].style.fontSize = scale_value*0.2 + 'px';
                 }
             }else{
                 $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
