@@ -1510,6 +1510,10 @@
                 $(".room-div").animate({ 'zoom': scale_value }, 400);
             }
 
+            for(var i=0;i<table_info.length;i++) {
+                table_info[i].style.fontSize = 10*0.2 + 'px';
+            }
+
         });
 
         $("#exit-fullscreen").click(function() {

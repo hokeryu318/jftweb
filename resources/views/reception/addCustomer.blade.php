@@ -891,7 +891,7 @@
         var screen_scale = "{{null !== session('scale_value1') ? session('scale_value1') : 100}}";
         $(".room-div").animate({ 'zoom': screen_scale*0.01 }, 400);
         $("#scale-value").text(screen_scale + '%');
-        var table_info = document.getElementById('table_info');
+        var table_info = document.getElementsByClassName('black-text wb');
         for(var i=0;i<table_info.length;i++) {
             table_info[i].style.fontSize = screen_scale*0.15 + 'px';
         }
