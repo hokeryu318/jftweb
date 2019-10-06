@@ -325,21 +325,11 @@
             url:"{{ route('reception.amend') }}",
             data:{order_id: order_id, order_dish_id: order_dish_id},
             success: function(result){
-                // console.log(result);
                 $('#thirdModal').html(result);
             }
         });
         $('#thirdModal').modal("toggle");
     }
-
-    // $("#data tr").click(function() {
-    //     var selected = $(this).hasClass("highlight");
-    //     $("#data tr").removeClass("highlight");
-    //
-    //     if(!selected)
-    //         $(this).addClass("highlight");
-    //
-    // });
 
     function select_item(selected_dish_id) {
 
@@ -376,7 +366,6 @@
             url:"{{ route('reception.tip') }}",
             data:{},
             success: function(result){
-//                    console.log(result);
                 $('#thirdModal').html(result);
             }
         });
