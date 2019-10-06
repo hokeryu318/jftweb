@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Dish;
 use App\Model\OrderDish;
+use App\Model\OrderPay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Model\Order;
@@ -64,7 +65,7 @@ class SaleController extends Controller
 
             foreach($order_obj as $order) {
                 if(substr($order->time, 0, 10) == $date){
-                    $sales += OrderDish::where('order_id', $order->id)->sum('total_price');
+                    $sales += OrderPay::where('order_id', $order->id)->sum('total');
                     $ds_ids = OrderDish::where('order_id', $order->id)->pluck('dish_id');
                     foreach($ds_ids as $ds_id) {
                         array_push($dish_ids[$i], $ds_id);
