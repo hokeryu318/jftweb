@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-2">
                     <div class="row qty_text">
-                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">0</span>
+                        <span id="qty" style="width: 70px;height: 60px;font-weight: 500;text-align: center;padding-top: 10px;">@if($order_dish_id != 0) {{ $count }} @else 0 @endif</span>
                     </div>
                 </div>
                 <div class="col-5">
@@ -357,29 +357,25 @@
                 }
             }
         } else {// change count of item
+            var count = <?php echo(json_encode($count))?>;
             var qty_number_obj = $("#qty");
             var qty = qty_number_obj.text();
-            
-            if(qty == 0) {
-                $("#alert-string1")[0].innerText = "Please set qty!";
-                $("#java-alert1").modal('toggle');
-            } else {
-                
-                $('#thirdModal').html('');
-                $('#thirdModal').modal('hide');
+            var change_count = parseInt(qty) - count;
 
-                $.ajax({
-                    type:"POST",
-                    url:"{{ route('reception.change_count') }}",
-                    data:{
-                        order_dish_id: order_dish_id, qty: qty, _token:"{{ csrf_token() }}"
-                    },
-                    success: function(result){
-                        // console.dir(result);
-                        location.href = window.location.href;
-                    }
-                });
-            }
+            $('#thirdModal').html('');
+            $('#thirdModal').modal('hide');
+
+            $.ajax({
+                type:"POST",
+                url:"{{ route('reception.change_count') }}",
+                data:{
+                    order_dish_id: order_dish_id, change_count: change_count, _token:"{{ csrf_token() }}"
+                },
+                success: function(result){
+                    // console.dir(result);
+                    location.href = window.location.href;
+                }
+            });
         }
 
     }

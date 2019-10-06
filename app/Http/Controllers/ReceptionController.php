@@ -693,7 +693,7 @@ class ReceptionController extends Controller
     {
         $order_id = request()->order_id;
         $order_dish_id = request()->order_dish_id;
-        $amend_count = request()->qty;
+        $amend_count = request()->change_count;
         $count = OrderDish::where('id', $order_dish_id)->pluck('count')->first() + $amend_count;
         $amend_time = $this->get_current_time();
 
@@ -1046,7 +1046,21 @@ class ReceptionController extends Controller
             $id = $item_info[0];
             $qty = $item_info[1];
             $sub_total = substr($item_info[2], 1);
-            OrderDish::where('id', $id)->update(['count' => $qty, 'total_price' => $sub_total]);
+
+            $count = OrderDish::where('id', $id)->pluck('count')->first();
+            $amend_time = $this->get_current_time();
+            if($count != $qty) {
+                $amend_count = $qty - $count;
+                $count = $qty;
+                OrderDish::where('id', $id)->update(['amend_count' => $amend_count, 'count' => $count, 'amend_time'=>$amend_time]);
+
+                $items_price = OrderOption::where('order_dish_id', $id)->sum('item_price');
+
+                //save total price
+                $order_dish = OrderDish::find($id);
+                $order_dish->total_price = ($order_dish->dish_price + $items_price) * $count;
+                $order_dish->save();
+            }
 
             //broadcast to kitchen
             $dish_id = OrderDish::where('id', $id)->pluck('dish_id');
@@ -1540,7 +1554,7 @@ class ReceptionController extends Controller
                     array_push($item_id_all_list, $item_sale_view[$i]->dish_id);
                     $item_id_list = array_values(array_unique($item_id_all_list));
                 }
-                
+
                 $item_sales_data = array();
                 for($i=0;$i<count($item_id_list);$i++) {
 
