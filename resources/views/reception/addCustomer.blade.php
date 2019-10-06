@@ -1160,9 +1160,9 @@
             var scale_value_all = scale_value_obj.text();
             var scale_value = scale_value_all.slice(0, -1);
 
-            if(scale_value > 10){
+            if(scale_value > 20){
                 scale_value = scale_value - 10;
-                if(scale_value == 10){
+                if(scale_value == 20){
                     $(".minus_btn").attr("src", "{{ asset('img/minus_full.png') }}")
                 }
                 $(".room-div").animate({ 'zoom': scale_value*0.01 }, 400);
@@ -1343,12 +1343,7 @@
                                 document.getElementById("time1_" + i).innerHTML = elapsed_time;
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
-                            if(screen_scale > 20) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
-                            }
-                            else {
-                                document.getElementById("time1_" + i).innerHTML = '';
-                            }
                         }
                     } else if(duration == 2) {
                         order_time.setMinutes( order_time.getMinutes() + 60 );
@@ -1382,7 +1377,6 @@
                         }
                         if((elapsed_time < 0) && (status != 'booking')) {
                                 document.getElementById("time1_" + i).innerHTML = '0';
-                            } 
                         }
                     } else if(duration == 5) {
                         if(status != 'booking') {
