@@ -1540,7 +1540,7 @@ class ReceptionController extends Controller
                     array_push($item_id_all_list, $item_sale_view[$i]->dish_id);
                     $item_id_list = array_values(array_unique($item_id_all_list));
                 }
-
+                
                 $item_sales_data = array();
                 for($i=0;$i<count($item_id_list);$i++) {
 

@@ -340,7 +340,7 @@ class CustomerController extends Controller
         $option_ids = request()->option_id_arr;
         $option_id_arr = explode(',', $option_ids);
         $option = Option::find($option_id_arr[$count]);
-        $items = Item::where('option_id', $option_id_arr[$count])->get();
+        $items = Item::where('option_id', $option_id_arr[$count])->where('stock', 1)->get();
 
 //        $chk_prev_flag = request()->chk_flag;
 //        if($chk_prev_flag == 0)
@@ -413,7 +413,7 @@ class CustomerController extends Controller
         }
 
         $option = Option::find($option_id_arr[$count]);
-        $items = Item::where('option_id', $option_id_arr[$count])->get();
+        $items = Item::where('option_id', $option_id_arr[$count])->where('stock', 1)->get();
 
         $count ++;
 
