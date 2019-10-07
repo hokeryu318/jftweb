@@ -1,4 +1,7 @@
-<div style="background-color: black;height: 100%;">
+<div style="background-color: black;height: 100%;" id="app">
+    <p>
+        <finish-and-pay-component order_id="{{ $order_id }}"></finish-and-pay-component>
+    </p>
     <div class="white-square">
         <div style="text-align: center; margin-top: 55px; margin-bottom: 15px;">
             <div style="font-size: 50px;font-weight: 400;margin-bottom: 20px;">
@@ -58,6 +61,7 @@
     </div>
 </div>
 
+<script src="{{ asset('js/app.js') }}"></script>
 
 <style>
     .white-square {

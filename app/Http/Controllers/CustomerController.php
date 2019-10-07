@@ -140,7 +140,7 @@ class CustomerController extends Controller
             $gst = Receipt::profile()->gst;
             $gst_price = $total * $gst/100;
             $without_gst_price = $total - $gst_price;
-            return view('customer.view_pay')->with(compact('table_name', 'starting_time', 'total', 'without_gst_price', 'gst_price'));
+            return view('customer.view_pay')->with(compact('order_id', 'table_name', 'starting_time', 'total', 'without_gst_price', 'gst_price'));
         }
 
     }
