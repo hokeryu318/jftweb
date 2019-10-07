@@ -73,7 +73,7 @@
     </div>
     <div style="margin-top:20px; margin-bottom: 75px;">
         <span onclick="$('#myModal').modal('hide');" class="pay_return">Return to the menu</span>
-        <span onclick="finish_pay('{{$table_name}}', '{{ $starting_time }}', '{{ $total }}', '{{ $without_gst_price }}', '{{ $gst_price }}')" class="pay_finish">Finish and Pay</span>
+        <span onclick="window.location='{{ route("customer.finish_pay", ["order_id" => $order_id, "table_name" => $table_name]) }}'" class="pay_finish">Finish and Pay</span>
     </div>
 </div>
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\NotificationEvent;
 use App\Events\SelfEvent;
+use App\Events\FinishAndPayEvent;
+use App\Events\PayEvent;
 
 use App\Model\Category;
 use App\Model\DishCategory;
@@ -108,7 +110,39 @@ class CustomerController extends Controller
 
         $screentime = Screentime::orderby('id','desc')->get()->first();
 
-        return view('customer.index')->with(compact('profile','category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name',$img_name);
+        $pay_flag = Order::where('id', $order_id)->pluck('pay_flag')->first();
+        if($pay_flag == 0) {
+            return view('customer.index')->with(compact('profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name', $img_name);
+        } elseif($pay_flag == 1) {
+
+            $table_name = $order->table_name;
+            $starting_time = $order->time;
+
+            $order_dishes = OrderDish::where('order_id', $order_id)->get();
+            $total = 0;
+            foreach($order_dishes as $order_dish) {
+                $order_dish->options = $order_dish->Order_Option()->get();
+                $items_price = 0;
+                foreach ($order_dish->options as $option) {
+                    if($option->item_id) {
+                        $option_items = Item::select('price')->where('id', $option->item_id)->get()->first();
+                        $items_price += $option_items->price;
+                    }
+                    else {
+                        $items_price = 0;
+                    }
+                }
+                $order_dish->each_price = $order_dish->dish_price + $items_price;
+                $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+                $total += $order_dish->sub_total;
+            }
+
+            $gst = Receipt::profile()->gst;
+            $gst_price = $total * $gst/100;
+            $without_gst_price = $total - $gst_price;
+            return view('customer.view_pay')->with(compact('table_name', 'starting_time', 'total', 'without_gst_price', 'gst_price'));
+        }
+
     }
 //    public function dish_list()
 //    {
@@ -783,7 +817,7 @@ class CustomerController extends Controller
 
 //        dd($order_dishes);
 
-        return (string)view('customer.view_bill_pay', compact('table_name', 'starting_time', 'order_dishes', 'total', 'gst_price', 'without_gst_price'))->render();
+        return (string)view('customer.view_bill_pay', compact('order_id', 'table_name', 'starting_time', 'order_dishes', 'total', 'gst_price', 'without_gst_price'))->render();
     }
 
     public function finish_pay() {
@@ -794,25 +828,18 @@ class CustomerController extends Controller
         $order->save();
 
         $table_name = request()->table_name;
-        $starting_time = request()->starting_time;
-        $total = request()->total;
-        $without_gst_price = request()->without_gst_price;
-        $gst_price = request()->gst_price;
 
         //show count_notification on reception screen
-
         $table_names = explode('+',$table_name);
         for($i=0;$i<count($table_names);$i++) {
             $id = Table::where('name',trim($table_names[$i]))->get()->first();
             $count_notification = $this->CountNotification1($id->id,1);
             broadcast(new NotificationEvent($count_notification));
         }
-        
-//        $id = Table::where('name',$table_name)->get()->first();
-//        $count_notification = $this->CountNotification1($id->id,1);
-//        broadcast(new NotificationEvent($count_notification));
 
-        return (string)view('customer.view_pay', compact('table_name', 'starting_time', 'total', 'gst_price', 'without_gst_price'))->render();
+        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+        broadcast(new FinishAndPayEvent($order_id, $table_id));
+
     }
 
     public function get_dishes($category,$menu_time,$menu_type) {

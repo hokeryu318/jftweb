@@ -192,7 +192,7 @@
                 </div>
                 <div class="col-1">
                     <button class="btnaddphoto3 mt-3 fs-23" type="button" onclick="onDelete(this)" data-id={{ $item->id }}>
-                        Remove
+                        DEL
                     </button>
                 </div>
                 <input type="file" class="file-image" name="prev-data[{{ $item->id }}][image]" style="display:none">
@@ -226,7 +226,7 @@
             </div>
             <div class="col-1">
                 <button class="btnaddphoto3 mt-3 fs-23" type="button" onclick="onDelete(this)" data-id=0>
-                    Remove
+                    DEL
                 </button>
             </div>
             <input type="file" class="file-image" style="display:none">

@@ -84,7 +84,7 @@ Route::get('customer/feedback', 'CustomerController@feedback')->name('customer.f
 Route::post('customer/add_review', 'CustomerController@add_review')->name('customer.add_review');
 Route::post('customer/calling', 'CustomerController@calling')->name('customer.calling');
 Route::get('customer/view_bill_pay', 'CustomerController@view_bill_pay')->name('customer.view_bill_pay');
-Route::post('customer/finish_pay', 'CustomerController@finish_pay')->name('customer.finish_pay');
+Route::get('customer/finish_pay', 'CustomerController@finish_pay')->name('customer.finish_pay');
 
 //kitchen
 Route::get('kitchen/CountNotification', 'KitchenController@CountNotification');

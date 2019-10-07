@@ -36,6 +36,10 @@
                 <pay-finish-component order_id="{{ $order->id }}"></pay-finish-component>
             </p>
 
+            <p>
+                <finish-and-pay-component order_id="{{ $order->id }}"></finish-and-pay-component>
+            </p>
+
             <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
         </div>
         <div class="brand">
@@ -187,7 +191,6 @@
             <h3><font size="5px"><span id="time"></span></font> mins</h3>
         </div>
     </header>
-
     <section id="dish-content" class="scrolling-content">
     @foreach ($dishes as $ds)
         @if($ds->sold_out == 0)
@@ -266,6 +269,7 @@
 </main>
 </div>
 <div id="screensaver"></div>
+
 <script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript">
@@ -894,30 +898,24 @@
         $("#myModal").modal("toggle");
     }
 
-    function finish_pay(table_name, starting_time, total, without_gst_price, gst_price) {
+    {{--function finish_pay(table_name, starting_time, total, without_gst_price, gst_price) {--}}
 
-        var order_id = $("#order_id").val();
-        // alert(table_name);
-        $.ajax({
-            type:"POST",
-            url:"{{ route('customer.finish_pay') }}",
-            data:{
-                order_id: order_id, table_name: table_name, starting_time: starting_time, total: total, without_gst_price: without_gst_price, gst_price: gst_price, _token:"{{ csrf_token() }}"
-            },
-            success: function(result){
-                // console.log(result);
-                $('#thirdModal').html(result);
-            }
-        });
-        $('#myModal').modal("hide");
-        // $('#thirdModal').modal("show");
-        $('#thirdModal').modal({backdrop: 'static', keyboard: false});
-        // $("#thirdModal").toggle();
-        // setTimeout(function(){
-        //     $("#thirdModal").hide();
-        //     window.location.replace('../../');
-        // }, 5000);
-    }
+        {{--var order_id = $("#order_id").val();--}}
+        {{--// alert(table_name);--}}
+        {{--$.ajax({--}}
+            {{--type:"POST",--}}
+            {{--url:"{{ route('customer.finish_pay') }}",--}}
+            {{--data:{--}}
+                {{--order_id: order_id, table_name: table_name, starting_time: starting_time, total: total, without_gst_price: without_gst_price, gst_price: gst_price, _token:"{{ csrf_token() }}"--}}
+            {{--},--}}
+            {{--success: function(result){--}}
+                {{--// console.log(result);--}}
+                {{--$('#thirdModal').html(result);--}}
+            {{--}--}}
+        {{--});--}}
+        {{--$('#myModal').modal("hide");--}}
+        {{--$('#thirdModal').modal({backdrop: 'static', keyboard: false});--}}
+    {{--}--}}
 
     var myVar = setInterval(myTimer, 1000);
 

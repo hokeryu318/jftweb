@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ChangeCountEvent;
 use App\Events\KitchenEvent;
 use App\Events\TableMoveEvent;
+use App\Events\FinishAndPayEvent;
 use Illuminate\Http\Request;
 
 use App\Events\NotificationEvent;
@@ -517,6 +518,9 @@ class ReceptionController extends Controller
 
         $count_notification = $this->CountNotification();
         broadcast(new NotificationEvent($count_notification));
+
+        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+        broadcast(new FinishAndPayEvent($order_id, $table_id));
 
         return $this->ready_to_pay();
     }
@@ -1246,6 +1250,9 @@ class ReceptionController extends Controller
         //show count_notification on reception screen
         $count_notification = $this->CountNotification();
         broadcast(new NotificationEvent($count_notification));
+
+        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+        broadcast(new FinishAndPayEvent($order_id, $table_id));
 
         $booking_order = $this->get_booking_order($order_id);
         return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
