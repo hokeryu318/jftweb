@@ -1,5 +1,8 @@
 <div style="background-color: black;height: 100%;" id="app">
     <p>
+        <pay-finish-component order_id="{{ $order_id }}"></pay-finish-component>
+    </p>
+    <p>
         <finish-and-pay-component order_id="{{ $order_id }}"></finish-and-pay-component>
     </p>
     <div class="white-square">
