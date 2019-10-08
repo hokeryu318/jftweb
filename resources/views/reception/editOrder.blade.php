@@ -409,7 +409,12 @@
                     _token:"{{ csrf_token() }}"
                 },
                 success: function(result){
-                    document.getElementById("pay_state").innerHTML = result;
+                    if(result == 'alert') {
+                        $("#alert-string")[0].innerText = "There is still some dishes being cooked.";
+                        $("#java-alert").modal('toggle');
+                    } else {
+                        document.getElementById("pay_state").innerHTML = result;
+                    }
                 }
             });
         }

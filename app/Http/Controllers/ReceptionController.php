@@ -1244,18 +1244,44 @@ class ReceptionController extends Controller
 
         $order_id = request()->order_id;
         $order = Order::findOrFail($order_id);
-        $order->pay_flag = 1;
-        $order->save();
 
-        //show count_notification on reception screen
-        $count_notification = $this->CountNotification();
-        broadcast(new NotificationEvent($count_notification));
+        if($order->menu_type == 'Menu') {
 
-        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
-        broadcast(new FinishAndPayEvent($order_id, $table_id));
+            $chk_ready = OrderDish::where('order_id', $order_id)->where('ready_flag', 0)->get()->count();
+            if($chk_ready > 0) {
 
-        $booking_order = $this->get_booking_order($order_id);
-        return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
+                return 'alert';
+            } else {
+
+                $order->pay_flag = 1;
+                $order->save();
+
+                //show count_notification on reception screen
+                $count_notification = $this->CountNotification();
+                broadcast(new NotificationEvent($count_notification));
+
+                $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+                broadcast(new FinishAndPayEvent($order_id, $table_id));
+
+                $booking_order = $this->get_booking_order($order_id);
+                return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
+            }
+
+        } elseif($order->menu_type == 'TakeawayMenu') {
+            $order->pay_flag = 1;
+            $order->save();
+
+            //show count_notification on reception screen
+            $count_notification = $this->CountNotification();
+            broadcast(new NotificationEvent($count_notification));
+
+            $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+            broadcast(new FinishAndPayEvent($order_id, $table_id));
+
+            $booking_order = $this->get_booking_order($order_id);
+            return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
+        }
+
     }
     
     public function get_dishes($category,$menu_time,$menu_type) {
