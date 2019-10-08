@@ -112,7 +112,12 @@ class CustomerController extends Controller
 
         $pay_flag = Order::where('id', $order_id)->pluck('pay_flag')->first();
         if($pay_flag == 0) {
-            return view('customer.index')->with(compact('profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name', $img_name);
+            if (request()->has('alert')) {
+                $alert = request()->alert;
+            } else {
+                $alert = '';
+            }
+            return view('customer.index')->with(compact('alert', 'profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name', $img_name);
         } elseif($pay_flag == 1) {
 
             $table_name = $order->table_name;
@@ -823,22 +828,49 @@ class CustomerController extends Controller
     public function finish_pay() {
 
         $order_id = request()->order_id;
-        $order = Order::findOrFail($order_id);
-        $order->pay_flag = 1;
-        $order->save();
-
         $table_name = request()->table_name;
 
-        //show count_notification on reception screen
-        $table_names = explode('+',$table_name);
-        for($i=0;$i<count($table_names);$i++) {
-            $id = Table::where('name',trim($table_names[$i]))->get()->first();
-            $count_notification = $this->CountNotification1($id->id,1);
-            broadcast(new NotificationEvent($count_notification));
-        }
+        $order = Order::findOrFail($order_id);
 
-        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
-        broadcast(new FinishAndPayEvent($order_id, $table_id));
+        if($order->menu_type == 'Menu') {
+
+            $chk_ready = OrderDish::where('order_id', $order_id)->where('ready_flag', 0)->get()->count();//dd($chk_ready);
+            if($chk_ready > 0) {
+                //alert
+                $alert = "There is still some dishes being cooked.";
+                $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+                return redirect()->route('customer.index', ['alert'=>$alert, 'order_id'=>$order_id, 'table_id'=>$table_id]);
+            } else {
+                $order->pay_flag = 1;
+                $order->save();
+
+                //show count_notification on reception screen
+                $table_names = explode('+',$table_name);
+                for($i=0;$i<count($table_names);$i++) {
+                    $id = Table::where('name',trim($table_names[$i]))->get()->first();
+                    $count_notification = $this->CountNotification1($id->id,1);
+                    broadcast(new NotificationEvent($count_notification));
+                }
+
+                $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+                broadcast(new FinishAndPayEvent($order_id, $table_id));
+            }
+        } elseif($order->menu_type == 'TakeawayMenu') {
+
+            $order->pay_flag = 1;
+            $order->save();
+
+            //show count_notification on reception screen
+            $table_names = explode('+',$table_name);
+            for($i=0;$i<count($table_names);$i++) {
+                $id = Table::where('name',trim($table_names[$i]))->get()->first();
+                $count_notification = $this->CountNotification1($id->id,1);
+                broadcast(new NotificationEvent($count_notification));
+            }
+
+            $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+            broadcast(new FinishAndPayEvent($order_id, $table_id));
+        }
 
     }
 
