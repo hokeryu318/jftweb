@@ -58,9 +58,9 @@ class CountNotificationController extends Controller
 
 //        $group_id = $request->group_id;
         $change_group_dish = array();
-//        $order_id_list = Order::where('pay_flag', '<>', 2)->pluck('id');
+        $order_id_list = Order::where('pay_flag', '<>', 2)->pluck('id');
         $dish_id_list = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
-        $order_dish_list = OrderDish::whereIn('dish_id', $dish_id_list)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+        $order_dish_list = OrderDish::whereIn('dish_id', $dish_id_list)->whereIn('order_id', $order_id_list)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
         foreach($order_dish_list as $key => $order_dish)
         {
             //order info

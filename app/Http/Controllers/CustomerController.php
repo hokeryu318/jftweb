@@ -111,42 +111,33 @@ class CustomerController extends Controller
         $screentime = Screentime::orderby('id','desc')->get()->first();
 
         $pay_flag = Order::where('id', $order_id)->pluck('pay_flag')->first();
-        if($pay_flag == 0) {
-            if (request()->has('alert')) {
-                $alert = request()->alert;
-            } else {
-                $alert = '';
-            }
-            return view('customer.index')->with(compact('alert', 'profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name', $img_name);
-        } elseif($pay_flag == 1) {
 
-            $table_name = $order->table_name;
-            $starting_time = $order->time;
+        $table_name = $order->table_name;
+        $starting_time = $order->time;
 
-            $order_dishes = OrderDish::where('order_id', $order_id)->get();
-            $total = 0;
-            foreach($order_dishes as $order_dish) {
-                $order_dish->options = $order_dish->Order_Option()->get();
-                $items_price = 0;
-                foreach ($order_dish->options as $option) {
-                    if($option->item_id) {
-                        $option_items = Item::select('price')->where('id', $option->item_id)->get()->first();
-                        $items_price += $option_items->price;
-                    }
-                    else {
-                        $items_price = 0;
-                    }
+        $order_dishes = OrderDish::where('order_id', $order_id)->get();
+        $total = 0;
+        foreach($order_dishes as $order_dish) {
+            $order_dish->options = $order_dish->Order_Option()->get();
+            $items_price = 0;
+            foreach ($order_dish->options as $option) {
+                if($option->item_id) {
+                    $option_items = Item::select('price')->where('id', $option->item_id)->get()->first();
+                    $items_price += $option_items->price;
                 }
-                $order_dish->each_price = $order_dish->dish_price + $items_price;
-                $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
-                $total += $order_dish->sub_total;
+                else {
+                    $items_price = 0;
+                }
             }
-
-            $gst = Receipt::profile()->gst;
-            $gst_price = $total * $gst/100;
-            $without_gst_price = $total - $gst_price;
-            return view('customer.view_pay')->with(compact('order_id', 'table_name', 'starting_time', 'total', 'without_gst_price', 'gst_price'));
+            $order_dish->each_price = $order_dish->dish_price + $items_price;
+            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+            $total += $order_dish->sub_total;
         }
+
+        $gst = Receipt::profile()->gst;
+        $gst_price = $total * $gst/100;
+        $without_gst_price = $total - $gst_price;
+        return view('customer.view_pay')->with(compact('order_id', 'table_name', 'starting_time', 'total', 'without_gst_price', 'gst_price'));
 
     }
 //    public function dish_list()
@@ -831,46 +822,19 @@ class CustomerController extends Controller
         $table_name = request()->table_name;
 
         $order = Order::findOrFail($order_id);
+        $order->pay_flag = 1;
+        $order->save();
 
-        if($order->menu_type == 'Menu') {
-
-            $chk_ready = OrderDish::where('order_id', $order_id)->where('ready_flag', 0)->get()->count();//dd($chk_ready);
-            if($chk_ready > 0) {
-                //alert
-                $alert = "There is still some dishes being cooked.";
-                $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
-                return redirect()->route('customer.index', ['alert'=>$alert, 'order_id'=>$order_id, 'table_id'=>$table_id]);
-            } else {
-                $order->pay_flag = 1;
-                $order->save();
-
-                //show count_notification on reception screen
-                $table_names = explode('+',$table_name);
-                for($i=0;$i<count($table_names);$i++) {
-                    $id = Table::where('name',trim($table_names[$i]))->get()->first();
-                    $count_notification = $this->CountNotification1($id->id,1);
-                    broadcast(new NotificationEvent($count_notification));
-                }
-
-                $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
-                broadcast(new FinishAndPayEvent($order_id, $table_id));
-            }
-        } elseif($order->menu_type == 'TakeawayMenu') {
-
-            $order->pay_flag = 1;
-            $order->save();
-
-            //show count_notification on reception screen
-            $table_names = explode('+',$table_name);
-            for($i=0;$i<count($table_names);$i++) {
-                $id = Table::where('name',trim($table_names[$i]))->get()->first();
-                $count_notification = $this->CountNotification1($id->id,1);
-                broadcast(new NotificationEvent($count_notification));
-            }
-
-            $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
-            broadcast(new FinishAndPayEvent($order_id, $table_id));
+        //show count_notification on reception screen
+        $table_names = explode('+',$table_name);
+        for($i=0;$i<count($table_names);$i++) {
+            $id = Table::where('name',trim($table_names[$i]))->get()->first();
+            $count_notification = $this->CountNotification1($id->id,1);
+            broadcast(new NotificationEvent($count_notification));
         }
+
+        $table_id = OrderTable::where('order_id', $order_id)->pluck('table_id')->first();
+        broadcast(new FinishAndPayEvent($order_id, $table_id));
 
     }
 

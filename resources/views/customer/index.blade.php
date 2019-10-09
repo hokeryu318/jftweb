@@ -191,11 +191,6 @@
             <h3><font size="5px"><span id="time"></span></font> mins</h3>
         </div>
     </header>
-    @if($alert != '')
-        <div class="alert" id="success-alert" role="alert" style="background-color: #0000FF;color: white;text-align: center;">
-            {{ $alert }}
-        </div>
-    @endif
     <section id="dish-content" class="scrolling-content">
     @foreach ($dishes as $ds)
         @if($ds->sold_out == 0)
@@ -275,13 +270,6 @@
 </div>
 <div id="screensaver"></div>
 
-<script>
-
-    $("#success-alert").fadeTo(3000, 500).fadeOut(5000, function(){
-        $("#success-alert").alert('close');
-    });
-
-</script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 <script type="text/javascript">

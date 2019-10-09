@@ -42,12 +42,12 @@ class KitchenController extends Controller
         }
 
         //get order dish data by group id
-//        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
-        $order_ids = Order::all()->pluck('id');
+        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
+//        $order_ids = Order::all()->pluck('id');
         if($order_ids->count() > 0) {
             $group_dish_ids = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
-//            $group_order_dishes = OrderDish::whereIn('order_id', $order_ids)->whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
-            $group_order_dishes = OrderDish::whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+            $group_order_dishes = OrderDish::whereIn('order_id', $order_ids)->whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+//            $group_order_dishes = OrderDish::whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
             $group_order_dishes = $this->get_order_dish($group_order_dishes, $group_id);
         }
         else {
