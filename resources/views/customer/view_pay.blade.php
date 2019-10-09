@@ -8,7 +8,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-        @yield('title')
+        Thank you
     </title>
 
 </head>
