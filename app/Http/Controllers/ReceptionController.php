@@ -1245,7 +1245,7 @@ class ReceptionController extends Controller
         $order_id = request()->order_id;
         $order = Order::findOrFail($order_id);
 
-        if($order->menu_type == 'Menu') {
+        if($order->menu_type != 'TakeawayMenu') {
 
             $chk_ready = OrderDish::where('order_id', $order_id)->where('ready_flag', 0)->get()->count();
             if($chk_ready > 0) {
@@ -1267,7 +1267,7 @@ class ReceptionController extends Controller
                 return (string)view('reception.editOrder_pay', compact('booking_order'))->render();
             }
 
-        } elseif($order->menu_type == 'TakeawayMenu') {
+        } else {
             $order->pay_flag = 1;
             $order->save();
 

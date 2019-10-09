@@ -150,14 +150,8 @@
 
                 $('#ChangeGroupModal').modal('hide');
                 window.location.replace("../kitchen/main_screen?group_id=" + group_id);
-                // $('.modal-backdrop').remove();
-                // $('#group_id').val(checked_group);
-                // $('.main ').html(result);
             }
         });
-
-        // clearInterval(myVar);
-        // var myVar = setInterval(myTimer, 1000);
     }
 
     //reprint docket

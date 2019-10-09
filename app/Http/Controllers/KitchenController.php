@@ -42,10 +42,12 @@ class KitchenController extends Controller
         }
 
         //get order dish data by group id
-        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
-        if(count($order_ids) > 0) {
+//        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
+        $order_ids = Order::all()->pluck('id');
+        if($order_ids->count() > 0) {
             $group_dish_ids = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
-            $group_order_dishes = OrderDish::whereIn('order_id', $order_ids)->whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+//            $group_order_dishes = OrderDish::whereIn('order_id', $order_ids)->whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+            $group_order_dishes = OrderDish::whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
             $group_order_dishes = $this->get_order_dish($group_order_dishes, $group_id);
         }
         else {
@@ -54,10 +56,7 @@ class KitchenController extends Controller
 
         $attend_status = OrderTable::where('calling_time', '<>', null)->where('attend_time', null)->distinct()->pluck('order_id')->count();
 
-//        $count_notification = $this->CountNotification();
-//        broadcast(new NotificationEvent($count_notification));
-
-//        dd($group_order_dishes);
+        //dd($group_order_dishes);
         return view('kitchen.main_screen')->with(compact('kitchen_group', 'group_order_dishes', 'group_id', 'attend_status'));
     }
 
@@ -129,9 +128,11 @@ class KitchenController extends Controller
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
             $orderdish->ready_time = Null;
+            $orderdish->save();
         } else {
             $orderdish->ready_flag = 1;
             $orderdish->ready_time = $this->get_current_time();
+            $orderdish->save();
 
             //print part
             //$printerIp = '192.168.192.151';
@@ -139,18 +140,15 @@ class KitchenController extends Controller
             $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
             $printerPort = 9100;
 
-            $ready_time = $orderdish->created_at;
+            $ready_time = $orderdish->ready_time;
             $time = substr($ready_time,11);
             $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
 
             $qty = $orderdish->count;
-            
-            $table_ids = OrderTable::where('order_id', $orderdish->order_id)->pluck('table_id');
-            $table_name = "";
-            foreach($table_ids as $table_id) {
-                $table_name .= $this->get_table_name($table_id).'+';
-            }
-            $table_name = rtrim($table_name, '+');
+
+            $order_id = $orderdish->order_id;
+            $order = Order::where('id', $order_id)->get()->first();
+            $table_name = $order->table_name;
 
             $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
 
@@ -225,7 +223,6 @@ class KitchenController extends Controller
             }
             
         }
-        $orderdish->save();
 
         $filter_flag = $request->filter_flag;
         $order_dishes = collect();
@@ -292,14 +289,19 @@ class KitchenController extends Controller
 
         foreach($group_order_dishes as $group_order_dish)
         {
-//            $group_order_dish->starting_time = $group_order_dish->created_at;
             //get table info
-            $display_table_list = OrderTable::where('order_id', $group_order_dish->order_id)->get();
-            $display_table_id = $display_table_list[0]->table_id;
-            $group_order_dish->display_table_id = $display_table_id;
-            $group_order_dish->display_table = $this->get_table_name($display_table_id);
-            $group_order_dish->table_count = count($display_table_list);
-            $group_order_dish->calling_time = OrderTable::where('table_id', $display_table_id)->pluck('calling_time')->first();
+//            $display_table_list = OrderTable::where('order_id', $group_order_dish->order_id)->get();
+//            $display_table_id = $display_table_list[0]->table_id;
+//            $group_order_dish->display_table_id = $display_table_id;
+//            $group_order_dish->display_table = $this->get_table_name($display_table_id);
+//            $group_order_dish->table_count = count($display_table_list);
+//            $group_order_dish->calling_time = OrderTable::where('table_id', $display_table_id)->pluck('calling_time')->first();
+
+            $table_name = Order::where('id', $group_order_dish->order_id)->pluck('table_name')->first();
+            $table_names = explode('+', $table_name);
+            $group_order_dish->display_table_id = Table::where('name', $table_names[0])->pluck('id');
+            $group_order_dish->display_table = $table_names[0];
+            $group_order_dish->table_count = count($table_names);
 
             //get order dish info
             $dish_list = Dish::select('image', 'name_en')->where('id', $group_order_dish->dish_id)->get()->first();

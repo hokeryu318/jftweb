@@ -108,11 +108,11 @@
         methods: {
             // api for get dish list by change group
             get_by_group_order_dishes(group_id) {
-                // console.log(group_id);
+                console.log(group_id);
                 axios.get('/api/get_change_group_dish/' + group_id)
                     .then(response => {
                         this.group_order_dishes = response.data;
-                        // console.dir(this.group_order_dishes);
+                        console.dir(this.group_order_dishes);
                     })
 
             },

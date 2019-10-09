@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Model\Kitchen;
+use App\Model\Table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -57,9 +58,9 @@ class CountNotificationController extends Controller
 
 //        $group_id = $request->group_id;
         $change_group_dish = array();
-        $order_id_list = Order::where('pay_flag', '<>', 2)->pluck('id');
+//        $order_id_list = Order::where('pay_flag', '<>', 2)->pluck('id');
         $dish_id_list = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
-        $order_dish_list = OrderDish::whereIn('dish_id', $dish_id_list)->whereIn('order_id', $order_id_list)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();//dd($order_dish_list);
+        $order_dish_list = OrderDish::whereIn('dish_id', $dish_id_list)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
         foreach($order_dish_list as $key => $order_dish)
         {
             //order info
@@ -68,11 +69,17 @@ class CountNotificationController extends Controller
             $change_group_dish[$key]['starting_time'] = Order::where('id', $order_id)->pluck('time')->first();
 
             //order table info
-            $display_table_list = OrderTable::where('order_id', $order_id)->get();
-            $change_group_dish[$key]['display_table_id'] = $display_table_list[0]->table_id;
-            $change_group_dish[$key]['display_table'] = $this->get_table_name($change_group_dish[$key]['display_table_id']);
-            $change_group_dish[$key]['table_count'] = count($display_table_list);
-            $change_group_dish[$key]['calling_time'] = OrderTable::where('table_id', $change_group_dish[$key]['display_table_id'])->pluck('calling_time');
+//            $display_table_list = OrderTable::where('order_id', $order_id)->get();
+//            $change_group_dish[$key]['display_table_id'] = $display_table_list[0]->table_id;
+//            $change_group_dish[$key]['display_table'] = $this->get_table_name($change_group_dish[$key]['display_table_id']);
+//            $change_group_dish[$key]['table_count'] = count($display_table_list);
+//            $change_group_dish[$key]['calling_time'] = OrderTable::where('table_id', $change_group_dish[$key]['display_table_id'])->pluck('calling_time');
+
+            $table_name = Order::where('id', $order_id)->pluck('table_name')->first();
+            $table_names = explode('+', $table_name);
+            $change_group_dish[$key]['display_table_id'] = Table::where('name', $table_names[0])->pluck('id');
+            $change_group_dish[$key]['display_table'] = $table_names[0];
+            $change_group_dish[$key]['table_count'] = count($table_names);
 
             //order dish info
             $change_group_dish[$key]['id'] = $order_dish->id;
@@ -112,9 +119,11 @@ class CountNotificationController extends Controller
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
             $orderdish->ready_time = Null;
+            $orderdish->save();
         } else {
             $orderdish->ready_flag = 1;
             $orderdish->ready_time = $this->get_current_time();
+            $orderdish->save();
 
             //print part
             //$printerIp = '192.168.192.151';
@@ -122,18 +131,15 @@ class CountNotificationController extends Controller
             $printerIp = Kitchen::where('id', $group_id)->pluck('printer_ip')->first();
             $printerPort = 9100;
 
-            $ready_time = $orderdish->created_at;
+            $ready_time = $orderdish->ready_time;
             $time = substr($ready_time,11);
             $date = strtoupper(date("d M Y", strtotime(substr($ready_time,0,10))));
 
             $qty = $orderdish->count;
-            
-            $table_ids = OrderTable::where('order_id', $orderdish->order_id)->pluck('table_id');
-            $table_name = "";
-            foreach($table_ids as $table_id) {
-                $table_name .= $this->get_table_name($table_id).'+';
-            }
-            $table_name = rtrim($table_name, '+');
+
+            $order_id = $orderdish->order_id;
+            $order = Order::where('id', $order_id)->get()->first();
+            $table_name = $order->table_name;
 
             $dish_name = Dish::where('id',$orderdish->dish_id)->pluck('name_en')->first();
 
@@ -206,8 +212,6 @@ class CountNotificationController extends Controller
                 $printer -> close();
             }
         }
-
-        $orderdish->save();    
 
         return $orderdish;
         
