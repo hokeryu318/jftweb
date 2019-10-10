@@ -18,7 +18,7 @@
                                 <div class="row" style="margin-left: -12px;">
                                     <p class="red-text font-weight-bold ml-3 fs-23" id="time_call_{{$kk}}"></p>
                                 </div>
-                                <div class="row table_name">
+                                <div class="row table_name" style="margin-top: -12px;">
                                     <table>
                                         <tr>
                                             @if(count($order->table_display_names) > 1)
