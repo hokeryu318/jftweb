@@ -117,7 +117,7 @@ class OptionController extends Controller
                     $item->price = $p['price'];
                     $item->stock = $p['stock'];
 
-                    if(isset(request()->file('prev-data')[$id]['image']) != null){
+                    if(isset(request()->file('prev-data')[$id]['image'])){
                         $image = request()->file('prev-data')[$id]['image'];
                         $destinationPath = 'options';
                         $destinationFile = "item_".$item->id.".png";

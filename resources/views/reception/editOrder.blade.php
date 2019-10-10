@@ -400,7 +400,6 @@
         }
 
         function finish_pay(order_id) {
-
             $.ajax({
                 type:"POST",
                 url:"{{ route('reception.finish_pay') }}",

@@ -338,12 +338,7 @@ class KitchenController extends Controller
         $group_id = request()->group_id;
         $current_date = date('Y-m-d');
         $order_ids = Order::whereDate('created_at', $current_date)->where('pay_flag', '<>', 2)->pluck('id')->toArray();
-//        $order_ids1 = Order::whereDate('created_at', $current_date)->where('menu_type', 'Menu')->where('pay_flag', '<>', 2)->pluck('id')->toArray();
-//        $order_ids2 = Order::whereDate('created_at', $current_date)->where('menu_type', 'TakeawayMenu')->pluck('id')->toArray();
-//        $order_ids = array_merge($order_ids1, $order_ids2);
-
         //dd($order_ids);
-//        $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
 
         if(count($order_ids) > 0) {
             $order_dishes = OrderDish::whereIn('order_id', $order_ids)

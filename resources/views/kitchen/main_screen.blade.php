@@ -9,9 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('kitchen_css/style.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-    {{--<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">--}}
-
 </head>
 <body>
 <input type="hidden" id="group_id" value="{{ $group_id }}">

@@ -96,10 +96,8 @@
 
             Echo.channel('changecount-channel')//public channel
             .listen('ChangeCountEvent', (event) => {
-
                     // console.dir(event.group_id);
                 if(('[' + event.group_id + ']').includes('&' + this.group + '&') == true) {
-
                     location.href = window.location.href;
                 }
             });
