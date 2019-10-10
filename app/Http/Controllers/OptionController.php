@@ -86,7 +86,7 @@ class OptionController extends Controller
 
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = "item_".$item->id.".png";
+                        $destinationFile = "item".time().".png";
                         $file->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
@@ -120,7 +120,7 @@ class OptionController extends Controller
                     if(isset(request()->file('prev-data')[$id]['image'])){
                         $image = request()->file('prev-data')[$id]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = "item_".$item->id.".png";
+                        $destinationFile = "item".time().".png";
                         $image->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
@@ -145,7 +145,7 @@ class OptionController extends Controller
                     if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = "item_".$item->id.".png";
+                        $destinationFile = "item".time().".png";
                         $file->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
