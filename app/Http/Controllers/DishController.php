@@ -153,7 +153,7 @@ class DishController extends Controller
             $file = request()->file('image');
             if($file != null){
                 $destinationPath = 'dishes';
-                $destinationFile = "dish_".$obj->id.".png";
+                $destinationFile = "dish".time().".png";
                 $file->move($destinationPath, $destinationFile);
                 $obj->image = $destinationFile;
             }
@@ -213,7 +213,7 @@ class DishController extends Controller
             $file = request()->file('image');
             if($file != null){
                 $destinationPath = 'dishes';
-                $destinationFile = "dish_".$obj->id.".png";
+                $destinationFile = "dish".time().".png";
                 $file->move($destinationPath, $destinationFile);
                 $obj->image = $destinationFile;
             }
