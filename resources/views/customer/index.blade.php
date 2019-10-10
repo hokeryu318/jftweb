@@ -42,7 +42,7 @@
 
             <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
         </div>
-        <div class="brand">
+        <div class="category_container">
             @php $i=0; @endphp
             @foreach($category_all as $key => $category)
                 @if(isset($category['has_subs']) && $category['has_subs'] == 1 && !empty($category['children']))
