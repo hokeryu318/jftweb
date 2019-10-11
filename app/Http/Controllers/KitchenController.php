@@ -42,18 +42,10 @@ class KitchenController extends Controller
         }
 
         //get order dish data by group id
-        // $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
-//        $order_ids = Order::all()->pluck('id');
-        // if($order_ids->count() > 0) {
-            $now_date = date('Y-m-d', strtotime($this->get_current_time()));
-            $group_dish_ids = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
-            // $group_order_dishes = OrderDish::whereIn('order_id', $order_ids)->whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
-            $group_order_dishes = OrderDish::whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->whereDate('created_at', $now_date)->orderBy('created_at', 'ASC')->get();
-            $group_order_dishes = $this->get_order_dish($group_order_dishes, $group_id);
-        // }
-        // else {
-        //     $group_order_dishes = '';
-        // }
+        $now_date = date('Y-m-d', strtotime($this->get_current_time()));
+        $group_dish_ids = Dish::where('group_id', 'like', '%&' . $group_id . '&%')->pluck('id');
+        $group_order_dishes = OrderDish::whereIn('dish_id', $group_dish_ids)->where('ready_flag', '0')->whereDate('created_at', $now_date)->orderBy('created_at', 'ASC')->get();
+        $group_order_dishes = $this->get_order_dish($group_order_dishes, $group_id);
 
         $attend_status = OrderTable::where('calling_time', '<>', null)->where('attend_time', null)->distinct()->pluck('order_id')->count();
 
@@ -227,13 +219,13 @@ class KitchenController extends Controller
 
         $filter_flag = $request->filter_flag;
         $order_dishes = collect();
+        $now_date = date('Y-m-d', strtotime($this->get_current_time()));
         if($filter_flag == 1)
         {
-            $order_ids = Order::where('pay_flag', '<>', 2)->pluck('id');
             $dish_id = $request->id;
             if(count($order_ids) > 0) {
 
-                $order_dishes = OrderDish::whereIn('order_id', $order_ids)->where('dish_id', $dish_id)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+                $order_dishes = OrderDish::whereDate('created_at', $now_date)->where('dish_id', $dish_id)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
                 if(count($order_dishes) > 0)
                     $order_dishes = $this->get_order_dish($order_dishes);
             }
@@ -243,8 +235,8 @@ class KitchenController extends Controller
         elseif($filter_flag == 2)
         {
             $table_id = $request->id;
-            $order_id = OrderTable::where('table_id', $table_id)->pluck('order_id')->first();
-            $order_dishes = OrderDish::where('order_id', $order_id)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
+            // $order_id = OrderTable::where('table_id', $table_id)->pluck('order_id')->first();
+            $order_dishes = OrderDish::whereDate('created_at', $now_date)->where('ready_flag', '0')->orderBy('created_at', 'ASC')->get();
             $order_dishes = $this->get_order_dish($order_dishes);
             return view('kitchen.extract_modal')->with(compact('order_dishes', 'filter_flag', 'table_id', 'group_id'));
         }

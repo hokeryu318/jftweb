@@ -29,6 +29,7 @@
                 <div style="font-size: 25px;">
                     <span>
                         Your bill has been created.<br>
+                        Please take the tablet to the register to make payment.
                     </span>
                 </div>
             </div>
