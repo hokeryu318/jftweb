@@ -8,7 +8,7 @@
                 <div :id="'time_' + key + '_' + group"></div>
             </td>
             <!--<td width="13%" style="padding-left: 2px;padding-right: 2px;" v-on:click="extract_table_number(group_order_dish.display_table_id)">-->
-            <td width="13%" style="padding-left: 2px;padding-right: 2px;" class="table_list" :data-id = group_order_dish.display_table_id >
+            <td width="13%" style="padding-left: 2px;padding-right: 2px;" class="table_list" :data-id = group_order_dish.order_id >
                 <b>{{ group_order_dish.display_table }}</b><br>({{ group_order_dish.table_count }})
             </td>
             <td width="8%">

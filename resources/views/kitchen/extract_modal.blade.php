@@ -55,7 +55,7 @@
                                 @if($filter_flag == 1)
                                     <span class="checkboxmark" onclick="ready('{{ $order_dish->id }}', '{{ $filter_flag }}', '{{ $dish_id }}', '{{ $group_id }}')"></span>
                                 @else
-                                    <span class="checkboxmark" onclick="ready('{{ $order_dish->id }}', '{{ $filter_flag }}', '{{ $table_id }}', '{{ $group_id }}')"></span>
+                                    <span class="checkboxmark" onclick="ready('{{ $order_dish->id }}', '{{ $filter_flag }}', '{{ $order_id }}', '{{ $group_id }}')"></span>
                                 @endif
                             </label>
                         </td>

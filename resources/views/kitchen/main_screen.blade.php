@@ -202,12 +202,12 @@
     // modal for table click
     $(document).ready(function() {
         $(".main").on("click", ".table_list", function () {
-            var table_id = $(this).attr("data-id");
+            var order_id = $(this).attr("data-id");
             var group_id = <?php echo(json_encode($group_id))?>;
             $.ajax({
                 type:"GET",
                 url:"{{ route('kitchen.extract_table_number') }}",
-                data:{ table_id: table_id, group_id: group_id },
+                data:{ order_id: order_id, group_id: group_id },
                 success: function(result){
                     $('#ExtractCookingName').html(result);
                 }
