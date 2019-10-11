@@ -70,7 +70,7 @@
                 <kitchendish-component :group="{{ $group_id }}"></kitchendish-component>
             </div>
         </div>
-        <kitchen-dish-ready-component></kitchen-dish-ready-component>        
+        <kitchen-dish-ready-component :group_id="{{ $group_id }}"></kitchen-dish-ready-component>        
     </div>
 </div>
 
