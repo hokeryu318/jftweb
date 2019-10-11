@@ -18,6 +18,7 @@ use App\Events\KitchenEvent;
 use App\Events\PayEvent;
 use App\Events\NotificationEvent;
 use App\Events\AttendEvent;
+use App\Events\KitchenDishReadyEvent;
 
 use App\Http\Controllers\print_table1;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
@@ -250,6 +251,7 @@ class KitchenController extends Controller
             }
         }
 
+        broadcast(new KitchenDishReadyEvent($group_id));
     }
 
     //extract cooking name

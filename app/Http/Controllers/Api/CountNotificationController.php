@@ -7,6 +7,8 @@ use App\Model\Table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Events\KitchenDishReadyEvent;
+
 use App\Model\Order;
 use App\Model\OrderTable;
 use App\Model\Dish;
@@ -113,7 +115,7 @@ class CountNotificationController extends Controller
 
     public function ready(Request $request)
     {
-
+        
         $orderdish = OrderDish::findOrFail($request->selected_id);
         if($orderdish->ready_flag == 1){
             $orderdish->ready_flag = 0;
@@ -211,6 +213,8 @@ class CountNotificationController extends Controller
                 $printer -> close();
             }
         }
+
+        broadcast(new KitchenDishReadyEvent($group_id));
 
         return $orderdish;
         

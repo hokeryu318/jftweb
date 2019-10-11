@@ -70,6 +70,7 @@
                 <kitchendish-component :group="{{ $group_id }}"></kitchendish-component>
             </div>
         </div>
+        <kitchen-dish-ready-component></kitchen-dish-ready-component>        
     </div>
 </div>
 
@@ -229,47 +230,6 @@
             }
         });
     }
-
-    {{--//extract_cooking_name--}}
-    {{--function extract_cooking_name(dish_id)--}}
-    {{--{--}}
-    {{--$.ajax({--}}
-    {{--type:"GET",--}}
-    {{--url:"{{ route('kitchen.extract_cooking_name') }}",--}}
-    {{--data:{ dish_id: dish_id },--}}
-    {{--success: function(result){--}}
-    {{--$('#ExtractCookingName').html(result);--}}
-    {{--}--}}
-    {{--});--}}
-    {{--$("#ExtractCookingName").modal("toggle");--}}
-    {{--}--}}
-
-    {{--function extract_table_number(table_id)--}}
-    {{--{--}}
-    {{--$.ajax({--}}
-    {{--type:"GET",--}}
-    {{--url:"{{ route('kitchen.extract_table_number') }}",--}}
-    {{--data:{ table_id: table_id },--}}
-    {{--success: function(result){--}}
-    {{--$('#ExtractCookingName').html(result);--}}
-    {{--}--}}
-    {{--});--}}
-    {{--$("#ExtractCookingName").modal("toggle");--}}
-    {{--}--}}
-
-    //modal_close
-    {{--function modal_close()--}}
-    {{--{--}}
-    {{--var group_id = $("#group_id").val();--}}
-    {{--$.ajax({--}}
-    {{--type:"GET",--}}
-    {{--url:"{{ route('kitchen.main_screen') }}",--}}
-    {{--data:{ group_id: group_id },--}}
-    {{--success: function(result){--}}
-    {{--$('.main').html(result);--}}
-    {{--}--}}
-    {{--});--}}
-    {{--}--}}
 
     //timer part
     var myVar = setInterval(myTimer, 1000);
