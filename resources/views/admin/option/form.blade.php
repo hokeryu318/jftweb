@@ -271,7 +271,7 @@
                 var image_tag = $('.option-image', parent);
                 if(($(obj).val() == "" && $(image_tag).attr('src') == "") && $(parent).is(':visible')) invalidCt++;
             });
-            console.log(invalidCt);
+            //console.log(invalidCt);
             if(invalidCt > 1){
                 //alert('Please upload photos');
                 $("#alert-string")[0].innerText = "Please upload photos";

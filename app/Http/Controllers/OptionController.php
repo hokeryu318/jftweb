@@ -120,7 +120,8 @@ class OptionController extends Controller
                     if(isset(request()->file('prev-data')[$id]['image']) != null) {
                         $image = request()->file('prev-data')[$id]['image'];
                         $destinationPath = 'options';
-                        $destinationFile = "item".time().".png";
+                        //$destinationFile = "item".time().".png";
+                        $destinationFile = $image->getClientOriginalName();
                         $image->move($destinationPath, $destinationFile);
                         $item->image = $destinationFile;
                     }
