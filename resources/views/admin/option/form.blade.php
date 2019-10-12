@@ -174,7 +174,7 @@
                     <img class="add-photo-button" width=55 height=55 onclick="onAddImage(this)" style="display: none"
                          src="{{ asset('img/image-add-icon.png') }}"
                     >
-                    <img class="option-image" width=55 height=55
+                    <img class="option-image" width=55 height=55 
                         @if($obj->photo_visible == '1')
                         src="{{ asset('options/'.$item->image) }}"
                         @endif

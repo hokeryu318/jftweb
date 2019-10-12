@@ -249,7 +249,7 @@ class ReceptionController extends Controller
                 $table_name = rtrim($table_name, '+');
                 Order::where('id', $order_obj->id)->update(['table_name' => $table_name]);
 
-                broadcast(new TableMoveEvent($table_name));
+                broadcast(new TableMoveEvent(request()->get('order_id'), $table_name));
             }
             else  //add
             {

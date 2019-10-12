@@ -14,11 +14,13 @@ class TableMoveEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $order_id;
     public $display_table_name;
 
-    public function __construct($var)
+    public function __construct($var1, $var2)
     {
-        $this->display_table_name = $var;
+        $this->order_id = $var1;
+        $this->display_table_name = $var2;
     }
 
     public function broadcastOn()

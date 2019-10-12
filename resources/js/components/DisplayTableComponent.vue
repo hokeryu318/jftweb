@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        props: ['table_name'],
+        props: ['order_id', 'table_name'],
         data: function(){
             return {
                 display_table_name: ''
@@ -20,8 +20,10 @@
             get_change_table() {
                 Echo.channel('table-move-channel')//public channel
                 .listen('TableMoveEvent', (event) => {
-                    this.display_table_name = event.display_table_name;
-                    console.dir(this.display_table_name);
+                    if(this.order_id === event.order_id) {
+                        this.display_table_name = event.display_table_name;
+                        console.dir(this.display_table_name);
+                    }
                 });
             },
         }
