@@ -725,9 +725,8 @@ class ReceptionController extends Controller
         $order = Order::find(request()->order_id);
         $menu_time = $order->time;
         $menu_type = $order->menu_type;
-
+        if(empty($menu_type))   $menu_type = "Menu";
         $dishes = $this->get_dishes($category,$menu_time,$menu_type);
-        
         return (string)view('reception.dish_list', compact('dishes'))->render();
     }
 

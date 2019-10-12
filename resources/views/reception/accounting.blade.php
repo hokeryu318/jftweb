@@ -51,8 +51,8 @@
 
 
 <body>
-<form method="POST" id="save-pay" action="{{ route('reception.pay', ['status' => $status]) }}">
-{{--<form method="POST" id="save-pay">--}}
+<!-- <form method="POST" id="save-pay" action="{{ route('reception.pay', ['status' => $status]) }}"> -->
+<form>
     @csrf
     <input type="hidden" id="order_time" value="{{ $time }}" />
     <input type="hidden" id="order_id" value="{{ $order_id }}" />

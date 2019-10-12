@@ -142,7 +142,7 @@ class OptionController extends Controller
                     $item->price = $n['price'];
                     $item->stock = $n['stock'];
                     $item->save();
-                    if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != ''){
+                    if(request()->photo_visible == "on" && request()->file('new-option')[$i]['image'] != '') {
                         $file = request()->file('new-option')[$i]['image'];
                         $destinationPath = 'options';
                         $destinationFile = "item".time().".png";
