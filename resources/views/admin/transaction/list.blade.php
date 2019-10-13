@@ -61,7 +61,7 @@
                 <table style="width: 96%;color: white;margin: 20px 0 0 15px;border-bottom: 1px solid white;">
                     <thead>
                     <tr>
-                        <th class="border-0" scope="col" width="15%">
+                        <th class="border-0" scope="col" width="15%" align="left">
                             <a href="{{route("admin.transaction", ["sortType" => $sort, 'search_date' => $search_display_date])}}" class="text-white">
                                 <b>TIME</b>
                                 @if($sort == "asc")
@@ -71,10 +71,10 @@
                                 @endif
                             </a>
                         </th>
-                        <th class="border-0" scope="col" width="30%"><b>TABLE</b></th>
-                        <th class="border-0" scope="col" width="15%"><b>AMOUNT</b></th>
-                        <th class="border-0" scope="col" width="25%"><b>CUSTOMER</b></th>
-                        <th class="border-0" scope="col" width="15%"></th>
+                        <th class="border-0" scope="col" width="30%" align="left"><b>TABLE</b></th>
+                        <th class="border-0" scope="col" width="15%" align="left"><b>AMOUNT</b></th>
+                        <th class="border-0" scope="col" width="25%" align="left"><b>CUSTOMER</b></th>
+                        <th class="border-0" scope="col" width="15%" align="left"></th>
                     </tr>
                     </thead>
                 </table>

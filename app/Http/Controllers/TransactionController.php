@@ -32,7 +32,7 @@ class TransactionController extends Controller
         $daily_all_amount = 0;
         if(request()->get('sortType') == "asc"){
 
-            $order_obj = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->orderBy('created_at', 'asc')->get();
+            $order_obj = OrderPay::whereDate('created_at', $search_date)->orderBy('created_at', 'asc')->get();
             if(count($order_obj) > 0) {
                 foreach($order_obj as $order) {
                     $order->display_time = date_format($order->created_at,"h:i A");
@@ -45,7 +45,7 @@ class TransactionController extends Controller
 
         } else {
 
-            $order_obj = OrderPay::whereDate('created_at', $search_date)->where('pay_method', 'CASH')->orderBy('created_at', 'desc')->get();
+            $order_obj = OrderPay::whereDate('created_at', $search_date)->orderBy('created_at', 'desc')->get();
             if(count($order_obj) > 0) {
                 foreach($order_obj as $order) {
                     $order->display_time = date_format($order->created_at,"h:i A");
