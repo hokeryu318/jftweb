@@ -789,7 +789,7 @@ class ReceptionController extends Controller
 
         $ids = OrderPay::groupBy("order_id")->havingRaw("COUNT(*) > 1")->pluck('id')->toArray();
         OrderPay::whereIn('id', $ids)->delete();
-        
+
 //        /return 'success';
         return redirect()->route('reception.seated', ['status'=>'seated']);
     }
@@ -809,12 +809,7 @@ class ReceptionController extends Controller
         $shop_name = $profile->shop_name;
 
         $order_id = request()->get('order_id');
-        $table_ids = OrderTable::where('order_id', $order_id)->pluck('table_id');
-        $table_name = "";
-        foreach($table_ids as $table_id) {
-            $table_name .= $this->get_table_name($table_id).'+';
-        }
-        $table_name = rtrim($table_name, '+');
+        $table_name = Order::where('id', $order_id)->pluck('table_name')->first();
         $guest = Order::where('id', $order_id)->pluck('guest')->first();
         $table = "   Table  : ".$table_name." (".$guest." Guests)";
         $current_date = date('d F Y');
@@ -841,7 +836,6 @@ class ReceptionController extends Controller
         try {
             //Print top logo
             $printer->setJustification(Printer::JUSTIFY_CENTER);
-//            $logo_image = EscposImage::load("receipt/$logo_image_name", false);
             $logo_image = EscposImage::load("receipt/logo.png");
             $printer->graphics($logo_image, 3 | 2);
 
@@ -902,10 +896,6 @@ class ReceptionController extends Controller
                 }
 
                 $printer->text("\n");
-                // loop
-//                $line = sprintf('%-40.40s %7.2f %5.0f %7.2f', $order_dish['dish_name_en'], $order_dish['each_price'], $order_dish['count'], $order_dish['sub_total']);
-//                $printer->text($line."\n");
-                // end loop
             }
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);

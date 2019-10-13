@@ -34,6 +34,7 @@ Route::get('admin/booking/edit', 'BookingController@edit')->name('admin.booking.
 
 Route::get('admin/transactions', 'TransactionController@index')->name('admin.transaction');
 Route::get('admin/src_trans', 'TransactionController@src_trans')->name('admin.src_trans');
+Route::get('admin/transactions/reprint', 'TransactionController@reprint')->name('admin.transaction.reprint');
 
 //Route::get('admin/review', 'SaleController@review')->name('admin.review');
 

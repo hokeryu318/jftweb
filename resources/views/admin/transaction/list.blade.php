@@ -82,17 +82,17 @@
                     <table class="table text-white txtdemibold" style="width: 96%; margin-left:15px;">
                         <tbody class="thh">
                         @if($order_obj)
-                        @foreach($order_obj as $order)
-                            <tr>
-                                <td width="15%" style="padding-left: 0;">{{ $order->display_time }}</td>
-                                <td width="30%" style="padding-left: 4px;">{{ $order->table_display_name }}</td>
-                                <td width="15%" style="padding-left: 4px;">{{ number_format($order->amount, 2) }}</td>
-                                <td width="25%" style="padding-left: 6px;">{{ $order->customer_name }}</td>
-                                <td width="15%" style="text-align:center;padding-left: 9px;">
-                                    {{--<a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">REPRINT</a>--}}
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach($order_obj as $order)
+                                <tr>
+                                    <td width="15%" style="padding-left: 0;">{{ $order->display_time }}</td>
+                                    <td width="30%" style="padding-left: 4px;">{{ $order->table_display_name }}</td>
+                                    <td width="15%" style="padding-left: 4px;">{{ number_format($order->amount, 2) }}</td>
+                                    <td width="25%" style="padding-left: 6px;">{{ $order->customer_name }}</td>
+                                    <td width="15%" style="text-align:center;padding-left: 9px;">
+                                        <div style="color:white" onclick="reprint('{{$order->order_id}}')" class="outline-0 editbtn">REPRINT</div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endif
                         </tbody>
                     </table>
@@ -150,6 +150,17 @@
             data:{},
             success: function(result){
                 //alert("asd");
+            }
+        });
+    }
+
+    function reprint(order_id) {
+        $.ajax({
+            type:"GET",
+            url:"{{ route('admin.transaction.reprint') }}",
+            data:{order_id: order_id},
+            success: function(result){
+                console.dir(result);
             }
         });
     }
