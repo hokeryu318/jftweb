@@ -787,6 +787,9 @@ class ReceptionController extends Controller
         
         broadcast(new PayEvent($pay_status));
 
+        $ids = OrderPay::groupBy("order_id")->havingRaw("COUNT(*) > 1")->pluck('id')->toArray();
+        OrderPay::whereIn('id', $ids)->delete();
+        
 //        /return 'success';
         return redirect()->route('reception.seated', ['status'=>'seated']);
     }
