@@ -18,7 +18,7 @@
                 <h4 class="text-white h4-responsive font-weight-bold ml-3 fs-30">TRANSACTION HISTORY</h4>
             </div>
             <div class="col-4">
-                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Cash Amount: ${{ $daily_all_amount }}" readonly/>
+                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Amount: ${{ $daily_all_amount }}" readonly/>
             </div>
             <div class="col-3" style="text-align: right;top: 5px;">
                 <a class="src_trans fs-25" onclick="now_sendmail()">
