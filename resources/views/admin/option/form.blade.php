@@ -168,10 +168,13 @@
                     </label>
                 </div>
                 <div class="col-1">
+                    {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button" style="display:none">--}}
+                        {{--Add Photo1--}}
+                    {{--</button>--}}
                     <img class="add-photo-button" width=55 height=55 onclick="onAddImage(this)" style="display: none"
                          src="{{ asset('img/image-add-icon.png') }}"
                     >
-                    <img class="option-image" width=55 height=55
+                    <img class="option-image" width=55 height=55  onclick="onAddImage(this)"
                         @if($obj->photo_visible == '1')
                         src="{{ asset('options/'.$item->image) }}"
                         @endif
@@ -192,7 +195,7 @@
                         DEL
                     </button>
                 </div>
-                <input type="file" class="file-image" name="prev-data[{{ $item->id }}][image]" style="display:none">
+                <input type="file" class="file-image" id="file-image" name="prev-data[{{ $item->id }}][image]" style="display:none">
                 <input type="hidden" class="stock-check-value"  name="prev-data[{{ $item->id }}][stock]">
                 <input type="hidden" class="old-id" name="prev[]" value="{{ $item->id }}">
             </div>
@@ -207,6 +210,9 @@
                 <input type="number" class="outline-0 border-bottom-blue mt-2 option-price" style="font-size: 25px;"/>
             </div>
             <div class="col-1">
+                {{--<button class="btnaddphoto3  mt-2 pt-1 add-photo-button" onclick="onAddImage(this)" type="button">--}}
+                    {{--Add Photo--}}
+                {{--</button>--}}
                 <img class="add-photo-button" width=55 height=55 onclick="onAddImage(this)"
                      src="{{ asset('img/image-add-icon.png') }}"
                 >
@@ -223,7 +229,7 @@
                     DEL
                 </button>
             </div>
-            <input type="file" class="file-image" style="display:none">
+            <input type="file" class="file-image" id="file-image" name="image" style="display:none">
             <input type="hidden" class="stock-check-value option-stock">
         </div>
 
@@ -260,7 +266,7 @@
     function onApply(){
         if($('#show_photo').is(':checked')){
             var invalidCt = 0;
-            $('.file-image').each(function(i, obj){
+            $('#file-image').each(function(i, obj){
                 var parent = $(obj).closest('.row');
                 var image_tag = $('.option-image', parent);
                 if(($(obj).val() == "" && $(image_tag).attr('src') == "") && $(parent).is(':visible')) invalidCt++;
@@ -300,19 +306,17 @@
             $("#alert-string")[0].innerText = "Please input Display Name!";
             $("#java-alert").modal('toggle');
         }
-        else {
-            if($('#multi_select').is(':checked')) {
-                $("#number_selection").prop('disabled', false);
-            } else {
-                $("#number_selection").prop('disabled', true);
-            }
+
+        // else if(count_item == 0)
+        //     alert('Please add Option(Include Option and Price)!');
+        else
             $('#post_form').submit();
-        }
+
     }
     var current_image_obj;
     var current_file_obj;
     //event on each file input
-    $(document).on('change', '.file-image', function(ev){
+    $(document).on('change', '#file-image', function(ev){
         var f = ev.target.files[0];
         var fr = new FileReader();
 
@@ -329,7 +333,7 @@
         fr.readAsDataURL(f);
     });
     //click add image button image in row
-    $(document).on('click', '.option-image', function(){
+    /*$(document).on('click', '.option-image', function(){
 
         if($('#show_photo').is(':checked')) {
             $('#popupimg').attr('src', $(this).attr('src'));
@@ -338,7 +342,7 @@
             $('#popupp').show();
             $("#popupp").animate({ "opacity": '1' }, "slow");
 
-            current_file_obj = $('.file-image', $(this).closest('.row'));
+            current_file_obj = $('#file-image', $(this).closest('.row'));
             current_image_obj = $(this);
         }
         else {
@@ -353,19 +357,19 @@
         // $('#popupp').show();
         // $("#popupp").animate({ "opacity": '1' }, "slow");
         //
-        // current_file_obj = $('.file-image', $(this).closest('.row'));
+        // current_file_obj = $('#file-image', $(this).closest('.row'));
         // current_image_obj = $(this);
-    });
+    });*/
     //close image modal
-    $('#btncloselang').click(function(){
+    /*$('#btncloselang').click(function(){
         $("#popupchangePhoto").animate({ "opacity": '0' }, "slow", function () {
             $("#popupchangePhoto").hide();
         });
         $("#popupp").animate({ "opacity": '0' }, "slow", function () {
             $("#popupp").hide();
         });
-    });
-    $('.addOptionbtn').click(function(){
+    });*/
+    /*$('.addOptionbtn').click(function(){
         $("#popupchangePhoto").animate({ "opacity": '0' }, "slow", function () {
             $("#popupchangePhoto").hide();
         });
@@ -374,7 +378,8 @@
         });
         //current_file_obj.val($('#option_image_modal').val());
         //$(current_file_obj).remove();
-
+        $("#alert-string")[0].innerText = $('#file-image').val();
+        $("#java-alert").modal('toggle');
         var org_name = $(current_file_obj).attr('name');
 
         var parent = $(current_file_obj).closest('.row');
@@ -383,27 +388,27 @@
         newFile.attr('id', '');
         parent.append(newFile);
         current_image_obj.attr('src', $('#popupimg').attr('src'));
-    });
+    });*/
     //on add image button
     function onAddImage(obj)
     {
+        //console.log($('#show_photo').is(':checked'));
         if($('#show_photo').is(':checked')) {
             var parent = $(obj).closest('.row');
-            $('.file-image', parent).trigger('click');
+            $('#file-image', parent).trigger('click');
         }
         else {
-            //alert('You can not change photo. Please check Show Photo option!');
             $("#alert-string")[0].innerText = "You can not change photo. Please check Show Photo option!";
             $("#java-alert").modal('toggle');
         }
 
     }
     //add image button on modal
-    $('#popupimg').click(function(){
+    /*$('#popupimg').click(function(){
         $('#option_image_modal').trigger('click');
-    });
+    });*/
     //event on modal file input
-    $('#option_image_modal').change(function(ev){
+    /*$('#option_image_modal').change(function(ev){
         var f = ev.target.files[0];
         var fr = new FileReader();
         var img = $('#popupimg');
@@ -413,7 +418,7 @@
         };
 
         fr.readAsDataURL(f);
-    });
+    });*/
     var newIndex = 0;
     function onAddOption()
     {
