@@ -138,7 +138,7 @@
             success: function(result){
                 //console.log(result);                
                 document.getElementById("data_view").innerHTML = result;
-                document.getElementById("all_amount").value = "Today's Total Cash Amount: $" + daily_all_amount.value;
+                document.getElementById("all_amount").value = "Today's Total Amount: $" + daily_all_amount.value;
             }
         });
     }
