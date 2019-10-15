@@ -18,7 +18,7 @@
                 <h4 class="text-white h4-responsive font-weight-bold ml-3 fs-30">TRANSACTION HISTORY</h4>
             </div>
             <div class="col-4">
-                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Amount: ${{ $daily_all_amount }}" readonly/>
+                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;font-size: 20px;height: 35px" value="Today's Total Amount: ${{ $daily_all_amount }}" readonly/>
             </div>
             <div class="col-3" style="text-align: right;top: 5px;">
                 <a class="src_trans fs-25" onclick="now_sendmail()">
@@ -46,7 +46,7 @@
                 </a>
             </div>
             <div class="col-4" style="text-align: right;">
-                <input type="text" id="search_trans_date" />
+                <input type="text" id="search_trans_date" style="height: 35px"/>
             </div>
             <div class="col-1"></div>
             <div class="col-3" style="margin-top: 14px;">
