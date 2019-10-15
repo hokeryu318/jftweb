@@ -19,7 +19,7 @@
         </tr>
         </thead>
     </table>
-    <div style="height: 50vh;overflow-y: auto;">
+    <div style="height: 55vh;overflow-y: auto;">
         <table class="table text-white txtdemibold" style="width: 96%;margin-left: 15px;">
             <tbody class="thh">
             @foreach($order_obj as $order)
