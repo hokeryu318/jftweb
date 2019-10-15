@@ -210,6 +210,7 @@
                 url:"{{ route('kitchen.extract_table_number') }}",
                 data:{ order_id: order_id, group_id: group_id },
                 success: function(result){
+                    console.dir(result);
                     $('#ExtractCookingName').html(result);
                 }
             });
