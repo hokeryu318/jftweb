@@ -34,7 +34,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 
     <script type="text/javascript" src="{{ asset('js/timepicki.js') }}"></script>
-
 </head>
 
 <body>
@@ -52,6 +51,10 @@
             <br><br>
             <a href="{{ route('admin.transaction') }}" class="text-left">
                 <img style="width:70px" src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline v-align-middle fs-30">Transactions</h4>
+            </a>
+            <br><br>
+            <a href="{{ route('admin.salesprint') }}" class="text-left">
+                <img style="width:70px" src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline v-align-middle fs-30">Sales Print</h4>
             </a>
             <br><br>
             <a href="{{ route('admin.booking') }}" class="text-left">

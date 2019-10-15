@@ -271,4 +271,8 @@ class TransactionController extends Controller
         return $order_dishes;
     }
 
+    public function sales_print() {
+        return 111;
+    }
+
 }

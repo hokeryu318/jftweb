@@ -178,4 +178,15 @@
         });
     }
 
+    function sales_print() {
+        $.ajax({
+            type:"GET",
+            url:"{{ route('admin.transaction.sales_print') }}",
+            data:{},
+            success: function(result){
+                console.dir(result);
+            }
+        });
+    }
+
 </script>
