@@ -78,7 +78,7 @@ class TransactionController extends Controller
 
         $src_date = request()->src_date;
 
-        $order_obj = OrderPay::whereDate('created_at', $src_date)->where('pay_method', 'CASH')->orderBy('created_at', 'desc')->get();
+        $order_obj = OrderPay::whereDate('created_at', $src_date)->orderBy('created_at', 'desc')->get();
         $daily_all_amount = 0;
         if(count($order_obj) > 0) {
             foreach($order_obj as $order) {

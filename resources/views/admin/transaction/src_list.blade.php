@@ -29,7 +29,7 @@
                     <td width="15%" style="padding-left: 4px;">{{ number_format($order->amount, 2) }}</td>
                     <td width="25%" style="padding-left: 6px;">{{ $order->customer_name }}</td>
                     <td width="15%" style="text-align:center;padding-left: 9px;">
-                        {{--<a style="color:white" href="{{ route('admin.booking.edit') }}" class="outline-0 editbtn">REPRINT</a>--}}
+                        <div style="color:white" onclick="reprint('{{$order->order_id}}')" class="outline-0 editbtn">REPRINT</div>
                     </td>
                 </tr>
             @endforeach
