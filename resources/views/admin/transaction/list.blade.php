@@ -62,7 +62,6 @@
             <div class="col-3" style="text-align: right;margin-left: 70px;">
                 <input type="text" id="search_trans_date" />
             </div>
-            
             <div class="col-4" style="margin: 13px 0 0 30px;">
                 <a class="src_trans fs-25" onclick="search_transaction()">
                     Search Transaction
@@ -122,7 +121,7 @@
         background: white;
         font-size: 25px;
         width: 300px;
-        height: 45px;
+        height: 35px;
         padding-left: 10px;
         padding-right: 10px;
         text-align: center;
