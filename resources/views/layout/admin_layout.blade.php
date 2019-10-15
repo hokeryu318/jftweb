@@ -52,10 +52,10 @@
             <a href="{{ route('admin.transaction') }}" class="text-left">
                 <img style="width:70px" src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline v-align-middle fs-30">Transactions</h4>
             </a>
-            <br><br>
+            <!-- <br><br>
             <a href="{{ route('admin.salesprint') }}" class="text-left">
                 <img style="width:70px" src="{{ asset('img/tran.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline v-align-middle fs-30">Sales Print</h4>
-            </a>
+            </a> -->
             <br><br>
             <a href="{{ route('admin.booking') }}" class="text-left">
                 <img style="width:70px" src="{{ asset('img/book.png') }}" />&nbsp;&nbsp;<h4 class="white-text d-inline v-align-middle fs-30">Bookings</h4>

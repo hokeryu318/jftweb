@@ -18,8 +18,12 @@
                 <h4 class="text-white h4-responsive font-weight-bold ml-3 fs-30">TRANSACTION HISTORY</h4>
             </div>
             <div class="col-4">
+                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;" value="Today's Total Amount: ${{ $daily_all_amount }}" readonly/>
             </div>
             <div class="col-3" style="text-align: right;top: 5px;">
+                <a class="src_trans fs-25" onclick="now_sendmail()">
+                    Finish the day now
+                </a>
             </div>
             <div class="col">
                 <a onclick="window.history.back()">
@@ -29,26 +33,8 @@
                 </a>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-1"></div>
+        <div class="row mb-5 mt-5">
             <div class="col-4">
-                <input type="text" id="all_amount" style="background:white;border:none;text-align:center;font-size:25px;padding:5px;" value="Today's Total Amount: ${{ $daily_all_amount }}" readonly/>
-            </div>
-            <div class="col-3" style="text-align: right;top: 5px;margin-left:-8px;">
-                <a class="src_trans fs-25" onclick="now_sendmail()">
-                    Finish the day now
-                </a>
-            </div>
-            <div class="col-3" style="text-align: right;top: 5px;margin-left:-10px;">
-                <a class="src_trans fs-25" onclick="sales_print()">
-                    Sales Print
-                </a>
-            </div>
-            <div class="col-1"></div>
-        </div>
-        <div class="row mb-5 mt-3">
-            <div class="col-1"></div>
-            <div class="col-3">
                 <a href="{{ route('admin.transaction', ['search_date' => $search_display_date, 'd_s' => 'down']) }}">
                     <img src="{{ asset('img/Path501.png') }}" class="ml-3 mb-3" height="30" />
                 </a>
@@ -59,10 +45,11 @@
                     <img src="{{ asset('img/Path502.png') }}" class="mb-3" height="30" />
                 </a>
             </div>
-            <div class="col-3" style="text-align: right;margin-left: 70px;">
+            <div class="col-4" style="text-align: right;">
                 <input type="text" id="search_trans_date" />
             </div>
-            <div class="col-4" style="margin: 13px 0 0 30px;">
+            <div class="col-1"></div>
+            <div class="col-3" style="margin-top: 14px;">
                 <a class="src_trans fs-25" onclick="search_transaction()">
                     Search Transaction
                     <img src="{{ asset('img/Group728black.png') }}" style="height:18px; margin-left: 5px;">
@@ -91,7 +78,7 @@
                     </tr>
                     </thead>
                 </table>
-                <div style="height: 50vh;overflow-y: auto;">
+                <div style="height: 55vh;overflow-y: auto;">
                     <table class="table text-white txtdemibold" style="width: 96%; margin-left:15px;">
                         <tbody class="thh">
                         @if($order_obj)
@@ -121,7 +108,7 @@
         background: white;
         font-size: 25px;
         width: 300px;
-        height: 35px;
+        height: 45px;
         padding-left: 10px;
         padding-right: 10px;
         text-align: center;
@@ -172,17 +159,6 @@
             type:"GET",
             url:"{{ route('admin.transaction.reprint') }}",
             data:{order_id: order_id},
-            success: function(result){
-                console.dir(result);
-            }
-        });
-    }
-
-    function sales_print() {
-        $.ajax({
-            type:"GET",
-            url:"{{ route('admin.transaction.sales_print') }}",
-            data:{},
             success: function(result){
                 console.dir(result);
             }
