@@ -205,9 +205,9 @@ class CountNotificationController extends Controller
                         $printer->setTextSize(1,2);
                         $printer->text("]");
                     }
-        
-                    $printer->text("\n");
                 }
+
+                $printer->text("\n");
 
                 $printer->cut();
 
