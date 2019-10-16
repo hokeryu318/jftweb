@@ -167,29 +167,27 @@ class KitchenController extends Controller
             try {
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
-                /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
-                $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));*/
                 $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
-                $printer -> text('TIME:' . $time);
-                $printer -> text('                  DATE:' . $date);
+                $printer->text('TIME:' . $time);
+                $printer->text('                  DATE:' . $date);
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 $printer->setTextSize(1,2);
                 $printer->setEmphasis(false);
-                $printer -> text('TABLE:');
+                $printer->text('TABLE:');
                 $printer->setEmphasis(true);
                 $printer->setTextSize(2,2);
                 $qty_len = strlen($qty);
                 $table_len = 19 - $qty_len;
-                $printer -> text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
+                $printer->text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
                 $printer->setEmphasis(false);
                 $printer->setTextSize(1,2);
-                $printer -> text('QTY:');               
+                $printer->text('QTY:');               
                 $printer->setEmphasis(true);
                 $printer->setTextSize(2,2);
-                $printer -> text($qty);
+                $printer->text($qty);
                 $printer->text("\n");
 
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
@@ -208,13 +206,13 @@ class KitchenController extends Controller
                         $printer->text("]");
                     }
                 }
-                
+
                 $printer->text("\n");
 
                 $printer->cut();
 
             } finally {
-                $printer -> close();
+                $printer->close();
             }
             
         }
@@ -468,29 +466,27 @@ class KitchenController extends Controller
 
         try {
             $printer->setJustification(Printer::JUSTIFY_LEFT);
-            /*$printer -> text(new print_table1('TIME:' . $time, 'DATE:' . $date));
-            $printer -> text(new print_table1('TABLE:' . $table_name, 'QTY:' . $qty));*/
             $printer->setTextSize(1,2);
             $printer->setEmphasis(false);
-            $printer -> text('TIME:' . $time);
-            $printer -> text('                  DATE:' . $date);
+            $printer->text('TIME:' . $time);
+            $printer->text('                  DATE:' . $date);
             $printer->text("\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setTextSize(1,2);
             $printer->setEmphasis(false);
-            $printer -> text('TABLE:');
+            $printer->text('TABLE:');
             $printer->setEmphasis(true);
             $printer->setTextSize(2,2);
             $qty_len = strlen($qty);
             $table_len = 19 - $qty_len;
-            $printer -> text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
+            $printer->text(str_pad($table_name,$table_len,' ', STR_PAD_RIGHT));
             $printer->setEmphasis(false);
             $printer->setTextSize(1,2);
-            $printer -> text('QTY:');
+            $printer->text('QTY:');
             $printer->setEmphasis(true);
             $printer->setTextSize(2,2);
-            $printer -> text($qty);
+            $printer->text($qty);
             $printer->text("\n");
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
@@ -515,7 +511,7 @@ class KitchenController extends Controller
             $printer->cut();
 
         } finally {
-            $printer -> close();
+            $printer->close();
         }
         
         return $dish_name;
