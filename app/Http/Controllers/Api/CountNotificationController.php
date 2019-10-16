@@ -195,17 +195,19 @@ class CountNotificationController extends Controller
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
                 
-                foreach($order_options as $order_option) {
-                    $printer->text( "[" . $order_option->option_name . ":");
-                    $printer->setEmphasis(true);
-                    $printer->setTextSize(2,2);
-                    $printer->text($order_option->item_name);
-                    $printer->setEmphasis(false);
-                    $printer->setTextSize(1,2);
-                    $printer->text("]");
-                }       
-                
-                $printer->text("\n");
+                if($orderdish->options) {
+                    foreach($orderdish->options as $option) {
+                        $printer->text( "[" . $option->option_name . ":");
+                        $printer->setEmphasis(true);
+                        $printer->setTextSize(2,2);
+                        $printer->text($option->item_name);
+                        $printer->setEmphasis(false);
+                        $printer->setTextSize(1,2);
+                        $printer->text("]");
+                    }
+        
+                    $printer->text("\n");
+                }
 
                 $printer->cut();
 
