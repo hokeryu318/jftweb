@@ -195,8 +195,8 @@ class KitchenController extends Controller
                 $printer->setEmphasis(false);
                 $printer->text($dish_name);
                 
-                if($orderdish->options) {
-                    foreach($orderdish->options as $option) {
+                if($order_options) {
+                    foreach($order_options as $option) {
                         $printer->text( "[" . $option->option_name . ":");
                         $printer->setEmphasis(true);
                         $printer->setTextSize(2,2);
@@ -494,8 +494,8 @@ class KitchenController extends Controller
             $printer->setEmphasis(false);
             $printer->text($dish_name);
 
-            if($orderdish->options) {
-                foreach($orderdish->options as $option) {
+            if($order_options) {
+                foreach($order_options as $option) {
                     $printer->text( "[" . $option->option_name . ":");
                     $printer->setEmphasis(true);
                     $printer->setTextSize(2,2);
@@ -514,6 +514,6 @@ class KitchenController extends Controller
             $printer->close();
         }
         
-        return $dish_name;
+        return $order_options;
     }
 }
