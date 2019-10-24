@@ -42,12 +42,13 @@ class AlarmCount
 
         View::share(compact('count_notification'));
 
+        $cur_date = date('Y-m-d');
+        $lm_date = '2019-12-01';
+
         date_default_timezone_set("Australia/Melbourne");
 
-//        date_default_timezone_set("Asia/Tokyo");
-//        $current_date = strtoupper(date('d M Y'));
-//        View::share(compact('current_date'));
+        if($cur_date < $lm_date)
+            return $next($request);
 
-        return $next($request);
     }
 }
