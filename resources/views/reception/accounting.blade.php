@@ -527,12 +527,12 @@
                 var order_id = $('#order_id').val();
                 var change = parseFloat(document.getElementById("change").textContent.replace(',', '').substring(1)).toFixed(2);
 
-                $("#alert-string-confirm")[0].innerText = "Would you like a receipt?";
-                $("#cancelbtn").attr("onclick", "cancel_print()");
-                $("#confirmbtn").attr("onclick", "account_print()");
-                $("#java-alert-confirm").modal('toggle');
+//                $("#alert-string-confirm")[0].innerText = "Would you like a receipt?";
+//                $("#cancelbtn").attr("onclick", "cancel_print()");
+//                $("#confirmbtn").attr("onclick", "account_print()");
+//                $("#java-alert-confirm").modal('toggle');
 
-//                cancel_print()
+                cancel_print();
 
             }
         }
