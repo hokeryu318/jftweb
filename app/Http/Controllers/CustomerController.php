@@ -36,7 +36,7 @@ class CustomerController extends Controller
         $table_ids_arr = OrderTable::where('order_id', $order_id)->pluck('table_id');
         $tables = Table::whereIn('id', $table_ids_arr)->get();
         $table_name = '';
-        $order = Order::where('id', $order_id)->where('pay_flag', '<>', 2)->first();//dd($order);
+        $order = Order::where('id', $order_id)->where('pay_flag', '<>', 2)->first();//dd($order->time);
         foreach($tables as $table){
             $table_name .= $this->get_table_name($table->id).'+';
         }
@@ -53,14 +53,16 @@ class CustomerController extends Controller
             }
 
         }*/
-        
+
+        $cur_time = $this->get_current_time();//dd($cur_time);
         $category_all = array();
         if(count($categories) > 0) {
             $i = 0;
             foreach ($categories as $category) {
                 $dishes = [];
                 if($category->has_subs != 1 && empty($category->parent_id)) {
-                    $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
+                    //$dishes = $this->get_dishes($category,$order->time,$order->menu_type);
+                    $dishes = $this->get_dishes($category,$cur_time,$order->menu_type);
                     if( !empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
                     }
@@ -74,7 +76,7 @@ class CustomerController extends Controller
 
                     if( !empty($sub_categories) && count($sub_categories) > 0 ) {
                         foreach ($sub_categories as $sub_category) {
-                            $sub_dishes = $this->get_dishes($sub_category,$order->time,$order->menu_type);
+                            $sub_dishes = $this->get_dishes($sub_category,$cur_time,$order->menu_type);
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
@@ -85,7 +87,7 @@ class CustomerController extends Controller
                         }                        
                     }
                     else {
-                        $dishes = $this->get_dishes($category,$order->time,$order->menu_type);
+                        $dishes = $this->get_dishes($category,$cur_time,$order->menu_type);
                         $main_sub_categories = [];
                         
                         if($i == 0) $temp_dishes = $dishes;
