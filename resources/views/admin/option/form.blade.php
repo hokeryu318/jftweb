@@ -96,7 +96,7 @@
                    @else
                         value="1"
                    @endif
-                   disabled>
+                   >
                 <img src="{{ asset('img/Path531.png') }}" class="" height="40" width="45" onclick="incNumber()" id="plus" />
             </div>
 

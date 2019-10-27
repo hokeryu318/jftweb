@@ -55,7 +55,7 @@ class OptionController extends Controller
     }
     public function store()
     {
-        // dd(request());
+        //dd(request());
         if(is_null(request()->id)){ //new item
             $obj = new Option();
             $obj->name = request()->name;
@@ -99,7 +99,7 @@ class OptionController extends Controller
             $obj->display_name_en = request()->display_name_en;
             $obj->display_name_cn = request()->display_name_cn;
             $obj->display_name_jp = request()->display_name_jp;
-            $obj->multi_select = request()->multi_select == "on" ? '1' : '0';
+            $obj->multi_select = request()->multi_select == "on" ? '1' : '0';//dd(request()->number_selection);
             if(($obj->multi_select == 1) && (request()->number_selection == null))
                 $obj->number_selection = 1;
             if(($obj->multi_select == 1) && (request()->number_selection != null))
