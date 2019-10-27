@@ -42,13 +42,9 @@ class AlarmCount
 
         View::share(compact('count_notification'));
 
-        $cur_date = date('Y-m-d');
-        $lm_date = '2'.'0'.'1'.'9'.'-'.'1'.'2'.'-'.'0'.'1';
-
         date_default_timezone_set("Australia/Melbourne");
 
-        if($cur_date < $lm_date)
-            return $next($request);
+        return $next($request);
 
     }
 }
