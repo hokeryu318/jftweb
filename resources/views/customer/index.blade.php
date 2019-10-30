@@ -40,7 +40,7 @@
                 <finish-and-pay-component order_id="{{ $order->id }}"></finish-and-pay-component>
             </p>
 
-            <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px">
+            <img src="{{asset('receipt/'.$profile->logo_image)}}" alt="Logo" class="logo" height="110px" onclick="location.reload();">
         </div>
         <div class="category_container">
             @php $i=0; @endphp
