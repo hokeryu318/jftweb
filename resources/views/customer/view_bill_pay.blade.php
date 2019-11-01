@@ -1,6 +1,12 @@
 <div class="pay_modal-content">
     <div>
-        <div style="vertical-align: top;width: 250px;"><span>Table number:<br><b>{{ $table_name }}</b></span></div>
+        <div style="vertical-align: top;width: 250px;">
+            <span>Table number:<br>
+                <b>
+                    {{ $table_name }}
+                </b>
+            </span>
+        </div>
     </div>
     <div style="margin: -50px 0 25px 245px;">
         <span>Starting time:<br><b>{{date('H:i, d F Y', strtotime($starting_time))}}</b></span>
@@ -76,4 +82,6 @@
         <span onclick="window.location='{{ route("customer.finish_pay", ["order_id" => $order_id, "table_name" => $table_name]) }}'" class="pay_finish">Finish and Pay</span>
     </div>
 </div>
+
+
 

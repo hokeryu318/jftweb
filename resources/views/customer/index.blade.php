@@ -172,7 +172,7 @@
             {{--</div>--}}
         {{--@endif--}}
 
-        <!-- <customer-calling-component order_id="{{ $order->id }}" calling_time="{{ $order_table->calling_time }}"></customer-calling-component> -->
+        {{--<!-- <customer-calling-component order_id="{{ $order->id }}" calling_time="{{ $order_table->calling_time }}"></customer-calling-component> -->--}}
 
         <div style="width:170px;"  onclick="lang_select()">
             <img src="{{asset('img/language.png')}}" alt="language" srcset="" width="70px">

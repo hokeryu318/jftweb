@@ -22,7 +22,7 @@
                 .listen('TableMoveEvent', (event) => {
                     if(this.order_id === event.order_id) {
                         this.display_table_name = event.display_table_name;
-                        console.dir(this.display_table_name);
+                        window.location.replace('../../customer/index/' + event.order_id + '?table_id=' + event.first_table_id);
                     }
                 });
             },
