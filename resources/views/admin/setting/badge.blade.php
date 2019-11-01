@@ -86,11 +86,11 @@
 		        <input class="form-control pl-3" style="font-size: 25px;" type="text" name="badge-name" id="badge-name">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect waves-light fs-18" data-dismiss="modal">
+                <button type="button" class="btn btn-light waves-effect waves-light fs-20" data-dismiss="modal">
                     CANCEL
                     <img src="{{ asset('img/Group728.png') }}" height="18" class="mb-1" />
                 </button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light fs-18" onclick="addbadge()">
+                <button type="submit" class="btn btn-primary waves-effect waves-light fs-20" onclick="addbadge()">
                     APPLY
                     <img src="{{ asset('img/Group728white.png') }}" height="18" class="mb-1" />
                 </button>
