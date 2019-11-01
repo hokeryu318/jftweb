@@ -4,17 +4,20 @@
 <div class="col-9 pl-5" style="margin-top: 45px;">
     <form method="POST" action="{{ route('admin.setting.screentime.save') }}" id="saveForm">
     <div class="mt-5">
+        <h5 class="black-text font-weight-bold fs-30">Screen Time</h5>
+    </div>
+    <div class="mt-3">
         <h6 class="font-weight-bold text-info fs-25">Current Screen Time(s)</h6>
-        <input style="border:1px solid grey;border-radius:5px;width: 200px;" class="white pl-4" type="text" name="current_time" id="current_time" 
+        <input style="border:1px solid grey;border-radius:5px;width: 200px;height:50px;font-size: 25px;" class="white pl-2" type="text" name="current_time" id="current_time"
         @if(!empty($screentime)) value="{{ $screentime->screen_time }}" @endif disabled/>
     </div>
-    <div class=" mt-2">
+    <div class="mt-3">
         <h6 class="font-weight-bold text-info fs-25">New Screen time(s)</h6>
-        <input style="border:1px solid grey;border-radius:5px;width: 200px;" class="white pl-4" type="text" name="new_time" id="new_time"/>
+        <input style="border:1px solid grey;border-radius:5px;width: 200px;height:50px;font-size: 25px;" class="white pl-2" type="text" name="new_time" id="new_time"/>
     </div>
     @csrf
     </form>
-    <div style="margin-bottom:302px"></div>
+    <div style="margin-bottom:420px"></div>
     <div class="col-lg-12 mt-5 pt-2 pr-4 text-right">
         <a href="{{ route('admin.setting.screentime') }}" class="btn bg-white black-text pt-2 pb-2 pr-3 pl-3">
             <h5 class="black-text mb-0 fs-25">
