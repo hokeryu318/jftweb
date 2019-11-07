@@ -112,8 +112,8 @@ class ReceptionController extends Controller
                 $table->display_time = date_format(date_create($table->order[0]->time),"h:i A");
             }     
             if(count($table->book) > 0) {
-                    $table->display_time1 = date_format(date_create($table->book[0]->time),"h:i A");
-                    $table->current_time1 = strtotime($table->book[0]->time) - strtotime($this->get_current_time());
+                $table->display_time1 = date_format(date_create($table->book[0]->time),"h:i A");
+                $table->current_time1 = strtotime($table->book[0]->time) - strtotime($this->get_current_time());
             }      
         }
 
