@@ -119,6 +119,9 @@ class ReceptionController extends Controller
 
         $room_size = Room::find(1);
 
+        $ids = OrderPay::groupBy("order_id")->havingRaw("COUNT(*) > 1")->pluck('id')->toArray();
+        OrderPay::whereIn('id', $ids)->delete();
+
         return view('reception.seated')->with(compact('order_tables', 'table_obj', 'order_obj', 'order_side_obj', 'room_size', 'status', 'booking_cnt'));
     }
 
