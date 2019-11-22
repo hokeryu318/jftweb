@@ -938,7 +938,7 @@ class ReceptionController extends Controller
             $printer->text("------------------------------------------------\n");
 
             $printer->cut();
-
+            $printer->pulse(0, 120, 240);
         } finally {
             $printer -> close();
         }
