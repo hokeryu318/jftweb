@@ -232,16 +232,16 @@ class TransactionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setEmphasis(false);
-            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.$sub_total));
-            $printer -> text(new print_table1('GST', '$'.$gst));
+            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.sprintf('%0.2f', $sub_total)));
+            $printer -> text(new print_table1('GST', '$'.sprintf('%0.2f', $gst)));
 
             $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
-            $printer -> text(new print_table1('Grand Total', '$'.$total));
+            $printer -> text(new print_table1('Grand Total', '$'.sprintf('%0.2f', $total)));
             $printer -> selectPrintMode();
 
-            $printer -> text(new print_table1('Payment', '$'.$amount));
-            $printer -> text(new print_table1('('.$pay_method.')', '$'.$amount));
-            $printer -> text(new print_table1('Change Due', '$'.$change));
+            $printer -> text(new print_table1('Payment', '$'.sprintf('%0.2f', $amount)));
+            $printer -> text(new print_table1('('.$pay_method.')', '$'.sprintf('%0.2f', $amount)));
+            $printer -> text(new print_table1('Change Due', '$'.sprintf('%0.2f', $change)));
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);
