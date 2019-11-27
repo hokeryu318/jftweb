@@ -16,6 +16,7 @@ use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use App\Http\Controllers\print_table1;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -113,10 +114,25 @@ class TransactionController extends Controller
         $table_name = Order::where('id', $order_id)->pluck('table_name')->first();
         $guest = Order::where('id', $order_id)->pluck('guest')->first();
         $table = "   Table  : ".$table_name." (".$guest." Guests)";
-        $current_date = date('d F Y');
-        $current_time = date('H:i:s');
-        $day = date("D", strtotime($current_date));
+
+
+        $print_time = Order::where('id', $order_id)->pluck('print_time')->first();
+        if($print_time == "0000-00-00 00:00:00" || empty($print_time)) {
+            $current_date = date('d F Y');
+            $current_time = date('H:i:s');
+
+            $orderObj = Order::find($order_id);
+            $orderObj->print_time = date('Y-m-d H:i:s');
+            $orderObj->save();
+        }
+        else {
+            $current_date = date('d F Y',strtotime(substr($print_time,0,10)));
+            $current_time = date('H:i:s',strtotime(substr($print_time,11)));
+        }
+
+        $day = date("D", strtotime($current_date));            
         $date = "   Date   : ".$day.", ".$current_date.", ".$current_time;
+        //Log::error($date);
 
         $order_dishes = OrderDish::where('order_id', $order_id)->get();
         foreach($order_dishes as $order_dish) {
@@ -232,16 +248,16 @@ class TransactionController extends Controller
 
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setEmphasis(false);
-            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.sprintf('%0.2f', $sub_total)));
-            $printer -> text(new print_table1('GST', '$'.sprintf('%0.2f', $gst)));
+            $printer -> text(new print_table1('Sub Total(Inc GST)', '$'.$sub_total));
+            $printer -> text(new print_table1('GST', '$'.$gst));
 
             $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
-            $printer -> text(new print_table1('Grand Total', '$'.sprintf('%0.2f', $total)));
+            $printer -> text(new print_table1('Grand Total', '$'.$total));
             $printer -> selectPrintMode();
 
-            $printer -> text(new print_table1('Payment', '$'.sprintf('%0.2f', $amount)));
-            $printer -> text(new print_table1('('.$pay_method.')', '$'.sprintf('%0.2f', $amount)));
-            $printer -> text(new print_table1('Change Due', '$'.sprintf('%0.2f', $change)));
+            $printer -> text(new print_table1('Payment', '$'.$amount));
+            $printer -> text(new print_table1('('.$pay_method.')', '$'.$amount));
+            $printer -> text(new print_table1('Change Due', '$'.$change));
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->setEmphasis(true);

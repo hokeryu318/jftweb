@@ -815,8 +815,20 @@ class ReceptionController extends Controller
         $table_name = Order::where('id', $order_id)->pluck('table_name')->first();
         $guest = Order::where('id', $order_id)->pluck('guest')->first();
         $table = "   Table  : ".$table_name." (".$guest." Guests)";
-        $current_date = date('d F Y');
-        $current_time = date('H:i:s');
+
+        $print_time = Order::where('id', $order_id)->pluck('print_time')->first();
+        if($print_time == "0000-00-00 00:00:00" || empty($print_time)) {
+            $current_date = date('d F Y');
+            $current_time = date('H:i:s');
+
+            $orderObj = Order::find($order_id);
+            $orderObj->print_time = date('Y-m-d H:i:s');
+            $orderObj->save();
+        }
+        else {
+            $current_date = date('d F Y',strtotime(substr($print_time,0,10)));
+            $current_time = date('H:i:s',strtotime(substr($print_time,11)));
+        }
         $day = date("D", strtotime($current_date));
         $date = "   Date   : ".$day.", ".$current_date.", ".$current_time;
 
