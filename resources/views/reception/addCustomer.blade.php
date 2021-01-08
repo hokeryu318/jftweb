@@ -855,7 +855,7 @@
         </div>
         <input type="hidden" name="time" id="selected-time" value="{{date('Y-m-d H:i:s')}}">
         <input type="hidden" name="duration" id="selected-duration">
-        <input type="hidden" name="table_id" id="selected-table" value="{{$table_id}}">
+        <input type="hidden" name="table_id" id="selected-table" value="{{$table_ids}}">
         <input type="hidden" name="order_id" id="selected-table" value="{{$order_id}}">
     </form>
     <input id="saved-width" type="hidden">

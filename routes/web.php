@@ -115,6 +115,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::get('admin/category/dish_delete/{id}', 'CategoryController@dish_delete')->name('admin.category.dish_delete');
     Route::get('admin/category/dish_add', 'CategoryController@dish_add')->name('admin.category.dish_add');
     Route::post('admin/category/edit_title', 'CategoryController@edit_title')->name('admin.category.edit_title');
+    Route::get('admin/category/sort', 'CategoryController@sortCategory');
 
     Route::get('admin/dish', 'DishController@index')->name('admin.dish');
     Route::get('admin/dish/preview/{id}', 'DishController@preview')->name('admin.dish.preview');
@@ -125,6 +126,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::post('admin/dish/store', 'DishController@store')->name('admin.dish.store');
     Route::post('admin/dish/previewpost', 'DishController@previewpost')->name('admin.dish.previewpost');
     Route::post('admin/dish/change_sold_active', 'DishController@change_sold_active')->name('admin.change_sold_active');
+    Route::get('admin/dish/search', 'DishController@dish_search')->name('admin.dish.search');
 
     Route::get('admin/option', 'OptionController@index')->name('admin.option');
     Route::get('admin/option/edit/{id}', 'OptionController@edit')->name('admin.option.edit');
@@ -138,7 +140,7 @@ Route::get('kitchen/alert', 'KitchenController@java_alert')->name('kitchen.java_
     Route::get('admin/discount/add', 'DiscountController@add')->name('admin.discount.add');
     Route::get('admin/discount/edit/{id}', 'DiscountController@edit')->name('admin.discount.edit');
     Route::post('admin/discount/store', 'DiscountController@store')->name('admin.discount.store');
-    Route::get('admin/discount/sort', 'DiscountController@sortOption')->name('admin.discount.sort');
+    Route::get('admin/discount/sort', 'DiscountController@sortDiscount')->name('admin.discount.sort');
 
     Route::get('admin/table', 'TableController@index')->name('admin.table');
     Route::post('admin/table/store', 'TableController@store')->name('admin.table.store');

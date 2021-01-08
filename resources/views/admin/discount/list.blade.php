@@ -17,6 +17,7 @@
                     <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
                 </span>
             </a>
+            <input type="text" name="discount-search" id="discount-search" onkeyup="discount_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
         </div>
     </div>
     <div class="row mb-2">
@@ -25,7 +26,7 @@
                 <thead>
                     <tr>
                         <th class="border-0 fs-3 pd" scope="col" width="12%">
-                            <a href="{{route("admin.discount.sort", ["sortField" => "start", 'start_sort' => $start_sort, "end_sort" => $end_sort])}}" class="text-white fs-25">
+                            <a href="{{route("admin.discount.sort", ["sortField" => "start", 'start_sort' => $start_sort, "end_sort" => $end_sort, 'key' => $key])}}" class="text-white fs-25">
                                 <b>START</b>
                                 <img
                                         @if($start_sort == "asc")
@@ -37,7 +38,7 @@
                             </a>
                         </th>
                         <th class="border-0 fs-3 pd" scope="col" width="12%">
-                            <a href="{{route("admin.discount.sort", ["sortField" => "end", "end_sort" => $end_sort, 'start_sort' => $start_sort])}}" class="text-white fs-25">
+                            <a href="{{route("admin.discount.sort", ["sortField" => "end", "end_sort" => $end_sort, 'start_sort' => $start_sort, 'key' => $key])}}" class="text-white fs-25">
                                 <b>END</b>
                                 <img
                                         @if($end_sort == "asc")
@@ -169,6 +170,13 @@
             $("#java-alert").modal('toggle');
 
         }
+    }
+
+    function discount_search()
+    {
+        location.href = '/admin/discount/sort?sortField=' + "{{ $_GET['sortField'] ?? '' }}" + 
+            '&start_sort=' + "{{ $_GET['start_sort'] ?? 'desc' }}" + 
+            '&end_sort=' + "{{ $_GET['end_sort'] ?? 'desc' }}" + '&key=' + $('#discount-search').val();
     }
 </script>
 @endsection

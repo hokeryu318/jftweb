@@ -25,6 +25,7 @@
                 <img src="{{ asset('img/Group826.png') }}"  style="width:25px;height:25px;" class="float-right" />
             </span></h2>
         </a>
+        <input type="text" name="category-search" id="category-search" onkeyup="category_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
         <div class="pt-5">
             <div class="row" style="height: 670px;">
                 <div class="col-7">
@@ -976,6 +977,11 @@
                 }
             });
         }
+    }
+
+    function category_search()
+    {
+        location.href = '/admin/category/sort?&key=' + $('#category-search').val();
     }
 
 </script>

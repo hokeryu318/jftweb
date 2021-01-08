@@ -15,7 +15,8 @@ class DiscountController extends Controller
         $end_sort = "desc";
         $start_sort = "desc";
         $check_discount_list = $this->check_discount_list();
-        return view('admin.discount.list')->with(compact('discounts', 'end_sort', 'start_sort', 'check_discount_list'));
+        $key = '';
+        return view('admin.discount.list')->with(compact('discounts', 'end_sort', 'start_sort', 'check_discount_list', 'key'));
     }
 
     public function add(){
@@ -138,20 +139,23 @@ class DiscountController extends Controller
         return redirect()->route('admin.discount');
     }
 
-    public function sortOption()
+    public function sortDiscount()
     {
         $start_sort = request()->get('start_sort');
         $end_sort = request()->get('end_sort');
         $sortField = request()->get('sortField');
+        $key = request()->get('key');
         if($sortField == "start"){
-            $discounts = Discount::orderBy($sortField, $start_sort)->get();
+            $discounts = Discount::orWhere('start','like','%' . $key . '%')->orWhere('end','like','%' . $key . '%')->orderBy($sortField, $start_sort)->get();
             $start_sort = ($start_sort == "asc") ? "desc" : "asc";
-        }else{
-            $discounts = Discount::orderBy($sortField, $end_sort)->get();
+        } elseif($sortField == "end"){
+            $discounts = Discount::orWhere('start','like','%' . $key . '%')->orWhere('end','like','%' . $key . '%')->orderBy($sortField, $end_sort)->get();
             $end_sort = ($end_sort == "asc") ? "desc" : "asc";
+        } else {
+            $discounts = Discount::orWhere('start','like','%' . $key . '%')->orWhere('end','like','%' . $key . '%')->get();
         }
         $check_discount_list = $this->check_discount_list();
-        return view('admin.discount.list')->with(compact('discounts', 'start_sort', 'end_sort', 'check_discount_list'));
+        return view('admin.discount.list')->with(compact('discounts', 'start_sort', 'end_sort', 'check_discount_list', 'key'));
     }
 
     //check exist of discount list

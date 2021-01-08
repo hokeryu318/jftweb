@@ -21,6 +21,7 @@ class DishController extends Controller
 
         $dishes = Dish::orderBy('name_en', 'asc')->get();//dd($dishes);
         $sort = "desc";
+        $key = '';
 
         foreach($dishes as $ds)
         {
@@ -32,7 +33,7 @@ class DishController extends Controller
             }
         }
 
-        return view('admin.dish.list')->with(compact('dishes', 'sort'));
+        return view('admin.dish.list')->with(compact('dishes', 'sort', 'key'));
     }
 
     public function edit($id) {
@@ -256,12 +257,12 @@ class DishController extends Controller
     public function sortDish()
     {
         if(request()->get('sortType') == "asc"){
-            $dishes = Dish::orderBy('name_en','asc')->get();
             $sort = "desc";
         }else{
-            $dishes = Dish::orderBy('name_en','desc')->get();
             $sort = "asc";
         }
+        $key = request()->get('key');
+        $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('name_en', request()->get('sortType'))->get();
 
         foreach($dishes as $ds)
         {
@@ -273,7 +274,7 @@ class DishController extends Controller
             }
         }
 
-        return view('admin.dish.list')->with(compact('dishes', 'sort'));
+        return view('admin.dish.list')->with(compact('dishes', 'sort', 'key'));
     }
 
 }

@@ -18,6 +18,7 @@ class OptionController extends Controller
         $options = Option::get();
         $sort_type_name = "desc";
         $sort_type_display_name = "desc";
+        $key = '';
         foreach($options as $option) {
             $dish_ids = DishOption::where('option_id', $option->id)->pluck('dish_id');
             //dd($dish_ids);
@@ -28,7 +29,7 @@ class OptionController extends Controller
             }
             $option->related_dishes = substr($related_dishes, 0, -2);
         }
-        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
+        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name', 'key'));
     }
     public function edit($id)
     {
@@ -161,15 +162,16 @@ class OptionController extends Controller
         $sort_type_name = request()->get('sort_type_name');
         $sort_type_display_name = request()->get('sort_type_display_name');
         $sortField = request()->get('sortField');
+        $key = request()->get('key');
         if($sortField == "name"){
-            $options = Option::orderBy('name',$sort_type_name)->get();
+            $options = Option::where('name','like','%' . $key . '%')->orderBy('name',$sort_type_name)->get();
             $sort_type_name = ($sort_type_name == "asc") ? "desc" : "asc";
         }else{
-            $options = Option::orderBy('display_name_en', $sort_type_display_name)->get();
+            $options = Option::where('name','like','%' . $key . '%')->orderBy('display_name_en', $sort_type_display_name)->get();
             $sort_type_display_name = ($sort_type_display_name == "asc") ? "desc" : "asc";
         }
         $this->get_related_dish($options);
-        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name'));
+        return view('admin.option.list')->with(compact('options', 'sort_type_name', 'sort_type_display_name', 'key'));
     }
 
     public function get_related_dish($options) {

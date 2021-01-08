@@ -15,7 +15,8 @@ class CategoryController extends Controller
     {
         $categories = Category::where('parent_id' ,'=', null)->orderby('order')->get();
         $dishes = Dish::orderby('order')->get();
-        return view('admin.category.list')->with(compact('categories', 'dishes'));
+        $key = '';
+        return view('admin.category.list')->with(compact('categories', 'dishes', 'key'));
     }
 
     public function add()
@@ -131,5 +132,13 @@ class CategoryController extends Controller
         $category_id = request()->category_id;
         DishCategory::where("dish_id", $dish_id)->where('categories_id', $category_id)->delete();
         return "success";
+    }
+
+    public function sortCategory()
+    {
+        $key = request()->get('key');
+        $categories = Category::where('parent_id' ,'=', null)->where('name_en','like','%' . $key . '%')->orderby('order')->get();
+        $dishes = Dish::orderby('order')->get();
+        return view('admin.category.list')->with(compact('categories', 'dishes', 'key'));
     }
 }

@@ -135,7 +135,8 @@ class ReceptionController extends Controller
     // create customer part ===========================================================================================
     public function addCustomer()
     {
-        $order_obj = Order::get();
+        $now = date('Y-m-d');
+        $order_obj = Order::where(DB::raw('substr(updated_at, 1, 10)'), $now)->get();
         $table_obj = Table::get();
         $order_tables = array();
         $order_get = array();
@@ -160,10 +161,13 @@ class ReceptionController extends Controller
                 foreach ($order_table_obj as $order) {
                     $table_ids[] = $order['table_id'];
                 }
-    
+
+                $table_ids = json_encode($table_ids);
+                $table_ids = substr($table_ids,1,strlen($table_ids) - 2);
                 $default_duration_id = $order_get->duration;
             }
             else{
+                $table_ids = $table_id;
                 $default_duration_id = $this->get_default_duration_id();
             }
         }
@@ -176,9 +180,12 @@ class ReceptionController extends Controller
                     $table_ids[] = $order['table_id'];
                 }
 
+                $table_ids = json_encode($table_ids);
+                $table_ids = substr($table_ids,1,strlen($table_ids) - 2);
                 $default_duration_id = $order_get->duration;
             }
             else{
+                $table_ids = $table_id;
                 $default_duration_id = $this->get_default_duration_id();
             }
         }
@@ -214,7 +221,7 @@ class ReceptionController extends Controller
 
         }
 
-//        dd($table_ids);
+        // dd($table_ids);
 
         $room_size = Room::find(1);
 

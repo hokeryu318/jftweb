@@ -14,6 +14,7 @@
             <a onclick="window.history.back()">
                 <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
             </a>
+            <input type="text" name="dish-search" id="dish-search" onkeyup="dish_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
         </div>
     </div>
     <div class="row mb-2" style="height: 65vh;">
@@ -22,7 +23,7 @@
                 <thead>
                     <tr>
                         <th class="border-0 fs-3 pd" scope="col" width="52%">
-                            <a href="{{route('admin.dish.sort', ['sortType' => $sort])}}" class="text-white fs-25">
+                            <a href="{{route('admin.dish.sort', ['sortType' => $sort, 'key' => $key])}}" class="text-white fs-25">
                                 <b>ITEM</b>
                                 @if($sort == "asc")
                                     <img src="{{ asset('img/Path444.png') }}" height="20" style="margin: -1px 0 0 5px;" />
@@ -109,6 +110,11 @@
     {
         var url = $(obj).data('url');
         window.location = url;
+    }
+
+    function dish_search()
+    {
+        location.href = '/admin/dish/sort?sortType=' + "{{ $_GET['sortType'] ?? 'asc' }}" + '&key=' + $('#dish-search').val();
     }
 </script>
 @endsection

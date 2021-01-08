@@ -16,6 +16,7 @@
                     <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
                 </span>
             </a>
+            <input type="text" name="option-search" id="option-search" onkeyup="option_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
         </div>
     </div>
     <div class="row mb-2">
@@ -24,7 +25,7 @@
                 <thead>
                     <tr>
                         <th class="border-0 fs-3 fontbig" scope="col" width="25%">
-                            <a href="{{route("admin.option.sort", ["sortField" => "name", "sort_type_name" => $sort_type_name, "sort_type_display_name" => $sort_type_display_name])}}" class="text-white fs-25">
+                            <a href="{{route("admin.option.sort", ["sortField" => "name", "sort_type_name" => $sort_type_name, "sort_type_display_name" => $sort_type_display_name, 'key' => $key])}}" class="text-white fs-25">
                                 <b>NAME</b>
                                 <img
                                         @if($sort_type_name == "asc")
@@ -36,7 +37,7 @@
                             </a>
                         </th>
                         <th class="border-0 fs-3 fontbig" scope="col" width="25%">
-                            <a href="{{route("admin.option.sort", ["sortField" => "display_name", "sort_type_display_name" => $sort_type_display_name, "sort_type_name" => $sort_type_name])}}" class="text-white fs-25">
+                            <a href="{{route("admin.option.sort", ["sortField" => "display_name", "sort_type_display_name" => $sort_type_display_name, "sort_type_name" => $sort_type_name, 'key' => $key])}}" class="text-white fs-25">
                                 <b>DISPLAY NAME</b>
                                 <img
                                         @if($sort_type_display_name == "asc")
@@ -103,6 +104,12 @@
 <script>
     function onrow(id){
         window.location = "{{ url('admin/option/edit') }}" + "/" + id;
+    }
+    function option_search()
+    {
+        location.href = '/admin/option/sort?sortField=' + "{{ $_GET['sortField'] ?? '' }}" + 
+            '&sort_type_name=' + "{{ $_GET['sort_type_name'] ?? 'desc' }}" + 
+            '&sort_type_display_name=' + "{{ $_GET['sort_type_display_name'] ?? 'asc' }}" + '&key=' + $('#option-search').val();
     }
 </script>
 @endsection
