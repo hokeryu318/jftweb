@@ -153,7 +153,7 @@
 
     var dish_search = document.getElementById("dish-search");
     dish_search.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 || event.keyCode === 36) {
             event.preventDefault();
             location.href = '/admin/dish/sort?sortField=key'
                 + '&sortType=' + "{{ $_GET['sortType'] ?? 'asc' }}" 

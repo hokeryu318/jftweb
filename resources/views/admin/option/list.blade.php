@@ -114,7 +114,7 @@
 
     var option_search = document.getElementById("option-search");
     option_search.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 || event.keyCode === 36) {
             event.preventDefault();
             location.href = '/admin/option/sort?sortField=' + "{{ $_GET['sortField'] ?? '' }}" + 
                 '&sort_type_name=' + "{{ $_GET['sort_type_name'] ?? 'desc' }}" + 
