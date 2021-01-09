@@ -17,7 +17,7 @@
                     <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
                 </span>
             </a>
-            <input type="text" name="discount-search" id="discount-search" onkeyup="discount_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
+            {{--<input type="text" name="discount-search" id="discount-search" onkeyup="discount_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">--}}
         </div>
     </div>
     <div class="row mb-2">

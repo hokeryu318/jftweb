@@ -21,6 +21,9 @@ class DishController extends Controller
 
         $dishes = Dish::orderBy('name_en', 'asc')->get();//dd($dishes);
         $sort = "desc";
+        $group = "desc";
+        $price = "desc";
+        $active = "";
         $key = '';
 
         foreach($dishes as $ds)
@@ -33,7 +36,7 @@ class DishController extends Controller
             }
         }
 
-        return view('admin.dish.list')->with(compact('dishes', 'sort', 'key'));
+        return view('admin.dish.list')->with(compact('dishes', 'sort', 'active', 'group', 'price', 'key'));
     }
 
     public function edit($id) {
@@ -256,13 +259,51 @@ class DishController extends Controller
 
     public function sortDish()
     {
-        if(request()->get('sortType') == "asc"){
-            $sort = "desc";
-        }else{
-            $sort = "asc";
+        $key    = request()->get('key');
+        $sort   = request()->get('sortType');
+        $group  = request()->get('sortGroupType');
+        $price  = request()->get('sortPriceType');
+        $active = strval(request()->get('sortActiveType'));
+         
+            
+        if (request()->get('sortField') == "item") {
+            if(request()->get('sortType') == "asc"){
+                $sort = "desc";
+            }else{
+                $sort = "asc";
+            }
+
+            $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('name_en', request()->get('sortType'));
+        } elseif (request()->get('sortField') == "group") {
+            if(request()->get('sortGroupType') == "asc"){
+                $group = "desc";
+            }else{
+                $group = "asc";
+            }
+
+            $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('group_id', request()->get('sortGroupType'));
+            // $dishes = Dish::leftjoin('groups','groups.id','=','dishes.group_id')
+            //     ->where('dishes.name_en','like','%' . $key . '%')->orderBy('groups.name', request()->get('sortGroupType'))
+            //     ->select('dishes.*','groups.name as group_name');
+        } elseif (request()->get('sortField') == "price") {
+            if(request()->get('sortPriceType') == "asc"){
+                $price = "desc";
+            }else{
+                $price = "asc";
+            }
+            
+            $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('price', request()->get('sortPriceType'));
+        } else {
+            $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('name_en', 'asc');
+
         }
-        $key = request()->get('key');
-        $dishes = Dish::where('name_en','like','%' . $key . '%')->orderBy('name_en', request()->get('sortType'))->get();
+
+        if ($active == 1) {
+            $dishes = $dishes->where('active', 1);
+        } elseif ($active == 2) {
+            $dishes = $dishes->where('active', 0);
+        }
+        $dishes = $dishes->get();
 
         foreach($dishes as $ds)
         {
@@ -274,7 +315,7 @@ class DishController extends Controller
             }
         }
 
-        return view('admin.dish.list')->with(compact('dishes', 'sort', 'key'));
+        return view('admin.dish.list')->with(compact('dishes', 'sort', 'group', 'price', 'active', 'key'));
     }
 
 }

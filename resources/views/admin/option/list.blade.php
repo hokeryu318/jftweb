@@ -16,7 +16,7 @@
                     <img src="{{ asset('img/Group826.png') }}" width="25" height="25" class="float-right" />
                 </span>
             </a>
-            <input type="text" name="option-search" id="option-search" onkeyup="option_search()" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
+            <input type="text" name="option-search" id="option-search" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
         </div>
     </div>
     <div class="row mb-2">
@@ -111,5 +111,15 @@
             '&sort_type_name=' + "{{ $_GET['sort_type_name'] ?? 'desc' }}" + 
             '&sort_type_display_name=' + "{{ $_GET['sort_type_display_name'] ?? 'asc' }}" + '&key=' + $('#option-search').val();
     }
+
+    var option_search = document.getElementById("option-search");
+    option_search.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            location.href = '/admin/option/sort?sortField=' + "{{ $_GET['sortField'] ?? '' }}" + 
+                '&sort_type_name=' + "{{ $_GET['sort_type_name'] ?? 'desc' }}" + 
+                '&sort_type_display_name=' + "{{ $_GET['sort_type_display_name'] ?? 'asc' }}" + '&key=' + $('#option-search').val();
+        }
+    });
 </script>
 @endsection
