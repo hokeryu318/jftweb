@@ -302,6 +302,10 @@ class DishController extends Controller
             $dishes = $dishes->where('active', 1);
         } elseif ($active == 2) {
             $dishes = $dishes->where('active', 0);
+        } elseif ($active == 3) {
+            $dishes = $dishes->where('sold_out', 1);
+        } elseif ($active == 4) {
+            $dishes = $dishes->where('sold_out', 0);
         }
         $dishes = $dishes->get();
 

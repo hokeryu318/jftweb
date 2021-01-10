@@ -16,11 +16,10 @@
             </a>
             <input type="text" name="dish-search" id="dish-search" value="{{$key}}" placeholder="Search" style="margin-right: 20px;width: 200px;color: #fff;float: right;">
             <select class="" id="orderId" name="orderId" onchange="searchActive()" style="margin-right: 40px;margin-top: 4px;float: right;height: 30px;background-color: #4e4e4e;color: #fff;width: 150px;">
-                {{--<option value="">&nbsp;&nbsp;NO FILTERS</option>
                 <option value="" disabled>===Sold out===</option>
-                <option value="1" @if($active == '1') selected @endif>&nbsp;&nbsp;Active</option>
-                <option value="0" @if($active == '0') selected @endif>&nbsp;&nbsp;Inactive</option>
-                <option value="" @if($active == '') selected @endif>&nbsp;&nbsp;Both</option>
+                <option value="3" @if($active == '3') selected @endif>&nbsp;&nbsp;Sold out</option>
+                <option value="4" @if($active == "4") selected @endif>&nbsp;&nbsp;Not sold out</option>
+                <option value="" @if($active == '' || empty($active)) selected @endif>&nbsp;&nbsp;Both</option>
                 <option value="" disabled>===Active===</option>--}}
                 <option value="1" @if($active == '1') selected @endif>&nbsp;&nbsp;Active</option>
                 <option value="2" @if($active == "2") selected @endif>&nbsp;&nbsp;Inactive</option>
