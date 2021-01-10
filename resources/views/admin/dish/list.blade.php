@@ -20,7 +20,7 @@
                 <option value="3" @if($active == '3') selected @endif>&nbsp;&nbsp;Sold out</option>
                 <option value="4" @if($active == "4") selected @endif>&nbsp;&nbsp;Not sold out</option>
                 <option value="" @if($active == '' || empty($active)) selected @endif>&nbsp;&nbsp;Both</option>
-                <option value="" disabled>===Active===</option>--}}
+                <option value="" disabled>===Active===</option>
                 <option value="1" @if($active == '1') selected @endif>&nbsp;&nbsp;Active</option>
                 <option value="2" @if($active == "2") selected @endif>&nbsp;&nbsp;Inactive</option>
                 <option value="" @if($active == '' || empty($active)) selected @endif>&nbsp;&nbsp;Both</option>
