@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 use App\Mail\SalesDayReportEmail;
 use Illuminate\Support\Facades\DB;
@@ -441,8 +442,10 @@ class DayReportEmail extends Command
         $filename = public_path().'/excel/exports/sales_report.xlsx';
 
         $email_address = DB::table('receipt')->where('id', 1)->pluck('email_address')->first();
-        if($email_address != Null)
+        if($email_address != Null) {
+            Log::error('Mail Send: '. $email_address);
             Mail::to($email_address)->send(new SalesDayReportEmail($filename));
+        }
 
     }
 }
