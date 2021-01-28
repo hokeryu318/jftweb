@@ -393,7 +393,10 @@ class DayReportEmail extends Command
                                     $hourly_cooktime_ranking[$i]['0'] = round($elapsed / $count_temp);
                             }
 
-                            $hourly_cooktime_ranking[$i]['cook_avg_time'] = round(($hourly_cooktime_ranking[$i]['10'] * $hourly_item_ranking[$i]['10'] +
+                            $hourly_cooktime_ranking[$i]['cook_avg_time'] = 0;
+
+                            if ( $hourly_item_ranking[$i]['item_total'] !== 0 ) {
+                                $hourly_cooktime_ranking[$i]['cook_avg_time'] = round(($hourly_cooktime_ranking[$i]['10'] * $hourly_item_ranking[$i]['10'] +
                                     $hourly_cooktime_ranking[$i]['11'] * $hourly_item_ranking[$i]['11'] +
                                     $hourly_cooktime_ranking[$i]['12'] * $hourly_item_ranking[$i]['12'] +
                                     $hourly_cooktime_ranking[$i]['13'] * $hourly_item_ranking[$i]['13'] +
@@ -408,6 +411,7 @@ class DayReportEmail extends Command
                                     $hourly_cooktime_ranking[$i]['22'] * $hourly_item_ranking[$i]['22'] +
                                     $hourly_cooktime_ranking[$i]['23'] * $hourly_item_ranking[$i]['23'] +
                                     $hourly_cooktime_ranking[$i]['0'] * $hourly_item_ranking[$i]['0']) / $hourly_item_ranking[$i]['item_total']);
+                            }
 
                         }
 
