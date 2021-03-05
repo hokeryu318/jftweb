@@ -66,7 +66,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mt-5 pt-3">
+                    <div class="row mt-4 pt-3">
                         <div class="col-4">
                             <h4 class="mb-0 white-text lg-font">Table Number</h4>
                         </div>
@@ -74,7 +74,7 @@
                             <input class="custom-input" name="table" value="{{ session('login_table_name') }}" />
                         </div>
                     </div>
-                    <div class="row  mt-5 pt-3">
+                    <div class="row  mt-4 pt-3">
                         <div class="col-4">
                             <h4 class="mb-0 white-text lg-font">Password</h4>
                         </div>
@@ -82,7 +82,15 @@
                             <input type="password" class="custom-input ps-hg" name="password" />
                         </div>
                     </div>
-                    <div class="row" style="padding-top:10rem">
+                    <div class="row  mt-4 pt-3">
+                        <div class="col-4">
+                            <h4 class="mb-0 white-text lg-font">Table Fix mode</h4>
+                        </div>
+                        <div class="col-6">
+                            <input type="checkbox" class="custom-input ps-hg" name="fix" style="width: 20px !important;"/>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:5rem">
                         <div class="col-6">
                         </div>
                         <div class="col-6 pl-2 mb-xl-3">

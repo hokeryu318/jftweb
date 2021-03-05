@@ -31,7 +31,7 @@ class SalesDayReportEmail extends Mailable
      */
     public function build()
     {
-        $address = 'jft@email.com';
+        $address = 'info@kuromatsu.com.au';
         $receipt = Receipt::find(1);
         $subject = '('.$receipt->shop_name.')'.' Daily Sales Report';
         $name = 'Manager';

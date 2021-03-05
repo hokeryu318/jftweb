@@ -116,7 +116,7 @@
                             @if(count($order_dishes) > 0)
                                 @foreach($order_dishes as $order_dish)
                                     {{--<tr onclick="select_item({{ $order_dish->id }})">--}}
-                                    <tr onclick="select_item({{ $order_dish->id }})" id="item_{{ $order_dish->id }}">
+                                    <tr onclick="select_item({{ $order_dish->id }},{{ $order_dish->active }})" id="item_{{ $order_dish->id }}">
                                         <td class="td1" id="td_{{ $order_dish->id }}" style="color:black;"><h6><span class="fs-25">{{ $order_dish->dish_name_en }}
                                                     @foreach($order_dish->options as $option)
                                                         [{{ $option->option_name }}: {{ $option->item_name }}]
@@ -136,7 +136,7 @@
                                 @endforeach
                                 @if(count($order_dishes) < 5)
                                     @for($i=0;$i<5-count($order_dishes);$i++)
-                                        <tr onclick="select_item(0)">
+                                        <tr onclick="select_item(0, 0)">
                                             <td class="td1"></td>
                                             <td class="td2"></td>
                                             <td class="td3"></td>
@@ -159,9 +159,14 @@
                                     <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
                                 </span>
                             </td>
-                            <td onclick="select_item(0)"></td>
-                            <td onclick="select_item(0)"></td>
-                            <td onclick="select_item(0)"></td>
+                            <td class="td1">
+                                <span class="amend_btn" onclick="onAddMisc()">
+                                    <am class="fs-25" style="margin-right: 80px;" id="am_misc">ADD MISC</am>
+                                    <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
+                                </span>
+                            </td>
+                            <td onclick="select_item(0, 0)"></td>
+                            <td onclick="select_item(0, 0)"></td>
                         </tr>
                     </table>
                 </div>
@@ -330,8 +335,20 @@
         });
         $('#thirdModal').modal("toggle");
     }
+    function onAddMisc() {
+        var order_id = $('#order_id').val()
+        $.ajax({
+            type:"GET",
+            url:"{{ route('reception.misc') }}",
+            data:{order_id: order_id, order_dish_id: order_dish_id},
+            success: function(result){
+                $('#thirdModal').html(result);
+            }
+        });
+        $('#thirdModal').modal("toggle");
+    }
 
-    function select_item(selected_dish_id) {
+    function select_item(selected_dish_id, selected_dish_active) {
 
         var select_color = document.getElementsByClassName('td1');
         for(var i=0;i<select_color.length;i++) {
@@ -344,7 +361,13 @@
         if(order_dish_id == 0) {
             document.getElementById('am').innerHTML = 'ADD ITEM';
         } else {
-            document.getElementById('am').innerHTML = 'AMEND';
+            if (selected_dish_active == 3) {
+                document.getElementById('am_misc').innerHTML = 'AMEND';
+                document.getElementById('am').innerHTML = 'ADD ITEM';
+            } else {
+                document.getElementById('am').innerHTML = 'AMEND';
+                document.getElementById('am_misc').innerHTML = 'ADD ITEM';
+            }
         }
     }
 

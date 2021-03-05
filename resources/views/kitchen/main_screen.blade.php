@@ -15,6 +15,9 @@
 
 <div class="main">
     <div id="app">
+        <audio id="audio-player" style="opacity: 0;">
+            <source src="{{ asset('mp3/kitchensound.mp3') }}" type="audio/mpeg">
+        </audio>
         <div class="container-fluid" style="position: sticky; top: 0;">
             <div class="row header">
                 <div class="col-sm-2" style="padding: 24px 0 0 30px;">
@@ -85,6 +88,9 @@
 
     //calling
     $(document).ready(function() {
+        var audio = document.getElementById("audio-player");
+        audio.play();
+
         $(".main").on("click", ".calling_bell", function () {
             var call_bell_img = document.getElementById('calling_bell');
             var table_id = 0;

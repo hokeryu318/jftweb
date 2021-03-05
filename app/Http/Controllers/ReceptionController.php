@@ -6,6 +6,7 @@ use App\Events\ChangeCountEvent;
 use App\Events\KitchenEvent;
 use App\Events\TableMoveEvent;
 use App\Events\FinishAndPayEvent;
+use App\Events\FixModeEvent;
 use Illuminate\Http\Request;
 
 use App\Events\NotificationEvent;
@@ -346,6 +347,8 @@ class ReceptionController extends Controller
                 Booked::where('id', $order_obj->id)->update(['table_name' => $table_name]);
             }
         }
+
+        broadcast(new FixModeEvent($order_obj->id));
         
         return redirect()->route('reception.seated', ['status'=>$status]);
     }
@@ -477,8 +480,9 @@ class ReceptionController extends Controller
         $total = 0;
         foreach($order_dishes as $order_dish) {
 
-            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
+            $dish_list = Dish::select('name_en','active')->where('id', $order_dish->dish_id)->get()->first();
             $order_dish->dish_name_en = $dish_list->name_en;
+            $order_dish->active = $dish_list->active;
 
             $order_dish->options = $order_dish->Order_Option()->get();
             $items_price = 0;
@@ -1890,5 +1894,105 @@ class ReceptionController extends Controller
         $status = request()->get('status');
         //return response()->json(['status' => session('scale_value')]);
         return redirect()->route('reception.seated', ['status' => $status]);
+    }
+    
+    public function misc() {
+
+        $order_id = request()->order_id;
+        $order_dish_id = request()->order_dish_id;
+        $count = OrderDish::where('id', $order_dish_id)->pluck('count')->first();
+
+        return view('reception.add_misc')->with(compact('order_id', 'order_dish_id', 'count'));
+    }
+
+    public function add_misc() {
+
+        $misc_name  = request()->misc_name;
+        $misc_price = request()->misc_price;
+        $order_id   = request()->order_id;
+        $count      = request()->qty;
+        //save misc dish
+        $dish = new Dish();
+        $dish->name_en         = $misc_name;
+        $dish->name_cn         = $misc_name;
+        $dish->name_jp         = $misc_name;
+        $dish->price           = $misc_price;
+        $dish->eatin_breakfast = 1;
+        $dish->eatin_lunch     = 1;
+        $dish->eatin_dinner    = 1;
+        $dish->active          = 3;
+        $dish->group_id        = '&16&';
+        $dish->save();
+        //save to order_dish_match table
+        $order_dish = new OrderDish();
+        $order_dish->order_id = $order_id;
+        $order_dish->dish_id = $dish->id;
+        $order_dish->count = $count;
+
+        $order_dish->dish_price = ($this->get_discount($dish->id))?($this->get_discount($dish->id)):$dish->price;
+        $order_dish->total_price = $order_dish->dish_price * $count;
+        $order_dish->ready_flag = 0;
+        $order_dish->save();
+
+        //save to order_option_match table
+        $order_dish_id = $order_dish->id;
+        $items_price = 0;
+        
+        //if(count($items_id) > 0) {
+            // foreach($items_id as $item_id) {
+            //     $order_option = new OrderOption();
+            //     $order_option->order_dish_id = $order_dish_id;
+            //     $order_option->option_id = Item::where('id',$item_id)->pluck('option_id')->first();
+            //     $order_option->item_id = $item_id;
+            //     $order_option->item_price = Item::where('id',$item_id)->pluck('price')->first();
+            //     $items_price += $order_option->item_price;
+            //     $order_option->save();
+            // }
+        //}
+        
+        //save total price
+        // $order_dish = OrderDish::find($order_dish_id);
+        // $order_dish->total_price = ($order_dish->dish_price + $items_price) * $count;
+        // $order_dish->save();
+
+        //display changed data
+        $order_dishes = OrderDish::where('order_id', $order_id)->get();
+
+        foreach($order_dishes as $order_dish) {
+
+            $dish_list = Dish::select('name_en')->where('id', $order_dish->dish_id)->get()->first();
+            $order_dish->dish_name_en = $dish_list->name_en;
+
+            $order_dish->options = $order_dish->Order_Option()->get();
+            $items_price = 0;
+            foreach ($order_dish->options as $option) {
+
+                if($option->option_id)
+                    $option->option_name = Option::where('id', $option->option_id)->pluck('name')->first();
+                else
+                    $option->option_name = '';
+
+                if($option->item_id) {
+
+                    $option_items = Item::select('name', 'price')->where('id', $option->item_id)->get()->first();
+                    $option->item_name = $option_items['name'];
+                    $items_price += $option_items['price'];
+                }
+                else {
+                    $option->item_name = '';
+                    $items_price = 0;
+                }
+
+            }
+            $order_dish->each_price = $order_dish->dish_price + $items_price;
+            $order_dish->sub_total = $order_dish->each_price * $order_dish->count;
+        }
+
+        //broadcast to kitchen
+        $added_dish = $this->get_added_dish($dish, $order_id, $order_dish_id);
+        broadcast(new KitchenEvent($added_dish));
+
+//        return (string)view('reception.item_list', compact('order_dishes'))->render();
+        return $order_id;
     }
 }

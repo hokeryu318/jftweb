@@ -34,3 +34,6 @@ Broadcast::channel('attend-channel', function ($user) {
 Broadcast::channel('changecount-channel', function ($user) {
     return $user;
 });
+Broadcast::channel('fixmode-channel', function ($user) {
+    return $user;
+});

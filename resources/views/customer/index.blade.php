@@ -29,6 +29,15 @@
 <body>
 <div id="app">
     <input type="hidden" id="img_name" value="{{ $img_name }}">
+    <input type="hidden" id="morning_starts" value="{{ $timeslot['morning_starts'] }}">
+    <input type="hidden" id="morning_ends" value="{{ $timeslot['morning_ends'] }}">
+    <input type="hidden" id="lunch_starts" value="{{ $timeslot['lunch_starts'] }}">
+    <input type="hidden" id="lunch_ends" value="{{ $timeslot['lunch_ends'] }}">
+    <input type="hidden" id="dinner_starts" value="{{ $timeslot['dinner_starts'] }}">
+    <input type="hidden" id="dinner_ends" value="{{ $timeslot['dinner_ends'] }}">
+    <input type="hidden" id="morning_on" value="{{ $timeslot['morning_on'] }}">
+    <input type="hidden" id="lunch_on" value="{{ $timeslot['lunch_on'] }}">
+    <input type="hidden" id="dinner_on" value="{{ $timeslot['dinner_on'] }}">
     <nav>
         <input type="hidden" id="order_id" value="{{ $order->id }}" />
         <div class="brand">
@@ -303,6 +312,20 @@
      //////////////////////////////////////////********************************************************************************************************************************
 
     $(document).ready(function(){
+        //change dish from lunch to dinner
+        var cur_time = get_curtime();
+        var cur_day  = get_day(cur_time);
+
+        setInterval(function(){ 
+            var cur_time = get_curtime();
+            var cng_day  = get_day(cur_time);
+
+            if (cng_day != cur_day) {
+                location.reload();
+            }
+        }, 1000);
+
+        //screen
         var idletime = 120;
         @if ($screentime)
             idletime = {{ $screentime->screen_time }};
@@ -353,6 +376,60 @@
         $content = $header.next();
         $content.slideToggle(500);
     });
+
+    function get_curtime()
+    {
+        var d = new Date();
+        const convertedDate = convertTZ( d, "Australia/Melbourne") 
+        var h = '0' + convertedDate.getHours();
+        if ( h.length > 2 ) h = h.substring(1,3);
+        var m = '0' + convertedDate.getMinutes();
+        if ( m.length > 2 ) m = m.substring(1,3);
+        var cur_time = h + ':' + m;
+        return cur_time;
+    }
+
+    function convertTZ(date, tzString) {
+        return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+    }
+
+    function get_day(cur_time)
+    {
+        var morning_starts = chk_time($('#morning_starts').val());
+        var morning_ends   = chk_time($('#morning_ends').val());
+        var lunch_starts   = chk_time($('#lunch_starts').val());
+        var lunch_ends     = chk_time($('#lunch_ends').val());
+        var dinner_starts  = chk_time($('#dinner_starts').val());
+        var dinner_ends    = chk_time($('#dinner_ends').val());
+        var morning_on     = $('#morning_on').val();
+        var lunch_on       = $('#lunch_on').val();
+        var dinner_on      = $('#dinner_on').val();
+        var cur_day        = '';
+
+        if ( cur_time >=morning_starts  && cur_time <= morning_ends && morning_on == 1 ) {
+            cur_day = 'morning';
+        } else if ( cur_time >= lunch_starts && cur_time <= lunch_ends && lunch_on == 1 ) {
+            cur_day = 'lunch';
+        } else if ( cur_time >= dinner_starts && cur_time <= dinner_ends && dinner_on == 1 ) {
+            cur_day = 'dinner';
+        }
+
+        return cur_day;
+    }
+
+    function chk_time(cur_time)
+    {
+        var h = cur_time.substring(0,2);
+        var m = cur_time.substring(3,5);
+        if (cur_time.substring(6) == 'PM' && cur_time.substring(0,2) != '12') {
+            h = parseInt(h) +12;
+        } if (cur_time.substring(6) == 'AM' && cur_time.substring(0,2) == '12') {
+            h = parseInt(h) +12;
+        }
+        cur_time = h + ':' + m;
+
+        return cur_time;
+    }
 
     function Global_format() {
 

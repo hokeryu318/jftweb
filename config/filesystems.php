@@ -69,6 +69,10 @@ return [
             'root'   => public_path('/screen'),
         ],
 
+        'welcome' => [
+            'driver' => 'local',
+            'root'   => public_path('/welcome'),
+        ],
     ],
 
 ];

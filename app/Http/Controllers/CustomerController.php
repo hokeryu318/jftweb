@@ -31,6 +31,12 @@ class CustomerController extends Controller
     public function index($order_id)
     {
         $profile = Receipt::profile();
+        
+        $fix = request()->fix;
+        if ($fix == 1) {
+            Order::where('id', $order_id)->update(['menu_type' => 'Menu']);
+        }
+
         $table_id = request()->table_id;//dd($table_id);
         $order_table = OrderTable::where('table_id', $table_id)->get()->first();//dd($order_table);
         $table_ids_arr = OrderTable::where('order_id', $order_id)->pluck('table_id');
@@ -113,8 +119,10 @@ class CustomerController extends Controller
         $screentime = Screentime::orderby('id','desc')->get()->first();
 
         $pay_flag = Order::where('id', $order_id)->pluck('pay_flag')->first();
+        $timeslot = Timeslot::find(1);
+
         if($pay_flag == 0) {
-            return view('customer.index')->with(compact( 'profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime'))->with('img_name', $img_name);
+            return view('customer.index')->with(compact( 'profile', 'category_all', 'dishes', 'order', 'order_table', 'table_name', 'table_id', 'screentime', 'timeslot'))->with('img_name', $img_name);
         } elseif($pay_flag == 1) {
 
             $table_name = $order->table_name;
@@ -164,7 +172,8 @@ class CustomerController extends Controller
     {
         $category = Category::find(request()->category);
 
-        $menu_time = request()->time_slot;
+        $menu_time = $this->get_current_time();
+        // $menu_time = request()->time_slot;
         $menu_type = request()->menu_type;
         $dishes = $this->get_dishes($category,$menu_time,$menu_type);
         /*$time = substr($menu_time,11,5);
@@ -1015,6 +1024,16 @@ class CustomerController extends Controller
         }
 
         return $time_chk[0];
+    }
+
+    public function welcome()
+    {
+        $img_name = Storage::disk('screen')->files();
+        $img_name = json_encode($img_name);
+
+        $table_id = request()->table_id;//dd($table_id);
+
+        return view('customer.welcome')->with(compact('table_id', 'img_name'));
     }
 
 }

@@ -29,6 +29,7 @@ Vue.component('customer-calling-component', require('./components/CustomerCallin
 Vue.component('display-table-component', require('./components/DisplayTableComponent.vue').default);
 Vue.component('finish-and-pay-component', require('./components/FinishAndPayComponent.vue').default);
 Vue.component('kitchen-dish-ready-component', require('./components/KitchenDishReadyComponent.vue').default);
+Vue.component('fix-mode-component', require('./components/FixModeComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\OrderTable;
-use App\Model\Receipt;
 use Hash;
 
 use Illuminate\Http\Request;
@@ -14,6 +12,8 @@ use App\Model\Table;
 use App\Model\Order;
 use App\Model\Dish;
 use App\Model\Item;
+use App\Model\Receipt;
+use App\Model\OrderTable;
 
 class LoginController extends Controller
 {
@@ -58,6 +58,7 @@ class LoginController extends Controller
 
         $name = $request->role;
         $password = $request->password;
+        $fix = $request->fix;
         $user = Role::where('name', '=', $name)->first();
         if(!isset($user)){
             return redirect(route('loginform'));
@@ -75,11 +76,33 @@ class LoginController extends Controller
                     if(count($table) > 0){
                         $order = $table[0]->order;
                         if(count($order) > 0){
+                            if ( $fix == 'on' ) {
+                                $alert = "That is the registered table";
+                                return redirect(route('loginform'))->with(compact('alert'));
+                            }
                             $order_id = $order[0]->id;
                             Order::where('id', $order_id)->update(['menu_type' => $menu_type]);
                             return redirect()->route('customer.index', ['order_id'=>$order_id, 'table_id'=>$table[0]->id]);
                         }
                         else{
+                            if ( $fix == 'on' ) {
+                            //     $order_obj = new Order();
+                            //     $order_obj->time = date('Y-m-d H:i:s');
+                            //     $order_obj->guest = 1;
+                            //     $order_obj->duration = 5;
+                            //     $order_obj->customer_name = 'Walked-in 00';
+                            //     $order_obj->status = 'seated';
+                            //     $order_obj->table_name = $table_name;
+                            //     $order_obj->menu_type = $menu_type;
+                            //     $order_obj->calls = 0;
+                            //     $order_obj->save();
+                            //     $order_table_obj = new OrderTable();
+                            //     $order_table_obj->order_id = $order_obj->id;
+                            //     $order_table_obj->table_id = $table[0]['id'];
+                            //     $order_table_obj->save();
+                            //     return redirect()->route('customer.index', ['order_id'=>$order_obj->id, 'table_id'=>$table[0]->id]);
+                                return redirect()->route('customer.welcome', ['table_id'=>$table[0]->id]);
+                            }
                             $alert = "There is no order registered!";
                             return redirect(route('loginform'))->with(compact('alert'));
                         }

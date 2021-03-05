@@ -68,7 +68,11 @@
             <span class="edit_order_add_item" onclick="onAddItem()">
                 <e style="margin-right:20px;font-size: 25px;">ADD ITEM</e>
                 <img src="{{ asset('img/Group728white.png') }}" style="height: 16px; margin-top: -3px;">
-            </span>
+            </span>&nbsp;&nbsp;&nbsp;
+            {{--<span class="edit_order_add_item" onclick="onAddMisc()">
+                <e style="margin-right:20px;font-size: 25px;">ADD MISC</e>
+                <img src="{{ asset('img/Group728white.png') }}" style="height: 16px; margin-top: -3px;">
+            </span>--}}
         </div>
     </div>
 
@@ -148,6 +152,19 @@
             data:{order_id: order_id, order_dish_id: 0},
             success: function(result){
                 // console.log(result);
+                $('#thirdModal').html(result);
+            }
+        });
+        $('#thirdModal').modal("toggle");
+    }
+
+    function onAddMisc() {
+        var order_id = <?php echo(json_encode($order_id)) ?>;
+        $.ajax({
+            type:"GET",
+            url:"{{ route('reception.misc') }}",
+            data:{order_id: order_id, order_dish_id: 0},
+            success: function(result){
                 $('#thirdModal').html(result);
             }
         });

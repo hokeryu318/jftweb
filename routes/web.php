@@ -72,6 +72,8 @@ Route::post('reception/finish_pay', 'ReceptionController@finish_pay')->name('rec
 Route::post('reception/book_end', 'ReceptionController@book_end')->name('reception.book_end');
 Route::get('reception/zoom_back', 'ReceptionController@zoom_back')->name('reception.zoom_back');
 Route::get('reception/zoom_back1', 'ReceptionController@zoom_back1')->name('reception.zoom_back1');
+Route::get('reception/misc', 'ReceptionController@misc')->name('reception.misc');
+Route::post('reception/add_misc', 'ReceptionController@add_misc')->name('reception.add_misc');
 
 //customer
 Route::get('customer/index/{order_id}', 'CustomerController@index')->name('customer.index');
@@ -90,6 +92,7 @@ Route::post('customer/add_review', 'CustomerController@add_review')->name('custo
 Route::post('customer/calling', 'CustomerController@calling')->name('customer.calling');
 Route::get('customer/view_bill_pay', 'CustomerController@view_bill_pay')->name('customer.view_bill_pay');
 Route::get('customer/finish_pay', 'CustomerController@finish_pay')->name('customer.finish_pay');
+Route::get('customer/welcome', 'CustomerController@welcome')->name('customer.welcome');
 
 //kitchen
 Route::get('kitchen/CountNotification', 'KitchenController@CountNotification');
