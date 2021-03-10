@@ -42,12 +42,13 @@ class LoginController extends Controller
                 $menu_type = $request->role;
                 $table_name = $request->table;
                 $fix = $request->fix;
+
                 if($table_name) {
                     $table = Table::select('id')->where('name', $table_name)->get();
                     if(count($table) > 0){
                         $order = $table[0]->order;
                         if(count($order) > 0){
-                            if ( $fix ) {
+                            if ( $fix == 'on' ) {
                                 $url = '';
                                 $message = "That is the registered table";
                             } else {
@@ -59,12 +60,13 @@ class LoginController extends Controller
                             }
                         }
                         else{
-                            if ( $fix ) {
+                            if ( $fix == 'on' ) {
                                 $url = $ip.'/customer/welcome?table_id='.$table[0]->id;
                                 $message = 'menu success';
                             } else {
                                 $url = '';
                                 $message = "There is no order registered!";
+                                $message = $fix;
                             }
                         }
                     }
