@@ -47,23 +47,25 @@ class LoginController extends Controller
                     if(count($table) > 0){
                         $order = $table[0]->order;
                         if(count($order) > 0){
-                            if ( $fix == 'on' ) {
+                            if ( $fix ) {
                                 $url = '';
                                 $message = "That is the registered table";
+                            } else {
+                                $order_id = $order[0]->id;
+                                $table_id = $table[0]->id;
+                                Order::where('id', $order_id)->update(['menu_type' => $menu_type]);
+                                $url = $ip.'/customer/index/'.$order_id.'?table_id='.$table_id;
+                                $message = 'menu success';
                             }
-                            $order_id = $order[0]->id;
-                            $table_id = $table[0]->id;
-                            Order::where('id', $order_id)->update(['menu_type' => $menu_type]);
-                            $url = $ip.'/customer/index/'.$order_id.'?table_id='.$table_id;
-                            $message = 'menu success';
                         }
                         else{
-                            if ( $fix == 'on' ) {
-                                    $url = $ip.'/customer/welcome?table_id='.$table_id;
-                                    $message = 'menu success';
-                                }
-                            $url = '';
-                            $message = "There is no order registered!";
+                            if ( $fix ) {
+                                $url = $ip.'/customer/welcome?table_id='.$table[0]->id;
+                                $message = 'menu success';
+                            } else {
+                                $url = '';
+                                $message = "There is no order registered!";
+                            }
                         }
                     }
                     else {
