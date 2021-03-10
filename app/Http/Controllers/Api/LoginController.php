@@ -66,7 +66,6 @@ class LoginController extends Controller
                             } else {
                                 $url = '';
                                 $message = "There is no order registered!";
-                                $message = $fix;
                             }
                         }
                     }
