@@ -15,6 +15,7 @@
 
 <div class="main">
     <div id="app">
+        <input type="hidden" id="audio" value="{{ $_GET['audio'] ?? 0 }}">
         <audio id="audio-player" style="opacity: 0;">
             <source src="{{ asset('mp3/kitchensound.mp3') }}" type="audio/mpeg">
         </audio>
@@ -89,8 +90,9 @@
     //calling
     $(document).ready(function() {
         var audio = document.getElementById("audio-player");
-        audio.play();
-
+        var check = $('#audio').val();
+        if (check == 1) audio.play();
+        
         $(".main").on("click", ".calling_bell", function () {
             var call_bell_img = document.getElementById('calling_bell');
             var table_id = 0;

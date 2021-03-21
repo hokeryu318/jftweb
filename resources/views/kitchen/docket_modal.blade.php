@@ -64,6 +64,9 @@
 <script>
 
     var parentURL = window.parent.location.href;
+    if (parentURL.indexOf('&audio=1') !== -1) {
+        parentURL = parentURL.replace('&audio=1', '');
+    }
 
     //modal_close
     function extract_modal_close()

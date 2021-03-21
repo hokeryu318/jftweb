@@ -86,7 +86,7 @@
                     console.dir(event.added_dish.id+"----------------"+this.chk_group_order_dishes[event.added_dish.id]);
                     // this.group_order_dishes.reverse();//display array reverse
 
-                    location.href = window.location.href;
+                    location.href = window.location.href.replace('&audio=1', '') + '&audio=1';
                 }
                 // this.group_order_dishes.pop();//array record remove
             });

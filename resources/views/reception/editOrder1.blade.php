@@ -47,6 +47,8 @@
                                 <span style="font-size: 25px;" id="each_{{$order_dish->id}}">
                                     @if($order_dish->each_price)
                                         ${{ number_format($order_dish->each_price, 2) }}
+                                    @else
+                                        $0.00
                                     @endif
                                 </span>
                             </td>
@@ -54,6 +56,8 @@
                                 <span style="font-size: 25px;" id="sub_total_{{$order_dish->id}}">
                                     @if($order_dish->sub_total)
                                         ${{ number_format($order_dish->sub_total, 2) }}
+                                    @else
+                                        $0.00
                                     @endif
                                 </span>
                             </td>
@@ -69,10 +73,10 @@
                 <e style="margin-right:20px;font-size: 25px;">ADD ITEM</e>
                 <img src="{{ asset('img/Group728white.png') }}" style="height: 16px; margin-top: -3px;">
             </span>&nbsp;&nbsp;&nbsp;
-            {{--<span class="edit_order_add_item" onclick="onAddMisc()">
+            <span class="edit_order_add_item" onclick="onAddMisc()">
                 <e style="margin-right:20px;font-size: 25px;">ADD MISC</e>
                 <img src="{{ asset('img/Group728white.png') }}" style="height: 16px; margin-top: -3px;">
-            </span>--}}
+            </span>
         </div>
     </div>
 

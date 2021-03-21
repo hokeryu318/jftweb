@@ -17,10 +17,16 @@
             Echo.channel('pay-channel')//public channel
             .listen('PayEvent', (event) => {
                 this.pay_status = event.pay_status;
-                console.dir(this.pay_status);
 
                 if(this.pay_status === 'pay_'+this.order_id) {
-                    window.location.replace('../../');
+                    var currentUrl = window.location.href;
+                    if(currentUrl.indexOf('fix=1') !== -1) {
+                        var splits = currentUrl.split('&fix=1');
+                        var parts = splits[0].split('table_id=');
+                        window.location.replace('/customer/welcome?table_id=' + parts[1]);
+                    } else {
+                        window.location.replace('../../');
+                    }
                 }
             });
         },

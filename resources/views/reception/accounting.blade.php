@@ -125,12 +125,16 @@
                                         <td class="td2"><h6><span class="fs-25">{{ $order_dish->count }}</span></h6></td>
                                         <td class="td3"><h6><span class="fs-25">
                                                 @if($order_dish->each_price)
-                                                        ${{ number_format($order_dish->each_price, 2) }}
-                                                    @endif</span></h6></td>
+                                                    ${{ number_format($order_dish->each_price, 2) }}
+                                                @else
+                                                    $0.00
+                                                @endif</span></h6></td>
                                         <td class="td4"><h6><span class="fs-25">
                                                 @if($order_dish->sub_total)
-                                                        ${{ number_format($order_dish->sub_total, 2) }}
-                                                    @endif
+                                                    ${{ number_format($order_dish->sub_total, 2) }}
+                                                @else
+                                                    $0.00
+                                                @endif
                                             </span></h6></td>
                                     </tr>
                                 @endforeach
@@ -159,12 +163,12 @@
                                     <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
                                 </span>
                             </td>
-                            <td class="td1">
+                            {{--<td class="td1">
                                 <span class="amend_btn" onclick="onAddMisc()">
                                     <am class="fs-25" style="margin-right: 80px;" id="am_misc">ADD MISC</am>
                                     <img src="{{ asset('img/Group728white.png') }}" style="height: 22px;margin-top: -5px;">
                                 </span>
-                            </td>
+                            </td>--}}
                             <td onclick="select_item(0, 0)"></td>
                             <td onclick="select_item(0, 0)"></td>
                         </tr>
