@@ -49,6 +49,7 @@ class CustomerController extends Controller
         $table_name = rtrim($table_name, '+');
         //dd($table_name);
         $categories = Category::orderby('order')->get();
+        // dd($categories);
         $dishes = array();
         $temp_dishes = array();
         /*if(count($categories) > 0) {
@@ -71,10 +72,11 @@ class CustomerController extends Controller
                     $dishes = $this->get_dishes($category,$cur_time,$order->menu_type);
                     if( !empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
+
+                        if($i == 0) $temp_dishes = $dishes;
+                        $i++;
                     }
                     
-                    if($i == 0) $temp_dishes = $dishes;
-                    if(!empty($dishes)) $i++;
                 }
                 elseif($category->has_subs == 1) {
                     $main_sub_categories = array();
@@ -86,18 +88,21 @@ class CustomerController extends Controller
                             if(!empty($sub_dishes) && count($sub_dishes) > 0) {
                                 $dishes = $sub_dishes;
                                 array_push($main_sub_categories ,$sub_category);
+
+                                if($i == 0) $temp_dishes = $dishes;
+                                $i++;
                             }
                             
-                            if($i == 0) $temp_dishes = $dishes;
-                            if(!empty($dishes)) $i++;
                         }                        
                     }
                     else {
                         $dishes = $this->get_dishes($category,$cur_time,$order->menu_type);
                         $main_sub_categories = [];
                         
-                        if($i == 0) $temp_dishes = $dishes;
-                        if(!empty($dishes)) $i++;
+                        if(!empty($dishes) && $i == 0) {
+                            $temp_dishes = $dishes;
+                            $i++;
+                        }
                     }
                     if( !empty($dishes) && count($dishes) > 0 ) {
                         $category_all[$category->id] = $category;
