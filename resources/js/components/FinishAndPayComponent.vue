@@ -23,9 +23,12 @@
                     if(this.order_id === event.order_id) {
                         var currentUrl = window.location.href;
                         if(currentUrl.indexOf('fix=1') !== -1) {
-                            window.location.replace('../../customer/index/' + event.order_id + '?table_id=' + event.table_id + '&fix=1');
+                            var splits = currentUrl.split('&fix=1');
+                            var parts = splits[0].split('table_id=');
+                            window.location.replace('../../customer/index/' + event.order_id + '?table_id=' + parts[1] + '&fix=1');
                         } else {
-                            window.location.replace('../../customer/index/' + event.order_id + '?table_id=' + event.table_id);
+                            var parts = currentUrl.split('table_id=');
+                            window.location.replace('../../customer/index/' + event.order_id + '?table_id=' + parts[1]);
                         }
                     }
                 });

@@ -15,10 +15,12 @@ class FixModeEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $order_id;
+    public $table_ids;
 
-    public function __construct($var)
+    public function __construct($var, $table_ids)
     {
-        $this->order_id = $var;
+        $this->order_id  = $var;
+        $this->table_ids = $table_ids;
     }
 
     public function broadcastOn()

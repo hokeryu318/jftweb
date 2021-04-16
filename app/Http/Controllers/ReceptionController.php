@@ -348,7 +348,7 @@ class ReceptionController extends Controller
             }
         }
 
-        broadcast(new FixModeEvent($order_obj->id));
+        broadcast(new FixModeEvent($order_obj->id, $table_id_arr));
         
         return redirect()->route('reception.seated', ['status'=>$status]);
     }
